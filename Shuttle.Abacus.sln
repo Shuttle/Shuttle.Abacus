@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuttle.Abacus", "Shuttle.Abacus\Shuttle.Abacus.csproj", "{23680A60-878A-48DA-B23C-9B0EA4A29305}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuttle.Abacus.Tests", "Shuttle.Abacus.Tests\Shuttle.Abacus.Tests.csproj", "{ABA24AFB-8E81-4E6A-A43F-F6E2234E6608}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{23680A60-878A-48DA-B23C-9B0EA4A29305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23680A60-878A-48DA-B23C-9B0EA4A29305}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23680A60-878A-48DA-B23C-9B0EA4A29305}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23680A60-878A-48DA-B23C-9B0EA4A29305}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABA24AFB-8E81-4E6A-A43F-F6E2234E6608}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABA24AFB-8E81-4E6A-A43F-F6E2234E6608}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABA24AFB-8E81-4E6A-A43F-F6E2234E6608}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABA24AFB-8E81-4E6A-A43F-F6E2234E6608}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
