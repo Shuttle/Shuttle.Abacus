@@ -21,6 +21,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus
@@ -33,16 +34,20 @@ namespace Shuttle.Abacus
         protected List<Calculation> calculations = new List<Calculation>();
 
         public CalculationCollection()
-            : base(null, false)
+            : this(Guid.NewGuid(), null)
         {
         }
 
         public CalculationCollection(string name)
-            : base(name, false)
+            : this(Guid.NewGuid(), name)
         {
         }
 
-        public Guid Id { get; private set; }
+        public CalculationCollection(Guid id, string name)
+            : base(name, false)
+        {
+            Id = id;
+        }
 
         public override string Type
         {

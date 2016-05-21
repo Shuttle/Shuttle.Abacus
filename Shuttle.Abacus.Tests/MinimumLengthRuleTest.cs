@@ -20,6 +20,7 @@
 
 using NUnit.Framework;
 using Shuttle.Abacus;
+using Shuttle.Abacus.Localisation;
 
 namespace Abacus.Test.Unit
 {

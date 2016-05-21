@@ -18,6 +18,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using Shuttle.Abacus.Localisation;
+
 namespace Shuttle.Abacus
 {
     public class FormulaCalculationResult : AbstractCalculationResult

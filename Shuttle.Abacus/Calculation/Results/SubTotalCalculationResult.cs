@@ -19,6 +19,7 @@
 */
 
 using System;
+using Shuttle.Abacus.Localisation;
 
 namespace Shuttle.Abacus
 {

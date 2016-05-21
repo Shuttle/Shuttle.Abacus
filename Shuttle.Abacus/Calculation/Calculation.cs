@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus
@@ -44,7 +45,7 @@ namespace Shuttle.Abacus
         public bool Required { get; private set; }
         public abstract string Type { get; }
 
-        public Guid Id { get; private set; }
+        public Guid Id { get; protected set; }
 
         public IEnumerable<GraphNodeArgument> GraphNodeArguments
         {

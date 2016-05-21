@@ -26,13 +26,26 @@ namespace Shuttle.Abacus
 {
     public class FormulaCalculation : Calculation, IFormulaOwner
     {
-        public FormulaCalculation(string name) : base(name, false)
+        public FormulaCalculation(string name)
+            : this(name, false)
+        {
+        }
+
+        public FormulaCalculation(Guid id, string name)
+            : this(id, name, false)
         {
         }
 
         public FormulaCalculation(string name, bool required)
+             : this(Guid.NewGuid(), name, required)
+        {
+        }
+
+        public FormulaCalculation(Guid id, string name, bool required)
             : base(name, required)
         {
+            Id = id;
+
             Formulas = new FormulaCollection();
         }
 

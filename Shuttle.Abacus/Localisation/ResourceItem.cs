@@ -20,6 +20,7 @@
 
 using System.Drawing;
 using System.Threading;
+using Shuttle.Abacus.Localisation;
 
 namespace Shuttle.Abacus
 {

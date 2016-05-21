@@ -242,7 +242,11 @@
     <Compile Include="Localisation\IResourceAccessor.cs" />
     <Compile Include="Localisation\ResourceItem.cs" />
     <Compile Include="Localisation\ResourceItems.cs" />
-    <Compile Include="Localisation\Resources.Designer.cs" />
+    <Compile Include="Localisation\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Logging\CalculationLoggerFactory.cs" />
     <Compile Include="Logging\ICalculationLoggerFactory.cs" />
     <Compile Include="Logging\IPremiumCalculationLogger.cs" />
@@ -468,7 +472,10 @@
     <Content Include="Localisation\Resources\user_two_delete_16.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Localisation\Resources.resx" />
+    <EmbeddedResource Include="Localisation\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
