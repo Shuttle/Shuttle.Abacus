@@ -1,6 +1,6 @@
-using Abacus.Infrastructure;
+using Shuttle.Abacus.Infrastructure;
 
-namespace Abacus.Application
+namespace Shuttle.Abacus.ApplicationService
 {
     public class TaskFactory : ITaskFactory
     {

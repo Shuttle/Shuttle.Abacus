@@ -1,18 +1,19 @@
 using System;
 using System.Linq;
-using Abacus.Domain;
+using Shuttle.Abacus.Domain;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public class FormulaTableAccess
     {
-        public const string TableName = "Formula";
+        
         public const string OperationTableName = "FormulaOperation";
 
         public static IQuery Add(IFormulaOwner owner, Formula item)
         {
             return InsertBuilder.Insert()
-                .Add(FormulaColumns.Id).WithValue(item.Id)
+                .AddParameterValue(FormulaColumns.Id, item.Id)
                 .Add(FormulaColumns.OwnerName).WithValue(owner.OwnerName)
                 .Add(FormulaColumns.OwnerId).WithValue(owner.Id)
                 .Add(FormulaColumns.Description).WithValue(item.Description())
@@ -22,39 +23,41 @@ namespace Abacus.Data
 
         public static IQuery Remove(Formula item)
         {
-            return DeleteBuilder.Where(FormulaColumns.Id).EqualTo(item.Id).From(TableName);
+            return RawQuery.Create("delete from TABLE where Id = @Id").AddParameterValue(FormulaColumns.Id, item.Id);
         }
 
         public static IQuery Get(Guid id)
         {
             return Get()
-                .Where(FormulaColumns.Id).EqualTo(id)
+                .AddParameterValue(FormulaColumns.Id, id)
                 .From(TableName);
         }
 
         private static ISelectBuilderSelect Get()
         {
-            return SelectBuilder
-                .Select(FormulaColumns.Id)
-                .With(FormulaColumns.OwnerName)
-                .With(FormulaColumns.OwnerId)
-                .With(FormulaColumns.Description);
+            return RawQuery.Create(@"
+select
+                Id,
+                OwnerName,
+                OwnerId,
+                Description,;
         }
 
         public static IQuery GetOperation(Guid formulaId)
         {
-            return SelectBuilder
-                .Select(FormulaOperationColumns.Operation)
-                .With(FormulaOperationColumns.ValueSource)
-                .With(FormulaOperationColumns.ValueSelection)
-                .Where(FormulaOperationColumns.FormulaId).EqualTo(formulaId)
+            return RawQuery.Create(@"
+select
+                Operation,
+                ValueSource,
+                ValueSelection,
+                .AddParameterValue(FormulaOperationColumns.FormulaId, formulaId)
                 .OrderBy(FormulaOperationColumns.SequenceNumber).Ascending()
                 .From(OperationTableName);
         }
 
         public static IQuery RemoveOperations(Formula formula)
         {
-            return DeleteBuilder.Where(FormulaOperationColumns.FormulaId).EqualTo(formula.Id).From(OperationTableName);
+            return DeleteBuilder.AddParameterValue(FormulaOperationColumns.FormulaId, formula.Id).From(OperationTableName);
         }
 
         public static IQuery AddOperation(Formula formula, FormulaOperation operation, int sequenceNumber)
@@ -80,7 +83,7 @@ namespace Abacus.Data
         {
             return UpdateBuilder.Update(TableName)
                 .Set(FormulaColumns.Description).ToValue(item.Description())
-                .Where(FormulaColumns.Id).HasValue(item.Id);
+                .AddParameterValue(FormulaColumns.Id).HasValue(item.Id);
         }
 
         public static IQuery SetSequenceNumber(Formula formula, int sequence)
@@ -88,13 +91,13 @@ namespace Abacus.Data
             return UpdateBuilder
                 .Update(TableName)
                 .Set(FormulaColumns.SequenceNumber).ToValue(sequence)
-                .Where(FormulaColumns.Id).HasValue(formula.Id);
+                .AddParameterValue(FormulaColumns.Id).HasValue(formula.Id);
         }
 
         public static IQuery AllForOwner(Guid ownerId)
         {
             return Get()
-               .Where(FormulaColumns.OwnerId).EqualTo(ownerId)
+               .AddParameterValue(FormulaColumns.OwnerId, ownerId)
                .From(TableName);
         }
     }

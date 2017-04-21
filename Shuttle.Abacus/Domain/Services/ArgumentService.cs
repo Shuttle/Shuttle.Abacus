@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class ArgumentService : IArgumentService
     {
@@ -66,7 +65,7 @@ namespace Shuttle.Abacus
                 }
             }
 
-            //TODO: pipeline.Process(result);
+            pipeline.Process(result);
 
             return result;
         }

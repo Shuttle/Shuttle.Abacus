@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public interface IResourceAccessor
     {

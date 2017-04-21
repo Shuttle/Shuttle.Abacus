@@ -1,9 +1,9 @@
 using System;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public interface IDecimalTableFactory
     {
-        DecimalTable Create(Guid decimalTableId, IDecimalTableCommand command);
+        DecimalTable Create(Guid decimalTableId, DecimalTableCommand command);
     }
 }

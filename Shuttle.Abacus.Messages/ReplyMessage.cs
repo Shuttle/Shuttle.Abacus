@@ -1,17 +1,14 @@
-using Abacus.Infrastructure;
-using NServiceBus;
-
 namespace Abacus.Messages
 {
-    public class ReplyMessage : IMessage
+    public class ReplyMessage
     {
-        public Result Result { get; set; }
-
         public ReplyMessage(IResult result)
         {
             Guard.AgainstNull(result, "result");
 
-            Result = (Result)result;
+            Result = (Result) result;
         }
+
+        public Result Result { get; set; }
     }
 }

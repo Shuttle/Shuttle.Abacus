@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Shuttle.Abacus.DTO;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
-    public class SetCalculationConstraintsCommand : ISetCalculationConstraintsCommand
+    public class SetCalculationConstraintsCommand 
     {
         public Guid CalculationId { get; set; }
         public List<ConstraintDTO> Constraints { get; set; }

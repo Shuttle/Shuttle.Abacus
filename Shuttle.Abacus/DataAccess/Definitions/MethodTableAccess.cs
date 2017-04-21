@@ -1,31 +1,33 @@
 using System;
-using Abacus.Domain;
+using Shuttle.Abacus.Domain;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public static class MethodTableAccess
     {
-        public const string TableName = "Method";
+        
 
         public static IQuery Add(Method item)
         {
             return InsertBuilder.Insert()
-                .Add(MethodColumns.Id).WithValue(item.Id)
-                .Add(MethodColumns.Name).WithValue(item.MethodName)
+                .AddParameterValue(MethodColumns.Id, item.Id)
+                .AddParameterValue(MethodColumns.Name, item.MethodName)
                 .Into(TableName);
         }
 
         public static IQuery Remove(Method item)
         {
-            return DeleteBuilder.Where(MethodColumns.Id).EqualTo(item.Id).From(TableName);
+            return RawQuery.Create("delete from TABLE where Id = @Id").AddParameterValue(MethodColumns.Id, item.Id);
         }
 
         public static IQuery Get(Guid id)
         {
-            return SelectBuilder
-                .Select(MethodColumns.Id)
-                .With(MethodColumns.Name)
-                .Where(MethodColumns.Id).EqualTo(id)
+            return RawQuery.Create(@"
+select
+                Id,
+                Name,
+                .AddParameterValue(MethodColumns.Id, id)
                 .From(TableName);
         }
 
@@ -33,15 +35,16 @@ namespace Abacus.Data
         {
             return UpdateBuilder.Update(TableName)
                 .Set(MethodColumns.Name).ToValue(item.MethodName)
-                .Where(MethodColumns.Id).HasValue(item.Id);
+                .AddParameterValue(MethodColumns.Id).HasValue(item.Id);
         }
 
         public static IQuery Get(string methodName)
         {
-            return SelectBuilder
-                .Select(MethodColumns.Id)
-                .With(MethodColumns.Name)
-                .Where(MethodColumns.Name).EqualTo(methodName)
+            return RawQuery.Create(@"
+select
+                Id,
+                Name,
+                .AddParameterValue(MethodColumns.Name, methodName)
                 .From(TableName);
         }
     }

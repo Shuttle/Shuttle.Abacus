@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Abacus.DTO;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.DataAccess.Query;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Mapping
 {
-    public class OperationDTOMapper : IDataTableMapper<OperationDTO>
+    public class OperationDTOMapper : IDataRowMapper<OperationDTO>
     {
         private readonly List<OperationTypeDTO> operationTypes;
         private readonly List<ValueSourceTypeDTO> valueSourceTypes;

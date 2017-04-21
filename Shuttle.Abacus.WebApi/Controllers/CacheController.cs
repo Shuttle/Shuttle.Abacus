@@ -1,9 +1,9 @@
-using System.Web.Mvc;
-using Abacus.Infrastructure;
+using System.Web.Http;
+using Shuttle.Abacus.Infrastructure;
 
-namespace Abacus.Endpoints
+namespace Shuttle.Abacus.WebApi
 {
-    public class CacheController : Controller
+    public class CacheController : ApiController
     {
         private readonly ICache cache;
 
@@ -12,11 +12,11 @@ namespace Abacus.Endpoints
             this.cache = cache;
         }
 
-        public ActionResult Flush()
+        public IHttpActionResult Flush()
         {
             cache.Flush();
 
-            return new EmptyResult();
+            return Ok();
         }
     }
 }

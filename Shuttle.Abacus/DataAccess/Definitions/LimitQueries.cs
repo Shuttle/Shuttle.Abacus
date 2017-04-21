@@ -1,28 +1,30 @@
 using System;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public static class LimitQueries
     {
         private const string TableName = "Limit";
 
-        public static ISelectQuery AllForOwner(Guid ownerId)
+        public IQuery AllForOwner(Guid ownerId)
         {
-            return SelectBuilder
-                .Select(LimitColumns.Id)
-                .With(LimitColumns.Name)
-                .Where(LimitColumns.OwnerId).EqualTo(ownerId)
+            return RawQuery.Create(@"
+select
+                Id,
+                Name,
+                .AddParameterValue(LimitColumns.OwnerId, ownerId)
                 .OrderBy(LimitColumns.Name).Ascending()
                 .From(TableName);
         }
 
-        public static ISelectQuery Get(Guid limitId)
+        public IQuery Get(Guid limitId)
         {
-            return SelectBuilder
-                .Select(LimitColumns.Id)
-                .With(LimitColumns.Name)
-                .With(LimitColumns.Type)
-                .Where(LimitColumns.Id).EqualTo(limitId)
+            return RawQuery.Create(@"
+select
+                Id,
+                Name,
+                Type,
+                .AddParameterValue(LimitColumns.Id, limitId)
                 .OrderBy(LimitColumns.Name).Ascending()
                 .From(TableName);
         }

@@ -1,6 +1,6 @@
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
-    public class CreateMethodCommand : ICreateMethodCommand
+    public class CreateMethodCommand
     {
         public string MethodName { get; set; }
     }

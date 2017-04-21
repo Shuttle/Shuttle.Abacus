@@ -34,6 +34,10 @@
       <HintPath>..\packages\RabbitMQ.Client.4.1.1\lib\net451\RabbitMQ.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Shuttle.Core.Data, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Core.Data.8.0.0\lib\net452-full\Shuttle.Core.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Shuttle.Core.Host, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Shuttle.Core.Host.8.0.0\lib\net452-full\Shuttle.Core.Host.exe</HintPath>
       <Private>True</Private>
@@ -60,11 +64,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Handlers\ArgumentHandler.cs" />
+    <Compile Include="Handlers\CalculationHandler.cs" />
+    <Compile Include="Handlers\DecimalTableHandler.cs" />
+    <Compile Include="Handlers\FormulaHandler.cs" />
+    <Compile Include="Handlers\LimitHandler.cs" />
+    <Compile Include="Handlers\MethodHandler.cs" />
+    <Compile Include="Handlers\MethodTestHandler.cs" />
+    <Compile Include="Handlers\SystemUserHandler.cs" />
+    <Compile Include="Host.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shuttle.Abacus.DTO\Shuttle.Abacus.DTO.csproj">
+      <Project>{5CD61A6D-ABCB-4400-A113-4EF4DA4C439C}</Project>
+      <Name>Shuttle.Abacus.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shuttle.Abacus.Infrastructure\Shuttle.Abacus.Infrastructure.csproj">
+      <Project>{1A365F2C-BA2B-41F0-969B-EEC08C6E2658}</Project>
+      <Name>Shuttle.Abacus.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shuttle.Abacus.Messages\Shuttle.Abacus.Messages.csproj">
+      <Project>{7A323D9C-E55E-4552-AAF1-E21A86009162}</Project>
+      <Name>Shuttle.Abacus.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shuttle.Abacus\Shuttle.Abacus.csproj">
+      <Project>{23680A60-878A-48DA-B23C-9B0EA4A29305}</Project>
+      <Name>Shuttle.Abacus</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

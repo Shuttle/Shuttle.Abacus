@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
 using NUnit.Framework;
-using Shuttle.Abacus;
+using Shuttle.Abacus.Domain;
 
-namespace Abacus.Test.Unit
+namespace Shuttle.Abacus.Tests
 {
     [TestFixture]
     public class CalculationCollectionTest

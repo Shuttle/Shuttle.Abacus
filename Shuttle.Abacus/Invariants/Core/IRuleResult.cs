@@ -1,6 +1,6 @@
-using Abacus.Infrastructure;
+using Shuttle.Abacus.Domain;
 
-namespace Abacus.Validation
+namespace Shuttle.Abacus.Invariants.Core
 {
     public interface IRuleResult
     {

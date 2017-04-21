@@ -1,9 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class ArgumentCollection : List<Argument>
     {
@@ -19,11 +18,6 @@ namespace Shuttle.Abacus
             arguments = new List<Argument>();
         }
 
-        public IEnumerator<Argument> GetEnumerator()
-        {
-            return arguments.GetEnumerator();
-        }
-
         public bool Contains(string name)
         {
             return Find(name) != null;
@@ -34,7 +28,7 @@ namespace Shuttle.Abacus
             return arguments.Find(argument => argument.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
         }
 
-        public void Add(Argument argument)
+        public new void Add(Argument argument)
         {
             Guard.AgainstNull(argument, "argument");
 

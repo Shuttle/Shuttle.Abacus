@@ -1,8 +1,8 @@
 using System;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
-    public class DeleteLimitCommand : IDeleteLimitCommand
+    public class DeleteLimitCommand 
     {
         public Guid LimitId { get; set; }
     }

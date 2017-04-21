@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class MethodTest
     {
@@ -54,7 +54,7 @@ namespace Shuttle.Abacus
             Guard.Against<InvalidStateException>(string.IsNullOrEmpty(Description), "The description may not be empty.");
         }
 
-        public MethodTest ProcessCommand(IChangeMethodTestCommand command)
+        public MethodTest ProcessCommand(ChangeMethodTestCommand command)
         {
             Description = command.Description;
             ExpectedResult = command.ExpectedResult;

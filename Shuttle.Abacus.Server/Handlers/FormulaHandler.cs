@@ -1,15 +1,13 @@
-using Abacus.Application;
-using Abacus.Data;
-using Abacus.Domain;
-using Abacus.DTO;
-using Abacus.Infrastructure;
-using Abacus.Messages;
-using NServiceBus;
+using Shuttle.Abacus.ApplicationService;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.DataAccess.Query;
+using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.DTO;
+using Shuttle.Esb;
 
-namespace Abacus.Server
+namespace Shuttle.Abacus.Server.Handlers
 {
     public class FormulaHandler :
-        MessageHandler,
         IMessageHandler<CreateFormulaCommand>,
         IMessageHandler<ChangeFormulaCommand>,
         IMessageHandler<DeleteFormulaCommand>,
@@ -45,66 +43,61 @@ namespace Abacus.Server
             this.argumentAnswerFactoryProvider = argumentAnswerFactoryProvider;
         }
 
-        public void Handle(ChangeFormulaCommand message)
+        public void ProcessMessage(IHandlerContext<CreateFormulaCommand> context)
         {
-            Transacted(() => TaskFactory.Create<IChangeFormulaTask>().Execute(
-                                 formulaRepository.Get(message.FormulaId).
-                                     ProcessCommand(
-                                     message,
-                                     operationFactoryProvider,
-                                     valueSourceFactoryProvider,
-                                     constraintFactoryProvider,
-                                     argumentAnswerFactoryProvider,
-                                     argumentDTOMapper)));
+            var message = context.Message;
+
+            var owner =
+                RepositoryProvider.Get(message.OwnerName).Get<IFormulaOwner>(
+                    message.OwnerId);
+
+            var formula = new Formula(message,
+                                      operationFactoryProvider,
+                                      valueSourceFactoryProvider,
+                                      constraintFactoryProvider,
+                                      argumentAnswerFactoryProvider);
+
+            owner.AddFormula(formula);
+
+            TaskFactory.Create<ICreateFormulaTask>().Execute(new OwnerModel(owner, formula));
         }
 
-        public void Handle(ChangeFormulaOrderCommand message)
+        public void ProcessMessage(IHandlerContext<ChangeFormulaCommand> context)
         {
-            Transacted(
-                () =>
-                    {
-                        var owner =
-                            RepositoryProvider.Get(message.OwnerName).Get<IFormulaOwner>(
-                                message.OwnerId);
+            var message = context.Message;
 
-                        owner.ProcessCommand(message, formulaOwnerService);
-                    });
+            TaskFactory.Create<IChangeFormulaTask>().Execute(
+                                             formulaRepository.Get(message.FormulaId).
+                                                 ProcessCommand(
+                                                 message,
+                                                 operationFactoryProvider,
+                                                 valueSourceFactoryProvider,
+                                                 constraintFactoryProvider,
+                                                 argumentAnswerFactoryProvider,
+                                                 argumentDTOMapper))        }
+
+        public void ProcessMessage(IHandlerContext<DeleteFormulaCommand> context)
+        {
+            var message = context.Message;
+
+            var query = formulaQuery.Get(message.FormulaId);
+
+            var owner =
+                RepositoryProvider.Get(FormulaColumns.OwnerName.MapFrom(query.Row)).Get<IFormulaOwner>(
+                    FormulaColumns.OwnerId.MapFrom(query.Row));
+
+            owner.RemoveFormula(message.FormulaId);
         }
 
-        public void Handle(CreateFormulaCommand message)
+        public void ProcessMessage(IHandlerContext<ChangeFormulaOrderCommand> context)
         {
-            Transacted(
-                () =>
-                    {
-                        var owner =
-                            RepositoryProvider.Get(message.OwnerName).Get<IFormulaOwner>(
-                                message.OwnerId);
+            var message = context.Message;
 
-                        var formula = new Formula(message,
-                                                  operationFactoryProvider,
-                                                  valueSourceFactoryProvider,
-                                                  constraintFactoryProvider,
-                                                  argumentAnswerFactoryProvider);
+            var owner =
+                RepositoryProvider.Get(message.OwnerName).Get<IFormulaOwner>(
+                    message.OwnerId);
 
-                        owner.AddFormula(formula);
-
-                        TaskFactory.Create<ICreateFormulaTask>().Execute(new OwnerModel(owner, formula));
-                    });
-        }
-
-        public void Handle(DeleteFormulaCommand message)
-        {
-            Transacted(
-                () =>
-                    {
-                        var query = formulaQuery.Get(message.FormulaId);
-
-                        var owner =
-                            RepositoryProvider.Get(FormulaColumns.OwnerName.MapFrom(query.Row)).Get<IFormulaOwner>(
-                                FormulaColumns.OwnerId.MapFrom(query.Row));
-
-                        owner.RemoveFormula(message.FormulaId);
-                    });
+            owner.ProcessCommand(message, formulaOwnerService);
         }
     }
 }

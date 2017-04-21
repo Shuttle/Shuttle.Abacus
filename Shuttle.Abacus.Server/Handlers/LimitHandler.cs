@@ -1,13 +1,10 @@
-using Abacus.Application;
-using Abacus.Domain;
-using Abacus.Infrastructure;
-using Abacus.Messages;
-using NServiceBus;
+using Shuttle.Abacus.ApplicationService;
+using Shuttle.Abacus.Domain;
+using Shuttle.Esb;
 
-namespace Abacus.Server
+namespace Shuttle.Abacus.Server.Handlers
 {
     public class LimitHandler :
-        MessageHandler,
         IMessageHandler<CreateLimitCommand>,
         IMessageHandler<ChangeLimitCommand>,
         IMessageHandler<DeleteLimitCommand>
@@ -21,35 +18,35 @@ namespace Abacus.Server
             this.limitRepository = limitRepository;
         }
 
-        public void Handle(ChangeLimitCommand message)
+        public void ProcessMessage(IHandlerContext<ChangeLimitCommand> context)
         {
-            Transacted(() =>
-                {
-                    var limit = limitFactoryProvider.Get(message.Type).Create(message.Name);
+            var message = context.Message;
 
-                    limit.AssignId(message.LimitId);
+            var limit = limitFactoryProvider.Get(message.Type).Create(message.Name);
 
-                    limitRepository.Save(limit);
-                });
+            limit.AssignId(message.LimitId);
+
+            limitRepository.Save(limit);
         }
 
-        public void Handle(CreateLimitCommand message)
+        public void ProcessMessage(IHandlerContext<CreateLimitCommand> context)
         {
-            Transacted(() =>
-                {
-                    var owner = RepositoryProvider.Get(message.OwnerName).Get<ILimitOwner>(message.OwnerId);
+            var message = context.Message;
 
-                    var limit = limitFactoryProvider.Get(message.Type).Create(message.Name);
+            var owner = RepositoryProvider.Get(message.OwnerName).Get<ILimitOwner>(message.OwnerId);
 
-                    owner.AddLimit(limit);
+            var limit = limitFactoryProvider.Get(message.Type).Create(message.Name);
 
-                    TaskFactory.Create<ICreateLimitTask>().Execute(new OwnerModel(owner, limit));
-                });
+            owner.AddLimit(limit);
+
+            TaskFactory.Create<ICreateLimitTask>().Execute(new OwnerModel(owner, limit));
         }
 
-        public void Handle(DeleteLimitCommand message)
+        public void ProcessMessage(IHandlerContext<DeleteLimitCommand> context)
         {
-            Transacted(() => limitRepository.Remove(limitRepository.Get(message.LimitId)));
+            var message = context.Message;
+
+            limitRepository.Remove(limitRepository.Get(message.LimitId));
         }
     }
 }

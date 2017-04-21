@@ -1,6 +1,6 @@
 using Abacus.Domain;
 
-namespace Abacus.Application
+namespace Shuttle.Abacus.ApplicationService
 {
     public class OwnerModel
     {

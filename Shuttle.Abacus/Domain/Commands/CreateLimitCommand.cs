@@ -1,8 +1,8 @@
 using System;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
-    public class CreateLimitCommand : ICreateLimitCommand
+    public class CreateLimitCommand
     {
         public string OwnerName { get; set; }
         public Guid OwnerId { get; set; }

@@ -1,13 +1,14 @@
 using System.Collections.Generic;
-using Abacus.DTO;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.DataAccess.Query;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess
 {
-    public class OperationTypeQuery : DataQuery, IOperationTypeQuery
+    public class OperationTypeQuery :IOperationTypeQuery
     {
-        private readonly IDataTableMapper<OperationTypeDTO> operationTypeDTOMapper;
+        private readonly IDataRowMapper<OperationTypeDTO> operationTypeDTOMapper;
 
-        public OperationTypeQuery(IDataTableMapper<OperationTypeDTO> operationTypeDTOMapper)
+        public OperationTypeQuery(IDataRowMapper<OperationTypeDTO> operationTypeDTOMapper)
         {
             this.operationTypeDTOMapper = operationTypeDTOMapper;
         }

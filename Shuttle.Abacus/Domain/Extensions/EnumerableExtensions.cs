@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Shuttle.Abacus.DTO;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public static class EnumerableExtensions
     {
@@ -18,7 +19,7 @@ namespace Shuttle.Abacus
                 });
             }
 
-            result.Sort((x, y) => String.Compare(x.Text, y.Text, StringComparison.Ordinal));
+            result.Sort((x, y) => string.Compare(x.Text, y.Text, StringComparison.Ordinal));
 
             return result;
         }

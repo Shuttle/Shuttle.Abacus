@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Abacus.Localisation {
+namespace Shuttle.Abacus.Localisation {
     using System;
     
     

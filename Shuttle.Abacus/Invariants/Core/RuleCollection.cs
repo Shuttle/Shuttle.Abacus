@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.Domain;
 
-namespace Abacus.Validation
+namespace Shuttle.Abacus.Invariants.Core
 {
     public class RuleCollection<T> : IRuleCollection<T>
     {

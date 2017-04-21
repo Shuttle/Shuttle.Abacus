@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 // TODO: fix up this class
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class FactoryProvider<T> : IFactoryProvider<T> where T : IFactory
     {

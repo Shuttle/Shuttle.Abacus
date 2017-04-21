@@ -1,13 +1,14 @@
 using System;
 using System.Data;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public class DecimalTableColumns
     {
-        public static readonly QueryColumn<Guid> Id = new QueryColumn<Guid>("DecimalTableId", DbType.Guid).AsIdentifier();
-        public static readonly QueryColumn<string> Name = new QueryColumn<string>("Name", DbType.AnsiString, 160);
-        public static readonly QueryColumn<Guid> RowArgumentId = new QueryColumn<Guid>("RowArgumentId", DbType.Guid);
-        public static readonly QueryColumn<Guid> ColumnArgumentId = new QueryColumn<Guid>("ColumnArgumentId", DbType.Guid);
+        public static readonly MappedColumn<Guid> Id = new MappedColumn<Guid>("DecimalTableId", DbType.Guid);
+        public static readonly MappedColumn<string> Name = new MappedColumn<string>("Name", DbType.AnsiString, 160);
+        public static readonly MappedColumn<Guid> RowArgumentId = new MappedColumn<Guid>("RowArgumentId", DbType.Guid);
+        public static readonly MappedColumn<Guid> ColumnArgumentId = new MappedColumn<Guid>("ColumnArgumentId", DbType.Guid);
     }
 }

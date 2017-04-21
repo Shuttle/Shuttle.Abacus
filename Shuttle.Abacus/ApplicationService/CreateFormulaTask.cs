@@ -1,7 +1,7 @@
-using Abacus.Domain;
-using Abacus.Policy;
+using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Policy;
 
-namespace Abacus.Application
+namespace Shuttle.Abacus.ApplicationService
 {
     public class CreateFormulaTask : ICreateFormulaTask
     {

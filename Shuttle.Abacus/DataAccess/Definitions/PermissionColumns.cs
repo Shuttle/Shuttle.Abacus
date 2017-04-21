@@ -1,14 +1,15 @@
 using System;
 using System.Data;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public static class PermissionColumns
     {
-        public static readonly QueryColumn<string> Permission =
-            new QueryColumn<string>("Permission", DbType.AnsiString, 100);
+        public static readonly MappedColumn<string> Permission =
+            new MappedColumn<string>("Permission", DbType.AnsiString, 100);
 
-        public static readonly QueryColumn<Guid> SystemUserId =
-            new QueryColumn<Guid>("SystemUserID", DbType.Guid);
+        public static readonly MappedColumn<Guid> SystemUserId =
+            new MappedColumn<Guid>("SystemUserID", DbType.Guid);
     }
 }

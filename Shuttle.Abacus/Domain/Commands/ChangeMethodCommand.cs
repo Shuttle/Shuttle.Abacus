@@ -1,8 +1,8 @@
 using System;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
-    public class ChangeMethodCommand : IChangeMethodCommand
+    public class ChangeMethodCommand 
     {
         public Guid MethodId { get; set; }
         public string MethodName { get; set; }

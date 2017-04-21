@@ -1,16 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using Castle.Windsor;
-using Abacus.Infrastructure;
-using Abacus.Messages;
-using Abacus.UI;
-using Abacus.Windsor;
-using NServiceBus;
 
-namespace Abacus.Shell
+namespace Shuttle.Abacus.UI
 {
     internal static class Program
     {

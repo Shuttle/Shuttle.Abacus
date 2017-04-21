@@ -1,11 +1,11 @@
 using System;
 using Abacus.Domain;
-using Abacus.Infrastructure;
-using Abacus.Localisation;
+using Shuttle.Abacus.Domain;
+using Shuttle.Core.Infrastructure;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess
 {
-    public abstract class Repository<T> : IRepository<T>
+    public abstract class Repository<T> : Domain.IRepository<T>
     {
         private static readonly string TypeName = typeof(T).Name;
 
@@ -13,7 +13,7 @@ namespace Abacus.Data
         public abstract void Remove(T item);
         public abstract T Get(Guid id);
 
-        public TCast Get<TCast>(Guid id) where TCast : class, IEntity
+        public TCast Get<TCast>(Guid id) where TCast : class
         {
             var result = Get(id) as TCast;
 

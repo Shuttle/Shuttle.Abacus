@@ -1,14 +1,15 @@
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public class OperationTypeQueries
     {
-        public const string TableName = "OperationType";
+        
 
-        public static ISelectQuery All()
+        public IQuery All()
         {
-            return SelectBuilder
-                .Select(OperationTypeColumns.Name)
-                .With(OperationTypeColumns.Text)
+            return RawQuery.Create(@"
+select
+                Name,
+                Text,
                 .From(TableName);
         }
     }

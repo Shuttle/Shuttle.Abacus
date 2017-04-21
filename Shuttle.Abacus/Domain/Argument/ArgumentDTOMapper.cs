@@ -1,4 +1,6 @@
-namespace Shuttle.Abacus
+using Shuttle.Abacus.DTO;
+
+namespace Shuttle.Abacus.Domain
 {
     public class ArgumentDTOMapper : IMapper<ArgumentDTO, Argument>
     {

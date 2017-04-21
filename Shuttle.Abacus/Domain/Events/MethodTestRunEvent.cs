@@ -1,6 +1,7 @@
 using System;
+using Shuttle.Abacus.DTO;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class MethodTestRunEvent 
     {

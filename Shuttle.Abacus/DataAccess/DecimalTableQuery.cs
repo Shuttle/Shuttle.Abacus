@@ -1,17 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Abacus.DTO;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.DataAccess.Query;
+using Shuttle.Abacus.DTO;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess
 {
-    public class DecimalTableQuery : DataQuery, IDecimalTableQuery
+    public class DecimalTableQuery :IDecimalTableQuery
     {
         private readonly IDatabaseGateway gateway;
-        private readonly IDataTableMapper<DecimalTableDTO> decimalTableDTOMapper;
+        private readonly IDataRowMapper<DecimalTableDTO> decimalTableDTOMapper;
 
 
-        public DecimalTableQuery(IDatabaseGateway gateway, IDataTableMapper<DecimalTableDTO> decimalTableDTOMapper)
+        public DecimalTableQuery(IDatabaseGateway gateway, IDataRowMapper<DecimalTableDTO> decimalTableDTOMapper)
         {
             this.gateway = gateway;
             this.decimalTableDTOMapper = decimalTableDTOMapper;
@@ -19,7 +22,7 @@ namespace Abacus.Data
 
         public IQueryResult All()
         {
-            return QueryProcessor.Execute(DecimalTableQueries.All());
+            return QueryProcessor.Execute(DecimalTableQueryFactory.All());
         }
 
         public IEnumerable<DecimalTableDTO> AllDTOs()
@@ -29,27 +32,27 @@ namespace Abacus.Data
 
         public IQueryResult Get(Guid id)
         {
-            return QueryProcessor.Execute(DecimalTableQueries.Get(id));
+            return QueryProcessor.Execute(DecimalTableQueryFactory.Get(id));
         }
 
         public DataTable ConstrainedDecimalValues(Guid id)
         {
             using (UnitOfWorkProvider.Create())
             {
-                return gateway.GetDataTableFor(DecimalTableQueries.ConstrainedDecimalValues(id));
+                return gateway.GetDataTableFor(DecimalTableQueryFactory.ConstrainedDecimalValues(id));
             }
         }
 
         public IQueryResult Name(Guid id)
         {
-            return QueryProcessor.Execute(DecimalTableQueries.Name(id));
+            return QueryProcessor.Execute(DecimalTableQueryFactory.Name(id));
         }
 
         public DataTable QueryDecimalTable(Guid decimalTableId)
         {
             using (UnitOfWorkProvider.Create())
             {
-                return gateway.GetDataTableFor(DecimalTableQueries.DecimalTableReport(decimalTableId));
+                return gateway.GetDataTableFor(DecimalTableQueryFactory.DecimalTableReport(decimalTableId));
             }
         }
     }

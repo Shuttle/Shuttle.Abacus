@@ -1,6 +1,6 @@
-using Abacus.Domain;
+using Shuttle.Abacus.Domain;
 
-namespace Abacus.DomainEventHandlers
+namespace Shuttle.Abacus.DomainEventHandlers
 {
     public class FormulaOrderChangedHandler : IHandleEvent<FormulaOrderChanged>
     {

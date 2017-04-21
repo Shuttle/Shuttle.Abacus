@@ -1,15 +1,16 @@
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public class ValueSourceTypeQueries
     {
-        public const string TableName = "ValueSourceType";
         
-        public static ISelectQuery All()
+        
+        public IQuery All()
         {
-            return SelectBuilder
-                .Select(ValueSourceTypeColumns.Name)
-                .With(ValueSourceTypeColumns.Text)
-                .With(ValueSourceTypeColumns.Type)
+            return RawQuery.Create(@"
+select
+                Name,
+                Text,
+                Type,
                 .From(TableName);
         }
     }

@@ -1,6 +1,4 @@
-using System.Web.Mvc;
-
-namespace Abacus.Endpoints
+namespace Shuttle.Abacus.WebApi
 {
     public class DefaultController : Controller
     {

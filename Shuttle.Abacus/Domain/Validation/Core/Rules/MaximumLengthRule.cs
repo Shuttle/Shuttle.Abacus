@@ -1,7 +1,6 @@
 using System;
-using Shuttle.Abacus.Localisation;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class MaximumLengthRule : Rule
     {

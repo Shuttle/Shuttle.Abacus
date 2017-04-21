@@ -1,8 +1,7 @@
 using System;
-using Abacus.Domain;
-using Abacus.Validation;
+using Shuttle.Abacus.Domain;
 
-namespace Abacus.Policy
+namespace Shuttle.Abacus.Policy
 {
     public class MethodPolicy : AbstractPolicy<Method>, IMethodPolicy
     {

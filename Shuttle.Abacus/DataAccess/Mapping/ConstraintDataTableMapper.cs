@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Data;
-using Abacus.Domain;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.Domain;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Mapping
 {
-    public class ConstraintDataTableMapper : IDataTableMapper<IConstraint>
+    public class ConstraintDataTableMapper : IDataRowMapper<IConstraint>
     {
         private readonly IFactoryProvider<IConstraintFactory> constraintFactoryProvider;
         private readonly IFactoryProvider<IArgumentAnswerFactory> argumentAnswerFactoryProvider;

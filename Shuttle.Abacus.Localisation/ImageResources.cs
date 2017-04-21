@@ -1,4 +1,4 @@
-namespace Abacus.Localisation
+namespace Shuttle.Abacus.Localisation
 {
     public static class ImageResources
     {

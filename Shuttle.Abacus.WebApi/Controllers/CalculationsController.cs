@@ -1,13 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.Mvc;
-using Abacus.DataContracts;
-using Abacus.Domain;
-using Abacus.Infrastructure;
-using Abacus.Web;
 
-namespace Abacus.Endpoints
+namespace Shuttle.Abacus.WebApi
 {
     public class CalculationsController : EndpointController
     {

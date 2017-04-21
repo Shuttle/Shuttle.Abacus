@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using Shuttle.Abacus.Invariants.Core.Rules;
 
-namespace Abacus.Validation
+namespace Shuttle.Abacus.Invariants.Core
 {
     public class RuleCollectionBuilder : IRuleCollectionBuilder
     {

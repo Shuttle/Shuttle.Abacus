@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
-    public class CreateSystemUserCommand : ICreateSystemUserCommand
+    public class CreateSystemUserCommand 
     {
         public string LoginName { get; set; }
         public List<string> PermissionIdentifiers { get; set; }

@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Shuttle.Abacus.DTO;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
-    public class UpdateDecimalTableCommand : IUpdateDecimalTableCommand
+    public class UpdateDecimalTableCommand
     {
         public string DecimalTableName { get; set; }
         public ArgumentDTO RowArgumentDto { get; set; }

@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using Abacus.Infrastructure;
-using Abacus.Localisation;
 
-namespace Abacus.Validation
+namespace Shuttle.Abacus.Invariants.Values
 {
     public class ValueTypeValidatorProvider : IValueTypeValidatorProvider
     {

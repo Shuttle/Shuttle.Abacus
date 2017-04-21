@@ -1,8 +1,8 @@
 using System;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
-    public class ChangeLoginNameCommand : IChangeLoginNameCommand
+    public class ChangeLoginNameCommand 
     {
         public Guid SystemUserId { get; set; }
         public string NewLoginName { get; set; }

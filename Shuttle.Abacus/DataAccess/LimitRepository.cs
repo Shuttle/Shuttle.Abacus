@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Abacus.Domain;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.Domain;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess
 {
     public class LimitRepository : Repository<Limit>, ILimitRepository
     {

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Data;
-using Abacus.DTO;
+using Shuttle.Abacus.DataAccess.Definitions;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Mapping
 {
     public class MethodTestDTOMapper : IMethodTestDTOMapper
     {

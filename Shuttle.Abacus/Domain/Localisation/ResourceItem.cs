@@ -1,8 +1,7 @@
 using System.Drawing;
 using System.Threading;
-using Shuttle.Abacus.Localisation;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class ResourceItem : IResourceAccessor
     {

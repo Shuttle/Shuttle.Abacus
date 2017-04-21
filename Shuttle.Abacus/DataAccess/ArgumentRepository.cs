@@ -1,9 +1,11 @@
 using System;
-using Abacus.Domain;
-using Abacus.Infrastructure;
-using Abacus.Validation;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Infrastructure;
+using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess
 {
     public class ArgumentRepository : Repository<Argument>, IArgumentRepository
     {

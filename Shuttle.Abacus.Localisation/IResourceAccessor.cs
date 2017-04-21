@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace Abacus.Localisation
+namespace Shuttle.Abacus.Localisation
 {
     public interface IResourceAccessor
     {

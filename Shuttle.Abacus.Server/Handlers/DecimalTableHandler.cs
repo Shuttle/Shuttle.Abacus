@@ -1,13 +1,10 @@
 using System;
-using Abacus.Domain;
-using Abacus.Infrastructure;
-using Abacus.Messages;
-using NServiceBus;
+using Shuttle.Abacus.Domain;
+using Shuttle.Esb;
 
-namespace Abacus.Server
+namespace Shuttle.Abacus.Server.Handlers
 {
     public class DecimalTableHandler :
-        MessageHandler,
         IMessageHandler<CreateDecimalTableCommand>,
         IMessageHandler<UpdateDecimalTableCommand>
     {
@@ -24,40 +21,38 @@ namespace Abacus.Server
             this.constraintRepository = constraintRepository;
         }
 
-        public void Handle(CreateDecimalTableCommand message)
+        public void ProcessMessage(IHandlerContext<CreateDecimalTableCommand> context)
         {
-            Transacted(uow =>
-                {
-                    var table = factory.Create(Guid.NewGuid(), message);
+            var message = context.Message;
 
-                    decimalTableRepository.Add(table);
+            var table = factory.Create(Guid.NewGuid(), message);
 
-                    table.DecimalValues.ForEach(value =>
-                        {
-                            decimalValueRepository.Add(table, value);
+            decimalTableRepository.Add(table);
 
-                            constraintRepository.SaveForOwner(value);
-                        });
-                });
+            foreach (var value in table.DecimalValues)
+            {
+                decimalValueRepository.Add(table, value);
+
+                constraintRepository.SaveForOwner(value);
+            }
         }
 
-        public void Handle(UpdateDecimalTableCommand message)
+        public void ProcessMessage(IHandlerContext<UpdateDecimalTableCommand> context)
         {
-            Transacted(uow =>
-                {
-                    var table = factory.Create(message.DecimalTableId, message);
+            var message = context.Message;
 
-                    decimalValueRepository.RemoveAllForDecimalTable(message.DecimalTableId);
+            var table = factory.Create(message.DecimalTableId, message);
 
-                    decimalTableRepository.Save(table);
+            decimalValueRepository.RemoveAllForDecimalTable(message.DecimalTableId);
 
-                    table.DecimalValues.ForEach(value =>
-                        {
-                            decimalValueRepository.Add(table, value);
+            decimalTableRepository.Save(table);
 
-                            constraintRepository.SaveForOwner(value);
-                        });
-                });
+            foreach (var value in table.DecimalValues)
+            {
+                decimalValueRepository.Add(table, value);
+
+                constraintRepository.SaveForOwner(value);
+            }
         }
     }
 }

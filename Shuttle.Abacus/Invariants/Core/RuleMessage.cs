@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Abacus.Infrastructure;
 
-namespace Abacus.Validation
+namespace Shuttle.Abacus.Invariants.Core
 {
     public class RuleMessage
     {

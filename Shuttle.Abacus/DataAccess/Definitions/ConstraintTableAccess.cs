@@ -1,15 +1,16 @@
 using System;
-using Abacus.Domain;
+using Shuttle.Abacus.Domain;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public static class ConstraintTableAccess
     {
-        public const string TableName = "Constraint";
+        
 
         public static IQuery RemoveForOwner(IConstraintOwner owner)
         {
-            return DeleteBuilder.Where(ConstraintColumns.OwnerId).EqualTo(owner.Id).From(TableName);
+            return DeleteBuilder.AddParameterValue(ConstraintColumns.OwnerId, owner.Id).From(TableName);
         }
 
         public static IQuery Add(IConstraintOwner owner, IConstraint constraint, int sequence)
@@ -30,13 +31,14 @@ namespace Abacus.Data
 
         public static IQuery AllForOwner(Guid id)
         {
-            return SelectBuilder
-                .Select(ConstraintColumns.Name)
-                .With(ConstraintColumns.ArgumentId)
-                .With(ConstraintColumns.ArgumentName)
-                .With(ConstraintColumns.Answer)
-                .With(ConstraintColumns.AnswerType)
-                .Where(ConstraintColumns.OwnerId).EqualTo(id)
+            return RawQuery.Create(@"
+select
+                Name,
+                ArgumentId,
+                ArgumentName,
+                Answer,
+                AnswerType,
+                .AddParameterValue(ConstraintColumns.OwnerId, id)
                 .OrderBy(ConstraintColumns.SequenceNumber).Ascending()
                 .From(TableName);
         }
@@ -45,14 +47,14 @@ namespace Abacus.Data
         {
             return UpdateBuilder.Update(TableName)
                 .Set(ConstraintColumns.ArgumentName).ToValue(argumentName)
-                .Where(ConstraintColumns.ArgumentId).HasValue(argumentId);
+                .AddParameterValue(ConstraintColumns.ArgumentId).HasValue(argumentId);
         }
 
         public static IQuery SetArgumentAnswerType(Guid argumentId, string answerType)
         {
             return UpdateBuilder.Update(TableName)
                 .Set(ConstraintColumns.AnswerType).ToValue(answerType)
-                .Where(ConstraintColumns.ArgumentId).HasValue(argumentId);
+                .AddParameterValue(ConstraintColumns.ArgumentId).HasValue(argumentId);
         }
     }
 }

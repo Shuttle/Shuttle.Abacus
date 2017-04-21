@@ -1,15 +1,15 @@
 using System;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public interface IFormulaOwner : IOwner
     {
         FormulaCollection Formulas { get; }
         Formula AddFormula(Formula formula);
 
-        void ProcessCommand(IChangeFormulaOrderCommand command, IFormulaOwnerService service);
+        void ProcessCommand(ChangeFormulaOrderCommand command, IFormulaOwnerService service);
 
         void AssignFormulas(FormulaCollection collection);
-        void RemoveFormula(Guid formulaId);
+        FormulaRemoved RemoveFormula(Guid formulaId);
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.DataAccess.Query;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess
 {
-    public class MethodTestQuery : DataQuery, IMethodTestQuery
+    public class MethodTestQuery :IMethodTestQuery
     {
         public IQueryResult All()
         {

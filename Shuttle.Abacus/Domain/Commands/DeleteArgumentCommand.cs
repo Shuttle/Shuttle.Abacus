@@ -1,8 +1,8 @@
 using System;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
-    public class DeleteArgumentCommand : IDeleteArgumentCommand
+    public class DeleteArgumentCommand 
     {
         public Guid ArgumentId { get; set; }
     }

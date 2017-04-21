@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class Formula :
         ISpecification<IMethodContext>,

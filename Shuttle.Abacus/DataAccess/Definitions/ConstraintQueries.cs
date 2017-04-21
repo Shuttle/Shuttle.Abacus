@@ -1,28 +1,30 @@
 using System;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public static class ConstraintQueries
     {
-        public const string TableName = "Constraint";
+        
 
-        public static ISelectQuery AllForOwner(Guid ownerId)
+        public IQuery AllForOwner(Guid ownerId)
         {
-            return SelectBuilder
-                .Select(ConstraintColumns.Description)
-                .Where(ConstraintColumns.OwnerId).EqualTo(ownerId)
+            return RawQuery.Create(@"
+select
+                Description,
+                .AddParameterValue(ConstraintColumns.OwnerId, ownerId)
                 .OrderBy(ConstraintColumns.SequenceNumber).Ascending()
                 .From(TableName);
         }
 
-        public static ISelectQuery DTOsForOwner(Guid ownerId)
+        public IQuery DTOsForOwner(Guid ownerId)
         {
-            return SelectBuilder
-                .Select(ConstraintColumns.Name)
-                .With(ConstraintColumns.ArgumentId)
-                .With(ConstraintColumns.ArgumentName)
-                .With(ConstraintColumns.Answer)
-                .Where(ConstraintColumns.OwnerId).EqualTo(ownerId)
+            return RawQuery.Create(@"
+select
+                Name,
+                ArgumentId,
+                ArgumentName,
+                Answer,
+                .AddParameterValue(ConstraintColumns.OwnerId, ownerId)
                 .OrderBy(ConstraintColumns.SequenceNumber).Ascending()
                 .From(TableName);
         }

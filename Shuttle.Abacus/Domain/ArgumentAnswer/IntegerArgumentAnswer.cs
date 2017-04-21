@@ -1,8 +1,7 @@
 using System;
-using Shuttle.Abacus.Localisation;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class IntegerArgumentAnswer : ArgumentAnswer
     {

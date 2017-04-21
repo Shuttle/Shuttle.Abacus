@@ -1,7 +1,7 @@
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public interface IFormulaOwnerService
     {
-        void ProcessCommand(IChangeFormulaOrderCommand command, IFormulaOwner owner);
+        FormulaOrderChanged ProcessCommand(ChangeFormulaOrderCommand command, IFormulaOwner owner);
     }
 }

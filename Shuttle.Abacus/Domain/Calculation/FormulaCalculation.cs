@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class FormulaCalculation : Calculation, IFormulaOwner
     {
@@ -36,7 +36,7 @@ namespace Shuttle.Abacus
 
         public FormulaCollection Formulas { get; private set; }
 
-        public void ProcessCommand(IChangeFormulaOrderCommand command, IFormulaOwnerService service)
+        public void ProcessCommand(ChangeFormulaOrderCommand command, IFormulaOwnerService service)
         {
             service.ProcessCommand(command, this);
         }
@@ -46,9 +46,10 @@ namespace Shuttle.Abacus
             Formulas = collection;
         }
 
-        public void RemoveFormula(Guid formulaId)
+        //TODO: Handle Event
+        public FormulaRemoved RemoveFormula(Guid formulaId)
         {
-            //TODO: DomainEvents.Raise(new FormulaRemoved(Formulas.Remove(formulaId), this));
+            return new FormulaRemoved(Formulas.Remove(formulaId), this);
         }
 
         public Formula AddFormula(Formula formula)

@@ -1,7 +1,7 @@
 using System;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class Money : IEquatable<Money>, IComparable<Money>, IConvertible
     {

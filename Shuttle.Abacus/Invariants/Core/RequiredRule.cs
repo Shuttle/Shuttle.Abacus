@@ -1,7 +1,6 @@
 using System;
-using Abacus.Localisation;
 
-namespace Abacus.Validation
+namespace Shuttle.Abacus.Invariants.Core
 {
     public class RequiredRule : Rule
     {

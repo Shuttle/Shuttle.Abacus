@@ -1,18 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Abacus.DTO;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.DataAccess.Query;
+using Shuttle.Abacus.DTO;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess
 {
-    public class ConstraintQuery : DataQuery, IConstraintQuery
+    public class ConstraintQuery :IConstraintQuery
     {
-        private readonly IDataTableMapper<ConstraintTypeDTO> constraintTypeDTOMapper;
+        private readonly IDataRowMapper<ConstraintTypeDTO> constraintTypeDTOMapper;
         private readonly IConstraintTypeQuery constraintTypeQuery;
         private readonly IArgumentQuery argumentQuery;
 
         public ConstraintQuery(IArgumentQuery argumentQuery, IConstraintTypeQuery constraintTypeQuery,
-                               IDataTableMapper<ConstraintTypeDTO> constraintTypeDTOMapper)
+                               IDataRowMapper<ConstraintTypeDTO> constraintTypeDTOMapper)
         {
             this.argumentQuery = argumentQuery;
             this.constraintTypeDTOMapper = constraintTypeDTOMapper;

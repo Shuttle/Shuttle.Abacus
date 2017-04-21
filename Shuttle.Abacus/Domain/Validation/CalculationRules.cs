@@ -1,4 +1,4 @@
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class CalculationRules : ICalculationRules
     {

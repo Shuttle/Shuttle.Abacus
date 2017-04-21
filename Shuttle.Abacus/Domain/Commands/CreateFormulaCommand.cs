@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Shuttle.Abacus.DTO;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
-    public class CreateFormulaCommand : ICreateFormulaCommand
+    public class CreateFormulaCommand 
     {
         public string OwnerName { get; set; }
         public Guid OwnerId { get; set; }

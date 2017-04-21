@@ -1,11 +1,12 @@
 using System.Data;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public static class ConstraintTypeColumns
     {
-        public static readonly QueryColumn<string> Name = new QueryColumn<string>("Name", DbType.AnsiString, 100);
-        public static readonly QueryColumn<string> Text = new QueryColumn<string>("Text", DbType.AnsiString, 100);
-        public static readonly QueryColumn<bool> EnabledForRestrictedAnswers = new QueryColumn<bool>("EnabledForRestrictedAnswers", DbType.Byte);
+        public static readonly MappedColumn<string> Name = new MappedColumn<string>("Name", DbType.AnsiString, 100);
+        public static readonly MappedColumn<string> Text = new MappedColumn<string>("Text", DbType.AnsiString, 100);
+        public static readonly MappedColumn<bool> EnabledForRestrictedAnswers = new MappedColumn<bool>("EnabledForRestrictedAnswers", DbType.Byte);
     }
 }

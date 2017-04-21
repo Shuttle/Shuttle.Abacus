@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Shuttle.Abacus.DTO;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
-    public class ChangeArgumentCommand : IChangeArgumentCommand
+    public class ChangeArgumentCommand
     {
         public Guid ArgumentId { get; set; }
         public string Name { get; set; }

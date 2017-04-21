@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
-using Abacus.DTO;
-namespace Abacus.Data
-{
-    public class MethodQuery : DataQuery, IMethodQuery
-    {
-        private readonly IDataTableMapper<MethodDTO> methodDTOMapper;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.DataAccess.Query;
 
-        public MethodQuery(IDataTableMapper<MethodDTO> methodDTOMapper)
+namespace Shuttle.Abacus.DataAccess
+{
+    public class MethodQuery :IMethodQuery
+    {
+        private readonly IDataRowMapper<MethodDTO> methodDTOMapper;
+
+        public MethodQuery(IDataRowMapper<MethodDTO> methodDTOMapper)
         {
             this.methodDTOMapper = methodDTOMapper;
         }

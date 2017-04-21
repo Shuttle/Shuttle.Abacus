@@ -1,7 +1,6 @@
-using Abacus.Domain;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.Domain;
 
-namespace Abacus.Application
+namespace Shuttle.Abacus.ApplicationService
 {
     public class AddMethodGraphTask : IAddMethodGraphTask
     {

@@ -1,7 +1,8 @@
 using System;
-using Abacus.Domain;
+using Shuttle.Abacus.Domain;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public static class LimitTableAccess
     {
@@ -10,34 +11,35 @@ namespace Abacus.Data
         public static IQuery Add(ILimitOwner owner, Limit item)
         {
             return InsertBuilder.Insert()
-                .Add(LimitColumns.Id).WithValue(item.Id)
+                .AddParameterValue(LimitColumns.Id, item.Id)
                 .Add(LimitColumns.OwnerName).WithValue(owner.OwnerName)
                 .Add(LimitColumns.OwnerId).WithValue(owner.Id)
-                .Add(LimitColumns.Name).WithValue(item.Name)
-                .Add(LimitColumns.Type).WithValue(item.Type)
+                .AddParameterValue(LimitColumns.Name, item.Name)
+                .AddParameterValue(LimitColumns.Type, item.Type)
                 .Into(TableName);
         }
 
         public static IQuery Remove(Limit item)
         {
-            return DeleteBuilder.Where(LimitColumns.Id).EqualTo(item.Id).From(TableName);
+            return RawQuery.Create("delete from TABLE where Id = @Id").AddParameterValue(LimitColumns.Id, item.Id);
         }
 
         public static IQuery Get(Guid id)
         {
             return Get()
-                .Where(LimitColumns.Id).EqualTo(id)
+                .AddParameterValue(LimitColumns.Id, id)
                 .From(TableName);
         }
 
         private static ISelectBuilderSelect Get()
         {
-            return SelectBuilder
-                .Select(LimitColumns.Id)
-                .With(LimitColumns.OwnerName)
-                .With(LimitColumns.OwnerId)
-                .With(LimitColumns.Name)
-                .With(LimitColumns.Type);
+            return RawQuery.Create(@"
+select
+                Id,
+                OwnerName,
+                OwnerId,
+                Name,
+                Type,;
         }
 
         public static IQuery Save(Limit item)
@@ -45,13 +47,13 @@ namespace Abacus.Data
             return UpdateBuilder.Update(TableName)
                 .Set(LimitColumns.Name).ToValue(item.Name)
                 .Set(LimitColumns.Type).ToValue(item.Type)
-                .Where(LimitColumns.Id).HasValue(item.Id);
+                .AddParameterValue(LimitColumns.Id).HasValue(item.Id);
         }
 
         public static IQuery AllForOwner(Guid ownerId)
         {
             return Get()
-               .Where(LimitColumns.OwnerId).EqualTo(ownerId)
+               .AddParameterValue(LimitColumns.OwnerId, ownerId)
                .From(TableName);
         }
     }

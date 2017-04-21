@@ -1,30 +1,31 @@
 using System;
 using System.Data;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public static class ConstraintColumns
     {
-        public static readonly QueryColumn<Guid> OwnerId = new QueryColumn<Guid>("OwnerId", DbType.Guid);
+        public static readonly MappedColumn<Guid> OwnerId = new MappedColumn<Guid>("OwnerId", DbType.Guid);
 
-        public static readonly QueryColumn<string> OwnerName = new QueryColumn<string>("OwnerName",
+        public static readonly MappedColumn<string> OwnerName = new MappedColumn<string>("OwnerName",
                                                                                                DbType.AnsiString, 100);
 
-        public static readonly QueryColumn<string> Answer = new QueryColumn<string>("Answer", DbType.AnsiString, 120);
+        public static readonly MappedColumn<string> Answer = new MappedColumn<string>("Answer", DbType.AnsiString, 120);
 
-        public static readonly QueryColumn<string> AnswerType = new QueryColumn<string>("AnswerType", DbType.AnsiString,
+        public static readonly MappedColumn<string> AnswerType = new MappedColumn<string>("AnswerType", DbType.AnsiString,
                                                                                         100);
 
-        public static readonly QueryColumn<string> Description = new QueryColumn<string>("Description",
+        public static readonly MappedColumn<string> Description = new MappedColumn<string>("Description",
                                                                                          DbType.AnsiString, 250);
 
-        public static readonly QueryColumn<Guid> ArgumentId = new QueryColumn<Guid>("ArgumentId", DbType.Guid);
+        public static readonly MappedColumn<Guid> ArgumentId = new MappedColumn<Guid>("ArgumentId", DbType.Guid);
 
-        public static readonly QueryColumn<string> ArgumentName = new QueryColumn<string>("ArgumentName", DbType.AnsiString,
+        public static readonly MappedColumn<string> ArgumentName = new MappedColumn<string>("ArgumentName", DbType.AnsiString,
                                                                                         120);
 
-        public static readonly QueryColumn<string> Name = new QueryColumn<string>("Name", DbType.AnsiString, 60);
+        public static readonly MappedColumn<string> Name = new MappedColumn<string>("Name", DbType.AnsiString, 60);
 
-        public static readonly QueryColumn<int> SequenceNumber = new QueryColumn<int>("SequenceNumber", DbType.Int32);
+        public static readonly MappedColumn<int> SequenceNumber = new MappedColumn<int>("SequenceNumber", DbType.Int32);
     }
 }

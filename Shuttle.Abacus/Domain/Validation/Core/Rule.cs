@@ -1,6 +1,6 @@
 using System;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public delegate bool RulePredicate<T>(T item, IRule<T> rule);
 

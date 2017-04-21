@@ -1,29 +1,30 @@
 ﻿using System;
 using System.Data;
-using Abacus.Domain;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.Domain;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public static class SystemUserTableAccess
     {
         public const string PermissionTableName = "SystemUserPermission";
-        public const string TableName = "SystemUser";
+        
 
-        public static ISelectQuery All()
+        public IQuery All()
         {
-            return SelectBuilder
-                .Select(Columns.Id)
-                .With(Columns.LoginName)
+            return RawQuery.Create(@"
+select
+                Id,
+                LoginName,
                 .OrderBy(Columns.LoginName).Ascending()
                 .From(TableName);
         }
 
-        public static ISelectQuery GetPermissions(Guid id)
+        public IQuery GetPermissions(Guid id)
         {
-            return SelectBuilder
-                .Select(PermissionColumns.Permission)
-                .Where(PermissionColumns.SystemUserId).EqualTo(id)
+            return RawQuery.Create(@"
+select
+                Permission,
+                .AddParameterValue(PermissionColumns.SystemUserId, id)
                 .From(PermissionTableName);
         }
 
@@ -34,7 +35,7 @@ namespace Abacus.Data
 
         private static IQuery FetchAll(int? top)
         {
-            return DynamicQuery.CreateFrom(
+            return RawQuery.Create(
                 @"
                     select {0}
                         u.SystemUserID,
@@ -55,7 +56,7 @@ namespace Abacus.Data
                 DynamicQuery.CreateFrom
                     (
                     FetchAll().Build() +
-                    WhereBuilder.Where(Columns.LoginName).WithEqualTo().Build()
+                    WhereBuilder.AddParameterValue(Columns.LoginName).WithEqualTo().Build()
                     )
                     .AddParameterValue(Columns.LoginName, loginName);
         }
@@ -66,7 +67,7 @@ namespace Abacus.Data
                 DynamicQuery.CreateFrom
                     (
                     FetchAll().Build() +
-                    WhereBuilder.Where(Columns.IdAliased).EqualTo(id).Build()
+                    WhereBuilder.AddParameterValue(Columns.IdAliased, id).Build()
                     )
                     .AddParameterValue(Columns.IdAliased, id);
         }
@@ -83,12 +84,12 @@ namespace Abacus.Data
         {
             return UpdateBuilder.Update(TableName)
                 .Set(Columns.LoginName).ToValue(user.LoginName)
-                .Where(Columns.Id).HasValue(user.Id);
+                .AddParameterValue(Columns.Id).HasValue(user.Id);
         }
 
         public static IQuery DeleteUser(SystemUser user)
         {
-            return DeleteBuilder.Where(Columns.Id).EqualTo(user.Id).From(TableName);
+            return DeleteBuilder.AddParameterValue(Columns.Id, user.Id).From(TableName);
         }
 
         public static IQuery AddPermission(SystemUser user, IPermission permission)
@@ -101,7 +102,7 @@ namespace Abacus.Data
 
         public static IQuery DeletePermissions(SystemUser user)
         {
-            return DeleteBuilder.Where(Columns.Id).EqualTo(user.Id).From(PermissionTableName);
+            return DeleteBuilder.AddParameterValue(Columns.Id, user.Id).From(PermissionTableName);
         }
 
         public static IQuery ChangeLoginName(SystemUser user)
@@ -110,28 +111,28 @@ namespace Abacus.Data
                 UpdateBuilder
                     .Update(TableName)
                     .Set(Columns.LoginName).ToValue(user.LoginName)
-                    .Where(Columns.Id).HasValue(user.Id);
+                    .AddParameterValue(Columns.Id).HasValue(user.Id);
         }
 
         public static class Columns
         {
-            public static readonly QueryColumn<Guid> Id =
-                new QueryColumn<Guid>("SystemUserID", DbType.Guid).AsIdentifier();
+            public static readonly MappedColumn<Guid> Id =
+                new MappedColumn<Guid>("SystemUserID", DbType.Guid);
 
-            public static readonly QueryColumn<Guid> IdAliased =
-                new QueryColumn<Guid>("u.SystemUserID", DbType.Guid).AsIdentifier();
+            public static readonly MappedColumn<Guid> IdAliased =
+                new MappedColumn<Guid>("u.SystemUserID", DbType.Guid);
 
-            public static readonly QueryColumn<string> LoginName = new QueryColumn<string>("LoginName",
+            public static readonly MappedColumn<string> LoginName = new MappedColumn<string>("LoginName",
                                                                                            DbType.AnsiString, 100);
         }
 
         public static class PermissionColumns
         {
-            public static readonly QueryColumn<string> Permission =
-                new QueryColumn<string>("Permission", DbType.AnsiString, 100);
+            public static readonly MappedColumn<string> Permission =
+                new MappedColumn<string>("Permission", DbType.AnsiString, 100);
 
-            public static readonly QueryColumn<Guid> SystemUserId =
-                new QueryColumn<Guid>("SystemUserID", DbType.Guid);
+            public static readonly MappedColumn<Guid> SystemUserId =
+                new MappedColumn<Guid>("SystemUserID", DbType.Guid);
         }
     }
 }

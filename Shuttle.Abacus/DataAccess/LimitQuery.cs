@@ -1,8 +1,10 @@
 using System;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.DataAccess.Query;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess
 {
-    public class LimitQuery : DataQuery, ILimitQuery
+    public class LimitQuery :ILimitQuery
     {
         public IQueryResult AllForOwner(Guid ownerId)
         {

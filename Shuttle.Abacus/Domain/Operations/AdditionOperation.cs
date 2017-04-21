@@ -1,6 +1,6 @@
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class AdditionOperation : FormulaOperation
     {

@@ -1,10 +1,11 @@
 using System.Linq;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class FormulaOwnerService : IFormulaOwnerService
     {
-        public void ProcessCommand(IChangeFormulaOrderCommand command, IFormulaOwner owner)
+        //TODO: HandleEvent
+        public FormulaOrderChanged ProcessCommand(ChangeFormulaOrderCommand command, IFormulaOwner owner)
         {
             if (owner.Formulas.Count() !=
                 command.OrderedIds.Count)
@@ -19,7 +20,7 @@ namespace Shuttle.Abacus
 
             owner.AssignFormulas(result);
 
-            //TODO: DomainEvents.Raise(new FormulaOrderChanged(owner));
+            return new FormulaOrderChanged(owner);
         }
     }
 }

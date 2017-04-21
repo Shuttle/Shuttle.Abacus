@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class Argument
     {
@@ -15,7 +16,7 @@ namespace Shuttle.Abacus
             Id = id;
         }
 
-        public Argument(ICreateArgumentCommand command)
+        public Argument(CreateArgumentCommand command)
         {
             Name = command.Name;
             AnswerType = command.AnswerType;
@@ -43,7 +44,7 @@ namespace Shuttle.Abacus
 
         public Guid Id { get; private set; }
 
-        public Argument ProcessCommand(IChangeArgumentCommand command)
+        public Argument ProcessCommand(ChangeArgumentCommand command)
         {
             Name = command.Name;
             AnswerType = command.AnswerType;

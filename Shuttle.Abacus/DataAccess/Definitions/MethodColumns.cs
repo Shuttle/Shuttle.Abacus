@@ -1,12 +1,13 @@
 using System;
 using System.Data;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public static class MethodColumns
     {
-        public static readonly QueryColumn<Guid> Id = new QueryColumn<Guid>("MethodId", DbType.Guid).AsIdentifier();
+        public static readonly MappedColumn<Guid> Id = new MappedColumn<Guid>("MethodId", DbType.Guid);
 
-        public static readonly QueryColumn<string> Name = new QueryColumn<string>("Name", DbType.AnsiString, 100);
+        public static readonly MappedColumn<string> Name = new MappedColumn<string>("Name", DbType.AnsiString, 100);
     }
 }

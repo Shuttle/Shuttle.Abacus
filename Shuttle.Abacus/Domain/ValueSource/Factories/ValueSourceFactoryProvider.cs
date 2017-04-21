@@ -1,27 +1,29 @@
 using System.Collections.Generic;
-using Shuttle.Abacus.Localisation;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class ValueSourceFactoryProvider 
     {
-        private readonly Dictionary<string, IValueSourceFactory> factories =
+        private readonly Dictionary<string, IValueSourceFactory> _factories =
             new Dictionary<string, IValueSourceFactory>();
 
-        public ValueSourceFactoryProvider()
+        public ValueSourceFactoryProvider(IEnumerable<IValueSourceFactory> factories)
         {
-            //TODO: DependencyResolver.Resolver.ResolveAll<IValueSourceFactory>().ForEach(factory => factories.Add(factory.Name.ToLower(), factory));
+            foreach (var factory in factories)
+            {
+                _factories.Add(factory.Name.ToLower(), factory);
+            }
         }
 
         public IValueSourceFactory Get(string name)
         {
-            if (!factories.ContainsKey(name.ToLower()))
+            if (!_factories.ContainsKey(name.ToLower()))
             {
                 throw new KeyNotFoundException(string.Format(Resources.KeyNotFoundException, name,
                                                              "ValueSourceFactoryProvider"));
             }
 
-            return factories[name.ToLower()];
+            return _factories[name.ToLower()];
         }
     }
 }

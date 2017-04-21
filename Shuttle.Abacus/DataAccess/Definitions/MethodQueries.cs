@@ -1,35 +1,38 @@
 using System;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public static class MethodQueries
     {
-        public const string TableName = "Method";
+        
 
-        public static ISelectQuery All()
+        public IQuery All()
         {
-            return SelectBuilder
-                .Select(MethodColumns.Id)
-                .With(MethodColumns.Name)
+            return RawQuery.Create(@"
+select
+                Id,
+                Name,
                 .OrderBy(MethodColumns.Name).Ascending()
                 .From(TableName);
         }
 
-        public static ISelectQuery MethodName(Guid id)
+        public IQuery MethodName(Guid id)
         {
-            return SelectBuilder
-                .Select(MethodColumns.Id)
-                .With(MethodColumns.Name)
-                .Where(MethodColumns.Id).EqualTo(id)
+            return RawQuery.Create(@"
+select
+                Id,
+                Name,
+                .AddParameterValue(MethodColumns.Id, id)
                 .From(TableName);
         }
 
-        public static ISelectQuery Get(Guid id)
+        public IQuery Get(Guid id)
         {
-            return SelectBuilder
-                .Select(MethodColumns.Id)
-                .With(MethodColumns.Name)
-                .Where(MethodColumns.Id).EqualTo(id)
+            return RawQuery.Create(@"
+select
+                Id,
+                Name,
+                .AddParameterValue(MethodColumns.Id, id)
                 .From(TableName);
         }
     }

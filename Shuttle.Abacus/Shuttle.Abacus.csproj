@@ -30,12 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Shuttle.Core.Data, Version=4.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Core.Data.4.1.1\lib\net452-full\Shuttle.Core.Data.dll</HintPath>
+    <Reference Include="Shuttle.Core.Data, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Core.Data.8.0.0\lib\net452-full\Shuttle.Core.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Shuttle.Core.Infrastructure, Version=4.1.12.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Core.Infrastructure.4.1.12\lib\net452-full\Shuttle.Core.Infrastructure.dll</HintPath>
+    <Reference Include="Shuttle.Core.Infrastructure, Version=8.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Core.Infrastructure.8.0.1\lib\net452-full\Shuttle.Core.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -49,6 +49,139 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationService\AddMethodGraphTask.cs" />
+    <Compile Include="ApplicationService\CalculationOwnerModel.cs" />
+    <Compile Include="ApplicationService\ChangeFormulaTask.cs" />
+    <Compile Include="ApplicationService\ChangeLoginNameTask.cs" />
+    <Compile Include="ApplicationService\ChangeMethodTask.cs" />
+    <Compile Include="ApplicationService\CreateFormulaTask.cs" />
+    <Compile Include="ApplicationService\CreateLimitTask.cs" />
+    <Compile Include="ApplicationService\CreateMethodTask.cs" />
+    <Compile Include="ApplicationService\IAddMethodGraphTask.cs" />
+    <Compile Include="ApplicationService\IChangeFormulaTask.cs" />
+    <Compile Include="ApplicationService\IChangeLoginNameTask.cs" />
+    <Compile Include="ApplicationService\IChangeMethodTask.cs" />
+    <Compile Include="ApplicationService\ICreateFormulaTask.cs" />
+    <Compile Include="ApplicationService\ICreateLimitTask.cs" />
+    <Compile Include="ApplicationService\ICreateMethodTask.cs" />
+    <Compile Include="ApplicationService\ISetCalculationConstraintsTask.cs" />
+    <Compile Include="ApplicationService\ISetPermissionsTask.cs" />
+    <Compile Include="ApplicationService\ITask.cs" />
+    <Compile Include="ApplicationService\ITaskFactory.cs" />
+    <Compile Include="ApplicationService\OwnerModel.cs" />
+    <Compile Include="ApplicationService\SetCalculationConstraintsTask.cs" />
+    <Compile Include="ApplicationService\SetPermissionsTask.cs" />
+    <Compile Include="ApplicationService\TaskFactory.cs" />
+    <Compile Include="DataAccess\AnswerTypeQuery.cs" />
+    <Compile Include="DataAccess\ArgumentQuery.cs" />
+    <Compile Include="DataAccess\ArgumentRepository.cs" />
+    <Compile Include="DataAccess\CalculationQuery.cs" />
+    <Compile Include="DataAccess\CalculationRepository.cs" />
+    <Compile Include="DataAccess\ConstraintQuery.cs" />
+    <Compile Include="DataAccess\ConstraintRepository.cs" />
+    <Compile Include="DataAccess\ConstraintTypeQuery.cs" />
+    <Compile Include="DataAccess\DecimalTableQuery.cs" />
+    <Compile Include="DataAccess\DecimalTableRepository.cs" />
+    <Compile Include="DataAccess\DecimalValueRepository.cs" />
+    <Compile Include="DataAccess\Definitions\AnswerTypeColumns.cs" />
+    <Compile Include="DataAccess\Definitions\AnswerTypeQueryFactory.cs" />
+    <Compile Include="DataAccess\Definitions\ArgumentColumns.cs" />
+    <Compile Include="DataAccess\Definitions\ArgumentQueryFactory.cs" />
+    <Compile Include="DataAccess\Definitions\ArgumentTableAccess.cs" />
+    <Compile Include="DataAccess\Definitions\CalculationColumns.cs" />
+    <Compile Include="DataAccess\Definitions\CalculationQueries.cs" />
+    <Compile Include="DataAccess\Definitions\CalculationTableAccess.cs" />
+    <Compile Include="DataAccess\Definitions\ConstraintColumns.cs" />
+    <Compile Include="DataAccess\Definitions\ConstraintQueries.cs" />
+    <Compile Include="DataAccess\Definitions\ConstraintTableAccess.cs" />
+    <Compile Include="DataAccess\Definitions\ConstraintTypeColumns.cs" />
+    <Compile Include="DataAccess\Definitions\ConstraintTypeQueries.cs" />
+    <Compile Include="DataAccess\Definitions\DecimalTableColumns.cs" />
+    <Compile Include="DataAccess\Definitions\DecimalTableQueryFactory.cs" />
+    <Compile Include="DataAccess\Definitions\DecimalTableTableAccess.cs" />
+    <Compile Include="DataAccess\Definitions\DecimalValueColumns.cs" />
+    <Compile Include="DataAccess\Definitions\DecimalValueTableAccess.cs" />
+    <Compile Include="DataAccess\Definitions\FormulaColumns.cs" />
+    <Compile Include="DataAccess\Definitions\FormulaOperationColumns.cs" />
+    <Compile Include="DataAccess\Definitions\FormulaQueries.cs" />
+    <Compile Include="DataAccess\Definitions\FormulaTableAccess.cs" />
+    <Compile Include="DataAccess\Definitions\GraphNodeArgumentColumns.cs" />
+    <Compile Include="DataAccess\Definitions\GraphNodeArgumentTableAccess.cs" />
+    <Compile Include="DataAccess\Definitions\IAnswerTypeQueryFactory.cs" />
+    <Compile Include="DataAccess\Definitions\IArgumentQueryFactory.cs" />
+    <Compile Include="DataAccess\Definitions\LimitColumns.cs" />
+    <Compile Include="DataAccess\Definitions\LimitQueries.cs" />
+    <Compile Include="DataAccess\Definitions\LimitTableAccess.cs" />
+    <Compile Include="DataAccess\Definitions\MethodColumns.cs" />
+    <Compile Include="DataAccess\Definitions\MethodQueries.cs" />
+    <Compile Include="DataAccess\Definitions\MethodTableAccess.cs" />
+    <Compile Include="DataAccess\Definitions\MethodTestColumns.cs" />
+    <Compile Include="DataAccess\Definitions\MethodTestQueries.cs" />
+    <Compile Include="DataAccess\Definitions\MethodTestTable.cs" />
+    <Compile Include="DataAccess\Definitions\OperationTypeColumns.cs" />
+    <Compile Include="DataAccess\Definitions\OperationTypeQueries.cs" />
+    <Compile Include="DataAccess\Definitions\PermissionColumns.cs" />
+    <Compile Include="DataAccess\Definitions\SystemUserColumns.cs" />
+    <Compile Include="DataAccess\Definitions\SystemUserQueries.cs" />
+    <Compile Include="DataAccess\Definitions\SystemUserTableAccess.cs" />
+    <Compile Include="DataAccess\Definitions\ValueSourceTypeColumns.cs" />
+    <Compile Include="DataAccess\Definitions\ValueSourceTypeQueries.cs" />
+    <Compile Include="DataAccess\FormulaQuery.cs" />
+    <Compile Include="DataAccess\FormulaRepository.cs" />
+    <Compile Include="DataAccess\LimitQuery.cs" />
+    <Compile Include="DataAccess\LimitRepository.cs" />
+    <Compile Include="DataAccess\Mapping\ArgumentDataReaderMapper.cs" />
+    <Compile Include="DataAccess\Mapping\ArgumentDTOMapper.cs" />
+    <Compile Include="DataAccess\Mapping\CalculationDataRowMapper.cs" />
+    <Compile Include="DataAccess\Mapping\CalculationDTOMapper.cs" />
+    <Compile Include="DataAccess\Mapping\ConstraintDataTableMapper.cs" />
+    <Compile Include="DataAccess\Mapping\ConstraintTypeDTOMapper.cs" />
+    <Compile Include="DataAccess\Mapping\DecimalTableDataRowMapper.cs" />
+    <Compile Include="DataAccess\Mapping\DecimalTableDTOMapper.cs" />
+    <Compile Include="DataAccess\Mapping\DecimalValueDataRowMapper.cs" />
+    <Compile Include="DataAccess\Mapping\FormulaDataRowMapper.cs" />
+    <Compile Include="DataAccess\Mapping\GraphNodeArgumentDataRowMapper.cs" />
+    <Compile Include="DataAccess\Mapping\IMethodTestDTOMapper.cs" />
+    <Compile Include="DataAccess\Mapping\LimitDataRowMapper.cs" />
+    <Compile Include="DataAccess\Mapping\MethodDataRowMapper.cs" />
+    <Compile Include="DataAccess\Mapping\MethodDTOMapper.cs" />
+    <Compile Include="DataAccess\Mapping\MethodTestDTOMapper.cs" />
+    <Compile Include="DataAccess\Mapping\OperationDTOMapper.cs" />
+    <Compile Include="DataAccess\Mapping\OperationTypeDTOMapper.cs" />
+    <Compile Include="DataAccess\Mapping\SystemUserDataReaderMapper.cs" />
+    <Compile Include="DataAccess\Mapping\TestCaseDataRowMapper.cs" />
+    <Compile Include="DataAccess\Mapping\ValueSourceTypeDTOMapper.cs" />
+    <Compile Include="DataAccess\Mapping\ValueTypeDTOMapper.cs" />
+    <Compile Include="DataAccess\MethodQuery.cs" />
+    <Compile Include="DataAccess\MethodRepository.cs" />
+    <Compile Include="DataAccess\MethodTestQuery.cs" />
+    <Compile Include="DataAccess\MethodTestRepository.cs" />
+    <Compile Include="DataAccess\OperationTypeQuery.cs" />
+    <Compile Include="DataAccess\BooleanArgumentDTOPipe.cs" />
+    <Compile Include="DataAccess\IAnswerTypeQuery.cs" />
+    <Compile Include="DataAccess\IArgumentQuery.cs" />
+    <Compile Include="DataAccess\ICalculationQuery.cs" />
+    <Compile Include="DataAccess\IConstraintQuery.cs" />
+    <Compile Include="DataAccess\IConstraintTypeQuery.cs" />
+    <Compile Include="DataAccess\IDecimalTableQuery.cs" />
+    <Compile Include="DataAccess\IFormulaQuery.cs" />
+    <Compile Include="DataAccess\ILimitQuery.cs" />
+    <Compile Include="DataAccess\IMethodQuery.cs" />
+    <Compile Include="DataAccess\IMethodTestQuery.cs" />
+    <Compile Include="DataAccess\IOperationTypeQuery.cs" />
+    <Compile Include="DataAccess\ISystemUserQuery.cs" />
+    <Compile Include="DataAccess\IValueSourceTypeQuery.cs" />
+    <Compile Include="DataAccess\Repository.cs" />
+    <Compile Include="DataAccess\SystemUserQuery.cs" />
+    <Compile Include="DataAccess\SystemUserRepository.cs" />
+    <Compile Include="DataAccess\ValueSourceTypeQuery.cs" />
+    <Compile Include="DataContracts\ExecuteMethodRequest.cs" />
+    <Compile Include="DataContracts\ExecuteMethodResponse.cs" />
+    <Compile Include="DataContracts\Message.cs" />
+    <Compile Include="DataContracts\NameValue.cs" />
+    <Compile Include="DomainEventHandlers\CalculationAddedHandler.cs" />
+    <Compile Include="DomainEventHandlers\FormulaOrderChangedHandler.cs" />
+    <Compile Include="DomainEventHandlers\FormulaRemovedHandler.cs" />
     <Compile Include="Domain\ArgumentAnswer\ArgumentAnswer.cs" />
     <Compile Include="Domain\ArgumentAnswer\ArgumentAnswerDTOMapper.cs" />
     <Compile Include="Domain\ArgumentAnswer\BooleanArgumentAnswer.cs" />
@@ -145,71 +278,14 @@
     <Compile Include="Domain\Core\IUnitOfWorkProvider.cs" />
     <Compile Include="Domain\DecimalTable.cs" />
     <Compile Include="Domain\DecimalValue.cs" />
-    <Compile Include="Domain\DTO\AnswerTypeDTO.cs" />
-    <Compile Include="Domain\DTO\ArgumentAnswerDTO.cs" />
-    <Compile Include="Domain\DTO\ArgumentDTO.cs" />
-    <Compile Include="Domain\DTO\ArgumentRestrictedAnswerDTO.cs" />
-    <Compile Include="Domain\DTO\CalculationDTO.cs" />
-    <Compile Include="Domain\DTO\ConstraintDTO.cs" />
-    <Compile Include="Domain\DTO\ConstraintTypeDTO.cs" />
-    <Compile Include="Domain\DTO\DecimalTableDTO.cs" />
-    <Compile Include="Domain\DTO\DecimalValueDTO.cs" />
-    <Compile Include="Domain\DTO\GraphNodeArgumentDTO.cs" />
-    <Compile Include="Domain\DTO\GraphNodeDTO.cs" />
-    <Compile Include="Domain\DTO\MethodContextDTO.cs" />
-    <Compile Include="Domain\DTO\MethodDTO.cs" />
-    <Compile Include="Domain\DTO\MethodTestDTO.cs" />
-    <Compile Include="Domain\DTO\OperationDTO.cs" />
-    <Compile Include="Domain\DTO\OperationTypeDTO.cs" />
-    <Compile Include="Domain\DTO\ValueSourceTypeDTO.cs" />
+    <Compile Include="Domain\DomainEvents.cs" />
+    <Compile Include="Domain\Entity.cs" />
     <Compile Include="Domain\Events\CalculationAdded.cs" />
     <Compile Include="Domain\Events\FormulaOrderChanged.cs" />
     <Compile Include="Domain\Events\FormulaRemoved.cs" />
-    <Compile Include="Domain\Events\IChangeArgumentCommand.cs" />
-    <Compile Include="Domain\Events\IChangeCalculationCommand.cs" />
-    <Compile Include="Domain\Events\IChangeCalculationOrderCommand.cs" />
-    <Compile Include="Domain\Events\IChangeFormulaCommand.cs" />
-    <Compile Include="Domain\Events\IChangeLimitCommand.cs" />
-    <Compile Include="Domain\Events\IChangeLoginNameCommand.cs" />
-    <Compile Include="Domain\Events\IChangeMethodCommand.cs" />
-    <Compile Include="Domain\Events\IChangeMethodTestCommand.cs" />
-    <Compile Include="Domain\Events\IChangeOrderCommand.cs" />
-    <Compile Include="Domain\Events\ICopyMethodCommand.cs" />
-    <Compile Include="Domain\Events\ICreateArgumentCommand.cs" />
-    <Compile Include="Domain\Events\ICreateCalculationCommand.cs" />
-    <Compile Include="Domain\Events\ICreateDecimalTableCommand.cs" />
-    <Compile Include="Domain\Events\ICreateFormulaCommand.cs" />
-    <Compile Include="Domain\Events\ICreateLimitCommand.cs" />
-    <Compile Include="Domain\Events\ICreateMethodCommand.cs" />
-    <Compile Include="Domain\Events\ICreateMethodTestCommand.cs" />
-    <Compile Include="Domain\Events\ICreateSystemUserCommand.cs" />
-    <Compile Include="Domain\Events\IDecimalTableCommand.cs" />
-    <Compile Include="Domain\Events\IDeleteArgumentCommand.cs" />
-    <Compile Include="Domain\Events\IDeleteCalculationCommand.cs" />
-    <Compile Include="Domain\Events\IDeleteFormulaCommand.cs" />
-    <Compile Include="Domain\Events\IDeleteLimitCommand.cs" />
-    <Compile Include="Domain\Events\IDeleteMethodCommand.cs" />
-    <Compile Include="Domain\Events\IDeleteMethodTestCommand.cs" />
-    <Compile Include="Domain\Events\IGrabCalculationsCommand.cs" />
-    <Compile Include="Domain\Events\IPrintMethodTestCommand.cs" />
-    <Compile Include="Domain\Events\IRunMethodTestCommand.cs" />
-    <Compile Include="Domain\Events\ISetCalculationConstraintsCommand.cs" />
-    <Compile Include="Domain\Events\ISetPermissionsCommand.cs" />
-    <Compile Include="Domain\Events\IUpdateDecimalTableCommand.cs" />
     <Compile Include="Domain\Events\LoginCompletedEvent.cs" />
     <Compile Include="Domain\Events\MethodTestPrintEvent.cs" />
     <Compile Include="Domain\Events\MethodTestRunEvent.cs" />
-    <Compile Include="Domain\Exceptions\CircularReferenceException.cs" />
-    <Compile Include="Domain\Exceptions\ConventionException.cs" />
-    <Compile Include="Domain\Exceptions\DuplicateEntityException.cs" />
-    <Compile Include="Domain\Exceptions\DuplicateEntryException.cs" />
-    <Compile Include="Domain\Exceptions\InvalidCalculationOrderException.cs" />
-    <Compile Include="Domain\Exceptions\InvalidStateException.cs" />
-    <Compile Include="Domain\Exceptions\InvariantException.cs" />
-    <Compile Include="Domain\Exceptions\MissingEntryException.cs" />
-    <Compile Include="Domain\Exceptions\NavigationItemNotFoundForMessageException.cs" />
-    <Compile Include="Domain\Exceptions\NullDependencyException.cs" />
-    <Compile Include="Domain\Exceptions\ReassignmentException.cs" />
     <Compile Include="Domain\Extensions\EnumerableExtensions.cs" />
     <Compile Include="Domain\Extensions\NumberExtensions.cs" />
     <Compile Include="Domain\Factories\CollectionCalculationFactory.cs" />
@@ -225,8 +301,15 @@
     <Compile Include="Domain\Formula\IFormulaOwner.cs" />
     <Compile Include="Domain\GraphNodeArgument.cs" />
     <Compile Include="Domain\ICanBeReadOnly.cs" />
+    <Compile Include="Domain\IDomainEvent.cs" />
+    <Compile Include="Domain\IEntity.cs" />
+    <Compile Include="Domain\IHandleEvent.cs" />
+    <Compile Include="Domain\IHaveInvariants.cs" />
     <Compile Include="Domain\IMapper.cs" />
     <Compile Include="Domain\InvalidMethod.cs" />
+    <Compile Include="Domain\IOwner.cs" />
+    <Compile Include="Domain\IRepository.cs" />
+    <Compile Include="Domain\IVersionedEntity.cs" />
     <Compile Include="Domain\Limits\Factories\ILimitFactory.cs" />
     <Compile Include="Domain\Limits\Factories\MaximumLimitFactory.cs" />
     <Compile Include="Domain\Limits\Factories\MinimumLimitFactory.cs" />
@@ -272,6 +355,54 @@
     <Compile Include="Domain\Operations\RoundingOperation.cs" />
     <Compile Include="Domain\Operations\SquareRootOperation.cs" />
     <Compile Include="Domain\Operations\SubtractionOperation.cs" />
+    <Compile Include="Domain\VersionedEntity.cs" />
+    <Compile Include="Invariants\ArgumentRules.cs" />
+    <Compile Include="Invariants\CalculationRules.cs" />
+    <Compile Include="Invariants\Core\IRule.cs" />
+    <Compile Include="Invariants\Core\IRuleCollection.cs" />
+    <Compile Include="Invariants\Core\IRuleCollectionBuilder.cs" />
+    <Compile Include="Invariants\Core\IRuleResult.cs" />
+    <Compile Include="Invariants\Core\RequiredRule.cs" />
+    <Compile Include="Invariants\Core\Rule.cs" />
+    <Compile Include="Invariants\Core\RuleCollection.cs" />
+    <Compile Include="Invariants\Core\RuleCollectionBuilder.cs" />
+    <Compile Include="Invariants\Core\RuleMessage.cs" />
+    <Compile Include="Invariants\Core\RuleResult.cs" />
+    <Compile Include="Invariants\Core\Rules\DateTimeRule.cs" />
+    <Compile Include="Invariants\Core\Rules\DecimalRule.cs" />
+    <Compile Include="Invariants\Core\Rules\IntegerRule.cs" />
+    <Compile Include="Invariants\Core\Rules\MaximumLengthRule.cs" />
+    <Compile Include="Invariants\Core\Rules\MinimumLengthRule.cs" />
+    <Compile Include="Invariants\DecimalTableRules.cs" />
+    <Compile Include="Invariants\Interfaces\IArgumentRules.cs" />
+    <Compile Include="Invariants\Interfaces\ICalculationRules.cs" />
+    <Compile Include="Invariants\Interfaces\IDecimalTableRules.cs" />
+    <Compile Include="Invariants\Interfaces\ILimitRules.cs" />
+    <Compile Include="Invariants\Interfaces\IMethodRules.cs" />
+    <Compile Include="Invariants\Interfaces\IMethodTestRules.cs" />
+    <Compile Include="Invariants\Interfaces\ISystemUserRules.cs" />
+    <Compile Include="Invariants\LimitRules.cs" />
+    <Compile Include="Invariants\MethodRules.cs" />
+    <Compile Include="Invariants\MethodTestRules.cs" />
+    <Compile Include="Invariants\Properties\AssemblyInfo.cs" />
+    <Compile Include="Invariants\SystemUserRules.cs" />
+    <Compile Include="Invariants\Values\DecimalValueTypeValidator.cs" />
+    <Compile Include="Invariants\Values\IntegerValueTypeValidator.cs" />
+    <Compile Include="Invariants\Values\IValueTypeValidator.cs" />
+    <Compile Include="Invariants\Values\IValueTypeValidatorProvider.cs" />
+    <Compile Include="Invariants\Values\MoneyValueTypeValidator.cs" />
+    <Compile Include="Invariants\Values\ValueTypeValidatorProvider.cs" />
+    <Compile Include="Policy\AbstractPolicy.cs" />
+    <Compile Include="Policy\CalculationPolicy.cs" />
+    <Compile Include="Policy\FormulaPolicy.cs" />
+    <Compile Include="Policy\ICalculationPolicy.cs" />
+    <Compile Include="Policy\IFormulaPolicy.cs" />
+    <Compile Include="Policy\ILimitPolicy.cs" />
+    <Compile Include="Policy\IMethodPolicy.cs" />
+    <Compile Include="Policy\ISystemUserPolicy.cs" />
+    <Compile Include="Policy\LimitPolicy.cs" />
+    <Compile Include="Policy\MethodPolicy.cs" />
+    <Compile Include="Policy\SystemUserPolicy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\Repositories\IArgumentRepository.cs" />
     <Compile Include="Domain\Repositories\ICalculationRepository.cs" />
@@ -283,20 +414,6 @@
     <Compile Include="Domain\Repositories\IMethodRepository.cs" />
     <Compile Include="Domain\Repositories\IMethodTestRepository.cs" />
     <Compile Include="Domain\Repositories\ISystemUserRepository.cs" />
-    <Compile Include="Domain\Result\AbstractResult.cs" />
-    <Compile Include="Domain\Result\IAbstractResult.cs" />
-    <Compile Include="Domain\Result\IResult.cs" />
-    <Compile Include="Domain\Result\Result.cs" />
-    <Compile Include="Domain\Result\ResultMessage.cs" />
-    <Compile Include="Domain\Result\StringToResultMessageMapper.cs" />
-    <Compile Include="Domain\Security\IPermission.cs" />
-    <Compile Include="Domain\Security\IPermissionCollection.cs" />
-    <Compile Include="Domain\Security\ISession.cs" />
-    <Compile Include="Domain\Security\NullPermission.cs" />
-    <Compile Include="Domain\Security\Permission.cs" />
-    <Compile Include="Domain\Security\PermissionCollection.cs" />
-    <Compile Include="Domain\Security\Permissions.cs" />
-    <Compile Include="Domain\Security\Session.cs" />
     <Compile Include="Domain\Services\ArgumentService.cs" />
     <Compile Include="Domain\Services\FormulaOwnerService.cs" />
     <Compile Include="Domain\Services\IArgumentService.cs" />
@@ -478,7 +595,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DataAccess\" />
+    <ProjectReference Include="..\Shuttle.Abacus.DTO\Shuttle.Abacus.DTO.csproj">
+      <Project>{5CD61A6D-ABCB-4400-A113-4EF4DA4C439C}</Project>
+      <Name>Shuttle.Abacus.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shuttle.Abacus.Infrastructure\Shuttle.Abacus.Infrastructure.csproj">
+      <Project>{1A365F2C-BA2B-41F0-969B-EEC08C6E2658}</Project>
+      <Name>Shuttle.Abacus.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Abacus.DTO;
 
-namespace Abacus.CommandMediators
+namespace Shuttle.Abacus
 {
     public interface ICreateMethodTestCommand
     {

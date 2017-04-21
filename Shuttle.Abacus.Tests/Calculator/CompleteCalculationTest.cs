@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Abacus.Test.Unit
+namespace Shuttle.Abacus.Tests
 {
     [TestFixture]
     public class CompleteCalculationTest

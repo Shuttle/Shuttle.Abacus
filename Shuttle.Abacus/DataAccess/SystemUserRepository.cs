@@ -1,9 +1,8 @@
 using System;
-using Abacus.Domain;
-using Abacus.Infrastructure;
-using Abacus.Validation;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.Domain;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess
 {
     public class SystemUserRepository : Repository<SystemUser>, ISystemUserRepository
     {

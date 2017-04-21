@@ -1,17 +1,18 @@
 using System;
 using System.Data;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public static class SystemUserColumns
     {
-        public static readonly QueryColumn<Guid> Id =
-            new QueryColumn<Guid>("SystemUserID", DbType.Guid).AsIdentifier();
+        public static readonly MappedColumn<Guid> Id =
+            new MappedColumn<Guid>("SystemUserID", DbType.Guid);
 
-        public static readonly QueryColumn<Guid> IdAliased =
-            new QueryColumn<Guid>("u.SystemUserID", DbType.Guid).AsIdentifier();
+        public static readonly MappedColumn<Guid> IdAliased =
+            new MappedColumn<Guid>("u.SystemUserID", DbType.Guid);
 
-        public static readonly QueryColumn<string> LoginName = new QueryColumn<string>("LoginName",
+        public static readonly MappedColumn<string> LoginName = new MappedColumn<string>("LoginName",
                                                                                        DbType.AnsiString, 100);
     }
 }

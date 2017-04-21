@@ -1,64 +1,68 @@
 ﻿using System;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public static class MethodTestQueries
     {
         public const string ArgumentAnswerTableName = "MethodTestArgumentAnswer";
-        public const string TableName = "MethodTest";
+        
 
-        public static ISelectQuery All()
+        public IQuery All()
         {
-            return SelectBuilder
-                .Select(MethodTestColumns.Id)
-                .With(MethodTestColumns.MethodId)
-                .With(MethodTestColumns.Description)
-                .With(MethodTestColumns.ExpectedResult)
+            return RawQuery.Create(@"
+select
+                Id,
+                MethodId,
+                Description,
+                ExpectedResult,
                 .OrderBy(MethodTestColumns.Description).Ascending()
                 .From(TableName);
         }
 
-        public static ISelectQuery AllForMethod(Guid id)
+        public IQuery AllForMethod(Guid id)
         {
-            return SelectBuilder
-                .Select(MethodTestColumns.Id)
-                .With(MethodTestColumns.Description)
-                .With(MethodTestColumns.ExpectedResult)
-                .Where(MethodTestColumns.MethodId).EqualTo(id)
+            return RawQuery.Create(@"
+select
+                Id,
+                Description,
+                ExpectedResult,
+                .AddParameterValue(MethodTestColumns.MethodId, id)
                 .OrderBy(MethodTestColumns.Description).Ascending()
                 .From(TableName);
         }
 
-        public static ISelectQuery Get(Guid id)
+        public IQuery Get(Guid id)
         {
-            return SelectBuilder
-                .Select(MethodTestColumns.Id)
-                .With(MethodTestColumns.MethodId)
-                .With(MethodTestColumns.Description)
-                .With(MethodTestColumns.ExpectedResult)
-                .Where(MethodTestColumns.Id).EqualTo(id)
+            return RawQuery.Create(@"
+select
+                Id,
+                MethodId,
+                Description,
+                ExpectedResult,
+                .AddParameterValue(MethodTestColumns.Id, id)
                 .OrderBy(MethodTestColumns.Description).Ascending()
                 .From(TableName);
         }
 
         public static IQuery Delete(Guid id)
         {
-            return DeleteBuilder.Where(MethodTestColumns.Id).EqualTo(id).From(TableName);
+            return DeleteBuilder.AddParameterValue(MethodTestColumns.Id, id).From(TableName);
         }
 
-        public static ISelectQuery GetArgumentAnswers(Guid id)
+        public IQuery GetArgumentAnswers(Guid id)
         {
-            return SelectBuilder
+            return RawQuery.Create(@"
+select
                 .Select(MethodTestColumns.ArgumentAnswerColumns.ArgumentId)
                 .With(MethodTestColumns.ArgumentAnswerColumns.ArgumentName)
                 .With(MethodTestColumns.ArgumentAnswerColumns.AnswerType)
                 .With(MethodTestColumns.ArgumentAnswerColumns.Answer)
-                .Where(MethodTestColumns.ArgumentAnswerColumns.MethodTestId).EqualTo(id)
+                .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.MethodTestId, id)
                 .OrderBy(MethodTestColumns.ArgumentAnswerColumns.ArgumentName).Ascending()
                 .From(ArgumentAnswerTableName);
         }
 
-        public static ISelectQuery AllUsingArgument(Guid argumentId)
+        public IQuery AllUsingArgument(Guid argumentId)
         {
             var query = SelectQuery.CreateSelectFrom(
                 @"

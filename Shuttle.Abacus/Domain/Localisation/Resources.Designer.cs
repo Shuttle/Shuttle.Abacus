@@ -8,10 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Shuttle.Abacus.Domain.Localisation {
-    using System;
-    
-    
+namespace Shuttle.Abacus.Domain {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

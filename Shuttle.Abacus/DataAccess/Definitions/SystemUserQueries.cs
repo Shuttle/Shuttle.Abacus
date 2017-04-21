@@ -1,35 +1,38 @@
 ﻿using System;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public static class SystemUserQueries
     {
         public const string PermissionTableName = "SystemUserPermission";
-        public const string TableName = "SystemUser";
+        
 
-        public static ISelectQuery All()
+        public IQuery All()
         {
-            return SelectBuilder
-                .Select(SystemUserColumns.Id)
-                .With(SystemUserColumns.LoginName)
+            return RawQuery.Create(@"
+select
+                Id,
+                LoginName,
                 .OrderBy(SystemUserColumns.LoginName).Ascending()
                 .From(TableName);
         }
 
-        public static ISelectQuery Get(Guid id)
+        public IQuery Get(Guid id)
         {
-            return SelectBuilder
-                .Select(SystemUserColumns.Id)
-                .With(SystemUserColumns.LoginName)
-                .Where(SystemUserColumns.Id).EqualTo(id)
+            return RawQuery.Create(@"
+select
+                Id,
+                LoginName,
+                .AddParameterValue(SystemUserColumns.Id, id)
                 .From(TableName);
         }
 
-        public static ISelectQuery GetPermissions(Guid id)
+        public IQuery GetPermissions(Guid id)
         {
-            return SelectBuilder
-                .Select(PermissionColumns.Permission)
-                .Where(PermissionColumns.SystemUserId).EqualTo(id)
+            return RawQuery.Create(@"
+select
+                Permission,
+                .AddParameterValue(PermissionColumns.SystemUserId, id)
                 .From(PermissionTableName);
         }
 
@@ -40,7 +43,7 @@ namespace Abacus.Data
 
         public static IQuery FetchAll(int? top)
         {
-            return DynamicQuery.CreateFrom(
+            return RawQuery.Create(
                 @"
                     select {0}
                         u.SystemUserID,
@@ -63,7 +66,7 @@ namespace Abacus.Data
                 DynamicQuery.CreateFrom
                     (
                     FetchAll().Build() +
-                    WhereBuilder.Where(SystemUserColumns.LoginName).EqualTo(loginName).Build()
+                    WhereBuilder.AddParameterValue(SystemUserColumns.LoginName, loginName).Build()
                     );
             //todo: remove .AddParameterValue(SystemUserColumns.LoginName, loginName);
         }
@@ -74,7 +77,7 @@ namespace Abacus.Data
                 DynamicQuery.CreateFrom
                     (
                     FetchAll().Build() +
-                    WhereBuilder.Where(SystemUserColumns.IdAliased).EqualTo(id).Build()
+                    WhereBuilder.AddParameterValue(SystemUserColumns.IdAliased, id).Build()
                     )
                     .AddParameterValue(SystemUserColumns.IdAliased, id);
         }

@@ -1,7 +1,8 @@
 using System;
-using Abacus.Domain;
+using Shuttle.Abacus.Domain;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public class CalculationTableAccess
     {
@@ -10,40 +11,41 @@ namespace Abacus.Data
         public static IQuery Add(Method method, ICalculationOwner owner, Calculation item)
         {
             return InsertBuilder.Insert()
-                .Add(CalculationColumns.Id).WithValue(item.Id)
+                .AddParameterValue(CalculationColumns.Id, item.Id)
                 .Add(CalculationColumns.MethodId).WithValue(method.Id)
                 .Add(CalculationColumns.OwnerName).WithValue(owner.OwnerName)
                 .Add(CalculationColumns.OwnerId).WithValue(owner.Id)
-                .Add(CalculationColumns.Name).WithValue(item.Name)
-                .Add(CalculationColumns.Type).WithValue(item.Type)
-                .Add(CalculationColumns.Required).WithValue(item.Required)
+                .AddParameterValue(CalculationColumns.Name, item.Name)
+                .AddParameterValue(CalculationColumns.Type, item.Type)
+                .AddParameterValue(CalculationColumns.Required, item.Required)
                 .Add(CalculationColumns.SequenceNumber).WithValue(-1)
                 .Into(TableName);
         }
 
         public static IQuery Remove(Calculation item)
         {
-            return DeleteBuilder.Where(CalculationColumns.Id).EqualTo(item.Id).From(TableName);
+            return RawQuery.Create("delete from TABLE where Id = @Id").AddParameterValue(CalculationColumns.Id, item.Id);
         }
 
         public static IQuery Get(Guid id)
         {
             return Get()
-                .Where(CalculationColumns.Id).EqualTo(id)
+                .AddParameterValue(CalculationColumns.Id, id)
                 .From(TableName);
         }
 
         private static ISelectBuilderSelect Get()
         {
-            return SelectBuilder
-                .Select(CalculationColumns.Id)
-                .With(CalculationColumns.MethodId)
-                .With(CalculationColumns.OwnerName)
-                .With(CalculationColumns.OwnerId)
-                .With(CalculationColumns.Name)
-                .With(CalculationColumns.Type)
-                .With(CalculationColumns.Required)
-                .With(CalculationColumns.SequenceNumber);
+            return RawQuery.Create(@"
+select
+                Id,
+                MethodId,
+                OwnerName,
+                OwnerId,
+                Name,
+                Type,
+                Required,
+                SequenceNumber,;
         }
 
         public static IQuery Save(Calculation item)
@@ -51,20 +53,20 @@ namespace Abacus.Data
             return UpdateBuilder.Update(TableName)
                 .Set(CalculationColumns.Name).ToValue(item.Name)
                 .Set(CalculationColumns.Required).ToValue(item.Required)
-                .Where(CalculationColumns.Id).HasValue(item.Id);
+                .AddParameterValue(CalculationColumns.Id).HasValue(item.Id);
         }
 
         public static IQuery SetSequenceNumber(Guid id, int sequenceNumber)
         {
             return UpdateBuilder.Update(TableName)
                 .Set(CalculationColumns.SequenceNumber).ToValue(sequenceNumber)
-                .Where(CalculationColumns.Id).HasValue(id);
+                .AddParameterValue(CalculationColumns.Id).HasValue(id);
         }
 
         public static IQuery AllForOwner(Guid ownerId)
         {
             return Get()
-                .Where(CalculationColumns.OwnerId).EqualTo(ownerId)
+                .AddParameterValue(CalculationColumns.OwnerId, ownerId)
                 .OrderBy(CalculationColumns.SequenceNumber).Ascending()
                 .From(TableName);
         }
@@ -75,7 +77,7 @@ namespace Abacus.Data
                 .Set(CalculationColumns.OwnerName).ToValue(ownerName)
                 .Set(CalculationColumns.OwnerId).ToValue(ownerId)
                 .Set(CalculationColumns.SequenceNumber).ToValue(sequence)
-                .Where(CalculationColumns.Id).HasValue(calculation.Id);
+                .AddParameterValue(CalculationColumns.Id).HasValue(calculation.Id);
         }
     }
 }

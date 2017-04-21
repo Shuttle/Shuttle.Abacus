@@ -1,7 +1,8 @@
 using System;
-using Abacus.Domain;
+using Shuttle.Abacus.Domain;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public class DecimalTableTableAccess
     {
@@ -10,26 +11,27 @@ namespace Abacus.Data
         public static IQuery Add(DecimalTable item)
         {
             return InsertBuilder.Insert()
-                .Add(DecimalTableColumns.Id).WithValue(item.Id)
-                .Add(DecimalTableColumns.Name).WithValue(item.Name)
-                .Add(DecimalTableColumns.RowArgumentId).WithValue(item.RowArgumentId)
-                .Add(DecimalTableColumns.ColumnArgumentId).WithValue(item.ColumnArgumentId)
+                .AddParameterValue(DecimalTableColumns.Id, item.Id)
+                .AddParameterValue(DecimalTableColumns.Name, item.Name)
+                .AddParameterValue(DecimalTableColumns.RowArgumentId, item.RowArgumentId)
+                .AddParameterValue(DecimalTableColumns.ColumnArgumentId, item.ColumnArgumentId)
                 .Into(TableName);
         }
 
         public static IQuery Remove(DecimalTable item)
         {
-            return DeleteBuilder.Where(DecimalTableColumns.Id).EqualTo(item.Id).From(TableName);
+            return RawQuery.Create("delete from TABLE where Id = @Id").AddParameterValue(DecimalTableColumns.Id, item.Id);
         }
 
         public static IQuery Get(Guid id)
         {
-            return SelectBuilder
-                .Select(DecimalTableColumns.Id)
-                .With(DecimalTableColumns.Name)
-                .With(DecimalTableColumns.RowArgumentId)
-                .With(DecimalTableColumns.ColumnArgumentId)
-                .Where(DecimalTableColumns.Id).EqualTo(id)
+            return RawQuery.Create(@"
+select
+                Id,
+                Name,
+                RowArgumentId,
+                ColumnArgumentId,
+                .AddParameterValue(DecimalTableColumns.Id, id)
                 .From(TableName);
         }
 
@@ -39,16 +41,17 @@ namespace Abacus.Data
                 .Set(DecimalTableColumns.Name).ToValue(item.Name)
                 .Set(DecimalTableColumns.RowArgumentId).ToValue(item.RowArgumentId)
                 .Set(DecimalTableColumns.ColumnArgumentId).ToValue(item.ColumnArgumentId)
-                .Where(DecimalTableColumns.Id).HasValue(item.Id);
+                .AddParameterValue(DecimalTableColumns.Id).HasValue(item.Id);
         }
 
         public static IQuery All()
         {
-            return SelectBuilder
-                .Select(DecimalTableColumns.Id)
-                .With(DecimalTableColumns.Name)
-                .With(DecimalTableColumns.RowArgumentId)
-                .With(DecimalTableColumns.ColumnArgumentId)
+            return RawQuery.Create(@"
+select
+                Id,
+                Name,
+                RowArgumentId,
+                ColumnArgumentId,
                 .From(TableName);
         }
     }

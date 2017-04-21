@@ -1,6 +1,6 @@
 using System;
 
-namespace Abacus.Validation
+namespace Shuttle.Abacus.Invariants.Core
 {
     public interface IRule<T> 
     {

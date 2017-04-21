@@ -1,6 +1,6 @@
 using System;
 
-namespace Abacus.CommandMediators
+namespace Shuttle.Abacus
 {
     public interface IDeleteCalculationCommand
     {

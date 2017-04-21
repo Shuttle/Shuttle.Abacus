@@ -1,22 +1,23 @@
 using System;
 using System.Data;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public static class CalculationColumns
     {
-        public static readonly QueryColumn<Guid> OwnerId = new QueryColumn<Guid>("OwnerId", DbType.Guid);
+        public static readonly MappedColumn<Guid> OwnerId = new MappedColumn<Guid>("OwnerId", DbType.Guid);
 
-        public static readonly QueryColumn<string> OwnerName = new QueryColumn<string>("OwnerName",
+        public static readonly MappedColumn<string> OwnerName = new MappedColumn<string>("OwnerName",
                                                                                                DbType.AnsiString, 100);
 
-        public static readonly QueryColumn<Guid> Id = new QueryColumn<Guid>("CalculationId", DbType.Guid).AsIdentifier();
+        public static readonly MappedColumn<Guid> Id = new MappedColumn<Guid>("CalculationId", DbType.Guid);
 
-        public static readonly QueryColumn<string> Name = new QueryColumn<string>("Name", DbType.AnsiString, 100);
-        public static readonly QueryColumn<bool> Required = new QueryColumn<bool>("Required", DbType.Byte);
-        public static readonly QueryColumn<Guid> MethodId = new QueryColumn<Guid>("MethodId", DbType.Guid);
+        public static readonly MappedColumn<string> Name = new MappedColumn<string>("Name", DbType.AnsiString, 100);
+        public static readonly MappedColumn<bool> Required = new MappedColumn<bool>("Required", DbType.Byte);
+        public static readonly MappedColumn<Guid> MethodId = new MappedColumn<Guid>("MethodId", DbType.Guid);
 
-        public static readonly QueryColumn<int> SequenceNumber = new QueryColumn<int>("SequenceNumber", DbType.Int32);
-        public static readonly QueryColumn<string> Type = new QueryColumn<string>("Type", DbType.AnsiString, 20);
+        public static readonly MappedColumn<int> SequenceNumber = new MappedColumn<int>("SequenceNumber", DbType.Int32);
+        public static readonly MappedColumn<string> Type = new MappedColumn<string>("Type", DbType.AnsiString, 20);
     }
 }

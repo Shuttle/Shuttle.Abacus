@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Shuttle.Abacus.DTO;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
-    public class ChangeFormulaCommand : IChangeFormulaCommand
+    public class ChangeFormulaCommand
     {
         public Guid CalculationId { get; set; }
         public Guid FormulaId { get; set; }

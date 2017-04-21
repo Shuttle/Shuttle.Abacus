@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Shuttle.Abacus.Localisation;
+using Shuttle.Abacus.DTO;
+using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
-    public abstract class Calculation :
-        ISpecification<IMethodContext>,
+    public abstract class Calculation : Core.Infrastructure.ISpecification<IMethodContext>,
         ILimitOwner,
         IConstraintOwner
     {
@@ -146,7 +146,7 @@ namespace Shuttle.Abacus
         }
 
         public Calculation ProcessCommand(
-            ISetCalculationConstraintsCommand command,
+            SetCalculationConstraintsCommand command,
             IFactoryProvider<IConstraintFactory> constraintFactoryProvider,
             IFactoryProvider<IArgumentAnswerFactory> argumentAnswerFactoryProvider,
             IMapper<ArgumentDTO, Argument> argumentDTOMapper)
@@ -168,7 +168,7 @@ namespace Shuttle.Abacus
             return this;
         }
 
-        public void ProcessCommand(IChangeCalculationCommand command)
+        public void ProcessCommand(ChangeCalculationCommand command)
         {
             Name = command.Name;
             Required = command.Required;

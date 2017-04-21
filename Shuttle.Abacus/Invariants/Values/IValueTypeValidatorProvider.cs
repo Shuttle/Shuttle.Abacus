@@ -1,4 +1,4 @@
-namespace Abacus.Validation
+namespace Shuttle.Abacus.Invariants.Values
 {
     public interface IValueTypeValidatorProvider
     {

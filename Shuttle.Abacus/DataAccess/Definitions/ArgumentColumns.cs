@@ -1,28 +1,29 @@
 using System;
 using System.Data;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public static class ArgumentColumns
     {
-        public static readonly QueryColumn<string>
-            AnswerType = new QueryColumn<string>("AnswerType", DbType.AnsiString, 100);
+        public static readonly MappedColumn<string>
+            AnswerType = new MappedColumn<string>("AnswerType", DbType.AnsiString, 100);
 
-        public static readonly QueryColumn<Guid> Id =
-            new QueryColumn<Guid>("ArgumentId", DbType.Guid).AsIdentifier();
+        public static readonly MappedColumn<Guid> Id =
+            new MappedColumn<Guid>("ArgumentId", DbType.Guid);
 
-        public static readonly QueryColumn<bool> IsSystemData = new QueryColumn<bool>("IsSystemData", DbType.Int16);
+        public static readonly MappedColumn<bool> IsSystemData = new MappedColumn<bool>("IsSystemData", DbType.Int16);
 
-        public static readonly QueryColumn<string>
-            Name = new QueryColumn<string>("Name", DbType.AnsiString, 100);
+        public static readonly MappedColumn<string>
+            Name = new MappedColumn<string>("Name", DbType.AnsiString, 100);
 
         public static class RestrictedAnswerColumns
         {
-            public static readonly QueryColumn<string>
-                Answer = new QueryColumn<string>("Answer", DbType.AnsiString, 100);
+            public static readonly MappedColumn<string>
+                Answer = new MappedColumn<string>("Answer", DbType.AnsiString, 100);
 
-            public static readonly QueryColumn<Guid> ArgumentId =
-                new QueryColumn<Guid>("ArgumentId", DbType.Guid).AsIdentifier();
+            public static readonly MappedColumn<Guid> ArgumentId =
+                new MappedColumn<Guid>("ArgumentId", DbType.Guid);
         }
     }
 }

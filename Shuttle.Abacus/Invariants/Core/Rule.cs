@@ -1,6 +1,6 @@
 using System;
 
-namespace Abacus.Validation
+namespace Shuttle.Abacus.Invariants.Core
 {
     public delegate bool RulePredicate<T>(T item, IRule<T> rule);
 

@@ -1,16 +1,17 @@
 using System;
-using Abacus.Domain;
+using Shuttle.Abacus.Domain;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public class GraphNodeArgumentTableAccess
     {
-        public const string TableName = "GraphNodeArgument";
+        
 
         public static IQuery RemoveFor(Guid calculationId)
         {
             return DeleteBuilder
-                .Where(GraphNodeArgumentColumns.CalculationId).EqualTo(calculationId)
+                .AddParameterValue(GraphNodeArgumentColumns.CalculationId, calculationId)
                 .From(TableName);
         }
 
@@ -21,17 +22,18 @@ namespace Abacus.Data
                 .Add(GraphNodeArgumentColumns.CalculationId).WithValue(calculation.Id)
                 .Add(GraphNodeArgumentColumns.SequenceNumber).WithValue(sequence)
                 .Add(GraphNodeArgumentColumns.ArgumentId).WithValue(item.Argument.Id)
-                .Add(GraphNodeArgumentColumns.Format).WithValue(item.Format)
+                .AddParameterValue(GraphNodeArgumentColumns.Format, item.Format)
                 .Into(TableName);
         }
 
 
         public static IQuery AllForCalculation(Calculation calculation)
         {
-            return SelectBuilder
-                .Select(GraphNodeArgumentColumns.ArgumentId)
-                .With(GraphNodeArgumentColumns.Format)
-                .Where(GraphNodeArgumentColumns.CalculationId).EqualTo(calculation.Id)
+            return RawQuery.Create(@"
+select
+                ArgumentId,
+                Format,
+                .AddParameterValue(GraphNodeArgumentColumns.CalculationId, calculation.Id)
                 .OrderBy(GraphNodeArgumentColumns.SequenceNumber).Ascending()
                 .From(TableName);
         }

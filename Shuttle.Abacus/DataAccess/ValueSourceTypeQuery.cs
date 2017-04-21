@@ -1,13 +1,14 @@
 using System.Collections.Generic;
-using Abacus.DTO;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.DataAccess.Query;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess
 {
-    public class ValueSourceTypeQuery : DataQuery, IValueSourceTypeQuery
+    public class ValueSourceTypeQuery :IValueSourceTypeQuery
     {
-        private readonly IDataTableMapper<ValueSourceTypeDTO> valueSourceTypeDTOMapper;
+        private readonly IDataRowMapper<ValueSourceTypeDTO> valueSourceTypeDTOMapper;
 
-        public ValueSourceTypeQuery(IDataTableMapper<ValueSourceTypeDTO> valueSourceTypeDTOMapper)
+        public ValueSourceTypeQuery(IDataRowMapper<ValueSourceTypeDTO> valueSourceTypeDTOMapper)
         {
             this.valueSourceTypeDTOMapper = valueSourceTypeDTOMapper;
         }

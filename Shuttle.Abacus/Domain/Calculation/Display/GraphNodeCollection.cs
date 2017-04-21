@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class GraphNodeCollection : IEnumerable<IGraphNode>
     {

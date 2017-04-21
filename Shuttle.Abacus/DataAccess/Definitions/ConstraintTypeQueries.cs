@@ -1,15 +1,16 @@
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public class ConstraintTypeQueries
     {
-        public const string TableName = "ConstraintType";
+        
 
-        public static ISelectQuery All()
+        public IQuery All()
         {
-            return SelectBuilder
-                .Select(ConstraintTypeColumns.Name)
-                .With(ConstraintTypeColumns.Text)
-                .With(ConstraintTypeColumns.EnabledForRestrictedAnswers)
+            return RawQuery.Create(@"
+select
+                Name,
+                Text,
+                EnabledForRestrictedAnswers,
                 .From(TableName);
         }
     }

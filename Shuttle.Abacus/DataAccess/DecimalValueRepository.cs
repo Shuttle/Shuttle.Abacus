@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Abacus.Domain;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.Domain;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess
 {
     public class DecimalValueRepository : Repository<DecimalValue>, IDecimalValueRepository
     {

@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using Shuttle.Abacus.DTO;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
-    public class CreateArgumentCommand : ICreateArgumentCommand
+    public class CreateArgumentCommand 
     {
         public string Name { get; set; }
         public string AnswerType { get; set; }

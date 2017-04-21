@@ -1,23 +1,24 @@
 using System;
 using System.Data;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public static class FormulaOperationColumns
     {
-        public static readonly QueryColumn<Guid> FormulaId = new QueryColumn<Guid>("FormulaId", DbType.Guid);
+        public static readonly MappedColumn<Guid> FormulaId = new MappedColumn<Guid>("FormulaId", DbType.Guid);
 
-        public static readonly QueryColumn<string> Operation = new QueryColumn<string>("Operation", DbType.AnsiString,
+        public static readonly MappedColumn<string> Operation = new MappedColumn<string>("Operation", DbType.AnsiString,
                                                                                        120);
 
-        public static readonly QueryColumn<int> SequenceNumber = new QueryColumn<int>("SequenceNumber", DbType.Int32);
+        public static readonly MappedColumn<int> SequenceNumber = new MappedColumn<int>("SequenceNumber", DbType.Int32);
 
-        public static readonly QueryColumn<string> ValueSelection = new QueryColumn<string>("ValueSelection",
+        public static readonly MappedColumn<string> ValueSelection = new MappedColumn<string>("ValueSelection",
                                                                                             DbType.AnsiString, 120);
 
-        public static readonly QueryColumn<string> Text = new QueryColumn<string>("Text", DbType.AnsiString, 120);
+        public static readonly MappedColumn<string> Text = new MappedColumn<string>("Text", DbType.AnsiString, 120);
 
-        public static readonly QueryColumn<string> ValueSource = new QueryColumn<string>("ValueSource",
+        public static readonly MappedColumn<string> ValueSource = new MappedColumn<string>("ValueSource",
                                                                                          DbType.AnsiString, 120);
     }
 }

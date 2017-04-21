@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
-    public class DeleteMethodTestCommand : IDeleteMethodTestCommand
+    public class DeleteMethodTestCommand 
     {
         public DeleteMethodTestCommand()
         {

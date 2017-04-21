@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Abacus.Domain;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Infrastructure;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess
 {
     public class ConstraintRepository : IConstraintRepository
     {

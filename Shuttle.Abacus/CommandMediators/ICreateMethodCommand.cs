@@ -1,4 +1,4 @@
-namespace Abacus.CommandMediators
+namespace Shuttle.Abacus
 {
     public interface ICreateMethodCommand
     {

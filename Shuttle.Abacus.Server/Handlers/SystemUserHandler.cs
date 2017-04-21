@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
-using Abacus.Application;
-using Abacus.Domain;
-using Abacus.Infrastructure;
 using Abacus.Messages;
-using NServiceBus;
+using Shuttle.Abacus.ApplicationService;
+using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Infrastructure;
+using Shuttle.Esb;
 
-namespace Abacus.Server
+namespace Shuttle.Abacus.Server.Handlers
 {
     public class SystemUserHandler :
-        MessageHandler,
         IMessageHandler<CreateSystemUserCommand>,
         IMessageHandler<SetPermissionsCommand>,
         IMessageHandler<ChangeLoginNameCommand>,
@@ -21,54 +20,53 @@ namespace Abacus.Server
             this.repository = repository;
         }
 
-        public void Handle(ChangeLoginNameCommand message)
+        public void ProcessMessage(IHandlerContext<CreateSystemUserCommand> context)
         {
-            Transacted(
-                () =>
-                TaskFactory.Create<IChangeLoginNameTask>().Execute(
-                    repository.Get(message.SystemUserId).ProcessCommand(message)));
+            repository.Add(new SystemUser(context.Message));
         }
 
-        public void Handle(CreateSystemUserCommand message)
+        public void ProcessMessage(IHandlerContext<SetPermissionsCommand> context)
         {
-            Transacted(() => repository.Add(new SystemUser(message)));
+            var message = context.Message;
+
+            TaskFactory.Create<ISetPermissionsTask>().Execute(
+                repository.Get(message.SystemUserId).ProcessCommand(message));
         }
 
-        public void Handle(LoginCommand message)
+        public void ProcessMessage(IHandlerContext<ChangeLoginNameCommand> context)
         {
-            Transacted(() =>
+            var message = context.Message;
+
+            TaskFactory.Create<IChangeLoginNameTask>().Execute(
+                repository.Get(message.SystemUserId).ProcessCommand(message));
+        }
+
+        public void ProcessMessage(IHandlerContext<LoginCommand> context)
+        {
+            var message = context.Message;
+
+            var user = repository.FetchByLoginName(message.LoginName);
+
+            if (user == null)
+            {
+                repository.Add(new SystemUser
                 {
-                    var user = repository.FetchByLoginName(message.LoginName);
-
-                    if (user == null)
-                    {
-                        repository.Add(new SystemUser
-                                       {
-                                           LoginName = message.LoginName
-                                       });
-
-                        Bus.Reply(new ReplyMessage(Result.Create().AddSuccessMessage(
-                                                       string.Format(
-                                                           "Your login name '{0}' is new and has been added to the security store.  Please contact the Abacus System Administrator to assign permissions to you.",
-                                                           message.LoginName))));
-                    }
-                    else
-                    {
-                        var permissions = new List<Permission>();
-
-                        user.Permissions.ForEach(permission => permissions.Add((Permission)permission));
-
-                        Bus.Reply(new LoginCompletedEvent { Permissions = permissions });
-                    }
+                    LoginName = message.LoginName
                 });
-        }
 
-        public void Handle(SetPermissionsCommand message)
-        {
-            Transacted(
-                () =>
-                TaskFactory.Create<ISetPermissionsTask>().Execute(
-                    repository.Get(message.SystemUserId).ProcessCommand(message)));
+                context.Send(new ReplyMessage(Result.Create().AddSuccessMessage(
+                                               string.Format(
+                                                   "Your login name '{0}' is new and has been added to the security store.  Please contact the Abacus System Administrator to assign permissions to you.",
+                                                   message.LoginName))), c => c.Reply());
+            }
+            else
+            {
+                var permissions = new List<Permission>();
+
+                user.Permissions.ForEach(permission => permissions.Add((Permission)permission));
+
+                context.Send(new LoginCompletedEvent { Permissions = permissions }, c => c.Reply());
+            }
         }
     }
 }

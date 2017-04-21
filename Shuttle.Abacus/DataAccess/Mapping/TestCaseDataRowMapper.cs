@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Abacus.Domain;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.Domain;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Mapping
 {
-    public class MethodTestDataTableMapper : IDataTableMapper<MethodTest>
+    public class MethodTestDataTableMapper : IDataRowMapper<MethodTest>
     {
         public IEnumerable<MethodTest> MapFrom(DataTable input)
         {

@@ -1,8 +1,8 @@
 using System;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
-    public class DeleteFormulaCommand : IDeleteFormulaCommand
+    public class DeleteFormulaCommand 
     {
         public Guid FormulaId { get; set; }
     }

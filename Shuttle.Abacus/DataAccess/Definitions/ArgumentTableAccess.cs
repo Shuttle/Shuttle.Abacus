@@ -1,26 +1,37 @@
 using System;
-using Abacus.Domain;
+using Shuttle.Abacus.Domain;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public static class ArgumentTableAccess
     {
         public const string RestrictedAnswerTableName = "ArgumentRestrictedAnswer";
-        public const string TableName = "Argument";
+        
 
         public static IQuery Add(Argument item)
         {
-            var insert = InsertBuilder.Insert()
-                .Add(ArgumentColumns.Id).WithValue(item.Id)
-                .Add(ArgumentColumns.Name).WithValue(item.Name)
-                .Add(ArgumentColumns.AnswerType).WithValue(item.AnswerType);
-
-            return insert.Into(TableName);
+            return RawQuery.Create(@"
+insert into Argument
+(
+    Id,
+    Name,
+    AnswerType
+)
+values
+(
+    @Id,
+    @Name,
+    @AnswerType
+)")
+                .AddParameterValue(ArgumentColumns.Id, item.Id)
+                .AddParameterValue(ArgumentColumns.Name, item.Name)
+                .AddParameterValue(ArgumentColumns.AnswerType, item.AnswerType);
         }
 
         public static IQuery Remove(Argument item)
         {
-            return DeleteBuilder.Where(ArgumentColumns.Id).EqualTo(item.Id).From(TableName);
+            return RawQuery.Create("delete from Argument where Id = @Id").AddParameterValue(ArgumentColumns.Id, item.Id);
         }
 
         public static IQuery Get(Guid id)
@@ -58,14 +69,14 @@ namespace Abacus.Data
             return UpdateBuilder.Update(TableName)
                 .Set(ArgumentColumns.Name).ToValue(item.Name)
                 .Set(ArgumentColumns.AnswerType).ToValue(item.AnswerType)
-                .Where(ArgumentColumns.Id).HasValue(item.Id);
+                .AddParameterValue(ArgumentColumns.Id).HasValue(item.Id);
         }
 
 
         public static IQuery RemoveRestrictedAnswers(Argument argument)
         {
             return
-                DeleteBuilder.Where(ArgumentColumns.RestrictedAnswerColumns.ArgumentId).EqualTo(argument.Id).From(
+                DeleteBuilder.AddParameterValue(ArgumentColumns.RestrictedAnswerColumns.ArgumentId, argument.Id).From(
                     RestrictedAnswerTableName);
         }
 

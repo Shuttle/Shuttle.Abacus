@@ -1,8 +1,9 @@
-using Abacus.Infrastructure;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.DataAccess.Query;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess
 {
-    public class ConstraintTypeQuery : DataQuery, IConstraintTypeQuery
+    public class ConstraintTypeQuery :IConstraintTypeQuery
     {
         public IQueryResult All()
         {

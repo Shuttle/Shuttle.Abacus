@@ -1,4 +1,7 @@
-namespace Abacus.Validation
+using Shuttle.Abacus.Invariants.Core;
+using Shuttle.Abacus.Invariants.Interfaces;
+
+namespace Shuttle.Abacus.Invariants
 {
     public class LimitRules : ILimitRules
     {

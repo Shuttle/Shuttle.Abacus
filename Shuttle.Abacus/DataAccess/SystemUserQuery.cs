@@ -1,9 +1,10 @@
 using System;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.DataAccess.Query;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess
 {
-    public class SystemUserQuery : DataQuery, ISystemUserQuery
+    public class SystemUserQuery :ISystemUserQuery
     {
         public IQueryResult All()
         {

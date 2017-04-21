@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class TextPremiumCalculationLogger : IPremiumCalculationLogger
     {

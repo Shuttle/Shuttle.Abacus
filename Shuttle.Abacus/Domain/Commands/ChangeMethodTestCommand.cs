@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Shuttle.Abacus.DTO;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
-    public class ChangeMethodTestCommand : IChangeMethodTestCommand
+    public class ChangeMethodTestCommand 
     {
         public ChangeMethodTestCommand()
         {

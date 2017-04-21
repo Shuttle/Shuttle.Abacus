@@ -1,6 +1,7 @@
 using System;
+using Shuttle.Abacus.Infrastructure;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class SystemUser
     {
@@ -14,7 +15,7 @@ namespace Shuttle.Abacus
             Construct();
         }
 
-        public SystemUser(ICreateSystemUserCommand command)
+        public SystemUser(CreateSystemUserCommand command)
         {
             Construct();
 
@@ -32,7 +33,7 @@ namespace Shuttle.Abacus
             Permissions = new PermissionCollection();
         }
 
-        public SystemUser ProcessCommand(ISetPermissionsCommand command)
+        public SystemUser ProcessCommand(SetPermissionsCommand command)
         {
             Permissions = new PermissionCollection();
 
@@ -41,7 +42,7 @@ namespace Shuttle.Abacus
             return this;
         }
 
-        public SystemUser ProcessCommand(IChangeLoginNameCommand command)
+        public SystemUser ProcessCommand(ChangeLoginNameCommand command)
         {
             LoginName = command.NewLoginName;
 

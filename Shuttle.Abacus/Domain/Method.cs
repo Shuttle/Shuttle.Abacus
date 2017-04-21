@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class Method :
         ICalculationOwner,
@@ -13,7 +14,7 @@ namespace Shuttle.Abacus
     {
         private MethodCalculationCollection calculations = new MethodCalculationCollection();
 
-        public Method(ICreateMethodCommand command)
+        public Method(CreateMethodCommand command)
         {
             MethodName = command.MethodName;
         }
@@ -55,7 +56,7 @@ namespace Shuttle.Abacus
             get { return calculations; }
         }
 
-        public ICalculationOwner ProcessCommand(IChangeCalculationOrderCommand command)
+        public ICalculationOwner ProcessCommand(ChangeCalculationOrderCommand command)
         {
             var owner = FindOwner(command.OwnerId);
 
@@ -105,7 +106,7 @@ namespace Shuttle.Abacus
             get { return calculations.Limits; }
         }
 
-        public Method ProcessCommand(IChangeMethodCommand command)
+        public Method ProcessCommand(ChangeMethodCommand command)
         {
             MethodName = command.MethodName;
 
@@ -145,19 +146,21 @@ namespace Shuttle.Abacus
             methodContext.Log("<< completed in {0} ms >>", sw.ElapsedMilliseconds.ToString("#,##0"));
         }
 
-        public ICalculationOwner ProcessCommand(ICreateCalculationCommand command, Calculation calculation)
+        public ICalculationOwner ProcessCommand(CreateCalculationCommand command, Calculation calculation)
         {
             Guard.Against<InvalidStateException>(calculations.ContainsName(command.OwnerName, Guid.Empty), string.Format("Cannot add calculation '{0}' since there is already a calculation with this name.", command.Name));
 
             var owner = FindOwner(command.OwnerId);
 
-            //TODO: Guard.AgainstMissing<ICalculationOwner>(owner, command.OwnerId);
+            if (owner == null)
+            {
+                throw new MissingEntityException(string.Format("ICalculationOwner with id '{0}'.", command.OwnerId));
+            }
 
             owner.AddCalculation(calculation);
 
-            //TODO: DomainEvents.Raise(new CalculationAdded(this, owner, calculation));
-
-            return this;
+            throw new NotImplementedException();
+            //return new CalculationAdded(this, owner, calculation));
         }
 
         public Method Copy()
@@ -177,7 +180,7 @@ namespace Shuttle.Abacus
             return result;
         }
 
-        public Method ProcessCommand(ICopyMethodCommand command)
+        public Method ProcessCommand(CopyMethodCommand command)
         {
             MethodName = command.MethodName;
 
@@ -222,14 +225,14 @@ namespace Shuttle.Abacus
             }
         }
 
-        public void ProcessCommand(IDeleteCalculationCommand command)
+        public void ProcessCommand(DeleteCalculationCommand command)
         {
             calculations.Remove(command.CalculationId);
 
             EnforceInvariants();
         }
 
-        public void ProcessCommand(IChangeCalculationCommand command)
+        public void ProcessCommand(ChangeCalculationCommand command)
         {
             Guard.Against<InvalidStateException>(calculations.ContainsName(command.OwnerName, command.CalculationId), string.Format("Cannot change calculation name to '{0}' since there is already a calculation with this name.", command.Name));
 
@@ -238,7 +241,7 @@ namespace Shuttle.Abacus
             EnforceInvariants();
         }
 
-        public void ProcessCommand(IGrabCalculationsCommand command)
+        public void ProcessCommand(GrabCalculationsCommand command)
         {
             var grabber = (CalculationCollection)calculations.Get(command.GrabberCalculationId);
 

@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Data;
-using Abacus.DTO;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.Domain;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Mapping
 {
     public interface IMethodTestDTOMapper : IMapper<DataTable, IEnumerable<MethodTestDTO>>
     {

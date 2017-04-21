@@ -1,37 +1,38 @@
 using System;
 using System.Data;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Definitions
 {
     public static class MethodTestColumns
     {
-        public static readonly QueryColumn<string> Description =
-            new QueryColumn<string>("Description", DbType.AnsiString, 250);
+        public static readonly MappedColumn<string> Description =
+            new MappedColumn<string>("Description", DbType.AnsiString, 250);
 
-        public static readonly QueryColumn<decimal> ExpectedResult =
-            new QueryColumn<decimal>("ExpectedResult", DbType.Decimal);
+        public static readonly MappedColumn<decimal> ExpectedResult =
+            new MappedColumn<decimal>("ExpectedResult", DbType.Decimal);
 
-        public static readonly QueryColumn<Guid> Id =
-            new QueryColumn<Guid>("MethodTestId", DbType.Guid).AsIdentifier();
+        public static readonly MappedColumn<Guid> Id =
+            new MappedColumn<Guid>("MethodTestId", DbType.Guid);
 
-        public static readonly QueryColumn<Guid> MethodId =
-            new QueryColumn<Guid>("MethodId", DbType.Guid);
+        public static readonly MappedColumn<Guid> MethodId =
+            new MappedColumn<Guid>("MethodId", DbType.Guid);
 
         public static class ArgumentAnswerColumns
         {
-            public static readonly QueryColumn<string>
-                Answer = new QueryColumn<string>("Answer", DbType.AnsiString, 100);
+            public static readonly MappedColumn<string>
+                Answer = new MappedColumn<string>("Answer", DbType.AnsiString, 100);
 
-            public static readonly QueryColumn<string>
-                AnswerType = new QueryColumn<string>("AnswerType", DbType.AnsiString, 100);
+            public static readonly MappedColumn<string>
+                AnswerType = new MappedColumn<string>("AnswerType", DbType.AnsiString, 100);
 
-            public static readonly QueryColumn<string>
-                ArgumentName = new QueryColumn<string>("ArgumentName", DbType.AnsiString, 100);
+            public static readonly MappedColumn<string>
+                ArgumentName = new MappedColumn<string>("ArgumentName", DbType.AnsiString, 100);
 
-            public static readonly QueryColumn<Guid> ArgumentId = new QueryColumn<Guid>("ArgumentId", DbType.Guid);
+            public static readonly MappedColumn<Guid> ArgumentId = new MappedColumn<Guid>("ArgumentId", DbType.Guid);
 
-            public static readonly QueryColumn<Guid> MethodTestId =
-                new QueryColumn<Guid>("MethodTestId", DbType.Guid).AsIdentifier();
+            public static readonly MappedColumn<Guid> MethodTestId =
+                new MappedColumn<Guid>("MethodTestId", DbType.Guid);
         }
     }
 }

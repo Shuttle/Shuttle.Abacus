@@ -1,6 +1,6 @@
 using System.Xml.Serialization;
 
-namespace Abacus.DataContracts
+namespace Shuttle.Abacus.DataContracts
 {
     public class NameValue
     {

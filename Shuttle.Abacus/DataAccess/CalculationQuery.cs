@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
-using Abacus.DTO;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.DataAccess.Query;
+using Shuttle.Abacus.DTO;
+using Shuttle.Core.Data;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess
 {
-    public class CalculationQuery : DataQuery, ICalculationQuery
+    public class CalculationQuery :ICalculationQuery
     {
-        private readonly IDataTableMapper<CalculationDTO> calculationDTOMapper;
+        private readonly IDataRowMapper<CalculationDTO> calculationDTOMapper;
 
-        public CalculationQuery(IDataTableMapper<CalculationDTO> calculationDTOMapper)
+        public CalculationQuery(IDataRowMapper<CalculationDTO> calculationDTOMapper)
         {
             this.calculationDTOMapper = calculationDTOMapper;
         }

@@ -1,8 +1,8 @@
 using System.Data;
-using System.Linq;
-using Abacus.Domain;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.Domain;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess.Mapping
 {
     public class GraphNodeArgumentDataRowMapper : IDataRowMapper<GraphNodeArgument>
     {

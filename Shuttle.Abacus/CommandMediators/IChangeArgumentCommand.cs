@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Abacus.DTO;
+using Abacus.Messages.DTO;
 
-namespace Abacus.CommandMediators
+namespace Shuttle.Abacus
 {
     public interface IChangeArgumentCommand
     {

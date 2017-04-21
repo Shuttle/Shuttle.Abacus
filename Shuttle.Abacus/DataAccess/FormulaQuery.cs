@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Abacus.DTO;
+using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.DataAccess.Query;
 
-namespace Abacus.Data
+namespace Shuttle.Abacus.DataAccess
 {
-    public class FormulaQuery : DataQuery, IFormulaQuery
+    public class FormulaQuery :IFormulaQuery
     {
         private readonly IDataTableRepository<OperationDTO> operationRepository;
 

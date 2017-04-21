@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Abacus.CommandMediators
+namespace Shuttle.Abacus
 {
     public interface ICreateSystemUserCommand
     {

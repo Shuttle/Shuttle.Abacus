@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class RuleCollection<T> : IRuleCollection<T>
     {
@@ -57,7 +57,7 @@ namespace Shuttle.Abacus
 
         public IRuleCollection<T> BrokenBy(T item)
         {
-            IList<IRule<T>> brokenRules = Rules.Where(rule => rule.IsBrokenBy(item)).ToList();
+            IList<IRule<T>> brokenRules = Rules.AddParameterValue(rule => rule.IsBrokenBy(item)).ToList();
 
             return new RuleCollection<T>(brokenRules);
         }

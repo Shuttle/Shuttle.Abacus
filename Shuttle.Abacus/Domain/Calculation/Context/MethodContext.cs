@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.Domain
 {
     public class MethodContext : IMethodContext
     {

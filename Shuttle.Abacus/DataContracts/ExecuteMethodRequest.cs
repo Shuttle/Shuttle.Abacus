@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace Abacus.DataContracts
+namespace Shuttle.Abacus.DataContracts
 {
     public class ExecuteMethodRequest
     {

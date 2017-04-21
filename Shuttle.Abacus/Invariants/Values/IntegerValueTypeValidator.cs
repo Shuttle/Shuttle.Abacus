@@ -1,7 +1,6 @@
-using System;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.Domain;
 
-namespace Abacus.Validation
+namespace Shuttle.Abacus.Invariants.Values
 {
     public class IntegerValueTypeValidator : IValueTypeValidator
     {
