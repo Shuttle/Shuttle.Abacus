@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8B8949A1-EE10-4444-B974-62C1DC5708AC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Shuttle.Abacus.Localisation</RootNamespace>
+    <AssemblyName>Shuttle.Abacus.Localisation</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ImageResources.cs" />
+    <Compile Include="IResourceAccessor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceItem.cs" />
+    <Compile Include="ResourceItems.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ImageResource.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help.png" />
+    <None Include="Resources\server_go.png" />
+    <None Include="Resources\report_magnify.png" />
+    <None Include="Resources\cut_red.png" />
+    <None Include="Resources\calculator_delete.png" />
+    <None Include="Resources\book_go.png" />
+    <None Include="Resources\page_white_copy.png" />
+    <None Include="Resources\script_go.png" />
+    <None Include="Resources\application_put.png" />
+    <None Include="Resources\application.png" />
+    <None Include="Resources\table_add.png" />
+    <None Include="Resources\table_delete.png" />
+    <None Include="Resources\table.png" />
+    <None Include="Resources\table_edit.png" />
+    <None Include="Resources\report.png" />
+    <None Include="Resources\Image_Report.png" />
+    <None Include="Resources\users_two_edit_16.png" />
+    <None Include="Resources\users_two_add_16.png" />
+    <None Include="Resources\users_two_16.png" />
+    <None Include="Resources\user_two_delete_16.png" />
+    <None Include="Resources\arrow_switch.png" />
+    <None Include="Resources\arrow_up.png" />
+    <None Include="Resources\arrow_down.png" />
+    <None Include="Resources\Image_GeneralUp.png" />
+    <None Include="Resources\tick.png" />
+    <None Include="Resources\link_go.png" />
+    <None Include="Resources\link_edit.png" />
+    <None Include="Resources\link_delete.png" />
+    <None Include="Resources\link_add.png" />
+    <None Include="Resources\link.png" />
+    <None Include="Resources\application_view_list.png" />
+    <None Include="Resources\script_edit.png" />
+    <None Include="Resources\script_delete.png" />
+    <None Include="Resources\script_add.png" />
+    <None Include="Resources\script.png" />
+    <None Include="Resources\layout_edit.png" />
+    <None Include="Resources\layout_delete.png" />
+    <None Include="Resources\layout_add.png" />
+    <None Include="Resources\layout.png" />
+    <None Include="Resources\error.png" />
+    <None Include="Resources\page.png" />
+    <None Include="Resources\key_go.png" />
+    <None Include="Resources\key.png" />
+    <None Include="Resources\table_go.png" />
+    <None Include="Resources\brick_go.png" />
+    <None Include="Resources\brick_edit.png" />
+    <None Include="Resources\brick_delete.png" />
+    <None Include="Resources\brick_add.png" />
+    <None Include="Resources\brick.png" />
+    <None Include="Resources\page_white_edit.png" />
+    <None Include="Resources\page_white_delete.png" />
+    <None Include="Resources\page_white_add.png" />
+    <None Include="Resources\page_white.png" />
+    <None Include="Resources\note_go.png" />
+    <None Include="Resources\note_error.png" />
+    <None Include="Resources\note_edit.png" />
+    <None Include="Resources\note_delete.png" />
+    <None Include="Resources\note_add.png" />
+    <None Include="Resources\note.png" />
+    <None Include="Resources\tag_blue_edit.png" />
+    <None Include="Resources\tag_blue_delete.png" />
+    <None Include="Resources\tag_blue_add.png" />
+    <None Include="Resources\tag_blue.png" />
+    <None Include="Resources\chart_curve_edit.png" />
+    <None Include="Resources\chart_curve_delete.png" />
+    <None Include="Resources\chart_curve_add.png" />
+    <None Include="Resources\chart_curve.png" />
+    <None Include="Resources\arrow_in.png" />
+    <None Include="Resources\calculator_add.png" />
+    <None Include="Resources\calculator_error.png" />
+    <None Include="Resources\calculator_edit.png" />
+    <None Include="Resources\calculator.png" />
+    <None Include="Resources\application_edit.png" />
+    <None Include="Resources\application_delete.png" />
+    <None Include="Resources\application_add.png" />
+    <None Include="Resources\delete.png" />
+    <None Include="Resources\add.png" />
+    <None Include="Resources\arrow_refresh_small.png" />
+    <None Include="Resources\hourglass.png" />
+    <None Include="Resources\accept.png" />
+    <None Include="Resources\bullet_orange.png" />
+    <None Include="Resources\cancel.png" />
+    <None Include="Resources\Save_16.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user_group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\remove_user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\marker_rounded_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\marker_rounded_light_blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\marker_rounded_remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\marker_squared_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\package.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\package_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\package_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\package_go.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\package_green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shield.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shield_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shield_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shield_go.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exclamation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chart_pie.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chart_pie_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chart_pie_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chart_pie_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel_round.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

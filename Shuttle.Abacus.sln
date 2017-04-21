@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuttle.Abacus", "Shuttle.Abacus\Shuttle.Abacus.csproj", "{23680A60-878A-48DA-B23C-9B0EA4A29305}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuttle.Abacus.Tests", "Shuttle.Abacus.Tests\Shuttle.Abacus.Tests.csproj", "{ABA24AFB-8E81-4E6A-A43F-F6E2234E6608}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuttle.Abacus.UI", "Shuttle.Abacus.UI\Shuttle.Abacus.UI.csproj", "{BD0F8D24-6577-466A-9440-F4ADE9C5433F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuttle.Abacus.WebApi", "Shuttle.Abacus.WebApi\Shuttle.Abacus.WebApi.csproj", "{FCEC5CAF-6826-40EE-B43E-4B15EBFD4EFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuttle.Abacus.Server", "Shuttle.Abacus.Server\Shuttle.Abacus.Server.csproj", "{9A441793-6466-484F-A086-C1EC1198B46D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{ABA24AFB-8E81-4E6A-A43F-F6E2234E6608}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABA24AFB-8E81-4E6A-A43F-F6E2234E6608}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABA24AFB-8E81-4E6A-A43F-F6E2234E6608}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD0F8D24-6577-466A-9440-F4ADE9C5433F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD0F8D24-6577-466A-9440-F4ADE9C5433F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD0F8D24-6577-466A-9440-F4ADE9C5433F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD0F8D24-6577-466A-9440-F4ADE9C5433F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCEC5CAF-6826-40EE-B43E-4B15EBFD4EFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCEC5CAF-6826-40EE-B43E-4B15EBFD4EFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCEC5CAF-6826-40EE-B43E-4B15EBFD4EFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCEC5CAF-6826-40EE-B43E-4B15EBFD4EFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A441793-6466-484F-A086-C1EC1198B46D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A441793-6466-484F-A086-C1EC1198B46D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A441793-6466-484F-A086-C1EC1198B46D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A441793-6466-484F-A086-C1EC1198B46D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

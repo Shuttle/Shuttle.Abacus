@@ -1,0 +1,45 @@
+using Abacus.Localisation;
+
+namespace Abacus.UI
+{
+    public class MethodTestResultPresenter : Presenter<IMethodTestResultView>, IMethodTestResultPresenter
+    {
+        public MethodTestResultPresenter(IMethodTestResultView view) : base(view)
+        {
+            Text = "Results";
+            Image = Resources.Image_MethodTestRun;
+
+            DontTrackChanges();
+        }
+
+        public void MethodTestResultSelected()
+        {
+            View.ClearResultDisplays();
+
+            if (!View.HasSelectedItem)
+            {
+                return;
+            }
+
+            View.ShowCalculationLog();
+            
+            var dto = View.SelectedDTO;
+
+            View.BuildDisplayTree("Test", dto.GraphNodes);
+        }
+
+        public void GraphNodeSelected()
+        {
+            View.ClearDisplayList();
+
+            if (!View.HasSelectedGraphNode)
+            {
+                return;
+            }
+
+            var items = View.SelectedGraphNodes();
+
+            items.ForEach(View.AddGraphNode);
+        }
+    }
+}
