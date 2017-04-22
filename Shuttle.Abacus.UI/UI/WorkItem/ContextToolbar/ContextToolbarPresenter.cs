@@ -1,7 +1,10 @@
 using System.Collections.Generic;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.UI.Messages.WorkItem;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar
 {
     public class ContextToolbarPresenter :
         Presenter<IContextToolbarView>,

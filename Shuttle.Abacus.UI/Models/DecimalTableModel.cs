@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Data;
-using Abacus.DTO;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Models
 {
     public class DecimalTableModel
     {

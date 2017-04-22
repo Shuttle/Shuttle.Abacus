@@ -1,9 +1,8 @@
 using System;
-using Abacus.Infrastructure;
-using Abacus.Messages;
-using NServiceBus;
+using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Messages.WorkItem;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.WorkItem
 {
     public abstract class WorkItemController : IWorkItemController
     {

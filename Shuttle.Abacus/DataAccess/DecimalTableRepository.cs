@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Shuttle.Abacus.DataAccess.Definitions;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Data;
@@ -12,9 +11,9 @@ namespace Shuttle.Abacus.DataAccess
     {
         private readonly ICache cache;
         private readonly IDatabaseGateway gateway;
-        private readonly IDataRowRepository<DecimalTable> repository;
+        private readonly IDataRepository<DecimalTable> repository;
 
-        public DecimalTableRepository(IDataRowRepository<DecimalTable> repository, IDatabaseGateway gateway, ICache cache)
+        public DecimalTableRepository(IDataRepository<DecimalTable> repository, IDatabaseGateway gateway, ICache cache)
         {
             this.repository = repository;
             this.gateway = gateway;
@@ -44,7 +43,7 @@ namespace Shuttle.Abacus.DataAccess
 
             result = repository.FetchItemUsing(DecimalTableTableAccess.Get(id));
 
-            Guard.AgainstMissing<DecimalValueTableAccess>(result, id);
+            Guard.AgainstMissing<DecimalValueQueryFactory>(result, id);
 
             cache.Add(key, result);
 

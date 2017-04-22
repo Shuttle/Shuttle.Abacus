@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace Abacus.Shell
+namespace Shuttle.Abacus.UI
 {
     public partial class Splash : Form
     {

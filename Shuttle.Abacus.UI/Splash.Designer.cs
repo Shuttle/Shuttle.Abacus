@@ -1,4 +1,4 @@
-﻿namespace Abacus.Shell
+﻿namespace Shuttle.Abacus.UI
 {
     partial class Splash
     {

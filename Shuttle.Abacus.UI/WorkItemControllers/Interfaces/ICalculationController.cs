@@ -1,4 +1,9 @@
-namespace Abacus.UI
+using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.UI.Messages.Calculation;
+using Shuttle.Abacus.UI.Messages.Core;
+
+namespace Shuttle.Abacus.UI.WorkItemControllers.Interfaces
 {
     public interface ICalculationController :
         IWorkItemController,

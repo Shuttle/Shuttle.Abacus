@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Core.Validation;
+using Shuttle.Abacus.UI.Navigation;
+using Shuttle.Abacus.UI.UI.Shell.Explorer;
+using Message = Shuttle.Abacus.UI.Core.Messaging.Message;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.Shell
 {
     public partial class ShellView : Form, IShellView
     {

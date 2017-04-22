@@ -1,8 +1,7 @@
-using Abacus.Data;
-using Abacus.Localisation;
-using Abacus.Validation;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Messages.SystemUser;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.SystemUser
 {
     public class SystemUserPresenter :
         Presenter<ISystemUserView>,

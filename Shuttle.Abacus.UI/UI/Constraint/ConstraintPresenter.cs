@@ -1,8 +1,8 @@
-using Abacus.Infrastructure;
-using Abacus.Localisation;
-using Abacus.Validation;
+using Shuttle.Abacus.UI.Core.Formatters;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Models;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.Constraint
 {
     public class ConstraintPresenter : Presenter<IConstraintView, ConstraintModel>, IConstraintPresenter
     {

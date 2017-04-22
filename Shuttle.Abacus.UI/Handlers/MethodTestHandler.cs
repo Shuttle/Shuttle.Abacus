@@ -1,6 +1,6 @@
-using Abacus.Messages;
+using Shuttle.Abacus.UI.Messages.TestCase;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Handlers
 {
     public class MethodTestHandler : UIHandler,
                                    NServiceBus.IMessageHandler<MethodTestRunEvent>,

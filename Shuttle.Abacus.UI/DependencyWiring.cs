@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Castle.MicroKernel.Registration;
-using Castle.Windsor;
-using Abacus.Application;
-using Abacus.Data;
-using Abacus.Domain;
-using Abacus.Infrastructure;
-using Abacus.UI;
-using Abacus.Validation;
-using Clipboard=Abacus.UI.Clipboard;
+using Shuttle.Abacus.UI.Core.Binding;
+using Shuttle.Abacus.UI.Core.Clipboard;
+using Shuttle.Abacus.UI.Core.Configuration;
+using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Core.Validation;
+using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.UI.Navigation;
+using Shuttle.Abacus.UI.UI.Shell.Explorer;
+using Clipboard=Shuttle.Abacus.UI.Core.Clipboard.Clipboard;
 
-namespace Abacus.Windsor
+namespace Shuttle.Abacus.UI
 {
     public class DependencyWiring : IDependencyWiringOptional
     {
@@ -281,8 +282,8 @@ namespace Abacus.Windsor
 
             container.Register
                 (
-                Component.For(typeof (IDataReaderRepository<>)).ImplementedBy(typeof (DataReaderRepository<>)),
-                Component.For(typeof (IDataRowRepository<>)).ImplementedBy(typeof (DataRowRepository<>)),
+                Component.For(typeof (IDataRepository<>)).ImplementedBy(typeof (DataReaderRepository<>)),
+                Component.For(typeof (IDataRepository<>)).ImplementedBy(typeof (DataRowRepository<>)),
                 Component.For(typeof (IDataTableRepository<>)).ImplementedBy(typeof (DataTableRepository<>))
                 );
 

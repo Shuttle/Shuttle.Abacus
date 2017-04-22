@@ -1,6 +1,4 @@
-using Abacus.Validation;
-
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Validation
 {
     public interface IControlValidatorBuild
     {

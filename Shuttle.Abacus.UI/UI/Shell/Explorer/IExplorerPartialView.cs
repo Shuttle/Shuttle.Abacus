@@ -1,8 +1,9 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Shuttle.Abacus.UI.Core.Resources;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.Shell.Explorer
 {
     public interface IExplorerPartialView
     {

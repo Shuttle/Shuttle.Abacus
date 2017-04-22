@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Data;
-using Shuttle.Abacus.DataAccess.Definitions;
+using Shuttle.Abacus.DTO;
 
-namespace Shuttle.Abacus.DataAccess.Mapping
+namespace Shuttle.Abacus.DataAccess
 {
-    public class ConstraintTypeDTOMapper : IDataRowMapper<ConstraintTypeDTO>
+    public class ConstraintTypeDTOMapper : IDataTableMapper<ConstraintTypeDTO>
     {
         public IEnumerable<ConstraintTypeDTO> MapFrom(DataTable input)
         {

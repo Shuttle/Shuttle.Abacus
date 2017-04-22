@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Shuttle.Abacus.DataAccess.Definitions;
 using Shuttle.Abacus.Domain;
 
 namespace Shuttle.Abacus.DataAccess
@@ -8,10 +7,10 @@ namespace Shuttle.Abacus.DataAccess
     public class FormulaRepository : Repository<Formula>, IFormulaRepository
     {
         private readonly IConstraintRepository constraintRepository;
-        private readonly IDataRowRepository<Formula> repository;
+        private readonly IDataRepository<Formula> repository;
         private readonly IDatabaseGateway gateway;
 
-        public FormulaRepository(IDataRowRepository<Formula> repository, IDatabaseGateway gateway, IConstraintRepository constraintRepository)
+        public FormulaRepository(IDataRepository<Formula> repository, IDatabaseGateway gateway, IConstraintRepository constraintRepository)
         {
             this.repository = repository;
             this.constraintRepository = constraintRepository;

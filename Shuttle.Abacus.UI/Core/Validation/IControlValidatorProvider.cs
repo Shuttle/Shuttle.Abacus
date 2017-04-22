@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Validation
 {
     public interface IControlValidatorProvider
     {

@@ -1,13 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Abacus.Data;
-using Abacus.DTO;
-using Abacus.Infrastructure;
-using Abacus.Localisation;
-using Abacus.Validation;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Models;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.DecimalTable
 {
     public class DecimalTablePresenter : Presenter<IDecimalTableView, DecimalTableModel>, IDecimalTablePresenter
     {

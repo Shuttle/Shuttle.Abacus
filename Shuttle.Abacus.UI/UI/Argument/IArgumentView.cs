@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Abacus.DTO;
-using Abacus.Validation;
+using Shuttle.Abacus.UI.Core.Presentation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.Argument
 {
     public interface IArgumentView : IView
     {

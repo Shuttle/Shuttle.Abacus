@@ -1,7 +1,7 @@
-using Abacus.Infrastructure;
 using System;
+using Shuttle.Abacus.UI.Core.Messaging;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Messages.TestCase
 {
     public class NewMethodTestMessage : Message
     {

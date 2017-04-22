@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
+using Shuttle.Esb;
 
 namespace Shuttle.Abacus.UI
 {
     internal static class Program
     {
-        public static IBus Bus { get; private set; }
+        public static IServiceBus Bus { get; private set; }
 
         private static bool loginRequestCompleted;
         private static IMessageBus messageBus;

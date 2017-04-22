@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Abacus.DTO;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.UI.Core.Presentation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.Formula
 {
     public partial class FormulaView : GenericFormulaView, IFormulaView
     {

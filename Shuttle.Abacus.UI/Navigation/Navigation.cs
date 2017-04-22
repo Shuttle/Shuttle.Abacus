@@ -1,4 +1,4 @@
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Navigation
 {
     public static class Navigation
     {

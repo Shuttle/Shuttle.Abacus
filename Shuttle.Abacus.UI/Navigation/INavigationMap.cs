@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Abacus.Infrastructure;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Navigation
 {
     public interface INavigationMap
     {

@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.UI.Messages.Core;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Messaging
 {
     public class MessageBus : IMessageBus
     {

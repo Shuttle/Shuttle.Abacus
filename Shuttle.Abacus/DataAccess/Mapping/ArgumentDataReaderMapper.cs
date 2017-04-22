@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using System.Data;
-using Shuttle.Abacus.DataAccess.Definitions;
 using Shuttle.Abacus.Domain;
 
-namespace Shuttle.Abacus.DataAccess.Mapping
+namespace Shuttle.Abacus.DataAccess
 {
-    public class ArgumentDataReaderMapper : AbstractMapper, IDataReaderMapper<Argument>
+    public class ArgumentDataReaderMapper : IDataReaderMapper<Argument>
     {
         public IEnumerable<Argument> MapFrom(IDataReader input)
         {

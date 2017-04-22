@@ -1,4 +1,10 @@
-﻿namespace Abacus.UI
+﻿using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.UI.Messages.Explorer;
+using Shuttle.Abacus.UI.Messages.FactorAnswer;
+using Shuttle.Abacus.UI.Messages.Resources;
+
+namespace Shuttle.Abacus.UI.Coordinators.Interfaces
 {
     public interface IArgumentCoordinator :
         IMessageHandler<ExplorerInitializeMessage>,

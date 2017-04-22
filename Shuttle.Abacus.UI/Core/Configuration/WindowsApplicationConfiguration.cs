@@ -1,8 +1,6 @@
 using System;
-using System.Configuration;
-using Abacus.Infrastructure;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Configuration
 {
     public class WindowsApplicationConfiguration : IWindowsApplicationConfiguration
     {

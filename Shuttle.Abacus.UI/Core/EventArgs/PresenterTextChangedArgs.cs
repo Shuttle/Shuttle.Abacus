@@ -1,8 +1,6 @@
-using System;
-
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.EventArgs
 {
-    public class PresenterTextChangedArgs : EventArgs
+    public class PresenterTextChangedArgs : System.EventArgs
     {
         public string From { get; private set; }
         public string To { get; private set; }

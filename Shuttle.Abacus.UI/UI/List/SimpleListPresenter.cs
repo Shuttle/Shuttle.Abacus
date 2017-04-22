@@ -1,9 +1,12 @@
 using System;
 using System.Linq;
 using System.Windows.Forms;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.UI.Models;
+using Shuttle.Abacus.UI.Navigation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.List
 {
     public class SimpleListPresenter : Presenter<ISimpleListView, SimpleListModel>, ISimpleListPresenter
     {

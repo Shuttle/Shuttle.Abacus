@@ -1,10 +1,10 @@
 using System.Data;
-using Abacus.Data;
-using Abacus.Infrastructure;
-using Abacus.Localisation;
-using Abacus.Validation;
+using Shuttle.Abacus.UI.Core.Formatters;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.UI.Models;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.MethodTest
 {
     public class MethodTestPresenter : Presenter<IMethodTestView, MethodTestModel>, IMethodTestPresenter
     {

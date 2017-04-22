@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.UI.Core.Presentation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.SystemUser.Permissions
 {
     public partial class PermissionsView : GenericPermissionsView, IPermissionsView
     {

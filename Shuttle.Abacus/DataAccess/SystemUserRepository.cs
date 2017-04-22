@@ -1,5 +1,4 @@
 using System;
-using Shuttle.Abacus.DataAccess.Definitions;
 using Shuttle.Abacus.Domain;
 
 namespace Shuttle.Abacus.DataAccess
@@ -7,10 +6,10 @@ namespace Shuttle.Abacus.DataAccess
     public class SystemUserRepository : Repository<SystemUser>, ISystemUserRepository
     {
         private readonly ISystemUserRules rules;
-        private readonly IDataReaderRepository<SystemUser> repository;
+        private readonly IDataRepository<SystemUser> repository;
         private readonly IDatabaseGateway gateway;
 
-        public SystemUserRepository(ISystemUserRules rules, IDataReaderRepository<SystemUser> repository, IDatabaseGateway gateway)
+        public SystemUserRepository(ISystemUserRules rules, IDataRepository<SystemUser> repository, IDatabaseGateway gateway)
         {
             this.rules = rules;
             this.repository = repository;

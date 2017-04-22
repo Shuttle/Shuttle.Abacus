@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Messages.WorkItem;
+using Shuttle.Abacus.UI.Navigation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.WorkItem
 {
     public class WorkItemManager : IWorkItemManager
     {

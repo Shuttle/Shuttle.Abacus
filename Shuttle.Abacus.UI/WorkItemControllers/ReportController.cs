@@ -1,9 +1,7 @@
-using System.Windows.Forms;
-using Abacus.Infrastructure;
-using Abacus.Messages;
-using System.IO;
+using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class ReportController : WorkItemController, IReportController
     {

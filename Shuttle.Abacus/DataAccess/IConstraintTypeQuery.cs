@@ -1,7 +1,10 @@
-namespace Shuttle.Abacus.DataAccess.Query
+using System.Collections.Generic;
+using Shuttle.Abacus.DTO;
+
+namespace Shuttle.Abacus.DataAccess
 {
     public interface IConstraintTypeQuery
     {
-        IQueryResult All();
+        IEnumerable<ConstraintTypeDTO> All();
     }
 }

@@ -29,7 +29,7 @@ namespace Shuttle.Abacus.Server.Handlers
         {
             var message = context.Message;
 
-            TaskFactory.Create<ISetPermissionsTask>().Execute(
+            _taskFactory.Create<ISetPermissionsTask>().Execute(
                 repository.Get(message.SystemUserId).ProcessCommand(message));
         }
 
@@ -37,7 +37,7 @@ namespace Shuttle.Abacus.Server.Handlers
         {
             var message = context.Message;
 
-            TaskFactory.Create<IChangeLoginNameTask>().Execute(
+            _taskFactory.Create<IChangeLoginNameTask>().Execute(
                 repository.Get(message.SystemUserId).ProcessCommand(message));
         }
 

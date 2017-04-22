@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Abacus.DTO;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Models
 {
     public class ConstraintModel
     {

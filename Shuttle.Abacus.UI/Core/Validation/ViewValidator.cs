@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Abacus.Localisation;
-using Abacus.Validation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Validation
 {
     public class ViewValidator : IViewValidator, IControlValidatorBuild
     {

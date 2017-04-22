@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Abacus.Localisation;
+using Shuttle.Abacus.UI.Core.EventArgs;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Navigation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar
 {
     public partial class ContextToolbarView : GenericContextToolbarView, IContextToolbarView
     {

@@ -1,8 +1,7 @@
 using System;
-using Abacus.Infrastructure;
-using Abacus.Localisation;
+using Shuttle.Abacus.UI.Core.State;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Resources
 {
     public class Resource
     {

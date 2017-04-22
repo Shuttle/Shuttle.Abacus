@@ -1,16 +1,15 @@
 using System;
 using System.Collections.Generic;
-using Shuttle.Abacus.DataAccess.Definitions;
 using Shuttle.Abacus.Domain;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public class LimitRepository : Repository<Limit>, ILimitRepository
     {
-        private readonly IDataRowRepository<Limit> repository;
+        private readonly IDataRepository<Limit> repository;
         private readonly IDatabaseGateway gateway;
 
-        public LimitRepository(IDataRowRepository<Limit> repository, IDatabaseGateway gateway)
+        public LimitRepository(IDataRepository<Limit> repository, IDatabaseGateway gateway)
         {
             this.repository = repository;
             this.gateway = gateway;

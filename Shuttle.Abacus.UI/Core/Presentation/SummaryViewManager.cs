@@ -1,6 +1,13 @@
 using System;
+using Shuttle.Abacus.UI.Coordinators;
+using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Core.Resources;
+using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.UI.Messages.Resources;
+using Shuttle.Abacus.UI.UI.Summary;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Presentation
 {
     public class SummaryViewManager : ISummaryViewManager, IDisposable
     {

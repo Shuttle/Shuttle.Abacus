@@ -1,7 +1,11 @@
 using System.Collections.Generic;
-using Abacus.Messages;
+using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.UI.Messages.SystemUser;
+using Shuttle.Abacus.UI.UI.SystemUser;
+using Shuttle.Abacus.UI.UI.SystemUser.Permissions;
+using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class SystemUserController : WorkItemController, ISystemUserController
     {

@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Abacus.DTO;
-using Abacus.Infrastructure;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Models
 {
     public class ArgumentDisplayModel
     {

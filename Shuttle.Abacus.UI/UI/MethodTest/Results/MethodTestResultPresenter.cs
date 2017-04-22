@@ -1,6 +1,6 @@
-using Abacus.Localisation;
+using Shuttle.Abacus.UI.Core.Presentation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.MethodTest.Results
 {
     public class MethodTestResultPresenter : Presenter<IMethodTestResultView>, IMethodTestResultPresenter
     {

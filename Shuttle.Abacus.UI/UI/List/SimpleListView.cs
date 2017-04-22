@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Models;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.List
 {
     public partial class SimpleListView : GenericSimpleListView, ISimpleListView
     {

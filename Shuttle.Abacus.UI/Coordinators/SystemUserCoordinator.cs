@@ -1,7 +1,16 @@
-using Abacus.Data;
-using Abacus.Localisation;
+using Shuttle.Abacus.UI.Coordinators.Interfaces;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Core.State;
+using Shuttle.Abacus.UI.Messages.SystemUser;
+using Shuttle.Abacus.UI.Models;
+using Shuttle.Abacus.UI.UI.List;
+using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
+using Shuttle.Abacus.UI.UI.SystemUser;
+using Shuttle.Abacus.UI.UI.SystemUser.Permissions;
+using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
+using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Coordinators
 {
     public class SystemUserCoordinator : Coordinator, ISystemUserCoordinator
     {

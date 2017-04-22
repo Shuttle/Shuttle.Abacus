@@ -1,8 +1,6 @@
-using Abacus.Data;
-using Abacus.Localisation;
-using Abacus.Validation;
+using Shuttle.Abacus.UI.Core.Presentation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.Limit
 {
     public class LimitPresenter : Presenter<ILimitView>, ILimitPresenter
     {

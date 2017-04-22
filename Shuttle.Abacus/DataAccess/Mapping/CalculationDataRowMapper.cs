@@ -1,17 +1,16 @@
 using System.Data;
-using Shuttle.Abacus.DataAccess.Definitions;
 using Shuttle.Abacus.Domain;
 
-namespace Shuttle.Abacus.DataAccess.Mapping
+namespace Shuttle.Abacus.DataAccess
 {
-    public class CalculationDataRowMapper : AbstractMapper, IDataRowMapper<Calculation>
+    public class CalculationDataRowMapper : IDataRowMapper<Calculation>
     {
         private readonly IFactoryProvider<ICalculationFactory> factoryProvider;
         private readonly IFormulaRepository formulaRepository;
         private readonly ILimitRepository limitRepository;
-        private readonly IDataRowRepository<GraphNodeArgument> graphNodeArgumentDataRowMapper;
+        private readonly IDataRepository<GraphNodeArgument> graphNodeArgumentDataRowMapper;
 
-        public CalculationDataRowMapper(IFactoryProvider<ICalculationFactory> factoryProvider, IFormulaRepository formulaRepository, ILimitRepository limitRepository, IDataRowRepository<GraphNodeArgument> graphNodeArgumentDataRowMapper)
+        public CalculationDataRowMapper(IFactoryProvider<ICalculationFactory> factoryProvider, IFormulaRepository formulaRepository, ILimitRepository limitRepository, IDataRepository<GraphNodeArgument> graphNodeArgumentDataRowMapper)
         {
             this.factoryProvider = factoryProvider;
             this.formulaRepository = formulaRepository;
@@ -56,7 +55,7 @@ namespace Shuttle.Abacus.DataAccess.Mapping
                 }
             }
 
-            graphNodeArgumentDataRowMapper.FetchAllUsing(GraphNodeArgumentTableAccess.AllForCalculation(calculation)).ForEach(calculation.AddGraphNodeArgument);
+            graphNodeArgumentDataRowMapper.FetchAllUsing(GraphNodeArgumentQueryFactory.AllForCalculation(calculation)).ForEach(calculation.AddGraphNodeArgument);
 
             UnitOfWork.Register(calculation);
 

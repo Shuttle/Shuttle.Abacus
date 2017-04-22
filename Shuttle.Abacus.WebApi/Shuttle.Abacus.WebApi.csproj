@@ -119,7 +119,6 @@
     <Compile Include="ApplicationStart\WebApiConfiguration.cs" />
     <Compile Include="Controllers\CacheController.cs" />
     <Compile Include="Controllers\CalculationsController.cs" />
-    <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

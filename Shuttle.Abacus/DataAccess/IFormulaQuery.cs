@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using Shuttle.Abacus.DTO;
 
-namespace Shuttle.Abacus.DataAccess.Query
+namespace Shuttle.Abacus.DataAccess
 {
     public interface IFormulaQuery
     {
-        IQueryResult AllForOwner(Guid ownerId);
+        IEnumerable<DataRow> AllForOwner(Guid ownerId);
         IEnumerable<OperationDTO> OperationDTOs(Guid formulaId);
-        IQueryResult Operations(Guid formulaId);
-        IQueryResult Description(Guid formulaId);
-        IQueryResult Get(Guid id);
-        IQueryResult OperationsSummary(Guid formulaId);
+        IEnumerable<DataRow> Operations(Guid formulaId);
+        DataRow Get(Guid id);
     }
 }

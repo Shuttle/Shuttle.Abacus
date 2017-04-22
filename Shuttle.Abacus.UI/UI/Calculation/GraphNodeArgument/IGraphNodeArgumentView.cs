@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Abacus.DTO;
+using Shuttle.Abacus.UI.Core.Presentation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.Calculation.GraphNodeArgument
 {
     public interface IGraphNodeArgumentView : IView
     {

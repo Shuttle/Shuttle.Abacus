@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Shuttle.Abacus.DataAccess.Query
+namespace Shuttle.Abacus.DataAccess
 {
     public interface IMethodQuery
     {

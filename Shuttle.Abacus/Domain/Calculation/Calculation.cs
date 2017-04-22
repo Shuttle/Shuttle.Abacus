@@ -156,12 +156,12 @@ namespace Shuttle.Abacus.Domain
             command.Constraints.ForEach(
                 constraint =>
                 AddConstraint(
-                    constraintFactoryProvider.Get(constraint.ConstraintTypeDTO.Name).Create(constraint.ArgumentDto.Id,
+                    constraintFactoryProvider.Get(constraint.ConstraintTypeDTO.Name).Create(constraint.ArgumentDTO.Id,
                                                                                             argumentAnswerFactoryProvider.
                                                                                                 Get(
-                                                                                                constraint.ArgumentDto.
+                                                                                                constraint.ArgumentDTO.
                                                                                                     AnswerType).Create(
-                                                                                                constraint.ArgumentDto.
+                                                                                                constraint.ArgumentDTO.
                                                                                                     Name,
                                                                                                 constraint.Value))));
 

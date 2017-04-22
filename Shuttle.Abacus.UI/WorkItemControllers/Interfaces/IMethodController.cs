@@ -1,4 +1,8 @@
-namespace Abacus.UI
+using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.UI.Messages.Section;
+
+namespace Shuttle.Abacus.UI.WorkItemControllers.Interfaces
 {
     public interface IMethodController :
         IWorkItemController,

@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Data;
-using Shuttle.Abacus.DataAccess.Definitions;
 
-namespace Shuttle.Abacus.DataAccess.Mapping
+namespace Shuttle.Abacus.DataAccess
 {
-    public class MethodDTOMapper : IDataRowMapper<MethodDTO>
+    public class MethodDTOMapper : IDataTableMapper<MethodDTO>
     {
         public IEnumerable<MethodDTO> MapFrom(DataTable input)
         {

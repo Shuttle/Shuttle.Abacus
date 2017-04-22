@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Text;
-using Shuttle.Abacus.DataAccess.Definitions;
-using Shuttle.Abacus.DataAccess.Query;
+using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Domain;
 using Shuttle.Esb;
 

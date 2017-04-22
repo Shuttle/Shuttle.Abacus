@@ -1,4 +1,7 @@
-namespace Abacus.UI
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Core.WorkItem;
+
+namespace Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace
 {
     public interface ITabbedWorkspaceView : IWorkspaceView
     {

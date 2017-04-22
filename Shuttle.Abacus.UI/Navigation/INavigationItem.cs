@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using Abacus.Infrastructure;
-using Abacus.Localisation;
+using Shuttle.Abacus.UI.Core.Messaging;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Navigation
 {
     public interface INavigationItem : IResourceAccessor
     {

@@ -3,7 +3,7 @@ using Shuttle.Abacus.Domain;
 
 namespace Shuttle.Abacus.Policy
 {
-    public class MethodPolicy : AbstractPolicy<Method>, IMethodPolicy
+    public class MethodPolicy : IMethodPolicy
     {
         private readonly IMethodRules methodRules;
 
@@ -18,6 +18,15 @@ namespace Shuttle.Abacus.Policy
                 (
                 IdRule(), MethodNameRule()
                 );
+        }
+
+        private static IRule<Method> IdRule()
+        {
+            return
+                new Rule<Method>
+                    (
+                    "Id may not be empty.",
+                    (item, rule) => item.Id.Equals(Guid.Empty));
         }
 
         private IRule<Method> MethodNameRule()

@@ -1,7 +1,8 @@
 using System;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Core.Resources;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Messages.Calculation
 {
     public class GrabCalculationsMessage : Message
     {

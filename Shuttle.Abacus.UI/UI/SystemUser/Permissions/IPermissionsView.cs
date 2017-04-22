@@ -1,6 +1,6 @@
-using Abacus.Infrastructure;
+using Shuttle.Abacus.UI.Core.Presentation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.SystemUser.Permissions
 {
     public interface IPermissionsView : IView
     {

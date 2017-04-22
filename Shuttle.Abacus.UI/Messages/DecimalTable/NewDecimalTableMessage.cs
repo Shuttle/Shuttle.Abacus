@@ -1,6 +1,6 @@
-using Abacus.Infrastructure;
+using Shuttle.Abacus.UI.Core.Messaging;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Messages.DecimalTable
 {
     public class NewDecimalTableMessage : Message
     {

@@ -1,10 +1,24 @@
 ﻿using System;
 using System.Data;
-using Abacus.Data;
-using Abacus.Infrastructure;
-using Abacus.Localisation;
+using Shuttle.Abacus.DataAccess;
+using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.UI.Coordinators.Interfaces;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Core.Resources;
+using Shuttle.Abacus.UI.Core.State;
+using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.UI.Messages.Explorer;
+using Shuttle.Abacus.UI.Messages.FactorAnswer;
+using Shuttle.Abacus.UI.Messages.Resources;
+using Shuttle.Abacus.UI.Models;
+using Shuttle.Abacus.UI.UI.Argument;
+using Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer;
+using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
+using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
+using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Coordinators
 {
     public class ArgumentCoordinator : Coordinator, IArgumentCoordinator
     {

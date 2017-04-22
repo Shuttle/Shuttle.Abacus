@@ -13,37 +13,39 @@ namespace Shuttle.Abacus.Server.Handlers
         IMessageHandler<DeleteCalculationCommand>,
         IMessageHandler<GrabCalculationsCommand>
     {
-        private readonly IFactoryProvider<IArgumentAnswerFactory> argumentAnswerFactoryProvider;
-        private readonly IMapper<ArgumentDTO, Argument> argumentDTOMapper;
-        private readonly IFactoryProvider<ICalculationFactory> calculationFactoryProvider;
-        private readonly ICalculationRepository calculationRepository;
-        private readonly IFactoryProvider<IConstraintFactory> constraintFactoryProvider;
-        private readonly ILimitRepository limitRepository;
-        private readonly IMethodRepository methodRepository;
+        private readonly IFactoryProvider<IArgumentAnswerFactory> _argumentAnswerFactoryProvider;
+        private readonly Infrastructure.IMapper<ArgumentDTO, Argument> _argumentDTOMapper;
+        private readonly IFactoryProvider<ICalculationFactory> _calculationFactoryProvider;
+        private readonly ICalculationRepository _calculationRepository;
+        private readonly IFactoryProvider<IConstraintFactory> _constraintFactoryProvider;
+        private readonly ILimitRepository _limitRepository;
+        private readonly ITaskFactory _taskFactory;
+        private readonly IMethodRepository _methodRepository;
 
         public CalculationHandler(
             IMethodRepository methodRepository,
             IFactoryProvider<ICalculationFactory> calculationFactoryProvider,
             ICalculationRepository calculationRepository,
             IFactoryProvider<IConstraintFactory> constraintFactoryProvider,
-            IFactoryProvider<IArgumentAnswerFactory> argumentAnswerFactoryProvider,
-            IMapper<ArgumentDTO, Argument> argumentDTOMapper,
-            ILimitRepository limitRepository)
+            IFactoryProvider<IArgumentAnswerFactory> argumentAnswerFactoryProvider, Infrastructure.IMapper<ArgumentDTO, Argument> argumentDTOMapper,
+            ILimitRepository limitRepository,
+            ITaskFactory taskFactory)
         {
-            this.methodRepository = methodRepository;
-            this.argumentDTOMapper = argumentDTOMapper;
-            this.limitRepository = limitRepository;
-            this.calculationFactoryProvider = calculationFactoryProvider;
-            this.calculationRepository = calculationRepository;
-            this.constraintFactoryProvider = constraintFactoryProvider;
-            this.argumentAnswerFactoryProvider = argumentAnswerFactoryProvider;
+            this._methodRepository = methodRepository;
+            this._argumentDTOMapper = argumentDTOMapper;
+            this._limitRepository = limitRepository;
+            _taskFactory = taskFactory;
+            this._calculationFactoryProvider = calculationFactoryProvider;
+            this._calculationRepository = calculationRepository;
+            this._constraintFactoryProvider = constraintFactoryProvider;
+            this._argumentAnswerFactoryProvider = argumentAnswerFactoryProvider;
         }
 
         public void ProcessMessage(IHandlerContext<ChangeCalculationCommand> context)
         {
             var message = context.Message;
 
-            var method = methodRepository.Get(message.MethodId);
+            var method = _methodRepository.Get(message.MethodId);
 
             method.ProcessCommand(message);
 
@@ -52,33 +54,33 @@ namespace Shuttle.Abacus.Server.Handlers
             calculation.ClearGraphNodeArguments();
 
             message.GraphNodeArguments.ForEach(
-                item => calculation.AddGraphNodeArgument(argumentDTOMapper.MapFrom(item.ArgumentDTO), item.Format));
+                item => calculation.AddGraphNodeArgument(_argumentDTOMapper.MapFrom(item.ArgumentDTO), item.Format));
 
-            calculationRepository.Save(calculation);
+            _calculationRepository.Save(calculation);
         }
 
         public void ProcessMessage(IHandlerContext<ChangeCalculationOrderCommand> context)
         {
             var message = context.Message;
 
-            var method = methodRepository.Get(message.MethodId);
+            var method = _methodRepository.Get(message.MethodId);
 
             method.ProcessCommand(message);
 
-            calculationRepository.SaveOrdered(method);
+            _calculationRepository.SaveOrdered(method);
         }
 
         public void ProcessMessage(IHandlerContext<CreateCalculationCommand> context)
         {
             var message = context.Message;
 
-            var calculation = calculationFactoryProvider.Get(message.Type).Create(message.Name, message.Required);
+            var calculation = _calculationFactoryProvider.Get(message.Type).Create(message.Name, message.Required);
 
 
             message.GraphNodeArguments.ForEach(
-                item => calculation.AddGraphNodeArgument(argumentDTOMapper.MapFrom(item.ArgumentDTO), item.Format));
+                item => calculation.AddGraphNodeArgument(_argumentDTOMapper.MapFrom(item.ArgumentDTO), item.Format));
 
-            var method = methodRepository.Get(message.MethodId);
+            var method = _methodRepository.Get(message.MethodId);
 
             method.ProcessCommand(message, calculation);
         }
@@ -87,41 +89,41 @@ namespace Shuttle.Abacus.Server.Handlers
         {
             var message = context.Message;
 
-            var method = methodRepository.Get(message.MethodId);
-            var calculation = calculationRepository.Get(message.CalculationId);
+            var method = _methodRepository.Get(message.MethodId);
+            var calculation = _calculationRepository.Get(message.CalculationId);
 
             method.ProcessCommand(message);
 
             foreach (var limit in method.Limits)
             {
-                limitRepository.Remove(limit);
+                _limitRepository.Remove(limit);
             }
 
-            calculationRepository.Remove(calculation);
+            _calculationRepository.Remove(calculation);
         }
 
         public void ProcessMessage(IHandlerContext<GrabCalculationsCommand> context)
         {
             var message = context.Message;
 
-            var method = methodRepository.Get(message.MethodId);
+            var method = _methodRepository.Get(message.MethodId);
 
             method.ProcessCommand(message);
 
-            calculationRepository.SaveOwnershipGraph(method);
+            _calculationRepository.SaveOwnershipGraph(method);
         }
 
         public void ProcessMessage(IHandlerContext<SetCalculationConstraintsCommand> context)
         {
             var message = context.Message;
 
-            TaskFactory.Create<ISetCalculationConstraintsTask>().Execute(
-                calculationRepository
+            _taskFactory.Create<ISetCalculationConstraintsTask>().Execute(
+                _calculationRepository
                     .Get(message.CalculationId)
                     .ProcessCommand(
                         message,
-                        constraintFactoryProvider,
-                        argumentAnswerFactoryProvider, argumentDTOMapper)))
+                        _constraintFactoryProvider,
+                        _argumentAnswerFactoryProvider, _argumentDTOMapper));
             ;
         }
     }

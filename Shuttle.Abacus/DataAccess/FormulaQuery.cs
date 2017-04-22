@@ -1,50 +1,42 @@
 using System;
 using System.Collections.Generic;
-using Shuttle.Abacus.DataAccess.Definitions;
-using Shuttle.Abacus.DataAccess.Query;
+using System.Data;
+using Shuttle.Abacus.DTO;
+using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public class FormulaQuery :IFormulaQuery
     {
-        private readonly IDataTableRepository<OperationDTO> operationRepository;
+        private readonly IDatabaseGateway _databaseGateway;
+        private readonly IFormulaQueryFactory _formulaQueryFactory;
+        private readonly IDataTableRepository<OperationDTO> _operationRepository;
 
-        public FormulaQuery(IDataTableRepository<OperationDTO> operationRepository)
+        public FormulaQuery(IDatabaseGateway databaseGateway, IFormulaQueryFactory formulaQueryFactory, IDataTableRepository<OperationDTO> operationRepository)
         {
-            this.operationRepository = operationRepository;
+            _databaseGateway = databaseGateway;
+            _formulaQueryFactory = formulaQueryFactory;
+            _operationRepository = operationRepository;
         }
 
-        public IQueryResult AllForOwner(Guid ownerId)
+        public IEnumerable<DataRow> AllForOwner(Guid ownerId)
         {
-            return QueryProcessor.Execute(FormulaQueries.AllForOwner(ownerId));
+            return _databaseGateway.GetRowsUsing(_formulaQueryFactory.AllForOwner(ownerId));
         }
 
         public IEnumerable<OperationDTO> OperationDTOs(Guid formulaId)
         {
-            using (UnitOfWorkProvider.Create())
-            {
-                return operationRepository.FetchAllUsing(FormulaQueries.GetOperations(formulaId));
-            }
+                return _operationRepository.FetchAllUsing(_formulaQueryFactory.GetOperations(formulaId));
         }
 
-        public IQueryResult Operations(Guid formulaId)
+        public IEnumerable<DataRow> Operations(Guid formulaId)
         {
-            return QueryProcessor.Execute(FormulaQueries.GetOperations(formulaId));
+            return QueryProcessor.Execute(_formulaQueryFactory.GetOperations(formulaId));
         }
 
-        public IQueryResult Description(Guid formulaId)
+        public DataRow Get(Guid id)
         {
-            return QueryProcessor.Execute(FormulaQueries.Description(formulaId));
-        }
-
-        public IQueryResult Get(Guid id)
-        {
-            return QueryProcessor.Execute(FormulaQueries.Get(id));
-        }
-
-        public IQueryResult OperationsSummary(Guid formulaId)
-        {
-            return QueryProcessor.Execute(FormulaQueries.OperationsSummary(formulaId));
+            return QueryProcessor.Execute(_formulaQueryFactory.Get(id));
         }
     }
 }

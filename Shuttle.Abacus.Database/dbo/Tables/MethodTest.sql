@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[MethodTest](
 	[MethodTestId] [uniqueidentifier] NOT NULL,
 	[MethodId] [uniqueidentifier] NOT NULL,
-	[ExpectedResult] [float] NOT NULL,
+	[ExpectedResult] DECIMAL(18, 6) NOT NULL,
 	[Description] [varchar](250) NOT NULL,
  CONSTRAINT [PK_MethodTest] PRIMARY KEY NONCLUSTERED 
 (

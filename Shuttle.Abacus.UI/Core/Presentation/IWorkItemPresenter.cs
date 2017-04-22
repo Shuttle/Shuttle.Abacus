@@ -1,4 +1,7 @@
-namespace Abacus.UI
+using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Messages.Core;
+
+namespace Shuttle.Abacus.UI.Core.Presentation
 {
     public interface IWorkItemPresenter : 
         IPresenter,

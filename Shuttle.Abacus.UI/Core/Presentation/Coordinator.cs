@@ -1,7 +1,11 @@
 using System;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.UI.Core.Clipboard;
+using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.UI.Messages.WorkItem;
+using Shuttle.Abacus.UI.Navigation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Presentation
 {
     public abstract class Coordinator : ICoordinator, IDisposable
     {

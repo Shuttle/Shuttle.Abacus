@@ -1,6 +1,4 @@
 ﻿using System;
-using Shuttle.Abacus.DataAccess.Definitions;
-using Shuttle.Abacus.DataAccess.Query;
 
 namespace Shuttle.Abacus.DataAccess
 {
@@ -8,27 +6,27 @@ namespace Shuttle.Abacus.DataAccess
     {
         public IQueryResult All()
         {
-            return QueryProcessor.Execute(MethodTestQueries.All());
+            return QueryProcessor.Execute(MethodTestQueryFactory.All());
         }
 
         public IQueryResult Get(Guid id)
         {
-            return QueryProcessor.Execute(MethodTestQueries.Get(id));
+            return QueryProcessor.Execute(MethodTestQueryFactory.Get(id));
         }
 
         public IQueryResult GetArgumentAnswers(Guid id)
         {
-            return QueryProcessor.Execute(MethodTestQueries.GetArgumentAnswers(id));
+            return QueryProcessor.Execute(MethodTestQueryFactory.GetArgumentAnswers(id));
         }
 
         public IQueryResult AllUsingArgument(Guid argumentId)
         {
-            return QueryProcessor.Execute(MethodTestQueries.AllUsingArgument(argumentId));
+            return QueryProcessor.Execute(MethodTestQueryFactory.AllUsingArgument(argumentId));
         }
 
         public IQueryResult FetchForMethodId(Guid methodId)
         {
-            return QueryProcessor.Execute(MethodTestQueries.AllForMethod(methodId));
+            return QueryProcessor.Execute(MethodTestQueryFactory.AllForMethod(methodId));
         }
     }
 }

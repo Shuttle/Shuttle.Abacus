@@ -2,11 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Abacus.DTO;
-using Abacus.Infrastructure;
-using Abacus.Validation;
+using Shuttle.Abacus.UI.Core.Formatters;
+using Shuttle.Abacus.UI.Core.Presentation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.MethodTest
 {
     public partial class MethodTestView : GenericMethodTestView, IMethodTestView
     {

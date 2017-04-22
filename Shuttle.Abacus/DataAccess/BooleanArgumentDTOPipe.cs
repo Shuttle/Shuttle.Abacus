@@ -1,7 +1,7 @@
 using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Infrastructure;
 
-namespace Shuttle.Abacus.DataAccess.Query
+namespace Shuttle.Abacus.DataAccess
 {
     public class BooleanArgumentDTOPipe : IPipe<ArgumentDTO>
     {

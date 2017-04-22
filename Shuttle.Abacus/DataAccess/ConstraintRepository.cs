@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Shuttle.Abacus.DataAccess.Definitions;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Data;

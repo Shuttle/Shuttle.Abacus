@@ -2,11 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
-using System.Linq;
 using System.Windows.Forms;
-using Abacus.Data;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Binding
 {
     public class ListViewBinder : IBinder<ListView>
     {

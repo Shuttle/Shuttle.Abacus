@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Abacus.DataContracts;
-using Abacus.DTO;
-using Abacus.Localisation;
+using Shuttle.Abacus.UI.Core.Presentation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.MethodTest.Results
 {
     public partial class MethodTestResultView : GenericMethodTestResultView, IMethodTestResultView
     {

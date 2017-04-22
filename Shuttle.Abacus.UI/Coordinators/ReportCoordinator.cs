@@ -1,9 +1,12 @@
 using System;
 using System.Data;
-using Abacus.Data;
-using Abacus.Localisation;
+using Shuttle.Abacus.UI.Coordinators.Interfaces;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Messages.Report;
+using Shuttle.Abacus.UI.Messages.TestCase;
+using Shuttle.Abacus.UI.Models;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Coordinators
 {
     public class ReportCoordinator : Coordinator, IReportCoordinator
     {

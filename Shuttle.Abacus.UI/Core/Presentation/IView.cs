@@ -1,4 +1,6 @@
-namespace Abacus.UI
+using Shuttle.Abacus.UI.Core.Validation;
+
+namespace Shuttle.Abacus.UI.Core.Presentation
 {
     public interface IView
     {

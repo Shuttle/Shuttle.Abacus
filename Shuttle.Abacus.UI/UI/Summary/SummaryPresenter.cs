@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Abacus.Data;
-using Abacus.Localisation;
+using Shuttle.Abacus.UI.Core.Presentation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.Summary
 {
     public class SummaryPresenter : Presenter<ISummaryView>, ISummaryPresenter
     {

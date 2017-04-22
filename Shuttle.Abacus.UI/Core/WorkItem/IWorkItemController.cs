@@ -1,6 +1,6 @@
 using System;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.WorkItem
 {
     public interface IWorkItemController : IDisposable
     {

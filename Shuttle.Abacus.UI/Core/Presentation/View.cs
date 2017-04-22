@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using Abacus.Infrastructure;
-using Abacus.Localisation;
+using Shuttle.Abacus.UI.Core.Binding;
+using Shuttle.Abacus.UI.Core.Validation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Presentation
 {
     public class View<TPresenter> : UserControl, IView where TPresenter : class, IPresenter
     {
@@ -116,7 +116,7 @@ namespace Abacus.UI
             Presenter.Show();
         }
 
-        protected override sealed void OnLoad(EventArgs e)
+        protected override sealed void OnLoad(System.EventArgs e)
         {
             base.OnLoad(e);
 

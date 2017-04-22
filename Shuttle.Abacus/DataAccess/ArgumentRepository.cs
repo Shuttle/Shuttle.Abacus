@@ -1,5 +1,4 @@
 using System;
-using Shuttle.Abacus.DataAccess.Definitions;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Data;
@@ -9,59 +8,62 @@ namespace Shuttle.Abacus.DataAccess
 {
     public class ArgumentRepository : Repository<Argument>, IArgumentRepository
     {
-        private readonly ICache cache;
-        private readonly IDatabaseGateway gateway;
-        private readonly IDataReaderRepository<Argument> repository;
+        private readonly ICache _cache;
+        private readonly IDatabaseGateway _databaseGateway;
+        private readonly IArgumentQueryFactory _argumentQueryFactory;
+        private readonly IDataRepository<Argument> _repository;
 
-        public ArgumentRepository(IDataReaderRepository<Argument> repository, IDatabaseGateway gateway, ICache cache)
+        public ArgumentRepository(IDatabaseGateway databaseGateway, IArgumentQueryFactory argumentQueryFactory, IDataRepository<Argument> repository, ICache cache)
         {
-            this.repository = repository;
-            this.gateway = gateway;
-            this.cache = cache;
+            _repository = repository;
+            _databaseGateway = databaseGateway;
+            _argumentQueryFactory = argumentQueryFactory;
+            _cache = cache;
         }
 
         public override void Add(Argument item)
         {
-            gateway.ExecuteUsing(ArgumentTableAccess.Add(item));
+            _databaseGateway.ExecuteUsing(_argumentQueryFactory.Add(item));
         }
 
         public override void Remove(Argument item)
         {
-            gateway.ExecuteUsing(ArgumentTableAccess.Remove(item));
+            _databaseGateway.ExecuteUsing(_argumentQueryFactory.Remove(item));
         }
 
         public override Argument Get(Guid id)
         {
             var key = string.Format("Argument|{0}", id);
 
-            var result = cache.Get<Argument>(key);
+            var result = _cache.Get<Argument>(key);
 
             if (result != null)
             {
                 return result;
             }
 
-            result = repository.FetchItemUsing(ArgumentTableAccess.Get(id));
+            result = _repository.FetchItemUsing(_argumentQueryFactory.Get(id));
 
             Guard.AgainstMissing<Argument>(result, id);
 
-            cache.Add(key, result);
+            _cache.Add(key, result);
 
             return result;
         }
 
         public ArgumentCollection All()
         {
-            return new ArgumentCollection(repository.FetchAllUsing(ArgumentTableAccess.All()));
+            return new ArgumentCollection(_repository.FetchAllUsing(_argumentQueryFactory.All()));
         }
 
         public void Save(Argument argument)
         {
-            gateway.ExecuteUsing(ArgumentTableAccess.Save(argument));
+            _databaseGateway.ExecuteUsing(_argumentQueryFactory.Save(argument));
 
-            gateway.ExecuteUsing(ArgumentTableAccess.RemoveRestrictedAnswers(argument));
+            _databaseGateway.ExecuteUsing(_argumentQueryFactory.RemoveRestrictedAnswers(argument));
 
-            argument.RestrictedAnswers.ForEach(mapping => gateway.ExecuteUsing(ArgumentTableAccess.SaveRestrictedAnswers(argument, mapping)));
+            argument.RestrictedAnswers.ForEach(
+                mapping => _databaseGateway.ExecuteUsing(_argumentQueryFactory.SaveRestrictedAnswers(argument, mapping)));
         }
     }
 }

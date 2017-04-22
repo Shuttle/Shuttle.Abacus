@@ -1,9 +1,8 @@
-using System;
 using System.Drawing;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.EventArgs
 {
-    public class PresenterImageChangedArgs : EventArgs
+    public class PresenterImageChangedArgs : System.EventArgs
     {
         public Image Image { get; private set; }
 

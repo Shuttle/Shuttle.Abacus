@@ -1,6 +1,8 @@
-using Abacus.Data;
+using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Messages.SystemUser;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Coordinators.Interfaces
 {
     public interface ISystemUserCoordinator :
         ICoordinator,

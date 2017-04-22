@@ -2,7 +2,7 @@ using Shuttle.Abacus.Domain;
 
 namespace Shuttle.Abacus.Policy
 {
-    public class LimitPolicy : AbstractPolicy<Limit>, ILimitPolicy
+    public class LimitPolicy : ILimitPolicy
     {
         private readonly ILimitRules limitRules;
 

@@ -1,7 +1,15 @@
 using System;
 using System.Windows.Forms;
+using Shuttle.Abacus.UI.Coordinators.Interfaces;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.UI.UI.Shell;
+using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
+using Shuttle.Abacus.UI.UI.Summary;
+using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
+using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Coordinators
 {
     public class DefaultCoordinator : Coordinator, IDefaultCoordinator
     {

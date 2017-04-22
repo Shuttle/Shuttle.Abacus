@@ -138,112 +138,112 @@ namespace Shuttle.Abacus.Tests
         //        .WithValue(39);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-10.200000m)))).For(
-        //        input).WithValue(40);
+        //        input, 40);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-12.200000m)))).For(
-        //        input).WithValue(41);
+        //        input, 41);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-14.000000m)))).For(
-        //        input).WithValue(42);
+        //        input, 42);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-15.900000m)))).For(
-        //        input).WithValue(43);
+        //        input, 43);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-17.800000m)))).For(
-        //        input).WithValue(44);
+        //        input, 44);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-19.400000m)))).For(
-        //        input).WithValue(45);
+        //        input, 45);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-21.300000m)))).For(
-        //        input).WithValue(46);
+        //        input, 46);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-23.300000m)))).For(
-        //        input).WithValue(47);
+        //        input, 47);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-25.200000m)))).For(
-        //        input).WithValue(48);
+        //        input, 48);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-27.100000m)))).For(
-        //        input).WithValue(49);
+        //        input, 49);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-28.700000m)))).For(
-        //        input).WithValue(50);
+        //        input, 50);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-30.600000m)))).For(
-        //        input).WithValue(51);
+        //        input, 51);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-32.500000m)))).For(
-        //        input).WithValue(52);
+        //        input, 52);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-34.400000m)))).For(
-        //        input).WithValue(53);
+        //        input, 53);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-36.300000m)))).For(
-        //        input).WithValue(54);
+        //        input, 54);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-38.000000m)))).For(
-        //        input).WithValue(55);
+        //        input, 55);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-39.900000m)))).For(
-        //        input).WithValue(56);
+        //        input, 56);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-41.800000m)))).For(
-        //        input).WithValue(57);
+        //        input, 57);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-43.700000m)))).For(
-        //        input).WithValue(58);
+        //        input, 58);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-45.600000m)))).For(
-        //        input).WithValue(59);
+        //        input, 59);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-47.200000m)))).For(
-        //        input).WithValue(60);
+        //        input, 60);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-49.100000m)))).For(
-        //        input).WithValue(61);
+        //        input, 61);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-51.000000m)))).For(
-        //        input).WithValue(62);
+        //        input, 62);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-53.000000m)))).For(
-        //        input).WithValue(63);
+        //        input, 63);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-54.900000m)))).For(
-        //        input).WithValue(64);
+        //        input, 64);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-56.500000m)))).For(
-        //        input).WithValue(65);
+        //        input, 65);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-58.700000m)))).For(
-        //        input).WithValue(66);
+        //        input, 66);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-60.800000m)))).For(
-        //        input).WithValue(67);
+        //        input, 67);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-62.800000m)))).For(
-        //        input).WithValue(68);
+        //        input, 68);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-64.600000m)))).For(
-        //        input).WithValue(69);
+        //        input, 69);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-65.800000m)))).For(
-        //        input).WithValue(70);
+        //        input, 70);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-67.700000m)))).For(
-        //        input).WithValue(71);
+        //        input, 71);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-69.600000m)))).For(
-        //        input).WithValue(72);
+        //        input, 72);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-71.400000m)))).For(
-        //        input).WithValue(73);
+        //        input, 73);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-74.400000m)))).For(
-        //        input).WithValue(74);
+        //        input, 74);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-75.000000m)))).For(
-        //        input).WithValue(75);
+        //        input, 75);
 
         //    return result;
         //}
@@ -258,42 +258,42 @@ namespace Shuttle.Abacus.Tests
 
         //    result.AddFormula(
         //        new Formula()
-        //            .AddOperation(new AdditionOperation(new FormulaValueSource(69.77m)))).To(input).WithValue(60000);
+        //            .AddOperation(new AdditionOperation(new FormulaValueSource(69.77m)))).To(input, 60000);
 
         //    result.AddFormula(
         //        new Formula(source)
         //            .AddOperation(new SubtractionOperation(new FormulaValueSource(60000)))
         //            .AddOperation(new PercentageOperation(new FormulaValueSource(0.0623m)))
         //            .AddOperation(new AdditionOperation(new FormulaValueSource(69.77m)))
-        //        ).To(input).WithValue(150000);
+        //        ).To(input, 150000);
 
         //    result.AddFormula(
         //        new Formula(source)
         //            .AddOperation(new SubtractionOperation(new FormulaValueSource(150000)))
         //            .AddOperation(new PercentageOperation(new FormulaValueSource(0.0500m)))
         //            .AddOperation(new AdditionOperation(new FormulaValueSource(125.84m)))
-        //        ).To(input).WithValue(270000);
+        //        ).To(input, 270000);
 
         //    result.AddFormula(
         //        new Formula(source)
         //            .AddOperation(new SubtractionOperation(new FormulaValueSource(270000)))
         //            .AddOperation(new PercentageOperation(new FormulaValueSource(0.0400m)))
         //            .AddOperation(new AdditionOperation(new FormulaValueSource(176.84m)))
-        //        ).To(input).WithValue(400000);
+        //        ).To(input, 400000);
 
         //    result.AddFormula(
         //        new Formula(source)
         //            .AddOperation(new SubtractionOperation(new FormulaValueSource(400000)))
         //            .AddOperation(new PercentageOperation(new FormulaValueSource(0.0300m)))
         //            .AddOperation(new AdditionOperation(new FormulaValueSource(221.04m)))
-        //        ).To(input).WithValue(700000);
+        //        ).To(input, 700000);
 
         //    result.AddFormula(
         //        new Formula(source)
         //            .AddOperation(new SubtractionOperation(new FormulaValueSource(700000)))
         //            .AddOperation(new PercentageOperation(new FormulaValueSource(0.0200m)))
         //            .AddOperation(new AdditionOperation(new FormulaValueSource(297.54m)))
-        //        ).From(input).WithValue(700000);
+        //        ).From(input, 700000);
 
         //    return result;
         //}
@@ -306,13 +306,13 @@ namespace Shuttle.Abacus.Tests
 
         //    var source = new InputValueSource("SumInsured");
 
-        //    result.AddFormula(new Formula(source).AddOperation(new AdditionOperation(source))).For(input).WithValue(0);
+        //    result.AddFormula(new Formula(source).AddOperation(new AdditionOperation(source))).For(input, 0);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new MultiplicationOperation(new FormulaValueSource(0.00075m)))).For(
-        //        input).WithValue(1);
+        //        input, 1);
         //    result.AddFormula(
         //        new Formula(source).AddOperation(new MultiplicationOperation(new FormulaValueSource(0.00068m)))).For(
-        //        input).WithValue(2);
+        //        input, 2);
 
         //    return result;
         //}
@@ -326,16 +326,16 @@ namespace Shuttle.Abacus.Tests
         //    var source = new SubTotalValueSource("WallConstruction");
 
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(25)))).
-        //        From(input).WithValue(18).To(input).WithValue(20);
+        //        From(input, 18).To(input, 20);
 
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(0)))).To(
-        //        input).WithValue(34);
+        //        input, 34);
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-10)))).To
-        //        (input).WithValue(44);
+        //        (input, 44);
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-20)))).To
-        //        (input).WithValue(54);
+        //        (input, 54);
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-35)))).
-        //        From(input).WithValue(55);
+        //        From(input, 55);
 
         //    return result;
         //}
@@ -346,7 +346,7 @@ namespace Shuttle.Abacus.Tests
 
         //    result.AddFormula(
         //        new Formula(new ResultValueSource("BasePremium")).AddOperation(
-        //            new PercentageOperation(new FormulaValueSource(50)))).For("HolidayHome").WithValue(1);
+        //            new PercentageOperation(new FormulaValueSource(50)))).For("HolidayHome", 1);
 
         //    return result;
         //}
@@ -357,7 +357,7 @@ namespace Shuttle.Abacus.Tests
 
         //    result.AddFormula(
         //        new Formula(new SubTotalValueSource("Area")).AddOperation(
-        //            new PercentageOperation(new FormulaValueSource(14)))).For("WallConstruction").WithValue(1);
+        //            new PercentageOperation(new FormulaValueSource(14)))).For("WallConstruction", 1);
 
         //    return result;
         //}
@@ -371,23 +371,23 @@ namespace Shuttle.Abacus.Tests
         //    var source = new SubTotalValueSource("Age");
 
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(33)))).For
-        //        (input).WithValue(0);
+        //        (input, 0);
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(26.7m)))).
-        //        For(input).WithValue(1);
+        //        For(input, 1);
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(20)))).For
-        //        (input).WithValue(2);
+        //        (input, 2);
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(13.3m)))).
-        //        For(input).WithValue(3);
+        //        For(input, 3);
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(6.7m)))).
-        //        For(input).WithValue(4);
+        //        For(input, 4);
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(0)))).For(
-        //        input).WithValue(5);
+        //        input, 5);
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-5)))).For
-        //        (input).WithValue(6);
+        //        (input, 6);
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-10)))).
-        //        For(input).WithValue(7);
+        //        For(input, 7);
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(-10)))).
-        //        For(input).WithValue(8);
+        //        For(input, 8);
 
         //    return result;
         //}
@@ -401,13 +401,13 @@ namespace Shuttle.Abacus.Tests
         //    var source = new SubTotalValueSource("NCB");
 
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(0)))).For(
-        //        input).WithValue(0);
+        //        input, 0);
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(30)))).For
-        //        (input).WithValue(1);
+        //        (input, 1);
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(25)))).For
-        //        (input).WithValue(2);
+        //        (input, 2);
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(60)))).For
-        //        (input).WithValue(3);
+        //        (input, 3);
 
         //    return result;
         //}
@@ -418,7 +418,7 @@ namespace Shuttle.Abacus.Tests
 
         //    result.AddFormula(
         //        new Formula(new SubTotalValueSource("CoverType")).AddOperation(
-        //            new PercentageOperation(new FormulaValueSource(-20)))).For("TheftBurglarySuspended").WithValue(1);
+        //            new PercentageOperation(new FormulaValueSource(-20)))).For("TheftBurglarySuspended", 1);
 
         //    return result;
         //}
@@ -452,7 +452,7 @@ namespace Shuttle.Abacus.Tests
 
         //    result.AddFormula(
         //        new Formula(new SubTotalValueSource("MonitoredAlarm")).AddOperation(
-        //            new PercentageOperation(new FormulaValueSource(-5)))).For("BurglarBars").WithValue(1);
+        //            new PercentageOperation(new FormulaValueSource(-5)))).For("BurglarBars", 1);
 
         //    return result;
         //}
@@ -463,7 +463,7 @@ namespace Shuttle.Abacus.Tests
 
         //    result.AddFormula(
         //        new Formula(new SubTotalValueSource("BurglarBars")).AddOperation(
-        //            new PercentageOperation(new FormulaValueSource(-5)))).For("BurglarBarsAndGates").WithValue(1);
+        //            new PercentageOperation(new FormulaValueSource(-5)))).For("BurglarBarsAndGates", 1);
 
         //    return result;
         //}
@@ -474,7 +474,7 @@ namespace Shuttle.Abacus.Tests
 
         //    result.AddFormula(
         //        new Formula(new SubTotalValueSource("BurglarBarsAndGates")).AddOperation(
-        //            new PercentageOperation(new FormulaValueSource(-25)))).For("ControlledEntrance").WithValue(1);
+        //            new PercentageOperation(new FormulaValueSource(-25)))).For("ControlledEntrance", 1);
 
         //    return result;
         //}
@@ -485,7 +485,7 @@ namespace Shuttle.Abacus.Tests
 
         //    result.AddFormula(
         //        new Formula(new SubTotalValueSource("VoluntaryExcess")).AddOperation(
-        //            new PercentageOperation(new FormulaValueSource(-15)))).For("MonitoredAlarm").WithValue(1);
+        //            new PercentageOperation(new FormulaValueSource(-15)))).For("MonitoredAlarm", 1);
 
         //    return result;
         //}
@@ -512,7 +512,7 @@ namespace Shuttle.Abacus.Tests
 
         //    result.AddFormula(
         //        new Formula(new SubTotalValueSource("TheftBurglarySuspended")).AddOperation(
-        //            new PercentageOperation(new FormulaValueSource(-10)))).For("FloodCoverExcluded").WithValue(1);
+        //            new PercentageOperation(new FormulaValueSource(-10)))).For("FloodCoverExcluded", 1);
 
         //    return result;
         //}
@@ -533,7 +533,7 @@ namespace Shuttle.Abacus.Tests
 
         //    result.AddFormula(
         //        new Formula(new SubTotalValueSource("Area")).AddOperation(
-        //            new PercentageOperation(new FormulaValueSource(50)))).For("AllRisks").WithValue(1);
+        //            new PercentageOperation(new FormulaValueSource(50)))).For("AllRisks", 1);
 
         //    return result;
         //}
@@ -543,7 +543,7 @@ namespace Shuttle.Abacus.Tests
         //    var result = new Calculation("Breakdown", false);
 
         //    result.AddFormula(new Formula().AddOperation(new AdditionOperation(new FormulaValueSource(2)))).For(
-        //        "Breakdown").WithValue(1);
+        //        "Breakdown", 1);
 
         //    return result;
         //}
@@ -568,15 +568,15 @@ namespace Shuttle.Abacus.Tests
         //    var source = new SubTotalValueSource("SecurityDiscounts");
 
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(0)))).For(
-        //        input).WithValue(0);
+        //        input, 0);
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(5)))).For(
-        //        input).WithValue(1);
+        //        input, 1);
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(10)))).For
-        //        (input).WithValue(2);
+        //        (input, 2);
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(15)))).For
-        //        (input).WithValue(3);
+        //        (input, 3);
         //    result.AddFormula(new Formula(source).AddOperation(new PercentageOperation(new FormulaValueSource(20)))).For
-        //        (input).WithValue(4);
+        //        (input, 4);
 
         //    return result;
         //}

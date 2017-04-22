@@ -1,12 +1,10 @@
 using System.Collections.Generic;
 using System.Data;
-using Shuttle.Abacus.DataAccess.Definitions;
 using Shuttle.Abacus.DTO;
-using Shuttle.Core.Data;
 
-namespace Shuttle.Abacus.DataAccess.Mapping
+namespace Shuttle.Abacus.DataAccess
 {
-    public class ArgumentDTOMapper : IDataRowMapper<ArgumentDTO>
+    public class ArgumentDTOMapper : IDataTableMapper<ArgumentDTO>
     {
         public IEnumerable<ArgumentDTO> MapFrom(DataTable input)
         {

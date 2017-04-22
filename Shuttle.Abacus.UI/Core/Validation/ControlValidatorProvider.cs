@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Abacus.Infrastructure;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Validation
 {
     public class ControlValidatorProvider : IControlValidatorProvider
     {

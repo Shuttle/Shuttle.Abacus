@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Formatters
 {
     public class MoneyFormatter : IDisposable
     {
@@ -16,7 +16,7 @@ namespace Abacus.UI
             valueProvider.TextChanged += TextChanged;
         }
 
-        private void TextChanged(object sender, EventArgs e)
+        private void TextChanged(object sender, System.EventArgs e)
         {
             decimal value;
 

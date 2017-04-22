@@ -78,5 +78,7 @@ namespace Shuttle.Abacus.Domain
             limit.AssignFormulas(((FormulaCalculation)calculation.Copy(new Dictionary<Guid, Guid>())).Formulas);
             constraints.ForEach(constraint => limit.AddConstraint(constraint.Copy()));
         }
+
+        public Guid Id { get; }
     }
 }

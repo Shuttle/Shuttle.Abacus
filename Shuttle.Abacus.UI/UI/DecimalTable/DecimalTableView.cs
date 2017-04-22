@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Abacus.DTO;
-using Abacus.Infrastructure;
-using Abacus.Validation;
+using Shuttle.Abacus.UI.Core.Presentation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.DecimalTable
 {
     public partial class DecimalTableView : GenericDecimalTableView, IDecimalTableView
     {

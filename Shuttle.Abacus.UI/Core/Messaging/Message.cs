@@ -1,7 +1,7 @@
 using System;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.UI.Core.WorkItem;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Messaging
 {
     public abstract class Message : IWorkItemInitiator
     {

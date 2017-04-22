@@ -33,14 +33,14 @@ namespace Shuttle.Abacus.Server.Handlers
                 .Copy()
                 .ProcessCommand(message);
 
-            TaskFactory.Create<IAddMethodGraphTask>().Execute(method);
+            _taskFactory.Create<IAddMethodGraphTask>().Execute(method);
         }
 
         public void ProcessMessage(IHandlerContext<ChangeMethodCommand> context)
         {
             var message = context.Message;
 
-            TaskFactory.Create<IChangeMethodTask>().Execute(
+            _taskFactory.Create<IChangeMethodTask>().Execute(
                 methodRepository.Get(message.MethodId).ProcessCommand(message));
         }
 

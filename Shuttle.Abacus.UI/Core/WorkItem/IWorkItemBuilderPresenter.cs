@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.WorkItem
 {
     public interface IWorkItemBuilderPresenter : IWorkItem
     {

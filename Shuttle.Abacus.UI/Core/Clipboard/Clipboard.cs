@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.UI.Core.Resources;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Clipboard
 {
     public class Clipboard : IClipboard
     {

@@ -1,7 +1,11 @@
 ﻿using System;
-using Abacus.Messages;
+using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.UI.Messages.TestCase;
+using Shuttle.Abacus.UI.UI.List;
+using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class MethodTestManagerController : WorkItemController, IMethodTestManagerController
     {

@@ -3,7 +3,7 @@ using Shuttle.Abacus.Domain;
 
 namespace Shuttle.Abacus.Policy
 {
-    public class FormulaPolicy : AbstractPolicy<Formula>, IFormulaPolicy
+    public class FormulaPolicy : IFormulaPolicy
     {
         public IRuleCollection<Formula> InvariantRules()
         {
@@ -11,6 +11,15 @@ namespace Shuttle.Abacus.Policy
                 (
                 IdRule(), OperationsRule()
                 );
+        }
+
+        private static IRule<Formula> IdRule()
+        {
+            return
+                new Rule<Formula>
+                    (
+                    "Id may not be empty.",
+                    (item, rule) => item.Id.Equals(Guid.Empty));
         }
 
         private static IRule<Formula> OperationsRule()

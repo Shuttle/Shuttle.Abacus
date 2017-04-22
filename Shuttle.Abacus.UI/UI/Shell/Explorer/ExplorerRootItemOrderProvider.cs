@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Shuttle.Abacus.UI.Core.Resources;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.Shell.Explorer
 {
     public class ExplorerRootItemOrderProvider : IExplorerRootItemOrderProvider
     {

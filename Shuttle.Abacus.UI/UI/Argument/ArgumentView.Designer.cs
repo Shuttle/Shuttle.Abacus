@@ -1,6 +1,4 @@
-﻿using Abacus.Localisation;
-
-namespace Abacus.UI
+﻿namespace Shuttle.Abacus.UI.UI.Argument
 {
     partial class ArgumentView
     {

@@ -1,6 +1,4 @@
 using System;
-using Shuttle.Abacus.DataAccess.Definitions;
-using Shuttle.Abacus.DataAccess.Query;
 
 namespace Shuttle.Abacus.DataAccess
 {
@@ -8,12 +6,12 @@ namespace Shuttle.Abacus.DataAccess
     {
         public IQueryResult AllForOwner(Guid ownerId)
         {
-            return QueryProcessor.Execute(LimitQueries.AllForOwner(ownerId));
+            return QueryProcessor.Execute(LimitQueryFactory.AllForOwner(ownerId));
         }
 
         public IQueryResult Get(Guid limitId)
         {
-            return QueryProcessor.Execute(LimitQueries.Get(limitId));
+            return QueryProcessor.Execute(LimitQueryFactory.Get(limitId));
         }
     }
 }

@@ -33,13 +33,13 @@ namespace Shuttle.Abacus.Server.Handlers
         {
             var message = context.Message;
 
-            var owner = RepositoryProvider.Get(message.OwnerName).Get<ILimitOwner>(message.OwnerId);
+            var owner = _repositoryProvider.Get(message.OwnerName).Get<ILimitOwner>(message.OwnerId);
 
             var limit = limitFactoryProvider.Get(message.Type).Create(message.Name);
 
             owner.AddLimit(limit);
 
-            TaskFactory.Create<ICreateLimitTask>().Execute(new OwnerModel(owner, limit));
+            _taskFactory.Create<ICreateLimitTask>().Execute(new OwnerModel(owner, limit));
         }
 
         public void ProcessMessage(IHandlerContext<DeleteLimitCommand> context)

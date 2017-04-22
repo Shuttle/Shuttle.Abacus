@@ -1,4 +1,9 @@
-namespace Abacus.UI
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.UI.Messages.WorkItem;
+
+namespace Shuttle.Abacus.UI.UI.Shell.ModalWorkspace
 {
     public class ModalWorkspacePresenter :
         Presenter<IModalWorkspaceView>,

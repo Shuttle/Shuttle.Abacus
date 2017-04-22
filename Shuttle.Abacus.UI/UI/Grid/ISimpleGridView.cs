@@ -1,6 +1,8 @@
 using System.Data;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Models;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.Grid
 {
     public interface ISimpleGridView : IView
     {

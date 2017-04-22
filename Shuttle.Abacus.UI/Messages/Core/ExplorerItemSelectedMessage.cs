@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Abacus.Data;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Core.Resources;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Messages.Core
 {
     public class SummaryViewRequestedMessage : NullPermissionMessage
     {

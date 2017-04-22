@@ -1,10 +1,9 @@
 using System.Data;
-using Shuttle.Abacus.DataAccess.Definitions;
 using Shuttle.Abacus.Domain;
 
-namespace Shuttle.Abacus.DataAccess.Mapping
+namespace Shuttle.Abacus.DataAccess
 {
-    public class MethodDataRowMapper : AbstractMapper, IDataRowMapper<Method>
+    public class MethodDataRowMapper : IDataRowMapper<Method>
     {
         private readonly ICalculationRepository calculationRepository;
         private readonly ILimitRepository limitRepository;

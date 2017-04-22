@@ -2,10 +2,9 @@ using System;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using Abacus.Infrastructure;
-using Abacus.Localisation;
+using Shuttle.Abacus.UI.Core.Resources;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.Shell.Explorer
 {
     public class ExplorerPartialView : IExplorerPartialView
     {

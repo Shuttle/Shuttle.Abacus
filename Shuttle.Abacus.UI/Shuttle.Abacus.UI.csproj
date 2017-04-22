@@ -33,6 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Shuttle.Core.Infrastructure, Version=8.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Core.Infrastructure.8.0.1\lib\net452-full\Shuttle.Core.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Shuttle.Esb, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Esb.8.0.0\lib\net452-full\Shuttle.Esb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,14 +54,458 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Coordinators\ArgumentCoordinator.cs" />
+    <Compile Include="Coordinators\CalculationCoordinator.cs" />
+    <Compile Include="Coordinators\ContraintCoordinator.cs" />
+    <Compile Include="Coordinators\DecimalTableCoordinator.cs" />
+    <Compile Include="Coordinators\DefaultCoordinator.cs" />
+    <Compile Include="Coordinators\FormulaCoordinator.cs" />
+    <Compile Include="Coordinators\Interfaces\IArgumentCoordinator.cs" />
+    <Compile Include="Coordinators\Interfaces\ICalculationCoordinator.cs" />
+    <Compile Include="Coordinators\Interfaces\IConstraintCoordinator.cs" />
+    <Compile Include="Coordinators\Interfaces\IDecimalTableCoordinator.cs" />
+    <Compile Include="Coordinators\Interfaces\IDefaultCoordinator.cs" />
+    <Compile Include="Coordinators\Interfaces\IFormulaCoordinator.cs" />
+    <Compile Include="Coordinators\Interfaces\ILimitCoordinator.cs" />
+    <Compile Include="Coordinators\Interfaces\IMethodCoordinator.cs" />
+    <Compile Include="Coordinators\Interfaces\IMethodTestManagerCoordinator.cs" />
+    <Compile Include="Coordinators\Interfaces\IReportCoordinator.cs" />
+    <Compile Include="Coordinators\Interfaces\ISystemUserCoordinator.cs" />
+    <Compile Include="Coordinators\LimitCoordinator.cs" />
+    <Compile Include="Coordinators\MethodCoordinator.cs" />
+    <Compile Include="Coordinators\MethodTestCoordinator.cs" />
+    <Compile Include="Coordinators\ReportCoordinator.cs" />
+    <Compile Include="Coordinators\SystemUserCoordinator.cs" />
+    <Compile Include="Core\Binding\BinderProvider.cs" />
+    <Compile Include="Core\Binding\IBinder.cs" />
+    <Compile Include="Core\Binding\IBinderProvider.cs" />
+    <Compile Include="Core\Binding\ListViewBinder.cs" />
+    <Compile Include="Core\Clipboard\Clipboard.cs" />
+    <Compile Include="Core\Clipboard\IClipboard.cs" />
+    <Compile Include="Core\Configuration\IWindowsApplicationConfiguration.cs" />
+    <Compile Include="Core\Configuration\WindowsApplicationConfiguration.cs" />
+    <Compile Include="Core\EventArgs\PresenterImageChangedArgs.cs" />
+    <Compile Include="Core\EventArgs\PresenterTextChangedArgs.cs" />
+    <Compile Include="Core\Extensions\ListViewExtender.cs" />
+    <Compile Include="Core\Formatters\MoneyFormatter.cs" />
+    <Compile Include="Core\Messaging\IHaveCancelMessage.cs" />
+    <Compile Include="Core\Messaging\IHaveDefaultMessage.cs" />
+    <Compile Include="Core\Messaging\IMessageBus.cs" />
+    <Compile Include="Core\Messaging\IMessageHandler.cs" />
+    <Compile Include="Core\Messaging\IMessagePipe.cs" />
+    <Compile Include="Core\Messaging\IMessagePipeProvider.cs" />
+    <Compile Include="Core\Messaging\ISubscriberProvider.cs" />
+    <Compile Include="Core\Messaging\Message.cs" />
+    <Compile Include="Core\Messaging\MessageBus.cs" />
+    <Compile Include="Core\Messaging\MessagePipeProvider.cs" />
+    <Compile Include="Core\Presentation\Coordinator.cs" />
+    <Compile Include="Core\Presentation\ICoordinator.cs" />
+    <Compile Include="Core\Presentation\IPresenter.cs" />
+    <Compile Include="Core\Presentation\IPresenterFactory.cs" />
+    <Compile Include="Core\Presentation\IShell.cs" />
+    <Compile Include="Core\Presentation\ISummaryViewManager.cs" />
+    <Compile Include="Core\Presentation\IView.cs" />
+    <Compile Include="Core\Presentation\IWorkItemPresenter.cs" />
+    <Compile Include="Core\Presentation\IWorkItemPresenterFactory.cs" />
+    <Compile Include="Core\Presentation\IWorkspacePresenter.cs" />
+    <Compile Include="Core\Presentation\IWorkspaceProvider.cs" />
+    <Compile Include="Core\Presentation\IWorkspaceView.cs" />
+    <Compile Include="Core\Presentation\NamedQueryResult.cs" />
+    <Compile Include="Core\Presentation\Presenter.cs" />
+    <Compile Include="Core\Presentation\PresenterFactory.cs" />
+    <Compile Include="Core\Presentation\Shell.cs" />
+    <Compile Include="Core\Presentation\SummaryViewManager.cs" />
+    <Compile Include="Core\Presentation\View.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Core\Presentation\WorkItemPresenterFactory.cs" />
+    <Compile Include="Core\Presentation\WorkspaceProvider.cs" />
+    <Compile Include="Core\Resources\ClipboardResource.cs" />
+    <Compile Include="Core\Resources\IResourceHolder.cs" />
+    <Compile Include="Core\Resources\Resource.cs" />
+    <Compile Include="Core\Resources\ResourceCollection.cs" />
+    <Compile Include="Core\Resources\ResourceKey.cs" />
+    <Compile Include="Core\Resources\ResourceKeys.cs" />
+    <Compile Include="Core\State\State.cs" />
+    <Compile Include="Core\State\StateKey.cs" />
+    <Compile Include="Core\Validation\ComboBoxValidator.cs" />
+    <Compile Include="Core\Validation\ControlValidation.cs" />
+    <Compile Include="Core\Validation\ControlValidator.cs" />
+    <Compile Include="Core\Validation\ControlValidatorProvider.cs" />
+    <Compile Include="Core\Validation\IControlValidation.cs" />
+    <Compile Include="Core\Validation\IControlValidator.cs" />
+    <Compile Include="Core\Validation\IControlValidatorBuild.cs" />
+    <Compile Include="Core\Validation\IControlValidatorProvider.cs" />
+    <Compile Include="Core\Validation\IValidationConfiguration.cs" />
+    <Compile Include="Core\Validation\IViewValidationManager.cs" />
+    <Compile Include="Core\Validation\IViewValidator.cs" />
+    <Compile Include="Core\Validation\IViewValidatorFactory.cs" />
+    <Compile Include="Core\Validation\TextBoxValidator.cs" />
+    <Compile Include="Core\Validation\ValidationConfiguration.cs" />
+    <Compile Include="Core\Validation\ViewValidationManager.cs" />
+    <Compile Include="Core\Validation\ViewValidator.cs" />
+    <Compile Include="Core\Validation\ViewValidatorFactory.cs" />
+    <Compile Include="Core\WorkItem\INavigationItemConfiguration.cs" />
+    <Compile Include="Core\WorkItem\IWorkItem.cs" />
+    <Compile Include="Core\WorkItem\IWorkItemBuilder.cs" />
+    <Compile Include="Core\WorkItem\IWorkItemBuilderPresenter.cs" />
+    <Compile Include="Core\WorkItem\IWorkItemController.cs" />
+    <Compile Include="Core\WorkItem\IWorkItemControllerFactory.cs" />
+    <Compile Include="Core\WorkItem\IWorkItemInitiator.cs" />
+    <Compile Include="Core\WorkItem\IWorkItemManager.cs" />
+    <Compile Include="Core\WorkItem\WorkItem.cs" />
+    <Compile Include="Core\WorkItem\WorkItemBuilder.cs" />
+    <Compile Include="Core\WorkItem\WorkItemController.cs" />
+    <Compile Include="Core\WorkItem\WorkItemControllerFactory.cs" />
+    <Compile Include="Core\WorkItem\WorkItemManager.cs" />
+    <Compile Include="DependencyWiring.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\MethodTestHandler.cs" />
+    <Compile Include="Handlers\NotificationHandler.cs" />
+    <Compile Include="Handlers\SystemUserHandler.cs" />
+    <Compile Include="Handlers\UIHandler.cs" />
+    <Compile Include="IUIService.cs" />
+    <Compile Include="Messages\Calculation\ChangeCalculationOrderMessage.cs" />
+    <Compile Include="Messages\Calculation\DeleteCalculationMessage.cs" />
+    <Compile Include="Messages\Calculation\EditCalculationMessage.cs" />
+    <Compile Include="Messages\Calculation\GrabCalculationsMessage.cs" />
+    <Compile Include="Messages\Calculation\ManageCalculationConstraintsMessage.cs" />
+    <Compile Include="Messages\Calculation\NewCalculationMessage.cs" />
+    <Compile Include="Messages\Core\ActivateShellMessage.cs" />
+    <Compile Include="Messages\Core\ApplicationExitMessage.cs" />
+    <Compile Include="Messages\Core\ConfigureShellMessage.cs" />
+    <Compile Include="Messages\Core\CopyFormulaMessage.cs" />
+    <Compile Include="Messages\Core\DisplayHelpManualMessage.cs" />
+    <Compile Include="Messages\Core\DoubleClickMessage.cs" />
+    <Compile Include="Messages\Core\ExplorerItemSelectedMessage.cs" />
+    <Compile Include="Messages\Core\InvertMarksMessage.cs" />
+    <Compile Include="Messages\Core\ListReadyMessage.cs" />
+    <Compile Include="Messages\Core\MarkAllMessage.cs" />
+    <Compile Include="Messages\Core\MoveDownMessage.cs" />
+    <Compile Include="Messages\Core\MoveUpMessage.cs" />
+    <Compile Include="Messages\Core\NullPermissionMessage.cs" />
+    <Compile Include="Messages\Core\ReadyStatusMessage.cs" />
+    <Compile Include="Messages\Core\ResourceMessage.cs" />
+    <Compile Include="Messages\Core\ResultNotificationMessage.cs" />
+    <Compile Include="Messages\Core\ShowPresenterMessage.cs" />
+    <Compile Include="Messages\Core\ShowSummaryViewMessage.cs" />
+    <Compile Include="Messages\Core\StartShellMessage.cs" />
+    <Compile Include="Messages\Core\StatusMessage.cs" />
+    <Compile Include="Messages\Core\SummaryViewActivatedMessage.cs" />
+    <Compile Include="Messages\Core\WorkCompletedMessage.cs" />
+    <Compile Include="Messages\Core\WorkStartedMessage.cs" />
+    <Compile Include="Messages\DecimalTable\EditDecimalTableMessage.cs" />
+    <Compile Include="Messages\DecimalTable\NewDecimalTableFromExistingMessage.cs" />
+    <Compile Include="Messages\DecimalTable\NewDecimalTableMessage.cs" />
+    <Compile Include="Messages\Explorer\ExplorerInitializeMessage.cs" />
+    <Compile Include="Messages\FactorAnswer\ArgumentUpdatedMessage.cs" />
+    <Compile Include="Messages\FactorAnswer\DeleteArgumentMessage.cs" />
+    <Compile Include="Messages\FactorAnswer\EditArgumentMessage.cs" />
+    <Compile Include="Messages\FactorAnswer\NewArgumentMessage.cs" />
+    <Compile Include="Messages\Formula\ChangeFormulaOrderMessage.cs" />
+    <Compile Include="Messages\Formula\DeleteFormulaMessage.cs" />
+    <Compile Include="Messages\Formula\EditFormulaMessage.cs" />
+    <Compile Include="Messages\Formula\NewFormulaFromExistingMessage.cs" />
+    <Compile Include="Messages\Formula\NewFormulaMessage.cs" />
+    <Compile Include="Messages\Formula\PasteFormulaMessage.cs" />
+    <Compile Include="Messages\Limit\DeleteLimitMessage.cs" />
+    <Compile Include="Messages\Limit\EditLimitMessage.cs" />
+    <Compile Include="Messages\Limit\NewLimitMessage.cs" />
+    <Compile Include="Messages\Report\DecimalTableReportMessage.cs" />
+    <Compile Include="Messages\Resources\PopulateResourceMessage.cs" />
+    <Compile Include="Messages\Resources\ResourceMenuRequestMessage.cs" />
+    <Compile Include="Messages\Resources\ResourceRefreshItemMessage.cs" />
+    <Compile Include="Messages\Resources\ResourceRefreshItemTextMessage.cs" />
+    <Compile Include="Messages\Resources\ResourceSelectedMessage.cs" />
+    <Compile Include="Messages\Section\DeleteMethodMessage.cs" />
+    <Compile Include="Messages\Section\EditMethodMessage.cs" />
+    <Compile Include="Messages\Section\NewMethodFromExistingMessage.cs" />
+    <Compile Include="Messages\Section\NewMethodMessage.cs" />
+    <Compile Include="Messages\SystemUser\EditLoginNameMessage.cs" />
+    <Compile Include="Messages\SystemUser\EditPermissionsMessage.cs" />
+    <Compile Include="Messages\SystemUser\ListSystemUserMessage.cs" />
+    <Compile Include="Messages\SystemUser\NewSystemUserMessage.cs" />
+    <Compile Include="Messages\TestCase\ChangeMethodTestMessage.cs" />
+    <Compile Include="Messages\TestCase\DeleteMethodTestMessage.cs" />
+    <Compile Include="Messages\TestCase\EditMethodTestMessage.cs" />
+    <Compile Include="Messages\TestCase\ManageMethodTestsMessage.cs" />
+    <Compile Include="Messages\TestCase\MethodTestChangedMessage.cs" />
+    <Compile Include="Messages\TestCase\MethodTestCreatedMessage.cs" />
+    <Compile Include="Messages\TestCase\MethodTestPrintMessage.cs" />
+    <Compile Include="Messages\TestCase\MethodTestRemovedMessage.cs" />
+    <Compile Include="Messages\TestCase\MethodTestRunMessage.cs" />
+    <Compile Include="Messages\TestCase\NewMethodTestFromExistingMessage.cs" />
+    <Compile Include="Messages\TestCase\NewMethodTestMessage.cs" />
+    <Compile Include="Messages\TestCase\PrintMethodTestMessage.cs" />
+    <Compile Include="Messages\TestCase\RemoveMethodTestMessage.cs" />
+    <Compile Include="Messages\TestCase\RunMethodTestMessage.cs" />
+    <Compile Include="Messages\WorkItem\RefreshWorkItemDispatcherMessage.cs" />
+    <Compile Include="Messages\WorkItem\RefreshWorkItemDispatcherTextMessage.cs" />
+    <Compile Include="Messages\WorkItem\WorkItemBusyMessage.cs" />
+    <Compile Include="Messages\WorkItem\WorkItemCompletedMessage.cs" />
+    <Compile Include="Messages\WorkItem\WorkItemMessage.cs" />
+    <Compile Include="Messages\WorkItem\WorkItemReadyMessage.cs" />
+    <Compile Include="Messages\WorkItem\WorkItemSitedMessage.cs" />
+    <Compile Include="Messages\WorkItem\WorkItemTextChangedMessage.cs" />
+    <Compile Include="Models\ArgumentDisplayModel.cs" />
+    <Compile Include="Models\ArgumentModel.cs" />
+    <Compile Include="Models\ConstraintModel.cs" />
+    <Compile Include="Models\DecimalTableModel.cs" />
+    <Compile Include="Models\FormulaModel.cs" />
+    <Compile Include="Models\MethodTestModel.cs" />
+    <Compile Include="Models\ReportModel.cs" />
+    <Compile Include="Models\SimpleGridModel.cs" />
+    <Compile Include="Models\SimpleListModel.cs" />
+    <Compile Include="Navigation\DefaultNavigationMap.cs" />
+    <Compile Include="Navigation\IMessageResourceItemStore.cs" />
+    <Compile Include="Navigation\INavigationItem.cs" />
+    <Compile Include="Navigation\INavigationItemContainer.cs" />
+    <Compile Include="Navigation\INavigationItemFactory.cs" />
+    <Compile Include="Navigation\INavigationMap.cs" />
+    <Compile Include="Navigation\MessageResourceItemStore.cs" />
+    <Compile Include="Navigation\Navigation.cs" />
+    <Compile Include="Navigation\NavigationItem.cs" />
+    <Compile Include="Navigation\NavigationItemCollection.cs" />
+    <Compile Include="Navigation\NavigationItemFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Splash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Splash.Designer.cs">
+      <DependentUpon>Splash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIService.cs" />
+    <Compile Include="UI\Argument\ArgumentPresenter.cs" />
+    <Compile Include="UI\Argument\ArgumentView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Argument\ArgumentView.Designer.cs">
+      <DependentUpon>ArgumentView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Argument\IArgumentPresenter.cs" />
+    <Compile Include="UI\Argument\IArgumentView.cs" />
+    <Compile Include="UI\Argument\RestrictedAnswer\ArgumentRestrictedAnswerPresenter.cs" />
+    <Compile Include="UI\Argument\RestrictedAnswer\ArgumentRestrictedAnswerView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Argument\RestrictedAnswer\ArgumentRestrictedAnswerView.Designer.cs">
+      <DependentUpon>ArgumentRestrictedAnswerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Argument\RestrictedAnswer\IArgumentRestrictedAnswerPresenter.cs" />
+    <Compile Include="UI\Argument\RestrictedAnswer\IArgumentRestrictedAnswerView.cs" />
+    <Compile Include="UI\Calculation\CalculationPresenter.cs" />
+    <Compile Include="UI\Calculation\CalculationView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Calculation\CalculationView.Designer.cs">
+      <DependentUpon>CalculationView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Calculation\GraphNodeArgument\GraphNodeArgumentPresenter.cs" />
+    <Compile Include="UI\Calculation\GraphNodeArgument\GraphNodeArgumentView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Calculation\GraphNodeArgument\GraphNodeArgumentView.Designer.cs">
+      <DependentUpon>GraphNodeArgumentView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Calculation\GraphNodeArgument\IGraphNodeArgumentPresenter.cs" />
+    <Compile Include="UI\Calculation\GraphNodeArgument\IGraphNodeArgumentView.cs" />
+    <Compile Include="UI\Calculation\ICalculationPresenter.cs" />
+    <Compile Include="UI\Calculation\ICalculationView.cs" />
+    <Compile Include="UI\Constraint\ConstraintPresenter.cs" />
+    <Compile Include="UI\Constraint\ConstraintView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Constraint\ConstraintView.Designer.cs">
+      <DependentUpon>ConstraintView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Constraint\IConstraintPresenter.cs" />
+    <Compile Include="UI\Constraint\IConstraintView.cs" />
+    <Compile Include="UI\DecimalTable\DecimalTablePresenter.cs" />
+    <Compile Include="UI\DecimalTable\DecimalTableView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\DecimalTable\DecimalTableView.Designer.cs">
+      <DependentUpon>DecimalTableView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\DecimalTable\IDecimalTablePresenter.cs" />
+    <Compile Include="UI\DecimalTable\IDecimalTableView.cs" />
+    <Compile Include="UI\Formula\FormulaPresenter.cs" />
+    <Compile Include="UI\Formula\FormulaView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Formula\FormulaView.Designer.cs">
+      <DependentUpon>FormulaView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Formula\IFormulaPresenter.cs" />
+    <Compile Include="UI\Formula\IFormulaView.cs" />
+    <Compile Include="UI\Grid\ISimpleGridPresenter.cs" />
+    <Compile Include="UI\Grid\ISimpleGridView.cs" />
+    <Compile Include="UI\Grid\SimpleGridPresenter.cs" />
+    <Compile Include="UI\Grid\SimpleGridView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Grid\SimpleGridView.Designer.cs">
+      <DependentUpon>SimpleGridView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Limit\ILimitPresenter.cs" />
+    <Compile Include="UI\Limit\ILimitView.cs" />
+    <Compile Include="UI\Limit\LimitPresenter.cs" />
+    <Compile Include="UI\Limit\LimitView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Limit\LimitView.Designer.cs">
+      <DependentUpon>LimitView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\List\ISimpleListPresenter.cs" />
+    <Compile Include="UI\List\ISimpleListView.cs" />
+    <Compile Include="UI\List\SimpleListPresenter.cs" />
+    <Compile Include="UI\List\SimpleListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\List\SimpleListView.Designer.cs">
+      <DependentUpon>SimpleListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MethodTest\IMethodTestPresenter.cs" />
+    <Compile Include="UI\MethodTest\IMethodTestView.cs" />
+    <Compile Include="UI\MethodTest\MethodTestPresenter.cs" />
+    <Compile Include="UI\MethodTest\MethodTestView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\MethodTest\MethodTestView.Designer.cs">
+      <DependentUpon>MethodTestView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MethodTest\Results\IMethodTestResultPresenter.cs" />
+    <Compile Include="UI\MethodTest\Results\IMethodTestResultView.cs" />
+    <Compile Include="UI\MethodTest\Results\MethodTestResultPresenter.cs" />
+    <Compile Include="UI\MethodTest\Results\MethodTestResultView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\MethodTest\Results\MethodTestResultView.Designer.cs">
+      <DependentUpon>MethodTestResultView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Method\IMethodPresenter.cs" />
+    <Compile Include="UI\Method\IMethodView.cs" />
+    <Compile Include="UI\Method\MethodPresenter.cs" />
+    <Compile Include="UI\Method\MethodView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Method\MethodView.Designer.cs">
+      <DependentUpon>MethodView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Shell\Explorer\ExplorerPartialPresenter.cs" />
+    <Compile Include="UI\Shell\Explorer\ExplorerPartialView.cs" />
+    <Compile Include="UI\Shell\Explorer\ExplorerRootItemOrderProvider.cs" />
+    <Compile Include="UI\Shell\Explorer\IExplorerPartialPresenter.cs" />
+    <Compile Include="UI\Shell\Explorer\IExplorerPartialView.cs" />
+    <Compile Include="UI\Shell\Explorer\IExplorerRootItemOrderProvider.cs" />
+    <Compile Include="UI\Shell\IShellPresenter.cs" />
+    <Compile Include="UI\Shell\IShellView.cs" />
+    <Compile Include="UI\Shell\ModalWorkspace\IModalWorkspacePresenter.cs" />
+    <Compile Include="UI\Shell\ModalWorkspace\IModalWorkspaceView.cs" />
+    <Compile Include="UI\Shell\ModalWorkspace\ModalWorkspaceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Shell\ModalWorkspace\ModalWorkspaceForm.Designer.cs">
+      <DependentUpon>ModalWorkspaceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Shell\ModalWorkspace\ModalWorkspacePresenter.cs" />
+    <Compile Include="UI\Shell\ModalWorkspace\ModalWorkspaceView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Shell\ModalWorkspace\ModalWorkspaceView.Designer.cs">
+      <DependentUpon>ModalWorkspaceView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Shell\NotificationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Shell\NotificationView.Designer.cs">
+      <DependentUpon>NotificationView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Shell\ShellPresenter.cs" />
+    <Compile Include="UI\Shell\ShellView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Shell\ShellView.Designer.cs">
+      <DependentUpon>ShellView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Shell\TabbedWorkspace\ITabbedWorkspacePresenter.cs" />
+    <Compile Include="UI\Shell\TabbedWorkspace\ITabbedWorkspaceView.cs" />
+    <Compile Include="UI\Shell\TabbedWorkspace\TabbedWorkspacePresenter.cs" />
+    <Compile Include="UI\Shell\TabbedWorkspace\TabbedWorkspaceView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Shell\TabbedWorkspace\TabbedWorkspaceView.designer.cs">
+      <DependentUpon>TabbedWorkspaceView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Summary\ISummaryPresenter.cs" />
+    <Compile Include="UI\Summary\ISummaryView.cs" />
+    <Compile Include="UI\Summary\SummaryPresenter.cs" />
+    <Compile Include="UI\Summary\SummaryView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Summary\SummaryView.Designer.cs">
+      <DependentUpon>SummaryView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SystemUser\ISystemUserPresenter.cs" />
+    <Compile Include="UI\SystemUser\ISystemUserView.cs" />
+    <Compile Include="UI\SystemUser\Permissions\IPermissionsPresenter.cs" />
+    <Compile Include="UI\SystemUser\Permissions\IPermissionsView.cs" />
+    <Compile Include="UI\SystemUser\Permissions\PermissionsPresenter.cs" />
+    <Compile Include="UI\SystemUser\Permissions\PermissionsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\SystemUser\Permissions\PermissionsView.Designer.cs">
+      <DependentUpon>PermissionsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SystemUser\SystemUserPresenter.cs" />
+    <Compile Include="UI\SystemUser\SystemUserView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\SystemUser\SystemUserView.Designer.cs">
+      <DependentUpon>SystemUserView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\WorkItem\ContextToolbar\ContextToolbarPresenter.cs" />
+    <Compile Include="UI\WorkItem\ContextToolbar\ContextToolbarView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\WorkItem\ContextToolbar\ContextToolbarView.Designer.cs">
+      <DependentUpon>ContextToolbarView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\WorkItem\ContextToolbar\IContextToolbarPresenter.cs" />
+    <Compile Include="UI\WorkItem\ContextToolbar\IContextToolbarView.cs" />
+    <Compile Include="WorkItemControllers\ArgumentController.cs" />
+    <Compile Include="WorkItemControllers\CalculationController.cs" />
+    <Compile Include="WorkItemControllers\DecimalTableController.cs" />
+    <Compile Include="WorkItemControllers\FormulaController.cs" />
+    <Compile Include="WorkItemControllers\Interfaces\IArgumentController.cs" />
+    <Compile Include="WorkItemControllers\Interfaces\ICalculationController.cs" />
+    <Compile Include="WorkItemControllers\Interfaces\IDecimalTableController.cs" />
+    <Compile Include="WorkItemControllers\Interfaces\IFormulaController.cs" />
+    <Compile Include="WorkItemControllers\Interfaces\ILimitController.cs" />
+    <Compile Include="WorkItemControllers\Interfaces\IMethodController.cs" />
+    <Compile Include="WorkItemControllers\Interfaces\IMethodTestController.cs" />
+    <Compile Include="WorkItemControllers\Interfaces\IMethodTestManagerController.cs" />
+    <Compile Include="WorkItemControllers\Interfaces\IReportController.cs" />
+    <Compile Include="WorkItemControllers\Interfaces\ISummaryController.cs" />
+    <Compile Include="WorkItemControllers\Interfaces\ISystemUserController.cs" />
+    <Compile Include="WorkItemControllers\Interfaces\ISystemUserListController.cs" />
+    <Compile Include="WorkItemControllers\LimitController.cs" />
+    <Compile Include="WorkItemControllers\MethodController.cs" />
+    <Compile Include="WorkItemControllers\MethodTestController.cs" />
+    <Compile Include="WorkItemControllers\MethodTestManagerController.cs" />
+    <Compile Include="WorkItemControllers\ReportController.cs" />
+    <Compile Include="WorkItemControllers\SummaryController.cs" />
+    <Compile Include="WorkItemControllers\SystemUserController.cs" />
+    <Compile Include="WorkItemControllers\SystemUserListController.cs" />
+    <EmbeddedResource Include="Core\Presentation\View.resx">
+      <DependentUpon>View.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -63,6 +515,76 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Splash.resx">
+      <DependentUpon>Splash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Argument\ArgumentView.resx">
+      <DependentUpon>ArgumentView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Argument\RestrictedAnswer\ArgumentRestrictedAnswerView.resx">
+      <DependentUpon>ArgumentRestrictedAnswerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Calculation\CalculationView.resx">
+      <DependentUpon>CalculationView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Calculation\GraphNodeArgument\GraphNodeArgumentView.resx">
+      <DependentUpon>GraphNodeArgumentView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Constraint\ConstraintView.resx">
+      <DependentUpon>ConstraintView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\DecimalTable\DecimalTableView.resx">
+      <DependentUpon>DecimalTableView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Formula\FormulaView.resx">
+      <DependentUpon>FormulaView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Grid\SimpleGridView.resx">
+      <DependentUpon>SimpleGridView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Limit\LimitView.resx">
+      <DependentUpon>LimitView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\List\SimpleListView.resx">
+      <DependentUpon>SimpleListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MethodTest\MethodTestView.resx">
+      <DependentUpon>MethodTestView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MethodTest\Results\MethodTestResultView.resx">
+      <DependentUpon>MethodTestResultView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Method\MethodView.resx">
+      <DependentUpon>MethodView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Shell\ModalWorkspace\ModalWorkspaceForm.resx">
+      <DependentUpon>ModalWorkspaceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Shell\ModalWorkspace\ModalWorkspaceView.resx">
+      <DependentUpon>ModalWorkspaceView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Shell\NotificationView.resx">
+      <DependentUpon>NotificationView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Shell\ShellView.resx">
+      <DependentUpon>ShellView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Shell\TabbedWorkspace\TabbedWorkspaceView.resx">
+      <DependentUpon>TabbedWorkspaceView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Summary\SummaryView.resx">
+      <DependentUpon>SummaryView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SystemUser\Permissions\PermissionsView.resx">
+      <DependentUpon>PermissionsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SystemUser\SystemUserView.resx">
+      <DependentUpon>SystemUserView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\WorkItem\ContextToolbar\ContextToolbarView.resx">
+      <DependentUpon>ContextToolbarView.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -75,6 +597,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Abacus.ico" />
+    <Content Include="UI\Shell\Abacus.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\Action\" />
+    <Folder Include="Resources\" />
+    <Folder Include="UI\Shell\Explorer\ItemManagers\" />
+    <Folder Include="UI\SystemUser\Item\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shuttle.Abacus.DTO\Shuttle.Abacus.DTO.csproj">
+      <Project>{5CD61A6D-ABCB-4400-A113-4EF4DA4C439C}</Project>
+      <Name>Shuttle.Abacus.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shuttle.Abacus.Infrastructure\Shuttle.Abacus.Infrastructure.csproj">
+      <Project>{1A365F2C-BA2B-41F0-969B-EEC08C6E2658}</Project>
+      <Name>Shuttle.Abacus.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shuttle.Abacus\Shuttle.Abacus.csproj">
+      <Project>{23680A60-878A-48DA-B23C-9B0EA4A29305}</Project>
+      <Name>Shuttle.Abacus</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

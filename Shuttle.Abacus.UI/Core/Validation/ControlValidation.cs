@@ -1,10 +1,8 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Abacus.Infrastructure;
-using Abacus.Validation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Validation
 {
     public class ControlValidation : IControlValidation
     {

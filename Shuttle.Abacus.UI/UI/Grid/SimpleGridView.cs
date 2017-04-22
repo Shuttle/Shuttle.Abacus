@@ -1,9 +1,9 @@
-﻿
-using System.Data;
+﻿using System.Data;
 using System.Windows.Forms;
-using Abacus.Localisation;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Models;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.Grid
 {
     public partial class SimpleGridView : GenericSimpleGridView, ISimpleGridView
     {

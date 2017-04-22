@@ -1,4 +1,10 @@
-namespace Abacus.UI
+using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.UI.Messages.SystemUser;
+using Shuttle.Abacus.UI.UI.List;
+using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+
+namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class SystemUserListController :
         WorkItemController,

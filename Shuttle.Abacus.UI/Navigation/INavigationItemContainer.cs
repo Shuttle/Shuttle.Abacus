@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Navigation
 {
     public interface INavigationItemContainer<T> where T : class
     {

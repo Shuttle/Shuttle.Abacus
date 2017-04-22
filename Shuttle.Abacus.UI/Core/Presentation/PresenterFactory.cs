@@ -1,6 +1,4 @@
-using Abacus.Infrastructure;
-
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Presentation
 {
     public class PresenterFactory : IPresenterFactory
     {

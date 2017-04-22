@@ -4,6 +4,6 @@ namespace Shuttle.Abacus.Domain
 {
     public interface IDecimalTableFactory
     {
-        DecimalTable Create(Guid decimalTableId, DecimalTableCommand command);
+        DecimalTable Create(Guid decimalTableId, CreateDecimalTableCommand command);
     }
 }

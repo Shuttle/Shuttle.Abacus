@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
-using Abacus.Infrastructure;
-using Abacus.Localisation;
+using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Core.WorkItem;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace
 {
     public partial class TabbedWorkspaceView : GenericTabbedWorkspaceView, ITabbedWorkspaceView
     {

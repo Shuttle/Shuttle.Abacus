@@ -1,9 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.UI.Navigation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Presentation
 {
     public interface IPresenter : INavigationItemContainer<IPresenter>, IDisposable
     {

@@ -1,6 +1,12 @@
-﻿using Abacus.Messages;
+﻿using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.UI.Messages.FactorAnswer;
+using Shuttle.Abacus.UI.Messages.Resources;
+using Shuttle.Abacus.UI.Messages.WorkItem;
+using Shuttle.Abacus.UI.UI.Argument;
+using Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer;
+using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class ArgumentController : WorkItemController, IArgumentController
     {

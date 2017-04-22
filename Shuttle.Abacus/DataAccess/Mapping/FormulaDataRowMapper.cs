@@ -1,11 +1,9 @@
 using System.Data;
-using Shuttle.Abacus.DataAccess.Definitions;
-using Shuttle.Abacus.DataAccess.Query;
 using Shuttle.Abacus.Domain;
 
-namespace Shuttle.Abacus.DataAccess.Mapping
+namespace Shuttle.Abacus.DataAccess
 {
-    public class FormulaDataRowMapper : AbstractMapper, IDataRowMapper<Formula>
+    public class FormulaDataRowMapper : IDataRowMapper<Formula>
     {
         private readonly IConstraintRepository constraintRepository;
         private readonly IFactoryProvider<IOperationFactory> operationFactoryProvider;

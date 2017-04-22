@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using Abacus.Infrastructure;
-using Abacus.Localisation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.State
 {
     public class State<T>
     {

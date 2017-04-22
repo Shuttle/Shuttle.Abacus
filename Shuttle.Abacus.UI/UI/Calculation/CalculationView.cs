@@ -1,7 +1,7 @@
 ﻿using System;
-using Abacus.Validation;
+using Shuttle.Abacus.UI.Core.Presentation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.Calculation
 {
     public partial class CalculationView : GenericCalculationView, ICalculationView
     {

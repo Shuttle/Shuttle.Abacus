@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Shuttle.Abacus.DataAccess.Definitions;
-using Shuttle.Abacus.DataAccess.Query;
 
 namespace Shuttle.Abacus.DataAccess
 {
@@ -16,17 +14,17 @@ namespace Shuttle.Abacus.DataAccess
 
         public IQueryResult MethodName(Guid id)
         {
-            return QueryProcessor.Execute(MethodQueries.MethodName(id));
+            return QueryProcessor.Execute(MethodQueryFactory.MethodName(id));
         }
 
         public IQueryResult All()
         {
-            return QueryProcessor.Execute(MethodQueries.All());
+            return QueryProcessor.Execute(MethodQueryFactory.All());
         }
 
         public IQueryResult Get(Guid id)
         {
-            return QueryProcessor.Execute(MethodQueries.Get(id));
+            return QueryProcessor.Execute(MethodQueryFactory.Get(id));
         }
 
         public IEnumerable<MethodDTO> AllDTOs()

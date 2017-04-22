@@ -1,4 +1,6 @@
-namespace Abacus.UI
+using Shuttle.Abacus.UI.Core.Resources;
+
+namespace Shuttle.Abacus.UI.Messages.Core
 {
     public abstract class ResourceMessage : NullPermissionMessage, IResourceHolder
     {

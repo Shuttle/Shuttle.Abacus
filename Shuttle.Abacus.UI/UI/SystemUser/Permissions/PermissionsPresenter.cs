@@ -1,9 +1,7 @@
 using System.Data;
-using Abacus.Data;
-using Abacus.Infrastructure;
-using Abacus.Localisation;
+using Shuttle.Abacus.UI.Core.Presentation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.SystemUser.Permissions
 {
     public class PermissionsPresenter : Presenter<IPermissionsView, IQueryResult>, IPermissionsPresenter
     {

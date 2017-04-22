@@ -1,7 +1,6 @@
 using System;
-using Abacus.Infrastructure;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Resources
 {
     public class ResourceKey
     {

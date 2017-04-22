@@ -19,11 +19,13 @@ namespace Shuttle.Abacus.Domain
 
         public DecimalValue(Guid id, int column, int row, decimal value)
         {
+            Id = id;
             Row = row;
             Column = column;
             Value = value;
         }
 
+        public Guid Id { get; }
         public int Row { get; private set; }
         public int Column { get; private set; }
         public decimal Value { get; private set; }

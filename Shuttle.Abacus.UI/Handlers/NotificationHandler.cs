@@ -1,6 +1,7 @@
-using Abacus.Messages;
+using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Messages.Core;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Handlers
 {
     public class NotificationHandler : NServiceBus.IMessageHandler<NotificationMessage>
     {

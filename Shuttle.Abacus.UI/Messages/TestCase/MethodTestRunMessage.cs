@@ -1,7 +1,7 @@
 using System;
-using Abacus.Messages;
+using Shuttle.Abacus.UI.Messages.Core;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Messages.TestCase
 {
     public class MethodTestRunMessage : NullPermissionMessage
     {

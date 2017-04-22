@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Shuttle.Abacus.DataAccess.Definitions;
-using Shuttle.Abacus.DataAccess.Query;
+using System.Data;
 using Shuttle.Abacus.DTO;
 using Shuttle.Core.Data;
 
@@ -9,56 +8,55 @@ namespace Shuttle.Abacus.DataAccess
 {
     public class CalculationQuery :ICalculationQuery
     {
-        private readonly IDataRowMapper<CalculationDTO> calculationDTOMapper;
+        private readonly IDatabaseGateway _databaseGateway;
+        private readonly ICalculationQueryFactory _calculationQueryFactory;
+        private readonly IDataTableMapper<CalculationDTO> _calculationDTOMapper;
 
-        public CalculationQuery(IDataRowMapper<CalculationDTO> calculationDTOMapper)
+        public CalculationQuery(IDatabaseGateway databaseGateway, ICalculationQueryFactory calculationQueryFactory, IDataTableMapper<CalculationDTO> calculationDTOMapper)
         {
-            this.calculationDTOMapper = calculationDTOMapper;
+            _databaseGateway = databaseGateway;
+            _calculationQueryFactory = calculationQueryFactory;
+            _calculationDTOMapper = calculationDTOMapper;
         }
 
-        public IQueryResult AllForOwner(Guid ownerId)
+        public IEnumerable<DataRow> AllForOwner(Guid ownerId)
         {
-            return QueryProcessor.Execute(CalculationQueries.AllForOwner(ownerId));
+            return _databaseGateway.GetRowsUsing(_calculationQueryFactory.AllForOwner(ownerId));
         }
 
-        public IQueryResult AllBeforeCalculation(Guid methodId, Guid calculationId)
+        public DataTable AllBeforeCalculation(Guid methodId, Guid calculationId)
         {
-            return QueryProcessor.Execute(CalculationQueries.AllBeforeCalculation(methodId, calculationId));
+            return _databaseGateway.GetDataTableFor(_calculationQueryFactory.AllBeforeCalculation(methodId, calculationId));
         }
 
-        public IQueryResult Get(Guid id)
+        public DataRow Get(Guid id)
         {
-            return QueryProcessor.Execute(CalculationQueries.Get(id));
+            return _databaseGateway.GetSingleRowUsing(_calculationQueryFactory.Get(id));
         }
 
-        public IQueryResult Name(Guid id)
+        public DataTable AllForMethod(Guid methodId)
         {
-            return QueryProcessor.Execute(CalculationQueries.Name(id));
-        }
-
-        public IQueryResult AllForMethod(Guid methodId)
-        {
-            return QueryProcessor.Execute(CalculationQueries.AllForMethod(methodId));
+            return _databaseGateway.GetDataTableFor(_calculationQueryFactory.AllForMethod(methodId));
         }
 
         public IEnumerable<CalculationDTO> DTOsBeforeCalculation(Guid methodId, Guid calculationId)
         {
-            return calculationDTOMapper.MapFrom(AllBeforeCalculation(methodId, calculationId).Table);
+            return _calculationDTOMapper.MapFrom(AllBeforeCalculation(methodId, calculationId));
         }
 
         public IEnumerable<CalculationDTO> DTOsForMethod(Guid methodId)
         {
-            return calculationDTOMapper.MapFrom(AllForMethod(methodId).Table);
+            return _calculationDTOMapper.MapFrom(AllForMethod(methodId));
         }
 
-        public IQueryResult AllForMethod(Guid methodId, Guid grabberCalculationId)
+        public DataTable AllForMethod(Guid methodId, Guid grabberCalculationId)
         {
-            return QueryProcessor.Execute(CalculationQueries.AllForMethod(methodId, grabberCalculationId));
+            return _databaseGateway.GetDataTableFor(_calculationQueryFactory.AllForMethod(methodId, grabberCalculationId));
         }
 
-        public IQueryResult GraphNodeArguments(Guid calculationId)
+        public IEnumerable<DataRow> GraphNodeArguments(Guid calculationId)
         {
-            return QueryProcessor.Execute(CalculationQueries.GraphNodeArguments(calculationId));
+            return _databaseGateway.GetRowsUsing(_calculationQueryFactory.GraphNodeArguments(calculationId));
         }
     }
 }

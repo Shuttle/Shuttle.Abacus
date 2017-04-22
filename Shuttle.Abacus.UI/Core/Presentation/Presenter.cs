@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using Abacus.Data;
-using Abacus.Infrastructure;
-using Abacus.Localisation;
+using Shuttle.Abacus.UI.Core.EventArgs;
+using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Core.Validation;
+using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.UI.Navigation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Presentation
 {
     public abstract class Presenter<TView, TModel> :
         IPresenter,

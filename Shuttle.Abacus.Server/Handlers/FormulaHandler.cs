@@ -1,8 +1,8 @@
 using Shuttle.Abacus.ApplicationService;
-using Shuttle.Abacus.DataAccess.Definitions;
-using Shuttle.Abacus.DataAccess.Query;
+using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.DTO;
+using Shuttle.Abacus.Infrastructure;
 using Shuttle.Esb;
 
 namespace Shuttle.Abacus.Server.Handlers
@@ -13,30 +13,32 @@ namespace Shuttle.Abacus.Server.Handlers
         IMessageHandler<DeleteFormulaCommand>,
         IMessageHandler<ChangeFormulaOrderCommand>
     {
-        private readonly IFactoryProvider<IConstraintFactory> constraintFactoryProvider;
-        private readonly IFactoryProvider<IArgumentAnswerFactory> argumentAnswerFactoryProvider;
+        private readonly Domain.IFactoryProvider<IConstraintFactory> constraintFactoryProvider;
+        private readonly Domain.IFactoryProvider<IArgumentAnswerFactory> argumentAnswerFactoryProvider;
         private readonly IMapper<ArgumentDTO, Argument> argumentDTOMapper;
+        private readonly ITaskFactory _taskFactory;
+        private readonly IRepositoryProvider _repositoryProvider;
         private readonly IFormulaOwnerService formulaOwnerService;
         private readonly IFormulaQuery formulaQuery;
         private readonly IFormulaRepository formulaRepository;
-        private readonly IFactoryProvider<IOperationFactory> operationFactoryProvider;
-        private readonly IFactoryProvider<IValueSourceFactory> valueSourceFactoryProvider;
+        private readonly Domain.IFactoryProvider<IOperationFactory> operationFactoryProvider;
+        private readonly Domain.IFactoryProvider<IValueSourceFactory> valueSourceFactoryProvider;
 
         public FormulaHandler
             (
             IFormulaQuery formulaQuery,
-            IFormulaRepository formulaRepository,
-            IFactoryProvider<IOperationFactory> operationFactoryProvider,
-            IFactoryProvider<IValueSourceFactory> valueSourceFactoryProvider,
-            IFactoryProvider<IConstraintFactory> constraintFactoryProvider,
-            IFactoryProvider<IArgumentAnswerFactory> argumentAnswerFactoryProvider,
+            IFormulaRepository formulaRepository, Domain.IFactoryProvider<IOperationFactory> operationFactoryProvider, Domain.IFactoryProvider<IValueSourceFactory> valueSourceFactoryProvider, Domain.IFactoryProvider<IConstraintFactory> constraintFactoryProvider, Domain.IFactoryProvider<IArgumentAnswerFactory> argumentAnswerFactoryProvider,
             IFormulaOwnerService formulaOwnerService,
-            IMapper<ArgumentDTO, Argument> argumentDTOMapper)
+            IMapper<ArgumentDTO, Argument> argumentDTOMapper,
+            ITaskFactory taskFactory,
+            IRepositoryProvider repositoryProvider)
         {
             this.formulaQuery = formulaQuery;
             this.formulaRepository = formulaRepository;
             this.formulaOwnerService = formulaOwnerService;
             this.argumentDTOMapper = argumentDTOMapper;
+            _taskFactory = taskFactory;
+            _repositoryProvider = repositoryProvider;
             this.operationFactoryProvider = operationFactoryProvider;
             this.valueSourceFactoryProvider = valueSourceFactoryProvider;
             this.constraintFactoryProvider = constraintFactoryProvider;
@@ -48,8 +50,7 @@ namespace Shuttle.Abacus.Server.Handlers
             var message = context.Message;
 
             var owner =
-                RepositoryProvider.Get(message.OwnerName).Get<IFormulaOwner>(
-                    message.OwnerId);
+                _repositoryProvider.Get(message.OwnerName).Get<IFormulaOwner>(message.OwnerId);
 
             var formula = new Formula(message,
                                       operationFactoryProvider,
@@ -59,22 +60,23 @@ namespace Shuttle.Abacus.Server.Handlers
 
             owner.AddFormula(formula);
 
-            TaskFactory.Create<ICreateFormulaTask>().Execute(new OwnerModel(owner, formula));
+            _taskFactory.Create<ICreateFormulaTask>().Execute(new OwnerModel(owner, formula));
         }
 
         public void ProcessMessage(IHandlerContext<ChangeFormulaCommand> context)
         {
             var message = context.Message;
 
-            TaskFactory.Create<IChangeFormulaTask>().Execute(
-                                             formulaRepository.Get(message.FormulaId).
-                                                 ProcessCommand(
-                                                 message,
-                                                 operationFactoryProvider,
-                                                 valueSourceFactoryProvider,
-                                                 constraintFactoryProvider,
-                                                 argumentAnswerFactoryProvider,
-                                                 argumentDTOMapper))        }
+            _taskFactory.Create<IChangeFormulaTask>().Execute(
+                formulaRepository.Get(message.FormulaId).
+                    ProcessCommand(
+                        message,
+                        operationFactoryProvider,
+                        valueSourceFactoryProvider,
+                        constraintFactoryProvider,
+                        argumentAnswerFactoryProvider,
+                        argumentDTOMapper));
+        }
 
         public void ProcessMessage(IHandlerContext<DeleteFormulaCommand> context)
         {
@@ -83,7 +85,7 @@ namespace Shuttle.Abacus.Server.Handlers
             var query = formulaQuery.Get(message.FormulaId);
 
             var owner =
-                RepositoryProvider.Get(FormulaColumns.OwnerName.MapFrom(query.Row)).Get<IFormulaOwner>(
+                _repositoryProvider.Get(FormulaColumns.OwnerName.MapFrom(query.Row)).Get<IFormulaOwner>(
                     FormulaColumns.OwnerId.MapFrom(query.Row));
 
             owner.RemoveFormula(message.FormulaId);
@@ -94,7 +96,7 @@ namespace Shuttle.Abacus.Server.Handlers
             var message = context.Message;
 
             var owner =
-                RepositoryProvider.Get(message.OwnerName).Get<IFormulaOwner>(
+                _repositoryProvider.Get(message.OwnerName).Get<IFormulaOwner>(
                     message.OwnerId);
 
             owner.ProcessCommand(message, formulaOwnerService);

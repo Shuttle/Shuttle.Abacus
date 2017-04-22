@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Messaging
 {
     public interface ISubscriberProvider
     {

@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.Infrastructure;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Messaging
 {
     public interface IMessageBus : ISubscriberProvider
     {

@@ -1,7 +1,15 @@
 using System;
-using Abacus.Messages;
+using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.UI.Messages.Formula;
+using Shuttle.Abacus.UI.Messages.Resources;
+using Shuttle.Abacus.UI.Messages.WorkItem;
+using Shuttle.Abacus.UI.UI.Constraint;
+using Shuttle.Abacus.UI.UI.Formula;
+using Shuttle.Abacus.UI.UI.List;
+using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class FormulaController : WorkItemController, IFormulaController
     {

@@ -1,4 +1,7 @@
-namespace Abacus.UI
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Core.WorkItem;
+
+namespace Shuttle.Abacus.UI.Messages.Core
 {
     public class ShowPresenterMessage : NullPermissionMessage
     {

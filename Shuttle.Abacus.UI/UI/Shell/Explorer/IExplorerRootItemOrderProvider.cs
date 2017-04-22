@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Shuttle.Abacus.UI.Core.Resources;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.Shell.Explorer
 {
     public interface IExplorerRootItemOrderProvider
     {

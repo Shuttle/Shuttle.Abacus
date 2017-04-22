@@ -1,8 +1,9 @@
+using System;
 using Shuttle.Abacus.Domain;
 
 namespace Shuttle.Abacus.Policy
 {
-    public class SystemUserPolicy : AbstractPolicy<SystemUser>, ISystemUserPolicy
+    public class SystemUserPolicy : ISystemUserPolicy
     {
         private readonly ISystemUserRules systemUserRules;
 
@@ -20,6 +21,15 @@ namespace Shuttle.Abacus.Policy
                 (
                 IdRule(), LoginNameRule()
                 );
+        }
+
+        private static IRule<SystemUser> IdRule()
+        {
+            return
+                new Rule<SystemUser>
+                    (
+                    "Id may not be empty.",
+                    (item, rule) => item.Id.Equals(Guid.Empty));
         }
 
         private IRule<SystemUser> LoginNameRule()

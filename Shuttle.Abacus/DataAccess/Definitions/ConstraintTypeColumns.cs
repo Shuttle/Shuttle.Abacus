@@ -1,7 +1,7 @@
 using System.Data;
 using Shuttle.Core.Data;
 
-namespace Shuttle.Abacus.DataAccess.Definitions
+namespace Shuttle.Abacus.DataAccess
 {
     public static class ConstraintTypeColumns
     {

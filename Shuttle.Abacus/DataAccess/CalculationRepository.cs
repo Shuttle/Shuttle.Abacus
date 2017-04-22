@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Shuttle.Abacus.DataAccess.Definitions;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Data;
@@ -10,10 +9,10 @@ namespace Shuttle.Abacus.DataAccess
 {
     public class CalculationRepository : Repository<Calculation>, ICalculationRepository
     {
-        private readonly IDataRowRepository<Calculation> calculationRepository;
+        private readonly IDataRepository<Calculation> calculationRepository;
         private readonly IDatabaseGateway gateway;
 
-        public CalculationRepository(IDataRowRepository<Calculation> dataRowMapper, IDatabaseGateway gateway)
+        public CalculationRepository(IDataRepository<Calculation> dataRowMapper, IDatabaseGateway gateway)
         {
             this.calculationRepository = dataRowMapper;
             this.gateway = gateway;
@@ -61,7 +60,7 @@ namespace Shuttle.Abacus.DataAccess
         {
             gateway.ExecuteUsing(CalculationTableAccess.Save(item));
 
-            gateway.ExecuteUsing(GraphNodeArgumentTableAccess.RemoveFor(item.Id));
+            gateway.ExecuteUsing(GraphNodeArgumentQueryFactory.RemoveFor(item.Id));
 
             AddGraphNodeArguments(item);
         }
@@ -72,7 +71,7 @@ namespace Shuttle.Abacus.DataAccess
 
             calculation.GraphNodeArguments.ForEach(item =>
                 {
-                    gateway.ExecuteUsing(GraphNodeArgumentTableAccess.Add(calculation, item, sequence));
+                    gateway.ExecuteUsing(GraphNodeArgumentQueryFactory.Add(calculation, item, sequence));
 
                     sequence++;
                 });

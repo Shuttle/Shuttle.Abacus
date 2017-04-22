@@ -5,6 +5,8 @@ namespace Shuttle.Abacus.Domain
 {
     public class SystemUser
     {
+        public Guid Id { get; private set; }
+
         public SystemUser()
         {
             Construct();
@@ -12,7 +14,13 @@ namespace Shuttle.Abacus.Domain
 
         public SystemUser(Guid id)
         {
-            Construct();
+            Construct(id);
+        }
+
+        private void Construct(Guid id)
+        {
+            Id = id;
+            Permissions = new PermissionCollection();
         }
 
         public SystemUser(CreateSystemUserCommand command)
@@ -30,7 +38,7 @@ namespace Shuttle.Abacus.Domain
 
         private void Construct()
         {
-            Permissions = new PermissionCollection();
+            Construct(Guid.NewGuid());
         }
 
         public SystemUser ProcessCommand(SetPermissionsCommand command)

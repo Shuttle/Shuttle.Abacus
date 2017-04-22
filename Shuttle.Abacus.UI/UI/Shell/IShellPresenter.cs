@@ -1,4 +1,8 @@
-namespace Abacus.UI
+using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Messages.Core;
+
+namespace Shuttle.Abacus.UI.UI.Shell
 {
     public interface IShellPresenter :
         IPresenter,

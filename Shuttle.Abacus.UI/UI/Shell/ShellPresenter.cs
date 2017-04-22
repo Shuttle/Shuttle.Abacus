@@ -1,7 +1,13 @@
 ﻿using System.Windows.Forms;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.UI.Core.Clipboard;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.UI.Navigation;
+using Shuttle.Abacus.UI.UI.Shell.Explorer;
+using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
+using Message = Shuttle.Abacus.UI.Core.Messaging.Message;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.Shell
 {
     public class ShellPresenter :
         Presenter<IShellView>,

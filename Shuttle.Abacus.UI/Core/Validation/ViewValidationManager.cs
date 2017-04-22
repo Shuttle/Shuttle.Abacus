@@ -1,7 +1,6 @@
-using System;
 using System.Windows.Forms;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Validation
 {
     public class ViewValidationManager : IViewValidationManager
     {

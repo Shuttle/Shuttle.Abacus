@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using Shuttle.Abacus.DataAccess.Definitions;
-using Shuttle.Abacus.DataAccess.Query;
 
 namespace Shuttle.Abacus.DataAccess
 {
@@ -15,7 +13,7 @@ namespace Shuttle.Abacus.DataAccess
 
         public IQueryResult All()
         {
-            return QueryProcessor.Execute(ValueSourceTypeQueries.All());
+            return QueryProcessor.Execute(ValueSourceTypeQueryFactory.All());
         }
 
         public IEnumerable<ValueSourceTypeDTO> AllDTOs()

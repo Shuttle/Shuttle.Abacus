@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Abacus.Data;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Binding
 {
     public interface IBinder
     {

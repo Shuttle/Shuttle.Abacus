@@ -1,8 +1,7 @@
 ﻿using System.Data;
-using Abacus.Data;
-using Abacus.Localisation;
+using Shuttle.Abacus.UI.Core.Presentation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer
 {
     public class ArgumentRestrictedAnswerPresenter : Presenter<IArgumentRestrictedAnswerView, IQueryResult>,
                                                 IArgumentRestrictedAnswerPresenter

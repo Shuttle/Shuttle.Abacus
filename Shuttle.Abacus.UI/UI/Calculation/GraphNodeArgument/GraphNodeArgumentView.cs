@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Abacus.DTO;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.UI.Core.Extensions;
+using Shuttle.Abacus.UI.Core.Presentation;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.Calculation.GraphNodeArgument
 {
     public partial class GraphNodeArgumentView : GenericGraphNodeArgumentView, IGraphNodeArgumentView
     {

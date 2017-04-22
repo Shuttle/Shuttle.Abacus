@@ -1,6 +1,4 @@
-using Abacus.Data;
-
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Core.Presentation
 {
     public class NamedQueryResult
     {

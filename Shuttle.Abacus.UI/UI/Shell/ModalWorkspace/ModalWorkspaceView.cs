@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Abacus.Infrastructure;
-using Abacus.Localisation;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Core.WorkItem;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.Shell.ModalWorkspace
 {
     public partial class ModalWorkspaceView : GenericModalWorkspaceView, IModalWorkspaceView
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Shuttle.Abacus.DataAccess.Query
+namespace Shuttle.Abacus.DataAccess
 {
     public interface ISystemUserQuery
     {

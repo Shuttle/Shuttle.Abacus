@@ -1,6 +1,15 @@
-using Abacus.Localisation;
+using Shuttle.Abacus.UI.Messages.Calculation;
+using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.UI.Messages.DecimalTable;
+using Shuttle.Abacus.UI.Messages.FactorAnswer;
+using Shuttle.Abacus.UI.Messages.Formula;
+using Shuttle.Abacus.UI.Messages.Limit;
+using Shuttle.Abacus.UI.Messages.Report;
+using Shuttle.Abacus.UI.Messages.Section;
+using Shuttle.Abacus.UI.Messages.SystemUser;
+using Shuttle.Abacus.UI.Messages.TestCase;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Navigation
 {
     public class MessageResourceItemStore : IMessageResourceItemStore
     {

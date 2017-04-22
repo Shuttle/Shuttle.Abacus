@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using Shuttle.Abacus.DTO;
+using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class Formula :
-        ISpecification<IMethodContext>,
+    public class Formula : Core.Infrastructure.ISpecification<IMethodContext>,
         IConstraintOwner
     {
         private readonly List<IConstraint> constraints = new List<IConstraint>();
@@ -26,7 +27,7 @@ namespace Shuttle.Abacus.Domain
         }
 
         public Formula(
-            ICreateFormulaCommand command,
+            CreateFormulaCommand command,
             IFactoryProvider<IOperationFactory> operationFactoryProvider,
             IFactoryProvider<IValueSourceFactory> valueSourceFactoryProvider,
             IFactoryProvider<IConstraintFactory> constraintFactoryProvider,
@@ -35,22 +36,24 @@ namespace Shuttle.Abacus.Domain
         {
             command.Operations.ForEach(
                 operation =>
-                AddOperation(
-                    operationFactoryProvider.Get(operation.OperationType.Name).Create(
-                        valueSourceFactoryProvider.Get(operation.ValueSourceType.Name).Create(operation.ValueSelection))));
+                    AddOperation(
+                        operationFactoryProvider.Get(operation.OperationType.Name).Create(
+                            valueSourceFactoryProvider.Get(operation.ValueSourceType.Name)
+                                .Create(operation.ValueSelection))));
 
             command.Constraints.ForEach(
                 constraint =>
-                AddConstraint(
-                    constraintFactoryProvider.Get(constraint.ConstraintTypeDTO.Name).Create(constraint.ArgumentDto.Id, argumentAnswerFactoryProvider.Get(constraint.ArgumentDto.AnswerType).Create(constraint.ArgumentDto.Name, constraint.Value))));
+                    AddConstraint(
+                        constraintFactoryProvider.Get(constraint.ConstraintTypeDTO.Name)
+                            .Create(constraint.ArgumentDTO.Id,
+                                argumentAnswerFactoryProvider.Get(constraint.ArgumentDTO.AnswerType)
+                                    .Create(constraint.ArgumentDTO.Name, constraint.Value))));
         }
 
         public Formula(Guid id)
         {
             Id = id;
         }
-
-        public Guid Id { get; private set; }
 
         public bool HasOperations
         {
@@ -61,6 +64,8 @@ namespace Shuttle.Abacus.Domain
         {
             get { return new ReadOnlyCollection<FormulaOperation>(operations); }
         }
+
+        public Guid Id { get; }
 
         public IEnumerable<IConstraint> Constraints
         {
@@ -81,34 +86,34 @@ namespace Shuttle.Abacus.Domain
             get { return "Formula"; }
         }
 
-        public IEnumerable<Guid> RequiredCalculationIds()
-        {
-            var result = new List<Guid>();
-
-            operations.ForEach(operation =>
-                {
-                    var source = operation.ValueSource as ICalculationValueSource;
-
-                    if (source != null)
-                    {
-                        var id = new Guid(source.ValueSelection);
-
-                        if (!result.Contains(id))
-                        {
-                            result.Add(id);
-                        }
-                    }
-                });
-
-            return result;
-        }
-
         public bool IsSatisfiedBy(IMethodContext collectionMethodContext)
         {
             return
                 OperationsSatisfied(collectionMethodContext)
                 &&
                 ConstraintSatisfied(collectionMethodContext);
+        }
+
+        public IEnumerable<Guid> RequiredCalculationIds()
+        {
+            var result = new List<Guid>();
+
+            operations.ForEach(operation =>
+            {
+                var source = operation.ValueSource as ICalculationValueSource;
+
+                if (source != null)
+                {
+                    var id = new Guid(source.ValueSelection);
+
+                    if (!result.Contains(id))
+                    {
+                        result.Add(id);
+                    }
+                }
+            });
+
+            return result;
         }
 
         private bool ConstraintSatisfied(IMethodContext collectionContext)
@@ -140,7 +145,7 @@ namespace Shuttle.Abacus.Domain
         }
 
         public Formula ProcessCommand(
-            IChangeFormulaCommand command,
+            ChangeFormulaCommand command,
             IFactoryProvider<IOperationFactory> operationFactoryProvider,
             IFactoryProvider<IValueSourceFactory> valueSourceFactoryProvider,
             IFactoryProvider<IConstraintFactory> constraintFactoryProvider,
@@ -151,18 +156,20 @@ namespace Shuttle.Abacus.Domain
 
             command.Operations.ForEach(
                 operation =>
-                AddOperation(
-                    operationFactoryProvider.Get(operation.OperationType.Name).Create(
-                        valueSourceFactoryProvider.Get(operation.ValueSourceType.Name)
-                            .Create(operation.ValueSelection))));
+                    AddOperation(
+                        operationFactoryProvider.Get(operation.OperationType.Name).Create(
+                            valueSourceFactoryProvider.Get(operation.ValueSourceType.Name)
+                                .Create(operation.ValueSelection))));
 
             constraints.Clear();
 
             command.Constraints.ForEach(
                 constraint =>
-                AddConstraint(
-                    constraintFactoryProvider.Get(constraint.ConstraintTypeDTO.Name)
-                        .Create(constraint.ArgumentDto.Id, argumentAnswerFactoryProvider.Get(constraint.ArgumentDto.AnswerType).Create(constraint.ArgumentDto.Name, constraint.Value))));
+                    AddConstraint(
+                        constraintFactoryProvider.Get(constraint.ConstraintTypeDTO.Name)
+                            .Create(constraint.ArgumentDTO.Id,
+                                argumentAnswerFactoryProvider.Get(constraint.ArgumentDTO.AnswerType)
+                                    .Create(constraint.ArgumentDTO.Name, constraint.Value))));
 
             return this;
         }
@@ -179,8 +186,8 @@ namespace Shuttle.Abacus.Domain
             foreach (var constraint in constraints)
             {
                 result.AppendFormat("{0}{1}", result.Length > 0
-                                                  ? " and "
-                                                  : string.Empty, constraint.Description());
+                    ? " and "
+                    : string.Empty, constraint.Description());
             }
 
             return result.ToString();
@@ -201,7 +208,7 @@ namespace Shuttle.Abacus.Domain
             {
                 methodContext.Log("Executing formula:");
 
-                if(constraints.Count>0)
+                if (constraints.Count > 0)
                 {
                     constraints.ForEach(
                         constraint => methodContext.Log("\t{0}", constraint.Description()));
@@ -222,7 +229,8 @@ namespace Shuttle.Abacus.Domain
 
                 if (methodContext.LoggerEnabled)
                 {
-                    methodContext.Log("{0}\t{1}", operation.Symbol, operation.ValueSource.Description(operand, methodContext));
+                    methodContext.Log("{0}\t{1}", operation.Symbol,
+                        operation.ValueSource.Description(operand, methodContext));
                 }
 
                 calculationContext.SetFormulaTotal(operation.Execute(calculationContext.FormulaTotal, operand));

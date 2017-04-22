@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Abacus.Infrastructure;
-using Abacus.Localisation;
+using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.UI.Messages.SystemUser;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.Navigation
 {
     public class DefaultNavigationMap : INavigationMap
     {

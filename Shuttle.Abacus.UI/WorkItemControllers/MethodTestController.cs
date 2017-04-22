@@ -1,10 +1,12 @@
 using System;
 using System.Windows.Forms;
-using Abacus.DTO;
-using Abacus.Infrastructure;
-using Abacus.Messages;
+using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.UI.Messages.TestCase;
+using Shuttle.Abacus.UI.UI.MethodTest;
+using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class MethodTestController : WorkItemController, IMethodTestController
     {

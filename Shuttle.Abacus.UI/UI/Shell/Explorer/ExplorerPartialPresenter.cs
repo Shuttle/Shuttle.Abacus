@@ -2,10 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Abacus.Infrastructure;
-using Abacus.Localisation;
+using Shuttle.Abacus.UI.Core.Clipboard;
+using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Core.Resources;
+using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.UI.Messages.Explorer;
+using Shuttle.Abacus.UI.Messages.Resources;
+using Shuttle.Abacus.UI.Messages.WorkItem;
+using Shuttle.Abacus.UI.Navigation;
+using Message = Shuttle.Abacus.UI.Core.Messaging.Message;
 
-namespace Abacus.UI
+namespace Shuttle.Abacus.UI.UI.Shell.Explorer
 {
     public class ExplorerPartialPresenter : IExplorerPartialPresenter
     {
