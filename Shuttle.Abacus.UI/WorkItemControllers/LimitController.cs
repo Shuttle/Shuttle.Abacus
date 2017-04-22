@@ -1,14 +1,21 @@
+using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.Limit;
 using Shuttle.Abacus.UI.Messages.Resources;
 using Shuttle.Abacus.UI.Messages.WorkItem;
 using Shuttle.Abacus.UI.UI.Limit;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Esb;
 
 namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class LimitController : WorkItemController, ILimitController
     {
+        public LimitController(IServiceBus serviceBus, IMessageBus messageBus) : base(serviceBus, messageBus)
+        {
+        }
+
         public void HandleMessage(NewLimitMessage message)
         {
             if (!WorkItem.PresentationValid())
@@ -46,7 +53,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                           };
 
             Send(command, () =>
-                          _messageBus.Publish(
+                          MessageBus.Publish(
                               new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
         }
 
@@ -56,7 +63,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                  {
                      LimitId = message.LimitId
                  },
-                 () => _messageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
+                 () => MessageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
         }
     }
 }

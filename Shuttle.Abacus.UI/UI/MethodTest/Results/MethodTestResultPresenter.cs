@@ -1,3 +1,4 @@
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
 
 namespace Shuttle.Abacus.UI.UI.MethodTest.Results

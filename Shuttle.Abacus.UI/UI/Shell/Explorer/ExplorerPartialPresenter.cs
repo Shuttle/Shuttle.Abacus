@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Clipboard;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.Resources;
@@ -10,6 +12,7 @@ using Shuttle.Abacus.UI.Messages.Explorer;
 using Shuttle.Abacus.UI.Messages.Resources;
 using Shuttle.Abacus.UI.Messages.WorkItem;
 using Shuttle.Abacus.UI.Navigation;
+using Shuttle.Core.Infrastructure;
 using Message = Shuttle.Abacus.UI.Core.Messaging.Message;
 
 namespace Shuttle.Abacus.UI.UI.Shell.Explorer

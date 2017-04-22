@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using NUnit.Framework;
 using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Infrastructure;
 
 namespace Shuttle.Abacus.Tests
 {

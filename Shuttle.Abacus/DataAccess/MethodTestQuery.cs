@@ -36,9 +36,9 @@ namespace Shuttle.Abacus.DataAccess
             return _databaseGateway.GetRowsUsing(_methodTestQueryFactory.AllUsingArgument(argumentId));
         }
 
-        public DataRow FetchForMethodId(Guid methodId)
+        public IEnumerable<DataRow> FetchForMethodId(Guid methodId)
         {
-            return _databaseGateway.GetSingleRowUsing(_methodTestQueryFactory.AllForMethod(methodId));
+            return _databaseGateway.GetRowsUsing(_methodTestQueryFactory.AllForMethod(methodId));
         }
     }
 }

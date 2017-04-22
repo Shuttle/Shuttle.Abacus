@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.UI.Core.Presentation;
 
 namespace Shuttle.Abacus.UI.UI.DecimalTable

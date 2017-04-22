@@ -13,7 +13,7 @@ namespace Shuttle.Abacus.Domain
             this.argumentAnswerFactoryProvider = argumentAnswerFactoryProvider;
         }
 
-        public DecimalTable Create(Guid decimalTableId, CreateDecimalTableCommand command)
+        public DecimalTable Create(Guid decimalTableId, DecimalTableCommand command)
         {
             var result = new DecimalTable(decimalTableId, command.DecimalTableName, command.RowArgumentDto.Id, command.ColumnArgumentDTO.Id);
 

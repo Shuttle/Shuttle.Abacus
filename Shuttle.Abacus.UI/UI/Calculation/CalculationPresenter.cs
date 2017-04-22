@@ -1,4 +1,7 @@
-﻿using Shuttle.Abacus.UI.Core.Presentation;
+﻿using Shuttle.Abacus.DataAccess;
+using Shuttle.Abacus.Invariants.Interfaces;
+using Shuttle.Abacus.Localisation;
+using Shuttle.Abacus.UI.Core.Presentation;
 
 namespace Shuttle.Abacus.UI.UI.Calculation
 {
@@ -48,9 +51,9 @@ namespace Shuttle.Abacus.UI.UI.Calculation
                 return;
             }
 
-            View.CalculationNameValue = CalculationColumns.Name.MapFrom(Model.Row);
-            View.TypeValue = CalculationColumns.Type.MapFrom(Model.Row);
-            View.RequiredValue = CalculationColumns.Required.MapFrom(Model.Row);
+            View.CalculationNameValue = CalculationColumns.Name.MapFrom(Model.GetRow());
+            View.TypeValue = CalculationColumns.Type.MapFrom(Model.GetRow());
+            View.RequiredValue = CalculationColumns.Required.MapFrom(Model.GetRow());
 
             View.DisableForEditing();
         }

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using Shuttle.Abacus.UI.Core.Binding;
 using Shuttle.Abacus.UI.Core.Validation;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Core.Presentation
 {
@@ -41,7 +42,7 @@ namespace Shuttle.Abacus.UI.Core.Presentation
 
                 if (result == null)
                 {
-                    throw new InvalidCastException(string.Format(Resources.NullSafeCasting,
+                    throw new InvalidCastException(string.Format(Localisation.Resources.NullSafeCasting,
                                                                  IPresenter.GetType().FullName,
                                                                  typeof (TPresenter).FullName));
                 }
@@ -56,7 +57,7 @@ namespace Shuttle.Abacus.UI.Core.Presentation
             {
                 if (viewValidator == null)
                 {
-                    throw new NullReferenceException(string.Format(Resources.NullReferenceException,
+                    throw new NullReferenceException(string.Format(Localisation.Resources.NullReferenceException,
                                                                    "View.ViewValidator"));
                 }
 
@@ -70,7 +71,7 @@ namespace Shuttle.Abacus.UI.Core.Presentation
             {
                 if (ipresenter == null)
                 {
-                    throw new NullReferenceException(string.Format(Resources.NullReferenceException, "View.IPresenter"));
+                    throw new NullReferenceException(string.Format(Localisation.Resources.NullReferenceException, "View.IPresenter"));
                 }
 
                 return ipresenter;

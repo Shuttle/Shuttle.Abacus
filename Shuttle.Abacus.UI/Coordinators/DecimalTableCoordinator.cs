@@ -3,6 +3,7 @@ using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Core.Resources;
@@ -93,7 +94,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                     {
                         foreach (
                             DataRow row in
-                                decimalTableQuery.All().Table.Rows)
+                                decimalTableQuery.All())
                         {
                             message.Resources.Add(new Resource(ResourceKeys.DecimalTable,
                                                                DecimalTableColumns.Id.MapFrom(row),
@@ -114,7 +115,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return;
             }
 
-            message.Item.AssignText(DecimalTableColumns.Name.MapFrom(decimalTableQuery.Name(message.Item.Key).Row));
+            message.Item.AssignText(DecimalTableColumns.Name.MapFrom(decimalTableQuery.Get(message.Item.Key)));
         }
 
         public void HandleMessage(NewDecimalTableMessage message)
@@ -135,7 +136,7 @@ namespace Shuttle.Abacus.UI.Coordinators
         {
             var model = BuildDecimalTableModel();
 
-            model.DecimalTableRow = decimalTableQuery.Get(message.DecimalTableId).Row;
+            model.DecimalTableRow = decimalTableQuery.Get(message.DecimalTableId);
             model.ConstrainedDecimalValues = decimalTableQuery.ConstrainedDecimalValues(message.DecimalTableId);
 
             var item = WorkItemManager
@@ -160,7 +161,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             }
 
             decimalTableModel.ConstrainedDecimalValues = decimalTableQuery.ConstrainedDecimalValues(message.DecimalTableId);
-            decimalTableModel.DecimalTableRow = decimalTableQuery.Get(message.DecimalTableId).Row;
+            decimalTableModel.DecimalTableRow = decimalTableQuery.Get(message.DecimalTableId);
 
             var item = WorkItemManager
                 .Create("New Decimal Table")
@@ -204,7 +205,8 @@ namespace Shuttle.Abacus.UI.Coordinators
             return new DecimalTableModel
                        {
                            Factors = argumentQuery.AllDTOs(),
-                           ConstraintTypes = constraintQuery.ConstraintTypes()
+                           //TODO
+                           //ConstraintTypes = constraintQuery.ConstraintTypes()
                        };
         }
     }

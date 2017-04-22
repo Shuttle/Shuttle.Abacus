@@ -7,40 +7,40 @@ namespace Shuttle.Abacus.Infrastructure
 {
     public class WindsorResolver : IDependencyResolver
     {
-        private WindsorContainer container;
+        private IWindsorContainer _container;
 
         private bool disposed;
 
-        public WindsorResolver(WindsorContainer configured)
+        public WindsorResolver(IWindsorContainer configured)
         {
-            container = configured;
+            _container = configured;
 
             disposed = false;
         }
 
         public object Container
         {
-            get { return container; }
+            get { return _container; }
         }
 
         public T Resolve<T>()
         {
-            return container.Resolve<T>();
+            return _container.Resolve<T>();
         }
 
         public T Resolve<T>(string key)
         {
-            return container.Resolve<T>(key);
+            return _container.Resolve<T>(key);
         }
 
         public IEnumerable<T> ResolveAll<T>()
         {
-            return container.Kernel.ResolveAll<T>();
+            return _container.Kernel.ResolveAll<T>();
         }
 
         public IEnumerable<object> ResolveAll(Type type)
         {
-            return (IEnumerable<object>) container.Kernel.ResolveAll(type);
+            return (IEnumerable<object>) _container.Kernel.ResolveAll(type);
         }
 
         public IEnumerable<T> ResolveAssignable<T>()
@@ -57,63 +57,63 @@ namespace Shuttle.Abacus.Infrastructure
 
         public IEnumerable<object> ResolveAssignable(Type type)
         {
-            return container.ResolveAll(type).Cast<object>();
+            return _container.ResolveAll(type).Cast<object>();
         }
 
         public object Resolve(string key)
         {
             throw new NotImplementedException();
-            //return container.Resolve(key);
+            //return _container.Resolve(key);
         }
 
         public void AddComponent<I, T>() where T : class
         {
-            container.AddComponent<I, T>();
+            _container.AddComponent<I, T>();
         }
 
         public void AddComponent<I, T>(string key) where T : class
         {
-            container.AddComponent<I, T>(key);
+            _container.AddComponent<I, T>(key);
         }
 
         public void AddComponent<I>(string key, Type type)
         {
-            container.AddComponent(key, typeof (I), type);
+            _container.AddComponent(key, typeof (I), type);
         }
 
         public void AddComponent<T>(string key)
         {
-            container.AddComponent<T>(key);
+            _container.AddComponent<T>(key);
         }
 
         public void AddComponent<T>()
         {
-            container.AddComponent<T>();
+            _container.AddComponent<T>();
         }
 
         public void AddComponentInstance<I>(object instance)
         {
-            container.Kernel.AddComponentInstance<I>(instance);
+            _container.Kernel.AddComponentInstance<I>(instance);
         }
 
         public void AddComponentInstance<I, T>(T instance)
         {
-            container.Kernel.AddComponentInstance<I>(instance);
+            _container.Kernel.AddComponentInstance<I>(instance);
         }
 
         public void AddComponent(string key, Type service, Type type)
         {
-            container.Kernel.AddComponent(key, service, type);
+            _container.Kernel.AddComponent(key, service, type);
         }
 
         public bool HasComponent(Type service)
         {
-            return container.Kernel.HasComponent(service);
+            return _container.Kernel.HasComponent(service);
         }
 
         public bool HasComponent(string key)
         {
-            return container.Kernel.HasComponent(key);
+            return _container.Kernel.HasComponent(key);
         }
 
         public void Dispose()
@@ -132,13 +132,13 @@ namespace Shuttle.Abacus.Infrastructure
 
             if (disposing)
             {
-                if (container != null)
+                if (_container != null)
                 {
-                    container.Dispose();
+                    _container.Dispose();
                 }
             }
 
-            container = null;
+            _container = null;
             disposed = true;
         }
     }

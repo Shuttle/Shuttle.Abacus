@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Shuttle.Abacus.Invariants.Core;
 
 namespace Shuttle.Abacus.UI.Core.Validation
 {
@@ -53,7 +54,7 @@ namespace Shuttle.Abacus.UI.Core.Validation
 
             if (validator == null)
             {
-                throw new NotSupportedException(string.Format(Resources.ControlValidatorNotFound,
+                throw new NotSupportedException(string.Format(Localisation.Resources.ControlValidatorNotFound,
                                                               builderControl.GetType().FullName));
             }
             return validator;

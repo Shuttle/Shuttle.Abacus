@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Shuttle.Abacus.DTO;
+using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.UI.Core.Extensions;
 using Shuttle.Abacus.UI.Core.Presentation;
 
@@ -53,16 +55,22 @@ namespace Shuttle.Abacus.UI.UI.Calculation.GraphNodeArgument
                 {
                     var tag = (ItemTag) item.Tag;
 
-                    result.Add(new GraphNodeArgumentDTO
-                                   {
-                                       ArgumentDTO = tag.ArgumentDTO,
-                                       Format = tag.Format
-                                   });
+                    //TODO
+                    //result.Add(new GraphNodeArgumentDTO
+                    //               {
+                    //                   ArgumentDTO = tag.ArgumentDTO,
+                    //                   Format = tag.Format
+                    //               });
                 }
 
                 return result;
             }
-            set { value.ForEach(dto => AddArgument(dto.ArgumentDTO, dto.Format)); }
+            set
+            {
+                //TODO
+                //value.ForEach(dto => AddArgument(dto.ArgumentDTO, dto.Format)); 
+                
+            }
         }
 
 

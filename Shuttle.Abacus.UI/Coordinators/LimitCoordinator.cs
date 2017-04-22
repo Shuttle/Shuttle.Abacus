@@ -40,7 +40,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             {
                 case Resource.ResourceType.Container:
                     {
-                        foreach (DataRow row in limitQuery.AllForOwner(ownerId).Table.Rows)
+                        foreach (DataRow row in limitQuery.AllForOwner(ownerId))
                         {
                             message.Resources.Add(
                                 new Resource(ResourceKeys.Limit, LimitColumns.Id.MapFrom(row),

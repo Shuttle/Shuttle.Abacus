@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using Shuttle.Abacus.DTO;
@@ -34,9 +35,9 @@ namespace Shuttle.Abacus.DataAccess
             return _databaseGateway.GetSingleRowUsing(_calculationQueryFactory.Get(id));
         }
 
-        public DataTable AllForMethod(Guid methodId)
+        public IEnumerable<DataRow> AllForMethod(Guid methodId)
         {
-            return _databaseGateway.GetDataTableFor(_calculationQueryFactory.AllForMethod(methodId));
+            return _databaseGateway.GetRowsUsing(_calculationQueryFactory.AllForMethod(methodId));
         }
 
         public IEnumerable<CalculationDTO> DTOsBeforeCalculation(Guid methodId, Guid calculationId)
@@ -46,12 +47,12 @@ namespace Shuttle.Abacus.DataAccess
 
         public IEnumerable<CalculationDTO> DTOsForMethod(Guid methodId)
         {
-            return _calculationDTOMapper.MapFrom(AllForMethod(methodId));
+            return _calculationDTOMapper.MapFrom(AllForMethod(methodId).CopyToDataTable());
         }
 
-        public DataTable AllForMethod(Guid methodId, Guid grabberCalculationId)
+        public IEnumerable<DataRow> AllForMethod(Guid methodId, Guid grabberCalculationId)
         {
-            return _databaseGateway.GetDataTableFor(_calculationQueryFactory.AllForMethod(methodId, grabberCalculationId));
+            return _databaseGateway.GetRowsUsing(_calculationQueryFactory.AllForMethod(methodId, grabberCalculationId));
         }
 
         public IEnumerable<DataRow> GraphNodeArguments(Guid calculationId)

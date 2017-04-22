@@ -1,14 +1,21 @@
+using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.Resources;
 using Shuttle.Abacus.UI.Messages.Section;
 using Shuttle.Abacus.UI.Messages.WorkItem;
 using Shuttle.Abacus.UI.UI.Method;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Esb;
 
 namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class MethodController : WorkItemController, IMethodController
     {
+        public MethodController(IServiceBus serviceBus, IMessageBus messageBus) : base(serviceBus, messageBus)
+        {
+        }
+
         public void HandleMessage(NewMethodMessage message)
         {
             if (!WorkItem.PresentationValid())
@@ -39,7 +46,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 
             Send(command,
                  () =>
-                 _messageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
+                 MessageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
         }
 
         public void HandleMessage(NewMethodFromExistingMessage message)
@@ -66,7 +73,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                  {
                      MethodId = message.MethodId
                  },
-                 () => _messageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
+                 () => MessageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
         }
     }
 }

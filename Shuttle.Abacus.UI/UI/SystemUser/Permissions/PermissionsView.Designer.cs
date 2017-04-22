@@ -1,4 +1,4 @@
-﻿namespace Shuttle.Abacus.UI.UI.SystemUser.Permissions
+﻿namespace Shuttle.Abacus.UI.UI.SystemUser
 {
     partial class PermissionsView
     {

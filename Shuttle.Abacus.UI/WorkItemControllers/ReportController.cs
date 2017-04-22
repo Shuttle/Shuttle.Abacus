@@ -1,16 +1,14 @@
+using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Esb;
 
 namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class ReportController : WorkItemController, IReportController
     {
-        private readonly IApplicationConfiguration _applicationConfiguration;
-
-        public ReportController(IApplicationConfiguration applicationConfiguration)
+        public ReportController(IServiceBus serviceBus, IMessageBus messageBus) : base(serviceBus, messageBus)
         {
-            _applicationConfiguration = applicationConfiguration;
         }
-
     }
 }

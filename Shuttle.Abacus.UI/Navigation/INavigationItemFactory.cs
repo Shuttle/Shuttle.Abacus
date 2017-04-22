@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Messaging;
 
 namespace Shuttle.Abacus.UI.Navigation

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Core.Resources;
 
@@ -23,14 +24,14 @@ namespace Shuttle.Abacus.UI.Messages.Core
             get { return new ReadOnlyCollection<NamedQueryResult>(namedQueryResults); }
         }
 
-        public void AddTable(string name, IEnumerable<DataRow> queryResult)
+        public void AddTable(string name, IEnumerable<DataRow> rows)
         {
-            namedQueryResults.Add(new NamedQueryResult(name, NamedQueryResult.DisplayType.Table, queryResult));
+            namedQueryResults.Add(new NamedQueryResult(name, NamedQueryResult.DisplayType.Table, rows));
         }
 
-        public void AddRow(string name, IEnumerable<DataRow> queryResult)
+        public void AddRow(string name, DataRow row)
         {
-            namedQueryResults.Add(new NamedQueryResult(name, NamedQueryResult.DisplayType.Row, queryResult));
+            namedQueryResults.Add(new NamedQueryResult(name, NamedQueryResult.DisplayType.Row, new[] {row}));
         }
     }
 }

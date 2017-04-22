@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Core.Resources;
@@ -42,7 +43,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                                           ? message.RelatedResources[ResourceKeys.Formula].Key
                                           : message.RelatedResources[ResourceKeys.Calculation].Key;
 
-                        foreach (DataRow row in constraintQuery.QueryAllForOwner(ownerId).Table.Rows)
+                        foreach (DataRow row in constraintQuery.QueryAllForOwner(ownerId))
                         {
                             message.Resources.Add(
                                 new Resource(ResourceKeys.Constraint, Guid.Empty,
@@ -104,7 +105,8 @@ namespace Shuttle.Abacus.UI.Coordinators
             return new ConstraintModel
                    {
                        Arguments = argumentQuery.AllDTOs(),
-                       ConstraintTypes = constraintQuery.ConstraintTypes(),
+                       //TODO
+                       //ConstraintTypes = constraintQuery.ConstraintTypes(),
                        Constraints = constraintQuery.DTOsForOwner(calculationId)
                    };
         }

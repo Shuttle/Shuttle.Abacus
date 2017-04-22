@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
@@ -99,15 +100,15 @@ namespace Shuttle.Abacus.UI.Coordinators
 
             var testRow = testQuery.Get(message.MethodTestId);
 
-            model.MethodTestRow = testRow.Row;
-            model.ArgumentAnswers = testQuery.GetArgumentAnswers(message.MethodTestId).Table;
+            model.MethodTestRow = testRow;
+            model.ArgumentAnswers = testQuery.GetArgumentAnswers(message.MethodTestId).CopyToDataTable();
 
-            message.MethodId = new Guid(testRow.Row["MethodId"].ToString());
-            message.Description = MethodTestColumns.Description.MapFrom(testRow.Row);
-            message.ExpectedResult = MethodTestColumns.ExpectedResult.MapFrom(testRow.Row);
+            message.MethodId = new Guid(testRow["MethodId"].ToString());
+            message.Description = MethodTestColumns.Description.MapFrom(testRow);
+            message.ExpectedResult = MethodTestColumns.ExpectedResult.MapFrom(testRow);
 
             var item = WorkItemManager
-                .Create("Test: " + MethodTestColumns.Description.MapFrom(testRow.Row))
+                .Create("Test: " + MethodTestColumns.Description.MapFrom(testRow))
                 .ControlledBy<IMethodTestController>()
                 .ShowIn<IContextToolbarPresenter>()
                 .AddPresenter<IMethodTestPresenter>().WithModel(model)
@@ -189,11 +190,11 @@ namespace Shuttle.Abacus.UI.Coordinators
 
             var testRow = testQuery.Get(message.MethodTestId);
 
-            model.MethodTestRow = testRow.Row;
-            model.ArgumentAnswers = testQuery.GetArgumentAnswers(message.MethodTestId).Table;
+            model.MethodTestRow = testRow;
+            model.ArgumentAnswers = testQuery.GetArgumentAnswers(message.MethodTestId).CopyToDataTable();
 
             var item = WorkItemManager
-                .Create(string.Format("New test case from '{0}'", MethodTestColumns.Description.MapFrom(testRow.Row)))
+                .Create(string.Format("New test case from '{0}'", MethodTestColumns.Description.MapFrom(testRow)))
                 .ControlledBy<IMethodTestController>()
                 .ShowIn<IContextToolbarPresenter>()
                 .AddPresenter<IMethodTestPresenter>().WithModel(model)

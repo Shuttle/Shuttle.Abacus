@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
 
-namespace Shuttle.Abacus.UI.UI.SystemUser.Permissions
+namespace Shuttle.Abacus.UI.UI.SystemUser
 {
     public class PermissionsPresenter : Presenter<IPermissionsView, IEnumerable<DataRow>>, IPermissionsPresenter
     {
@@ -29,7 +30,7 @@ namespace Shuttle.Abacus.UI.UI.SystemUser.Permissions
 
             if (Model != null)
             {
-                foreach (DataRow row in Model.Table.Rows)
+                foreach (var row in Model)
                 {
                     result.Add(new Permission(PermissionColumns.Permission.MapFrom(row)));
                 }

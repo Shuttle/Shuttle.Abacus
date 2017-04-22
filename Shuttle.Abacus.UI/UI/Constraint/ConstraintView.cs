@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Shuttle.Abacus.DTO;
+using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.UI.Core.Extensions;
 using Shuttle.Abacus.UI.Core.Formatters;
 using Shuttle.Abacus.UI.Core.Presentation;
@@ -128,7 +130,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
 
                     result.Add(new ConstraintDTO
                                {
-                                   ArgumentDto = tag.ArgumentDto,
+                                   ArgumentDTO = tag.ArgumentDto,
                                    ConstraintTypeDTO = tag.ConstraintTypeDTO,
                                    Value = tag.ValueSelection
                                });
@@ -136,7 +138,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
 
                 return result;
             }
-            set { value.ForEach(dto => AddConstraint(dto.ArgumentDto, dto.ConstraintTypeDTO, dto.Value)); }
+            set { value.ForEach(dto => AddConstraint(dto.ArgumentDTO, dto.ConstraintTypeDTO, dto.Value)); }
         }
 
         public ComboBox ValueSelectionControl

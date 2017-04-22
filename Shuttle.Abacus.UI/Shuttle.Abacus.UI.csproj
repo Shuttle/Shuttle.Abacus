@@ -185,6 +185,7 @@
     </Compile>
     <Compile Include="Handlers\MethodTestHandler.cs" />
     <Compile Include="Handlers\NotificationHandler.cs" />
+    <Compile Include="Handlers\ReplyMessageHandler.cs" />
     <Compile Include="Handlers\SystemUserHandler.cs" />
     <Compile Include="Handlers\UIHandler.cs" />
     <Compile Include="IUIService.cs" />
@@ -623,7 +624,6 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="UI\Shell\Explorer\ItemManagers\" />
-    <Folder Include="UI\SystemUser\Item\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shuttle.Abacus.DTO\Shuttle.Abacus.DTO.csproj">

@@ -1,3 +1,6 @@
+using Shuttle.Abacus.DataAccess;
+using Shuttle.Abacus.Invariants.Interfaces;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Messages.SystemUser;
 
@@ -20,9 +23,7 @@ namespace Shuttle.Abacus.UI.UI.SystemUser
 
         public void HandleMessage(EditLoginNameMessage message)
         {
-            var row = Model.Row;
-
-            View.LoginNameValue = SystemUserColumns.LoginName.MapFrom(row);
+            View.LoginNameValue = SystemUserColumns.LoginName.MapFrom(Model.GetRow());
         }
 
         public void LoginNameExited()

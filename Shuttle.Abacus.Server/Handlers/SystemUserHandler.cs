@@ -13,24 +13,13 @@ namespace Shuttle.Abacus.Server.Handlers
         IMessageHandler<ChangeLoginNameCommand>,
         IMessageHandler<LoginCommand>
     {
-        private readonly ISystemUserRepository repository;
+        private readonly ISystemUserRepository _systemUserRepository;
+        private readonly ITaskFactory _taskFactory;
 
-        public SystemUserHandler(ISystemUserRepository repository)
+        public SystemUserHandler(ISystemUserRepository systemUserRepository, ITaskFactory taskFactory)
         {
-            this.repository = repository;
-        }
-
-        public void ProcessMessage(IHandlerContext<CreateSystemUserCommand> context)
-        {
-            repository.Add(new SystemUser(context.Message));
-        }
-
-        public void ProcessMessage(IHandlerContext<SetPermissionsCommand> context)
-        {
-            var message = context.Message;
-
-            _taskFactory.Create<ISetPermissionsTask>().Execute(
-                repository.Get(message.SystemUserId).ProcessCommand(message));
+            _systemUserRepository = systemUserRepository;
+            _taskFactory = taskFactory;
         }
 
         public void ProcessMessage(IHandlerContext<ChangeLoginNameCommand> context)
@@ -38,35 +27,48 @@ namespace Shuttle.Abacus.Server.Handlers
             var message = context.Message;
 
             _taskFactory.Create<IChangeLoginNameTask>().Execute(
-                repository.Get(message.SystemUserId).ProcessCommand(message));
+                _systemUserRepository.Get(message.SystemUserId).ProcessCommand(message));
+        }
+
+        public void ProcessMessage(IHandlerContext<CreateSystemUserCommand> context)
+        {
+            _systemUserRepository.Add(new SystemUser(context.Message));
         }
 
         public void ProcessMessage(IHandlerContext<LoginCommand> context)
         {
             var message = context.Message;
 
-            var user = repository.FetchByLoginName(message.LoginName);
+            var user = _systemUserRepository.FetchByLoginName(message.LoginName);
 
             if (user == null)
             {
-                repository.Add(new SystemUser
+                _systemUserRepository.Add(new SystemUser
                 {
                     LoginName = message.LoginName
                 });
 
                 context.Send(new ReplyMessage(Result.Create().AddSuccessMessage(
-                                               string.Format(
-                                                   "Your login name '{0}' is new and has been added to the security store.  Please contact the Abacus System Administrator to assign permissions to you.",
-                                                   message.LoginName))), c => c.Reply());
+                    string.Format(
+                        "Your login name '{0}' is new and has been added to the security store.  Please contact the Abacus System Administrator to assign permissions to you.",
+                        message.LoginName))), c => c.Reply());
             }
             else
             {
                 var permissions = new List<Permission>();
 
-                user.Permissions.ForEach(permission => permissions.Add((Permission)permission));
+                user.Permissions.ForEach(permission => permissions.Add((Permission) permission));
 
-                context.Send(new LoginCompletedEvent { Permissions = permissions }, c => c.Reply());
+                context.Send(new LoginCompletedEvent {Permissions = permissions}, c => c.Reply());
             }
+        }
+
+        public void ProcessMessage(IHandlerContext<SetPermissionsCommand> context)
+        {
+            var message = context.Message;
+
+            _taskFactory.Create<ISetPermissionsTask>().Execute(
+                _systemUserRepository.Get(message.SystemUserId).ProcessCommand(message));
         }
     }
 }

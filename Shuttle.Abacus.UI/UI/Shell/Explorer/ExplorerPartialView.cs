@@ -2,7 +2,9 @@ using System;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Resources;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.UI.Shell.Explorer
 {
@@ -188,7 +190,13 @@ namespace Shuttle.Abacus.UI.UI.Shell.Explorer
 
         public void RefreshText(Resource item)
         {
-            Invoke(() => Find(item).ForEach(node => node.Text = item.Text));
+            Invoke(() =>
+            {
+                foreach (var node in Find(item))
+                {
+                    node.Text = item.Text;
+                }
+            });
         }
 
         public void Clear()

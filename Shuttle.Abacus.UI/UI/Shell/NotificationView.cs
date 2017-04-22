@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Messages.Core;
 

@@ -1,15 +1,20 @@
 using System.Collections.Generic;
 using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.SystemUser;
 using Shuttle.Abacus.UI.UI.SystemUser;
-using Shuttle.Abacus.UI.UI.SystemUser.Permissions;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Esb;
 
 namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class SystemUserController : WorkItemController, ISystemUserController
     {
+        public SystemUserController(IServiceBus serviceBus, IMessageBus messageBus) : base(serviceBus, messageBus)
+        {
+        }
+
         public void HandleMessage(NewSystemUserMessage message)
         {
             if (!WorkItem.PresentationValid())

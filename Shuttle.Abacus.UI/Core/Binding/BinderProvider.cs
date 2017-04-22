@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Shuttle.Abacus.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Core.Binding
 {

@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Messages.Report;

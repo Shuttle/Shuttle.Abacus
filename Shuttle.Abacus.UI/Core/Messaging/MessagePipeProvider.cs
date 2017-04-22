@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Core.Messaging
 {

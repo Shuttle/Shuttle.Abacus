@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Shuttle.Abacus.DTO;
+using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Invariants.Core;
 using Shuttle.Abacus.UI.Core.Presentation;
 
 namespace Shuttle.Abacus.UI.UI.DecimalTable
@@ -308,7 +311,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
                     dto.ConstraintDTOs.Add(new ConstraintDTO
                                            {
-                                               ArgumentDto = RowArgumentDto,
+                                               ArgumentDTO = RowArgumentDto,
                                                ConstraintTypeDTO = RowConstraintTypeDTO(row),
                                                Value = RowConstraintAnswer(row)
                                            });
@@ -317,7 +320,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
                     {
                         dto.ConstraintDTOs.Add(new ConstraintDTO
                                                {
-                                                   ArgumentDto = ColumnArgumentDTO,
+                                                   ArgumentDTO = ColumnArgumentDTO,
                                                    ConstraintTypeDTO = ColumnConstraintTypeDTO(column),
                                                    Value = ColumnConstraintAnswer(column)
                                                });

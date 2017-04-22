@@ -11,6 +11,11 @@ namespace Shuttle.Abacus.UI.Models
             HiddenColumns = new List<string>();
         }
 
+        public SimpleListModel(DataRow row) : this()
+        {
+            Rows = new[] { row };
+        }
+
         public SimpleListModel(IEnumerable<DataRow> rows) : this()
         {
             Rows = rows;

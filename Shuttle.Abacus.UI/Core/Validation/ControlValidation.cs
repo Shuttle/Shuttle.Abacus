@@ -1,6 +1,8 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Invariants.Core;
 
 namespace Shuttle.Abacus.UI.Core.Validation
 {

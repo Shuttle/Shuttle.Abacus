@@ -1,5 +1,7 @@
 using NUnit.Framework;
 using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Invariants.Core.Rules;
+using Shuttle.Abacus.Localisation;
 
 namespace Shuttle.Abacus.Tests
 {

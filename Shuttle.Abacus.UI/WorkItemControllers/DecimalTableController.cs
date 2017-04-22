@@ -1,13 +1,20 @@
+using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.DecimalTable;
 using Shuttle.Abacus.UI.Messages.WorkItem;
 using Shuttle.Abacus.UI.UI.DecimalTable;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Esb;
 
 namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class DecimalTableController : WorkItemController, IDecimalTableController
     {
+        public DecimalTableController(IServiceBus serviceBus, IMessageBus messageBus) : base(serviceBus, messageBus)
+        {
+        }
+
         public void HandleMessage(NewDecimalTableMessage message)
         {
             if (!WorkItem.PresentationValid())
@@ -62,7 +69,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 
             Send(command,
                  () =>
-                 _messageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
+                 MessageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
         }
     }
 }

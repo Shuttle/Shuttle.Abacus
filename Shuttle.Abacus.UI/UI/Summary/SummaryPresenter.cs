@@ -2,13 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Shuttle.Abacus.DataAccess;
+using Shuttle.Abacus.Localisation;
+using Shuttle.Abacus.UI.Core;
 using Shuttle.Abacus.UI.Core.Presentation;
 
 namespace Shuttle.Abacus.UI.UI.Summary
 {
     public class SummaryPresenter : Presenter<ISummaryView>, ISummaryPresenter
     {
-        private readonly object[] emptyValue = new object[] { "(empty)" };
+        private readonly object[] emptyValue = { "(empty)" };
 
         public SummaryPresenter(ISummaryView view)
             : base(view)
@@ -21,7 +24,7 @@ namespace Shuttle.Abacus.UI.UI.Summary
         {
             View.Clear();
 
-            if (namedQueryResults.Count() == 0)
+            if (!namedQueryResults.Any())
             {
                 return;
             }
@@ -39,25 +42,31 @@ namespace Shuttle.Abacus.UI.UI.Summary
             {
                 View.AddGroup(namedQueryResult.Name);
 
+                var firstRow = namedQueryResult.Rows.FirstOrDefault();
+
+                if (firstRow == null)
+                {
+                    continue;
+                }
+
+                var columns = firstRow.Table.Columns;
+
                 switch (namedQueryResult.Type)
                 {
                     case NamedQueryResult.DisplayType.Table:
                         {
                             View.AddRow();
 
-                            foreach (var queryColumn in namedQueryResult.QueryResult.Columns)
+                            foreach (DataColumn column in columns)
                             {
-                                if (!queryColumn.IsIdentifier)
-                                {
-                                    View.AddHeading(queryColumn.Text);
-                                }
+                                    View.AddHeading(column.Text());
                             }
 
-                            if (namedQueryResult.QueryResult.Table.Rows.Count > 0)
+                            if (namedQueryResult.Rows.Any())
                             {
-                                foreach (DataRow row in namedQueryResult.QueryResult.Table.Rows)
+                                foreach (DataRow row in namedQueryResult.Rows)
                                 {
-                                    View.AddRow(RowValues(namedQueryResult.QueryResult, row));
+                                    View.AddRow(RowValues(namedQueryResult.Rows, row));
                                 }
                             }
                             else
@@ -69,19 +78,14 @@ namespace Shuttle.Abacus.UI.UI.Summary
                         }
                         case NamedQueryResult.DisplayType.Row:
                         {
-                            var column = 0;
-                            var values = RowValues(namedQueryResult.QueryResult, namedQueryResult.QueryResult.Row);
+                            var columnIndex = 0;
+                            var values = RowValues(namedQueryResult.Rows, firstRow);
 
-                            foreach (var queryColumn in namedQueryResult.QueryResult.Columns)
+                            foreach (DataColumn column in columns)
                             {
-                                if (queryColumn.IsIdentifier)
-                                {
-                                    continue;
-                                }
+                                View.AddAttribute(column.Text(), values[columnIndex]);
 
-                                View.AddAttribute(queryColumn.Text, values[column]);
-
-                                column++;
+                                columnIndex++;
                             }
 
                             break;
@@ -94,16 +98,16 @@ namespace Shuttle.Abacus.UI.UI.Summary
 
         private static object[] RowValues(IEnumerable<DataRow> queryResult, DataRow row)
         {
-            if (queryResult.HasIdentifierColumn())
-            {
-                var length = row.ItemArray.Length - 1;
+            //if (queryResult.HasIdentifierColumn())
+            //{
+            //    var length = row.ItemArray.Length - 1;
 
-                var values = Array.CreateInstance(typeof (object), length);
+            //    var values = Array.CreateInstance(typeof (object), length);
 
-                Array.Copy(row.ItemArray, 1, values, 0, length);
+            //    Array.Copy(row.ItemArray, 1, values, 0, length);
 
-                return (object[]) values;
-            }
+            //    return (object[]) values;
+            //}
 
             return row.ItemArray;
         }
@@ -115,7 +119,7 @@ namespace Shuttle.Abacus.UI.UI.Summary
             foreach (var namedQueryResult in namedQueryResults)
             {
                 var count = namedQueryResult.Type == NamedQueryResult.DisplayType.Table
-                                ? namedQueryResult.QueryResult.Columns.Count()
+                                ? namedQueryResult.Rows.GetRow().Table.Columns.Count
                                 : 2;
 
                 if (count > i)

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.DTO;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Tests
 {

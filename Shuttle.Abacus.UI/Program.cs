@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using Abacus.Messages;
 using Castle.Windsor;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
@@ -17,6 +16,7 @@ namespace Shuttle.Abacus.UI
 {
     internal static class Program
     {
+        private static WindsorContainer _container = new WindsorContainer();
         private static IServiceBus _bus;
 
         private static bool loginRequestCompleted;
@@ -41,7 +41,7 @@ namespace Shuttle.Abacus.UI
 
             splashThread.Start();
 
-            DependencyWiring.Start().AddWindowsComponents().AddCaching();
+            DependencyWiring.Start(_container).AddWindowsComponents().AddCaching();
 
             StartServiceBus();
 
@@ -78,6 +78,9 @@ namespace Shuttle.Abacus.UI
             messageBus.Publish(new ActivateShellMessage());
 
             Application.Run();
+
+            _bus.Dispose();
+            _container.Dispose();
         }
 
         private static void CloseSplash()
@@ -94,17 +97,6 @@ namespace Shuttle.Abacus.UI
             ServiceBus.Register(container);
 
             _bus = ServiceBus.Create(container).Start();
-            Bus = Configure.With()
-                .CastleWindsorBuilder((IWindsorContainer) DependencyResolver.Resolver.Container)
-                .XmlSerializer()
-                .MsmqTransport()
-                .IsTransactional(false)
-                .PurgeOnStartup(true)
-                .UnicastBus()
-                .ImpersonateSender(false)
-                .LoadMessageHandlers()
-                .CreateBus()
-                .Start();
         }
 
         private static void AssemblyLoad(object sender, AssemblyLoadEventArgs args)
@@ -126,48 +118,7 @@ namespace Shuttle.Abacus.UI
                               LoginName = loginName
                           };
 
-            Bus.Send(command).Register(ReplyCallback, command).AsyncWaitHandle.WaitOne(10000);
-        }
-
-        private static void ReplyCallback(IAsyncResult ar)
-        {
-            loginRequestCompleted = true;
-
-            CloseSplash();
-
-            var result = ar.AsyncState as CompletionResult;
-
-            if (result == null)
-            {
-                return;
-            }
-
-            if (result.Messages == null)
-            {
-                return;
-            }
-
-            if (result.Messages.Length == 0)
-            {
-                return;
-            }
-
-            if (result.State == null)
-            {
-                return;
-            }
-
-            var reply = result.Messages[0] as ReplyMessage;
-
-            if (reply == null)
-            {
-                return;
-            }
-
-            if (reply.Result.HasMessages)
-            {
-                messageBus.Publish(reply.Result);
-            }
+            _bus.Send(command);
         }
 
         private static void ShowSplash()

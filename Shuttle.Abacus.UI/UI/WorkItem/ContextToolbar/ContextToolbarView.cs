@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.EventArgs;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Navigation;

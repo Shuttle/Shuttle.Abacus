@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using System.Drawing;
+using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Navigation
 {

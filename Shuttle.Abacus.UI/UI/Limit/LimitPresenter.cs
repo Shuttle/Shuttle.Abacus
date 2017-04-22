@@ -1,3 +1,6 @@
+using Shuttle.Abacus.DataAccess;
+using Shuttle.Abacus.Invariants.Interfaces;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
 
 namespace Shuttle.Abacus.UI.UI.Limit
@@ -33,8 +36,8 @@ namespace Shuttle.Abacus.UI.UI.Limit
                 return;
             }
 
-            View.LimitNameValue = LimitColumns.Name.MapFrom(Model.Row);
-            View.TypeValue = LimitColumns.Type.MapFrom(Model.Row);
+            View.LimitNameValue = LimitColumns.Name.MapFrom(Model.GetRow());
+            View.TypeValue = LimitColumns.Type.MapFrom(Model.GetRow());
         }
     }
 }

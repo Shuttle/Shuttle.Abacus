@@ -1,15 +1,22 @@
-﻿using Shuttle.Abacus.UI.Core.WorkItem;
+﻿using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.FactorAnswer;
 using Shuttle.Abacus.UI.Messages.Resources;
 using Shuttle.Abacus.UI.Messages.WorkItem;
 using Shuttle.Abacus.UI.UI.Argument;
 using Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Esb;
 
 namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class ArgumentController : WorkItemController, IArgumentController
     {
+        public ArgumentController(IServiceBus serviceBus, IMessageBus messageBus) : base(serviceBus, messageBus)
+        {
+        }
+
         public void HandleMessage(NewArgumentMessage message)
         {
             if (!WorkItem.PresentationValid())
@@ -49,7 +56,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                           };
 
             Send(command, () =>
-                          _messageBus.Publish(
+                          MessageBus.Publish(
                               new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
         }
 
@@ -59,7 +66,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                  {
                      ArgumentId = message.ArgumentId
                  },
-                 () => _messageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
+                 () => MessageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
         }
     }
 }

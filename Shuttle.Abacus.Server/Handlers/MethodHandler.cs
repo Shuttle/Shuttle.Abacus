@@ -10,30 +10,16 @@ namespace Shuttle.Abacus.Server.Handlers
         IMessageHandler<ChangeMethodCommand>,
         IMessageHandler<DeleteMethodCommand>
     {
-        private readonly ILimitRepository limitRepository;
-        private readonly IMethodRepository methodRepository;
+        private readonly ILimitRepository _limitRepository;
+        private readonly IMethodRepository _methodRepository;
+        private readonly ITaskFactory _taskFactory;
 
-        public MethodHandler(IMethodRepository methodRepository, ILimitRepository limitRepository)
+        public MethodHandler(IMethodRepository methodRepository, ILimitRepository limitRepository,
+            ITaskFactory taskFactory)
         {
-            this.methodRepository = methodRepository;
-            this.limitRepository = limitRepository;
-        }
-
-        public void ProcessMessage(IHandlerContext<CreateMethodCommand> context)
-        {
-            methodRepository.Add(new Method(context.Message));
-        }
-
-        public void ProcessMessage(IHandlerContext<CopyMethodCommand> context)
-        {
-            var message = context.Message;
-
-            var method = methodRepository
-                .Get(message.MethodId)
-                .Copy()
-                .ProcessCommand(message);
-
-            _taskFactory.Create<IAddMethodGraphTask>().Execute(method);
+            _methodRepository = methodRepository;
+            _limitRepository = limitRepository;
+            _taskFactory = taskFactory;
         }
 
         public void ProcessMessage(IHandlerContext<ChangeMethodCommand> context)
@@ -41,21 +27,38 @@ namespace Shuttle.Abacus.Server.Handlers
             var message = context.Message;
 
             _taskFactory.Create<IChangeMethodTask>().Execute(
-                methodRepository.Get(message.MethodId).ProcessCommand(message));
+                _methodRepository.Get(message.MethodId).ProcessCommand(message));
+        }
+
+        public void ProcessMessage(IHandlerContext<CopyMethodCommand> context)
+        {
+            var message = context.Message;
+
+            var method = _methodRepository
+                .Get(message.MethodId)
+                .Copy()
+                .ProcessCommand(message);
+
+            _taskFactory.Create<IAddMethodGraphTask>().Execute(method);
+        }
+
+        public void ProcessMessage(IHandlerContext<CreateMethodCommand> context)
+        {
+            _methodRepository.Add(new Method(context.Message));
         }
 
         public void ProcessMessage(IHandlerContext<DeleteMethodCommand> context)
         {
             var message = context.Message;
 
-            var method = methodRepository.Get(message.MethodId);
+            var method = _methodRepository.Get(message.MethodId);
 
             foreach (var limit in method.Limits)
             {
-                limitRepository.Remove(limit);
+                _limitRepository.Remove(limit);
             }
 
-            methodRepository.Remove(method);
+            _methodRepository.Remove(method);
         }
     }
 }

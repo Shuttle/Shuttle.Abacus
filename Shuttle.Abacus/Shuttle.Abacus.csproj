@@ -112,6 +112,7 @@
     <Compile Include="DataAccess\ILimitQueryFactory.cs" />
     <Compile Include="DataAccess\IMethodQueryFactory.cs" />
     <Compile Include="DataAccess\IMethodTestQueryFactory.cs" />
+    <Compile Include="DataAccess\Infrastructure\DataRowExtensions.cs" />
     <Compile Include="DataAccess\Infrastructure\IDataReaderMapper.cs" />
     <Compile Include="DataAccess\Infrastructure\RepositoryProvider.cs" />
     <Compile Include="DataAccess\IOperationTypeQueryFactory.cs" />
@@ -253,6 +254,7 @@
     <Compile Include="Domain\Commands\CreateMethodCommand.cs" />
     <Compile Include="Domain\Commands\CreateMethodTestCommand.cs" />
     <Compile Include="Domain\Commands\CreateSystemUserCommand.cs" />
+    <Compile Include="Domain\Commands\DecimalTableCommand.cs" />
     <Compile Include="Domain\Commands\DeleteArgumentCommand.cs" />
     <Compile Include="Domain\Commands\DeleteCalculationCommand.cs" />
     <Compile Include="Domain\Commands\DeleteFormulaCommand.cs" />

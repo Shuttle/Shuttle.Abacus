@@ -1,6 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Core.Infrastructure;
+using ConventionException = Shuttle.Core.Infrastructure.ConventionException;
 
 namespace Shuttle.Abacus.UI.Navigation
 {

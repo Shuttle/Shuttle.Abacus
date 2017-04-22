@@ -1,4 +1,5 @@
 using Shuttle.Abacus.Invariants.Values;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Formatters;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
@@ -129,7 +130,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
 
             foreach (var constraint in Model.Constraints)
             {
-                View.AddConstraint(constraint.ArgumentDto, constraint.ConstraintTypeDTO, constraint.Value);
+                View.AddConstraint(constraint.ArgumentDTO, constraint.ConstraintTypeDTO, constraint.Value);
             }
         }
     }

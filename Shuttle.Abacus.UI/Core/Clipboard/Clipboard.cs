@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Shuttle.Abacus.UI.Core.Resources;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Core.Clipboard
 {

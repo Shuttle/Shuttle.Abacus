@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Core.State
 {
@@ -36,7 +37,7 @@ namespace Shuttle.Abacus.UI.Core.State
 
             if (!Contains(key))
             {
-                throw new KeyNotFoundException(string.Format(Resources.KeyNotFoundException, key, "State"));
+                throw new KeyNotFoundException(string.Format(Localisation.Resources.KeyNotFoundException, key, "State"));
             }
 
             return (TGet) state[key.Key];
@@ -55,7 +56,7 @@ namespace Shuttle.Abacus.UI.Core.State
 
             if (!Contains(key))
             {
-                throw new KeyNotFoundException(string.Format(Resources.KeyNotFoundException, key, "State"));
+                throw new KeyNotFoundException(string.Format(Localisation.Resources.KeyNotFoundException, key, "State"));
             }
 
             return (TGet) state[key.Key];

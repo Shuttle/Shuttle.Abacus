@@ -1,4 +1,9 @@
 using System.Data;
+using Shuttle.Abacus.DataAccess;
+using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Invariants.Interfaces;
+using Shuttle.Abacus.Invariants.Values;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Formatters;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Messages.Core;

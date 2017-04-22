@@ -1,4 +1,6 @@
 using System;
+using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Abacus.UI.Messages.Formula;
@@ -8,11 +10,16 @@ using Shuttle.Abacus.UI.UI.Constraint;
 using Shuttle.Abacus.UI.UI.Formula;
 using Shuttle.Abacus.UI.UI.List;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Esb;
 
 namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class FormulaController : WorkItemController, IFormulaController
     {
+        public FormulaController(IServiceBus serviceBus, IMessageBus messageBus) : base(serviceBus, messageBus)
+        {
+        }
+
         public void HandleMessage(NewFormulaMessage message)
         {
             if (!WorkItem.PresentationValid())
@@ -49,7 +56,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                      Operations = formulaView.Operations,
                      Constraints = constraintView.Constraints
                  }, () =>
-                    _messageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
+                    MessageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
         }
 
         public void HandleMessage(MoveUpMessage message)
@@ -90,7 +97,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                  {
                      FormulaId = message.FormulaId
                  },
-                 () => _messageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
+                 () => MessageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
         }
     }
 }

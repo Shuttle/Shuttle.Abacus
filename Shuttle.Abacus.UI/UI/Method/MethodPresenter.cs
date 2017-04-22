@@ -1,3 +1,6 @@
+using Shuttle.Abacus.DataAccess;
+using Shuttle.Abacus.Invariants.Interfaces;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Messages.Section;
 
@@ -20,14 +23,12 @@ namespace Shuttle.Abacus.UI.UI.Method
         public void TitleExited()
         {
             WorkItem.Text = string.Format("Method{0}",
-                                          View.MethodNameValue.Length > 0 ? " : " + View.MethodNameValue : string.Empty);
+                View.MethodNameValue.Length > 0 ? " : " + View.MethodNameValue : string.Empty);
         }
 
         public void HandleMessage(EditMethodMessage message)
         {
-            var table = Model.Table;
-
-            View.MethodNameValue = MethodColumns.Name.MapFrom(table.Rows[0]);
+            View.MethodNameValue = MethodColumns.Name.MapFrom(Model.GetRow());
         }
 
         public override void OnInitialize()

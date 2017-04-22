@@ -1,14 +1,21 @@
 ﻿using System;
+using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Abacus.UI.Messages.TestCase;
 using Shuttle.Abacus.UI.UI.List;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Esb;
 
 namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class MethodTestManagerController : WorkItemController, IMethodTestManagerController
     {
+        public MethodTestManagerController(IServiceBus serviceBus, IMessageBus messageBus) : base(serviceBus, messageBus)
+        {
+        }
+
         public void HandleMessage(ListReadyMessage message)
         {
             WorkItem.GetView<ISimpleListView>().ShowCheckboxes();
@@ -18,7 +25,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
         {
             message.WorkItemId = WorkItem.Id;
 
-            _messageBus.Publish(message);
+            MessageBus.Publish(message);
         }
 
         public void HandleMessage(EditMethodTestMessage message)
@@ -35,7 +42,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             message.MethodTestId = new Guid(item.Name);
             message.WorkItemId = WorkItem.Id;
 
-            _messageBus.Publish(message);
+            MessageBus.Publish(message);
         }
 
         public void HandleMessage(RemoveMethodTestMessage message)
@@ -61,9 +68,9 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                 command.MethodTestIds.Add(new Guid(item.Name));
             }
 
-            SendNoComplete(command,
+            Send(command,
                            () =>
-                           _messageBus.Publish(new MethodTestRemovedMessage(WorkItem.Id, message.MethodId)));
+                           MessageBus.Publish(new MethodTestRemovedMessage(WorkItem.Id, message.MethodId)));
         }
 
         public void HandleMessage(MarkAllMessage message)
@@ -92,7 +99,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                 command.MethodTestIds.Add(new Guid(item.Name));
             }
 
-            SendNoComplete(command);
+            Send(command);
         }
 
         public void HandleMessage(NewMethodTestFromExistingMessage message)
@@ -109,7 +116,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             message.MethodTestId = new Guid(item.Name);
             message.WorkItemId = WorkItem.Id;
 
-            _messageBus.Publish(message);
+            MessageBus.Publish(message);
         }
 
         public void HandleMessage(PrintMethodTestMessage message)
@@ -128,7 +135,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                 command.MethodTestIds.Add(new Guid(item.Name));
             }
 
-            SendNoComplete(command);
+            Send(command);
         }
     }
 }

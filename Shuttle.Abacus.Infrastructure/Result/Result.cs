@@ -5,6 +5,11 @@ namespace Shuttle.Abacus.Infrastructure
 {
     public class Result : AbstractResult, IResult
     {
+        public Result()
+        {
+            Headers = new List<ResultHeader>();
+        }
+
         public static IResult Create()
         {
             return new Result(); 
@@ -72,6 +77,8 @@ namespace Shuttle.Abacus.Infrastructure
 
             return this;
         }
+
+        public List<ResultHeader> Headers { get; private set; }
     }
 
     public class Result<TValue> : AbstractResult, IResult<TValue>

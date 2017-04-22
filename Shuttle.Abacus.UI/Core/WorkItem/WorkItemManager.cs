@@ -4,31 +4,34 @@ using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Messages.WorkItem;
 using Shuttle.Abacus.UI.Navigation;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Core.WorkItem
 {
     public class WorkItemManager : IWorkItemManager
     {
+        private readonly IMessageBus _messageBus;
+        private readonly IPresenterFactory _presenterFactory;
+        private readonly IShell _shell;
+
+        private readonly IWorkItemControllerFactory _workItemControllerFactory;
+        private readonly IWorkItemPresenterFactory _workItemPresenterFactory;
         private readonly Dictionary<Guid, IWorkItem> store = new Dictionary<Guid, IWorkItem>();
 
-        private readonly IWorkItemControllerFactory workItemControllerFactory;
-        private readonly IWorkItemPresenterFactory workItemPresenterFactory;
-        private readonly IPresenterFactory presenterFactory;
-        private readonly IMessageBus messageBus;
-        private readonly IShell shell;
-
-        public WorkItemManager(IWorkItemControllerFactory workItemControllerFactory, IWorkItemPresenterFactory workItemPresenterFactory, IPresenterFactory presenterFactory, IMessageBus messageBus, IShell shell)
+        public WorkItemManager(IWorkItemControllerFactory workItemControllerFactory,
+            IWorkItemPresenterFactory workItemPresenterFactory, IPresenterFactory presenterFactory,
+            IMessageBus messageBus, IShell shell)
         {
             Guard.AgainstNull(workItemControllerFactory, "workItemControllerFactory");
             Guard.AgainstNull(workItemPresenterFactory, "workItemPresenterFactory");
             Guard.AgainstNull(presenterFactory, "presenterFactory");
             Guard.AgainstNull(messageBus, "messageBus");
 
-            this.workItemControllerFactory = workItemControllerFactory;
-            this.workItemPresenterFactory = workItemPresenterFactory;
-            this.presenterFactory = presenterFactory;
-            this.messageBus = messageBus;
-            this.shell = shell;
+            _workItemControllerFactory = workItemControllerFactory;
+            _workItemPresenterFactory = workItemPresenterFactory;
+            _presenterFactory = presenterFactory;
+            _messageBus = messageBus;
+            _shell = shell;
 
             messageBus.AddSubscriber(this);
         }
@@ -45,32 +48,32 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
 
         public IWorkItemBuilderController Create(string text)
         {
-            return new WorkItemBuilder(text, this, workItemPresenterFactory);
+            return new WorkItemBuilder(text, this, _workItemControllerFactory, _workItemPresenterFactory);
         }
 
         public IWorkItemBuilderController Create(Guid workItemId, string text)
         {
-            return new WorkItemBuilder(workItemId, text, this, workItemPresenterFactory);
+            return new WorkItemBuilder(workItemId, text, this, _workItemControllerFactory, _workItemPresenterFactory);
         }
 
         public void TextChanged(WorkItem workItem)
         {
-            messageBus.Publish(new WorkItemTextChangedMessage(workItem));
+            _messageBus.Publish(new WorkItemTextChangedMessage(workItem));
         }
 
         public INavigationItemContainer<IPresenter> BuildPresenter<T>() where T : IPresenter
         {
-            return presenterFactory.Create<T>();
+            return _presenterFactory.Create<T>();
         }
 
         public void Waiting(WorkItem workItem)
         {
-            messageBus.Publish(new WorkItemBusyMessage(workItem));
+            _messageBus.Publish(new WorkItemBusyMessage(workItem));
         }
 
         public void Ready(WorkItem workItem)
         {
-            messageBus.Publish(new WorkItemReadyMessage(workItem));
+            _messageBus.Publish(new WorkItemReadyMessage(workItem));
         }
 
         public bool Contains(Guid id)
@@ -80,12 +83,12 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
 
         public IPresenter CreatePresenter<T>() where T : IPresenter
         {
-            return presenterFactory.Create<T>();
+            return _presenterFactory.Create<T>();
         }
 
         public void Invoke(Action action)
         {
-            shell.Invoke(action);
+            _shell.Invoke(action);
         }
 
         public void HandleMessage(WorkItemCompletedMessage message)

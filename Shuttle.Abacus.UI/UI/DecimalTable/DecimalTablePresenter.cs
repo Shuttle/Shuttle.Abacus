@@ -1,8 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using Shuttle.Abacus.DataAccess;
+using Shuttle.Abacus.DTO;
+using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Invariants.Interfaces;
+using Shuttle.Abacus.Invariants.Values;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.UI.DecimalTable
 {
@@ -180,7 +187,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
                 }
             }
 
-            throw new MissingEntryException(string.Format("Could not find contraint type with name '{0}'.", name));
+            throw new MissingEntityException(string.Format("Could not find contraint type with name '{0}'.", name));
         }
 
         public IEnumerable<ConstraintTypeDTO> ConstraintTypes

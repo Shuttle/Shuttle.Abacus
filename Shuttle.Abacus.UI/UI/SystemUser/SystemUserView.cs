@@ -1,4 +1,5 @@
 ﻿using System;
+using Shuttle.Abacus.Invariants.Core;
 using Shuttle.Abacus.UI.Core.Presentation;
 
 namespace Shuttle.Abacus.UI.UI.SystemUser

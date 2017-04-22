@@ -95,6 +95,7 @@
     <Compile Include="Result\IAbstractResult.cs" />
     <Compile Include="Result\IResult.cs" />
     <Compile Include="Result\Result.cs" />
+    <Compile Include="Result\ResultHeader.cs" />
     <Compile Include="Result\ResultMessage.cs" />
     <Compile Include="Result\StringToResultMessageMapper.cs" />
     <Compile Include="Security\IPermission.cs" />

@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
@@ -37,7 +38,7 @@ namespace Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer
                 return;
             }
 
-            foreach (DataRow row in Model.Table.Rows)
+            foreach (var row in Model)
             {
                 View.AddRestrictedAnswer(ArgumentColumns.RestrictedAnswerColumns.Answer.MapFrom(row));
             }

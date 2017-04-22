@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using Shuttle.Abacus.DTO;
 using Shuttle.Core.Data;
-using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.DataAccess
 {
@@ -12,15 +12,12 @@ namespace Shuttle.Abacus.DataAccess
         private readonly IDataTableMapper<ArgumentDTO> _argumentDTOMapper;
         private readonly IDatabaseGateway _databaseGateway;
         private readonly IArgumentQueryFactory _argumentQueryFactory;
-        private readonly IPipeline _pipeline;
 
-        public ArgumentQuery(IDatabaseGateway databaseGateway, IArgumentQueryFactory argumentQueryFactory, IDataTableMapper<ArgumentDTO> argumentDTOMapper,
-            IPipeline pipeline)
+        public ArgumentQuery(IDatabaseGateway databaseGateway, IArgumentQueryFactory argumentQueryFactory, IDataTableMapper<ArgumentDTO> argumentDTOMapper)
         {
             _databaseGateway = databaseGateway;
             _argumentQueryFactory = argumentQueryFactory;
             _argumentDTOMapper = argumentDTOMapper;
-            _pipeline = pipeline;
         }
 
         public IEnumerable<DataRow> All()
@@ -40,8 +37,12 @@ namespace Shuttle.Abacus.DataAccess
 
         public ArgumentDTO ArgumentDTO(Guid argumentId)
         {
-            throw new NotImplementedException();
-            //return _argumentDTOMapper.MapFrom(Get(argumentId).Table);
+            return _argumentDTOMapper.MapFrom(Get(argumentId).Table).First();
+        }
+
+        public IEnumerable<ArgumentDTO> AllDTOs()
+        {
+            return _argumentDTOMapper.MapFrom(All().CopyToDataTable());
         }
     }
 }

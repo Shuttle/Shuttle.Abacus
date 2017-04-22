@@ -24,10 +24,11 @@ namespace Shuttle.Abacus.UI
 {
     public class DependencyWiring : IDependencyWiringOptional
     {
-        private readonly WindsorContainer _container = new WindsorContainer();
+        private readonly IWindsorContainer _container;
 
-        private DependencyWiring()
+        private DependencyWiring(IWindsorContainer container)
         {
+            _container = container;
         }
 
         public IDependencyWiringOptional AddWindowsComponents()
@@ -252,9 +253,9 @@ namespace Shuttle.Abacus.UI
             return this;
         }
 
-        public static IDependencyWiringOptional Start()
+        public static IDependencyWiringOptional Start(IWindsorContainer container)
         {
-            return new DependencyWiring().AddCore();
+            return new DependencyWiring(container).AddCore();
         }
 
 

@@ -4,6 +4,7 @@ using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Core.Resources;
@@ -48,7 +49,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                     {
                         foreach (
                             DataRow row in
-                                calculationQuery.AllForOwner(message.RelatedResources.FirstItem.Key).Table.Rows)
+                                calculationQuery.AllForOwner(message.RelatedResources.FirstItem.Key))
                         {
                             message.Resources.Add(
                                 new Resource(
@@ -118,11 +119,11 @@ namespace Shuttle.Abacus.UI.Coordinators
         {
             var item = WorkItemManager
                 .Create("Edit calculation: " +
-                        CalculationColumns.Name.MapFrom(calculationQuery.Get(message.CalculationId).Row))
+                        CalculationColumns.Name.MapFrom(calculationQuery.Get(message.CalculationId)))
                 .ControlledBy<ICalculationController>()
                 .ShowIn<IContextToolbarPresenter>()
                 .AddPresenter<ICalculationPresenter>().WithModel(calculationQuery.Get(message.CalculationId))
-                .AddPresenter<IGraphNodeArgumentPresenter>().WithModel(new ArgumentDisplayModel(argumentQuery.AllDTOs()) { GraphNodeArguments = calculationQuery.GraphNodeArguments(message.CalculationId).Table})
+                .AddPresenter<IGraphNodeArgumentPresenter>().WithModel(new ArgumentDisplayModel(argumentQuery.AllDTOs()) { GraphNodeArguments = calculationQuery.GraphNodeArguments(message.CalculationId).CopyToDataTable()})
                 .AddNavigationItem(
                 NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
                 .AssignInitiator(message);
@@ -239,7 +240,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return;
             }
 
-            message.Item.AssignText(CalculationColumns.Name.MapFrom(calculationQuery.Name(message.Item.Key).Row));
+            message.Item.AssignText(CalculationColumns.Name.MapFrom(calculationQuery.Get(message.Item.Key)));
         }
 
         public void HandleMessage(DeleteCalculationMessage message)
