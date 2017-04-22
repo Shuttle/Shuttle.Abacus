@@ -24,38 +24,34 @@ namespace Shuttle.Abacus.DataAccess
             return _databaseGateway.GetRowsUsing(_constraintQueryFactory.AllForOwner(ownerId));
         }
 
-        //public IEnumerable<ConstraintDTO> DTOsForOwner(Guid ownerId)
-        //{
-        //    var constraints = new List<ConstraintDTO>();
+        public IEnumerable<ConstraintDTO> DTOsForOwner(Guid ownerId)
+        {
+            var constraints = new List<ConstraintDTO>();
 
-        //    var types = new List<ConstraintTypeDTO>(ConstraintTypes());
+            foreach (DataRow row in _databaseGateway.GetRowsUsing(_constraintQueryFactory.AllForOwner(ownerId)))
+            {
+                var argumentResult = _argumentQuery.ArgumentDTO(ConstraintColumns.ArgumentId.MapFrom(row));
 
-        //    foreach (
-        //        DataRow row in
-        //        QueryProcessor.Execute(ConstraintQueryFactory.DTOsForOwner(ownerId)).Table.Rows)
-        //    {
-        //        var argumentResult = _argumentQuery.ArgumentDTO(ConstraintColumns.ArgumentId.MapFrom(row));
+                var constraintName = ConstraintColumns.Name.MapFrom(row);
 
-        //        var constraintName = ConstraintColumns.Name.MapFrom(row);
+                //var type =
+                //    types.Find(item => item.Name.Equals(constraintName, StringComparison.InvariantCultureIgnoreCase));
 
-        //        var type =
-        //            types.Find(item => item.Name.Equals(constraintName, StringComparison.InvariantCultureIgnoreCase));
+                constraints.Add(new ConstraintDTO
+                {
+                    //ConstraintTypeDTO = new ConstraintTypeDTO
+                    //{
+                    //    Name = constraintName,
+                    //    Text = type != null
+                    //        ? type.Text
+                    //        : constraintName
+                    //},
+                    ArgumentDTO = argumentResult,
+                    Value = ConstraintColumns.Answer.MapFrom(row)
+                });
+            }
 
-        //        constraints.Add(new ConstraintDTO
-        //        {
-        //            ConstraintTypeDTO = new ConstraintTypeDTO
-        //            {
-        //                Name = constraintName,
-        //                Text = type != null
-        //                    ? type.Text
-        //                    : constraintName
-        //            },
-        //            ArgumentDTO = argumentResult,
-        //            Value = ConstraintColumns.Answer.MapFrom(row)
-        //        });
-        //    }
-
-        //    return constraints;
-        //}
+            return constraints;
+        }
     }
 }

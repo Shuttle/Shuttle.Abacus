@@ -62,7 +62,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 
             Send(command,
                  () =>
-                 MessageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
+                 _messageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
         }
     }
 }

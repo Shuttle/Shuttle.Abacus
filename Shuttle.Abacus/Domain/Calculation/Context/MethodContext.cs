@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Shuttle.Abacus.DTO;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
@@ -8,31 +9,31 @@ namespace Shuttle.Abacus.Domain
     public class MethodContext : IMethodContext
     {
         private readonly ArgumentAnswerCollection answers;
-        private readonly IPremiumCalculationLogger logger;
+        private readonly ICalculationLogger logger;
         private readonly IMethodContextRegister register;
 
         public IGraphNode GraphNode { get; private set; }
 
         public MethodContext()
             : this(
-                string.Empty, new NullPremiumCalculationLogger(), new ArgumentAnswerCollection(),
-                new MethodContextRegister("register", new NullPremiumCalculationLogger()))
+                string.Empty, new NullCalculationLogger(), new ArgumentAnswerCollection(),
+                new MethodContextRegister("register", new NullCalculationLogger()))
         {
         }
 
         public MethodContext(string name)
             : this(
-                name, new NullPremiumCalculationLogger(), new ArgumentAnswerCollection(),
-                new MethodContextRegister(name, new NullPremiumCalculationLogger()))
+                name, new NullCalculationLogger(), new ArgumentAnswerCollection(),
+                new MethodContextRegister(name, new NullCalculationLogger()))
         {
         }
 
-        public MethodContext(string name, IPremiumCalculationLogger logger)
+        public MethodContext(string name, ICalculationLogger logger)
             : this(name, logger, new ArgumentAnswerCollection(), new MethodContextRegister(name, logger))
         {
         }
 
-        private MethodContext(string name, IPremiumCalculationLogger logger, ArgumentAnswerCollection answers,
+        private MethodContext(string name, ICalculationLogger logger, ArgumentAnswerCollection answers,
                                IMethodContextRegister register)
         {
             Name = name;

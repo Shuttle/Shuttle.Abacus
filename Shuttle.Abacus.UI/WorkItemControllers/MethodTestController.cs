@@ -49,7 +49,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 
             if (command.ArgumentAnswers.Count == 0)
             {
-                MessageBus.Publish(
+                _messageBus.Publish(
                     new ResultNotificationMessage(Result.Create().AddFailureMessage("Please add at least one input.")));
 
                 return;
@@ -57,7 +57,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 
             Send(command,
                  () =>
-                 MessageBus.Publish(new MethodTestCreatedMessage(message.WorkItemId, message.MethodId)));
+                 _messageBus.Publish(new MethodTestCreatedMessage(message.WorkItemId, message.MethodId)));
         }
 
         public void HandleMessage(ChangeMethodTestMessage message)
@@ -94,7 +94,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 
             Send(command,
                  () =>
-                 MessageBus.Publish(new MethodTestChangedMessage(message.WorkItemId, message.MethodId)));
+                 _messageBus.Publish(new MethodTestChangedMessage(message.WorkItemId, message.MethodId)));
         }
     }
 }

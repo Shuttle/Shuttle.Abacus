@@ -1,9 +1,11 @@
 ﻿using System.Data;
+using Shuttle.Abacus.DataAccess;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
 
 namespace Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer
 {
-    public class ArgumentRestrictedAnswerPresenter : Presenter<IArgumentRestrictedAnswerView, IQueryResult>,
+    public class ArgumentRestrictedAnswerPresenter : Presenter<IArgumentRestrictedAnswerView, IEnumerable<DataRow>>,
                                                 IArgumentRestrictedAnswerPresenter
     {
         public ArgumentRestrictedAnswerPresenter(IArgumentRestrictedAnswerView view) : base(view)

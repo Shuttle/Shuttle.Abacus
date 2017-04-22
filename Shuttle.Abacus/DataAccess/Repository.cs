@@ -1,11 +1,11 @@
 using System;
-using Abacus.Domain;
 using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.DataAccess
 {
-    public abstract class Repository<T> : Domain.IRepository<T>
+    public abstract class Repository<T> : IRepository<T>
     {
         private static readonly string TypeName = typeof(T).Name;
 
@@ -18,8 +18,8 @@ namespace Shuttle.Abacus.DataAccess
             var result = Get(id) as TCast;
 
             Guard.Against<InvalidCastException>(result == null,
-                                                string.Format(Resources.NullSafeCasting, typeof (T).Name,
-                                                              typeof (TCast).Name));
+                string.Format(Resources.NullSafeCasting, typeof(T).Name,
+                    typeof(TCast).Name));
 
             return result;
         }

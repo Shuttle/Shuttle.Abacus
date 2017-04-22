@@ -7,16 +7,16 @@ namespace Shuttle.Abacus.Domain
 {
     public class MethodContextRegister : IMethodContextRegister
     {
-        private readonly IPremiumCalculationLogger logger;
+        private readonly ICalculationLogger logger;
         private readonly Dictionary<string, ICalculationResult> results;
         private readonly Dictionary<string, SubTotalCalculationResult> subtotals;
 
-        public MethodContextRegister(string name, IPremiumCalculationLogger logger)
+        public MethodContextRegister(string name, ICalculationLogger logger)
             : this(name, logger, new Dictionary<string, ICalculationResult>(), new Dictionary<string, SubTotalCalculationResult>())
         {
         }
 
-        private MethodContextRegister(string name, IPremiumCalculationLogger logger, Dictionary<string, ICalculationResult> results,
+        private MethodContextRegister(string name, ICalculationLogger logger, Dictionary<string, ICalculationResult> results,
                                        Dictionary<string, SubTotalCalculationResult> subtotals)
         {
             this.logger = logger;

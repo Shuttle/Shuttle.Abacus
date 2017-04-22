@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using Shuttle.Abacus.DTO;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Models
 {
@@ -30,7 +32,7 @@ namespace Shuttle.Abacus.UI.Models
                 }
             }
 
-            throw new MissingEntryException(string.Format("Argument id {0} not found.", argumentId));
+            throw new MissingEntityException(string.Format("Argument id {0} not found.", argumentId));
         }
     }
 }

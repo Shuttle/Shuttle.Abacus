@@ -6,7 +6,7 @@ namespace Shuttle.Abacus.DataAccess
 {
     public class MethodTestQueryFactory : IMethodTestQueryFactory
     {
-        private static string SelectClause = @"
+        private const string SelectClause = @"
 select
     MethodTestId,
     MethodId,
@@ -64,15 +64,26 @@ inner join
 where
     mtaa.ArgumentId = @ArgumentId
 ")
-            .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.ArgumentId, argumentId);
+                .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.ArgumentId, argumentId);
         }
 
-        public static IQuery Remove(MethodTest item)
+        public IQuery Get(Guid id)
         {
-            return RawQuery.Create("delete from MethodTest where MethodTestId = @MethodTestId").AddParameterValue(MethodTestColumns.Id, item.Id);
+            return RawQuery.Create(string.Concat(SelectClause, @"
+where
+    MethodTestId = @MethodTestId
+"))
+                .AddParameterValue(MethodTestColumns.Id, id);
         }
 
-        public static IQuery Add(MethodTest item)
+        public IQuery Remove(MethodTest item)
+        {
+            return
+                RawQuery.Create("delete from MethodTest where MethodTestId = @MethodTestId")
+                    .AddParameterValue(MethodTestColumns.Id, item.Id);
+        }
+
+        public IQuery Add(MethodTest item)
         {
             return RawQuery.Create(@"
 insert into MethodTest
@@ -95,7 +106,7 @@ values
                 .AddParameterValue(MethodTestColumns.ExpectedResult, item.ExpectedResult);
         }
 
-        public static IQuery AddArgumentAnswer(MethodTest test, MethodTestArgumentAnswer argumentAnswer)
+        public IQuery AddArgumentAnswer(MethodTest test, MethodTestArgumentAnswer argumentAnswer)
         {
             return RawQuery.Create(@"
 insert into MethodTestArgumentAnswer
@@ -121,7 +132,7 @@ values
                 .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.Answer, argumentAnswer.Answer);
         }
 
-        //public static IQuery Get(Guid id)
+        //public  IQuery Get(Guid id)
         //{
         //    var query = SelectQuery.CreateSelectFrom(@"
         //            select
@@ -147,16 +158,18 @@ values
         //    return query;
         //}
 
-        public static IQuery SetArgumentName(Guid argumentId, string argumentName)
+        public IQuery SetArgumentName(Guid argumentId, string argumentName)
         {
-            return RawQuery.Create("update MethodTestArgumentAnswer set ArgumentName = @ArgumentName where ArgumentId = @ArgumentId")
+            return RawQuery.Create(
+                    "update MethodTestArgumentAnswer set ArgumentName = @ArgumentName where ArgumentId = @ArgumentId")
                 .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.ArgumentName, argumentName)
                 .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.ArgumentId, argumentId);
         }
 
-        public static IQuery SetArgumentAnswerType(Guid argumentId, string answerType)
+        public IQuery SetArgumentAnswerType(Guid argumentId, string answerType)
         {
-            return RawQuery.Create("update MethodTestArgumentAnswer set AnswerType = @AnswerType where ArgumentId = @ArgumentId")
+            return RawQuery.Create(
+                    "update MethodTestArgumentAnswer set AnswerType = @AnswerType where ArgumentId = @ArgumentId")
                 .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.AnswerType, answerType)
                 .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.ArgumentId, argumentId);
         }

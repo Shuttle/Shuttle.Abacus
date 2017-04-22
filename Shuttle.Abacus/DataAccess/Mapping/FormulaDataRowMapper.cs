@@ -1,5 +1,7 @@
 using System.Data;
+using System.Runtime.Remoting.Messaging;
 using Shuttle.Abacus.Domain;
+using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
 {
@@ -20,30 +22,26 @@ namespace Shuttle.Abacus.DataAccess
             this.valueSourceFactoryProvider = valueSourceFactoryProvider;
         }
 
-        public Formula MapFrom(DataRow input)
+        public MappedRow<Formula> Map(DataRow row)
         {
-            var id = FormulaColumns.Id.MapFrom(input);
-
-            if (UnitOfWork.Contains(id))
-            {
-                UnitOfWork.Get<Formula>(id);
-            }
+            var id = FormulaColumns.Id.MapFrom(row);
 
             var formula = new Formula(id);
 
-            foreach (DataRow row in query.Operations(formula.Id).Table.Rows)
+            foreach (DataRow operationRow in query.Operations(formula.Id))
             {
                 formula.AddOperation(
-                    operationFactoryProvider.Get(FormulaOperationColumns.Operation.MapFrom(row)).Create(
-                        valueSourceFactoryProvider.Get(FormulaOperationColumns.ValueSource.MapFrom(row)).Create(
-                            FormulaOperationColumns.ValueSelection.MapFrom(row))));
+                    operationFactoryProvider.Get(FormulaOperationColumns.Operation.MapFrom(operationRow)).Create(
+                        valueSourceFactoryProvider.Get(FormulaOperationColumns.ValueSource.MapFrom(operationRow)).Create(
+                            FormulaOperationColumns.ValueSelection.MapFrom(operationRow))));
             }
 
-            constraintRepository.AllForOwner(formula.Id).ForEach(item => formula.AddConstraint(item));
+            foreach (var constraint in constraintRepository.AllForOwner(formula.Id))
+            {
+                formula.AddConstraint(constraint);
+            }
 
-            UnitOfWork.Register(formula);
-
-            return formula;
+            return new MappedRow<Formula>(row, formula);
         }
     }
 }

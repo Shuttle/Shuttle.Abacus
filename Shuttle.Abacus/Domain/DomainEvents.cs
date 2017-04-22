@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Abacus.Infrastructure;
+using Shuttle.Abacus.Infrastructure;
 
 namespace Abacus.Domain
 {
@@ -10,7 +10,7 @@ namespace Abacus.Domain
 
         public static IDependencyResolver Container { get; set; }
 
-        public static void Register<T>(Action<T> callback) where T : IDomainEvent
+        public static void Register<T>(Action<T> callback) where T : class
         {
             if (actions == null)
             {
@@ -25,7 +25,7 @@ namespace Abacus.Domain
             actions = null;
         }
 
-        public static void Raise<T>(T args) where T : IDomainEvent
+        public static void Raise<T>(T args) where T : class
         {
             if (Container != null)
             {

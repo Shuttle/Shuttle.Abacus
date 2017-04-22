@@ -23,12 +23,12 @@ namespace Shuttle.Abacus.UI.Messages.Core
             get { return new ReadOnlyCollection<NamedQueryResult>(namedQueryResults); }
         }
 
-        public void AddTable(string name, IQueryResult queryResult)
+        public void AddTable(string name, IEnumerable<DataRow> queryResult)
         {
             namedQueryResults.Add(new NamedQueryResult(name, NamedQueryResult.DisplayType.Table, queryResult));
         }
 
-        public void AddRow(string name, IQueryResult queryResult)
+        public void AddRow(string name, IEnumerable<DataRow> queryResult)
         {
             namedQueryResults.Add(new NamedQueryResult(name, NamedQueryResult.DisplayType.Row, queryResult));
         }

@@ -1,5 +1,8 @@
+using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Invariants.Values;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.UI.Formula
 {
@@ -75,7 +78,10 @@ namespace Shuttle.Abacus.UI.UI.Formula
         {
             base.OnInitialize();
 
-            Guard.AgainstNullDependency(Model, "Model");
+            if (Model == null)
+            {
+                throw new NullDependencyException("Model");
+            }
 
             View.PopulateOperations(Model.OperationTypes);
             View.PopulateValueSources(Model.ValueSourceTypes);

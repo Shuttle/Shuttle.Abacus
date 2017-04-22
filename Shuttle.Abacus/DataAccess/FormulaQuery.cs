@@ -31,12 +31,12 @@ namespace Shuttle.Abacus.DataAccess
 
         public IEnumerable<DataRow> Operations(Guid formulaId)
         {
-            return QueryProcessor.Execute(_formulaQueryFactory.GetOperations(formulaId));
+            return _databaseGateway.GetRowsUsing(_formulaQueryFactory.GetOperations(formulaId));
         }
 
         public DataRow Get(Guid id)
         {
-            return QueryProcessor.Execute(_formulaQueryFactory.Get(id));
+            return _databaseGateway.GetSingleRowUsing(_formulaQueryFactory.Get(id));
         }
     }
 }

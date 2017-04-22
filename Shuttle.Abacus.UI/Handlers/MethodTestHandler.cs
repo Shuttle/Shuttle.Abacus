@@ -1,19 +1,23 @@
+using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.UI.Messages.TestCase;
+using Shuttle.Esb;
 
 namespace Shuttle.Abacus.UI.Handlers
 {
     public class MethodTestHandler : UIHandler,
-                                   NServiceBus.IMessageHandler<MethodTestRunEvent>,
-                                   NServiceBus.IMessageHandler<MethodTestPrintEvent>
+        IMessageHandler<MethodTestRunEvent>,
+        IMessageHandler<MethodTestPrintEvent>
     {
-        public void Handle(MethodTestRunEvent message)
+        public void ProcessMessage(IHandlerContext<MethodTestPrintEvent> context)
         {
-            MessageBus.Publish(new MethodTestRunMessage(message.WorkItemId, message));
+            MessageBus.Publish(new MethodTestPrintMessage(context.Message));
         }
 
-        public void Handle(MethodTestPrintEvent message)
+        public void ProcessMessage(IHandlerContext<MethodTestRunEvent> context)
         {
-            MessageBus.Publish(new MethodTestPrintMessage(message));
+            var message = context.Message;
+
+            MessageBus.Publish(new MethodTestRunMessage(message.WorkItemId, message));
         }
     }
 }

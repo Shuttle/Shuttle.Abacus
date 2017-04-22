@@ -1,9 +1,11 @@
+using Abacus.Messages;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Esb;
 
 namespace Shuttle.Abacus.UI.Handlers
 {
-    public class NotificationHandler : NServiceBus.IMessageHandler<NotificationMessage>
+    public class NotificationHandler : Esb.IMessageHandler<NotificationMessage>
     {
         private readonly IMessageBus messageBus;
 
@@ -12,9 +14,9 @@ namespace Shuttle.Abacus.UI.Handlers
             this.messageBus = messageBus;
         }
 
-        public void Handle(NotificationMessage message)
+        public void ProcessMessage(IHandlerContext<NotificationMessage> context)
         {
-            messageBus.Publish(new ResultNotificationMessage(message.Result));
+            messageBus.Publish(new ResultNotificationMessage(context.Message.Result));
         }
     }
 }

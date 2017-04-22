@@ -82,11 +82,11 @@ namespace Shuttle.Abacus.Server.Handlers
         {
             var message = context.Message;
 
-            var query = formulaQuery.Get(message.FormulaId);
+            var row = formulaQuery.Get(message.FormulaId);
 
             var owner =
-                _repositoryProvider.Get(FormulaColumns.OwnerName.MapFrom(query.Row)).Get<IFormulaOwner>(
-                    FormulaColumns.OwnerId.MapFrom(query.Row));
+                _repositoryProvider.Get(FormulaColumns.OwnerName.MapFrom(row)).Get<IFormulaOwner>(
+                    FormulaColumns.OwnerId.MapFrom(row));
 
             owner.RemoveFormula(message.FormulaId);
         }

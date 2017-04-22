@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public interface IMethodTestQuery
     {
-        IQueryResult All();
-        IQueryResult Get(Guid id);
-        IQueryResult FetchForMethodId(Guid methodId);
-        IQueryResult GetArgumentAnswers(Guid id);
-        IQueryResult AllUsingArgument(Guid argumentId);
+        IEnumerable<DataRow> All();
+        DataRow Get(Guid id);
+        DataRow FetchForMethodId(Guid methodId);
+        IEnumerable<DataRow> GetArgumentAnswers(Guid id);
+        IEnumerable<DataRow> AllUsingArgument(Guid argumentId);
     }
 }

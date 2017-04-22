@@ -1,5 +1,7 @@
 using System.Data;
 using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Infrastructure;
+using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
 {
@@ -14,21 +16,21 @@ namespace Shuttle.Abacus.DataAccess
             this.limitRepository = limitRepository;
         }
 
-        public Method MapFrom(DataRow input)
+        public MappedRow<Method> Map(DataRow row)
         {
-            var method = new Method(MethodColumns.Id.MapFrom(input))
-                          {
-                              MethodName = MethodColumns.Name.MapFrom(input)
-                          };
-
-            if (UnitOfWork.Uses<Calculation>())
+            var method = new Method(MethodColumns.Id.MapFrom(row))
             {
-                calculationRepository.AllForOwner(method.Id).ForEach(calculation => method.AddCalculation(calculation));
-            }
+                MethodName = MethodColumns.Name.MapFrom(row)
+            };
+
+            //if (UnitOfWork.Uses<Calculation>())
+            //{
+            //    calculationRepository.AllForOwner(method.Id).ForEach(calculation => method.AddCalculation(calculation));
+            //}
 
             limitRepository.AllForOwner(method.Id).ForEach(limit => method.AddLimit(limit));
 
-            return method;
+            return new MappedRow<Method>(row, method);
         }
     }
 }

@@ -7,9 +7,9 @@ namespace Shuttle.Abacus.UI.Models
     {
         public SimpleGridModel()
         {
-            VisibleColumns = new List<QueryColumn>();
-            HiddenColumns = new List<QueryColumn>();
-            EditableColumns = new List<QueryColumn>();
+            VisibleColumns = new List<string>();
+            HiddenColumns = new List<string>();
+            EditableColumns = new List<string>();
         }
 
         public SimpleGridModel(DataTable result)
@@ -19,8 +19,8 @@ namespace Shuttle.Abacus.UI.Models
         }
 
         public DataTable GridItems { get; set; }
-        public IList<QueryColumn> VisibleColumns { get; set; }
-        public IList<QueryColumn> HiddenColumns { get; set; }
-        public IList<QueryColumn> EditableColumns { get; set; }
+        public IList<string> VisibleColumns { get; set; }
+        public IList<string> HiddenColumns { get; set; }
+        public IList<string> EditableColumns { get; set; }
     }
 }

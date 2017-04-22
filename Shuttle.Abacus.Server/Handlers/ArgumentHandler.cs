@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Linq;
 using System.Text;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Domain;
@@ -60,14 +61,14 @@ namespace Shuttle.Abacus.Server.Handlers
         public void ProcessMessage(IHandlerContext<DeleteArgumentCommand> context)
         {
             var message = context.Message;
-            var testQueryResult = testQuery.AllUsingArgument(message.ArgumentId);
+            var rows = testQuery.AllUsingArgument(message.ArgumentId).ToList();
             var argument = argumentRepository.Get(message.ArgumentId);
 
-            if (testQueryResult.Table.Rows.Count > 0)
+            if (rows.Any())
             {
                 var list = new StringBuilder();
 
-                foreach (DataRow row in testQueryResult.Table.Rows)
+                foreach (var row in rows)
                 {
                     list.AppendLine(MethodTestColumns.Description.MapFrom(row));
                 }

@@ -1,6 +1,6 @@
 namespace Abacus.Domain
 {
-    public interface IHandleEvent<T> where T : IDomainEvent
+    public interface IHandleEvent<in T> where T : class
     {
         void Handle(T args);
     }

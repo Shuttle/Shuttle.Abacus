@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Data;
 
 namespace Shuttle.Abacus.UI.Models
 {
@@ -6,18 +7,18 @@ namespace Shuttle.Abacus.UI.Models
     {
         public SimpleListModel()
         {
-            VisibleColumns = new List<QueryColumn>();
-            HiddenColumns = new List<QueryColumn>();
+            VisibleColumns = new List<string>();
+            HiddenColumns = new List<string>();
         }
 
-        public SimpleListModel(IQueryResult result) : this()
+        public SimpleListModel(IEnumerable<DataRow> rows) : this()
         {
-            ListItems = result;
+            Rows = rows;
         }
 
-        public IQueryResult ListItems { get; set; }
-        public IList<QueryColumn> VisibleColumns { get; set; }
-        public List<QueryColumn> HiddenColumns { get; set; }
+        public IEnumerable<DataRow> Rows { get; set; }
+        public IList<string> VisibleColumns { get; set; }
+        public List<string> HiddenColumns { get; set; }
         public bool HasCheckBoxes { get; set; }
     }
 }

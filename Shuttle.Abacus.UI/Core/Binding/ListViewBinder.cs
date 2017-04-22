@@ -2,45 +2,50 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Shuttle.Abacus.UI.Core.Binding
 {
     public class ListViewBinder : IBinder<ListView>
     {
-        private static readonly Type fortype = typeof (ListView);
+        private static readonly Type fortype = typeof(ListView);
 
-        public void Bind(IQueryResult result, ListView to)
+        public void Bind(IEnumerable<DataRow> rows, ListView to)
         {
-            Bind(result, to, new List<QueryColumn>(), new List<QueryColumn>());
+            Bind(rows, to, new List<string>(), new List<string>());
         }
 
-        public void Bind(IQueryResult result, ListView to, IList<QueryColumn> visibleColumns,
-                         IList<QueryColumn> hiddenColumns)
+        public Type ForType
+        {
+            get { return fortype; }
+        }
+
+        public void Bind(IEnumerable<DataRow> rows, ListView to, IEnumerable<string> visibleColumns,
+            IEnumerable<string> hiddenColumns)
         {
             to.Columns.Clear();
             to.Items.Clear();
 
-            var keyColumn = GetIdentifier(result);
+            if (!rows.Any())
+            {
+                return;
+            }
 
-            BuildColumns(result, to, visibleColumns, hiddenColumns);
+            BuildColumns(rows.First().Table.Columns, to, visibleColumns, hiddenColumns);
 
-            foreach (DataRow row in result.Table.Rows)
+            foreach (var row in rows)
             {
                 var item = to.Items.Add(string.Empty);
 
-                item.Name = Convert.ToString(row[keyColumn]);
+                //TODO
+                //item.Name = Convert.ToString(row[keyColumn]);
 
                 var textSet = false;
 
-                foreach (var column in result.Columns)
+                foreach (DataColumn column in row.Table.Columns)
                 {
-                    if (column.IsIdentifier)
-                    {
-                        continue;
-                    }
-
-                    if (!IsColumnVisible(column, result, visibleColumns, hiddenColumns))
+                    if (!IsColumnVisible(column, visibleColumns, hiddenColumns))
                     {
                         continue;
                     }
@@ -61,114 +66,94 @@ namespace Shuttle.Abacus.UI.Core.Binding
             }
         }
 
-        public Type ForType
+        private static void BuildColumns(DataColumnCollection columns, ListView to, IEnumerable<string> visibleColumns,
+            IEnumerable<string> hiddenColumns)
         {
-            get { return fortype; }
-        }
-
-        private static int GetIdentifier(IQueryResult result)
-        {
-            var i = 0;
-
-            foreach (var column in result.Columns)
+            foreach (DataColumn column in columns)
             {
-                if (column.IsIdentifier)
-                {
-                    break;
-                }
-                i++;
-            }
-            return i;
-        }
-
-        private static void BuildColumns(IQueryResult result, ListView to, ICollection<QueryColumn> visibleColumns,
-                                         ICollection<QueryColumn> hiddenColumns)
-        {
-            foreach (var column in result.Columns)
-            {
-                if (!column.IsIdentifier && IsColumnVisible(column, result, visibleColumns, hiddenColumns))
+                if (IsColumnVisible(column, visibleColumns, hiddenColumns))
                 {
                     AddHeader(column, to);
                 }
             }
         }
 
-        private static bool IsColumnVisible(QueryColumn column, IQueryResult result,
-                                            ICollection<QueryColumn> visibleColumns,
-                                            ICollection<QueryColumn> hiddenColumns)
+        private static bool IsColumnVisible(DataColumn column, IEnumerable<string> visibleColumns,
+            IEnumerable<string> hiddenColumns)
         {
             return
-                result.Columns.Contains(column)
+                visibleColumns.Any()
                 &&
-                (
-                    visibleColumns.Count > 0
-                    && visibleColumns.Contains(column)
-                    || (hiddenColumns.Count <= 0 || !hiddenColumns.Contains(column))
-                       && (visibleColumns.Count == 0 && hiddenColumns.Count == 0)
-                );
+                visibleColumns.Contains(column.ColumnName)
+                ||
+                (!hiddenColumns.Any() || !hiddenColumns.Contains(column.ColumnName))
+                &&
+                !visibleColumns.Any()
+                &&
+                !hiddenColumns.Any();
         }
 
-        private static string FormattedValue(QueryColumn column, object value)
+        private static string FormattedValue(DataColumn column, object value)
         {
-            switch (column.DbType)
+            switch (column.DataType.Name)
             {
-                case DbType.Date:
-                case DbType.DateTime:
-                    {
-                        return Convert.ToString(value, CultureInfo.CurrentUICulture.DateTimeFormat);
-                    }
-                case DbType.Byte:
-                case DbType.Decimal:
-                case DbType.Double:
-                case DbType.Int16:
-                case DbType.Int32:
-                case DbType.Int64:
-                case DbType.SByte:
-                case DbType.Single:
-                case DbType.UInt16:
-                case DbType.UInt32:
-                case DbType.UInt64:
-                case DbType.VarNumeric:
-                case DbType.Currency:
-                    {
-                        return Convert.ToString(value, CultureInfo.CurrentUICulture.NumberFormat);
-                    }
+                case "Date":
+                case "DateTime":
+                {
+                    return Convert.ToString(value, CultureInfo.CurrentUICulture.DateTimeFormat);
+                }
+                case "Byte":
+                case "Decimal":
+                case "Double":
+                case "Int16":
+                case "Int32":
+                case "Int64":
+                case "SByte":
+                case "Single":
+                case "UInt16":
+                case "UInt32":
+                case "UInt64":
+                case "VarNumeric":
+                case "Currency":
+                {
+                    return Convert.ToString(value, CultureInfo.CurrentUICulture.NumberFormat);
+                }
             }
 
             return Convert.ToString(value);
         }
 
-        private static void AddHeader(QueryColumn column, ListView to)
+        private static void AddHeader(DataColumn column, ListView to)
         {
-            var header = to.Columns.Add(column.ColumnName, column.Text);
+            var header = to.Columns.Add(column.ColumnName, column.Text());
 
-            switch (column.DbType)
+            switch (column.DataType.Name)
             {
-                case DbType.Byte:
-                case DbType.Currency:
-                case DbType.Date:
-                case DbType.DateTime:
-                case DbType.Decimal:
-                case DbType.Double:
-                case DbType.Int16:
-                case DbType.Int32:
-                case DbType.Int64:
-                case DbType.SByte:
-                case DbType.Single:
-                case DbType.UInt16:
-                case DbType.UInt32:
-                case DbType.UInt64:
-                case DbType.VarNumeric:
-                    {
-                        header.TextAlign = HorizontalAlignment.Right;
+                case "Byte":
+                case "Currency":
+                case "Date":
+                case "DateTime":
+                case "Decimal":
+                case "Double":
+                case "Int16":
+                case "Int32":
+                case "Int64":
+                case "SByte":
+                case "Single":
+                case "UInt16":
+                case "UInt32":
+                case "UInt64":
+                case "VarNumeric":
+                {
+                    header.TextAlign = HorizontalAlignment.Right;
 
-                        break;
-                    }
+                    break;
+                }
             }
 
-            var width = column.Size.HasValue
-                            ? column.Size.Value*3
-                            : 120;
+            var width = column.MaxLength > 0
+                ? column.MaxLength * 3
+                : 120;
 
             if (width > 200)
             {

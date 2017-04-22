@@ -39,7 +39,7 @@ namespace Shuttle.Abacus.Localisation {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Abacus.Localisation.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shuttle.Abacus.Localisation.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -1014,15 +1014,6 @@ namespace Shuttle.Abacus.Localisation {
         public static string NavigationItemProviderNameConventionBroken {
             get {
                 return ResourceManager.GetString("NavigationItemProviderNameConventionBroken", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There is no current unit of work in your context.  Please contact development support..
-        /// </summary>
-        public static string NoUnitOfWork {
-            get {
-                return ResourceManager.GetString("NoUnitOfWork", resourceCulture);
             }
         }
         

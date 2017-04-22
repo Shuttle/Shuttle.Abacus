@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Data;
 using Shuttle.Abacus.DataAccess;
-using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Core.Resources;
@@ -100,7 +100,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             {
                 case Resource.ResourceType.Container:
                     {
-                        foreach (DataRow row in argumentQuery.All().Table.Rows)
+                        foreach (var row in argumentQuery.All())
                         {
                             message.Resources.Add(new Resource(ResourceKeys.Argument,
                                                                ArgumentColumns.Id.MapFrom(row),
@@ -118,7 +118,7 @@ namespace Shuttle.Abacus.UI.Coordinators
         {
             var model = BuildArgumentModel();
 
-            model.ArgumentRow = argumentQuery.Get(message.ArgumentId).Row;
+            model.ArgumentRow = argumentQuery.Get(message.ArgumentId);
 
             var item = WorkItemManager
                 .Create("Edit Argument")
@@ -141,14 +141,14 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return;
             }
 
-            message.Item.AssignText(ArgumentColumns.Name.MapFrom(argumentQuery.Name(message.Item.Key).Row));
+            message.Item.AssignText(ArgumentColumns.Name.MapFrom(argumentQuery.Get(message.Item.Key)));
         }
 
         private ArgumentModel BuildArgumentModel()
         {
             return new ArgumentModel
                    {
-                       AnswerTypes = answerTypeQuery.AllDTOs()
+                       AnswerTypes = answerTypeQuery.All()
                    };
         }
 

@@ -1,5 +1,7 @@
 using System;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.State;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Core.Resources
 {

@@ -1,18 +1,22 @@
 using System;
 using System.Collections.Generic;
 using Shuttle.Abacus.Domain;
+using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public class LimitRepository : Repository<Limit>, ILimitRepository
     {
-        private readonly IDataRepository<Limit> repository;
-        private readonly IDatabaseGateway gateway;
+        private readonly IDatabaseGateway _databaseGateway;
+        private readonly ILimitQueryFactory _limitQueryFactory;
+        private readonly IDataRepository<Limit> _repository;
 
-        public LimitRepository(IDataRepository<Limit> repository, IDatabaseGateway gateway)
+        public LimitRepository(IDatabaseGateway databaseGateway, ILimitQueryFactory limitQueryFactory, IDataRepository<Limit> repository)
         {
-            this.repository = repository;
-            this.gateway = gateway;
+            _repository = repository;
+            _databaseGateway = databaseGateway;
+            _limitQueryFactory = limitQueryFactory;
         }
 
         public override void Add(Limit item)
@@ -22,31 +26,34 @@ namespace Shuttle.Abacus.DataAccess
 
         public override void Remove(Limit item)
         {
-            gateway.ExecuteUsing(LimitTableAccess.Remove(item));
+            _databaseGateway.ExecuteUsing(_limitQueryFactory.Remove(item));
         }
 
         public override Limit Get(Guid id)
         {
-            var result = repository.FetchItemUsing(LimitTableAccess.Get(id));
+            var result = _repository.FetchItemUsing(_limitQueryFactory.Get(id));
 
-            Guard.AgainstMissing<Limit>(result, id);
+            if (result == null)
+            {
+                throw Exceptions.MissingEntity("Limit", id);
+            }
 
             return result;
         }
 
         public void Add(ILimitOwner owner, Limit limit)
         {
-            gateway.ExecuteUsing(LimitTableAccess.Add(owner, limit));
+            _databaseGateway.ExecuteUsing(_limitQueryFactory.Add(owner, limit));
         }
 
         public void Save(Limit limit)
         {
-            gateway.ExecuteUsing(LimitTableAccess.Save(limit));
+            _databaseGateway.ExecuteUsing(_limitQueryFactory.Save(limit));
         }
 
         public IEnumerable<Limit> AllForOwner(Guid ownerId)
         {
-            return repository.FetchAllUsing(LimitTableAccess.AllForOwner(ownerId));
+            return _repository.FetchAllUsing(_limitQueryFactory.AllForOwner(ownerId));
         }
     }
 }

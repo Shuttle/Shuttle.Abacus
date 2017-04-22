@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using Shuttle.Abacus.DTO;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public interface IMethodQuery
     {
-        IQueryResult MethodName(Guid id);
-        IQueryResult All();
-        IQueryResult Get(Guid id);
+        IEnumerable<DataRow> All();
+        DataRow Get(Guid id);
         IEnumerable<MethodDTO> AllDTOs();
     }
 }

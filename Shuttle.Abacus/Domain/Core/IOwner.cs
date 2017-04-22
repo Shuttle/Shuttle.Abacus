@@ -1,10 +1,9 @@
-using System;
+using Abacus.Domain;
 
 namespace Shuttle.Abacus.Domain
 {
-    public interface IOwner 
+    public interface IOwner : IEntity
     {
-        Guid Id { get; }
         string OwnerName { get; }
     }
 }

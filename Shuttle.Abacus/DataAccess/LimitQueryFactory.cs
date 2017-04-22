@@ -6,7 +6,7 @@ namespace Shuttle.Abacus.DataAccess
 {
     public class LimitQueryFactory : ILimitQueryFactory
     {
-        private static readonly string SelectClause = @"
+        private readonly string SelectClause = @"
 select
     LimitId,
     OwnerName,
@@ -37,7 +37,7 @@ where
                 .AddParameterValue(LimitColumns.Id, limitId);
         }
 
-        public static IQuery Add(ILimitOwner owner, Limit item)
+        public IQuery Add(ILimitOwner owner, Limit item)
         {
             return RawQuery.Create(@"
 insert into Limit
@@ -63,12 +63,13 @@ values
                 .AddParameterValue(LimitColumns.Type, item.Type);
         }
 
-        public static IQuery Remove(Limit item)
+        public IQuery Remove(Limit item)
         {
-            return RawQuery.Create("delete from Limit where LimitId = @LimitId").AddParameterValue(LimitColumns.Id, item.Id);
+            return RawQuery.Create("delete from Limit where LimitId = @LimitId")
+                .AddParameterValue(LimitColumns.Id, item.Id);
         }
 
-        public static IQuery Save(Limit item)
+        public IQuery Save(Limit item)
         {
             return RawQuery.Create(@"
 update

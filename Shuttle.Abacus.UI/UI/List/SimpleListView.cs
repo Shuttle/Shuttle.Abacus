@@ -18,7 +18,7 @@ namespace Shuttle.Abacus.UI.UI.List
         {
             Invoke(
                 () =>
-                BinderProvider.GetBinderFor<ListView>().Bind(model.ListItems, ListView, model.VisibleColumns,
+                BinderProvider.GetBinderFor<ListView>().Bind(model.Rows, ListView, model.VisibleColumns,
                                                              model.HiddenColumns));
         }
 

@@ -92,7 +92,7 @@ namespace Shuttle.Abacus.UI.UI.Summary
             }
         }
 
-        private static object[] RowValues(IQueryResult queryResult, DataRow row)
+        private static object[] RowValues(IEnumerable<DataRow> queryResult, DataRow row)
         {
             if (queryResult.HasIdentifierColumn())
             {

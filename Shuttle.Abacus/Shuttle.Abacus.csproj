@@ -149,7 +149,6 @@
     <Compile Include="DataAccess\Mapping\DecimalTableDTOMapper.cs" />
     <Compile Include="DataAccess\Mapping\DecimalValueDataRowMapper.cs" />
     <Compile Include="DataAccess\Mapping\FormulaDataRowMapper.cs" />
-    <Compile Include="DataAccess\Mapping\GraphNodeArgumentDataRowMapper.cs" />
     <Compile Include="DataAccess\Mapping\IMethodTestDTOMapper.cs" />
     <Compile Include="DataAccess\Mapping\LimitDataRowMapper.cs" />
     <Compile Include="DataAccess\Mapping\MethodDataRowMapper.cs" />
@@ -158,7 +157,7 @@
     <Compile Include="DataAccess\Mapping\OperationDTOMapper.cs" />
     <Compile Include="DataAccess\Mapping\OperationTypeDTOMapper.cs" />
     <Compile Include="DataAccess\Mapping\SystemUserDataReaderMapper.cs" />
-    <Compile Include="DataAccess\Mapping\TestCaseDataRowMapper.cs" />
+    <Compile Include="DataAccess\Mapping\MethodTestDataTableMapper.cs" />
     <Compile Include="DataAccess\Mapping\ValueSourceTypeDTOMapper.cs" />
     <Compile Include="DataAccess\Mapping\ValueTypeDTOMapper.cs" />
     <Compile Include="DataAccess\MethodQuery.cs" />
@@ -308,7 +307,6 @@
     <Compile Include="Domain\Formula\IFormulaOwner.cs" />
     <Compile Include="Domain\GraphNodeArgument.cs" />
     <Compile Include="Domain\ICanBeReadOnly.cs" />
-    <Compile Include="Domain\IDomainEvent.cs" />
     <Compile Include="Domain\IEntity.cs" />
     <Compile Include="Domain\IHandleEvent.cs" />
     <Compile Include="Domain\IHaveInvariants.cs" />
@@ -326,21 +324,11 @@
     <Compile Include="Domain\Limits\MaximumLimitResultBuilder.cs" />
     <Compile Include="Domain\Limits\MinimumLimit.cs" />
     <Compile Include="Domain\Limits\MinimumLimitResultBuilder.cs" />
-    <Compile Include="Domain\Localisation\ImageResource.cs" />
-    <Compile Include="Domain\Localisation\ImageResources.cs" />
-    <Compile Include="Domain\Localisation\IResourceAccessor.cs" />
-    <Compile Include="Domain\Localisation\ResourceItem.cs" />
-    <Compile Include="Domain\Localisation\ResourceItems.cs" />
-    <Compile Include="Domain\Localisation\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Domain\Logging\CalculationLoggerFactory.cs" />
     <Compile Include="Domain\Logging\ICalculationLoggerFactory.cs" />
-    <Compile Include="Domain\Logging\IPremiumCalculationLogger.cs" />
-    <Compile Include="Domain\Logging\NullPremiumCalculationLogger.cs" />
-    <Compile Include="Domain\Logging\TextPremiumLogger.cs" />
+    <Compile Include="Domain\Logging\ICalculationLogger.cs" />
+    <Compile Include="Domain\Logging\NullCalculationLogger.cs" />
+    <Compile Include="Domain\Logging\DefaultCalculationLogger.cs" />
     <Compile Include="Domain\Method.cs" />
     <Compile Include="Domain\MethodTest.cs" />
     <Compile Include="Domain\MethodTestArgumentAnswer.cs" />
@@ -390,7 +378,6 @@
     <Compile Include="Invariants\LimitRules.cs" />
     <Compile Include="Invariants\MethodRules.cs" />
     <Compile Include="Invariants\MethodTestRules.cs" />
-    <Compile Include="Invariants\Properties\AssemblyInfo.cs" />
     <Compile Include="Invariants\SystemUserRules.cs" />
     <Compile Include="Invariants\Values\DecimalValueTypeValidator.cs" />
     <Compile Include="Invariants\Values\IntegerValueTypeValidator.cs" />
@@ -424,41 +411,6 @@
     <Compile Include="Domain\Services\IArgumentService.cs" />
     <Compile Include="Domain\Services\IFormulaOwnerService.cs" />
     <Compile Include="Domain\SystemUser.cs" />
-    <Compile Include="Domain\Validation\ArgumentRules.cs" />
-    <Compile Include="Domain\Validation\CalculationRules.cs" />
-    <Compile Include="Domain\Validation\Core\IRule.cs" />
-    <Compile Include="Domain\Validation\Core\IRuleCollection.cs" />
-    <Compile Include="Domain\Validation\Core\IRuleCollectionBuilder.cs" />
-    <Compile Include="Domain\Validation\Core\IRuleResult.cs" />
-    <Compile Include="Domain\Validation\Core\RequiredRule.cs" />
-    <Compile Include="Domain\Validation\Core\Rule.cs" />
-    <Compile Include="Domain\Validation\Core\RuleCollection.cs" />
-    <Compile Include="Domain\Validation\Core\RuleCollectionBuilder.cs" />
-    <Compile Include="Domain\Validation\Core\RuleMessage.cs" />
-    <Compile Include="Domain\Validation\Core\RuleResult.cs" />
-    <Compile Include="Domain\Validation\Core\Rules\DateTimeRule.cs" />
-    <Compile Include="Domain\Validation\Core\Rules\DecimalRule.cs" />
-    <Compile Include="Domain\Validation\Core\Rules\IntegerRule.cs" />
-    <Compile Include="Domain\Validation\Core\Rules\MaximumLengthRule.cs" />
-    <Compile Include="Domain\Validation\Core\Rules\MinimumLengthRule.cs" />
-    <Compile Include="Domain\Validation\DecimalTableRules.cs" />
-    <Compile Include="Domain\Validation\Interfaces\IArgumentRules.cs" />
-    <Compile Include="Domain\Validation\Interfaces\ICalculationRules.cs" />
-    <Compile Include="Domain\Validation\Interfaces\IDecimalTableRules.cs" />
-    <Compile Include="Domain\Validation\Interfaces\ILimitRules.cs" />
-    <Compile Include="Domain\Validation\Interfaces\IMethodRules.cs" />
-    <Compile Include="Domain\Validation\Interfaces\IMethodTestRules.cs" />
-    <Compile Include="Domain\Validation\Interfaces\ISystemUserRules.cs" />
-    <Compile Include="Domain\Validation\LimitRules.cs" />
-    <Compile Include="Domain\Validation\MethodRules.cs" />
-    <Compile Include="Domain\Validation\MethodTestRules.cs" />
-    <Compile Include="Domain\Validation\SystemUserRules.cs" />
-    <Compile Include="Domain\Validation\Values\DecimalValueTypeValidator.cs" />
-    <Compile Include="Domain\Validation\Values\IntegerValueTypeValidator.cs" />
-    <Compile Include="Domain\Validation\Values\IValueTypeValidator.cs" />
-    <Compile Include="Domain\Validation\Values\IValueTypeValidatorProvider.cs" />
-    <Compile Include="Domain\Validation\Values\MoneyValueTypeValidator.cs" />
-    <Compile Include="Domain\Validation\Values\ValueTypeValidatorProvider.cs" />
     <Compile Include="Domain\ValueSource\ArgumentAnswerValueSource.cs" />
     <Compile Include="Domain\ValueSource\CalculationResultValueSource.cs" />
     <Compile Include="Domain\ValueSource\CalculationSubTotalValueSource.cs" />
@@ -482,124 +434,6 @@
     <Compile Include="Domain\ValueSource\MethodResultValueSource.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Domain\Localisation\Resources\accept.png" />
-    <Content Include="Domain\Localisation\Resources\add.png" />
-    <Content Include="Domain\Localisation\Resources\add_user.png" />
-    <Content Include="Domain\Localisation\Resources\application.png" />
-    <Content Include="Domain\Localisation\Resources\application_add.png" />
-    <Content Include="Domain\Localisation\Resources\application_delete.png" />
-    <Content Include="Domain\Localisation\Resources\application_edit.png" />
-    <Content Include="Domain\Localisation\Resources\application_put.png" />
-    <Content Include="Domain\Localisation\Resources\application_view_list.png" />
-    <Content Include="Domain\Localisation\Resources\arrow_down.png" />
-    <Content Include="Domain\Localisation\Resources\arrow_in.png" />
-    <Content Include="Domain\Localisation\Resources\arrow_refresh_small.png" />
-    <Content Include="Domain\Localisation\Resources\arrow_switch.png" />
-    <Content Include="Domain\Localisation\Resources\arrow_up.png" />
-    <Content Include="Domain\Localisation\Resources\book_go.png" />
-    <Content Include="Domain\Localisation\Resources\brick.png" />
-    <Content Include="Domain\Localisation\Resources\brick_add.png" />
-    <Content Include="Domain\Localisation\Resources\brick_delete.png" />
-    <Content Include="Domain\Localisation\Resources\brick_edit.png" />
-    <Content Include="Domain\Localisation\Resources\brick_go.png" />
-    <Content Include="Domain\Localisation\Resources\bullet_orange.png" />
-    <Content Include="Domain\Localisation\Resources\calculator.png" />
-    <Content Include="Domain\Localisation\Resources\calculator_add.png" />
-    <Content Include="Domain\Localisation\Resources\calculator_delete.png" />
-    <Content Include="Domain\Localisation\Resources\calculator_edit.png" />
-    <Content Include="Domain\Localisation\Resources\calculator_error.png" />
-    <Content Include="Domain\Localisation\Resources\cancel.png" />
-    <Content Include="Domain\Localisation\Resources\cancel_round.png" />
-    <Content Include="Domain\Localisation\Resources\chart_curve.png" />
-    <Content Include="Domain\Localisation\Resources\chart_curve_add.png" />
-    <Content Include="Domain\Localisation\Resources\chart_curve_delete.png" />
-    <Content Include="Domain\Localisation\Resources\chart_curve_edit.png" />
-    <Content Include="Domain\Localisation\Resources\chart_pie.png" />
-    <Content Include="Domain\Localisation\Resources\chart_pie_add.png" />
-    <Content Include="Domain\Localisation\Resources\chart_pie_delete.png" />
-    <Content Include="Domain\Localisation\Resources\chart_pie_edit.png" />
-    <Content Include="Domain\Localisation\Resources\cut_red.png" />
-    <Content Include="Domain\Localisation\Resources\delete.png" />
-    <Content Include="Domain\Localisation\Resources\edit_user.png" />
-    <Content Include="Domain\Localisation\Resources\error.png" />
-    <Content Include="Domain\Localisation\Resources\exclamation.png" />
-    <Content Include="Domain\Localisation\Resources\help.png" />
-    <Content Include="Domain\Localisation\Resources\hourglass.png" />
-    <Content Include="Domain\Localisation\Resources\Image_GeneralUp.png" />
-    <Content Include="Domain\Localisation\Resources\Image_Report.png" />
-    <Content Include="Domain\Localisation\Resources\key.png" />
-    <Content Include="Domain\Localisation\Resources\key_go.png" />
-    <Content Include="Domain\Localisation\Resources\layout.png" />
-    <Content Include="Domain\Localisation\Resources\layout_add.png" />
-    <Content Include="Domain\Localisation\Resources\layout_delete.png" />
-    <Content Include="Domain\Localisation\Resources\layout_edit.png" />
-    <Content Include="Domain\Localisation\Resources\link.png" />
-    <Content Include="Domain\Localisation\Resources\link_add.png" />
-    <Content Include="Domain\Localisation\Resources\link_delete.png" />
-    <Content Include="Domain\Localisation\Resources\link_edit.png" />
-    <Content Include="Domain\Localisation\Resources\link_go.png" />
-    <Content Include="Domain\Localisation\Resources\marker_rounded_edit.png" />
-    <Content Include="Domain\Localisation\Resources\marker_rounded_light_blue.png" />
-    <Content Include="Domain\Localisation\Resources\marker_rounded_remove.png" />
-    <Content Include="Domain\Localisation\Resources\marker_squared_add.png" />
-    <Content Include="Domain\Localisation\Resources\note.png" />
-    <Content Include="Domain\Localisation\Resources\note_add.png" />
-    <Content Include="Domain\Localisation\Resources\note_delete.png" />
-    <Content Include="Domain\Localisation\Resources\note_edit.png" />
-    <Content Include="Domain\Localisation\Resources\note_error.png" />
-    <Content Include="Domain\Localisation\Resources\note_go.png" />
-    <Content Include="Domain\Localisation\Resources\package.png" />
-    <Content Include="Domain\Localisation\Resources\package_add.png" />
-    <Content Include="Domain\Localisation\Resources\package_delete.png" />
-    <Content Include="Domain\Localisation\Resources\package_go.png" />
-    <Content Include="Domain\Localisation\Resources\package_green.png" />
-    <Content Include="Domain\Localisation\Resources\page.png" />
-    <Content Include="Domain\Localisation\Resources\page_white.png" />
-    <Content Include="Domain\Localisation\Resources\page_white_add.png" />
-    <Content Include="Domain\Localisation\Resources\page_white_copy.png" />
-    <Content Include="Domain\Localisation\Resources\page_white_delete.png" />
-    <Content Include="Domain\Localisation\Resources\page_white_edit.png" />
-    <Content Include="Domain\Localisation\Resources\remove_user.png" />
-    <Content Include="Domain\Localisation\Resources\report.png" />
-    <Content Include="Domain\Localisation\Resources\report_magnify.png" />
-    <Content Include="Domain\Localisation\Resources\Save_16.gif" />
-    <Content Include="Domain\Localisation\Resources\script.png" />
-    <Content Include="Domain\Localisation\Resources\script_add.png" />
-    <Content Include="Domain\Localisation\Resources\script_delete.png" />
-    <Content Include="Domain\Localisation\Resources\script_edit.png" />
-    <Content Include="Domain\Localisation\Resources\script_go.png" />
-    <Content Include="Domain\Localisation\Resources\server_go.png" />
-    <Content Include="Domain\Localisation\Resources\shield.png" />
-    <Content Include="Domain\Localisation\Resources\shield_add.png" />
-    <Content Include="Domain\Localisation\Resources\shield_delete.png" />
-    <Content Include="Domain\Localisation\Resources\shield_go.png" />
-    <Content Include="Domain\Localisation\Resources\table.png" />
-    <Content Include="Domain\Localisation\Resources\table_add.png" />
-    <Content Include="Domain\Localisation\Resources\table_delete.png" />
-    <Content Include="Domain\Localisation\Resources\table_edit.png" />
-    <Content Include="Domain\Localisation\Resources\table_go.png" />
-    <Content Include="Domain\Localisation\Resources\tag_blue.png" />
-    <Content Include="Domain\Localisation\Resources\tag_blue_add.png" />
-    <Content Include="Domain\Localisation\Resources\tag_blue_delete.png" />
-    <Content Include="Domain\Localisation\Resources\tag_blue_edit.png" />
-    <Content Include="Domain\Localisation\Resources\tick.png" />
-    <Content Include="Domain\Localisation\Resources\user.png" />
-    <Content Include="Domain\Localisation\Resources\users_two_16.png" />
-    <Content Include="Domain\Localisation\Resources\users_two_add_16.png" />
-    <Content Include="Domain\Localisation\Resources\users_two_edit_16.png" />
-    <Content Include="Domain\Localisation\Resources\user_add.png" />
-    <Content Include="Domain\Localisation\Resources\user_delete.png" />
-    <Content Include="Domain\Localisation\Resources\user_edit.png" />
-    <Content Include="Domain\Localisation\Resources\user_group.png" />
-    <Content Include="Domain\Localisation\Resources\user_two_delete_16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Domain\Localisation\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Shuttle.Abacus.DTO\Shuttle.Abacus.DTO.csproj">
       <Project>{5CD61A6D-ABCB-4400-A113-4EF4DA4C439C}</Project>
       <Name>Shuttle.Abacus.DTO</Name>
@@ -607,6 +441,10 @@
     <ProjectReference Include="..\Shuttle.Abacus.Infrastructure\Shuttle.Abacus.Infrastructure.csproj">
       <Project>{1A365F2C-BA2B-41F0-969B-EEC08C6E2658}</Project>
       <Name>Shuttle.Abacus.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shuttle.Abacus.Localisation\Shuttle.Abacus.Localisation.csproj">
+      <Project>{8B8949A1-EE10-4444-B974-62C1DC5708AC}</Project>
+      <Name>Shuttle.Abacus.Localisation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,8 @@
+using Shuttle.Abacus.Invariants.Values;
 using Shuttle.Abacus.UI.Core.Formatters;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.UI.Constraint
 {
@@ -112,7 +114,10 @@ namespace Shuttle.Abacus.UI.UI.Constraint
         {
             base.OnInitialize();
 
-            Guard.AgainstNullDependency(Model, "Model");
+            if (Model == null)
+            {
+                throw new NullDependencyException("Model");
+            }
 
             View.PopulateFactors(Model.Arguments);
             View.SetContraintTypes(Model.ConstraintTypes);

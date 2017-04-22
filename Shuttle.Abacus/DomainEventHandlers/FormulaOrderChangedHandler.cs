@@ -1,3 +1,4 @@
+using Abacus.Domain;
 using Shuttle.Abacus.Domain;
 
 namespace Shuttle.Abacus.DomainEventHandlers

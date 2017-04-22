@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Windows.Forms;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
 
@@ -22,19 +23,40 @@ namespace Shuttle.Abacus.UI.UI.Grid
                 column.HeaderText = ResourceItem.GetText(column.Name);
             }
 
-            foreach(var col in model.HiddenColumns)
+            foreach(var name in model.HiddenColumns)
             {
-                GridView.Columns[col.ColumnName].Visible = false;
+                var column = GridView.Columns[name];
+
+                if (column == null)
+                {
+                    continue;
+                }
+
+                column.Visible = false;
             }
 
-            foreach (var col in model.VisibleColumns)
+            foreach (var name in model.VisibleColumns)
             {
-                GridView.Columns[col.ColumnName].Visible = true;
+                var column = GridView.Columns[name];
+
+                if (column == null)
+                {
+                    continue;
+                }
+
+                column.Visible = true;
             }
 
-            foreach (var col in model.EditableColumns)
+            foreach (var name in model.EditableColumns)
             {
-                GridView.Columns[col.ColumnName].ReadOnly = false;
+                var column = GridView.Columns[name];
+
+                if (column == null)
+                {
+                    continue;
+                }
+
+                column.ReadOnly = false;
             }
 
         }

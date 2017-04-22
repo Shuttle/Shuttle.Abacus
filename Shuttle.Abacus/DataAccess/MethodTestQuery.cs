@@ -1,32 +1,44 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public class MethodTestQuery :IMethodTestQuery
     {
-        public IQueryResult All()
+        private readonly IDatabaseGateway _databaseGateway;
+        private readonly IMethodTestQueryFactory _methodTestQueryFactory;
+
+        public MethodTestQuery(IDatabaseGateway databaseGateway, IMethodTestQueryFactory methodTestQueryFactory)
         {
-            return QueryProcessor.Execute(MethodTestQueryFactory.All());
+            _databaseGateway = databaseGateway;
+            _methodTestQueryFactory = methodTestQueryFactory;
         }
 
-        public IQueryResult Get(Guid id)
+        public IEnumerable<DataRow> All()
         {
-            return QueryProcessor.Execute(MethodTestQueryFactory.Get(id));
+            return _databaseGateway.GetRowsUsing(_methodTestQueryFactory.All());
         }
 
-        public IQueryResult GetArgumentAnswers(Guid id)
+        public DataRow Get(Guid id)
         {
-            return QueryProcessor.Execute(MethodTestQueryFactory.GetArgumentAnswers(id));
+            return _databaseGateway.GetSingleRowUsing(_methodTestQueryFactory.Get(id));
         }
 
-        public IQueryResult AllUsingArgument(Guid argumentId)
+        public IEnumerable<DataRow> GetArgumentAnswers(Guid id)
         {
-            return QueryProcessor.Execute(MethodTestQueryFactory.AllUsingArgument(argumentId));
+            return _databaseGateway.GetRowsUsing(_methodTestQueryFactory.GetArgumentAnswers(id));
         }
 
-        public IQueryResult FetchForMethodId(Guid methodId)
+        public IEnumerable<DataRow> AllUsingArgument(Guid argumentId)
         {
-            return QueryProcessor.Execute(MethodTestQueryFactory.AllForMethod(methodId));
+            return _databaseGateway.GetRowsUsing(_methodTestQueryFactory.AllUsingArgument(argumentId));
+        }
+
+        public DataRow FetchForMethodId(Guid methodId)
+        {
+            return _databaseGateway.GetSingleRowUsing(_methodTestQueryFactory.AllForMethod(methodId));
         }
     }
 }

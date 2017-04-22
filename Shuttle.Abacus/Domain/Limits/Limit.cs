@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Abacus.Domain;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
     public abstract class Limit :
+        Entity<Limit>,
         IFormulaOwner,
         IConstraintOwner
     {
@@ -78,7 +80,5 @@ namespace Shuttle.Abacus.Domain
             limit.AssignFormulas(((FormulaCalculation)calculation.Copy(new Dictionary<Guid, Guid>())).Formulas);
             constraints.ForEach(constraint => limit.AddConstraint(constraint.Copy()));
         }
-
-        public Guid Id { get; }
     }
 }

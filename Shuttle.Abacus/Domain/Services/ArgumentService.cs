@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Shuttle.Core.Infrastructure;
+using IPipeline = Shuttle.Abacus.Infrastructure.IPipeline;
 
 namespace Shuttle.Abacus.Domain
 {

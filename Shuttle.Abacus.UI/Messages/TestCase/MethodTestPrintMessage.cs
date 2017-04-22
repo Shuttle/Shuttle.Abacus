@@ -1,3 +1,4 @@
+using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.UI.Messages.Core;
 
 namespace Shuttle.Abacus.UI.Messages.TestCase

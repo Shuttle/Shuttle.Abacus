@@ -1,4 +1,6 @@
 ﻿using System;
+using Shuttle.Abacus.DataAccess;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Core.Resources;

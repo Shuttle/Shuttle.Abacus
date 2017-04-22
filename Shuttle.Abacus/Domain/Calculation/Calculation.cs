@@ -1,15 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Abacus.Domain;
 using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
-    public abstract class Calculation : Core.Infrastructure.ISpecification<IMethodContext>,
+    public abstract class Calculation : Entity<Calculation>,
         ILimitOwner,
-        IConstraintOwner
+        IConstraintOwner,
+        ISpecification<IMethodContext>
     {
         private readonly List<IConstraint> constraints = new List<IConstraint>();
         private readonly List<GraphNodeArgument> graphNodeArguments = new List<GraphNodeArgument>();
@@ -57,7 +59,7 @@ namespace Shuttle.Abacus.Domain
 
             Guard.Against<InvalidStateException>(
                 limits.Find(item => item.Name.Equals(limit.Name, StringComparison.InvariantCultureIgnoreCase)) != null,
-                string.Format(Resources.DuplicateEntryException, limit.Name, "Limits"));
+                string.Format(Localisation.Resources.DuplicateEntryException, limit.Name, "Limits"));
 
             limits.Add(limit);
 

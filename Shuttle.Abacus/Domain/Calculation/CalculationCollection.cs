@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Shuttle.Abacus.DataAccess;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
@@ -113,7 +114,7 @@ namespace Shuttle.Abacus.Domain
         }
 
         public override ICalculationResult Execute(IMethodContext methodContext,
-                                                   ICalculationContext calculationContext)
+            ICalculationContext calculationContext)
         {
             Guard.AgainstNull(methodContext, "methodContext");
 
@@ -126,11 +127,14 @@ namespace Shuttle.Abacus.Domain
 
             foreach (var calculation in calculations)
             {
-                using (var context = calculation.CalculationContext(methodContext).AssignGraphNode(calculationContext.GraphNode.AddGraphNode(calculation.Name)))
+                using (
+                    var context =
+                        calculation.CalculationContext(methodContext)
+                            .AssignGraphNode(calculationContext.GraphNode.AddGraphNode(calculation.Name)))
                 {
                     context.GraphNode.AddGraphNodeArguments(GraphNodeArguments);
 
-                    var calculationResult = (AbstractCalculationResult)calculation.Execute(methodContext, context);
+                    var calculationResult = (AbstractCalculationResult) calculation.Execute(methodContext, context);
                     var subTotalCalculationResult = methodContext.GetSubTotal(calculation.Name);
 
                     context.PopulateGraphNode(calculationResult.Value, subTotalCalculationResult.Value);
@@ -172,34 +176,34 @@ namespace Shuttle.Abacus.Domain
             Copy(result);
 
             calculations.ForEach(calculation =>
+            {
+                var copy = calculation.Copy(idMap);
+
+                idMap.Add(calculation.Id, copy.Id);
+
+                var formulaCalculation = copy as FormulaCalculation;
+
+                if (formulaCalculation != null)
                 {
-                    var copy = calculation.Copy(idMap);
-
-                    idMap.Add(calculation.Id, copy.Id);
-
-                    var formulaCalculation = copy as FormulaCalculation;
-
-                    if (formulaCalculation != null)
+                    foreach (var formula in formulaCalculation.Formulas)
                     {
-                        foreach (var formula in formulaCalculation.Formulas)
+                        foreach (var operation in formula.Operations)
                         {
-                            foreach (var operation in formula.Operations)
-                            {
-                                var calculationValueSource =
-                                    operation.ValueSource as ICalculationValueSource;
+                            var calculationValueSource =
+                                operation.ValueSource as ICalculationValueSource;
 
-                                if (calculationValueSource != null)
-                                {
-                                    calculationValueSource
-                                        .AssignCalculationId(
+                            if (calculationValueSource != null)
+                            {
+                                calculationValueSource
+                                    .AssignCalculationId(
                                         idMap[new Guid(calculationValueSource.ValueSelection)]);
-                                }
                             }
                         }
                     }
+                }
 
-                    result.AddCalculation(copy);
-                });
+                result.AddCalculation(copy);
+            });
 
             return result;
         }
@@ -278,9 +282,10 @@ namespace Shuttle.Abacus.Domain
         {
             var result = Find(id, true);
 
-            Guard.Against<MissingEntryException>(result == null,
-                                                 string.Format(Resources.MissingEntryException, id,
-                                                               "CalculationCollection"));
+            if (result == null)
+            {
+                throw Exceptions.MissingEntity("CalculationCollection", id);
+            }
 
             return result;
         }

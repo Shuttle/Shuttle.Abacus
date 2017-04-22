@@ -4,7 +4,7 @@ using Shuttle.Abacus.Domain;
 
 namespace Shuttle.Abacus.DataAccess
 {
-    public class ConstraintDataTableMapper : IDataRowMapper<IConstraint>
+    public class ConstraintDataTableMapper : IDataTableMapper<IConstraint>
     {
         private readonly IFactoryProvider<IConstraintFactory> constraintFactoryProvider;
         private readonly IFactoryProvider<IArgumentAnswerFactory> argumentAnswerFactoryProvider;

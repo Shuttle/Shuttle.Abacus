@@ -1,35 +1,38 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using Shuttle.Abacus.DTO;
+using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
 {
-    public class MethodQuery :IMethodQuery
+    public class MethodQuery : IMethodQuery
     {
-        private readonly IDataRowMapper<MethodDTO> methodDTOMapper;
+        private readonly IDatabaseGateway _databaseGateway;
+        private readonly IDataTableMapper<MethodDTO> _methodDTOMapper;
+        private readonly IMethodQueryFactory _methodQueryFactory;
 
-        public MethodQuery(IDataRowMapper<MethodDTO> methodDTOMapper)
+        public MethodQuery(IDatabaseGateway databaseGateway, IMethodQueryFactory methodQueryFactory,
+            IDataTableMapper<MethodDTO> methodDTOMapper)
         {
-            this.methodDTOMapper = methodDTOMapper;
+            _databaseGateway = databaseGateway;
+            _methodQueryFactory = methodQueryFactory;
+            _methodDTOMapper = methodDTOMapper;
         }
 
-        public IQueryResult MethodName(Guid id)
+        public IEnumerable<DataRow> All()
         {
-            return QueryProcessor.Execute(MethodQueryFactory.MethodName(id));
+            return _databaseGateway.GetRowsUsing(_methodQueryFactory.All());
         }
 
-        public IQueryResult All()
+        public DataRow Get(Guid id)
         {
-            return QueryProcessor.Execute(MethodQueryFactory.All());
-        }
-
-        public IQueryResult Get(Guid id)
-        {
-            return QueryProcessor.Execute(MethodQueryFactory.Get(id));
+            return _databaseGateway.GetSingleRowUsing(_methodQueryFactory.Get(id));
         }
 
         public IEnumerable<MethodDTO> AllDTOs()
         {
-            return methodDTOMapper.MapFrom(All().Table);
+            return _methodDTOMapper.MapFrom(All().CopyToDataTable());
         }
     }
 }

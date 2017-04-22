@@ -46,7 +46,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                           };
 
             Send(command, () =>
-                          MessageBus.Publish(
+                          _messageBus.Publish(
                               new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
         }
 
@@ -56,7 +56,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                  {
                      LimitId = message.LimitId
                  },
-                 () => MessageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
+                 () => _messageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
         }
     }
 }

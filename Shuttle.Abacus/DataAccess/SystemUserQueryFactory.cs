@@ -7,7 +7,7 @@ namespace Shuttle.Abacus.DataAccess
 {
     public class SystemUserQueryFactory : ISystemUserQueryFactory
     {
-        private  readonly string SelectClausePermissions = @"
+        private readonly string SelectClausePermissions = @"
 select {0}
     u.SystemUserID,
     u.LoginName,
@@ -55,37 +55,29 @@ where
                 .AddParameterValue(PermissionColumns.SystemUserId, id);
         }
 
-        public  IQuery FetchAll()
+        public IQuery FetchAll()
         {
             return FetchAll(0);
         }
 
-        public  IQuery FetchAll(int top)
+        public IQuery FetchAll(int top)
         {
             return RawQuery.Create(SelectClausePermissionsTop(top));
         }
 
-        private  string SelectClausePermissionsTop(int top)
-        {
-            return string.Format(SelectClausePermissions,
-                top < 1
-                    ? string.Empty
-                    : string.Concat("top ", top.ToString()));
-        }
-
-        public  IQuery FetchByLoginName(string loginName)
+        public IQuery FetchByLoginName(string loginName)
         {
             return RawQuery.Create(string.Concat(SelectClausePermissionsTop(0), "where u.LoginName = @LoginName"))
                 .AddParameterValue(SystemUserColumns.LoginName, loginName);
         }
 
-        public  IQuery FetchById(Guid id)
+        public IQuery FetchById(Guid id)
         {
             return RawQuery.Create(string.Concat(SelectClausePermissionsTop(0), "where u.SystemUserId = @SystemUserId"))
                 .AddParameterValue(SystemUserColumns.Id, id);
         }
 
-        public  IQuery Add(SystemUser user)
+        public IQuery Add(SystemUser user)
         {
             return RawQuery.Create(@"
 insert into SystemUser
@@ -102,20 +94,20 @@ values
                 .AddParameterValue(SystemUserColumns.LoginName, user.LoginName);
         }
 
-        public  IQuery Update(SystemUser user)
+        public IQuery Update(SystemUser user)
         {
             return RawQuery.Create("update SystemUser set LoginName = @LoginName where SystemUserId = @SystemUserId")
                 .AddParameterValue(SystemUserColumns.LoginName, user.LoginName)
                 .AddParameterValue(SystemUserColumns.Id, user.Id);
         }
 
-        public  IQuery DeleteUser(SystemUser user)
+        public IQuery DeleteUser(SystemUser user)
         {
             return RawQuery.Create("delete from SystemUserSystemUserId = @SystemUserId")
                 .AddParameterValue(SystemUserColumns.Id, user.Id);
         }
 
-        public  IQuery AddPermission(SystemUser user, IPermission permission)
+        public IQuery AddPermission(SystemUser user, IPermission permission)
         {
             return RawQuery.Create(@"
 insert into SystemUserPermission
@@ -132,10 +124,30 @@ values
                 .AddParameterValue(PermissionColumns.Permission, permission.Identifier);
         }
 
-        public  IQuery DeletePermissions(SystemUser user)
+        public IQuery DeletePermissions(SystemUser user)
         {
             return RawQuery.Create("delete from SystemUserPermission where SystemUserId = @SystemUserId")
                 .AddParameterValue(SystemUserColumns.Id, user.Id);
+        }
+
+        public IQuery Get(string loginname)
+        {
+            return RawQuery.Create(@"
+select
+    SystemUserId,
+    LoginName
+where
+    LoginName = @LoginName
+")
+               .AddParameterValue(SystemUserColumns.LoginName, loginname);
+        }
+
+        private string SelectClausePermissionsTop(int top)
+        {
+            return string.Format(SelectClausePermissions,
+                top < 1
+                    ? string.Empty
+                    : string.Concat("top ", top.ToString()));
         }
     }
 }

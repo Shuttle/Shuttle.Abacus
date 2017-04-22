@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using Shuttle.Abacus.DTO;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
@@ -8,73 +9,39 @@ namespace Shuttle.Abacus.DataAccess
 {
     public class ArgumentQuery : IArgumentQuery
     {
-        private readonly IDataRowMapper<ArgumentDTO> argumentDTOMapper;
-        private readonly IPipeline pipeline;
+        private readonly IDataTableMapper<ArgumentDTO> _argumentDTOMapper;
+        private readonly IDatabaseGateway _databaseGateway;
+        private readonly IArgumentQueryFactory _argumentQueryFactory;
+        private readonly IPipeline _pipeline;
 
-        public ArgumentQuery(IDataRowMapper<ArgumentDTO> argumentDTOMapper, IPipeline pipeline)
+        public ArgumentQuery(IDatabaseGateway databaseGateway, IArgumentQueryFactory argumentQueryFactory, IDataTableMapper<ArgumentDTO> argumentDTOMapper,
+            IPipeline pipeline)
         {
-            this.argumentDTOMapper = argumentDTOMapper;
-            this.pipeline = pipeline;
+            _databaseGateway = databaseGateway;
+            _argumentQueryFactory = argumentQueryFactory;
+            _argumentDTOMapper = argumentDTOMapper;
+            _pipeline = pipeline;
         }
 
-        public IQueryResult All()
+        public IEnumerable<DataRow> All()
         {
-            return QueryProcessor.Execute(ArgumentQueryFactory.All());
+            return _databaseGateway.GetRowsUsing(_argumentQueryFactory.All());
         }
 
-        public IQueryResult Get(Guid id)
+        public DataRow Get(Guid id)
         {
-            return QueryProcessor.Execute(ArgumentQueryFactory.Get(id));
+            return _databaseGateway.GetSingleRowUsing(_argumentQueryFactory.Get(id));
         }
 
-        public IQueryResult GetAnswerCatalog(Guid id)
+        public IEnumerable<DataRow> GetAnswerCatalog(Guid id)
         {
-            return QueryProcessor.Execute(ArgumentQueryFactory.GetRestrictedAnswer(id));
-        }
-
-        public IQueryResult Definitions()
-        {
-            return QueryProcessor.Execute(ArgumentQueryFactory.Definitions());
-        }
-
-        public IQueryResult Name(Guid id)
-        {
-            return QueryProcessor.Execute(ArgumentQueryFactory.Name(id));
-        }
-
-        public IEnumerable<ArgumentDTO> AllDTOs()
-        {
-            var dtos = new List<ArgumentDTO>(argumentDTOMapper.MapFrom(Definitions().Table));
-
-            new List<ArgumentDTO>(argumentDTOMapper.MapFrom(Definitions().Table))
-                .ForEach(dto =>
-                    {
-                        if (
-                            dtos.Find(
-                                candidate =>
-                                candidate.Name.Equals(dto.Name, StringComparison.InvariantCultureIgnoreCase)) ==
-                            null)
-                        {
-                            dtos.Add(dto);
-                        }
-                    });
-
-            dtos.Sort((x, y) => x.Name.CompareTo(y.Name));
-
-            dtos.ForEach(pipeline.Process);
-
-            return dtos;
+            return _databaseGateway.GetRowsUsing(_argumentQueryFactory.GetRestrictedAnswer(id));
         }
 
         public ArgumentDTO ArgumentDTO(Guid argumentId)
         {
-            var dtos = new List<ArgumentDTO>(argumentDTOMapper.MapFrom(QueryProcessor.Execute(ArgumentQueryFactory.Definition(argumentId)).Table));
-
-            var dto = dtos.Count > 0 ? dtos[0]: null;
-
-            Guard.AgainstMissing<ArgumentDTO>(dto, argumentId);
-
-            return dto;
+            throw new NotImplementedException();
+            //return _argumentDTOMapper.MapFrom(Get(argumentId).Table);
         }
     }
 }

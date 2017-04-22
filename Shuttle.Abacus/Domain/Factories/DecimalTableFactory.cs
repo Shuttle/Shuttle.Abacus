@@ -23,8 +23,9 @@ namespace Shuttle.Abacus.Domain
 
                 foreach (var constraintDTO in dto.ConstraintDTOs)
                 {
-                    value.AddConstraint(
-                        constraintFactoryProvider.Get(constraintDTO.ConstraintTypeDTO.Name).Create(constraintDTO.ArgumentDto.Id, argumentAnswerFactoryProvider.Get(constraintDTO.ArgumentDto.AnswerType).Create(constraintDTO.ArgumentDto.Name, constraintDTO.Value)));
+                    //TODO
+                    //value.AddConstraint(
+                    //    constraintFactoryProvider.Get(constraintDTO.ConstraintTypeDTO.Name).Create(constraintDTO.ArgumentDto.Id, argumentAnswerFactoryProvider.Get(constraintDTO.ArgumentDto.AnswerType).Create(constraintDTO.ArgumentDto.Name, constraintDTO.Value)));
                 }
 
                 result.AddDecimalValue(value);

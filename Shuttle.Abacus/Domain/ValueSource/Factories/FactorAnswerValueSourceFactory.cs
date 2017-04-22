@@ -4,11 +4,11 @@ namespace Shuttle.Abacus.Domain
 {
     public class ArgumentAnswerValueSourceFactory : IValueSourceFactory
     {
-        private readonly IUnitOfWorkProvider unitOfWorkProvider;
+        private readonly IArgumentRepository _argumentRepository;
 
-        public ArgumentAnswerValueSourceFactory(IUnitOfWorkProvider unitOfWorkProvider)
+        public ArgumentAnswerValueSourceFactory(IArgumentRepository argumentRepository)
         {
-            this.unitOfWorkProvider = unitOfWorkProvider;
+            _argumentRepository = argumentRepository;
         }
 
         public string Name
@@ -28,7 +28,7 @@ namespace Shuttle.Abacus.Domain
 
         public IValueSource Create(string value)
         {
-            return new ArgumentAnswerValueSource(unitOfWorkProvider.Current.Get<Argument>(new Guid(value)));
+            return new ArgumentAnswerValueSource(_argumentRepository.Get(new Guid(value)));
         }
     }
 }

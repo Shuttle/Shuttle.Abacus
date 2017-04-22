@@ -1,6 +1,9 @@
 using System.Data;
+using Shuttle.Abacus.DataAccess;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.UI.Calculation.GraphNodeArgument
 {
@@ -36,7 +39,10 @@ namespace Shuttle.Abacus.UI.UI.Calculation.GraphNodeArgument
         {
             base.OnInitialize();
 
-            Guard.AgainstNullDependency(Model, "Model");
+            if (Model == null)
+            {
+                throw new NullDependencyException("Model");
+            }
 
             View.PopulateFactors(Model.Factors);
 

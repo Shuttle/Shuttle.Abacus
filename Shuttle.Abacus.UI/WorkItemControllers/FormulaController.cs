@@ -49,7 +49,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                      Operations = formulaView.Operations,
                      Constraints = constraintView.Constraints
                  }, () =>
-                    MessageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
+                    _messageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
         }
 
         public void HandleMessage(MoveUpMessage message)
@@ -90,7 +90,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                  {
                      FormulaId = message.FormulaId
                  },
-                 () => MessageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
+                 () => _messageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
         }
     }
 }

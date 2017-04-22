@@ -4,11 +4,11 @@ namespace Shuttle.Abacus.Domain
 {
     public class MethodResultValueSourceFactory : IValueSourceFactory
     {
-        private readonly IUnitOfWorkProvider unitOfWorkProvider;
+        private readonly IMethodRepository _methodRepository;
 
-        public MethodResultValueSourceFactory(IUnitOfWorkProvider unitOfWorkProvider)
+        public MethodResultValueSourceFactory(IMethodRepository methodRepository)
         {
-            this.unitOfWorkProvider = unitOfWorkProvider;
+            _methodRepository = methodRepository;
         }
 
         public string Name
@@ -28,7 +28,7 @@ namespace Shuttle.Abacus.Domain
 
         public IValueSource Create(string value)
         {
-            return new MethodResultValueSource(unitOfWorkProvider.Current.Get<Method>(new Guid(value)));
+            return new MethodResultValueSource(_methodRepository.Get(new Guid(value)));
         }
     }
 }

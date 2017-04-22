@@ -1,4 +1,5 @@
 ﻿using System;
+using Shuttle.Abacus.Domain;
 using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
@@ -9,5 +10,11 @@ namespace Shuttle.Abacus.DataAccess
         IQuery AllForMethod(Guid id);
         IQuery GetArgumentAnswers(Guid id);
         IQuery AllUsingArgument(Guid argumentId);
+        IQuery Get(Guid id);
+        IQuery Remove(MethodTest item);
+        IQuery Add(MethodTest item);
+        IQuery AddArgumentAnswer(MethodTest test, MethodTestArgumentAnswer argumentAnswer);
+        IQuery SetArgumentName(Guid argumentId, string argumentName);
+        IQuery SetArgumentAnswerType(Guid argumentId, string answerType);
     }
 }

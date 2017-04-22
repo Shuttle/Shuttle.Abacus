@@ -45,12 +45,12 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
 
         public IWorkItemBuilderController Create(string text)
         {
-            return new WorkItemBuilder(text, this, workItemControllerFactory, workItemPresenterFactory);
+            return new WorkItemBuilder(text, this, workItemPresenterFactory);
         }
 
         public IWorkItemBuilderController Create(Guid workItemId, string text)
         {
-            return new WorkItemBuilder(workItemId, text, this, workItemControllerFactory, workItemPresenterFactory);
+            return new WorkItemBuilder(workItemId, text, this, workItemPresenterFactory);
         }
 
         public void TextChanged(WorkItem workItem)

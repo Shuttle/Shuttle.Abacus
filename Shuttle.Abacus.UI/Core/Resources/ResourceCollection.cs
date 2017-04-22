@@ -1,3 +1,5 @@
+using Shuttle.Abacus.Infrastructure;
+
 namespace Shuttle.Abacus.UI.Core.Resources
 {
     public class ResourceCollection : RichList<Resource>

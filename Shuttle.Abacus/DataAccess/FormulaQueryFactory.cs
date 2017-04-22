@@ -7,7 +7,8 @@ namespace Shuttle.Abacus.DataAccess
 {
     public class FormulaQueryFactory : IFormulaQueryFactory
     {
-        private static string SelectClause = @"
+        public const string OperationTableName = "FormulaOperation";
+        private readonly string SelectClause = @"
 select 
     FormulaId,
     OwnerName,
@@ -18,8 +19,6 @@ from
     Formula
 ";
 
-        public const string OperationTableName = "FormulaOperation";
-        
 
         public IQuery AllForOwner(Guid ownerId)
         {
@@ -43,7 +42,7 @@ select
 from
     FormulaOperation
 ")
-.AddParameterValue(FormulaOperationColumns.FormulaId, id);
+                .AddParameterValue(FormulaOperationColumns.FormulaId, id);
         }
 
         public IQuery Get(Guid id)
@@ -54,7 +53,7 @@ where
                 .AddParameterValue(FormulaColumns.Id, id);
         }
 
-        public static IQuery Add(IFormulaOwner owner, Formula item)
+        public IQuery Add(IFormulaOwner owner, Formula item)
         {
             return RawQuery.Create(@"
 insert into Formula
@@ -80,23 +79,27 @@ values
                 .AddParameterValue(FormulaColumns.SequenceNumber, owner.Formulas.Count());
         }
 
-        public static IQuery Remove(Formula item)
+        public IQuery Remove(Formula item)
         {
-            return RawQuery.Create("delete from Formula where FormulaId = @FormulaId").AddParameterValue(FormulaColumns.Id, item.Id);
+            return
+                RawQuery.Create("delete from Formula where FormulaId = @FormulaId")
+                    .AddParameterValue(FormulaColumns.Id, item.Id);
         }
 
-        public static IQuery RemoveOperations(Formula formula)
+        public IQuery RemoveOperations(Formula formula)
         {
-            return RawQuery.Create("delete from FormulaOperation where FormulaId = @FormulaId").AddParameterValue(FormulaColumns.Id, formula.Id);
+            return
+                RawQuery.Create("delete from FormulaOperation where FormulaId = @FormulaId")
+                    .AddParameterValue(FormulaColumns.Id, formula.Id);
         }
 
-        public static IQuery AddOperation(Formula formula, FormulaOperation operation, int sequenceNumber)
+        public IQuery AddOperation(Formula formula, FormulaOperation operation, int sequenceNumber)
         {
             var valueSelectionHolder = operation.ValueSource as IValueSelectionHolder;
 
             var valueSelection = valueSelectionHolder == null
-                                     ? string.Empty
-                                     : valueSelectionHolder.ValueSelection;
+                ? string.Empty
+                : valueSelectionHolder.ValueSelection;
 
             return RawQuery.Create(@"
 insert into FormulaOperation
@@ -126,7 +129,7 @@ values
                 .AddParameterValue(FormulaOperationColumns.SequenceNumber, sequenceNumber);
         }
 
-        public static IQuery Save(Formula item)
+        public IQuery Save(Formula item)
         {
             return RawQuery.Create(@"
 update 
@@ -140,7 +143,7 @@ where
                 .AddParameterValue(FormulaColumns.Id, item.Id);
         }
 
-        public static IQuery SetSequenceNumber(Formula formula, int sequence)
+        public IQuery SetSequenceNumber(Formula formula, int sequence)
         {
             return RawQuery.Create(@"
 update 

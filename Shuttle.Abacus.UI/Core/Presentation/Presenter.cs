@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.UI.Core.EventArgs;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.Validation;
 using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Abacus.UI.Navigation;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Core.Presentation
 {
@@ -56,7 +58,7 @@ namespace Shuttle.Abacus.UI.Core.Presentation
             view.AttachPresenter(this);
 
             Text = GetType().Name;
-            Image = Resources.Image_Presenter;
+            Image = Localisation.Resources.Image_Presenter;
 
             TrackChanges = true;
 
@@ -76,7 +78,7 @@ namespace Shuttle.Abacus.UI.Core.Presentation
 
                 if (result == null)
                 {
-                    throw new InvalidCastException(string.Format(Resources.NullSafeCasting, IView.GetType().FullName,
+                    throw new InvalidCastException(string.Format(Localisation.Resources.NullSafeCasting, IView.GetType().FullName,
                                                                  typeof (TView).FullName));
                 }
 
@@ -267,7 +269,7 @@ namespace Shuttle.Abacus.UI.Core.Presentation
 
     public delegate void PresenterTextChanged(object sender, PresenterTextChangedArgs args);
 
-    public abstract class Presenter<TView> : Presenter<TView, IQueryResult> where TView : class, IView
+    public abstract class Presenter<TView> : Presenter<TView, IEnumerable<DataRow>> where TView : class, IView
     {
         protected Presenter(TView view)
             : base(view)

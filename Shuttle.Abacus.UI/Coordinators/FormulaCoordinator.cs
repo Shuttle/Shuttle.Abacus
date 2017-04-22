@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Core.Resources;
@@ -16,6 +17,7 @@ using Shuttle.Abacus.UI.UI.List;
 using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.UI.Coordinators
 {
@@ -135,7 +137,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             {
                 case Resource.ResourceType.Container:
                     {
-                        foreach (DataRow row in formulaQuery.AllForOwner(ownerId).Table.Rows)
+                        foreach (DataRow row in formulaQuery.AllForOwner(ownerId))
                         {
                             message.Resources.Add(
                                 new Resource(ResourceKeys.Formula, FormulaColumns.Id.MapFrom(row),
@@ -222,15 +224,15 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return;
             }
 
-            message.Item.AssignText(FormulaColumns.Description.MapFrom(formulaQuery.Description(message.Item.Key).Row));
+            message.Item.AssignText(FormulaColumns.Description.MapFrom(formulaQuery.Get(message.Item.Key)));
         }
 
         public void HandleMessage(ChangeFormulaOrderMessage message)
         {
             var model = new SimpleListModel
                             {
-                                ListItems = formulaQuery.AllForOwner(message.OwnerId),
-                                VisibleColumns = new List<QueryColumn>
+                                Rows = formulaQuery.AllForOwner(message.OwnerId),
+                                VisibleColumns = new List<MappedColumn<>>
                                                      {
                                                          FormulaColumns.Description
                                                      }

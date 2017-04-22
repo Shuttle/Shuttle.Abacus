@@ -1,5 +1,8 @@
 using System;
 using System.Data;
+using Shuttle.Abacus.DataAccess;
+using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Core.Resources;
@@ -48,10 +51,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             {
                 case Resource.ResourceType.Container:
                     {
-                        foreach (
-                            DataRow row in
-                                methodQuery.All().
-                                    Table.Rows)
+                        foreach (var row in methodQuery.All())
                         {
                             message.Resources.Add(
                                 new Resource(
@@ -134,7 +134,7 @@ namespace Shuttle.Abacus.UI.Coordinators
         public void HandleMessage(EditMethodMessage message)
         {
             var item = WorkItemManager
-                .Create("Method: " + MethodColumns.Name.MapFrom(methodQuery.Get(message.MethodId).Row))
+                .Create("Method: " + MethodColumns.Name.MapFrom(methodQuery.Get(message.MethodId)))
                 .ControlledBy<IMethodController>()
                 .ShowIn<IContextToolbarPresenter>()
                 .AddPresenter<IMethodPresenter>().WithModel(methodQuery.Get(message.MethodId))
@@ -155,7 +155,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return;
             }
 
-            message.Item.AssignText(MethodColumns.Name.MapFrom(methodQuery.MethodName(message.Item.Key).Row));
+            message.Item.AssignText(MethodColumns.Name.MapFrom(methodQuery.Get(message.Item.Key)));
         }
 
         public void HandleMessage(NewMethodFromExistingMessage message)

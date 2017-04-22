@@ -1,3 +1,4 @@
+using Shuttle.Abacus.Localisation;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain

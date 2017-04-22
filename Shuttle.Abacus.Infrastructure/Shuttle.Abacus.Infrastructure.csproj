@@ -107,7 +107,6 @@
     <Compile Include="Security\Session.cs" />
     <Compile Include="Specifications\AndSpecification.cs" />
     <Compile Include="Specifications\CompositeSpecification.cs" />
-    <Compile Include="Specifications\ISpecification.cs" />
     <Compile Include="Specifications\NotSpecification.cs" />
     <Compile Include="Specifications\OrSpecification.cs" />
     <Compile Include="Specifications\Specification.cs" />

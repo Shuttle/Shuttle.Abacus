@@ -2,18 +2,18 @@ using System;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Data;
-using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public class ArgumentRepository : Repository<Argument>, IArgumentRepository
     {
+        private readonly IArgumentQueryFactory _argumentQueryFactory;
         private readonly ICache _cache;
         private readonly IDatabaseGateway _databaseGateway;
-        private readonly IArgumentQueryFactory _argumentQueryFactory;
         private readonly IDataRepository<Argument> _repository;
 
-        public ArgumentRepository(IDatabaseGateway databaseGateway, IArgumentQueryFactory argumentQueryFactory, IDataRepository<Argument> repository, ICache cache)
+        public ArgumentRepository(IDatabaseGateway databaseGateway, IArgumentQueryFactory argumentQueryFactory,
+            IDataRepository<Argument> repository, ICache cache)
         {
             _repository = repository;
             _databaseGateway = databaseGateway;
@@ -44,7 +44,10 @@ namespace Shuttle.Abacus.DataAccess
 
             result = _repository.FetchItemUsing(_argumentQueryFactory.Get(id));
 
-            Guard.AgainstMissing<Argument>(result, id);
+            if (result == null)
+            {
+                throw Exceptions.MissingEntity("Argument", id);
+            }
 
             _cache.Add(key, result);
 

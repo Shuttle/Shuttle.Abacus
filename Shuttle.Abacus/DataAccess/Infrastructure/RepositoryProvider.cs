@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Localisation;
+
 namespace Shuttle.Abacus.DataAccess
 {
     public class RepositoryProvider : IRepositoryProvider

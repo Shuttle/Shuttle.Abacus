@@ -19,5 +19,6 @@ namespace Shuttle.Abacus.DataAccess
         IQuery DeleteUser(SystemUser user);
         IQuery AddPermission(SystemUser user, IPermission permission);
         IQuery DeletePermissions(SystemUser user);
+        IQuery Get(string loginName);
     }
 }

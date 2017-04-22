@@ -20,7 +20,7 @@ namespace Shuttle.Abacus.Tests
         [Test]
         public void Should_be_able_to_use_a_logger()
         {
-            IPremiumCalculationLogger logger = new TextPremiumCalculationLogger();
+            ICalculationLogger logger = new DefaultCalculationLogger();
 
             var context = new MethodContext("context", logger);
 

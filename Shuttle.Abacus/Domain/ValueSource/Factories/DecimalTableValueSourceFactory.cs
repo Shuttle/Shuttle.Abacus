@@ -4,11 +4,11 @@ namespace Shuttle.Abacus.Domain
 {
     public class DecimalTableValueSourceFactory : IValueSourceFactory
     {
-        private readonly IUnitOfWorkProvider unitOfWorkProvider;
+        private readonly IDecimalTableRepository _decimalTableRepository;
 
-        public DecimalTableValueSourceFactory(IUnitOfWorkProvider unitOfWorkProvider)
+        public DecimalTableValueSourceFactory(IDecimalTableRepository decimalTableRepository)
         {
-            this.unitOfWorkProvider = unitOfWorkProvider;
+            _decimalTableRepository = decimalTableRepository;
         }
 
         public string Name
@@ -28,7 +28,7 @@ namespace Shuttle.Abacus.Domain
 
         public IValueSource Create(string value)
         {
-            return new DecimalTableValueSource(unitOfWorkProvider.Current.Get<DecimalTable>(new Guid(value)));
+            return new DecimalTableValueSource(_decimalTableRepository.Get(new Guid(value)));
         }
     }
 }

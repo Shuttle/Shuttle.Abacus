@@ -5,6 +5,7 @@ using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Abacus.UI.Models;
 using Shuttle.Abacus.UI.Navigation;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.UI.List
 {
@@ -42,7 +43,10 @@ namespace Shuttle.Abacus.UI.UI.List
         {
             base.OnInitialize();
 
-            Guard.AgainstNullDependency(Model, "Model");
+            if (Model == null)
+            {
+                throw new NullDependencyException("Model");
+            }
 
             Refresh();
 

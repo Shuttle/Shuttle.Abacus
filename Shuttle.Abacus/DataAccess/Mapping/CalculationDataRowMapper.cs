@@ -1,16 +1,18 @@
 using System.Data;
 using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Infrastructure;
+using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public class CalculationDataRowMapper : IDataRowMapper<Calculation>
     {
-        private readonly IFactoryProvider<ICalculationFactory> factoryProvider;
+        private readonly Domain.IFactoryProvider<ICalculationFactory> factoryProvider;
         private readonly IFormulaRepository formulaRepository;
         private readonly ILimitRepository limitRepository;
         private readonly IDataRepository<GraphNodeArgument> graphNodeArgumentDataRowMapper;
 
-        public CalculationDataRowMapper(IFactoryProvider<ICalculationFactory> factoryProvider, IFormulaRepository formulaRepository, ILimitRepository limitRepository, IDataRepository<GraphNodeArgument> graphNodeArgumentDataRowMapper)
+        public CalculationDataRowMapper(Domain.IFactoryProvider<ICalculationFactory> factoryProvider, IFormulaRepository formulaRepository, ILimitRepository limitRepository, IDataRepository<GraphNodeArgument> graphNodeArgumentDataRowMapper)
         {
             this.factoryProvider = factoryProvider;
             this.formulaRepository = formulaRepository;
@@ -18,48 +20,41 @@ namespace Shuttle.Abacus.DataAccess
             this.graphNodeArgumentDataRowMapper = graphNodeArgumentDataRowMapper;
         }
 
-        public Calculation MapFrom(DataRow input)
+        public MappedRow<Calculation> Map(DataRow row)
         {
-            var id = CalculationColumns.Id.MapFrom(input);
+            var id = CalculationColumns.Id.MapFrom(row);
 
-            if (UnitOfWork.Contains(id))
-            {
-                return UnitOfWork.Get<Calculation>(id);
-            }
+            var result =
+                factoryProvider.Get(CalculationColumns.Type.MapFrom(row)).Create(
+                    CalculationColumns.Name.MapFrom(row),
+                    CalculationColumns.Required.MapFrom(row));
 
-            var calculation =
-                factoryProvider.Get(CalculationColumns.Type.MapFrom(input)).Create(
-                    CalculationColumns.Name.MapFrom(input),
-                    CalculationColumns.Required.MapFrom(input));
+            result.AssignId(id);
 
-            calculation.AssignId(id);
-
-            var formulaOwner = calculation as IFormulaOwner;
+            var formulaOwner = result as IFormulaOwner;
 
             if (formulaOwner != null)
             {
-                formulaRepository.AllForOwner(calculation.Id).ForEach(formula => formulaOwner.AddFormula(formula));
+                formulaRepository.AllForOwner(result.Id).ForEach(formula => formulaOwner.AddFormula(formula));
             }
 
-            limitRepository.AllForOwner(calculation.Id).ForEach(limit => calculation.AddLimit(limit));
+            limitRepository.AllForOwner(result.Id).ForEach(limit => result.AddLimit(limit));
 
-            if (UnitOfWork.Uses<Calculation>())
-            {
-                var owner = calculation as ICalculationOwner;
+            //if (UnitOfWork.Uses<Calculation>())
+            //{
+            //    var owner = calculation as ICalculationOwner;
 
-                if (owner != null)
-                {
-                    DependencyResolver.Resolve<ICalculationRepository>()
-                        .AllForOwner(calculation.Id)
-                        .ForEach(item => owner.AddCalculation(item));
-                }
-            }
+            //    if (owner != null)
+            //    {
+            //        DependencyResolver.Resolve<ICalculationRepository>()
+            //            .AllForOwner(calculation.Id)
+            //            .ForEach(item => owner.AddCalculation(item));
+            //    }
+            //}
 
-            graphNodeArgumentDataRowMapper.FetchAllUsing(GraphNodeArgumentQueryFactory.AllForCalculation(calculation)).ForEach(calculation.AddGraphNodeArgument);
+            graphNodeArgumentDataRowMapper.FetchAllUsing(GraphNodeArgumentQueryFactory.AllForCalculation(result)).ForEach(result.AddGraphNodeArgument);
 
-            UnitOfWork.Register(calculation);
-
-            return calculation;
+            return new MappedRow<Calculation>(row, result);
         }
     }
 }

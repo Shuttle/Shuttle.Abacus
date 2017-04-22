@@ -1,24 +1,31 @@
 using System.Collections.Generic;
+using System.Data;
+using Shuttle.Abacus.DTO;
+using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public class OperationTypeQuery :IOperationTypeQuery
     {
-        private readonly IDataRowMapper<OperationTypeDTO> operationTypeDTOMapper;
+        private readonly IDatabaseGateway _databaseGateway;
+        private readonly IOperationTypeQueryFactory _operationTypeQueryFactory;
+        private readonly IDataTableMapper<OperationTypeDTO> _operationTypeDTOMapper;
 
-        public OperationTypeQuery(IDataRowMapper<OperationTypeDTO> operationTypeDTOMapper)
+        public OperationTypeQuery(IDatabaseGateway databaseGateway, IOperationTypeQueryFactory operationTypeQueryFactory, IDataTableMapper<OperationTypeDTO> operationTypeDTOMapper)
         {
-            this.operationTypeDTOMapper = operationTypeDTOMapper;
+            _databaseGateway = databaseGateway;
+            _operationTypeQueryFactory = operationTypeQueryFactory;
+            _operationTypeDTOMapper = operationTypeDTOMapper;
         }
 
-        public IQueryResult All()
+        public IEnumerable<DataRow> All()
         {
-            return QueryProcessor.Execute(OperationTypeQueryFactory.All());
+            return _databaseGateway.GetRowsUsing(_operationTypeQueryFactory.All());
         }
 
         public IEnumerable<OperationTypeDTO> AllDTOs()
         {
-            return operationTypeDTOMapper.MapFrom(All().Table);
+            return _operationTypeDTOMapper.MapFrom(All().CopyToDataTable());
         }
     }
 }

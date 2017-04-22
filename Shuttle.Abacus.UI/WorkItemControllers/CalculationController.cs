@@ -100,7 +100,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 
             Send(command,
                  () =>
-                 MessageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
+                 _messageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
         }
 
         public void HandleMessage(DeleteCalculationMessage message)
@@ -110,7 +110,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                      MethodId = message.MethodId,
                      CalculationId = message.CalculationId
                  },
-                 () => MessageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
+                 () => _messageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
         }
 
         public void HandleMessage(GrabCalculationsMessage message)
@@ -134,7 +134,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             }
 
             Send(command,
-                 () => MessageBus.Publish(new ResourceRefreshItemMessage(message.MethodResource)));
+                 () => _messageBus.Publish(new ResourceRefreshItemMessage(message.MethodResource)));
         }
     }
 }

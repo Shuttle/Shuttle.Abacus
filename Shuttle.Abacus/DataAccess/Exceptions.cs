@@ -9,5 +9,10 @@ namespace Shuttle.Abacus.DataAccess
         {
             return new MissingEntityException(string.Format("Could not find entity '{0}' with an id of '{1}'.", name, id));
         }
+
+        public static Exception MissingEntity<T>(Guid id)
+        {
+            return MissingEntity(typeof(T).Name, id);
+        }
     }
 }

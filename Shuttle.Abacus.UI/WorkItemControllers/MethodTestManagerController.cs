@@ -18,7 +18,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
         {
             message.WorkItemId = WorkItem.Id;
 
-            MessageBus.Publish(message);
+            _messageBus.Publish(message);
         }
 
         public void HandleMessage(EditMethodTestMessage message)
@@ -35,7 +35,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             message.MethodTestId = new Guid(item.Name);
             message.WorkItemId = WorkItem.Id;
 
-            MessageBus.Publish(message);
+            _messageBus.Publish(message);
         }
 
         public void HandleMessage(RemoveMethodTestMessage message)
@@ -63,7 +63,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 
             SendNoComplete(command,
                            () =>
-                           MessageBus.Publish(new MethodTestRemovedMessage(WorkItem.Id, message.MethodId)));
+                           _messageBus.Publish(new MethodTestRemovedMessage(WorkItem.Id, message.MethodId)));
         }
 
         public void HandleMessage(MarkAllMessage message)
@@ -109,7 +109,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             message.MethodTestId = new Guid(item.Name);
             message.WorkItemId = WorkItem.Id;
 
-            MessageBus.Publish(message);
+            _messageBus.Publish(message);
         }
 
         public void HandleMessage(PrintMethodTestMessage message)

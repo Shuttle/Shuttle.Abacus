@@ -8,7 +8,7 @@ namespace Shuttle.Abacus.UI.Core.Presentation
             Row = 1
         }
 
-        public NamedQueryResult(string name, DisplayType type, IQueryResult queryResult)
+        public NamedQueryResult(string name, DisplayType type, IEnumerable<DataRow> queryResult)
         {
             Name = name;
             Type = type;
@@ -17,6 +17,6 @@ namespace Shuttle.Abacus.UI.Core.Presentation
 
         public string Name { get; private set; }
         public DisplayType Type { get; private set; }
-        public IQueryResult QueryResult { get; private set; }
+        public IEnumerable<DataRow> QueryResult { get; private set; }
     }
 }

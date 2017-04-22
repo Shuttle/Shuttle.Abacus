@@ -4,11 +4,11 @@ namespace Shuttle.Abacus.Domain
 {
     public class CalculationResultValueSourceFactory : IValueSourceFactory
     {
-        private readonly IUnitOfWorkProvider unitOfWorkProvider;
+        private readonly ICalculationRepository _calculationRepository;
 
-        public CalculationResultValueSourceFactory(IUnitOfWorkProvider unitOfWorkProvider)
+        public CalculationResultValueSourceFactory(ICalculationRepository calculationRepository)
         {
-            this.unitOfWorkProvider = unitOfWorkProvider;
+            _calculationRepository = calculationRepository;
         }
 
         public string Name
@@ -28,7 +28,7 @@ namespace Shuttle.Abacus.Domain
 
         public IValueSource Create(string value)
         {
-            return new CalculationResultValueSource(unitOfWorkProvider.Current.Get<Calculation>(new Guid(value)));
+            return new CalculationResultValueSource(_calculationRepository.Get(new Guid(value)));
         }
     }
 }

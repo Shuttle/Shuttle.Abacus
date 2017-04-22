@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Data;
-using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public class CalculationRepository : Repository<Calculation>, ICalculationRepository
     {
-        private readonly IDataRepository<Calculation> calculationRepository;
-        private readonly IDatabaseGateway gateway;
+        private readonly ICalculationQueryFactory _calculationQueryFactory;
+        private readonly IDatabaseGateway _databaseGateway;
+        private readonly IDataRepository<Calculation> _repository;
 
-        public CalculationRepository(IDataRepository<Calculation> dataRowMapper, IDatabaseGateway gateway)
+        public CalculationRepository(IDatabaseGateway databaseGateway, ICalculationQueryFactory calculationQueryFactory,
+            IDataRepository<Calculation> dataRowMapper)
         {
-            this.calculationRepository = dataRowMapper;
-            this.gateway = gateway;
+            _repository = dataRowMapper;
+            _databaseGateway = databaseGateway;
+            _calculationQueryFactory = calculationQueryFactory;
         }
 
         public override void Add(Calculation item)
@@ -25,14 +27,17 @@ namespace Shuttle.Abacus.DataAccess
 
         public override void Remove(Calculation item)
         {
-            gateway.ExecuteUsing(CalculationTableAccess.Remove(item));
+            _databaseGateway.ExecuteUsing(_calculationQueryFactory.Remove(item));
         }
 
         public override Calculation Get(Guid id)
         {
-            var result = calculationRepository.FetchItemUsing(CalculationTableAccess.Get(id));
+            var result = _repository.FetchItemUsing(_calculationQueryFactory.Get(id));
 
-            Guard.AgainstMissing<Calculation>(result, id);
+            if (result == null)
+            {
+                throw Exceptions.MissingEntity<Calculation>(id);
+            }
 
             return result;
         }
@@ -42,44 +47,32 @@ namespace Shuttle.Abacus.DataAccess
             var sequence = 1;
 
             method.CalculationCollection.Flattened().ForEach(calculation =>
-                {
-                    gateway.ExecuteUsing(CalculationTableAccess.SetSequenceNumber(calculation.Id, sequence));
+            {
+                _databaseGateway.ExecuteUsing(_calculationQueryFactory.SetSequenceNumber(calculation.Id, sequence));
 
-                    sequence++;
-                });
+                sequence++;
+            });
         }
 
         public void Add(Method method, ICalculationOwner owner, Calculation entity)
         {
-            gateway.ExecuteUsing(CalculationTableAccess.Add(method, owner, entity));
+            _databaseGateway.ExecuteUsing(_calculationQueryFactory.Add(method, owner, entity));
 
             AddGraphNodeArguments(entity);
         }
 
         public void Save(Calculation item)
         {
-            gateway.ExecuteUsing(CalculationTableAccess.Save(item));
+            _databaseGateway.ExecuteUsing(_calculationQueryFactory.Save(item));
 
-            gateway.ExecuteUsing(GraphNodeArgumentQueryFactory.RemoveFor(item.Id));
+            _databaseGateway.ExecuteUsing(GraphNodeArgumentQueryFactory.RemoveFor(item.Id));
 
             AddGraphNodeArguments(item);
         }
 
-        private void AddGraphNodeArguments(Calculation calculation)
-        {
-            var sequence = 1;
-
-            calculation.GraphNodeArguments.ForEach(item =>
-                {
-                    gateway.ExecuteUsing(GraphNodeArgumentQueryFactory.Add(calculation, item, sequence));
-
-                    sequence++;
-                });
-        }
-
         public IEnumerable<Calculation> AllForOwner(Guid ownerId)
         {
-            return calculationRepository.FetchAllUsing(CalculationTableAccess.AllForOwner(ownerId));
+            return _repository.FetchAllUsing(_calculationQueryFactory.AllForOwner(ownerId));
         }
 
         public void SaveOwnershipGraph(Method method)
@@ -89,7 +82,20 @@ namespace Shuttle.Abacus.DataAccess
             SaveOwnershipGraph(method.CalculationCollection, typeof(Method).Name, method.Id, ref sequence);
         }
 
-        private void SaveOwnershipGraph(IEnumerable<Calculation> calculations, string ownerName, Guid ownerId, ref int sequence)
+        private void AddGraphNodeArguments(Calculation calculation)
+        {
+            var sequence = 1;
+
+            calculation.GraphNodeArguments.ForEach(item =>
+            {
+                _databaseGateway.ExecuteUsing(GraphNodeArgumentQueryFactory.Add(calculation, item, sequence));
+
+                sequence++;
+            });
+        }
+
+        private void SaveOwnershipGraph(IEnumerable<Calculation> calculations, string ownerName, Guid ownerId,
+            ref int sequence)
         {
             foreach (var calculation in calculations)
             {
@@ -108,7 +114,7 @@ namespace Shuttle.Abacus.DataAccess
 
         private void Save(Calculation calculation, string ownerName, Guid ownerId, ref int sequence)
         {
-            gateway.ExecuteUsing(CalculationTableAccess.Save(calculation, ownerName, ownerId, sequence));
+            _databaseGateway.ExecuteUsing(_calculationQueryFactory.Save(calculation, ownerName, ownerId, sequence));
         }
     }
 }

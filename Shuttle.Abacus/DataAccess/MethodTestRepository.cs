@@ -1,57 +1,63 @@
 using System;
 using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Infrastructure;
+using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public class MethodTestRepository : Repository<MethodTest>, IMethodTestRepository
     {
-        private readonly IDatabaseGateway gateway;
-        private readonly IDataTableRepository<MethodTest> repository;
+        private readonly IDatabaseGateway _databaseGateway;
+        private readonly IMethodTestQueryFactory _methodTestQueryFactory;
+        private readonly IDataTableRepository<MethodTest> _repository;
 
-        public MethodTestRepository(IDataTableRepository<MethodTest> repository, IDatabaseGateway gateway)
+        public MethodTestRepository(IDatabaseGateway databaseGateway, IMethodTestQueryFactory methodTestQueryFactory,
+            IDataTableRepository<MethodTest> repository)
         {
-            this.repository = repository;
-            this.gateway = gateway;
+            _repository = repository;
+            _databaseGateway = databaseGateway;
+            _methodTestQueryFactory = methodTestQueryFactory;
         }
 
         public override void Add(MethodTest item)
         {
-            gateway.ExecuteUsing(MethodTestTable.Add(item));
+            _databaseGateway.ExecuteUsing(_methodTestQueryFactory.Add(item));
 
             AddArgumentAnswers(item);
         }
 
-        private void AddArgumentAnswers(MethodTest test)
-        {
-            test.ArgumentAnswers.ForEach(entry => gateway.ExecuteUsing(MethodTestTable.AddArgumentAnswer(test, entry)));
-        }
-
         public override void Remove(MethodTest item)
         {
-            gateway.ExecuteUsing(MethodTestTable.Remove(item));
+            _databaseGateway.ExecuteUsing(_methodTestQueryFactory.Remove(item));
         }
 
         public override MethodTest Get(Guid id)
         {
-            return repository.FetchItemUsing(MethodTestTable.Get(id));
+            return _repository.FetchItemUsing(_methodTestQueryFactory.Get(id));
         }
 
         public void Save(MethodTest item)
         {
-            gateway.ExecuteUsing(MethodTestTable.Remove(item));
-            gateway.ExecuteUsing(MethodTestTable.Add(item));
+            _databaseGateway.ExecuteUsing(_methodTestQueryFactory.Remove(item));
+            _databaseGateway.ExecuteUsing(_methodTestQueryFactory.Add(item));
 
             AddArgumentAnswers(item);
         }
 
         public void SetArgumentName(Guid argumentId, string argumentName)
         {
-            gateway.ExecuteUsing(MethodTestTable.SetArgumentName(argumentId, argumentName));
+            _databaseGateway.ExecuteUsing(_methodTestQueryFactory.SetArgumentName(argumentId, argumentName));
         }
 
         public void SetArgumentAnswerType(Guid argumentId, string answerType)
         {
-            gateway.ExecuteUsing(MethodTestTable.SetArgumentAnswerType(argumentId, answerType));
+            _databaseGateway.ExecuteUsing(_methodTestQueryFactory.SetArgumentAnswerType(argumentId, answerType));
+        }
+
+        private void AddArgumentAnswers(MethodTest test)
+        {
+            test.ArgumentAnswers.ForEach(
+                entry => _databaseGateway.ExecuteUsing(_methodTestQueryFactory.AddArgumentAnswer(test, entry)));
         }
     }
 }

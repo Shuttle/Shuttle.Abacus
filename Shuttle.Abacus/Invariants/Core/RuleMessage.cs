@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Shuttle.Abacus.Infrastructure;
 
 namespace Shuttle.Abacus.Invariants.Core
 {

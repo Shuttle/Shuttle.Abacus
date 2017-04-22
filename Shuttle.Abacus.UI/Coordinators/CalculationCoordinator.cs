@@ -134,8 +134,8 @@ namespace Shuttle.Abacus.UI.Coordinators
         {
             var model = new SimpleListModel
                         {
-                            ListItems = calculationQuery.AllForOwner(message.OwnerId),
-                            VisibleColumns = new List<QueryColumn>
+                            Rows = calculationQuery.AllForOwner(message.OwnerId),
+                            VisibleColumns = new List<string>
                                              {
                                                  CalculationColumns.Name
                                              }

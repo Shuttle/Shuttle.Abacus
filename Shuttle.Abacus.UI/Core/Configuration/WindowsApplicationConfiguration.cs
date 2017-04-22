@@ -1,4 +1,6 @@
 using System;
+using System.Configuration;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Core.Configuration
 {

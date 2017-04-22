@@ -1,5 +1,6 @@
 using System.Data;
 using Shuttle.Abacus.Domain;
+using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
 {
@@ -16,18 +17,18 @@ namespace Shuttle.Abacus.DataAccess
             this.formulaRepository = formulaRepository;
         }
 
-        public Limit MapFrom(DataRow input)
+        public MappedRow<Limit> Map(DataRow row)
         {
-            var limit = limitFactoryProvider.Get(LimitColumns.Type.MapFrom(input)).Create(LimitColumns.Name.MapFrom(input));
+            var result = limitFactoryProvider.Get(LimitColumns.Type.MapFrom(row)).Create(LimitColumns.Name.MapFrom(row));
 
-            limit.AssignId(LimitColumns.Id.MapFrom(input));
+            result.AssignId(LimitColumns.Id.MapFrom(row));
 
-            foreach (DataRow row in formulaQuery.AllForOwner(limit.Id).Table.Rows)
+            foreach (var formulaRow in formulaQuery.AllForOwner(result.Id))
             {
-                limit.AddFormula(formulaRepository.Get(FormulaColumns.Id.MapFrom(row)));
+                result.AddFormula(formulaRepository.Get(FormulaColumns.Id.MapFrom(formulaRow)));
             }
 
-            return limit;
+            return new MappedRow<Limit>(row, result);
         }
     }
 }

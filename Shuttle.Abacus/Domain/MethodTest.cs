@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
@@ -16,7 +17,7 @@ namespace Shuttle.Abacus.Domain
 
         public Guid Id { get; private set; }
 
-        public MethodTest(ICreateMethodTestCommand command)
+        public MethodTest(CreateMethodTestCommand command)
         {
             MethodId = command.MethodId;
             Description = command.Description;

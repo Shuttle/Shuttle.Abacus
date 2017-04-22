@@ -48,6 +48,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Shuttle.Core.Infrastructure, Version=8.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Core.Infrastructure.8.0.1\lib\net452-full\Shuttle.Core.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -62,6 +66,13 @@
       <Project>{5cd61a6d-abcb-4400-a113-4ef4da4c439c}</Project>
       <Name>Shuttle.Abacus.DTO</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Shuttle.Abacus.Infrastructure\Shuttle.Abacus.Infrastructure.csproj">
+      <Project>{1A365F2C-BA2B-41F0-969B-EEC08C6E2658}</Project>
+      <Name>Shuttle.Abacus.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,3 +1,5 @@
+using Shuttle.Core.Infrastructure;
+
 namespace Shuttle.Abacus.Infrastructure
 {
     public abstract class Specification<T> : ISpecification<T>

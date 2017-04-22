@@ -1,5 +1,7 @@
 using System.Data;
 using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Infrastructure;
+using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
 {
@@ -15,7 +17,7 @@ namespace Shuttle.Abacus.DataAccess
             this.constraintRepository = constraintRepository;
         }
 
-        public DecimalTable MapFrom(DataRow row)
+        public MappedRow<DecimalTable> Map(DataRow row)
         {
             var result = new DecimalTable(DecimalTableColumns.Id.MapFrom(row),
                                           DecimalTableColumns.Name.MapFrom(row),
@@ -25,15 +27,15 @@ namespace Shuttle.Abacus.DataAccess
 
             decimalValueRepository.AllForDecimalTable(result)
                 .ForEach(value =>
-                             {
-                                 constraintRepository.AllForOwner(value.Id)
-                                     .ForEach(constraint =>
-                                              value.AddConstraint(constraint));
+                {
+                    constraintRepository.AllForOwner(value.Id)
+                        .ForEach(constraint =>
+                                 value.AddConstraint(constraint));
 
-                                 result.AddDecimalValue(value);
-                             });
+                    result.AddDecimalValue(value);
+                });
 
-            return result;
+            return new MappedRow<DecimalTable>(row, result);
         }
     }
 }

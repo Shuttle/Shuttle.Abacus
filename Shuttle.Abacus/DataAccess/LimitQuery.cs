@@ -1,17 +1,29 @@
 using System;
+using System.Collections.Generic;
+using System.Data;
+using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public class LimitQuery :ILimitQuery
     {
-        public IQueryResult AllForOwner(Guid ownerId)
+        private readonly IDatabaseGateway _databaseGateway;
+        private readonly ILimitQueryFactory _limitQueryFactory;
+
+        public LimitQuery(IDatabaseGateway databaseGateway, ILimitQueryFactory limitQueryFactory)
         {
-            return QueryProcessor.Execute(LimitQueryFactory.AllForOwner(ownerId));
+            _databaseGateway = databaseGateway;
+            _limitQueryFactory = limitQueryFactory;
         }
 
-        public IQueryResult Get(Guid limitId)
+        public IEnumerable<DataRow> AllForOwner(Guid ownerId)
         {
-            return QueryProcessor.Execute(LimitQueryFactory.Get(limitId));
+            return _databaseGateway.GetRowsUsing(_limitQueryFactory.AllForOwner(ownerId));
+        }
+
+        public DataRow Get(Guid limitId)
+        {
+            return _databaseGateway.GetSingleRowUsing(_limitQueryFactory.Get(limitId));
         }
     }
 }

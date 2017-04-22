@@ -1,14 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using Abacus.Messages;
+using Castle.Windsor;
+using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Core.Castle;
 using Shuttle.Esb;
 
 namespace Shuttle.Abacus.UI
 {
     internal static class Program
     {
-        public static IServiceBus Bus { get; private set; }
+        private static IServiceBus _bus;
 
         private static bool loginRequestCompleted;
         private static IMessageBus messageBus;
@@ -34,7 +43,7 @@ namespace Shuttle.Abacus.UI
 
             DependencyWiring.Start().AddWindowsComponents().AddCaching();
 
-            StartBus();
+            StartServiceBus();
 
             // get an initial application instance to handle global events
             DependencyResolver.Resolve<IMessageBus>()
@@ -42,7 +51,7 @@ namespace Shuttle.Abacus.UI
                 (
                 new List<object>
                     (
-                    DependencyResolver.Resolver.ResolveAssignable<ICoordinator>().Cast<object>()
+                    DependencyResolver.Resolver.ResolveAssignable<ICoordinator>()
                     )
                 );
 
@@ -78,8 +87,13 @@ namespace Shuttle.Abacus.UI
             splashThread.Join();
         }
 
-        private static void StartBus()
+        private static void StartServiceBus()
         {
+            var container = new WindsorComponentContainer(_container);
+
+            ServiceBus.Register(container);
+
+            _bus = ServiceBus.Create(container).Start();
             Bus = Configure.With()
                 .CastleWindsorBuilder((IWindsorContainer) DependencyResolver.Resolver.Container)
                 .XmlSerializer()

@@ -6,7 +6,7 @@ namespace Shuttle.Abacus.DataAccess
 {
     public class ArgumentQueryFactory : IArgumentQueryFactory
     {
-        private static readonly string SelectClauseDTO = @"
+        private readonly string SelectClauseDTO = @"
 select
     a.ArgumentId,
     Name,
@@ -44,7 +44,7 @@ from
                 .AddParameterValue(ArgumentColumns.RestrictedAnswerColumns.ArgumentId, id);
         }
 
-        public static IQuery Add(Argument item)
+        public IQuery Add(Argument item)
         {
             return RawQuery.Create(@"
 insert into Argument
@@ -64,19 +64,19 @@ values
                 .AddParameterValue(ArgumentColumns.AnswerType, item.AnswerType);
         }
 
-        public static IQuery Remove(Argument item)
+        public IQuery Remove(Argument item)
         {
             return RawQuery.Create("delete from Argument where Id = @Id").AddParameterValue(ArgumentColumns.Id, item.Id);
         }
 
 
-        public static IQuery GetDTO(Guid id)
+        public IQuery GetDTO(Guid id)
         {
             return RawQuery.Create(string.Concat(SelectClauseDTO, "where a.ArgumentId = @ArgumentId order by Name"))
                 .AddParameterValue(ArgumentColumns.Id, id);
         }
 
-        public static IQuery Save(Argument item)
+        public IQuery Save(Argument item)
         {
             return RawQuery.Create(@"
 update 
@@ -93,13 +93,13 @@ where
         }
 
 
-        public static IQuery RemoveRestrictedAnswers(Argument argument)
+        public IQuery RemoveRestrictedAnswers(Argument argument)
         {
             return RawQuery.Create("delete from ArgumentRestrictedAnswer where ArgumentId = @ArgumentId")
                     .AddParameterValue(ArgumentColumns.RestrictedAnswerColumns.ArgumentId, argument.Id);
         }
 
-        public static IQuery SaveRestrictedAnswers(Argument argument, ArgumentRestrictedAnswer argumentRestrictedAnswer)
+        public IQuery SaveRestrictedAnswers(Argument argument, ArgumentRestrictedAnswer argumentRestrictedAnswer)
         {
             return RawQuery.Create(@"
 insert into ArgumentRestrictedAnswer

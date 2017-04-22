@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Shuttle.Abacus.DTO;
 
 namespace Shuttle.Abacus.Domain
 {

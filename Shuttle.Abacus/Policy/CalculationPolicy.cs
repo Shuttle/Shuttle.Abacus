@@ -1,4 +1,6 @@
 ﻿using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Invariants.Core;
+using Shuttle.Abacus.Invariants.Interfaces;
 
 namespace Shuttle.Abacus.Policy
 {

@@ -22,7 +22,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             message.SystemUserId = view.SelectedId;
             message.LoginName = view.SelectedText;
 
-            MessageBus.Publish(message);
+            _messageBus.Publish(message);
         }
 
         public void HandleMessage(EditPermissionsMessage message)
@@ -44,7 +44,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                 return;
             }
 
-            MessageBus.Publish(new EditPermissionsMessage(view.SelectedId, view.SelectedText));
+            _messageBus.Publish(new EditPermissionsMessage(view.SelectedId, view.SelectedText));
         }
     }
 }
