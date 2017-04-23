@@ -47,6 +47,8 @@ namespace Shuttle.Abacus.WebApi
 
                 WebApiConfiguration.Register(GlobalConfiguration.Configuration);
 
+                //HttpConfiguration.EnsureInitialized();
+
                 _log.Information("[started]");
             }
             catch (Exception ex)
