@@ -41,6 +41,10 @@
       <HintPath>..\packages\Castle.Windsor.3.4.0\lib\net45\Castle.Windsor.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RabbitMQ.Client, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\RabbitMQ.Client.4.1.1\lib\net451\RabbitMQ.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Shuttle.Core.Castle, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Shuttle.Core.Castle.8.0.0\lib\net452-full\Shuttle.Core.Castle.dll</HintPath>
       <Private>True</Private>
@@ -53,8 +57,20 @@
       <HintPath>..\packages\Shuttle.Core.Infrastructure.8.0.1\lib\net452-full\Shuttle.Core.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Shuttle.Esb, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Esb.8.0.0\lib\net452-full\Shuttle.Esb.dll</HintPath>
+    <Reference Include="Shuttle.Esb, Version=8.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Esb.8.0.1\lib\net452-full\Shuttle.Esb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Shuttle.Esb.Module.PurgeInbox, Version=8.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Esb.Module.PurgeInbox.8.0.1\lib\net452-full\Shuttle.Esb.Module.PurgeInbox.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Shuttle.Esb.Modules, Version=6.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Esb.Module.PurgeInbox.8.0.1\lib\net452-full\Shuttle.Esb.Modules.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Shuttle.Esb.RabbitMQ, Version=8.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Esb.RabbitMQ.8.0.1\lib\net452-full\Shuttle.Esb.RabbitMQ.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -177,12 +193,8 @@
     <Compile Include="Core\WorkItem\WorkItemControllerFactory.cs" />
     <Compile Include="Core\WorkItem\WorkItemManager.cs" />
     <Compile Include="DependencyWiring.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Handlers\LoginCompletedHandler.cs" />
+    <Compile Include="Handlers\LoginTimeoutHandler.cs" />
     <Compile Include="Handlers\MethodTestHandler.cs" />
     <Compile Include="Handlers\NotificationHandler.cs" />
     <Compile Include="Handlers\ReplyMessageHandler.cs" />

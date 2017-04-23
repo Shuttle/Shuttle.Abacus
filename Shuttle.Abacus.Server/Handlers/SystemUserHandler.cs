@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Abacus.Messages;
 using Shuttle.Abacus.ApplicationService;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
@@ -41,26 +40,22 @@ namespace Shuttle.Abacus.Server.Handlers
 
             var user = _systemUserRepository.FetchByLoginName(message.LoginName);
 
+            var permissions = new List<Permission>();
+
             if (user == null)
             {
                 _systemUserRepository.Add(new SystemUser
                 {
                     LoginName = message.LoginName
                 });
-
-                context.Send(new ReplyMessage(Result.Create().AddSuccessMessage(
-                    string.Format(
-                        "Your login name '{0}' is new and has been added to the security store.  Please contact the Abacus System Administrator to assign permissions to you.",
-                        message.LoginName))), c => c.Reply());
             }
             else
             {
-                var permissions = new List<Permission>();
-
                 user.Permissions.ForEach(permission => permissions.Add((Permission) permission));
 
-                context.Send(new LoginCompletedEvent {Permissions = permissions}, c => c.Reply());
             }
+
+            context.Send(new LoginCompletedEvent { Permissions = permissions }, c => c.Reply());
         }
 
         public void ProcessMessage(IHandlerContext<SetPermissionsCommand> context)

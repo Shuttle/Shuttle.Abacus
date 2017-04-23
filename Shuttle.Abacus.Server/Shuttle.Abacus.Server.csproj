@@ -66,8 +66,8 @@
       <HintPath>..\packages\Shuttle.Core.Log4Net.8.0.0\lib\net452-full\Shuttle.Core.Log4Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Shuttle.Esb, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Esb.8.0.0\lib\net452-full\Shuttle.Esb.dll</HintPath>
+    <Reference Include="Shuttle.Esb, Version=8.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Esb.8.0.1\lib\net452-full\Shuttle.Esb.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Shuttle.Esb.RabbitMQ, Version=8.0.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -76,12 +76,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Handlers\ArgumentHandler.cs" />
@@ -107,10 +102,6 @@
     <ProjectReference Include="..\Shuttle.Abacus.Infrastructure\Shuttle.Abacus.Infrastructure.csproj">
       <Project>{1A365F2C-BA2B-41F0-969B-EEC08C6E2658}</Project>
       <Name>Shuttle.Abacus.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Shuttle.Abacus.Messages\Shuttle.Abacus.Messages.csproj">
-      <Project>{7A323D9C-E55E-4552-AAF1-E21A86009162}</Project>
-      <Name>Shuttle.Abacus.Messages</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shuttle.Abacus\Shuttle.Abacus.csproj">
       <Project>{23680A60-878A-48DA-B23C-9B0EA4A29305}</Project>

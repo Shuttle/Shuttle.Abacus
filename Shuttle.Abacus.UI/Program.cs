@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using Abacus.Messages;
 using Castle.Windsor;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
@@ -16,12 +17,12 @@ namespace Shuttle.Abacus.UI
 {
     internal static class Program
     {
-        private static WindsorContainer _container = new WindsorContainer();
+        private static Splash _splash;
+
+        private static readonly WindsorContainer _container = new WindsorContainer();
         private static IServiceBus _bus;
 
-        private static bool loginRequestCompleted;
         private static IMessageBus messageBus;
-        private static Splash splash;
         private static Thread splashThread;
 
         [STAThread]
@@ -63,29 +64,33 @@ namespace Shuttle.Abacus.UI
                                 Environment.UserDomainName,
                                 Environment.UserName));
 
-            if (!loginRequestCompleted)
-            {
-                CloseSplash();
-
-                MessageBox.Show("It took too long to try to log you on.  Please try again.", "Login Failure",
-                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-                Application.Exit();
-
-                return;
-            }
-
-            messageBus.Publish(new ActivateShellMessage());
-
             Application.Run();
 
-            _bus.Dispose();
-            _container.Dispose();
+            Dispose();
+            Environment.Exit(0);
         }
 
-        private static void CloseSplash()
+        private static void Dispose()
         {
-            splash.Invoke(new MethodInvoker(splash.Close));
+            try
+            {
+                _bus.Dispose();
+            }
+            catch
+            {
+            }
+            try
+            {
+                _container.Dispose();
+            }
+            catch
+            {
+            }
+        }
+
+        public static void CloseSplash()
+        {
+            _splash.Invoke(new MethodInvoker(_splash.Close));
 
             splashThread.Join();
         }
@@ -106,7 +111,7 @@ namespace Shuttle.Abacus.UI
 
         private static void ShowStatus(string heading, string message)
         {
-            splash.Invoke(new MethodInvoker(() => splash.ShowStatus(heading, message)));
+            _splash.Invoke(new MethodInvoker(() => _splash.ShowStatus(heading, message)));
         }
 
         private static void Login(string loginName)
@@ -118,14 +123,15 @@ namespace Shuttle.Abacus.UI
                               LoginName = loginName
                           };
 
+            _bus.Send(new LoginTimeoutCommand(), c => c.Defer(DateTime.Now.AddSeconds(5)).Local());
             _bus.Send(command);
         }
 
         private static void ShowSplash()
         {
-            splash = new Splash();
+            _splash = new Splash();
 
-            splash.ShowDialog();
+            _splash.ShowDialog();
         }
 
         private static void ThreadException(object sender, ThreadExceptionEventArgs e)

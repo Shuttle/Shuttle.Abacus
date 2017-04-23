@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NotificationMessage.cs" />
+    <Compile Include="LoginTimeoutCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReplyMessage.cs" />
   </ItemGroup>
