@@ -119,7 +119,7 @@ namespace Shuttle.Abacus.UI
                     .FromAssemblyNamed("Shuttle.Abacus.UI")
                     .Pick()
                     .If(type => !type.IsInterface && type.Name != "Coordinator" && type.Name.EndsWith("Coordinator"))
-                    .WithService.Select((type, basetype) => FindInterface("Coordinator", type)));
+                    .WithServiceAllInterfaces());
 
             _container.Register(
                 Classes

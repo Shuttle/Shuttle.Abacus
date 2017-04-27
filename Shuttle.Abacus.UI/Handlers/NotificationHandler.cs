@@ -1,4 +1,4 @@
-using Abacus.Messages;
+using Shuttle.Abacus.Messages;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Esb;

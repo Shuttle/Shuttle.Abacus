@@ -1,5 +1,4 @@
 using System;
-using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Localisation;
@@ -14,6 +13,8 @@ using Shuttle.Abacus.UI.UI.Method;
 using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Coordinators
 {
@@ -21,11 +22,16 @@ namespace Shuttle.Abacus.UI.Coordinators
         Coordinator,
         IMethodCoordinator
     {
-        private readonly IMethodQuery methodQuery;
+        private readonly IDatabaseContextFactory _databaseContextFactory;
+        private readonly IMethodQuery _methodQuery;
 
-        public MethodCoordinator(IMethodQuery methodQuery)
+        public MethodCoordinator(IDatabaseContextFactory databaseContextFactory, IMethodQuery methodQuery)
         {
-            this.methodQuery = methodQuery;
+            Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
+            Guard.AgainstNull(methodQuery, "_methodQuery");
+
+            _databaseContextFactory = databaseContextFactory;
+            _methodQuery = methodQuery;
         }
 
         public void HandleMessage(ExplorerInitializeMessage message)
@@ -41,8 +47,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(PopulateResourceMessage message)
         {
-            if (message.Resource.ResourceKey !=
-                ResourceKeys.Method)
+            if (message.Resource.ResourceKey.Equals(ResourceKeys.Method))
             {
                 return;
             }
@@ -51,14 +56,18 @@ namespace Shuttle.Abacus.UI.Coordinators
             {
                 case Resource.ResourceType.Container:
                     {
-                        foreach (var row in methodQuery.All())
+                        using (_databaseContextFactory.Create())
+
                         {
-                            message.Resources.Add(
-                                new Resource(
-                                    ResourceKeys.Method,
-                                    MethodColumns.Id.MapFrom(row),
-                                    MethodColumns.Name.MapFrom(row),
-                                    ImageResources.Method));
+                            foreach (var row in _methodQuery.All())
+                            {
+                                message.Resources.Add(
+                                    new Resource(
+                                        ResourceKeys.Method,
+                                        MethodColumns.Id.MapFrom(row),
+                                        MethodColumns.Name.MapFrom(row),
+                                        ImageResources.Method));
+                            }
                         }
 
                         break;
@@ -67,15 +76,15 @@ namespace Shuttle.Abacus.UI.Coordinators
                     {
                         message.Resources.Add(
                             new Resource(ResourceKeys.Calculation, Guid.NewGuid(), "Calculations",
-                                             ImageResources.Calculation).AsContainer());
+                                ImageResources.Calculation).AsContainer());
 
                         message.Resources.Add(
                             new Resource(ResourceKeys.Limit, Guid.NewGuid(), "Limits",
-                                             ImageResources.Limit).AsContainer());
+                                ImageResources.Limit).AsContainer());
 
                         message.Resources.Add(
                             new Resource(ResourceKeys.MethodTest, Guid.NewGuid(), "Tests",
-                                             ImageResources.MethodTest).AsContainer().AsLeaf());
+                                ImageResources.MethodTest).AsContainer().AsLeaf());
 
                         break;
                     }
@@ -98,46 +107,49 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(ResourceMenuRequestMessage message)
         {
-            if (message.Item.ResourceKey != ResourceKeys.Method)
+            if (message.Item.ResourceKey.Equals(ResourceKeys.Method))
             {
                 return;
             }
 
-            switch (message.Item.Type)
+            using (_databaseContextFactory.Create())
             {
-                case Resource.ResourceType.Container:
-                    {
-                        message.NavigationItems.Add(NavigationItemFactory.Create<NewMethodMessage>());
+                switch (message.Item.Type)
+                {
+                    case Resource.ResourceType.Container:
+                        {
+                            message.NavigationItems.Add(NavigationItemFactory.Create<NewMethodMessage>());
 
-                        break;
-                    }
-                case Resource.ResourceType.Item:
-                    {
-                        message.NavigationItems.Add(
-                            NavigationItemFactory.Create(
-                                new EditMethodMessage(message.Item.Key)));
+                            break;
+                        }
+                    case Resource.ResourceType.Item:
+                        {
+                            message.NavigationItems.Add(
+                                NavigationItemFactory.Create(
+                                    new EditMethodMessage(message.Item.Key)));
 
-                        message.NavigationItems.Add(
-                            NavigationItemFactory.Create(
-                                new NewMethodFromExistingMessage(message.Item.Key,
-                                                                  message.Item.Text)));
+                            message.NavigationItems.Add(
+                                NavigationItemFactory.Create(
+                                    new NewMethodFromExistingMessage(message.Item.Key,
+                                        message.Item.Text)));
 
-                        message.NavigationItems.Add(
-                            NavigationItemFactory.Create(
-                                new DeleteMethodMessage(message.Item.Key, message.Item.Text, message.UpstreamItems[0])));
+                            message.NavigationItems.Add(
+                                NavigationItemFactory.Create(
+                                    new DeleteMethodMessage(message.Item.Key, message.Item.Text, message.UpstreamItems[0])));
 
-                        break;
-                    }
+                            break;
+                        }
+                }
             }
         }
 
         public void HandleMessage(EditMethodMessage message)
         {
             var item = WorkItemManager
-                .Create("Method: " + MethodColumns.Name.MapFrom(methodQuery.Get(message.MethodId)))
+                .Create("Method: " + MethodColumns.Name.MapFrom(_methodQuery.Get(message.MethodId)))
                 .ControlledBy<IMethodController>()
                 .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<IMethodPresenter>().WithModel(methodQuery.Get(message.MethodId))
+                .AddPresenter<IMethodPresenter>().WithModel(_methodQuery.Get(message.MethodId))
                 .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).
                 AsDefault()
                 .AssignInitiator(message);
@@ -149,13 +161,16 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(ResourceRefreshItemTextMessage message)
         {
-            if (message.Item.ResourceKey != ResourceKeys.Method ||
+            if (message.Item.ResourceKey.Equals(ResourceKeys.Method) ||
                 message.Item.Type != Resource.ResourceType.Item)
             {
                 return;
             }
 
-            message.Item.AssignText(MethodColumns.Name.MapFrom(methodQuery.Get(message.Item.Key)));
+            using (_databaseContextFactory.Create())
+            {
+                message.Item.AssignText(MethodColumns.Name.MapFrom(_methodQuery.Get(message.Item.Key)));
+            }
         }
 
         public void HandleMessage(NewMethodFromExistingMessage message)
@@ -189,20 +204,26 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return;
             }
 
-            switch (message.Item.Type)
+            using (_databaseContextFactory.Create())
             {
-                case Resource.ResourceType.Container:
+                using (_databaseContextFactory.Create())
+                {
+                    switch (message.Item.Type)
                     {
-                        message.AddTable("Methods", methodQuery.All());
+                        case Resource.ResourceType.Container:
+                            {
+                                message.AddTable("Methods", _methodQuery.All());
 
-                        break;
-                    }
-                case Resource.ResourceType.Item:
-                    {
-                        message.AddRow(message.Item.Text, methodQuery.Get(message.Item.Key));
+                                break;
+                            }
+                        case Resource.ResourceType.Item:
+                            {
+                                message.AddRow(message.Item.Text, _methodQuery.Get(message.Item.Key));
 
-                        break;
+                                break;
+                            }
                     }
+                }
             }
         }
     }

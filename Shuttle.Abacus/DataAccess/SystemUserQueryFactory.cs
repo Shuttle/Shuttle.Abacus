@@ -25,6 +25,8 @@ left join
 select
     SystemUserId,
     LoginName
+from
+    SystemUser
 order by    
     LoginName
 ");
@@ -36,6 +38,8 @@ order by
 select
     SystemUserId,
     LoginName
+from
+    SystemUser
 where
     SystemUserId = @SystemUserId
 ")
@@ -136,6 +140,8 @@ values
 select
     SystemUserId,
     LoginName
+from
+    SystemUser
 where
     LoginName = @LoginName
 ")

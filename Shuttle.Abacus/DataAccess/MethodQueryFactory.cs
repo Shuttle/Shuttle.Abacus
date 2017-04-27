@@ -8,6 +8,7 @@ namespace Shuttle.Abacus.DataAccess
     {
         private readonly string SelectClause = @"
 select
+    MethodId,
     Name
 from
     Method

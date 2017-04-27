@@ -1,31 +1,76 @@
-using Shuttle.Abacus.Domain;
+using System.Windows.Forms;
 using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Messages;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;
+using Permission = Shuttle.Abacus.Infrastructure.Permission;
 
 namespace Shuttle.Abacus.UI.Handlers
 {
-    public class SystemUserHandler : Esb.IMessageHandler<LoginCompletedEvent>
+    public class SystemUserHandler : 
+        Esb.IMessageHandler<LoginCompletedEvent>,
+        Esb.IMessageHandler<LoginTimeoutCommand>
     {
-        private readonly ISession session;
-        private readonly IMessageBus messageBus;
+        private readonly IMessageBus _messageBus;
+        private readonly ISession _session;
+        private readonly object _lock = new object();
+        private static bool _loginTimeout;
+        private static bool _loginCompleted;
 
         public SystemUserHandler(ISession session, IMessageBus messageBus)
         {
-            this.session = session;
-            this.messageBus = messageBus;
+            Guard.AgainstNull(session, "session");
+            Guard.AgainstNull(messageBus, "messageBus");
+
+            _session = session;
+            _messageBus = messageBus;
         }
 
         public void ProcessMessage(IHandlerContext<LoginCompletedEvent> context)
         {
+            lock (_lock)
+            {
+                if (_loginTimeout)
+                {
+                    return;
+                }
+
+                _loginCompleted = true;
+            }
+
+            Program.CloseSplash();
+
             var permissions = new PermissionCollection();
 
-            context.Message.Permissions.ForEach(permissions.Add);
+            context.Message.Permissions.ForEach(
+                permission => permissions.Add(new Permission(permission.Identifier, permission.Description)));
 
-            session.Permissions = permissions;
+            _session.Permissions = permissions;
 
-            messageBus.Publish(new ConfigureShellMessage());
+            _messageBus.Publish(new ConfigureShellMessage());
+            _messageBus.Publish(new ActivateShellMessage());
+        }
+
+        public void ProcessMessage(IHandlerContext<LoginTimeoutCommand> context)
+        {
+            lock (_lock)
+            {
+                if (_loginCompleted)
+                {
+                    return;
+                }
+
+                _loginTimeout = true;
+            }
+
+            Program.CloseSplash();
+
+            MessageBox.Show("It took too long to try to log you on.  Please try again.", "Login Failure",
+                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            Application.Exit();
         }
     }
 }

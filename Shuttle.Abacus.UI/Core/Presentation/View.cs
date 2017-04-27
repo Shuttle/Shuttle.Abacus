@@ -12,7 +12,7 @@ namespace Shuttle.Abacus.UI.Core.Presentation
         private readonly IViewValidationManager viewValidationManager;
         private IContainer components;
         private ErrorProvider errorProvider;
-        private IPresenter ipresenter;
+        private IPresenter _presenter;
         private IViewValidator viewValidator;
 
         public IBinderProvider BinderProvider { get; set; }
@@ -69,12 +69,12 @@ namespace Shuttle.Abacus.UI.Core.Presentation
         {
             get
             {
-                if (ipresenter == null)
+                if (_presenter == null)
                 {
                     throw new NullReferenceException(string.Format(Localisation.Resources.NullReferenceException, "View.IPresenter"));
                 }
 
-                return ipresenter;
+                return _presenter;
             }
         }
 
@@ -92,7 +92,7 @@ namespace Shuttle.Abacus.UI.Core.Presentation
         {
             Guard.AgainstNull(presenter, "presenter");
 
-            ipresenter = presenter;
+            _presenter = presenter;
         }
 
         public void AttachViewValidator(IViewValidator validator)
@@ -138,11 +138,11 @@ namespace Shuttle.Abacus.UI.Core.Presentation
                 components.Dispose();
             }
 
-            if (ipresenter != null)
+            if (_presenter != null)
             {
                 IPresenter.Dispose();
 
-                ipresenter = null;
+                _presenter = null;
             }
 
             base.Dispose(disposing);

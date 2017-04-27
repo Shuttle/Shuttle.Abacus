@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using Shuttle.Abacus.DTO;
@@ -7,13 +6,14 @@ using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
 {
-    public class CalculationQuery :ICalculationQuery
+    public class CalculationQuery : ICalculationQuery
     {
-        private readonly IDatabaseGateway _databaseGateway;
-        private readonly ICalculationQueryFactory _calculationQueryFactory;
         private readonly IDataTableMapper<CalculationDTO> _calculationDTOMapper;
+        private readonly ICalculationQueryFactory _calculationQueryFactory;
+        private readonly IDatabaseGateway _databaseGateway;
 
-        public CalculationQuery(IDatabaseGateway databaseGateway, ICalculationQueryFactory calculationQueryFactory, IDataTableMapper<CalculationDTO> calculationDTOMapper)
+        public CalculationQuery(IDatabaseGateway databaseGateway, ICalculationQueryFactory calculationQueryFactory,
+            IDataTableMapper<CalculationDTO> calculationDTOMapper)
         {
             _databaseGateway = databaseGateway;
             _calculationQueryFactory = calculationQueryFactory;
@@ -27,7 +27,8 @@ namespace Shuttle.Abacus.DataAccess
 
         public DataTable AllBeforeCalculation(Guid methodId, Guid calculationId)
         {
-            return _databaseGateway.GetDataTableFor(_calculationQueryFactory.AllBeforeCalculation(methodId, calculationId));
+            return
+                _databaseGateway.GetDataTableFor(_calculationQueryFactory.AllBeforeCalculation(methodId, calculationId));
         }
 
         public DataRow Get(Guid id)

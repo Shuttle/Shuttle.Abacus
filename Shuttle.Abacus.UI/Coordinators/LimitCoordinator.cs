@@ -1,5 +1,4 @@
 using System;
-using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
@@ -12,58 +11,66 @@ using Shuttle.Abacus.UI.UI.Limit;
 using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Coordinators
 {
     public class LimitCoordinator : Coordinator, ILimitCoordinator
     {
-        private readonly ILimitQuery limitQuery;
+        private readonly IDatabaseContextFactory _databaseContextFactory;
+        private readonly ILimitQuery _limitQuery;
 
-        public LimitCoordinator(ILimitQuery limitQuery)
+        public LimitCoordinator(IDatabaseContextFactory databaseContextFactory, ILimitQuery limitQuery)
         {
-            this.limitQuery = limitQuery;
+            Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
+            Guard.AgainstNull(limitQuery, "limitQuery");
+
+            _databaseContextFactory = databaseContextFactory;
+            _limitQuery = limitQuery;
         }
 
         public void HandleMessage(PopulateResourceMessage message)
         {
-            if (message.Resource.ResourceKey !=
-                ResourceKeys.Limit)
+            if (message.Resource.ResourceKey.Equals(ResourceKeys.Limit))
             {
                 return;
             }
 
             var ownerId = message.RelatedResources.Contains(ResourceKeys.Calculation)
-                              ? message.RelatedResources[ResourceKeys.Calculation].Key
-                              : message.RelatedResources[ResourceKeys.Method].Key;
+                ? message.RelatedResources[ResourceKeys.Calculation].Key
+                : message.RelatedResources[ResourceKeys.Method].Key;
 
-            switch (message.Resource.Type)
+            using (_databaseContextFactory.Create())
             {
-                case Resource.ResourceType.Container:
+                switch (message.Resource.Type)
+                {
+                    case Resource.ResourceType.Container:
                     {
-                        foreach (DataRow row in limitQuery.AllForOwner(ownerId))
+                        foreach (var row in _limitQuery.AllForOwner(ownerId))
                         {
                             message.Resources.Add(
                                 new Resource(ResourceKeys.Limit, LimitColumns.Id.MapFrom(row),
-                                             LimitColumns.Name.MapFrom(row), ImageResources.Limit));
+                                    LimitColumns.Name.MapFrom(row), ImageResources.Limit));
                         }
 
                         break;
                     }
-                case Resource.ResourceType.Item:
+                    case Resource.ResourceType.Item:
                     {
                         message.Resources.Add(
                             new Resource(ResourceKeys.Formula, Guid.NewGuid(), "Formulas",
-                                         ImageResources.Formula).AsContainer());
+                                ImageResources.Formula).AsContainer());
 
                         break;
                     }
+                }
             }
         }
 
         public void HandleMessage(ResourceMenuRequestMessage message)
         {
-            if (message.Item.ResourceKey !=
-                ResourceKeys.Limit)
+            if (message.Item.ResourceKey.Equals(ResourceKeys.Limit))
             {
                 return;
             }
@@ -76,34 +83,31 @@ namespace Shuttle.Abacus.UI.Coordinators
                 ownerName = "Calculation";
                 ownerId = message.RelatedItems[ResourceKeys.Calculation].Key;
             }
-            else
-            {
-                ownerName = "Method";
-                ownerId = message.RelatedItems[ResourceKeys.Method].Key;
-            }
+            ownerName = "Method";
+            ownerId = message.RelatedItems[ResourceKeys.Method].Key;
 
             switch (message.Item.Type)
             {
                 case Resource.ResourceType.Container:
-                    {
-                        message.NavigationItems.Add(
-                            NavigationItemFactory.Create(
-                                new NewLimitMessage(ownerName, ownerId)));
+                {
+                    message.NavigationItems.Add(
+                        NavigationItemFactory.Create(
+                            new NewLimitMessage(ownerName, ownerId)));
 
-                        break;
-                    }
+                    break;
+                }
                 case Resource.ResourceType.Item:
-                    {
-                        message.NavigationItems.Add(
-                            NavigationItemFactory.Create(
-                                new EditLimitMessage(message.Item.Key, message.Item.Text)));
+                {
+                    message.NavigationItems.Add(
+                        NavigationItemFactory.Create(
+                            new EditLimitMessage(message.Item.Key, message.Item.Text)));
 
-                        message.NavigationItems.Add(
-                            NavigationItemFactory.Create(
-                                new DeleteLimitMessage(message.Item.Key, message.Item.Text, message.UpstreamItems[0])));
+                    message.NavigationItems.Add(
+                        NavigationItemFactory.Create(
+                            new DeleteLimitMessage(message.Item.Key, message.Item.Text, message.UpstreamItems[0])));
 
-                        break;
-                    }
+                    break;
+                }
             }
         }
 
@@ -115,7 +119,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .ShowIn<IContextToolbarPresenter>()
                 .AddPresenter<ILimitPresenter>()
                 .AddNavigationItem(
-                NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
+                    NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
                 .AssignInitiator(message);
 
             HostInWorkspace<ITabbedWorkspacePresenter>(item);
@@ -127,9 +131,9 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .Create(string.Format("Edit limit: {0}", message.Text))
                 .ControlledBy<ILimitController>()
                 .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<ILimitPresenter>().WithModel(limitQuery.Get(message.LimitId))
+                .AddPresenter<ILimitPresenter>().WithModel(_limitQuery.Get(message.LimitId))
                 .AddNavigationItem(
-                NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
+                    NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
                 .AssignInitiator(message);
 
             HostInWorkspace<ITabbedWorkspacePresenter>(item);
@@ -152,31 +156,27 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return;
             }
 
-            switch (message.Item.Type)
+            using (_databaseContextFactory.Create())
             {
-                case Resource.ResourceType.Container:
+                switch (message.Item.Type)
+                {
+                    case Resource.ResourceType.Container:
                     {
-                        Guid ownerId;
+                        var ownerId = message.RelatedItems.Contains(ResourceKeys.Calculation)
+                            ? message.RelatedItems[ResourceKeys.Calculation].Key
+                            : message.RelatedItems[ResourceKeys.Method].Key;
 
-                        if (message.RelatedItems.Contains(ResourceKeys.Calculation))
-                        {
-                            ownerId = message.RelatedItems[ResourceKeys.Calculation].Key;
-                        }
-                        else
-                        {
-                            ownerId = message.RelatedItems[ResourceKeys.Method].Key;
-                        }
-
-                        message.AddTable("Limits", limitQuery.AllForOwner(ownerId));
+                        message.AddTable("Limits", _limitQuery.AllForOwner(ownerId));
 
                         break;
                     }
-                case Resource.ResourceType.Item:
+                    case Resource.ResourceType.Item:
                     {
                         //message.AddRow(message.Item.Text, productQuery.Get(message.Item.Key));
 
                         break;
                     }
+                }
             }
         }
     }

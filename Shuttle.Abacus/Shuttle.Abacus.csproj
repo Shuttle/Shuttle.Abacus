@@ -121,6 +121,7 @@
     <Compile Include="DataAccess\Definitions\LimitColumns.cs" />
     <Compile Include="DataAccess\LimitQueryFactory.cs" />
     <Compile Include="DataAccess\Definitions\MethodColumns.cs" />
+    <Compile Include="DataAccess\Mapping\SystemDataRowMapper.cs" />
     <Compile Include="DataAccess\MethodQueryFactory.cs" />
     <Compile Include="DataAccess\Definitions\MethodTestColumns.cs" />
     <Compile Include="DataAccess\MethodTestQueryFactory.cs" />
@@ -262,7 +263,6 @@
     <Compile Include="Domain\Commands\DeleteMethodCommand.cs" />
     <Compile Include="Domain\Commands\DeleteMethodTestCommand.cs" />
     <Compile Include="Domain\Commands\GrabCalculationsCommand.cs" />
-    <Compile Include="Domain\Commands\LoginCommand.cs" />
     <Compile Include="Domain\Commands\PrintMethodTestCommand.cs" />
     <Compile Include="Domain\Commands\RunMethodTestCommand.cs" />
     <Compile Include="Domain\Commands\SetCalculationConstraintsCommand.cs" />
@@ -291,7 +291,6 @@
     <Compile Include="Domain\Events\CalculationAdded.cs" />
     <Compile Include="Domain\Events\FormulaOrderChanged.cs" />
     <Compile Include="Domain\Events\FormulaRemoved.cs" />
-    <Compile Include="Domain\Events\LoginCompletedEvent.cs" />
     <Compile Include="Domain\Events\MethodTestPrintEvent.cs" />
     <Compile Include="Domain\Events\MethodTestRunEvent.cs" />
     <Compile Include="Domain\Extensions\EnumerableExtensions.cs" />

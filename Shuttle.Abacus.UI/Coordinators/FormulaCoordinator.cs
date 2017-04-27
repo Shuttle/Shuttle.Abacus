@@ -15,40 +15,54 @@ using Shuttle.Abacus.UI.UI.List;
 using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Coordinators
 {
     public class FormulaCoordinator : Coordinator, IFormulaCoordinator
     {
-        private readonly IArgumentQuery argumentQuery;
-        private readonly ICalculationQuery calculationQuery;
-        private readonly IConstraintQuery constraintQuery;
-        private readonly IDecimalTableQuery decimalTableQuery;
-        private readonly IFormulaQuery formulaQuery;
-        private readonly IMethodQuery methodQuery;
-        private readonly IOperationTypeQuery operationTypeQuery;
-        private readonly IValueSourceTypeQuery valueSourceTypeQuery;
+        private readonly IArgumentQuery _argumentQuery;
+        private readonly ICalculationQuery _calculationQuery;
+        private readonly IConstraintQuery _constraintQuery;
+        private readonly IDatabaseContextFactory _databaseContextFactory;
+        private readonly IDecimalTableQuery _decimalTableQuery;
+        private readonly IFormulaQuery _formulaQuery;
+        private readonly IMethodQuery _methodQuery;
+        private readonly IOperationTypeQuery _operationTypeQuery;
+        private readonly IValueSourceTypeQuery _valueSourceTypeQuery;
 
-        public FormulaCoordinator(IFormulaQuery formulaQuery, IConstraintQuery constraintQuery,
+        public FormulaCoordinator(IDatabaseContextFactory databaseContextFactory, IFormulaQuery formulaQuery,
+            IConstraintQuery constraintQuery,
             IArgumentQuery argumentQuery, ICalculationQuery calculationQuery,
             IOperationTypeQuery operationTypeQuery, IValueSourceTypeQuery valueSourceTypeQuery,
             IDecimalTableQuery decimalTableQuery, IMethodQuery methodQuery)
         {
-            this.formulaQuery = formulaQuery;
-            this.decimalTableQuery = decimalTableQuery;
-            this.methodQuery = methodQuery;
-            this.calculationQuery = calculationQuery;
-            this.operationTypeQuery = operationTypeQuery;
-            this.valueSourceTypeQuery = valueSourceTypeQuery;
+            Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
+            Guard.AgainstNull(formulaQuery, "_formulaQuery");
+            Guard.AgainstNull(constraintQuery, "_constraintQuery");
+            Guard.AgainstNull(argumentQuery, "_argumentQuery");
+            Guard.AgainstNull(calculationQuery, "_calculationQuery");
+            Guard.AgainstNull(operationTypeQuery, "operationTypeQueryy");
+            Guard.AgainstNull(valueSourceTypeQuery, "_valueSourceTypeQuery");
+            Guard.AgainstNull(decimalTableQuery, "_decimalTableQuery");
+            Guard.AgainstNull(methodQuery, "_methodQuery");
 
-            this.constraintQuery = constraintQuery;
-            this.argumentQuery = argumentQuery;
+            _databaseContextFactory = databaseContextFactory;
+            _formulaQuery = formulaQuery;
+            _decimalTableQuery = decimalTableQuery;
+            _methodQuery = methodQuery;
+            _calculationQuery = calculationQuery;
+            _operationTypeQuery = operationTypeQuery;
+            _valueSourceTypeQuery = valueSourceTypeQuery;
+
+            _constraintQuery = constraintQuery;
+            _argumentQuery = argumentQuery;
         }
 
         public void HandleMessage(ResourceMenuRequestMessage message)
         {
-            if (message.Item.ResourceKey !=
-                ResourceKeys.Formula)
+            if (message.Item.ResourceKey.Equals(ResourceKeys.Formula))
             {
                 return;
             }
@@ -61,11 +75,8 @@ namespace Shuttle.Abacus.UI.Coordinators
                 ownerName = "Limit";
                 ownerId = message.RelatedItems[ResourceKeys.Limit].Key;
             }
-            else
-            {
-                ownerName = "Calculation";
-                ownerId = message.RelatedItems[ResourceKeys.Calculation].Key;
-            }
+            ownerName = "Calculation";
+            ownerId = message.RelatedItems[ResourceKeys.Calculation].Key;
 
             switch (message.Item.Type)
             {
@@ -120,8 +131,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(PopulateResourceMessage message)
         {
-            if (message.Resource.ResourceKey !=
-                ResourceKeys.Formula)
+            if (message.Resource.ResourceKey.Equals(ResourceKeys.Formula))
             {
                 return;
             }
@@ -134,12 +144,15 @@ namespace Shuttle.Abacus.UI.Coordinators
             {
                 case Resource.ResourceType.Container:
                 {
-                    foreach (var row in formulaQuery.AllForOwner(ownerId))
+                    using (_databaseContextFactory.Create())
                     {
-                        message.Resources.Add(
-                            new Resource(ResourceKeys.Formula, FormulaColumns.Id.MapFrom(row),
-                                    FormulaColumns.Description.MapFrom(row), ImageResources.Formula)
-                                .AsLeaf());
+                        foreach (var row in _formulaQuery.AllForOwner(ownerId))
+                        {
+                            message.Resources.Add(
+                                new Resource(ResourceKeys.Formula, FormulaColumns.Id.MapFrom(row),
+                                        FormulaColumns.Description.MapFrom(row), ImageResources.Formula)
+                                    .AsLeaf());
+                        }
                     }
 
                     break;
@@ -189,7 +202,10 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return;
             }
 
-            formulaModel.FormulaOperations = formulaQuery.OperationDTOs(message.FormulaId);
+            using (_databaseContextFactory.Create())
+            {
+                formulaModel.FormulaOperations = _formulaQuery.OperationDTOs(message.FormulaId);
+            }
 
             var constraintModel = BuildConstraintModel(formulaModel);
 
@@ -198,7 +214,10 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return;
             }
 
-            constraintModel.Constraints = constraintQuery.DTOsForOwner(message.FormulaId);
+            using (_databaseContextFactory.Create())
+            {
+                constraintModel.Constraints = _constraintQuery.DTOsForOwner(message.FormulaId);
+            }
 
             var item = WorkItemManager
                 .Create("Edit formula")
@@ -215,25 +234,32 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(ResourceRefreshItemTextMessage message)
         {
-            if (message.Item.ResourceKey != ResourceKeys.Formula ||
-                message.Item.Type != Resource.ResourceType.Item)
+            if (message.Item.ResourceKey.Equals(ResourceKeys.Formula) ||
+                                                message.Item.Type != Resource.ResourceType.Item)
             {
                 return;
             }
 
-            message.Item.AssignText(FormulaColumns.Description.MapFrom(formulaQuery.Get(message.Item.Key)));
+            using (_databaseContextFactory.Create())
+            {
+                message.Item.AssignText(FormulaColumns.Description.MapFrom(_formulaQuery.Get(message.Item.Key)));
+            }
         }
 
         public void HandleMessage(ChangeFormulaOrderMessage message)
         {
             var model = new SimpleListModel
             {
-                Rows = formulaQuery.AllForOwner(message.OwnerId),
                 VisibleColumns = new List<string>
                 {
                     "Description"
                 }
             };
+
+            using (_databaseContextFactory.Create())
+            {
+                model.Rows = _formulaQuery.AllForOwner(message.OwnerId);
+            }
 
             var item = WorkItemManager
                 .Create(string.Format("'{0}' Formulas", message.OwnerText))
@@ -269,7 +295,10 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return;
             }
 
-            formulaModel.FormulaOperations = formulaQuery.OperationDTOs(message.FormulaId);
+            using (_databaseContextFactory.Create())
+            {
+                formulaModel.FormulaOperations = _formulaQuery.OperationDTOs(message.FormulaId);
+            }
 
             var constraintModel = BuildConstraintModel(formulaModel);
 
@@ -278,7 +307,10 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return;
             }
 
-            constraintModel.Constraints = constraintQuery.DTOsForOwner(message.FormulaId);
+            using (_databaseContextFactory.Create())
+            {
+                constraintModel.Constraints = _constraintQuery.DTOsForOwner(message.FormulaId);
+            }
 
             var item = WorkItemManager
                 .Create("New formula")
@@ -302,27 +334,30 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return;
             }
 
-            switch (message.Item.Type)
+            using (_databaseContextFactory.Create())
             {
-                case Resource.ResourceType.Container:
+                switch (message.Item.Type)
                 {
-                    var ownerId = message.RelatedItems.Contains(ResourceKeys.Limit)
-                        ? message.RelatedItems[ResourceKeys.Limit].Key
-                        : message.RelatedItems[ResourceKeys.Calculation].Key;
+                    case Resource.ResourceType.Container:
+                    {
+                        var ownerId = message.RelatedItems.Contains(ResourceKeys.Limit)
+                            ? message.RelatedItems[ResourceKeys.Limit].Key
+                            : message.RelatedItems[ResourceKeys.Calculation].Key;
 
-                    message.AddTable("Formulas",
-                        formulaQuery.AllForOwner(ownerId));
+                        message.AddTable("Formulas",
+                            _formulaQuery.AllForOwner(ownerId));
 
-                    break;
-                }
-                case Resource.ResourceType.Item:
-                {
-                    //var result = formulaQuery.OperationsSummary(message.Item.Key);
-                    var result = formulaQuery.Get(message.Item.Key);
+                        break;
+                    }
+                    case Resource.ResourceType.Item:
+                    {
+                        //var result = _formulaQuery.OperationsSummary(message.Item.Key);
+                        var result = _formulaQuery.Get(message.Item.Key);
 
-                    message.AddTable("Formula Operations", new[] {result});
+                        message.AddTable("Formula Operations", new[] {result});
 
-                    break;
+                        break;
+                    }
                 }
             }
         }
@@ -333,24 +368,27 @@ namespace Shuttle.Abacus.UI.Coordinators
             {
                 Arguments = formulaModel.Arguments
                 //TODO
-                //ConstraintTypes = constraintQuery.ConstraintTypes()
+                //ConstraintTypes = _constraintQuery.ConstraintTypes()
             };
         }
 
         private FormulaModel BuildFormulaModel(Guid methodId, string ownerName, Guid ownerId)
         {
-            return new FormulaModel
+            using (_databaseContextFactory.Create())
             {
-                DecimalTables = decimalTableQuery.AllDTOs(),
-                Arguments = argumentQuery.AllDTOs(),
-                PrecedingCalculations =
-                    ownerName.ToLower() == "calculation"
-                        ? calculationQuery.DTOsBeforeCalculation(methodId, ownerId)
-                        : calculationQuery.DTOsForMethod(methodId),
-                OperationTypes = operationTypeQuery.AllDTOs(),
-                ValueSourceTypes = valueSourceTypeQuery.AllDTOs(),
-                Methods = methodQuery.AllDTOs()
-            };
+                return new FormulaModel
+                {
+                    DecimalTables = _decimalTableQuery.AllDTOs(),
+                    Arguments = _argumentQuery.AllDTOs(),
+                    PrecedingCalculations =
+                        ownerName.ToLower() == "calculation"
+                            ? _calculationQuery.DTOsBeforeCalculation(methodId, ownerId)
+                            : _calculationQuery.DTOsForMethod(methodId),
+                    OperationTypes = _operationTypeQuery.AllDTOs(),
+                    ValueSourceTypes = _valueSourceTypeQuery.AllDTOs(),
+                    Methods = _methodQuery.AllDTOs()
+                };
+            }
         }
     }
 }

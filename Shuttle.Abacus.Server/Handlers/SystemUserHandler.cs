@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Shuttle.Abacus.ApplicationService;
 using Shuttle.Abacus.Domain;
-using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Messages;
+using Shuttle.Core.Data;
 using Shuttle.Esb;
 
 namespace Shuttle.Abacus.Server.Handlers
@@ -12,11 +13,14 @@ namespace Shuttle.Abacus.Server.Handlers
         IMessageHandler<ChangeLoginNameCommand>,
         IMessageHandler<LoginCommand>
     {
+        private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly ISystemUserRepository _systemUserRepository;
         private readonly ITaskFactory _taskFactory;
 
-        public SystemUserHandler(ISystemUserRepository systemUserRepository, ITaskFactory taskFactory)
+        public SystemUserHandler(IDatabaseContextFactory databaseContextFactory,
+            ISystemUserRepository systemUserRepository, ITaskFactory taskFactory)
         {
+            _databaseContextFactory = databaseContextFactory;
             _systemUserRepository = systemUserRepository;
             _taskFactory = taskFactory;
         }
@@ -38,24 +42,32 @@ namespace Shuttle.Abacus.Server.Handlers
         {
             var message = context.Message;
 
-            var user = _systemUserRepository.FetchByLoginName(message.LoginName);
-
-            var permissions = new List<Permission>();
-
-            if (user == null)
+            using (_databaseContextFactory.Create())
             {
-                _systemUserRepository.Add(new SystemUser
+                var user = _systemUserRepository.FetchByLoginName(message.LoginName);
+
+                var permissions = new List<Permission>();
+
+                if (user == null)
                 {
-                    LoginName = message.LoginName
-                });
-            }
-            else
-            {
-                user.Permissions.ForEach(permission => permissions.Add((Permission) permission));
+                    _systemUserRepository.Add(new SystemUser
+                    {
+                        LoginName = message.LoginName
+                    });
+                }
+                else
+                {
+                    user.Permissions.ForEach(
+                        permission =>
+                            permissions.Add(new Permission
+                            {
+                                Identifier = permission.Identifier,
+                                Description = permission.Description
+                            }));
+                }
 
+                context.Send(new LoginCompletedEvent {Permissions = permissions}, c => c.Reply());
             }
-
-            context.Send(new LoginCompletedEvent { Permissions = permissions }, c => c.Reply());
         }
 
         public void ProcessMessage(IHandlerContext<SetPermissionsCommand> context)

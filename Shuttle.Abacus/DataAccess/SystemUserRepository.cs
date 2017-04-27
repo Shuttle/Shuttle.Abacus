@@ -1,4 +1,5 @@
 using System;
+using System.Data;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Invariants.Interfaces;
 using Shuttle.Core.Data;
@@ -9,22 +10,40 @@ namespace Shuttle.Abacus.DataAccess
     public class SystemUserRepository : Repository<SystemUser>, ISystemUserRepository
     {
         private readonly IDatabaseGateway _databaseGateway;
-        private readonly IDataRepository<SystemUser> _repository;
         private readonly ISystemUserRules _rules;
         private readonly ISystemUserQueryFactory _systemUserQueryFactory;
+        private readonly IDataRowMapper<SystemUser> _mapper;
 
-        public SystemUserRepository(IDatabaseGateway databaseGateway, ISystemUserQueryFactory systemUserQueryFactory,
-            IDataRepository<SystemUser> repository, ISystemUserRules rules)
+        public SystemUserRepository(IDatabaseGateway databaseGateway, ISystemUserQueryFactory systemUserQueryFactory, IDataRowMapper<SystemUser> mapper, ISystemUserRules rules)
         {
             _rules = rules;
-            _repository = repository;
             _databaseGateway = databaseGateway;
             _systemUserQueryFactory = systemUserQueryFactory;
+            _mapper = mapper;
         }
 
         public SystemUser FetchByLoginName(string loginName)
         {
-            return _repository.FetchItemUsing(_systemUserQueryFactory.Get(loginName));
+            var row = _databaseGateway.GetSingleRowUsing(_systemUserQueryFactory.Get(loginName));
+
+            if (row == null)
+            {
+                return null;
+            }
+
+            return MapSystemUser(row);
+        }
+
+        private SystemUser MapSystemUser(DataRow row)
+        {
+            var result = _mapper.Map(row).Result;
+
+            foreach (var permissionRow in _databaseGateway.GetRowsUsing(_systemUserQueryFactory.GetPermissions(result.Id)))
+            {
+                result.OnAddPermission(PermissionColumns.Permission.MapFrom(permissionRow));
+            }
+
+            return result;
         }
 
         public void SetPermissions(SystemUser user)
@@ -55,14 +74,14 @@ namespace Shuttle.Abacus.DataAccess
 
         public override SystemUser Get(Guid id)
         {
-            var result = _repository.FetchItemUsing(_systemUserQueryFactory.Get(id));
+            var row = _databaseGateway.GetSingleRowUsing(_systemUserQueryFactory.Get(id));
 
-            if (result == null)
+            if (row == null)
             {
                 throw Exceptions.MissingEntity("SystemUser", id);
             }
 
-            return result;
+            return MapSystemUser(row);
         }
 
         private void AddPermissions(SystemUser user)

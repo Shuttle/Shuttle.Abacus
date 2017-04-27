@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Abacus.Messages;
 using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Messages;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;

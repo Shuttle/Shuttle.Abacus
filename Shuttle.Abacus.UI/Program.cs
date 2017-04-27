@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using Abacus.Messages;
 using Castle.Windsor;
-using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Messages;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Core.Castle;
+using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;
 
 namespace Shuttle.Abacus.UI
@@ -44,25 +44,33 @@ namespace Shuttle.Abacus.UI
 
             DependencyWiring.Start(_container).AddWindowsComponents().AddCaching();
 
-            StartServiceBus();
+            var container = new WindsorComponentContainer(_container);
 
-            // get an initial application instance to handle global events
-            DependencyResolver.Resolve<IMessageBus>()
-                .AddSubscribers
-                (
-                new List<object>
+            ServiceBus.Register(container);
+
+            _bus = ServiceBus.Create(container).Start();
+
+            container.Resolve<IDatabaseContextFactory>().ConfigureWith("Abacus");
+
+            using (container.Resolve<IDatabaseContextFactory>().Create())
+            {
+                DependencyResolver.Resolve<IMessageBus>()
+                    .AddSubscribers
                     (
-                    DependencyResolver.Resolver.ResolveAssignable<ICoordinator>()
-                    )
-                );
+                        new List<object>
+                        (
+                            DependencyResolver.Resolver.ResolveAssignable<ICoordinator>()
+                        )
+                    );
+            }
 
             messageBus = DependencyResolver.Resolve<IMessageBus>();
 
             messageBus.Publish(new StartShellMessage());
 
             Login(string.Format(@"{0}\{1}",
-                                Environment.UserDomainName,
-                                Environment.UserName));
+                Environment.UserDomainName,
+                Environment.UserName));
 
             Application.Run();
 
@@ -95,15 +103,6 @@ namespace Shuttle.Abacus.UI
             splashThread.Join();
         }
 
-        private static void StartServiceBus()
-        {
-            var container = new WindsorComponentContainer(_container);
-
-            ServiceBus.Register(container);
-
-            _bus = ServiceBus.Create(container).Start();
-        }
-
         private static void AssemblyLoad(object sender, AssemblyLoadEventArgs args)
         {
             ShowStatus("loaded", args.LoadedAssembly.GetName().Name);
@@ -119,9 +118,9 @@ namespace Shuttle.Abacus.UI
             ShowStatus("logging in", loginName);
 
             var command = new LoginCommand
-                          {
-                              LoginName = loginName
-                          };
+            {
+                LoginName = loginName
+            };
 
             _bus.Send(new LoginTimeoutCommand(), c => c.Defer(DateTime.Now.AddSeconds(5)).Local());
             _bus.Send(command);
@@ -147,7 +146,7 @@ namespace Shuttle.Abacus.UI
         private static void ShowException(string message)
         {
             MessageBox.Show(message, "Application Exception", MessageBoxButtons.OK,
-                            MessageBoxIcon.Exclamation);
+                MessageBoxIcon.Exclamation);
         }
     }
 }

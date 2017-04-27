@@ -103,6 +103,10 @@
       <Project>{1A365F2C-BA2B-41F0-969B-EEC08C6E2658}</Project>
       <Name>Shuttle.Abacus.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Shuttle.Abacus.Messages\Shuttle.Abacus.Messages.csproj">
+      <Project>{7A323D9C-E55E-4552-AAF1-E21A86009162}</Project>
+      <Name>Shuttle.Abacus.Messages</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shuttle.Abacus\Shuttle.Abacus.csproj">
       <Project>{23680A60-878A-48DA-B23C-9B0EA4A29305}</Project>
       <Name>Shuttle.Abacus</Name>

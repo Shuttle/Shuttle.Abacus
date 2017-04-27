@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using Shuttle.Abacus.DataAccess;
-using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
@@ -19,6 +18,8 @@ using Shuttle.Abacus.UI.UI.List;
 using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Coordinators
 {
@@ -26,19 +27,25 @@ namespace Shuttle.Abacus.UI.Coordinators
         Coordinator,
         ICalculationCoordinator
     {
-        private readonly ICalculationQuery calculationQuery;
-        private readonly IArgumentQuery argumentQuery;
+        private readonly IArgumentQuery _argumentQuery;
+        private readonly ICalculationQuery _calculationQuery;
+        private readonly IDatabaseContextFactory _databaseContextFactory;
 
-        public CalculationCoordinator(ICalculationQuery calculationQuery, IArgumentQuery argumentQuery)
+        public CalculationCoordinator(IDatabaseContextFactory databaseContextFactory, ICalculationQuery calculationQuery,
+            IArgumentQuery argumentQuery)
         {
-            this.calculationQuery = calculationQuery;
-            this.argumentQuery = argumentQuery;
+            Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
+            Guard.AgainstNull(calculationQuery, "calculationQuery");
+            Guard.AgainstNull(argumentQuery, "argumentQuery");
+
+            _databaseContextFactory = databaseContextFactory;
+            _calculationQuery = calculationQuery;
+            _argumentQuery = argumentQuery;
         }
 
         public void HandleMessage(PopulateResourceMessage message)
         {
-            if (message.Resource.ResourceKey !=
-                ResourceKeys.Calculation)
+            if (message.Resource.ResourceKey.Equals(ResourceKeys.Calculation))
             {
                 return;
             }
@@ -47,20 +54,23 @@ namespace Shuttle.Abacus.UI.Coordinators
             {
                 case Resource.ResourceType.Container:
                     {
-                        foreach (
-                            DataRow row in
-                                calculationQuery.AllForOwner(message.RelatedResources.FirstItem.Key))
+                        using (_databaseContextFactory.Create())
                         {
-                            message.Resources.Add(
-                                new Resource(
-                                    ResourceKeys.Calculation,
-                                    CalculationColumns.Id.MapFrom(row),
-                                    CalculationColumns.Name.MapFrom(row),
-                                    ImageResources.Calculation)
-                                    .State.Add(StateKeys.Type,
-                                               Enumeration.Cast<Enumeration.CalculationType>(
-                                                   CalculationColumns.Type.MapFrom(row)))
+                            foreach (
+                                var row in
+                                _calculationQuery.AllForOwner(message.RelatedResources.FirstItem.Key))
+                            {
+                                message.Resources.Add(
+                                    new Resource(
+                                            ResourceKeys.Calculation,
+                                            CalculationColumns.Id.MapFrom(row),
+                                            CalculationColumns.Name.MapFrom(row),
+                                            ImageResources.Calculation)
+                                        .State.Add(StateKeys.Type,
+                                            Enumeration.Cast<Enumeration.CalculationType>(
+                                                CalculationColumns.Type.MapFrom(row)))
                                 );
+                            }
                         }
 
                         break;
@@ -73,7 +83,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                                 {
                                     message.Resources.Add(
                                         new Resource(ResourceKeys.Formula, Guid.NewGuid(), "Formulas",
-                                                     ImageResources.Formula).AsContainer());
+                                            ImageResources.Formula).AsContainer());
 
                                     break;
                                 }
@@ -81,7 +91,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                                 {
                                     message.Resources.Add(
                                         new Resource(ResourceKeys.Calculation, Guid.NewGuid(), "Calculations",
-                                                     ImageResources.Calculation).AsContainer());
+                                            ImageResources.Calculation).AsContainer());
 
                                     break;
                                 }
@@ -89,11 +99,11 @@ namespace Shuttle.Abacus.UI.Coordinators
 
                         message.Resources.Add(
                             new Resource(ResourceKeys.Limit, Guid.NewGuid(), "Limits",
-                                         ImageResources.Limit).AsContainer());
+                                ImageResources.Limit).AsContainer());
 
                         message.Resources.Add(
                             new Resource(ResourceKeys.Constraint, Guid.NewGuid(), "Constraints",
-                                         ImageResources.Constraint).AsContainer());
+                                ImageResources.Constraint).AsContainer());
 
                         break;
                     }
@@ -102,63 +112,78 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(NewCalculationMessage message)
         {
-            var item = WorkItemManager
-                .Create("New calculation")
-                .ControlledBy<ICalculationController>()
-                .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<ICalculationPresenter>()
-                .AddPresenter<IGraphNodeArgumentPresenter>().WithModel(new ArgumentDisplayModel(argumentQuery.AllDTOs()))
-                .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).
-                AsDefault()
-                .AssignInitiator(message);
+            using (_databaseContextFactory.Create())
+            {
+                var item = WorkItemManager
+                    .Create("New calculation")
+                    .ControlledBy<ICalculationController>()
+                    .ShowIn<IContextToolbarPresenter>()
+                    .AddPresenter<ICalculationPresenter>()
+                    .AddPresenter<IGraphNodeArgumentPresenter>()
+                    .WithModel(new ArgumentDisplayModel(_argumentQuery.AllDTOs()))
+                    .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).
+                    AsDefault()
+                    .AssignInitiator(message);
 
-            HostInWorkspace<ITabbedWorkspacePresenter>(item);
+                HostInWorkspace<ITabbedWorkspacePresenter>(item);
+            }
         }
 
         public void HandleMessage(EditCalculationMessage message)
         {
-            var item = WorkItemManager
-                .Create("Edit calculation: " +
-                        CalculationColumns.Name.MapFrom(calculationQuery.Get(message.CalculationId)))
-                .ControlledBy<ICalculationController>()
-                .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<ICalculationPresenter>().WithModel(calculationQuery.Get(message.CalculationId))
-                .AddPresenter<IGraphNodeArgumentPresenter>().WithModel(new ArgumentDisplayModel(argumentQuery.AllDTOs()) { GraphNodeArguments = calculationQuery.GraphNodeArguments(message.CalculationId).CopyToDataTable()})
-                .AddNavigationItem(
-                NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
-                .AssignInitiator(message);
+            using (_databaseContextFactory.Create())
+            {
+                var item = WorkItemManager
+                    .Create("Edit calculation: " +
+                            CalculationColumns.Name.MapFrom(_calculationQuery.Get(message.CalculationId)))
+                    .ControlledBy<ICalculationController>()
+                    .ShowIn<IContextToolbarPresenter>()
+                    .AddPresenter<ICalculationPresenter>().WithModel(_calculationQuery.Get(message.CalculationId))
+                    .AddPresenter<IGraphNodeArgumentPresenter>()
+                    .WithModel(new ArgumentDisplayModel(_argumentQuery.AllDTOs())
+                    {
+                        GraphNodeArguments =
+                            _calculationQuery.GraphNodeArguments(message.CalculationId).CopyToDataTable()
+                    })
+                    .AddNavigationItem(
+                        NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
+                    .AssignInitiator(message);
 
-            HostInWorkspace<ITabbedWorkspacePresenter>(item);
+                HostInWorkspace<ITabbedWorkspacePresenter>(item);
+            }
         }
 
         public void HandleMessage(ChangeCalculationOrderMessage message)
         {
             var model = new SimpleListModel
-                        {
-                            Rows = calculationQuery.AllForOwner(message.OwnerId),
-                            VisibleColumns = new List<string>
-                                             {
-                                                 CalculationColumns.Name
-                                             }
-                        };
+            {
+                VisibleColumns = new List<string>
+                {
+                    CalculationColumns.Name
+                }
+            };
+
+            using (_databaseContextFactory.Create())
+            {
+                model.Rows = _calculationQuery.AllForOwner(message.OwnerId);
+            }
 
             var item = WorkItemManager
-                .Create(string.Format("'{0}' Calculations", message.OwnerText))
-                .ControlledBy<ICalculationController>()
-                .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<ISimpleListPresenter>().WithModel(model)
-                .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
-                .AddNavigationItem(NavigationItemFactory.Create<MoveDownMessage>())
-                .AddNavigationItem(NavigationItemFactory.Create<MoveUpMessage>())
-                .AssignInitiator(message);
+                    .Create(string.Format("'{0}' Calculations", message.OwnerText))
+                    .ControlledBy<ICalculationController>()
+                    .ShowIn<IContextToolbarPresenter>()
+                    .AddPresenter<ISimpleListPresenter>().WithModel(model)
+                    .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
+                    .AddNavigationItem(NavigationItemFactory.Create<MoveDownMessage>())
+                    .AddNavigationItem(NavigationItemFactory.Create<MoveUpMessage>())
+                    .AssignInitiator(message);
 
             HostInWorkspace<ITabbedWorkspacePresenter>(item);
         }
 
         public void HandleMessage(ResourceMenuRequestMessage message)
         {
-            if (message.Item.ResourceKey !=
-                ResourceKeys.Calculation)
+            if (message.Item.ResourceKey.Equals(ResourceKeys.Calculation))
             {
                 return;
             }
@@ -234,13 +259,16 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(ResourceRefreshItemTextMessage message)
         {
-            if (message.Item.ResourceKey != ResourceKeys.Calculation ||
+            if (message.Item.ResourceKey.Equals(ResourceKeys.Calculation) ||
                 message.Item.Type != Resource.ResourceType.Item)
             {
                 return;
             }
 
-            message.Item.AssignText(CalculationColumns.Name.MapFrom(calculationQuery.Get(message.Item.Key)));
+            using (_databaseContextFactory.Create())
+            {
+                message.Item.AssignText(CalculationColumns.Name.MapFrom(_calculationQuery.Get(message.Item.Key)));
+            }
         }
 
         public void HandleMessage(DeleteCalculationMessage message)
@@ -256,20 +284,24 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(GrabCalculationsMessage message)
         {
-            var item = WorkItemManager
-                .Create(string.Format("'{0}' Grabbing", message.Text))
-                .ControlledBy<ICalculationController>()
-                .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<ISimpleListPresenter>()
-                .WithModel(
-                new SimpleListModel(calculationQuery.AllForMethod(message.MethodId, message.GrabberCalculationId))
-                {
-                    HasCheckBoxes = true
-                })
-                .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
-                .AssignInitiator(message);
+            using (_databaseContextFactory.Create())
+            {
+                var item = WorkItemManager
+                    .Create(string.Format("'{0}' Grabbing", message.Text))
+                    .ControlledBy<ICalculationController>()
+                    .ShowIn<IContextToolbarPresenter>()
+                    .AddPresenter<ISimpleListPresenter>()
+                    .WithModel(
+                        new SimpleListModel(_calculationQuery.AllForMethod(message.MethodId,
+                            message.GrabberCalculationId))
+                        {
+                            HasCheckBoxes = true
+                        })
+                    .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
+                    .AssignInitiator(message);
 
-            HostInWorkspace<ITabbedWorkspacePresenter>(item);
+                HostInWorkspace<ITabbedWorkspacePresenter>(item);
+            }
         }
 
         public void HandleMessage(SummaryViewRequestedMessage message)
@@ -279,21 +311,24 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return;
             }
 
-            switch (message.Item.Type)
+            using (_databaseContextFactory.Create())
             {
-                case Resource.ResourceType.Container:
-                    {
-                        message.AddTable("Calculations",
-                                         calculationQuery.AllForMethod(message.RelatedItems[ResourceKeys.Method].Key));
+                switch (message.Item.Type)
+                {
+                    case Resource.ResourceType.Container:
+                        {
+                            message.AddTable("Calculations",
+                                _calculationQuery.AllForMethod(message.RelatedItems[ResourceKeys.Method].Key));
 
-                        break;
-                    }
-                case Resource.ResourceType.Item:
-                    {
-                        //message.AddRow(message.Item.Text, productQuery.Get(message.Item.Key));
+                            break;
+                        }
+                    case Resource.ResourceType.Item:
+                        {
+                            message.AddRow(message.Item.Text, _calculationQuery.Get(message.Item.Key));
 
-                        break;
-                    }
+                            break;
+                        }
+                }
             }
         }
 

@@ -1,7 +1,5 @@
 using System;
-using System.Data;
 using Shuttle.Abacus.DataAccess;
-using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
 using Shuttle.Abacus.UI.Core.Presentation;
@@ -13,24 +11,32 @@ using Shuttle.Abacus.UI.UI.Constraint;
 using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Coordinators
 {
     public class ConstraintCoordinator : Coordinator, IConstraintCoordinator
     {
-        private readonly IConstraintQuery constraintQuery;
-        private readonly IArgumentQuery argumentQuery;
+        private readonly IArgumentQuery _argumentQuery;
+        private readonly IConstraintQuery _constraintQuery;
+        private readonly IDatabaseContextFactory _databaseContextFactory;
 
-        public ConstraintCoordinator(IConstraintQuery constraintQuery, IArgumentQuery argumentQuery)
+        public ConstraintCoordinator(IDatabaseContextFactory databaseContextFactory, IConstraintQuery constraintQuery,
+            IArgumentQuery argumentQuery)
         {
-            this.constraintQuery = constraintQuery;
-            this.argumentQuery = argumentQuery;
+            Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
+            Guard.AgainstNull(constraintQuery, "constraintQuery");
+            Guard.AgainstNull(argumentQuery, "argumentQuery");
+
+            _databaseContextFactory = databaseContextFactory;
+            _constraintQuery = constraintQuery;
+            _argumentQuery = argumentQuery;
         }
 
         public void HandleMessage(PopulateResourceMessage message)
         {
-            if (message.Resource.ResourceKey !=
-                ResourceKeys.Constraint)
+            if (message.Resource.ResourceKey.Equals(ResourceKeys.Constraint))
             {
                 return;
             }
@@ -38,29 +44,30 @@ namespace Shuttle.Abacus.UI.Coordinators
             switch (message.Resource.Type)
             {
                 case Resource.ResourceType.Container:
-                    {
-                        var ownerId = message.RelatedResources.Contains(ResourceKeys.Formula)
-                                          ? message.RelatedResources[ResourceKeys.Formula].Key
-                                          : message.RelatedResources[ResourceKeys.Calculation].Key;
+                {
+                    var ownerId = message.RelatedResources.Contains(ResourceKeys.Formula)
+                        ? message.RelatedResources[ResourceKeys.Formula].Key
+                        : message.RelatedResources[ResourceKeys.Calculation].Key;
 
-                        foreach (DataRow row in constraintQuery.QueryAllForOwner(ownerId))
+                    using (_databaseContextFactory.Create())
+                    {
+                        foreach (var row in _constraintQuery.QueryAllForOwner(ownerId))
                         {
                             message.Resources.Add(
                                 new Resource(ResourceKeys.Constraint, Guid.Empty,
-                                                 ConstraintColumns.Description.MapFrom(row), ImageResources.Constraint)
+                                        ConstraintColumns.Description.MapFrom(row), ImageResources.Constraint)
                                     .AsLeaf());
                         }
-
-
-                        break;
                     }
+
+                    break;
+                }
             }
         }
 
         public void HandleMessage(ResourceMenuRequestMessage message)
         {
-            if (message.Item.ResourceKey !=
-                ResourceKeys.Constraint)
+            if (message.Item.ResourceKey.Equals(ResourceKeys.Constraint))
             {
                 return;
             }
@@ -68,14 +75,14 @@ namespace Shuttle.Abacus.UI.Coordinators
             switch (message.Item.Type)
             {
                 case Resource.ResourceType.Container:
-                    {
-                        message.NavigationItems.Add(
-                            NavigationItemFactory.Create(
-                                new ManageCalculationConstraintsMessage(message.RelatedItems[ResourceKeys.Calculation].Text,
-                                    message.RelatedItems[ResourceKeys.Calculation].Key)));
+                {
+                    message.NavigationItems.Add(
+                        NavigationItemFactory.Create(
+                            new ManageCalculationConstraintsMessage(message.RelatedItems[ResourceKeys.Calculation].Text,
+                                message.RelatedItems[ResourceKeys.Calculation].Key)));
 
-                        break;
-                    }
+                    break;
+                }
             }
         }
 
@@ -94,7 +101,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .ShowIn<IContextToolbarPresenter>()
                 .AddPresenter<IConstraintPresenter>().WithModel(constraintModel)
                 .AddNavigationItem(
-                NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
+                    NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
                 .AssignInitiator(message);
 
             HostInWorkspace<ITabbedWorkspacePresenter>(item);
@@ -102,13 +109,16 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         private ConstraintModel BuildConstraintModel(Guid calculationId)
         {
-            return new ConstraintModel
-                   {
-                       Arguments = argumentQuery.AllDTOs(),
-                       //TODO
-                       //ConstraintTypes = constraintQuery.ConstraintTypes(),
-                       Constraints = constraintQuery.DTOsForOwner(calculationId)
-                   };
+            using (_databaseContextFactory.Create())
+            {
+                return new ConstraintModel
+                {
+                    Arguments = _argumentQuery.AllDTOs(),
+                    //TODO
+                    //ConstraintTypes = _constraintQuery.ConstraintTypes(),
+                    Constraints = _constraintQuery.DTOsForOwner(calculationId)
+                };
+            }
         }
     }
 }

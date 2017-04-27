@@ -15,6 +15,11 @@ namespace Shuttle.Abacus.UI.Core.Resources
 
         public Resource(ResourceKey resourceKey, Guid key, string text, ImageResource imageResource)
         {
+            if (Guid.Empty.Equals(key))
+            {
+                throw new ArgumentException("Argument 'key' may not be an empty guid.");
+            }
+
             ResourceKey = resourceKey;
             Key = key;
             Text = text;

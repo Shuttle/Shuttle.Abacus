@@ -56,9 +56,10 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(ActivateShellMessage message)
         {
-            shellForm.BringToFront();
-
-            SummaryViewManager.ShowView();
+            shellForm.Invoke(new MethodInvoker(() => {
+                shellForm.BringToFront();
+                SummaryViewManager.ShowView();
+            }));
         }
 
         public void HandleMessage(ShowSummaryViewMessage message)

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Localisation;
@@ -17,18 +16,27 @@ using Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer;
 using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Coordinators
 {
     public class ArgumentCoordinator : Coordinator, IArgumentCoordinator
     {
-        private readonly IAnswerTypeQuery answerTypeQuery;
-        private readonly IArgumentQuery argumentQuery;
+        private readonly IAnswerTypeQuery _answerTypeQuery;
+        private readonly IArgumentQuery _argumentQuery;
+        private readonly IDatabaseContextFactory _databaseContextFactory;
 
-        public ArgumentCoordinator(IArgumentQuery argumentQuery, IAnswerTypeQuery answerTypeQuery)
+        public ArgumentCoordinator(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
+            IAnswerTypeQuery answerTypeQuery)
         {
-            this.argumentQuery = argumentQuery;
-            this.answerTypeQuery = answerTypeQuery;
+            Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
+            Guard.AgainstNull(argumentQuery, "argumentQuery");
+            Guard.AgainstNull(answerTypeQuery, "answerTypeQuery");
+
+            _databaseContextFactory = databaseContextFactory;
+            _argumentQuery = argumentQuery;
+            _answerTypeQuery = answerTypeQuery;
         }
 
         public void HandleMessage(ExplorerInitializeMessage message)
@@ -44,7 +52,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(ResourceMenuRequestMessage message)
         {
-            if (message.Item.ResourceKey != ResourceKeys.Argument)
+            if (message.Item.ResourceKey.Equals(ResourceKeys.Argument))
             {
                 return;
             }
@@ -52,24 +60,25 @@ namespace Shuttle.Abacus.UI.Coordinators
             switch (message.Item.Type)
             {
                 case Resource.ResourceType.Container:
-                    {
-                        message.NavigationItems.Add(NavigationItemFactory.Create<NewArgumentMessage>());
+                {
+                    message.NavigationItems.Add(NavigationItemFactory.Create<NewArgumentMessage>());
 
-                        break;
-                    }
+                    break;
+                }
                 case Resource.ResourceType.Item:
+                {
+                    if (!message.Item.State.Get<bool>(StateKeys.IsSystemData))
                     {
-                        if (!message.Item.State.Get<bool>(StateKeys.IsSystemData))
-                        {
-                            message.NavigationItems.Add(
-                                NavigationItemFactory.Create(new EditArgumentMessage(message.Item.Key)));
+                        message.NavigationItems.Add(
+                            NavigationItemFactory.Create(new EditArgumentMessage(message.Item.Key)));
 
-                            message.NavigationItems.Add(
-                                NavigationItemFactory.Create(new DeleteArgumentMessage(message.Item.Key, message.Item.Text, message.UpstreamItems[0])));
-                        }
-
-                        break;
+                        message.NavigationItems.Add(
+                            NavigationItemFactory.Create(new DeleteArgumentMessage(message.Item.Key, message.Item.Text,
+                                message.UpstreamItems[0])));
                     }
+
+                    break;
+                }
             }
         }
 
@@ -90,8 +99,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(PopulateResourceMessage message)
         {
-            if (message.Resource.ResourceKey !=
-                ResourceKeys.Argument)
+            if (message.Resource.ResourceKey.Equals(ResourceKeys.Argument))
             {
                 return;
             }
@@ -99,18 +107,21 @@ namespace Shuttle.Abacus.UI.Coordinators
             switch (message.Resource.Type)
             {
                 case Resource.ResourceType.Container:
+                {
+                    using (_databaseContextFactory.Create())
                     {
-                        foreach (var row in argumentQuery.All())
+                        foreach (var row in _argumentQuery.All())
                         {
                             message.Resources.Add(new Resource(ResourceKeys.Argument,
-                                                               ArgumentColumns.Id.MapFrom(row),
-                                                               ArgumentColumns.Name.MapFrom(row),
-                                                               ImageResources.Argument).AsLeaf().State.Add(
-                                                  StateKeys.IsSystemData, ArgumentColumns.IsSystemData.MapFrom(row)));
+                                ArgumentColumns.Id.MapFrom(row),
+                                ArgumentColumns.Name.MapFrom(row),
+                                ImageResources.Argument).AsLeaf().State.Add(
+                                StateKeys.IsSystemData, ArgumentColumns.IsSystemData.MapFrom(row)));
                         }
-
-                        break;
                     }
+
+                    break;
+                }
             }
         }
 
@@ -118,14 +129,18 @@ namespace Shuttle.Abacus.UI.Coordinators
         {
             var model = BuildArgumentModel();
 
-            model.ArgumentRow = argumentQuery.Get(message.ArgumentId);
+            using (_databaseContextFactory.Create())
+            {
+                model.ArgumentRow = _argumentQuery.Get(message.ArgumentId);
+            }
 
             var item = WorkItemManager
                 .Create("Edit Argument")
                 .ControlledBy<IArgumentController>()
                 .ShowIn<IContextToolbarPresenter>()
                 .AddPresenter<IArgumentPresenter>().WithModel(model)
-                .AddPresenter<IArgumentRestrictedAnswerPresenter>().WithModel(argumentQuery.GetAnswerCatalog(message.ArgumentId))
+                .AddPresenter<IArgumentRestrictedAnswerPresenter>()
+                .WithModel(_argumentQuery.GetAnswerCatalog(message.ArgumentId))
                 .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).
                 AsDefault()
                 .AssignInitiator(message);
@@ -135,26 +150,13 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(ResourceRefreshItemTextMessage message)
         {
-            if (message.Item.ResourceKey != ResourceKeys.Argument ||
+            if (message.Item.ResourceKey.Equals(ResourceKeys.Argument) ||
                 message.Item.Type != Resource.ResourceType.Item)
             {
                 return;
             }
 
-            message.Item.AssignText(ArgumentColumns.Name.MapFrom(argumentQuery.Get(message.Item.Key)));
-        }
-
-        private ArgumentModel BuildArgumentModel()
-        {
-            return new ArgumentModel
-                   {
-                       AnswerTypes = answerTypeQuery.All()
-                   };
-        }
-
-        public static class StateKeys
-        {
-            public static readonly StateKey IsSystemData = new StateKey("IsSystemData");
+            message.Item.AssignText(ArgumentColumns.Name.MapFrom(_argumentQuery.Get(message.Item.Key)));
         }
 
         public void HandleMessage(DeleteArgumentMessage message)
@@ -174,23 +176,42 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return;
             }
 
-            switch (message.Item.Type)
+            using (_databaseContextFactory.Create())
             {
-                case Resource.ResourceType.Container:
+                switch (message.Item.Type)
+                {
+                    case Resource.ResourceType.Container:
                     {
-                        message.AddTable("Arguments", argumentQuery.All());
+                        message.AddTable("Arguments", _argumentQuery.All());
 
                         break;
                     }
-                case Resource.ResourceType.Item:
+                    case Resource.ResourceType.Item:
                     {
-                        message.AddRow(message.Item.Text, argumentQuery.Get(message.Item.Key));
+                        message.AddRow(message.Item.Text, _argumentQuery.Get(message.Item.Key));
 
-                        message.AddTable("Answer Catalog", argumentQuery.GetAnswerCatalog(message.Item.Key));
+                        message.AddTable("Answer Catalog", _argumentQuery.GetAnswerCatalog(message.Item.Key));
 
                         break;
                     }
+                }
             }
+        }
+
+        private ArgumentModel BuildArgumentModel()
+        {
+            using (_databaseContextFactory.Create())
+            {
+                return new ArgumentModel
+                {
+                    AnswerTypes = _answerTypeQuery.All()
+                };
+            }
+        }
+
+        public static class StateKeys
+        {
+            public static readonly StateKey IsSystemData = new StateKey("IsSystemData");
         }
     }
 }

@@ -15,6 +15,8 @@ using Shuttle.Abacus.UI.UI.MethodTest.Results;
 using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Coordinators
 {
@@ -22,14 +24,20 @@ namespace Shuttle.Abacus.UI.Coordinators
         Coordinator,
         IMethodTestManagerCoordinator
     {
-        private readonly IArgumentQuery argumentQuery;
+        private readonly IArgumentQuery _argumentQuery;
+        private readonly IDatabaseContextFactory _databaseContextFactory;
+        private readonly IMethodTestQuery _testQuery;
 
-        private readonly IMethodTestQuery testQuery;
-
-        public MethodTestCoordinator(IMethodTestQuery testQuery, IArgumentQuery argumentQuery)
+        public MethodTestCoordinator(IDatabaseContextFactory databaseContextFactory, IMethodTestQuery testQuery,
+            IArgumentQuery argumentQuery)
         {
-            this.argumentQuery = argumentQuery;
-            this.testQuery = testQuery;
+            Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
+            Guard.AgainstNull(testQuery, "testQuery");
+            Guard.AgainstNull(argumentQuery, "argumentQuery");
+
+            _databaseContextFactory = databaseContextFactory;
+            _argumentQuery = argumentQuery;
+            _testQuery = testQuery;
         }
 
         public void HandleMessage(ManageMethodTestsMessage message)
@@ -48,7 +56,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .Create(string.Format("Tests: {0}", message.MethodName))
                 .ControlledBy<IMethodTestManagerController>()
                 .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter(presenter).WithModel(new SimpleListModel(testQuery.FetchForMethodId(message.MethodId)))
+                .AddPresenter(presenter).WithModel(new SimpleListModel(_testQuery.FetchForMethodId(message.MethodId)))
                 .AddPresenter<IMethodTestResultPresenter>()
                 .AssignInitiator(message);
 
@@ -57,7 +65,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(ResourceMenuRequestMessage message)
         {
-            if (message.Item.ResourceKey != ResourceKeys.MethodTest)
+            if (message.Item.ResourceKey.Equals(ResourceKeys.MethodTest))
             {
                 return;
             }
@@ -65,18 +73,18 @@ namespace Shuttle.Abacus.UI.Coordinators
             switch (message.Item.Type)
             {
                 case Resource.ResourceType.Container:
-                    {
-                        message.NavigationItems.Add(
-                            NavigationItemFactory.Create(
-                                new ManageMethodTestsMessage(message.RelatedItems[ResourceKeys.Method].Key,
-                                                           message.RelatedItems[ResourceKeys.Method].Text)));
+                {
+                    message.NavigationItems.Add(
+                        NavigationItemFactory.Create(
+                            new ManageMethodTestsMessage(message.RelatedItems[ResourceKeys.Method].Key,
+                                message.RelatedItems[ResourceKeys.Method].Text)));
 
-                        break;
-                    }
+                    break;
+                }
                 case Resource.ResourceType.Item:
-                    {
-                        break;
-                    }
+                {
+                    break;
+                }
             }
         }
 
@@ -98,17 +106,22 @@ namespace Shuttle.Abacus.UI.Coordinators
         {
             var model = BuildModel();
 
-            var testRow = testQuery.Get(message.MethodTestId);
+            DataRow row;
 
-            model.MethodTestRow = testRow;
-            model.ArgumentAnswers = testQuery.GetArgumentAnswers(message.MethodTestId).CopyToDataTable();
+            using (_databaseContextFactory.Create())
+            {
+                row = _testQuery.Get(message.MethodTestId);
+            }
 
-            message.MethodId = new Guid(testRow["MethodId"].ToString());
-            message.Description = MethodTestColumns.Description.MapFrom(testRow);
-            message.ExpectedResult = MethodTestColumns.ExpectedResult.MapFrom(testRow);
+            model.MethodTestRow = row;
+            model.ArgumentAnswers = _testQuery.GetArgumentAnswers(message.MethodTestId).CopyToDataTable();
+
+            message.MethodId = new Guid(row["MethodId"].ToString());
+            message.Description = MethodTestColumns.Description.MapFrom(row);
+            message.ExpectedResult = MethodTestColumns.ExpectedResult.MapFrom(row);
 
             var item = WorkItemManager
-                .Create("Test: " + MethodTestColumns.Description.MapFrom(testRow))
+                .Create("Test: " + MethodTestColumns.Description.MapFrom(row))
                 .ControlledBy<IMethodTestController>()
                 .ShowIn<IContextToolbarPresenter>()
                 .AddPresenter<IMethodTestPresenter>().WithModel(model)
@@ -160,12 +173,68 @@ namespace Shuttle.Abacus.UI.Coordinators
             view.ShowView();
         }
 
+        public void HandleMessage(NewMethodTestFromExistingMessage message)
+        {
+            var model = BuildModel();
+
+            DataRow row;
+
+            using (_databaseContextFactory.Create())
+            {
+                row = _testQuery.Get(message.MethodTestId);
+            }
+
+            model.MethodTestRow = row;
+            model.ArgumentAnswers = _testQuery.GetArgumentAnswers(message.MethodTestId).CopyToDataTable();
+
+            var item = WorkItemManager
+                .Create(string.Format("New test case from '{0}'", MethodTestColumns.Description.MapFrom(row)))
+                .ControlledBy<IMethodTestController>()
+                .ShowIn<IContextToolbarPresenter>()
+                .AddPresenter<IMethodTestPresenter>().WithModel(model)
+                .AddNavigationItem(
+                    NavigationItemFactory.Create(new NewMethodTestMessage(message))
+                        .AssignResourceItem(ResourceItems.Submit)).AsDefault()
+                .AssignInitiator(message);
+
+            HostInWorkspace<ITabbedWorkspacePresenter>(item);
+        }
+
+        public void HandleMessage(SummaryViewRequestedMessage message)
+        {
+            if (SummaryViewManager.CanIgnore(message, ResourceKeys.MethodTest))
+            {
+                return;
+            }
+
+            using (_databaseContextFactory.Create())
+            {
+                switch (message.Item.Type)
+                {
+                    case Resource.ResourceType.Container:
+                    {
+                        message.AddTable("Test Cases",
+                            _testQuery.FetchForMethodId(message.RelatedItems[ResourceKeys.Method].Key));
+
+                        break;
+                    }
+                    case Resource.ResourceType.Item:
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+
         private MethodTestModel BuildModel()
         {
-            return new MethodTestModel
-                   {
-                       Arguments = argumentQuery.AllDTOs()
-                   };
+            using (_databaseContextFactory.Create())
+            {
+                return new MethodTestModel
+                {
+                    Arguments = _argumentQuery.AllDTOs()
+                };
+            }
         }
 
         private void RefreshList(Guid workItemId, Guid methodId)
@@ -179,54 +248,12 @@ namespace Shuttle.Abacus.UI.Coordinators
 
             var presenter = workItem.GetPresenter<ISimpleListPresenter>();
 
-            presenter.AssignModel(new SimpleListModel(testQuery.FetchForMethodId(methodId)));
+            using (_databaseContextFactory.Create())
+            {
+                presenter.AssignModel(new SimpleListModel(_testQuery.FetchForMethodId(methodId)));
+            }
 
             presenter.Refresh();
         }
-
-        public void HandleMessage(NewMethodTestFromExistingMessage message)
-        {
-            var model = BuildModel();
-
-            var testRow = testQuery.Get(message.MethodTestId);
-
-            model.MethodTestRow = testRow;
-            model.ArgumentAnswers = testQuery.GetArgumentAnswers(message.MethodTestId).CopyToDataTable();
-
-            var item = WorkItemManager
-                .Create(string.Format("New test case from '{0}'", MethodTestColumns.Description.MapFrom(testRow)))
-                .ControlledBy<IMethodTestController>()
-                .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<IMethodTestPresenter>().WithModel(model)
-                .AddNavigationItem(NavigationItemFactory.Create(new NewMethodTestMessage(message)).AssignResourceItem(ResourceItems.Submit)).AsDefault()
-                .AssignInitiator(message);
-
-            HostInWorkspace<ITabbedWorkspacePresenter>(item);
-        }
-
-        public void HandleMessage(SummaryViewRequestedMessage message)
-        {
-            if (SummaryViewManager.CanIgnore(message, ResourceKeys.MethodTest))
-            {
-                return;
-            }
-
-            switch (message.Item.Type)
-            {
-                case Resource.ResourceType.Container:
-                    {
-                        message.AddTable("Test Cases", testQuery.FetchForMethodId(message.RelatedItems[ResourceKeys.Method].Key));
-
-                        break;
-                    }
-                case Resource.ResourceType.Item:
-                    {
-
-                        break;
-                    }
-            }
-
-        }
-
     }
 }

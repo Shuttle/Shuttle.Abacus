@@ -32,7 +32,7 @@ namespace Shuttle.Abacus.Domain
             command.PermissionIdentifiers.ForEach(identifier => Permissions.Add(new Permission(identifier)));
         }
 
-        public IPermissionCollection Permissions { get; set; }
+        public IPermissionCollection Permissions { get; private set; }
 
         public string LoginName { get; set; }
 
@@ -55,6 +55,11 @@ namespace Shuttle.Abacus.Domain
             LoginName = command.NewLoginName;
 
             return this;
+        }
+
+        public void OnAddPermission(string permission)
+        {
+            Permissions.Add(new Permission(permission));
         }
     }
 }

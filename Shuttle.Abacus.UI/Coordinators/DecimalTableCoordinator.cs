@@ -1,7 +1,5 @@
 using System;
-using System.Data;
 using Shuttle.Abacus.DataAccess;
-using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
@@ -17,21 +15,31 @@ using Shuttle.Abacus.UI.UI.DecimalTable;
 using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Coordinators
 {
     public class DecimalTableCoordinator : Coordinator, IDecimalTableCoordinator
     {
-        private readonly IArgumentQuery argumentQuery;
-        private readonly IConstraintQuery constraintQuery;
-        private readonly IDecimalTableQuery decimalTableQuery;
+        private readonly IArgumentQuery _argumentQuery;
+        private readonly IConstraintQuery _constraintQuery;
+        private readonly IDatabaseContextFactory _databaseContextFactory;
+        private readonly IDecimalTableQuery _decimalTableQuery;
 
-        public DecimalTableCoordinator(IArgumentQuery argumentQuery, IDecimalTableQuery decimalTableQuery,
-                                       IConstraintQuery constraintQuery)
+        public DecimalTableCoordinator(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
+            IDecimalTableQuery decimalTableQuery,
+            IConstraintQuery constraintQuery)
         {
-            this.argumentQuery = argumentQuery;
-            this.decimalTableQuery = decimalTableQuery;
-            this.constraintQuery = constraintQuery;
+            Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
+            Guard.AgainstNull(argumentQuery, "argumentQuery");
+            Guard.AgainstNull(decimalTableQuery, "decimalTableQuery");
+            Guard.AgainstNull(constraintQuery, "constraintQuery");
+
+            _databaseContextFactory = databaseContextFactory;
+            _argumentQuery = argumentQuery;
+            _decimalTableQuery = decimalTableQuery;
+            _constraintQuery = constraintQuery;
         }
 
         public void HandleMessage(ExplorerInitializeMessage message)
@@ -42,12 +50,13 @@ namespace Shuttle.Abacus.UI.Coordinators
             }
 
             message.Items.Add(
-                new Resource(ResourceKeys.DecimalTable, Guid.NewGuid(), "Decimal Tables", ImageResources.DecimalTable).AsContainer());
+                new Resource(ResourceKeys.DecimalTable, Guid.NewGuid(), "Decimal Tables", ImageResources.DecimalTable)
+                    .AsContainer());
         }
 
         public void HandleMessage(ResourceMenuRequestMessage message)
         {
-            if (message.Item.ResourceKey != ResourceKeys.DecimalTable)
+            if (message.Item.ResourceKey.Equals(ResourceKeys.DecimalTable))
             {
                 return;
             }
@@ -55,67 +64,73 @@ namespace Shuttle.Abacus.UI.Coordinators
             switch (message.Item.Type)
             {
                 case Resource.ResourceType.Container:
-                    {
-                        message.NavigationItems.Add(NavigationItemFactory.Create<NewDecimalTableMessage>());
+                {
+                    message.NavigationItems.Add(NavigationItemFactory.Create<NewDecimalTableMessage>());
 
-                        break;
-                    }
+                    break;
+                }
                 case Resource.ResourceType.Item:
-                    {
-                        message.NavigationItems.Add(
-                            NavigationItemFactory.Create(
-                                new NewDecimalTableFromExistingMessage(message.Item.Key)));
+                {
+                    message.NavigationItems.Add(
+                        NavigationItemFactory.Create(
+                            new NewDecimalTableFromExistingMessage(message.Item.Key)));
 
-                        message.NavigationItems.Add(
-                            NavigationItemFactory.Create(
-                                new EditDecimalTableMessage(message.Item.Key,
-                                    message.Item.Text)));
+                    message.NavigationItems.Add(
+                        NavigationItemFactory.Create(
+                            new EditDecimalTableMessage(message.Item.Key,
+                                message.Item.Text)));
 
-                        message.NavigationItems.Add(
-                            NavigationItemFactory.Create(
-                                new DecimalTableReportMessage(message.Item.Key,
-                                    message.Item.Text)));
+                    message.NavigationItems.Add(
+                        NavigationItemFactory.Create(
+                            new DecimalTableReportMessage(message.Item.Key,
+                                message.Item.Text)));
 
-                        break;
-                    }
+                    break;
+                }
             }
         }
 
         public void HandleMessage(PopulateResourceMessage message)
         {
-            if (message.Resource.ResourceKey != ResourceKeys.DecimalTable)
+            if (message.Resource.ResourceKey.Equals(ResourceKeys.DecimalTable))
             {
                 return;
             }
 
-            switch (message.Resource.Type)
+            using (_databaseContextFactory.Create())
             {
-                case Resource.ResourceType.Container:
+                switch (message.Resource.Type)
+                {
+                    case Resource.ResourceType.Container:
                     {
                         foreach (
-                            DataRow row in
-                                decimalTableQuery.All())
+                            var row in
+                            _decimalTableQuery.All())
                         {
                             message.Resources.Add(new Resource(ResourceKeys.DecimalTable,
-                                                               DecimalTableColumns.Id.MapFrom(row),
-                                                               DecimalTableColumns.Name.MapFrom(row),
-                                                               ImageResources.DecimalTable).AsLeaf());
+                                DecimalTableColumns.Id.MapFrom(row),
+                                DecimalTableColumns.Name.MapFrom(row),
+                                ImageResources.DecimalTable).AsLeaf());
                         }
 
                         break;
                     }
+                }
             }
         }
 
         public void HandleMessage(ResourceRefreshItemTextMessage message)
         {
-            if (message.Item.ResourceKey != ResourceKeys.DecimalTable ||
-                message.Item.Type != Resource.ResourceType.Item)
+            if (message.Item.ResourceKey.Equals(ResourceKeys.DecimalTable) ||
+                                                message.Item.Type != Resource.ResourceType.Item)
             {
                 return;
             }
 
-            message.Item.AssignText(DecimalTableColumns.Name.MapFrom(decimalTableQuery.Get(message.Item.Key)));
+            using (_databaseContextFactory.Create())
+            {
+                message.Item.AssignText(DecimalTableColumns.Name.MapFrom(_decimalTableQuery.Get(message.Item.Key)));
+            }
         }
 
         public void HandleMessage(NewDecimalTableMessage message)
@@ -136,8 +151,11 @@ namespace Shuttle.Abacus.UI.Coordinators
         {
             var model = BuildDecimalTableModel();
 
-            model.DecimalTableRow = decimalTableQuery.Get(message.DecimalTableId);
-            model.ConstrainedDecimalValues = decimalTableQuery.ConstrainedDecimalValues(message.DecimalTableId);
+            using (_databaseContextFactory.Create())
+            {
+                model.DecimalTableRow = _decimalTableQuery.Get(message.DecimalTableId);
+                model.ConstrainedDecimalValues = _decimalTableQuery.ConstrainedDecimalValues(message.DecimalTableId);
+            }
 
             var item = WorkItemManager
                 .Create(string.Format("Decimal Table: {0}", message.DecimalTableName))
@@ -160,8 +178,12 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return;
             }
 
-            decimalTableModel.ConstrainedDecimalValues = decimalTableQuery.ConstrainedDecimalValues(message.DecimalTableId);
-            decimalTableModel.DecimalTableRow = decimalTableQuery.Get(message.DecimalTableId);
+            using (_databaseContextFactory.Create())
+            {
+                decimalTableModel.ConstrainedDecimalValues =
+                    _decimalTableQuery.ConstrainedDecimalValues(message.DecimalTableId);
+                decimalTableModel.DecimalTableRow = _decimalTableQuery.Get(message.DecimalTableId);
+            }
 
             var item = WorkItemManager
                 .Create("New Decimal Table")
@@ -169,8 +191,8 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .ShowIn<IContextToolbarPresenter>()
                 .AddPresenter<IDecimalTablePresenter>().WithModel(decimalTableModel)
                 .AddNavigationItem(
-                NavigationItemFactory.Create<NewDecimalTableMessage>().AssignResourceItem(
-                    ResourceItems.Submit))
+                    NavigationItemFactory.Create<NewDecimalTableMessage>().AssignResourceItem(
+                        ResourceItems.Submit))
                 .
                 AsDefault()
                 .AssignInitiator(message.WithRefreshOwner());
@@ -185,29 +207,35 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return;
             }
 
-            switch (message.Item.Type)
+            using (_databaseContextFactory.Create())
             {
-                case Resource.ResourceType.Container:
+                switch (message.Item.Type)
+                {
+                    case Resource.ResourceType.Container:
                     {
-                        message.AddTable("DecimalTables", decimalTableQuery.All());
+                        message.AddTable("DecimalTables", _decimalTableQuery.All());
 
                         break;
                     }
-                case Resource.ResourceType.Item:
+                    case Resource.ResourceType.Item:
                     {
                         break;
                     }
+                }
             }
         }
 
         private DecimalTableModel BuildDecimalTableModel()
         {
-            return new DecimalTableModel
-                       {
-                           Factors = argumentQuery.AllDTOs(),
-                           //TODO
-                           //ConstraintTypes = constraintQuery.ConstraintTypes()
-                       };
+            using (_databaseContextFactory.Create())
+            {
+                return new DecimalTableModel
+                {
+                    Factors = _argumentQuery.AllDTOs()
+                    //TODO
+                    //ConstraintTypes = _constraintQuery.ConstraintTypes()
+                };
+            }
         }
     }
 }

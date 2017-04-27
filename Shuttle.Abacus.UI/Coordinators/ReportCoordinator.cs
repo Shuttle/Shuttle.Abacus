@@ -1,4 +1,3 @@
-using System;
 using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
@@ -6,28 +5,38 @@ using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Messages.Report;
 using Shuttle.Abacus.UI.Messages.TestCase;
 using Shuttle.Abacus.UI.Models;
+using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Coordinators
 {
     public class ReportCoordinator : Coordinator, IReportCoordinator
     {
-        private const string tab = "   ";
+        private const string Tab = "   ";
+        private readonly IDatabaseContextFactory _databaseContextFactory;
+        public IDecimalTableQuery _decimalTableQuery;
 
-        public ReportCoordinator(IDecimalTableQuery decimalTableQuery)
+        public ReportCoordinator(IDatabaseContextFactory databaseContextFactory, IDecimalTableQuery decimalTableQuery)
         {
-            DecimalTableQuery = decimalTableQuery;
+            Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
+            Guard.AgainstNull(decimalTableQuery, "decimalTableQuery");
+
+            _databaseContextFactory = databaseContextFactory;
+            _decimalTableQuery = decimalTableQuery;
         }
 
-        public IDecimalTableQuery DecimalTableQuery { get; set; }
 
         public void HandleMessage(DecimalTableReportMessage message)
         {
-            var model = new ReportModel
-                        {
-                            ReportDatasetName = "ReportsDataSet_DecimalTable",
-                            ReportDefinitionName = "Abacus.Reporting.Reports.DecimalTable.rdlc",
-                            ReportData = DecimalTableQuery.QueryDecimalTable(message.DecimalTableId)
-                        };
+            using (_databaseContextFactory.Create())
+            {
+                var model = new ReportModel
+                {
+                    ReportDatasetName = "ReportsDataSet_DecimalTable",
+                    ReportDefinitionName = "Abacus.Reporting.Reports.DecimalTable.rdlc",
+                    ReportData = _decimalTableQuery.QueryDecimalTable(message.DecimalTableId)
+                };
+            }
 
             //var item = WorkItemManager
             //    .Create("Decimal Table Report: " + message.DecimalTableName)
@@ -44,13 +53,13 @@ namespace Shuttle.Abacus.UI.Coordinators
             var table = new DataTable("RunEvents");
 
             table.Columns.Add(new DataColumn("MethodTestName", typeof(string)));
-            table.Columns.Add(new DataColumn("ExpectedResult", typeof (decimal)));
-            table.Columns.Add(new DataColumn("ActualResult", typeof (decimal)));
-            table.Columns.Add(new DataColumn("CalculationLog", typeof (string)));
+            table.Columns.Add(new DataColumn("ExpectedResult", typeof(decimal)));
+            table.Columns.Add(new DataColumn("ActualResult", typeof(decimal)));
+            table.Columns.Add(new DataColumn("CalculationLog", typeof(string)));
 
             foreach (var testResult in message.Event.RunEvents)
             {
-                var logLines = testResult.MethodContext.GetLog().Replace("\n",String.Empty).Split("\r".ToCharArray());
+                var logLines = testResult.MethodContext.GetLog().Replace("\n", string.Empty).Split("\r".ToCharArray());
 
                 foreach (var line in logLines)
                 {
@@ -59,18 +68,18 @@ namespace Shuttle.Abacus.UI.Coordinators
                     row["MethodTestName"] = testResult.MethodTestDescription;
                     row["ExpectedResult"] = testResult.ExpectedResult;
                     row["ActualResult"] = testResult.MethodContext.Total;
-                    row["CalculationLog"] = line.Replace("\t", tab);
+                    row["CalculationLog"] = line.Replace("\t", Tab);
 
                     table.Rows.Add(row);
                 }
             }
 
             var model = new ReportModel
-                        {
-                            ReportDatasetName = "ReportsDataSet_MethodTestResult",
-                            ReportDefinitionName = "Abacus.Reporting.Reports.MethodTest.rdlc",
-                            ReportData = table
-                        };
+            {
+                ReportDatasetName = "ReportsDataSet_MethodTestResult",
+                ReportDefinitionName = "Abacus.Reporting.Reports.MethodTest.rdlc",
+                ReportData = table
+            };
 
             //var item = WorkItemManager
             //    .Create("Test Results Report")
