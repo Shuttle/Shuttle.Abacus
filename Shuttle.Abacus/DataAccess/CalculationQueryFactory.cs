@@ -48,7 +48,7 @@ where
         public IQuery AllBeforeCalculation(Guid methodId, Guid calculationId)
         {
             var query =
-                RawQuery.Create(string.Concat(SelectClause,@"
+                RawQuery.Create(string.Concat(SelectClause, @"
 where
     MethodId = @MethodId
 and
@@ -74,7 +74,7 @@ and
 where
     MethodId = @MethodId
 and
-    Id <> @Id
+    CalculationId <> @CalculationId
 order by
     SequenceNumber
 "))
@@ -98,7 +98,7 @@ order by
                 .AddParameterValue(GraphNodeArgumentColumns.CalculationId, calculationId);
         }
 
-        public  IQuery Add(Method method, ICalculationOwner owner, Calculation item)
+        public IQuery Add(Method method, ICalculationOwner owner, Calculation item)
         {
             return RawQuery.Create(@"
 insert into Calculation
@@ -133,12 +133,12 @@ values
                 .AddParameterValue(CalculationColumns.SequenceNumber, -1);
         }
 
-        public  IQuery Remove(Calculation item)
+        public IQuery Remove(Calculation item)
         {
-            return RawQuery.Create("delete from TABLE where Id = @Id").AddParameterValue(CalculationColumns.Id, item.Id);
+            return RawQuery.Create("delete from TABLE where CalculationId = @CalculationId").AddParameterValue(CalculationColumns.Id, item.Id);
         }
 
-        public  IQuery Get(Guid id)
+        public IQuery Get(Guid id)
         {
             return RawQuery.Create(string.Concat(SelectClause, @"
 where
@@ -146,7 +146,7 @@ where
                 .AddParameterValue(CalculationColumns.Id, id);
         }
 
-        public  IQuery Save(Calculation item)
+        public IQuery Save(Calculation item)
         {
             return RawQuery.Create(@"
 update Calculation set
@@ -159,7 +159,7 @@ where
                 .AddParameterValue(CalculationColumns.Id, item.Id);
         }
 
-        public  IQuery SetSequenceNumber(Guid id, int sequenceNumber)
+        public IQuery SetSequenceNumber(Guid id, int sequenceNumber)
         {
             return RawQuery.Create(@"
 update Calculation set
@@ -170,7 +170,7 @@ where
                 .AddParameterValue(CalculationColumns.Id, id);
         }
 
-        public  IQuery Save(Calculation calculation, string ownerName, Guid ownerId, int sequence)
+        public IQuery Save(Calculation calculation, string ownerName, Guid ownerId, int sequence)
         {
             return RawQuery.Create(@"
 update Calculation set
@@ -184,5 +184,5 @@ where
                 .AddParameterValue(CalculationColumns.SequenceNumber, sequence)
                 .AddParameterValue(CalculationColumns.Id, calculation.Id);
         }
-}
+    }
 }

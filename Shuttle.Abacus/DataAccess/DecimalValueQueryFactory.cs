@@ -45,7 +45,7 @@ values
 
         public static IQuery Remove(DecimalValue item)
         {
-            return RawQuery.Create("delete from DecimalValue where Id = @Id").AddParameterValue(DecimalValueColumns.Id, item.Id);
+            return RawQuery.Create("delete from DecimalValue where DecimalValueId = @DecimalValueId").AddParameterValue(DecimalValueColumns.Id, item.Id);
         }
 
         public static IQuery Get(Guid id)

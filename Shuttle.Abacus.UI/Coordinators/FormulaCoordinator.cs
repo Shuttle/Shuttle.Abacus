@@ -62,7 +62,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(ResourceMenuRequestMessage message)
         {
-            if (message.Item.ResourceKey.Equals(ResourceKeys.Formula))
+            if (!message.Item.ResourceKey.Equals(ResourceKeys.Formula))
             {
                 return;
             }
@@ -131,7 +131,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(PopulateResourceMessage message)
         {
-            if (message.Resource.ResourceKey.Equals(ResourceKeys.Formula))
+            if (!message.Resource.ResourceKey.Equals(ResourceKeys.Formula))
             {
                 return;
             }
@@ -234,7 +234,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(ResourceRefreshItemTextMessage message)
         {
-            if (message.Item.ResourceKey.Equals(ResourceKeys.Formula) ||
+            if (!message.Item.ResourceKey.Equals(ResourceKeys.Formula) ||
                                                 message.Item.Type != Resource.ResourceType.Item)
             {
                 return;

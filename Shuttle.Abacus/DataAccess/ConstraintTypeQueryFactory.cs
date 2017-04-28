@@ -8,6 +8,7 @@ namespace Shuttle.Abacus.DataAccess
         {
             return RawQuery.Create(@"
 select
+    ConstraintTypeId,
     Name,
     Text,
     EnabledForRestrictedAnswers

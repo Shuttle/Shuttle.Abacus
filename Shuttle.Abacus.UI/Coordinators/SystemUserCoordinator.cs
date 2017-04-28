@@ -31,15 +31,18 @@ namespace Shuttle.Abacus.UI.Coordinators
         
         public void HandleMessage(ListSystemUserMessage message)
         {
-            var item = WorkItemManager
-                .Create("Users")
-                .ControlledBy<ISystemUserListController>()
-                .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<ISimpleListPresenter>().WithModel(new SimpleListModel(_systemUserQuery.All()))
-                .AddNavigationItem(NavigationItemFactory.Create<EditLoginNameMessage>())
-                .AddNavigationItem(NavigationItemFactory.Create<EditPermissionsMessage>());
+            using (_databaseContextFactory.Create())
+            {
+                var item = WorkItemManager
+                    .Create("Users")
+                    .ControlledBy<ISystemUserListController>()
+                    .ShowIn<IContextToolbarPresenter>()
+                    .AddPresenter<ISimpleListPresenter>().WithModel(new SimpleListModel(_systemUserQuery.All()))
+                    .AddNavigationItem(NavigationItemFactory.Create<EditLoginNameMessage>())
+                    .AddNavigationItem(NavigationItemFactory.Create<EditPermissionsMessage>());
 
-            HostInWorkspace<ITabbedWorkspacePresenter>(item);
+                HostInWorkspace<ITabbedWorkspacePresenter>(item);
+            }
         }
 
         public void HandleMessage(NewSystemUserMessage message)

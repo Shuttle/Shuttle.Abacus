@@ -35,7 +35,7 @@ from
 
         public IQuery Get(Guid id)
         {
-            return new RawQuery(string.Concat(SelectClause, "where Id = @Id")).AddParameterValue(ArgumentColumns.Id, id);
+            return new RawQuery(string.Concat(SelectClause, "where ArgumentId = @ArgumentId")).AddParameterValue(ArgumentColumns.Id, id);
         }
 
         public IQuery GetRestrictedAnswer(Guid id)
@@ -49,13 +49,13 @@ from
             return RawQuery.Create(@"
 insert into Argument
 (
-    Id,
+    ArgumentId,
     Name,
     AnswerType
 )
 values
 (
-    @Id,
+    @ArgumentId,
     @Name,
     @AnswerType
 )")
@@ -66,7 +66,7 @@ values
 
         public IQuery Remove(Argument item)
         {
-            return RawQuery.Create("delete from Argument where Id = @Id").AddParameterValue(ArgumentColumns.Id, item.Id);
+            return RawQuery.Create("delete from Argument where ArgumentId = @ArgumentId").AddParameterValue(ArgumentColumns.Id, item.Id);
         }
 
 

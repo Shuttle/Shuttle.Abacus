@@ -32,7 +32,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(PopulateResourceMessage message)
         {
-            if (message.Resource.ResourceKey.Equals(ResourceKeys.Limit))
+            if (!message.Resource.ResourceKey.Equals(ResourceKeys.Limit))
             {
                 return;
             }
@@ -70,7 +70,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(ResourceMenuRequestMessage message)
         {
-            if (message.Item.ResourceKey.Equals(ResourceKeys.Limit))
+            if (!message.Item.ResourceKey.Equals(ResourceKeys.Limit))
             {
                 return;
             }

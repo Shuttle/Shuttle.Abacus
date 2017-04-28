@@ -34,7 +34,7 @@ namespace Shuttle.Abacus.UI.Core.Presentation
 
         public bool CanIgnore(SummaryViewRequestedMessage message, ResourceKey forKey)
         {
-            return !ViewOpen || message.Item.ResourceKey.Equals(forKey);
+            return !ViewOpen || !message.Item.ResourceKey.Equals(forKey);
         }
 
         public void HandleMessage(ResourceSelectedMessage message)

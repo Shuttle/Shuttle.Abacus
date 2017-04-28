@@ -10,7 +10,7 @@ namespace Shuttle.Abacus.DataAccess
         {
             return RawQuery.Create(@"
 select
-    Id,
+    DecimalTableId,
     Name
 from
     DecimalTable
@@ -22,7 +22,7 @@ order by
         {
             return RawQuery.Create(@"
 select
-    Id,
+    DecimalTableId,
     Name,
     ColumnArgumentId,
     RowArgumentId
@@ -62,6 +62,7 @@ from
         {
             return RawQuery.Create(@"
 select
+    DecimalTableId,
     Name
 from
     DecimalTable

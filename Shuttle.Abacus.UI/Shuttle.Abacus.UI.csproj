@@ -632,7 +632,6 @@
     <Content Include="UI\Shell\Abacus.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
     <Folder Include="UI\Shell\Explorer\ItemManagers\" />
   </ItemGroup>
   <ItemGroup>

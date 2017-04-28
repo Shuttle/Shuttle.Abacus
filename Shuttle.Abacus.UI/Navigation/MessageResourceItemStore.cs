@@ -62,8 +62,7 @@ namespace Shuttle.Abacus.UI.Navigation
                 .RegisterResourceItem<EditDecimalTableMessage>()
                 .RegisterResourceItem<DecimalTableReportMessage>(new ResourceItem("ReportDecimalTable", "Report"))
                 .RegisterResourceItem<NewDecimalTableFromExistingMessage>(new ResourceItem("NewFromThis", "Copy"))
-                .RegisterResourceItem<CopyMessage>(new ResourceItem("Copy"))
-                ;
+                .RegisterResourceItem<CopyMessage>(new ResourceItem("Copy"));
         }
     }
 }
