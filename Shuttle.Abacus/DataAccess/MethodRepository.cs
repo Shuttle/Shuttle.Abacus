@@ -27,9 +27,9 @@ namespace Shuttle.Abacus.DataAccess
             _databaseGateway.ExecuteUsing(_methodQueryFactory.Add(item));
         }
 
-        public override void Remove(Method item)
+        public override void Remove(Guid id)
         {
-            _databaseGateway.ExecuteUsing(_methodQueryFactory.Remove(item));
+            _databaseGateway.ExecuteUsing(_methodQueryFactory.Remove(id));
         }
 
         public override Method Get(Guid id)

@@ -79,11 +79,11 @@ values
                 .AddParameterValue(FormulaColumns.SequenceNumber, owner.Formulas.Count());
         }
 
-        public IQuery Remove(Formula item)
+        public IQuery Remove(Guid id)
         {
             return
                 RawQuery.Create("delete from Formula where FormulaId = @FormulaId")
-                    .AddParameterValue(FormulaColumns.Id, item.Id);
+                    .AddParameterValue(FormulaColumns.Id, id);
         }
 
         public IQuery RemoveOperations(Formula formula)

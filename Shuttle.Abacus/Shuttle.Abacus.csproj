@@ -103,6 +103,7 @@
     <Compile Include="DataAccess\FormulaQueryFactory.cs" />
     <Compile Include="DataAccess\Definitions\GraphNodeArgumentColumns.cs" />
     <Compile Include="DataAccess\GraphNodeArgumentQueryFactory.cs" />
+    <Compile Include="DataAccess\Guarded.cs" />
     <Compile Include="DataAccess\IAnswerTypeQueryFactory.cs" />
     <Compile Include="DataAccess\IArgumentQueryFactory.cs" />
     <Compile Include="DataAccess\ICalculationQueryFactory.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="DataAccess\Definitions\LimitColumns.cs" />
     <Compile Include="DataAccess\LimitQueryFactory.cs" />
     <Compile Include="DataAccess\Definitions\MethodColumns.cs" />
+    <Compile Include="DataAccess\Mapping\ArgumentDataRowMapper.cs" />
     <Compile Include="DataAccess\Mapping\SystemDataRowMapper.cs" />
     <Compile Include="DataAccess\MethodQueryFactory.cs" />
     <Compile Include="DataAccess\Definitions\MethodTestColumns.cs" />
@@ -297,12 +299,9 @@
     <Compile Include="Domain\Extensions\NumberExtensions.cs" />
     <Compile Include="Domain\Factories\CollectionCalculationFactory.cs" />
     <Compile Include="Domain\Factories\DecimalTableFactory.cs" />
-    <Compile Include="Domain\Factories\FactoryProvider.cs" />
     <Compile Include="Domain\Factories\FormulaCalculationFactory.cs" />
     <Compile Include="Domain\Factories\ICalculationFactory.cs" />
     <Compile Include="Domain\Factories\IDecimalTableFactory.cs" />
-    <Compile Include="Domain\Factories\IFactory.cs" />
-    <Compile Include="Domain\Factories\IFactoryProvider.cs" />
     <Compile Include="Domain\Formula\Formula.cs" />
     <Compile Include="Domain\Formula\FormulaCollection.cs" />
     <Compile Include="Domain\Formula\IFormulaOwner.cs" />

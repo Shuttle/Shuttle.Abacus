@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Shuttle.Abacus.Infrastructure
 {
@@ -10,13 +8,6 @@ namespace Shuttle.Abacus.Infrastructure
         {
         }
 
-        public override string ToString()
-        {
-            return Message;
-        }
-
-        public string Message { get; private set; }
-
         public ResultMessage(string message)
         {
             Message = message;
@@ -24,6 +15,13 @@ namespace Shuttle.Abacus.Infrastructure
             Messages = new List<ResultMessage>();
         }
 
+        public string Message { get; set; }
+
         public List<ResultMessage> Messages { get; set; }
+
+        public override string ToString()
+        {
+            return Message;
+        }
     }
 }

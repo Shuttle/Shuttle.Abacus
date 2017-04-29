@@ -11,7 +11,8 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class DecimalTableController : WorkItemController, IDecimalTableController
     {
-        public DecimalTableController(IServiceBus serviceBus, IMessageBus messageBus) : base(serviceBus, messageBus)
+        public DecimalTableController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository) 
+            : base(serviceBus, messageBus, callbackRepository)
         {
         }
 

@@ -1,4 +1,5 @@
 using System;
+using Shuttle.Abacus.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {

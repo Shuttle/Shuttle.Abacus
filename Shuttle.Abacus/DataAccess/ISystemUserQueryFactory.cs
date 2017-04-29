@@ -15,8 +15,8 @@ namespace Shuttle.Abacus.DataAccess
         IQuery FetchByLoginName(string loginName);
         IQuery FetchById(Guid id);
         IQuery Add(SystemUser user);
-        IQuery Update(SystemUser user);
-        IQuery DeleteUser(SystemUser user);
+        IQuery Save(SystemUser user);
+        IQuery Remove(Guid id);
         IQuery AddPermission(SystemUser user, IPermission permission);
         IQuery DeletePermissions(SystemUser user);
         IQuery Get(string loginName);

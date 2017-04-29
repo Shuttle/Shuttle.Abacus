@@ -61,12 +61,12 @@
       <HintPath>..\packages\Shuttle.Esb.8.0.1\lib\net452-full\Shuttle.Esb.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Shuttle.Esb.Module.PurgeInbox, Version=8.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Esb.Module.PurgeInbox.8.0.1\lib\net452-full\Shuttle.Esb.Module.PurgeInbox.dll</HintPath>
+    <Reference Include="Shuttle.Esb.Module.PurgeQueues, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Esb.Module.PurgeQueues.8.0.0\lib\net452-full\Shuttle.Esb.Module.PurgeQueues.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Shuttle.Esb.Modules, Version=6.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Esb.Module.PurgeInbox.8.0.1\lib\net452-full\Shuttle.Esb.Modules.dll</HintPath>
+      <HintPath>..\packages\Shuttle.Esb.Module.PurgeQueues.8.0.0\lib\net452-full\Shuttle.Esb.Modules.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Shuttle.Esb.RabbitMQ, Version=8.0.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -132,6 +132,7 @@
     <Compile Include="Core\Messaging\Message.cs" />
     <Compile Include="Core\Messaging\MessageBus.cs" />
     <Compile Include="Core\Messaging\MessagePipeProvider.cs" />
+    <Compile Include="Core\Messaging\ReplyMessage.cs" />
     <Compile Include="Core\Presentation\Coordinator.cs" />
     <Compile Include="Core\Presentation\ICoordinator.cs" />
     <Compile Include="Core\Presentation\IPresenter.cs" />
@@ -179,6 +180,8 @@
     <Compile Include="Core\Validation\ViewValidationManager.cs" />
     <Compile Include="Core\Validation\ViewValidator.cs" />
     <Compile Include="Core\Validation\ViewValidatorFactory.cs" />
+    <Compile Include="Core\WorkItem\CallbackRepository.cs" />
+    <Compile Include="Core\WorkItem\ICallbackRepository.cs" />
     <Compile Include="Core\WorkItem\INavigationItemConfiguration.cs" />
     <Compile Include="Core\WorkItem\IWorkItem.cs" />
     <Compile Include="Core\WorkItem\IWorkItemBuilder.cs" />
@@ -232,10 +235,10 @@
     <Compile Include="Messages\DecimalTable\NewDecimalTableFromExistingMessage.cs" />
     <Compile Include="Messages\DecimalTable\NewDecimalTableMessage.cs" />
     <Compile Include="Messages\Explorer\ExplorerInitializeMessage.cs" />
-    <Compile Include="Messages\FactorAnswer\ArgumentUpdatedMessage.cs" />
-    <Compile Include="Messages\FactorAnswer\DeleteArgumentMessage.cs" />
-    <Compile Include="Messages\FactorAnswer\EditArgumentMessage.cs" />
-    <Compile Include="Messages\FactorAnswer\NewArgumentMessage.cs" />
+    <Compile Include="Messages\Argument\ArgumentUpdatedMessage.cs" />
+    <Compile Include="Messages\Argument\DeleteArgumentMessage.cs" />
+    <Compile Include="Messages\Argument\EditArgumentMessage.cs" />
+    <Compile Include="Messages\Argument\NewArgumentMessage.cs" />
     <Compile Include="Messages\Formula\ChangeFormulaOrderMessage.cs" />
     <Compile Include="Messages\Formula\DeleteFormulaMessage.cs" />
     <Compile Include="Messages\Formula\EditFormulaMessage.cs" />
@@ -631,9 +634,7 @@
     <Content Include="Abacus.ico" />
     <Content Include="UI\Shell\Abacus.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\Shell\Explorer\ItemManagers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Shuttle.Abacus.DTO\Shuttle.Abacus.DTO.csproj">
       <Project>{5CD61A6D-ABCB-4400-A113-4EF4DA4C439C}</Project>

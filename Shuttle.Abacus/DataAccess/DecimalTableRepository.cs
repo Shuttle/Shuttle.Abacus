@@ -27,9 +27,9 @@ namespace Shuttle.Abacus.DataAccess
             _databaseGateway.ExecuteUsing(_decimalTableQueryFactory.Add(item));
         }
 
-        public override void Remove(DecimalTable item)
+        public override void Remove(Guid id)
         {
-            _databaseGateway.ExecuteUsing(_decimalTableQueryFactory.Remove(item));
+            _databaseGateway.ExecuteUsing(_decimalTableQueryFactory.Remove(id));
         }
 
         public override DecimalTable Get(Guid id)

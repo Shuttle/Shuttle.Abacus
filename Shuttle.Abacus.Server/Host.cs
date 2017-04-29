@@ -54,6 +54,7 @@ namespace Shuttle.Abacus.Server
 
             _container.Register
             (
+                Component.For<ICache>().ImplementedBy<DefaultCache>(),
                 Component.For(typeof(IDataRepository<>)).ImplementedBy(typeof(DataRepository<>)),
                 Component.For(typeof(IDataTableRepository<>)).ImplementedBy(typeof(DataTableRepository<>))
             );

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Infrastructure;
 using IPipeline = Shuttle.Abacus.Infrastructure.IPipeline;
 

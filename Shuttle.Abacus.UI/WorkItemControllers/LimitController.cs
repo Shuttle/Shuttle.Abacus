@@ -12,7 +12,8 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class LimitController : WorkItemController, ILimitController
     {
-        public LimitController(IServiceBus serviceBus, IMessageBus messageBus) : base(serviceBus, messageBus)
+        public LimitController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository) 
+            : base(serviceBus, messageBus, callbackRepository)
         {
         }
 

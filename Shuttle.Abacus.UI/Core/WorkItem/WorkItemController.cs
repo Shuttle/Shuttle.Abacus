@@ -1,39 +1,36 @@
 using System;
-using System.Collections.Generic;
-using Shuttle.Abacus.Infrastructure;
-using Shuttle.Abacus.Messages;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;
 
 namespace Shuttle.Abacus.UI.Core.WorkItem
 {
-    public abstract class WorkItemController : IWorkItemController, Messaging.IMessageHandler<ReplyMessage>
+    public abstract class WorkItemController : IWorkItemController
     {
-        private readonly Dictionary<string, Action> _callbacks = new Dictionary<string, Action>();
+        private readonly ICallbackRepository _callbackRepository;
 
-        protected WorkItemController(IServiceBus serviceBus, IMessageBus messageBus)
+        protected WorkItemController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository)
         {
+            Guard.AgainstNull(serviceBus, "serviceBus");
+            Guard.AgainstNull(messageBus, "messageBus");
+            Guard.AgainstNull(callbackRepository, "callbackRepository");
+
+            _callbackRepository = callbackRepository;
+
             ServiceBus = serviceBus;
             MessageBus = messageBus;
-
-            MessageBus.AddSubscriber(this);
         }
 
         protected IServiceBus ServiceBus { get; }
         protected IMessageBus MessageBus { get; }
         protected IWorkItem WorkItem { get; private set; }
 
+
         public void AssignWorkItem(IWorkItem workItem)
         {
             Guard.AgainstReassignment(WorkItem, "WorkItem");
 
             WorkItem = workItem;
-        }
-
-        public void Dispose()
-        {
-            MessageBus.RemoveSubscriber(this);
         }
 
         protected void SetWorkItemWaiting()
@@ -48,44 +45,21 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
 
         protected void Send(object command)
         {
-            ServiceBus.Send(command);
+            Send(command, () => { });
         }
 
         protected void Send(object command, Action action)
         {
+            Send(command, action, true);
+        }
+
+        protected void Send(object command, Action action, bool complete)
+        {
             SetWorkItemWaiting();
 
-            var callback = RegisterCallback(action);
+            var callback = _callbackRepository.Register(WorkItem, action, complete);
 
-            ServiceBus.Send(command, c => c.Headers.Add(new TransportHeader { Key = "__callback", Value = callback }));
-        }
-
-        private string RegisterCallback(Action action)
-        {
-            var id = Guid.NewGuid().ToString();
-
-            _callbacks.Add(id, action);
-
-            return id;
-        }
-
-        public void HandleMessage(ReplyMessage message)
-        {
-            var header = message.Result.Headers.Find(item=> item.Key.Equals("__callback", StringComparison.OrdinalIgnoreCase));
-
-            if (header == null)
-            {
-                return;
-            }
-
-            if (!_callbacks.ContainsKey(header.Value))
-            {
-                return;
-            }
-
-            _callbacks[header.Value]();
-
-            _callbacks.Remove(header.Value);
+            ServiceBus.Send(command, c => c.Headers.Add(new TransportHeader {Key = "__callback", Value = callback}));
         }
     }
 }

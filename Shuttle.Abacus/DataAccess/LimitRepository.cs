@@ -24,9 +24,9 @@ namespace Shuttle.Abacus.DataAccess
             throw new NotImplementedException();
         }
 
-        public override void Remove(Limit item)
+        public override void Remove(Guid id)
         {
-            _databaseGateway.ExecuteUsing(_limitQueryFactory.Remove(item));
+            _databaseGateway.ExecuteUsing(_limitQueryFactory.Remove(id));
         }
 
         public override Limit Get(Guid id)

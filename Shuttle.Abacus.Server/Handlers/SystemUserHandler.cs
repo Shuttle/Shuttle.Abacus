@@ -3,6 +3,7 @@ using Shuttle.Abacus.ApplicationService;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Messages;
 using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;
 
 namespace Shuttle.Abacus.Server.Handlers
@@ -20,6 +21,10 @@ namespace Shuttle.Abacus.Server.Handlers
         public SystemUserHandler(IDatabaseContextFactory databaseContextFactory,
             ISystemUserRepository systemUserRepository, ITaskFactory taskFactory)
         {
+            Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
+            Guard.AgainstNull(systemUserRepository, "systemUserRepository");
+            Guard.AgainstNull(taskFactory, "taskFactory");
+
             _databaseContextFactory = databaseContextFactory;
             _systemUserRepository = systemUserRepository;
             _taskFactory = taskFactory;
@@ -29,13 +34,19 @@ namespace Shuttle.Abacus.Server.Handlers
         {
             var message = context.Message;
 
-            _taskFactory.Create<IChangeLoginNameTask>().Execute(
-                _systemUserRepository.Get(message.SystemUserId).ProcessCommand(message));
+            using (_databaseContextFactory.Create())
+            {
+                _taskFactory.Create<IChangeLoginNameTask>().Execute(
+                    _systemUserRepository.Get(message.SystemUserId).ProcessCommand(message));
+            }
         }
 
         public void ProcessMessage(IHandlerContext<CreateSystemUserCommand> context)
         {
-            _systemUserRepository.Add(new SystemUser(context.Message));
+            using (_databaseContextFactory.Create())
+            {
+                _systemUserRepository.Add(new SystemUser(context.Message));
+            }
         }
 
         public void ProcessMessage(IHandlerContext<LoginCommand> context)
@@ -66,7 +77,7 @@ namespace Shuttle.Abacus.Server.Handlers
                             }));
                 }
 
-                context.Send(new LoginCompletedEvent {Permissions = permissions}, c => c.Reply());
+                context.Send(new LoginCompletedEvent { Permissions = permissions }, c => c.Reply());
             }
         }
 
@@ -74,8 +85,11 @@ namespace Shuttle.Abacus.Server.Handlers
         {
             var message = context.Message;
 
-            _taskFactory.Create<ISetPermissionsTask>().Execute(
-                _systemUserRepository.Get(message.SystemUserId).ProcessCommand(message));
+            using (_databaseContextFactory.Create())
+            {
+                _taskFactory.Create<ISetPermissionsTask>().Execute(
+                    _systemUserRepository.Get(message.SystemUserId).ProcessCommand(message));
+            }
         }
     }
 }

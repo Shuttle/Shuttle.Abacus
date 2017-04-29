@@ -9,7 +9,7 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Core.Presentation
 {
-    public abstract class Coordinator : ICoordinator, IDisposable
+    public abstract class Coordinator : ICoordinator, IDisposable, IMessageHandler<ReplyMessage>
     {
         public IClipboard Clipboard { get; set; }
         public ISummaryViewManager SummaryViewManager { get; set; }
@@ -21,6 +21,7 @@ namespace Shuttle.Abacus.UI.Core.Presentation
         public IWorkItemControllerFactory WorkItemControllerFactory { get; set; }
         public IUIService UIService { get; set; }
         public IShell Shell { get; set; }
+        public ICallbackRepository CallbackRepository { get; set; }
 
         public void Dispose()
         {
@@ -45,5 +46,28 @@ namespace Shuttle.Abacus.UI.Core.Presentation
                     MessageBus.Publish(new WorkItemSitedMessage(workItem));
                 });
         }
+
+        public void HandleMessage(ReplyMessage message)
+        {
+            var header =
+                message.Result.Headers.Find(item => item.Key.Equals("__callback", StringComparison.OrdinalIgnoreCase));
+
+            if (header == null)
+            {
+                return;
+            }
+
+            var action = CallbackRepository.Find(header.Value);
+
+            if (action == null)
+            {
+                return;
+            }
+
+            action();
+
+            CallbackRepository.Remove(header.Value);
+        }
+
     }
 }

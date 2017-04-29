@@ -13,7 +13,8 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class ArgumentController : WorkItemController, IArgumentController
     {
-        public ArgumentController(IServiceBus serviceBus, IMessageBus messageBus) : base(serviceBus, messageBus)
+        public ArgumentController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository) 
+            : base(serviceBus, messageBus, callbackRepository)
         {
         }
 

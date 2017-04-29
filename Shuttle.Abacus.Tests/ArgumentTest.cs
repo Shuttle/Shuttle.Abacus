@@ -40,7 +40,7 @@ namespace Shuttle.Abacus.Tests
             command.Answers.Add(new ArgumentRestrictedAnswerDTO("One"));
             command.Answers.Add(new ArgumentRestrictedAnswerDTO("Three"));
 
-            Assert.Throws<DuplicateEntryException>(() => new Argument(command));
+            Assert.Throws<DuplicateEntryException>(() => new Argument().ProcessCommand(command));
         }
     }
 }

@@ -26,9 +26,9 @@ namespace Shuttle.Abacus.DataAccess
             AddArgumentAnswers(item);
         }
 
-        public override void Remove(MethodTest item)
+        public override void Remove(Guid id)
         {
-            _databaseGateway.ExecuteUsing(_methodTestQueryFactory.Remove(item));
+            _databaseGateway.ExecuteUsing(_methodTestQueryFactory.Remove(id));
         }
 
         public override MethodTest Get(Guid id)
@@ -38,7 +38,7 @@ namespace Shuttle.Abacus.DataAccess
 
         public void Save(MethodTest item)
         {
-            _databaseGateway.ExecuteUsing(_methodTestQueryFactory.Remove(item));
+            _databaseGateway.ExecuteUsing(_methodTestQueryFactory.Remove(item.Id));
             _databaseGateway.ExecuteUsing(_methodTestQueryFactory.Add(item));
 
             AddArgumentAnswers(item);

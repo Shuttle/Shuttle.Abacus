@@ -1,5 +1,7 @@
 using System;
 using Shuttle.Abacus.Domain;
+using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;
 
 namespace Shuttle.Abacus.Server.Handlers
@@ -8,32 +10,45 @@ namespace Shuttle.Abacus.Server.Handlers
         IMessageHandler<CreateDecimalTableCommand>,
         IMessageHandler<UpdateDecimalTableCommand>
     {
-        private readonly IConstraintRepository constraintRepository;
-        private readonly IDecimalTableFactory factory;
-        private readonly IDecimalValueRepository decimalValueRepository;
-        private readonly IDecimalTableRepository decimalTableRepository;
+        private readonly IConstraintRepository _constraintRepository;
+        private readonly IDatabaseContextFactory _databaseContextFactory;
+        private readonly IDecimalTableFactory _decimalTableFactory;
+        private readonly IDecimalTableRepository _decimalTableRepository;
+        private readonly IDecimalValueRepository _decimalValueRepository;
 
-        public DecimalTableHandler(IDecimalTableFactory factory, IDecimalTableRepository decimalTableRepository, IDecimalValueRepository decimalValueRepository, IConstraintRepository constraintRepository)
+        public DecimalTableHandler(IDatabaseContextFactory databaseContextFactory,
+            IDecimalTableFactory decimalTableFactory, IDecimalTableRepository decimalTableRepository,
+            IDecimalValueRepository decimalValueRepository, IConstraintRepository constraintRepository)
         {
-            this.factory = factory;
-            this.decimalTableRepository = decimalTableRepository;
-            this.decimalValueRepository = decimalValueRepository;
-            this.constraintRepository = constraintRepository;
+            Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
+            Guard.AgainstNull(decimalTableFactory, "decimalTableFactory");
+            Guard.AgainstNull(decimalTableRepository, "decimalTableRepository");
+            Guard.AgainstNull(decimalValueRepository, "decimalValueRepository");
+            Guard.AgainstNull(constraintRepository, "constraintRepository");
+
+            _databaseContextFactory = databaseContextFactory;
+            _decimalTableFactory = decimalTableFactory;
+            _decimalTableRepository = decimalTableRepository;
+            _decimalValueRepository = decimalValueRepository;
+            _constraintRepository = constraintRepository;
         }
 
         public void ProcessMessage(IHandlerContext<CreateDecimalTableCommand> context)
         {
             var message = context.Message;
 
-            var table = factory.Create(Guid.NewGuid(), message);
-
-            decimalTableRepository.Add(table);
-
-            foreach (var value in table.DecimalValues)
+            using (_databaseContextFactory.Create())
             {
-                decimalValueRepository.Add(table, value);
+                var table = _decimalTableFactory.Create(Guid.NewGuid(), message);
 
-                constraintRepository.SaveForOwner(value);
+                _decimalTableRepository.Add(table);
+
+                foreach (var value in table.DecimalValues)
+                {
+                    _decimalValueRepository.Add(table, value);
+
+                    _constraintRepository.SaveForOwner(value);
+                }
             }
         }
 
@@ -41,17 +56,20 @@ namespace Shuttle.Abacus.Server.Handlers
         {
             var message = context.Message;
 
-            var table = factory.Create(message.DecimalTableId, message);
-
-            decimalValueRepository.RemoveAllForDecimalTable(message.DecimalTableId);
-
-            decimalTableRepository.Save(table);
-
-            foreach (var value in table.DecimalValues)
+            using (_databaseContextFactory.Create())
             {
-                decimalValueRepository.Add(table, value);
+                var table = _decimalTableFactory.Create(message.DecimalTableId, message);
 
-                constraintRepository.SaveForOwner(value);
+                _decimalValueRepository.RemoveAllForDecimalTable(message.DecimalTableId);
+
+                _decimalTableRepository.Save(table);
+
+                foreach (var value in table.DecimalValues)
+                {
+                    _decimalValueRepository.Add(table, value);
+
+                    _constraintRepository.SaveForOwner(value);
+                }
             }
         }
     }

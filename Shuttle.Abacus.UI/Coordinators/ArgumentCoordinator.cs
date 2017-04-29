@@ -132,20 +132,20 @@ namespace Shuttle.Abacus.UI.Coordinators
             using (_databaseContextFactory.Create())
             {
                 model.ArgumentRow = _argumentQuery.Get(message.ArgumentId);
+
+                var item = WorkItemManager
+                    .Create("Edit Argument")
+                    .ControlledBy<IArgumentController>()
+                    .ShowIn<IContextToolbarPresenter>()
+                    .AddPresenter<IArgumentPresenter>().WithModel(model)
+                    .AddPresenter<IArgumentRestrictedAnswerPresenter>()
+                    .WithModel(_argumentQuery.GetAnswerCatalog(message.ArgumentId))
+                    .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).
+                    AsDefault()
+                    .AssignInitiator(message);
+
+                HostInWorkspace<ITabbedWorkspacePresenter>(item);
             }
-
-            var item = WorkItemManager
-                .Create("Edit Argument")
-                .ControlledBy<IArgumentController>()
-                .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<IArgumentPresenter>().WithModel(model)
-                .AddPresenter<IArgumentRestrictedAnswerPresenter>()
-                .WithModel(_argumentQuery.GetAnswerCatalog(message.ArgumentId))
-                .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).
-                AsDefault()
-                .AssignInitiator(message);
-
-            HostInWorkspace<ITabbedWorkspacePresenter>(item);
         }
 
         public void HandleMessage(ResourceRefreshItemTextMessage message)
@@ -156,7 +156,10 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return;
             }
 
-            message.Item.AssignText(ArgumentColumns.Name.MapFrom(_argumentQuery.Get(message.Item.Key)));
+            using (_databaseContextFactory.Create())
+            {
+                message.Item.AssignText(ArgumentColumns.Name.MapFrom(_argumentQuery.Get(message.Item.Key)));
+            }
         }
 
         public void HandleMessage(DeleteArgumentMessage message)

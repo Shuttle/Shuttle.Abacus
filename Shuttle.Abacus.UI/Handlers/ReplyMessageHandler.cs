@@ -1,11 +1,10 @@
 ﻿using Shuttle.Abacus.Infrastructure;
-using Shuttle.Abacus.Messages;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Esb;
 
 namespace Shuttle.Abacus.UI.Handlers
 {
-    public class ReplyMessageHandler : Esb.IMessageHandler<ReplyMessage>
+    public class ReplyMessageHandler : Esb.IMessageHandler<Abacus.Messages.ReplyMessage>
     {
         private readonly IMessageBus _messageBus;
 
@@ -14,15 +13,14 @@ namespace Shuttle.Abacus.UI.Handlers
             _messageBus = messageBus;
         }
 
-        public void ProcessMessage(IHandlerContext<ReplyMessage> context)
+        public void ProcessMessage(IHandlerContext<Abacus.Messages.ReplyMessage> context)
         {
             var message = context.Message;
-            var result = message.Result;
-
-            if (result == null)
+            var result = new Result
             {
-                return;
-            }
+                SuccessMessages = message.SuccessMessages,
+                FailureMessages = message.FailureMessages
+            };
 
             foreach (var header in context.TransportMessage.Headers)
             {
@@ -33,10 +31,7 @@ namespace Shuttle.Abacus.UI.Handlers
                 });
             }
 
-            if (result.HasMessages)
-            {
-                _messageBus.Publish(result);
-            }
+            _messageBus.Publish(new ReplyMessage(result));
         }
     }
 }

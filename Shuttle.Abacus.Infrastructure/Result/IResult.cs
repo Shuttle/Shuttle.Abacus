@@ -14,6 +14,7 @@ namespace Shuttle.Abacus.Infrastructure
         IResult AddSuccessMessages(params string[] messages);
         IResult AddSuccessMessages(IEnumerable<string> messages);
         IResult AddException(Exception ex);
+        List<ResultHeader> Headers { get; }
     }
 
     public interface IResult<TValue> : IAbstractResult

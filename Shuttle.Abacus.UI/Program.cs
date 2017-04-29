@@ -98,7 +98,10 @@ namespace Shuttle.Abacus.UI
 
         public static void CloseSplash()
         {
-            _splash.Invoke(new MethodInvoker(_splash.Close));
+            if (_splash.Created)
+            {
+                _splash.Invoke(new MethodInvoker(_splash.Close));
+            }
 
             splashThread.Join();
         }
@@ -110,6 +113,11 @@ namespace Shuttle.Abacus.UI
 
         private static void ShowStatus(string heading, string message)
         {
+            if (!_splash.Created)
+            {
+                return;
+            }
+
             _splash.Invoke(new MethodInvoker(() => _splash.ShowStatus(heading, message)));
         }
 

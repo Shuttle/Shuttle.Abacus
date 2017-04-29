@@ -12,7 +12,7 @@ namespace Shuttle.Abacus.Domain
     public interface IRepository<T> : IRepository
     {
         void Add(T item);
-        void Remove(T item);
+        void Remove(Guid id);
         T Get(Guid id);
     }
 }

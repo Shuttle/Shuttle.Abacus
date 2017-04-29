@@ -98,17 +98,17 @@ values
                 .AddParameterValue(SystemUserColumns.LoginName, user.LoginName);
         }
 
-        public IQuery Update(SystemUser user)
+        public IQuery Save(SystemUser user)
         {
             return RawQuery.Create("update SystemUser set LoginName = @LoginName where SystemUserId = @SystemUserId")
                 .AddParameterValue(SystemUserColumns.LoginName, user.LoginName)
                 .AddParameterValue(SystemUserColumns.Id, user.Id);
         }
 
-        public IQuery DeleteUser(SystemUser user)
+        public IQuery Remove(Guid id)
         {
             return RawQuery.Create("delete from SystemUserSystemUserId = @SystemUserId")
-                .AddParameterValue(SystemUserColumns.Id, user.Id);
+                .AddParameterValue(SystemUserColumns.Id, id);
         }
 
         public IQuery AddPermission(SystemUser user, IPermission permission)

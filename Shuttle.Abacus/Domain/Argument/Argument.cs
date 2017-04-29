@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Abacus.Domain;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
@@ -11,21 +12,25 @@ namespace Shuttle.Abacus.Domain
 
         private readonly List<ArgumentRestrictedAnswer> answers = new List<ArgumentRestrictedAnswer>();
 
+
+        public Argument()
+            : this(Guid.NewGuid())
+        {
+        }
+
         public Argument(Guid id)
         {
             Id = id;
         }
 
-        public Argument(CreateArgumentCommand command)
+        public Argument ProcessCommand(CreateArgumentCommand command)
         {
             Name = command.Name;
             AnswerType = command.AnswerType;
 
             command.Answers.ForEach(adding => AddArgumentAnswer(adding.Answer));
-        }
 
-        public Argument()
-        {
+            return this;
         }
 
         public string Name { get; set; }

@@ -9,7 +9,7 @@ namespace Shuttle.Abacus.DataAccess
         IQuery All();
         IQuery Get(Guid id);
         IQuery Add(Method item);
-        IQuery Remove(Method item);
+        IQuery Remove(Guid id);
         IQuery Save(Method item);
         IQuery Get(string name);
     }

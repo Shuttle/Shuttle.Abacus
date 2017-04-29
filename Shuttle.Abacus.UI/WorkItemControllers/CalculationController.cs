@@ -19,7 +19,8 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class CalculationController : WorkItemController, ICalculationController
     {
-        public CalculationController(IServiceBus serviceBus, IMessageBus messageBus) : base(serviceBus, messageBus)
+        public CalculationController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository) 
+            : base(serviceBus, messageBus, callbackRepository) 
         {
         }
 

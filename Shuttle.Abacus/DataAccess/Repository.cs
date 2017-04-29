@@ -10,7 +10,7 @@ namespace Shuttle.Abacus.DataAccess
         private static readonly string TypeName = typeof(T).Name;
 
         public abstract void Add(T item);
-        public abstract void Remove(T item);
+        public abstract void Remove(Guid id);
         public abstract T Get(Guid id);
 
         public TCast Get<TCast>(Guid id) where TCast : class

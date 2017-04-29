@@ -271,7 +271,7 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
         {
             get
             {
-                return new List<object>(presenters.Cast<object>())
+                return new List<object>(presenters)
                        {
                            WorkItemController
                        };

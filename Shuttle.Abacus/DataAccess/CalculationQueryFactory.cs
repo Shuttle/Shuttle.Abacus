@@ -133,9 +133,9 @@ values
                 .AddParameterValue(CalculationColumns.SequenceNumber, -1);
         }
 
-        public IQuery Remove(Calculation item)
+        public IQuery Remove(Guid id)
         {
-            return RawQuery.Create("delete from TABLE where CalculationId = @CalculationId").AddParameterValue(CalculationColumns.Id, item.Id);
+            return RawQuery.Create("delete from TABLE where CalculationId = @CalculationId").AddParameterValue(CalculationColumns.Id, id);
         }
 
         public IQuery Get(Guid id)

@@ -64,9 +64,9 @@ values
                 .AddParameterValue(ArgumentColumns.AnswerType, item.AnswerType);
         }
 
-        public IQuery Remove(Argument item)
+        public IQuery Remove(Guid id)
         {
-            return RawQuery.Create("delete from Argument where ArgumentId = @ArgumentId").AddParameterValue(ArgumentColumns.Id, item.Id);
+            return RawQuery.Create("delete from Argument where ArgumentId = @ArgumentId").AddParameterValue(ArgumentColumns.Id, id);
         }
 
 

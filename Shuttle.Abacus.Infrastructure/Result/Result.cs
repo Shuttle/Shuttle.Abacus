@@ -10,10 +10,7 @@ namespace Shuttle.Abacus.Infrastructure
             Headers = new List<ResultHeader>();
         }
 
-        public static IResult Create()
-        {
-            return new Result(); 
-        }
+        public List<ResultHeader> Headers { get; }
 
         public IResult AddFailureMessage(ResultMessage message)
         {
@@ -31,7 +28,7 @@ namespace Shuttle.Abacus.Infrastructure
 
         public IResult AddFailureMessages(params string[] messages)
         {
-            AddFailureMessages((IEnumerable<string>)messages);
+            AddFailureMessages((IEnumerable<string>) messages);
 
             return this;
         }
@@ -59,7 +56,7 @@ namespace Shuttle.Abacus.Infrastructure
 
         public IResult AddSuccessMessages(params string[] messages)
         {
-            AddSuccessMessages((IEnumerable<string>)messages);
+            AddSuccessMessages((IEnumerable<string>) messages);
 
             return this;
         }
@@ -78,7 +75,10 @@ namespace Shuttle.Abacus.Infrastructure
             return this;
         }
 
-        public List<ResultHeader> Headers { get; private set; }
+        public static IResult Create()
+        {
+            return new Result();
+        }
     }
 
     public class Result<TValue> : AbstractResult, IResult<TValue>
@@ -86,11 +86,6 @@ namespace Shuttle.Abacus.Infrastructure
         public Result(TValue value)
         {
             Value = value;
-        }
-
-        public static IResult<TValue> Create()
-        {
-            return new Result<TValue>(default(TValue));
         }
 
         public IResult<TValue> AddFailureMessage(ResultMessage message)
@@ -109,7 +104,7 @@ namespace Shuttle.Abacus.Infrastructure
 
         public IResult<TValue> AddFailureMessages(params string[] messages)
         {
-            AddFailureMessages((IEnumerable<string>)messages);
+            AddFailureMessages((IEnumerable<string>) messages);
 
             return this;
         }
@@ -137,7 +132,7 @@ namespace Shuttle.Abacus.Infrastructure
 
         public IResult<TValue> AddSuccessMessages(params string[] messages)
         {
-            AddSuccessMessages((IEnumerable<string>)messages);
+            AddSuccessMessages((IEnumerable<string>) messages);
 
             return this;
         }
@@ -156,6 +151,11 @@ namespace Shuttle.Abacus.Infrastructure
             return this;
         }
 
-        public TValue Value { get; private set; }
+        public TValue Value { get; }
+
+        public static IResult<TValue> Create()
+        {
+            return new Result<TValue>(default(TValue));
+        }
     }
 }

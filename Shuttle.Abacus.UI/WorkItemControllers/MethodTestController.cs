@@ -15,7 +15,8 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class MethodTestController : WorkItemController, IMethodTestController
     {
-        public MethodTestController(IServiceBus serviceBus, IMessageBus messageBus) : base(serviceBus, messageBus)
+        public MethodTestController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository) 
+            : base(serviceBus, messageBus, callbackRepository)
         {
         }
 

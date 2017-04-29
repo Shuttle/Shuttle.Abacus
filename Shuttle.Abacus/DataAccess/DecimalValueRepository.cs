@@ -21,7 +21,7 @@ namespace Shuttle.Abacus.DataAccess
             throw new NotImplementedException();
         }
 
-        public override void Remove(DecimalValue item)
+        public override void Remove(Guid id)
         {
             throw new NotImplementedException();
         }

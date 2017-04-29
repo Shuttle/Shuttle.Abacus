@@ -13,7 +13,7 @@ namespace Shuttle.Abacus.DataAccess
         IQuery AllForMethod(Guid methodId, Guid grabberCalculationId);
         IQuery GraphNodeArguments(Guid calculationId);
         IQuery Add(Method method, ICalculationOwner owner, Calculation item);
-        IQuery Remove(Calculation item);
+        IQuery Remove(Guid item);
         IQuery Get(Guid id);
         IQuery Save(Calculation item);
         IQuery SetSequenceNumber(Guid id, int sequenceNumber);

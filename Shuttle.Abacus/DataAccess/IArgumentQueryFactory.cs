@@ -10,7 +10,7 @@ namespace Shuttle.Abacus.DataAccess
         IQuery Get(Guid id);
         IQuery GetRestrictedAnswer(Guid id);
         IQuery Add(Argument item);
-        IQuery Remove(Argument item);
+        IQuery Remove(Guid id);
         IQuery GetDTO(Guid id);
         IQuery Save(Argument item);
         IQuery RemoveRestrictedAnswers(Argument argument);

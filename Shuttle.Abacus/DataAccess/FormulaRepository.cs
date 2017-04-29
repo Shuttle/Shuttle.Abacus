@@ -27,9 +27,9 @@ namespace Shuttle.Abacus.DataAccess
             throw new NotImplementedException();
         }
 
-        public override void Remove(Formula item)
+        public override void Remove(Guid id)
         {
-            _databaseGateway.ExecuteUsing(_formulaQueryFactory.Remove(item));
+            _databaseGateway.ExecuteUsing(_formulaQueryFactory.Remove(id));
         }
 
         public override Formula Get(Guid id)

@@ -12,7 +12,8 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class MethodController : WorkItemController, IMethodController
     {
-        public MethodController(IServiceBus serviceBus, IMessageBus messageBus) : base(serviceBus, messageBus)
+        public MethodController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository) 
+            : base(serviceBus, messageBus, callbackRepository)
         {
         }
 

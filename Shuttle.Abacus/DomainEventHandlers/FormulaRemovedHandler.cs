@@ -14,7 +14,7 @@ namespace Shuttle.Abacus.DomainEventHandlers
 
         public void Handle(FormulaRemoved args)
         {
-            repository.Remove(args.Formula);
+            repository.Remove(args.Formula.Id);
             repository.SaveOrdered(args.Owner);
         }
     }

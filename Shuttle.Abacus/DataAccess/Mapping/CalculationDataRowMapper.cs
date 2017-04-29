@@ -7,12 +7,12 @@ namespace Shuttle.Abacus.DataAccess
 {
     public class CalculationDataRowMapper : IDataRowMapper<Calculation>
     {
-        private readonly Domain.IFactoryProvider<ICalculationFactory> factoryProvider;
+        private readonly IFactoryProvider<ICalculationFactory> factoryProvider;
         private readonly IFormulaRepository formulaRepository;
         private readonly ILimitRepository limitRepository;
         private readonly IDataRepository<GraphNodeArgument> graphNodeArgumentDataRowMapper;
 
-        public CalculationDataRowMapper(Domain.IFactoryProvider<ICalculationFactory> factoryProvider, IFormulaRepository formulaRepository, ILimitRepository limitRepository, IDataRepository<GraphNodeArgument> graphNodeArgumentDataRowMapper)
+        public CalculationDataRowMapper(IFactoryProvider<ICalculationFactory> factoryProvider, IFormulaRepository formulaRepository, ILimitRepository limitRepository, IDataRepository<GraphNodeArgument> graphNodeArgumentDataRowMapper)
         {
             this.factoryProvider = factoryProvider;
             this.formulaRepository = formulaRepository;

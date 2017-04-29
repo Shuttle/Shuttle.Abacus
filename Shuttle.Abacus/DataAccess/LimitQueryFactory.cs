@@ -63,10 +63,10 @@ values
                 .AddParameterValue(LimitColumns.Type, item.Type);
         }
 
-        public IQuery Remove(Limit item)
+        public IQuery Remove(Guid id)
         {
             return RawQuery.Create("delete from Limit where LimitId = @LimitId")
-                .AddParameterValue(LimitColumns.Id, item.Id);
+                .AddParameterValue(LimitColumns.Id, id);
         }
 
         public IQuery Save(Limit item)

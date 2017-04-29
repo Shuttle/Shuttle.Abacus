@@ -18,7 +18,7 @@ select
     Description,
     SequenceNumber
 from
-    Constraint
+    [Constraint]
 ";
 
         public IQuery AllForOwner(Guid ownerId)
@@ -34,7 +34,7 @@ order by
 
         public IQuery RemoveForOwner(IConstraintOwner owner)
         {
-            return RawQuery.Create("delete from Constraint where OwnerId = @OwnerId")
+            return RawQuery.Create("delete from [Constraint] where OwnerId = @OwnerId")
                 .AddParameterValue(ConstraintColumns.OwnerId, owner.Id);
         }
 
@@ -78,14 +78,14 @@ values
 
         public IQuery SetArgumentName(Guid argumentId, string argumentName)
         {
-            return RawQuery.Create(@"update Constraint set ArgumentName = @ArgumentName where ArgumentId = @ArgumentId")
+            return RawQuery.Create(@"update [Constraint] set ArgumentName = @ArgumentName where ArgumentId = @ArgumentId")
                 .AddParameterValue(ConstraintColumns.ArgumentName, argumentName)
                 .AddParameterValue(ConstraintColumns.ArgumentId, argumentId);
         }
 
         public IQuery SetArgumentAnswerType(Guid argumentId, string answerType)
         {
-            return RawQuery.Create(@"update Constraint set AnswerType = @AnswerType where ArgumentId = @ArgumentId")
+            return RawQuery.Create(@"update [Constraint] set AnswerType = @AnswerType where ArgumentId = @ArgumentId")
                 .AddParameterValue(ConstraintColumns.AnswerType, answerType)
                 .AddParameterValue(ConstraintColumns.ArgumentId, argumentId);
         }

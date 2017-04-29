@@ -12,7 +12,7 @@ namespace Shuttle.Abacus.DataAccess
         IQuery Name(Guid id);
         IQuery DecimalTableReport(Guid decimalTableId);
         IQuery Add(DecimalTable item);
-        IQuery Remove(DecimalTable item);
+        IQuery Remove(Guid id);
         IQuery Save(DecimalTable item);
     }
 }

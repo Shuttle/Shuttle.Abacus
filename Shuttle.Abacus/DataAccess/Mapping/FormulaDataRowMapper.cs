@@ -1,6 +1,7 @@
 using System.Data;
 using System.Runtime.Remoting.Messaging;
 using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess

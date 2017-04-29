@@ -1,17 +1,17 @@
+using System.Collections.Generic;
 using Shuttle.Abacus.Infrastructure;
-using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Messages
 {
     public class ReplyMessage
     {
-        public ReplyMessage(IResult result)
+        public ReplyMessage()
         {
-            Guard.AgainstNull(result, "result");
-
-            Result = (Result) result;
+            SuccessMessages = new List<ResultMessage>();
+            FailureMessages = new List<ResultMessage>();
         }
 
-        public Result Result { get; set; }
+        public List<ResultMessage> SuccessMessages { get; set; }
+        public List<ResultMessage> FailureMessages { get; set; }
     }
 }

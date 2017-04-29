@@ -55,7 +55,7 @@ namespace Shuttle.Abacus.DataAccess
 
         public void ChangeLoginName(SystemUser user)
         {
-            _databaseGateway.ExecuteUsing(_systemUserQueryFactory.Update(user));
+            _databaseGateway.ExecuteUsing(_systemUserQueryFactory.Save(user));
         }
 
         public override void Add(SystemUser user)
@@ -67,9 +67,9 @@ namespace Shuttle.Abacus.DataAccess
             AddPermissions(user);
         }
 
-        public override void Remove(SystemUser user)
+        public override void Remove(Guid id)
         {
-            _databaseGateway.ExecuteUsing(_systemUserQueryFactory.DeleteUser(user));
+            _databaseGateway.ExecuteUsing(_systemUserQueryFactory.Remove(id));
         }
 
         public override SystemUser Get(Guid id)
@@ -96,7 +96,7 @@ namespace Shuttle.Abacus.DataAccess
         {
             ApplyInvariants(user);
 
-            _databaseGateway.ExecuteUsing(_systemUserQueryFactory.Update(user));
+            _databaseGateway.ExecuteUsing(_systemUserQueryFactory.Save(user));
             _databaseGateway.ExecuteUsing(_systemUserQueryFactory.DeletePermissions(user));
 
             AddPermissions(user);

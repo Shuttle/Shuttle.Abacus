@@ -2,23 +2,26 @@ using System;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public class ArgumentRepository : Repository<Argument>, IArgumentRepository
     {
         private readonly IArgumentQueryFactory _argumentQueryFactory;
-        private readonly ICache _cache;
         private readonly IDatabaseGateway _databaseGateway;
         private readonly IDataRepository<Argument> _repository;
 
         public ArgumentRepository(IDatabaseGateway databaseGateway, IArgumentQueryFactory argumentQueryFactory,
-            IDataRepository<Argument> repository, ICache cache)
+            IDataRepository<Argument> repository)
         {
+            Guard.AgainstNull(databaseGateway, "databaseGateway");
+            Guard.AgainstNull(argumentQueryFactory, "argumentQueryFactory");
+            Guard.AgainstNull(repository, "repository");
+
             _repository = repository;
             _databaseGateway = databaseGateway;
             _argumentQueryFactory = argumentQueryFactory;
-            _cache = cache;
         }
 
         public override void Add(Argument item)
@@ -26,32 +29,14 @@ namespace Shuttle.Abacus.DataAccess
             _databaseGateway.ExecuteUsing(_argumentQueryFactory.Add(item));
         }
 
-        public override void Remove(Argument item)
+        public override void Remove(Guid id)
         {
-            _databaseGateway.ExecuteUsing(_argumentQueryFactory.Remove(item));
+            _databaseGateway.ExecuteUsing(_argumentQueryFactory.Remove(id));
         }
 
         public override Argument Get(Guid id)
         {
-            var key = string.Format("Argument|{0}", id);
-
-            var result = _cache.Get<Argument>(key);
-
-            if (result != null)
-            {
-                return result;
-            }
-
-            result = _repository.FetchItemUsing(_argumentQueryFactory.Get(id));
-
-            if (result == null)
-            {
-                throw Exceptions.MissingEntity("Argument", id);
-            }
-
-            _cache.Add(key, result);
-
-            return result;
+            return Guarded.Entity(Find(id), id);
         }
 
         public ArgumentCollection All()
@@ -67,6 +52,11 @@ namespace Shuttle.Abacus.DataAccess
 
             argument.RestrictedAnswers.ForEach(
                 mapping => _databaseGateway.ExecuteUsing(_argumentQueryFactory.SaveRestrictedAnswers(argument, mapping)));
+        }
+
+        public Argument Find(Guid id)
+        {
+            return _repository.FetchItemUsing(_argumentQueryFactory.Get(id));
         }
     }
 }

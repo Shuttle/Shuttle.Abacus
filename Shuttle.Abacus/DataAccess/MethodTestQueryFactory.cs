@@ -60,7 +60,7 @@ from
     MethodTest mt
 inner join
     MethodTestArgumentAnswer mtaa on
-        (tcfa.MethodTestId = mt.MethodTestId)
+        (mtaa.MethodTestId = mt.MethodTestId)
 where
     mtaa.ArgumentId = @ArgumentId
 ")
@@ -76,11 +76,11 @@ where
                 .AddParameterValue(MethodTestColumns.Id, id);
         }
 
-        public IQuery Remove(MethodTest item)
+        public IQuery Remove(Guid id)
         {
             return
                 RawQuery.Create("delete from MethodTest where MethodTestId = @MethodTestId")
-                    .AddParameterValue(MethodTestColumns.Id, item.Id);
+                    .AddParameterValue(MethodTestColumns.Id, id);
         }
 
         public IQuery Add(MethodTest item)

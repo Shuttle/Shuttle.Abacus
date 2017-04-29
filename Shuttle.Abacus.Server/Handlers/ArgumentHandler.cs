@@ -1,9 +1,12 @@
 ﻿using System;
-using System.Data;
 using System.Linq;
 using System.Text;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Messages;
+using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;
 
 namespace Shuttle.Abacus.Server.Handlers
@@ -13,74 +16,98 @@ namespace Shuttle.Abacus.Server.Handlers
         IMessageHandler<ChangeArgumentCommand>,
         IMessageHandler<DeleteArgumentCommand>
     {
-        private readonly IMethodTestRepository methodTestRepository;
-        private readonly IConstraintRepository constraintRepository;
-        private readonly IMethodTestQuery testQuery;
-        private readonly IArgumentRepository argumentRepository;
+        private readonly IArgumentRepository _argumentRepository;
+        private readonly IConstraintRepository _constraintRepository;
+        private readonly IDatabaseContextFactory _databaseContextFactory;
+        private readonly IMethodTestQuery _methodTestQuery;
+        private readonly IMethodTestRepository _methodTestRepository;
 
-        public ArgumentHandler(IArgumentRepository argumentRepository, IMethodTestRepository methodTestRepository,
-            IConstraintRepository constraintRepository, IMethodTestQuery testQuery)
+        public ArgumentHandler(IDatabaseContextFactory databaseContextFactory, IArgumentRepository argumentRepository,
+            IMethodTestRepository methodTestRepository, IConstraintRepository constraintRepository, IMethodTestQuery methodTestQuery)
         {
-            this.argumentRepository = argumentRepository;
-            this.methodTestRepository = methodTestRepository;
-            this.constraintRepository = constraintRepository;
-            this.testQuery = testQuery;
-        }
+            Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
+            Guard.AgainstNull(argumentRepository, "argumentRepository");
+            Guard.AgainstNull(methodTestRepository, "methodTestRepository");
+            Guard.AgainstNull(constraintRepository, "constraintRepository");
+            Guard.AgainstNull(methodTestQuery, "methodTestQuery");
 
-        public void ProcessMessage(IHandlerContext<CreateArgumentCommand> context)
-        {
-            argumentRepository.Add(new Argument(context.Message));
+            _databaseContextFactory = databaseContextFactory;
+            _argumentRepository = argumentRepository;
+            _methodTestRepository = methodTestRepository;
+            _constraintRepository = constraintRepository;
+            _methodTestQuery = methodTestQuery;
         }
 
         public void ProcessMessage(IHandlerContext<ChangeArgumentCommand> context)
         {
             var message = context.Message;
 
-            var argument = argumentRepository.Get(message.ArgumentId);
-            var nameChanged = !argument.Name.Equals(message.Name, StringComparison.InvariantCultureIgnoreCase);
-            var answerTypeChanged =
-                !argument.AnswerType.Equals(message.AnswerType, StringComparison.InvariantCultureIgnoreCase);
-
-            argument.ProcessCommand(message);
-
-            argumentRepository.Save(argument);
-
-            if (nameChanged)
+            using (_databaseContextFactory.Create())
             {
-                constraintRepository.SetArgumentName(message.ArgumentId, message.Name);
-                methodTestRepository.SetArgumentName(message.ArgumentId, message.Name);
+                var argument = _argumentRepository.Get(message.ArgumentId);
+                var nameChanged = !argument.Name.Equals(message.Name, StringComparison.InvariantCultureIgnoreCase);
+                var answerTypeChanged =
+                    !argument.AnswerType.Equals(message.AnswerType, StringComparison.InvariantCultureIgnoreCase);
+
+                argument.ProcessCommand(message);
+
+                _argumentRepository.Save(argument);
+
+                if (nameChanged)
+                {
+                    _constraintRepository.SetArgumentName(message.ArgumentId, message.Name);
+                    _methodTestRepository.SetArgumentName(message.ArgumentId, message.Name);
+                }
+
+                if (answerTypeChanged)
+                {
+                    _constraintRepository.SetArgumentAnswerType(message.ArgumentId, message.AnswerType);
+                    _methodTestRepository.SetArgumentAnswerType(message.ArgumentId, message.AnswerType);
+                }
             }
 
-            if (answerTypeChanged)
+            context.ReplyOK();
+        }
+
+        public void ProcessMessage(IHandlerContext<CreateArgumentCommand> context)
+        {
+            using (_databaseContextFactory.Create())
             {
-                constraintRepository.SetArgumentAnswerType(message.ArgumentId, message.AnswerType);
-                methodTestRepository.SetArgumentAnswerType(message.ArgumentId, message.AnswerType);
+                _argumentRepository.Add(new Argument().ProcessCommand(context.Message));
             }
+
+            context.ReplyOK();
         }
 
         public void ProcessMessage(IHandlerContext<DeleteArgumentCommand> context)
         {
             var message = context.Message;
-            var rows = testQuery.AllUsingArgument(message.ArgumentId).ToList();
-            var argument = argumentRepository.Get(message.ArgumentId);
 
-            if (rows.Any())
+            using (_databaseContextFactory.Create())
             {
-                var list = new StringBuilder();
+                var rows = _methodTestQuery.AllUsingArgument(message.ArgumentId).ToList();
 
-                foreach (var row in rows)
+                if (rows.Any())
                 {
-                    list.AppendLine(MethodTestColumns.Description.MapFrom(row));
+                    var argument = _argumentRepository.Find(message.ArgumentId);
+
+                    var list = new StringBuilder();
+
+                    foreach (var row in rows)
+                    {
+                        list.AppendLine(MethodTestColumns.Description.MapFrom(row));
+                    }
+
+                    throw new InvalidOperationException(
+                        string.Format(
+                            "Cannot delete argument '{0}' since it is being used by the following test cases:\r\n{1}",
+                            argument.Name, list));
                 }
 
-                throw new InvalidOperationException(
-                    string.Format(
-                        "Cannot delete argument '{0}' since it is being used by the following test cases:\r\n{1}",
-                        argument.Name, list));
+                _argumentRepository.Remove(message.ArgumentId);
             }
 
-            argumentRepository.Remove(argument);
+            context.ReplyOK();
         }
     }
 }
-

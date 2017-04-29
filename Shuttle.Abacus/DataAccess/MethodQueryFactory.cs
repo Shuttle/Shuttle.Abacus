@@ -45,10 +45,10 @@ values
                 .AddParameterValue(MethodColumns.Name, item.MethodName);
         }
 
-        public IQuery Remove(Method item)
+        public IQuery Remove(Guid id)
         {
             return RawQuery.Create("delete from Method where MethodId = @MethodId")
-                .AddParameterValue(MethodColumns.Id, item.Id);
+                .AddParameterValue(MethodColumns.Id, id);
         }
 
         public IQuery Save(Method item)

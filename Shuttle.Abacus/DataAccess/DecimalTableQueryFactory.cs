@@ -144,11 +144,11 @@ values
                 .AddParameterValue(DecimalTableColumns.ColumnArgumentId, item.ColumnArgumentId);
         }
 
-        public IQuery Remove(DecimalTable item)
+        public IQuery Remove(Guid id)
         {
             return
                 RawQuery.Create("delete from DecimalTable where DecimalTableId = @DecimalTableId")
-                    .AddParameterValue(DecimalTableColumns.Id, item.Id);
+                    .AddParameterValue(DecimalTableColumns.Id, id);
         }
 
         public IQuery Save(DecimalTable item)
