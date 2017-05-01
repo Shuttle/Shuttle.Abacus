@@ -22,16 +22,17 @@ namespace Shuttle.Abacus.Domain
         {
             var result = new List<Guid>();
 
-            foreach (var formula in formulas)
-            {
-                foreach (var requiredCalculationId in formula.RequiredCalculationIds())
-                {
-                    if (!result.Contains(requiredCalculationId))
-                    {
-                        result.Add(requiredCalculationId);
-                    }
-                }
-            }
+            //TODO
+            //foreach (var formula in formulas)
+            //{
+            //    foreach (var requiredCalculationId in formula.RequiredCalculationIds())
+            //    {
+            //        if (!result.Contains(requiredCalculationId))
+            //        {
+            //            result.Add(requiredCalculationId);
+            //        }
+            //    }
+            //}
 
             return result;
         }

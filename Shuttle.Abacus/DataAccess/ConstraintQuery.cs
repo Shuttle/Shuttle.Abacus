@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.DTO;
 using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.DataAccess
 {
@@ -21,16 +23,16 @@ namespace Shuttle.Abacus.DataAccess
 
         public IEnumerable<DataRow> QueryAllForOwner(Guid ownerId)
         {
-            return _databaseGateway.GetRowsUsing(_constraintQueryFactory.AllForOwner(ownerId));
+            return _databaseGateway.GetRowsUsing(_constraintQueryFactory.All(ownerId));
         }
 
         public IEnumerable<ConstraintDTO> DTOsForOwner(Guid ownerId)
         {
             var constraints = new List<ConstraintDTO>();
 
-            foreach (DataRow row in _databaseGateway.GetRowsUsing(_constraintQueryFactory.AllForOwner(ownerId)))
+            foreach (DataRow row in _databaseGateway.GetRowsUsing(_constraintQueryFactory.All(ownerId)))
             {
-                var argumentResult = _argumentQuery.ArgumentDTO(ConstraintColumns.ArgumentId.MapFrom(row));
+                var argumentResult = _argumentQuery.DataRow(ConstraintColumns.ArgumentId.MapFrom(row));
 
                 var constraintName = ConstraintColumns.Name.MapFrom(row);
 
@@ -46,12 +48,39 @@ namespace Shuttle.Abacus.DataAccess
                     //        ? type.Text
                     //        : constraintName
                     //},
-                    ArgumentDTO = argumentResult,
+                    DataRow = argumentResult,
                     Value = ConstraintColumns.Answer.MapFrom(row)
                 });
             }
 
             return constraints;
+        }
+
+        public void GetOwned(IConstraintOwner owner)
+        {
+            Guard.AgainstNull(owner, "owner");
+
+            foreach (var row in _databaseGateway.GetRowsUsing(_constraintQueryFactory.All(owner.Id)))
+            {
+                owner.AddConstraint(new OwnedConstraint(
+                    ConstraintColumns.SequenceNumber.MapFrom(row),
+                    ConstraintColumns.ArgumentId.MapFrom(row),
+                    ConstraintColumns.Name.MapFrom(row),
+                    ConstraintColumns.Answer.MapFrom(row)
+                ));
+            }
+        }
+
+        public void SaveOwned(IConstraintOwner owner)
+        {
+            Guard.AgainstNull(owner, "owner");
+
+            _databaseGateway.ExecuteUsing(_constraintQueryFactory.Remove(owner.Id));
+
+            foreach (var constraint in owner.Constraints)
+            {
+                _databaseGateway.ExecuteUsing(_constraintQueryFactory.Add(owner, constraint));
+            }
         }
     }
 }

@@ -36,7 +36,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                           {
                               DecimalTableName = view.DecimalTableNameValue,
                               RowArgumentDto = view.RowArgumentDto,
-                              ColumnArgumentDTO = view.ColumnArgumentDTO,
+                              ColumnDataRow = view.ColumnDataRow,
                               DecimalValueDTOs = view.DecimalValueDTOs()
                           };
 
@@ -64,7 +64,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                               DecimalTableId = message.DecimalTableId,
                               DecimalTableName = view.DecimalTableNameValue,
                               RowArgumentDto = view.RowArgumentDto,
-                              ColumnArgumentDTO = view.ColumnArgumentDTO,
+                              ColumnDataRow = view.ColumnDataRow,
                               DecimalValueDTOs = view.DecimalValueDTOs()
                           };
 

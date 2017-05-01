@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
+using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.UI.Core.Extensions;
@@ -22,7 +24,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
             lvw = new ListViewExtender(ConstraintsListView);
         }
 
-        public void PopulateFactors(IEnumerable<ArgumentDTO> items)
+        public void PopulateArguments(IEnumerable<DataRow> items)
         {
             Answer.Items.Clear();
 
@@ -49,9 +51,9 @@ namespace Shuttle.Abacus.UI.UI.Constraint
                 });
         }
 
-        public ArgumentDTO ArgumentDto
+        public DataRow ArgumentDto
         {
-            get { return Argument.SelectedItem as ArgumentDTO; }
+            get { return Argument.SelectedItem as DataRow; }
         }
 
         public ConstraintTypeDTO ConstraintTypeDTO
@@ -118,27 +120,27 @@ namespace Shuttle.Abacus.UI.UI.Constraint
             get { return Constraint.Text.Length > 0; }
         }
 
-        public List<ConstraintDTO> Constraints
+        public List<OwnedConstraint> Constraints
         {
             get
             {
-                var result = new List<ConstraintDTO>();
+                var result = new List<OwnedConstraint>();
+                var sequenceNumber = 1;
 
                 foreach (ListViewItem item in ConstraintsListView.Items)
                 {
                     var tag = (ItemTag) item.Tag;
 
-                    result.Add(new ConstraintDTO
-                               {
-                                   ArgumentDTO = tag.ArgumentDto,
-                                   ConstraintTypeDTO = tag.ConstraintTypeDTO,
-                                   Value = tag.ValueSelection
-                               });
+                    result.Add(new OwnedConstraint(
+                        sequenceNumber,
+                        tag.ArgumentId,
+                        tag.Name,
+                        tag.ValueSelection));
                 }
 
                 return result;
             }
-            set { value.ForEach(dto => AddConstraint(dto.ArgumentDTO, dto.ConstraintTypeDTO, dto.Value)); }
+            set { value.ForEach(dto => AddConstraint(dto.DataRow, dto.ConstraintTypeDTO, dto.Value)); }
         }
 
         public ComboBox ValueSelectionControl
@@ -166,7 +168,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
             SetError(Constraint, "Please select the constraint to use.");
         }
 
-        public void AddConstraint(ArgumentDTO argumentDto, ConstraintTypeDTO constraintTypeDTO,
+        public void AddConstraint(DataRow argumentDto, ConstraintTypeDTO constraintTypeDTO,
                                   string valueSelection)
         {
             var item = new ListViewItem();
@@ -231,7 +233,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
             }
         }
 
-        private static ListViewItem PopulateItem(ListViewItem item, ArgumentDTO argumentDto,
+        private static ListViewItem PopulateItem(ListViewItem item, DataRow argumentDto,
                                                  ConstraintTypeDTO constraintTypeDTO, string valueSelection)
         {
             item.Text = argumentDto.Name;
@@ -284,7 +286,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
 
         private class ItemTag
         {
-            public ItemTag(ArgumentDTO argumentDto, ConstraintTypeDTO constraintTypeDTO,
+            public ItemTag(DataRow argumentDto, ConstraintTypeDTO constraintTypeDTO,
                            string valueSelection)
             {
                 ArgumentDto = argumentDto;
@@ -292,7 +294,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
                 ValueSelection = valueSelection;
             }
 
-            public ArgumentDTO ArgumentDto { get; private set; }
+            public DataRow ArgumentDto { get; private set; }
             public ConstraintTypeDTO ConstraintTypeDTO { get; private set; }
             public string ValueSelection { get; private set; }
         }

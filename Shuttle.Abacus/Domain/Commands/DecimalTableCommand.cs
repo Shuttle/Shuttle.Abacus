@@ -8,8 +8,8 @@ namespace Shuttle.Abacus.Domain
     {
         public Guid DecimalTableId { get; set; }
         public string DecimalTableName { get; set; }
-        public ArgumentDTO RowArgumentDto { get; set; }
-        public ArgumentDTO ColumnArgumentDTO { get; set; }
+        public Guid RowArgumentId { get; set; }
+        public Guid ColumnArgumentId { get; set; }
         public List<DecimalValueDTO> DecimalValueDTOs { get; set; }
     }
 }

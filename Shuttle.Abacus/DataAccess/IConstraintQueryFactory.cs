@@ -6,10 +6,8 @@ namespace Shuttle.Abacus.DataAccess
 {
     public interface IConstraintQueryFactory
     {
-        IQuery AllForOwner(Guid ownerId);
-        IQuery RemoveForOwner(IConstraintOwner owner);
-        IQuery Add(IConstraintOwner owner, IConstraint constraint, int sequence);
-        IQuery SetArgumentName(Guid argumentId, string argumentName);
-        IQuery SetArgumentAnswerType(Guid argumentId, string answerType);
+        IQuery All(Guid ownerId);
+        IQuery Remove(Guid ownerId);
+        IQuery Add(IConstraintOwner owner, OwnedConstraint constraint1);
     }
 }

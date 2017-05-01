@@ -10,7 +10,5 @@ namespace Shuttle.Abacus.DataAccess
         IEnumerable<DataRow> All();
         DataRow Get(Guid id);
         IEnumerable<DataRow> GetAnswerCatalog(Guid id);
-        ArgumentDTO ArgumentDTO(Guid argumentId);
-        IEnumerable<ArgumentDTO> AllDTOs();
     }
 }

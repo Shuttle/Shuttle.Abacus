@@ -4,14 +4,12 @@ namespace Shuttle.Abacus.DTO
 {
     public class DecimalValueDTO
     {
-        public DecimalValueDTO()
-        {
-            ConstraintDTOs = new List<ConstraintDTO>();
-        }
-
         public int Row { get; set; }
+        public string RowConstraintName { get; set; }
+        public string RowConstraintAnswer { get; set; }
         public int Column { get; set; }
+        public string ColumnConstraintName { get; set; }
+        public string ColumnConstraintAnswer { get; set; }
         public decimal Value { get; set; }
-        public List<ConstraintDTO> ConstraintDTOs { get; set; }
     }
 }

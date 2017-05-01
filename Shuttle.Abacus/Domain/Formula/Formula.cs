@@ -3,51 +3,20 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using Shuttle.Abacus.DTO;
-using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class Formula : Core.Infrastructure.ISpecification<IMethodContext>,
+    public class Formula : ISpecification<IMethodContext>,
         IConstraintOwner
     {
+        private readonly List<OwnedConstraint> _constraints = new List<OwnedConstraint>();
         private readonly List<IConstraint> constraints = new List<IConstraint>();
-        private readonly List<FormulaOperation> operations = new List<FormulaOperation>();
+        private readonly List<FormulaOperation> _operations = new List<FormulaOperation>();
 
         public Formula()
+            : this(Guid.NewGuid())
         {
-        }
-
-        public Formula(IValueSource initialValueSource)
-            : this()
-        {
-            Guard.AgainstNull(initialValueSource, "initialValueSource");
-
-            operations.Add(new AdditionOperation(initialValueSource));
-        }
-
-        public Formula(
-            CreateFormulaCommand command,
-            IFactoryProvider<IOperationFactory> operationFactoryProvider,
-            IFactoryProvider<IValueSourceFactory> valueSourceFactoryProvider,
-            IFactoryProvider<IConstraintFactory> constraintFactoryProvider,
-            IFactoryProvider<IArgumentAnswerFactory> argumentAnswerFactoryProvider)
-            : this()
-        {
-            command.Operations.ForEach(
-                operation =>
-                    AddOperation(
-                        operationFactoryProvider.Get(operation.OperationType.Name).Create(
-                            valueSourceFactoryProvider.Get(operation.ValueSourceType.Name)
-                                .Create(operation.ValueSelection))));
-
-            command.Constraints.ForEach(
-                constraint =>
-                    AddConstraint(
-                        constraintFactoryProvider.Get(constraint.ConstraintTypeDTO.Name)
-                            .Create(constraint.ArgumentDTO.Id,
-                                argumentAnswerFactoryProvider.Get(constraint.ArgumentDTO.AnswerType)
-                                    .Create(constraint.ArgumentDTO.Name, constraint.Value))));
         }
 
         public Formula(Guid id)
@@ -55,21 +24,16 @@ namespace Shuttle.Abacus.Domain
             Id = id;
         }
 
-        public bool HasOperations
-        {
-            get { return operations.Count > 0; }
-        }
-
         public IEnumerable<FormulaOperation> Operations
         {
-            get { return new ReadOnlyCollection<FormulaOperation>(operations); }
+            get { return new ReadOnlyCollection<FormulaOperation>(_operations); }
         }
 
         public Guid Id { get; }
 
-        public IEnumerable<IConstraint> Constraints
+        public IEnumerable<OwnedConstraint> Constraints
         {
-            get { return new ReadOnlyCollection<IConstraint>(constraints); }
+            get { return new ReadOnlyCollection<OwnedConstraint>(_constraints); }
         }
 
         public IConstraintOwner AddConstraint(IConstraint constraint)
@@ -81,10 +45,23 @@ namespace Shuttle.Abacus.Domain
             return this;
         }
 
+        public void AddConstraint(OwnedConstraint item)
+        {
+            Guard.AgainstNull(item, "item");
+
+            _constraints.Add(item);
+        }
+
         public string OwnerName
         {
             get { return "Formula"; }
         }
+
+        public bool HasOperations {
+            get { return _operations.Count > 0; }
+        }
+
+        public int SequenceNumber { get; set; }
 
         public bool IsSatisfiedBy(IMethodContext collectionMethodContext)
         {
@@ -94,27 +71,27 @@ namespace Shuttle.Abacus.Domain
                 ConstraintSatisfied(collectionMethodContext);
         }
 
-        public IEnumerable<Guid> RequiredCalculationIds()
-        {
-            var result = new List<Guid>();
+        //public IEnumerable<Guid> RequiredCalculationIds()
+        //{
+        //    var result = new List<Guid>();
 
-            operations.ForEach(operation =>
-            {
-                var source = operation.ValueSource as ICalculationValueSource;
+        //    _operations.ForEach(operation =>
+        //    {
+        //        var source = operation.ValueSource as ICalculationValueSource;
 
-                if (source != null)
-                {
-                    var id = new Guid(source.ValueSelection);
+        //        if (source != null)
+        //        {
+        //            var id = new Guid(source.ValueSelection);
 
-                    if (!result.Contains(id))
-                    {
-                        result.Add(id);
-                    }
-                }
-            });
+        //            if (!result.Contains(id))
+        //            {
+        //                result.Add(id);
+        //            }
+        //        }
+        //    });
 
-            return result;
-        }
+        //    return result;
+        //}
 
         private bool ConstraintSatisfied(IMethodContext collectionContext)
         {
@@ -133,43 +110,42 @@ namespace Shuttle.Abacus.Domain
         {
             var result = true;
 
-            foreach (var operation in operations)
-            {
-                if (!operation.IsSatisfiedBy(collectionContext))
-                {
-                    result = false;
-                }
-            }
+            //foreach (var operation in _operations)
+            //{
+            //    if (!operation.IsSatisfiedBy(collectionContext))
+            //    {
+            //        result = false;
+            //    }
+            //}
 
             return result;
         }
 
-        public Formula ProcessCommand(
-            ChangeFormulaCommand command,
-            IFactoryProvider<IOperationFactory> operationFactoryProvider,
-            IFactoryProvider<IValueSourceFactory> valueSourceFactoryProvider,
-            IFactoryProvider<IConstraintFactory> constraintFactoryProvider,
-            IFactoryProvider<IArgumentAnswerFactory> argumentAnswerFactoryProvider,
-            IMapper<ArgumentDTO, Argument> argumentDTOMapper)
+        public Formula ProcessCommand(ChangeFormulaCommand command)
         {
-            operations.Clear();
+            _operations.Clear();
+
+            var sequencuNumber = 1;
 
             command.Operations.ForEach(
-                operation =>
-                    AddOperation(
-                        operationFactoryProvider.Get(operation.OperationType.Name).Create(
-                            valueSourceFactoryProvider.Get(operation.ValueSourceType.Name)
-                                .Create(operation.ValueSelection))));
+                operation => AddOperation(new FormulaOperation(
+                    sequencuNumber++,
+                    operation.Operation,
+                    operation.ValueSource,
+                    operation.ValueSelection,
+                    operation.Text)));
 
             constraints.Clear();
 
+            sequencuNumber = 1;
+
             command.Constraints.ForEach(
                 constraint =>
-                    AddConstraint(
-                        constraintFactoryProvider.Get(constraint.ConstraintTypeDTO.Name)
-                            .Create(constraint.ArgumentDTO.Id,
-                                argumentAnswerFactoryProvider.Get(constraint.ArgumentDTO.AnswerType)
-                                    .Create(constraint.ArgumentDTO.Name, constraint.Value))));
+                    AddConstraint(new OwnedConstraint(
+                        sequencuNumber++,
+                        constraint.ArgumentId,
+                        constraint.Name,
+                        constraint.Answer)));
 
             return this;
         }
@@ -195,7 +171,7 @@ namespace Shuttle.Abacus.Domain
 
         public Formula AddOperation(FormulaOperation operation)
         {
-            operations.Add(operation);
+            _operations.Add(operation);
 
             return this;
         }
@@ -204,57 +180,59 @@ namespace Shuttle.Abacus.Domain
         {
             Guard.AgainstNull(calculationContext, "context");
 
-            if (methodContext.LoggerEnabled)
-            {
-                methodContext.Log("Executing formula:");
+            throw new NotImplementedException();
 
-                if (constraints.Count > 0)
-                {
-                    constraints.ForEach(
-                        constraint => methodContext.Log("\t{0}", constraint.Description()));
-                }
-                else
-                {
-                    methodContext.Log("\t(no contraints)");
-                }
+            //if (methodContext.LoggerEnabled)
+            //{
+            //    methodContext.Log("Executing formula:");
 
-                methodContext.Log();
-            }
+            //    if (constraints.Count > 0)
+            //    {
+            //        constraints.ForEach(
+            //            constraint => methodContext.Log("\t{0}", constraint.Description()));
+            //    }
+            //    else
+            //    {
+            //        methodContext.Log("\t(no contraints)");
+            //    }
 
-            calculationContext.ZeroFormulaTotal();
+            //    methodContext.Log();
+            //}
 
-            foreach (var operation in operations)
-            {
-                var operand = operation.Operand(methodContext, calculationContext);
+            //calculationContext.ZeroFormulaTotal();
 
-                if (methodContext.LoggerEnabled)
-                {
-                    methodContext.Log("{0}\t{1}", operation.Symbol,
-                        operation.ValueSource.Description(operand, methodContext));
-                }
+            //foreach (var operation in _operations)
+            //{
+            //    var operand = operation.Operand(methodContext, calculationContext);
 
-                calculationContext.SetFormulaTotal(operation.Execute(calculationContext.FormulaTotal, operand));
+            //    if (methodContext.LoggerEnabled)
+            //    {
+            //        methodContext.Log("{0}\t{1}", operation.Symbol,
+            //            operation.ValueSource.Description(operand, methodContext));
+            //    }
 
-                if (!methodContext.OK)
-                {
-                    return 0;
-                }
-            }
+            //    calculationContext.SetFormulaTotal(operation.Execute(calculationContext.FormulaTotal, operand));
 
-            if (methodContext.LoggerEnabled)
-            {
-                methodContext.Log();
-            }
+            //    if (!methodContext.OK)
+            //    {
+            //        return 0;
+            //    }
+            //}
 
-            return calculationContext.FormulaTotal;
+            //if (methodContext.LoggerEnabled)
+            //{
+            //    methodContext.Log();
+            //}
+
+            //return calculationContext.FormulaTotal;
         }
 
         public Formula Copy()
         {
             var result = new Formula();
 
-            constraints.ForEach(constraint => result.AddConstraint(constraint.Copy()));
-            operations.ForEach(operation => result.AddOperation(operation.Copy()));
+            _constraints.ForEach(constraint => result.AddConstraint(constraint));
+            _operations.ForEach(operation => result.AddOperation(operation));
 
             return result;
         }

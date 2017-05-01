@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="AnswerTypeDTO.cs" />
     <Compile Include="ArgumentAnswerDTO.cs" />
-    <Compile Include="ArgumentDTO.cs" />
     <Compile Include="ArgumentRestrictedAnswerDTO.cs" />
     <Compile Include="CalculationDTO.cs" />
     <Compile Include="ConstraintDTO.cs" />

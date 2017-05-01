@@ -1,7 +1,4 @@
-using Shuttle.Abacus.ApplicationService;
-using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Domain;
-using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;
@@ -14,25 +11,15 @@ namespace Shuttle.Abacus.Server.Handlers
         IMessageHandler<DeleteLimitCommand>
     {
         private readonly IDatabaseContextFactory _databaseContextFactory;
-        private readonly IFactoryProvider<ILimitFactory> _limitFactoryProvider;
         private readonly ILimitRepository _limitRepository;
-        private readonly IRepositoryProvider _repositoryProvider;
-        private readonly ITaskFactory _taskFactory;
 
-        public LimitHandler(IDatabaseContextFactory databaseContextFactory, IFactoryProvider<ILimitFactory> limitFactoryProvider, ILimitRepository limitRepository,
-            IRepositoryProvider repositoryProvider, ITaskFactory taskFactory)
+        public LimitHandler(IDatabaseContextFactory databaseContextFactory, ILimitRepository limitRepository)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
-            Guard.AgainstNull(limitFactoryProvider, "limitFactoryProvider");
             Guard.AgainstNull(limitRepository, "limitRepository");
-            Guard.AgainstNull(repositoryProvider, "repositoryProvider");
-            Guard.AgainstNull(taskFactory, "taskFactory");
 
             _databaseContextFactory = databaseContextFactory;
-            _limitFactoryProvider = limitFactoryProvider;
             _limitRepository = limitRepository;
-            _repositoryProvider = repositoryProvider;
-            _taskFactory = taskFactory;
         }
 
         public void ProcessMessage(IHandlerContext<ChangeLimitCommand> context)
@@ -41,9 +28,9 @@ namespace Shuttle.Abacus.Server.Handlers
 
             using (_databaseContextFactory.Create())
             {
-                var limit = _limitFactoryProvider.Get(message.Type).Create(message.Name);
+                var limit = _limitRepository.Get(message.LimitId);
 
-                limit.AssignId(message.LimitId);
+                limit.ProcessCommand(message);
 
                 _limitRepository.Save(limit);
             }
@@ -55,13 +42,7 @@ namespace Shuttle.Abacus.Server.Handlers
 
             using (_databaseContextFactory.Create())
             {
-                var owner = _repositoryProvider.Get(message.OwnerName).Get<ILimitOwner>(message.OwnerId);
-
-                var limit = _limitFactoryProvider.Get(message.Type).Create(message.Name);
-
-                owner.AddLimit(limit);
-
-                _taskFactory.Create<ICreateLimitTask>().Execute(new OwnerModel(owner, limit));
+                _limitRepository.Add(message.OwnerName, message.OwnerId, new Limit(message.Name, message.Type));
             }
         }
 

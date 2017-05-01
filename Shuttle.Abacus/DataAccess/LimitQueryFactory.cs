@@ -37,7 +37,7 @@ where
                 .AddParameterValue(LimitColumns.Id, limitId);
         }
 
-        public IQuery Add(ILimitOwner owner, Limit item)
+        public IQuery Add(string ownerName, Guid ownerId, Limit limit)
         {
             return RawQuery.Create(@"
 insert into Limit
@@ -56,11 +56,11 @@ values
     @Name,
     @Type
 )")
-                .AddParameterValue(LimitColumns.Id, item.Id)
-                .AddParameterValue(LimitColumns.OwnerName, owner.OwnerName)
-                .AddParameterValue(LimitColumns.OwnerId, owner.Id)
-                .AddParameterValue(LimitColumns.Name, item.Name)
-                .AddParameterValue(LimitColumns.Type, item.Type);
+                .AddParameterValue(LimitColumns.Id, limit.Id)
+                .AddParameterValue(LimitColumns.OwnerName, ownerName)
+                .AddParameterValue(LimitColumns.OwnerId, ownerId)
+                .AddParameterValue(LimitColumns.Name, limit.Name)
+                .AddParameterValue(LimitColumns.Type, limit.Type);
         }
 
         public IQuery Remove(Guid id)
@@ -69,7 +69,7 @@ values
                 .AddParameterValue(LimitColumns.Id, id);
         }
 
-        public IQuery Save(Limit item)
+        public IQuery Save(Limit limit)
         {
             return RawQuery.Create(@"
 update
@@ -80,9 +80,9 @@ set
 where
     LimitId = @LimitId
 ")
-                .AddParameterValue(LimitColumns.Name, item.Name)
-                .AddParameterValue(LimitColumns.Type, item.Type)
-                .AddParameterValue(LimitColumns.Id, item.Id);
+                .AddParameterValue(LimitColumns.Name, limit.Name)
+                .AddParameterValue(LimitColumns.Type, limit.Type)
+                .AddParameterValue(LimitColumns.Id, limit.Id);
         }
     }
 }

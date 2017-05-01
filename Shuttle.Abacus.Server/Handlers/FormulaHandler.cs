@@ -1,3 +1,4 @@
+using System;
 using Shuttle.Abacus.ApplicationService;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Domain;
@@ -16,7 +17,6 @@ namespace Shuttle.Abacus.Server.Handlers
         IMessageHandler<ChangeFormulaOrderCommand>
     {
         private readonly IFactoryProvider<IArgumentAnswerFactory> _argumentAnswerFactoryProvider;
-        private readonly IMapper<ArgumentDTO, Argument> _argumentDTOMapper;
         private readonly IFactoryProvider<IConstraintFactory> _constraintFactoryProvider;
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IFormulaOwnerService _formulaOwnerService;
@@ -36,7 +36,6 @@ namespace Shuttle.Abacus.Server.Handlers
             IFactoryProvider<IConstraintFactory> constraintFactoryProvider,
             IFactoryProvider<IArgumentAnswerFactory> argumentAnswerFactoryProvider,
             IFormulaOwnerService formulaOwnerService,
-            IMapper<ArgumentDTO, Argument> argumentDTOMapper,
             ITaskFactory taskFactory,
             IRepositoryProvider repositoryProvider)
         {
@@ -44,7 +43,6 @@ namespace Shuttle.Abacus.Server.Handlers
             Guard.AgainstNull(formulaQuery, "formulaQuery");
             Guard.AgainstNull(formulaRepository, "formulaRepository");
             Guard.AgainstNull(formulaOwnerService, "formulaOwnerService");
-            Guard.AgainstNull(argumentDTOMapper, "argumentDTOMapper");
             Guard.AgainstNull(taskFactory, "taskFactory");
             Guard.AgainstNull(repositoryProvider, "repositoryProvider");
             Guard.AgainstNull(operationFactoryProvider, "operationFactoryProvider");
@@ -56,7 +54,6 @@ namespace Shuttle.Abacus.Server.Handlers
             _formulaQuery = formulaQuery;
             _formulaRepository = formulaRepository;
             _formulaOwnerService = formulaOwnerService;
-            _argumentDTOMapper = argumentDTOMapper;
             _taskFactory = taskFactory;
             _repositoryProvider = repositoryProvider;
             _operationFactoryProvider = operationFactoryProvider;
@@ -71,15 +68,16 @@ namespace Shuttle.Abacus.Server.Handlers
 
             using (_databaseContextFactory.Create())
             {
-                _taskFactory.Create<IChangeFormulaTask>().Execute(
-                    _formulaRepository.Get(message.FormulaId).
-                        ProcessCommand(
-                            message,
-                            _operationFactoryProvider,
-                            _valueSourceFactoryProvider,
-                            _constraintFactoryProvider,
-                            _argumentAnswerFactoryProvider,
-                            _argumentDTOMapper));
+                throw new NotImplementedException();
+                //_taskFactory.Create<IChangeFormulaTask>().Execute(
+                //    _formulaRepository.Get(message.FormulaId).
+                //        ProcessCommand(
+                //            message,
+                //            _operationFactoryProvider,
+                //            _valueSourceFactoryProvider,
+                //            _constraintFactoryProvider,
+                //            _argumentAnswerFactoryProvider,
+                //            _argumentDTOMapper));
             }
         }
 
@@ -103,18 +101,32 @@ namespace Shuttle.Abacus.Server.Handlers
 
             using (_databaseContextFactory.Create())
             {
-                var owner =
-                    _repositoryProvider.Get(message.OwnerName).Get<IFormulaOwner>(message.OwnerId);
+                var formula = new Formula();
 
-                var formula = new Formula(message,
-                    _operationFactoryProvider,
-                    _valueSourceFactoryProvider,
-                    _constraintFactoryProvider,
-                    _argumentAnswerFactoryProvider);
+                foreach (var constraint in message.Constraints)
+                {
+                    formula.AddConstraint(constraint);
+                }
 
-                owner.AddFormula(formula);
+                foreach (var operation in message.Operations)
+                {
+                    formula.AddOperation(operation);
+                }
 
-                _taskFactory.Create<ICreateFormulaTask>().Execute(new OwnerModel(owner, formula));
+                _formulaRepository.Add(message.OwnerName, message.OwnerId, formula);
+
+                //var owner =
+                //    _repositoryProvider.Get(message.OwnerName).Get<IFormulaOwner>(message.OwnerId);
+
+                //var formula = new Formula(message,
+                //    _operationFactoryProvider,
+                //    _valueSourceFactoryProvider,
+                //    _constraintFactoryProvider,
+                //    _argumentAnswerFactoryProvider);
+
+                //owner.AddFormula(formula);
+
+                //_taskFactory.Create<ICreateFormulaTask>().Execute(new OwnerModel(owner, formula));
             }
         }
 

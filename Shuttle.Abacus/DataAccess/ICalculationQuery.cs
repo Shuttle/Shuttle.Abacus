@@ -1,7 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.DTO;
 
 namespace Shuttle.Abacus.DataAccess
@@ -16,5 +16,7 @@ namespace Shuttle.Abacus.DataAccess
         IEnumerable<CalculationDTO> DTOsForMethod(Guid methodId);
         IEnumerable<DataRow> AllForMethod(Guid methodId, Guid grabberCalculationId);
         IEnumerable<DataRow> GraphNodeArguments(Guid calculationId);
+
+        void PopulateOwner(ICalculationOwner owner);
     }
 }

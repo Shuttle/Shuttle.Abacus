@@ -13,24 +13,23 @@ namespace Shuttle.Abacus.Domain
         IHaveInvariants
     {
         private MethodCalculationCollection calculations = new MethodCalculationCollection();
+        private readonly List<CalculationItem> _calculations = new List<CalculationItem>();
+        private readonly List<OwnedLimit> _limits = new List<OwnedLimit>();
+        private readonly List<MethodTestItem> _tests = new List<MethodTestItem>();
 
-        public Method(CreateMethodCommand command)
+        public Method(string methodName)
+            : this(Guid.NewGuid(), methodName)
         {
-            MethodName = command.MethodName;
         }
 
-        public Method(Guid id)
+        public Method(Guid id, string methodName)
         {
             Id = id;
+            MethodName = methodName;
         }
 
         public Guid Id { get; private set; }
-
-        public Method() : this(Guid.NewGuid())
-        {
-        }
-
-        public string MethodName { get; set; }
+        public string MethodName { get; private set; }
 
         public CalculationCollection CalculationCollection
         {
@@ -49,6 +48,13 @@ namespace Shuttle.Abacus.Domain
             return Id.Equals(ownerId)
                        ? this
                        : calculations.FindOwner(ownerId);
+        }
+
+        public void AddCalculation(CalculationItem calculation)
+        {
+            Guard.AgainstNull(calculation, "calculation");
+
+            _calculations.Add(calculation);
         }
 
         CalculationCollection ICalculationOwner.Calculations
@@ -165,10 +171,7 @@ namespace Shuttle.Abacus.Domain
 
         public Method Copy()
         {
-            var result = new Method
-                         {
-                             MethodName = MethodName
-                         };
+            var result = new Method(MethodName = MethodName);
 
             result.AssignCalculations((CalculationCollection)calculations.Copy(new Dictionary<Guid, Guid>()));
 
@@ -251,6 +254,20 @@ namespace Shuttle.Abacus.Domain
             }
 
             EnforceInvariants();
+        }
+
+        public void AddLimit(OwnedLimit limit)
+        {
+            Guard.AgainstNull(limit, "limit");
+
+            _limits.Add(limit);
+        }
+
+        public void AddMethodTest(MethodTestItem item)
+        {
+            Guard.AgainstNull(item, "item");
+
+            _tests.Add(item);
         }
     }
 }

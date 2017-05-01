@@ -11,5 +11,6 @@ namespace Shuttle.Abacus.Domain
 
         CalculationCollection AddCalculation(Calculation calculation);
         ICalculationOwner FindOwner(Guid ownerId);
+        void AddCalculation(CalculationItem calculation);
     }
 }

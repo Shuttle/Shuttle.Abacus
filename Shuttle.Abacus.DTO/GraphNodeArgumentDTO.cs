@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace Shuttle.Abacus.DTO
 {
-    public class GraphNodeArgumentDTO
+    public class GraphNodeDataRow
     {
         [XmlAttribute("argument")]
         public string Argument { get; set; }

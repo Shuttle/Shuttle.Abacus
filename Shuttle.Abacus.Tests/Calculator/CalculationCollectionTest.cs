@@ -81,40 +81,40 @@ namespace Shuttle.Abacus.Tests
             Assert.AreEqual(0, level3.Calculations.Count());
         }
 
-        [Test]
-        public void Should_not_be_able_to_add_a_calculation_that_uses_a_calculation_that_is_not_yet_defined()
-        {
-            var method = new Method();
+        //[Test]
+        //public void Should_not_be_able_to_add_a_calculation_that_uses_a_calculation_that_is_not_yet_defined()
+        //{
+        //    var method = new Method();
 
-            var level1 = new CalculationCollection("level1");
-            var level2 = new CalculationCollection("level2");
-            var level3 = new CalculationCollection("level3");
+        //    var level1 = new CalculationCollection("level1");
+        //    var level2 = new CalculationCollection("level2");
+        //    var level3 = new CalculationCollection("level3");
 
-            level1.AddCalculation(level2);
-            level2.AddCalculation(level3);
+        //    level1.AddCalculation(level2);
+        //    level2.AddCalculation(level3);
 
-            var formula1 = new FormulaCalculation("formula1", false);
-            var formula2 = new FormulaCalculation("formula2", false);
+        //    var formula1 = new FormulaCalculation("formula1", false);
+        //    var formula2 = new FormulaCalculation("formula2", false);
 
-            level2.AddCalculation(formula1);
-            level3.AddCalculation(formula2);
+        //    level2.AddCalculation(formula1);
+        //    level3.AddCalculation(formula2);
 
-            var calculation1 = new FormulaCalculation("calculation1", false);
+        //    var calculation1 = new FormulaCalculation("calculation1", false);
 
-            var formula3 = new Formula(new CalculationResultValueSource(calculation1));
+        //    var formula3 = new Formula(new CalculationResultValueSource(calculation1));
 
-            formula2.AddFormula(formula3);
+        //    formula2.AddFormula(formula3);
 
-            method.AddCalculation(level1);
+        //    method.AddCalculation(level1);
 
-            Assert.Throws<InvalidCalculationOrderException>(method.EnforceInvariants);
+        //    Assert.Throws<InvalidCalculationOrderException>(method.EnforceInvariants);
 
-            level2.AddCalculation(calculation1);
+        //    level2.AddCalculation(calculation1);
 
-            level2.Remove(level3.Id);
-            level2.AddCalculation(level3);
+        //    level2.Remove(level3.Id);
+        //    level2.AddCalculation(level3);
 
-            method.EnforceInvariants();
-        }
+        //    method.EnforceInvariants();
+        //}
     }
 }

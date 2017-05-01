@@ -2,10 +2,10 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
-    public abstract class FormulaOperation :
+    public abstract class Operation :
         ISpecification<IMethodContext>
     {
-        protected FormulaOperation(IValueSource source)
+        protected Operation(IValueSource source)
         {
             Guard.AgainstNull(source, "source");
 
@@ -26,7 +26,5 @@ namespace Shuttle.Abacus.Domain
 
         public abstract decimal Execute(decimal total, decimal operand);
         public abstract decimal Operand(IMethodContext methodContext, IFormulaCalculationContext calculationContext);
-
-        public abstract FormulaOperation Copy();
     }
 }

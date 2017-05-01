@@ -2,7 +2,7 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class PercentageOperation : FormulaOperation
+    public class PercentageOperation : Operation
     {
         public PercentageOperation(IValueSource source)
             : base(source)
@@ -29,11 +29,6 @@ namespace Shuttle.Abacus.Domain
         public override decimal Operand(IMethodContext methodContext, IFormulaCalculationContext calculationContext)
         {
             return ValueSource.Operand(methodContext, calculationContext);
-        }
-
-        public override FormulaOperation Copy()
-        {
-            return new PercentageOperation(ValueSource.Copy());
         }
     }
 }

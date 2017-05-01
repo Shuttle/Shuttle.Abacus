@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Data;
 using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.UI.Core.Presentation;
 
@@ -12,7 +13,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
         void ColumnArgumentChanged();
         bool IsDecimal(string value);
-        bool IsValidAnswer(ArgumentDTO argumentDto, object value);
+        bool IsValidAnswer(DataRow row, object value);
         void ShowInvalidDecimalTableMessage();
         ConstraintTypeDTO GetConstraintType(string name);
     }

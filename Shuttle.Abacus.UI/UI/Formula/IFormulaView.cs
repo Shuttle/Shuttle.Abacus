@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Data;
+using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.UI.Core.Presentation;
 
@@ -16,9 +18,9 @@ namespace Shuttle.Abacus.UI.UI.Formula
         string OperationValue { get; set; }
         OperationTypeDTO OperationTypeDTO { get; }
         bool HasSelectedItem { get; }
-        List<OperationDTO> Operations { get; set; }
+        List<FormulaOperation> Operations { get; set; }
         void PopulateValueSources(IEnumerable<ValueSourceTypeDTO> enumerable);
-        void PopulateFactors(IEnumerable<ArgumentDTO> enumerable);
+        void PopulateArguments(IEnumerable<DataRow> rows);
         void EnableValueSelection(string text);
         void EnableValueEntry(string text);
         void ShowValueSourceError();

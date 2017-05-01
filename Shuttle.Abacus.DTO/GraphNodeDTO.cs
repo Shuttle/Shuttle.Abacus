@@ -8,7 +8,7 @@ namespace Shuttle.Abacus.DTO
         public GraphNodeDTO()
         {
             GraphNodes = new List<GraphNodeDTO>();
-            GraphNodeArguments = new List<GraphNodeArgumentDTO>();
+            GraphNodeArguments = new List<GraphNodeDataRow>();
         }
 
         [XmlAttribute("name")]
@@ -24,11 +24,11 @@ namespace Shuttle.Abacus.DTO
         public List<GraphNodeDTO> GraphNodes { get; set; }
 
         [XmlArrayItem("GraphNodeArgument")]
-        public List<GraphNodeArgumentDTO> GraphNodeArguments { get; set; }
+        public List<GraphNodeDataRow> GraphNodeArguments { get; set; }
 
         public void AddGraphNodeArgument(string argument, string display)
         {
-            GraphNodeArguments.Add(new GraphNodeArgumentDTO
+            GraphNodeArguments.Add(new GraphNodeDataRow
                                    {
                                        Argument = argument, Display = display
                                    });

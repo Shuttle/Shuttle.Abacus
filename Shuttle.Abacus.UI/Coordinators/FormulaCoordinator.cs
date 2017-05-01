@@ -366,7 +366,7 @@ namespace Shuttle.Abacus.UI.Coordinators
         {
             return new ConstraintModel
             {
-                Arguments = formulaModel.Arguments
+                ArgumentRows = formulaModel.ArgumentRows
                 //TODO
                 //ConstraintTypes = _constraintQuery.ConstraintTypes()
             };
@@ -379,7 +379,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return new FormulaModel
                 {
                     DecimalTables = _decimalTableQuery.AllDTOs(),
-                    Arguments = _argumentQuery.AllDTOs(),
+                    ArgumentRows = _argumentQuery.AllDTOs(),
                     PrecedingCalculations =
                         ownerName.ToLower() == "calculation"
                             ? _calculationQuery.DTOsBeforeCalculation(methodId, ownerId)

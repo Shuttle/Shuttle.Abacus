@@ -13,5 +13,15 @@ namespace Shuttle.Abacus.DataAccess
 
             return instance;
         }
+
+        public static void Entity<T>(object instance, Guid id) where T : class
+        {
+            if (instance != null)
+            {
+                return;
+            }
+
+            throw Exceptions.MissingEntity(typeof(T).Name, id);
+        }
     }
 }

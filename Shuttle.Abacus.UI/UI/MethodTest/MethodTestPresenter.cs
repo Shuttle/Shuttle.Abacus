@@ -29,7 +29,7 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
 
         public void ArgumentChanged()
         {
-            var dto = View.ArgumentDto;
+            var dto = View.ArgumentRow;
 
             View.DetachValueFormatter();
 
@@ -61,7 +61,7 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
 
             if (!View.HasAnswer)
             {
-                if (View.ArgumentDto.HasAnswerCatalog)
+                if (View.ArgumentRow.HasAnswerCatalog)
                 {
                     View.ShowAnswerError("Please make a selection");
                 }
@@ -73,10 +73,10 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
                 return false;
             }
 
-            if (View.ArgumentDto.IsNumber)
+            if (View.ArgumentRow.IsNumber)
             {
                 var result =
-                    valueTypeValidatorProvider.Get(View.ArgumentDto.AnswerType)
+                    valueTypeValidatorProvider.Get(View.ArgumentRow.AnswerType)
                         .Validate(View.AnswerValue);
 
                 if (!result.OK)
@@ -103,7 +103,7 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
             View.DescriptionRules = testRules.DescriptionRules();
             View.ExpectedResultRules = testRules.ExpectedResultRules();
 
-            foreach (var dto in Model.Arguments)
+            foreach (var dto in Model.ArgumentRows)
             {
                 View.AddArgument(dto);
             }

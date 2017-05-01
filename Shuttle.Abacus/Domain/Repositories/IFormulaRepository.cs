@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace Shuttle.Abacus.Domain
 {
@@ -8,6 +7,6 @@ namespace Shuttle.Abacus.Domain
         void Add(IFormulaOwner owner, Formula formula);
         void Save(Formula item);
         void SaveOrdered(IFormulaOwner owner);
-        IEnumerable<Formula> AllForOwner(Guid ownerId);
+        void Add(string ownerName, Guid ownerId, Formula formula);
     }
 }

@@ -55,13 +55,11 @@ namespace Shuttle.Abacus.Server.Handlers
 
                 if (nameChanged)
                 {
-                    _constraintRepository.SetArgumentName(message.ArgumentId, message.Name);
                     _methodTestRepository.SetArgumentName(message.ArgumentId, message.Name);
                 }
 
                 if (answerTypeChanged)
                 {
-                    _constraintRepository.SetArgumentAnswerType(message.ArgumentId, message.AnswerType);
                     _methodTestRepository.SetArgumentAnswerType(message.ArgumentId, message.AnswerType);
                 }
             }
@@ -73,7 +71,9 @@ namespace Shuttle.Abacus.Server.Handlers
         {
             using (_databaseContextFactory.Create())
             {
-                _argumentRepository.Add(new Argument().ProcessCommand(context.Message));
+                var message = context.Message;
+
+                _argumentRepository.Add(new Argument().ProcessCommand(message));
             }
 
             context.ReplyOK();

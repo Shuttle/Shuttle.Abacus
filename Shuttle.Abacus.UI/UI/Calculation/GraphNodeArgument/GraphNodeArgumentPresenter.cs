@@ -44,7 +44,7 @@ namespace Shuttle.Abacus.UI.UI.Calculation.GraphNodeArgument
                 throw new NullDependencyException("Model");
             }
 
-            View.PopulateFactors(Model.Factors);
+            View.PopulateArguments(Model.ArgumentRows);
 
             if (!Model.HasGraphNodeArguments)
             {
@@ -53,7 +53,7 @@ namespace Shuttle.Abacus.UI.UI.Calculation.GraphNodeArgument
 
             foreach (DataRow row in Model.GraphNodeArguments.Rows)
             {
-                View.AddArgument(Model.GetArgumentDTO(GraphNodeArgumentColumns.ArgumentId.MapFrom(row)),
+                View.AddArgumentRow(Model.GetArgumentRow(GraphNodeArgumentColumns.ArgumentId.MapFrom(row)),
                                  GraphNodeArgumentColumns.Format.MapFrom(row));
             }
         }

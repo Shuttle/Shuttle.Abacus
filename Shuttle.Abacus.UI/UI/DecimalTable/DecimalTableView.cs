@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using Shuttle.Abacus.DTO;
@@ -85,14 +86,14 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             set { ViewValidator.Control(RowArgument).ShouldSatisfy(value); }
         }
 
-        public ArgumentDTO RowArgumentDto
+        public DataRow ArgumentRow
         {
-            get { return (ArgumentDTO)RowArgument.SelectedItem; }
+            get { return (DataRow)RowArgument.SelectedItem; }
         }
 
-        public ArgumentDTO ColumnArgumentDTO
+        public DataRow ColumnDataRow
         {
-            get { return (ArgumentDTO)ColumnArgument.SelectedItem; }
+            get { return (DataRow)ColumnArgument.SelectedItem; }
         }
 
         public bool GridInitialized { get; private set; }
@@ -102,21 +103,22 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             get { return ColumnArgument.SelectedIndex > 0; }
         }
 
-        public void PopulateFactors(IEnumerable<ArgumentDTO> factors)
+        public void PopulateArguments(IEnumerable<DataRow> rows)
         {
             RowArgument.DisplayMember = "Name";
             ColumnArgument.DisplayMember = "Name";
 
-            ColumnArgument.Items.Add(new ArgumentDTO
-                                   {
-                                       Name = "(none)",
-                                       AnswerType = string.Empty
-                                   });
+            //TODO
+            //ColumnArgument.Items.Add(new DataRow
+            //                       {
+            //                           Name = "(none)",
+            //                           AnswerType = string.Empty
+            //                       });
 
-            factors.ForEach(dto =>
+            rows.ForEach(row =>
                 {
-                    RowArgument.Items.Add(dto);
-                    ColumnArgument.Items.Add(dto);
+                    RowArgument.Items.Add(row);
+                    ColumnArgument.Items.Add(row);
                 });
 
             ColumnArgument.SelectedIndex = 0;
@@ -253,9 +255,9 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             {
                 MakeConstraintCell(column, 0);
 
-                if (ColumnArgumentDTO.HasAnswerCatalog)
+                if (ColumnDataRow.HasAnswerCatalog)
                 {
-                    MakeAnswerSelectionCell(column, 1, ColumnArgumentDTO.Answers);
+                    MakeAnswerSelectionCell(column, 1, ColumnDataRow.Answers);
                 }
                 else
                 {
@@ -279,7 +281,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
         private bool HasSameRowAndColumnArgument()
         {
-            if (RowArgumentDto.Id.Equals(ColumnArgumentDTO.Id))
+            if (ArgumentRow.Id.Equals(ColumnDataRow.Id))
             {
                 const string message = "Cannot have the same row and column argument.";
 
@@ -311,7 +313,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
                     dto.ConstraintDTOs.Add(new ConstraintDTO
                                            {
-                                               ArgumentDTO = RowArgumentDto,
+                                               DataRow = ArgumentRow,
                                                ConstraintTypeDTO = RowConstraintTypeDTO(row),
                                                Value = RowConstraintAnswer(row)
                                            });
@@ -320,7 +322,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
                     {
                         dto.ConstraintDTOs.Add(new ConstraintDTO
                                                {
-                                                   ArgumentDTO = ColumnArgumentDTO,
+                                                   DataRow = ColumnDataRow,
                                                    ConstraintTypeDTO = ColumnConstraintTypeDTO(column),
                                                    Value = ColumnConstraintAnswer(column)
                                                });
@@ -511,7 +513,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             {
                 var cell = ValueGridView[column, 1];
 
-                if (Presenter.IsValidAnswer(ColumnArgumentDTO, cell.Value))
+                if (Presenter.IsValidAnswer(ColumnDataRow, cell.Value))
                 {
                     cell.Style = null;
 
@@ -532,7 +534,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             {
                 var cell = ValueGridView[1, row];
 
-                if (Presenter.IsValidAnswer(RowArgumentDto, cell.Value))
+                if (Presenter.IsValidAnswer(ArgumentRow, cell.Value))
                 {
                     cell.Style = null;
 
@@ -565,12 +567,12 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
             if (IsRowAnswerCell(e.ColumnIndex, e.RowIndex))
             {
-                ok = Presenter.IsValidAnswer(RowArgumentDto, value);
+                ok = Presenter.IsValidAnswer(ArgumentRow, value);
             }
 
             if (IsColumnAnswerCell(e.ColumnIndex, e.RowIndex))
             {
-                ok = Presenter.IsValidAnswer(ColumnArgumentDTO, value);
+                ok = Presenter.IsValidAnswer(ColumnDataRow, value);
             }
 
             var cell = ValueGridView[e.ColumnIndex, e.RowIndex];
@@ -639,12 +641,12 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
         private bool IsRowAnswerCell(int columnIndex, int rowIndex)
         {
-            return !RowArgumentDto.HasAnswerCatalog && columnIndex == 1 && rowIndex > 1;
+            return !ArgumentRow.HasAnswerCatalog && columnIndex == 1 && rowIndex > 1;
         }
 
         private bool IsColumnAnswerCell(int columnIndex, int rowIndex)
         {
-            return !ColumnArgumentDTO.HasAnswerCatalog && columnIndex > 1 && rowIndex == 1;
+            return !ColumnDataRow.HasAnswerCatalog && columnIndex > 1 && rowIndex == 1;
         }
 
         private static bool IsValueCell(int columnIndex, int rowIndex)
@@ -663,7 +665,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             ValueGridView[column, row] = cell;
             ValueGridView[column, row].ReadOnly = false;
 
-            PopulateConstraintTypes(cell, RowArgumentDto.HasAnswerCatalog);
+            PopulateConstraintTypes(cell, ArgumentRow.HasAnswerCatalog);
         }
 
         private void AddRow()
@@ -674,9 +676,9 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
             MakeConstraintCell(0, row);
 
-            if (RowArgumentDto.HasAnswerCatalog)
+            if (ArgumentRow.HasAnswerCatalog)
             {
-                MakeAnswerSelectionCell(1, row, RowArgumentDto.Answers);
+                MakeAnswerSelectionCell(1, row, ArgumentRow.Answers);
             }
             else
             {
@@ -810,9 +812,9 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
             MakeConstraintCell(column, 0);
 
-            if (ColumnArgumentDTO.HasAnswerCatalog)
+            if (ColumnDataRow.HasAnswerCatalog)
             {
-                MakeAnswerSelectionCell(column, 1, ColumnArgumentDTO.Answers);
+                MakeAnswerSelectionCell(column, 1, ColumnDataRow.Answers);
             }
             else
             {

@@ -46,7 +46,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 
             foreach (ListViewItem item in view.ArgumentAnswers)
             {
-                var dto = ((ArgumentDTO) item.Tag);
+                var dto = ((DataRow) item.Tag);
 
                 command.ArgumentAnswers.Add(new ArgumentAnswerDTO
                                           {
@@ -91,7 +91,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 
             foreach (ListViewItem item in view.ArgumentAnswers)
             {
-                var dto = ((ArgumentDTO)item.Tag);
+                var dto = ((DataRow)item.Tag);
 
                 command.ArgumentAnswers.Add(new ArgumentAnswerDTO
                 {

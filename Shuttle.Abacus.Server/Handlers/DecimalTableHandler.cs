@@ -46,8 +46,6 @@ namespace Shuttle.Abacus.Server.Handlers
                 foreach (var value in table.DecimalValues)
                 {
                     _decimalValueRepository.Add(table, value);
-
-                    _constraintRepository.SaveForOwner(value);
                 }
             }
         }
@@ -67,8 +65,6 @@ namespace Shuttle.Abacus.Server.Handlers
                 foreach (var value in table.DecimalValues)
                 {
                     _decimalValueRepository.Add(table, value);
-
-                    _constraintRepository.SaveForOwner(value);
                 }
             }
         }

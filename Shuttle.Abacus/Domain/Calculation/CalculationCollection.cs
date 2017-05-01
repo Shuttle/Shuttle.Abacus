@@ -12,6 +12,7 @@ namespace Shuttle.Abacus.Domain
         IEnumerable<Calculation>
     {
         protected List<Calculation> calculations = new List<Calculation>();
+        protected List<CalculationItem> _calculations = new List<CalculationItem>();
 
         public CalculationCollection()
             : this(Guid.NewGuid(), null)
@@ -24,7 +25,7 @@ namespace Shuttle.Abacus.Domain
         }
 
         public CalculationCollection(Guid id, string name)
-            : base(name, false)
+            : base(id, name, false)
         {
             Id = id;
         }
@@ -79,6 +80,13 @@ namespace Shuttle.Abacus.Domain
             }
 
             return null;
+        }
+
+        public void AddCalculation(CalculationItem calculation)
+        {
+            Guard.AgainstNull(calculation, "calculation");
+
+            _calculations.Add(calculation);
         }
 
         public IEnumerator<Calculation> GetEnumerator()
@@ -171,41 +179,42 @@ namespace Shuttle.Abacus.Domain
 
         public override Calculation Copy(IDictionary<Guid, Guid> idMap)
         {
-            var result = new CalculationCollection(Name);
+            throw new NotImplementedException();
+            //var result = new CalculationCollection(Name);
 
-            Copy(result);
+            //Copy(result);
 
-            calculations.ForEach(calculation =>
-            {
-                var copy = calculation.Copy(idMap);
+            //calculations.ForEach(calculation =>
+            //{
+            //    var copy = calculation.Copy(idMap);
 
-                idMap.Add(calculation.Id, copy.Id);
+            //    idMap.Add(calculation.Id, copy.Id);
 
-                var formulaCalculation = copy as FormulaCalculation;
+            //    var formulaCalculation = copy as FormulaCalculation;
 
-                if (formulaCalculation != null)
-                {
-                    foreach (var formula in formulaCalculation.Formulas)
-                    {
-                        foreach (var operation in formula.Operations)
-                        {
-                            var calculationValueSource =
-                                operation.ValueSource as ICalculationValueSource;
+            //    if (formulaCalculation != null)
+            //    {
+            //        foreach (var formula in formulaCalculation.Formulas)
+            //        {
+            //            foreach (var operation in formula.Operations)
+            //            {
+            //                var calculationValueSource =
+            //                    operation.ValueSource as ICalculationValueSource;
 
-                            if (calculationValueSource != null)
-                            {
-                                calculationValueSource
-                                    .AssignCalculationId(
-                                        idMap[new Guid(calculationValueSource.ValueSelection)]);
-                            }
-                        }
-                    }
-                }
+            //                if (calculationValueSource != null)
+            //                {
+            //                    calculationValueSource
+            //                        .AssignCalculationId(
+            //                            idMap[new Guid(calculationValueSource.ValueSelection)]);
+            //                }
+            //            }
+            //        }
+            //    }
 
-                result.AddCalculation(copy);
-            });
+            //    result.AddCalculation(copy);
+            //});
 
-            return result;
+            //return result;
         }
 
         public override ICalculationContext CalculationContext(IMethodContext methodContext)

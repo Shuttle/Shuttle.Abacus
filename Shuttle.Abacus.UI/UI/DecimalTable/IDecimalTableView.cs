@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Data;
 using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Invariants.Core;
 using Shuttle.Abacus.UI.Core.Presentation;
@@ -10,13 +11,13 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
         string DecimalTableNameValue { get; set; }
         IRuleCollection<object> DecimalTableNameRules { set; }
         IRuleCollection<object> RowArgumentRules { set; }
-        ArgumentDTO RowArgumentDto { get; }
+        DataRow RowArgumentDto { get; }
         bool GridInitialized { get; }
         string RowArgumentValue { get; set; }
         string ColumnArgumentValue { get; set; }
         bool HasColumnArgument { get; }
-        ArgumentDTO ColumnArgumentDTO { get; }
-        void PopulateFactors(IEnumerable<ArgumentDTO> factors);
+        DataRow ColumnDataRow { get; }
+        void PopulateArguments(IEnumerable<DataRow> rows);
         void EnableColumnArgument();
         void ShowRowAnswerCatalogConstraints();
         void ShowRowAllConstraints();

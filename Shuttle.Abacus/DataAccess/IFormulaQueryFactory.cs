@@ -9,7 +9,7 @@ namespace Shuttle.Abacus.DataAccess
         IQuery AllForOwner(Guid ownerId);
         IQuery GetOperations(Guid id);
         IQuery Get(Guid id);
-        IQuery Add(IFormulaOwner owner, Formula item);
+        IQuery Add(string ownerName, Guid ownerId, Formula formula);
         IQuery Remove(Guid id);
         IQuery RemoveOperations(Formula formula);
         IQuery AddOperation(Formula formula, FormulaOperation operation, int sequenceNumber);

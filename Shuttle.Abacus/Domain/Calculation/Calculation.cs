@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Abacus.Domain;
 using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Localisation;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
-    public abstract class Calculation : Entity<Calculation>,
+    public abstract class Calculation :
         ILimitOwner,
         IConstraintOwner,
         ISpecification<IMethodContext>
@@ -17,31 +17,29 @@ namespace Shuttle.Abacus.Domain
         private readonly List<GraphNodeArgument> graphNodeArguments = new List<GraphNodeArgument>();
         private readonly List<Limit> limits = new List<Limit>();
 
-        protected Calculation(string name, bool required)
+        private readonly List<OwnedConstraint> _constraints = new List<OwnedConstraint>();
+        private readonly List<OwnedLimit> _limits = new List<OwnedLimit>();
+
+        protected Calculation(Guid id, string name, bool required)
         {
+            Id = id;
             Name = name;
             Required = required;
         }
 
+        public Guid Id { get; protected set; }
         public string Name { get; private set; }
         public bool Required { get; private set; }
         public abstract string Type { get; }
-
-        public Guid Id { get; protected set; }
 
         public IEnumerable<GraphNodeArgument> GraphNodeArguments
         {
             get { return new ReadOnlyCollection<GraphNodeArgument>(graphNodeArguments); }
         }
 
-        public void AddGraphNodeArgument(Argument argument, string format)
+        public IEnumerable<OwnedConstraint> Constraints
         {
-            graphNodeArguments.Add(new GraphNodeArgument(argument, format));
-        }
-
-        public IEnumerable<IConstraint> Constraints
-        {
-            get { return new ReadOnlyCollection<IConstraint>(constraints); }
+            get { return new ReadOnlyCollection<OwnedConstraint>(_constraints); }
         }
 
         public IConstraintOwner AddConstraint(IConstraint constraint)
@@ -53,13 +51,20 @@ namespace Shuttle.Abacus.Domain
             return this;
         }
 
-        ILimitOwner ILimitOwner.AddLimit(Limit limit)
+        public void AddConstraint(OwnedConstraint item)
+        {
+            Guard.AgainstNull(item, "item");
+
+            _constraints.Add(item);
+        }
+
+        public ILimitOwner AddLimit(Limit limit)
         {
             Guard.AgainstNull(limit, "limit");
 
             Guard.Against<InvalidStateException>(
                 limits.Find(item => item.Name.Equals(limit.Name, StringComparison.InvariantCultureIgnoreCase)) != null,
-                string.Format(Localisation.Resources.DuplicateEntryException, limit.Name, "Limits"));
+                string.Format(Resources.DuplicateEntryException, limit.Name, "Limits"));
 
             limits.Add(limit);
 
@@ -91,11 +96,9 @@ namespace Shuttle.Abacus.Domain
             return true;
         }
 
-        public Calculation AddLimit(Limit limit)
+        public void AddGraphNodeArgument(Argument argument, string format)
         {
-            limits.Add(limit);
-
-            return this;
+            graphNodeArguments.Add(new GraphNodeArgument(argument, format));
         }
 
         public void ApplyLimits(IMethodContext context, ICalculationResult value)
@@ -147,25 +150,24 @@ namespace Shuttle.Abacus.Domain
             Name = name;
         }
 
-        public Calculation ProcessCommand(
-            SetCalculationConstraintsCommand command,
-            IFactoryProvider<IConstraintFactory> constraintFactoryProvider,
-            IFactoryProvider<IArgumentAnswerFactory> argumentAnswerFactoryProvider,
-            IMapper<ArgumentDTO, Argument> argumentDTOMapper)
+        public Calculation ProcessCommand(SetCalculationConstraintsCommand command)
         {
             constraints.Clear();
 
-            command.Constraints.ForEach(
-                constraint =>
-                AddConstraint(
-                    constraintFactoryProvider.Get(constraint.ConstraintTypeDTO.Name).Create(constraint.ArgumentDTO.Id,
-                                                                                            argumentAnswerFactoryProvider.
-                                                                                                Get(
-                                                                                                constraint.ArgumentDTO.
-                                                                                                    AnswerType).Create(
-                                                                                                constraint.ArgumentDTO.
-                                                                                                    Name,
-                                                                                                constraint.Value))));
+            throw new NotImplementedException();
+
+            //command.Constraints.ForEach(
+            //    constraint =>
+            //        AddConstraint(
+            //            constraintFactoryProvider.Get(constraint.ConstraintTypeDTO.Name)
+            //                .Create(constraint.DataRow.Id,
+            //                    argumentAnswerFactoryProvider.
+            //                        Get(
+            //                            constraint.DataRow.
+            //                                AnswerType).Create(
+            //                            constraint.DataRow.
+            //                                Name,
+            //                            constraint.Value))));
 
             return this;
         }
@@ -187,7 +189,7 @@ namespace Shuttle.Abacus.Domain
         public abstract ICalculationContext CalculationContext(IMethodContext methodContext);
 
         public abstract ICalculationResult Execute(IMethodContext methodContext,
-                                                   ICalculationContext calculationContext);
+            ICalculationContext calculationContext);
 
         public void ClearGraphNodeArguments()
         {
@@ -199,6 +201,13 @@ namespace Shuttle.Abacus.Domain
             Guard.AgainstNull(graphNodeArgument, "graphNodeArgument");
 
             graphNodeArguments.Add(graphNodeArgument);
+        }
+
+        public void AddLimit(OwnedLimit limit)
+        {
+            Guard.AgainstNull(limit, "limit");
+
+            _limits.Add(limit);
         }
     }
 }

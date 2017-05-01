@@ -120,7 +120,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
                 throw new NullDependencyException("Model");
             }
 
-            View.PopulateFactors(Model.Arguments);
+            View.PopulateArguments(Model.ArgumentRows);
             View.SetContraintTypes(Model.ConstraintTypes);
 
             if (Model.Constraints == null)
@@ -130,7 +130,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
 
             foreach (var constraint in Model.Constraints)
             {
-                View.AddConstraint(constraint.ArgumentDTO, constraint.ConstraintTypeDTO, constraint.Value);
+                View.AddConstraint(constraint.DataRow, constraint.ConstraintTypeDTO, constraint.Value);
             }
         }
     }

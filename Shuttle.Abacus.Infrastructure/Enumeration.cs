@@ -56,7 +56,5 @@ namespace Shuttle.Abacus.Infrastructure
         {
             return (TEnumeration)Enum.Parse(typeof(TEnumeration), name);
         }
-
-
     }
 }

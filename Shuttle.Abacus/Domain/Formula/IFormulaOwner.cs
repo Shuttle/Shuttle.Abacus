@@ -6,6 +6,7 @@ namespace Shuttle.Abacus.Domain
     {
         FormulaCollection Formulas { get; }
         Formula AddFormula(Formula formula);
+        void AddFormula(OwnedFormula item);
 
         void ProcessCommand(ChangeFormulaOrderCommand command, IFormulaOwnerService service);
 

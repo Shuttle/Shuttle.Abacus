@@ -42,7 +42,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                               Type = calculationView.TypeValue,
                               Name = calculationView.CalculationNameValue,
                               Required = calculationView.RequiredValue,
-                              GraphNodeArguments = new List<GraphNodeArgumentDTO>(graphNodeArgumentView.GraphNodeArguments)
+                              GraphNodeArguments = new List<GraphNodeDataRow>(graphNodeArgumentView.GraphNodeArguments)
                           };
 
             Send(command);
@@ -104,7 +104,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                               OwnerName = message.OwnerName,
                               Name = calculationView.CalculationNameValue,
                               Required = calculationView.RequiredValue,
-                              GraphNodeArguments = new List<GraphNodeArgumentDTO>(graphNodeArgumentView.GraphNodeArguments)
+                              GraphNodeArguments = new List<GraphNodeDataRow>(graphNodeArgumentView.GraphNodeArguments)
                           };
 
             Send(command,

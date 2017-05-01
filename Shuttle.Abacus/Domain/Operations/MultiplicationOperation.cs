@@ -2,7 +2,7 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class MultiplicationOperation : FormulaOperation
+    public class MultiplicationOperation : Operation
     {
         public MultiplicationOperation(IValueSource source)
             : base(source)
@@ -29,11 +29,6 @@ namespace Shuttle.Abacus.Domain
         public override decimal Operand(IMethodContext methodContext, IFormulaCalculationContext calculationContext)
         {
             return ValueSource.Operand(methodContext, calculationContext);
-        }
-
-        public override FormulaOperation Copy()
-        {
-            return new MultiplicationOperation(ValueSource.Copy());
         }
     }
 }

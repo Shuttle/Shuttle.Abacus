@@ -13,7 +13,6 @@ namespace Shuttle.Abacus.ApplicationService
 
         public void Execute(Calculation item)
         {
-            constraintRepository.SaveForOwner(item);
         }
     }
 }

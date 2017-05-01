@@ -1,19 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Shuttle.Abacus.DTO;
+using Shuttle.Abacus.DataAccess;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Models
 {
     public class ArgumentDisplayModel
     {
-        public ArgumentDisplayModel(IEnumerable<ArgumentDTO> factors)
+        public ArgumentDisplayModel(IEnumerable<DataRow> argumentRows)
         {
-            Factors = factors;
+            ArgumentRows = argumentRows;
         }
 
-        public IEnumerable<ArgumentDTO> Factors { get; set; }
+        public IEnumerable<DataRow> ArgumentRows { get; set; }
 
         public DataTable GraphNodeArguments { get; set; }
 
@@ -22,13 +22,13 @@ namespace Shuttle.Abacus.UI.Models
             get { return GraphNodeArguments != null && GraphNodeArguments.Rows.Count > 0; }
         }
 
-        public ArgumentDTO GetArgumentDTO(Guid argumentId)
+        public DataRow GetArgumentRow(Guid argumentId)
         {
-            foreach (var dto in Factors)
+            foreach (var row in ArgumentRows)
             {
-                if (dto.Id.Equals(argumentId))
+                if (ArgumentColumns.Id.MapFrom(row).Equals(argumentId))
                 {
-                    return dto;
+                    return row;
                 }
             }
 

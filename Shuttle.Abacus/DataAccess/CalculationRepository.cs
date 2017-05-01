@@ -3,21 +3,32 @@ using System.Collections.Generic;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public class CalculationRepository : Repository<Calculation>, ICalculationRepository
     {
-        private readonly ICalculationQueryFactory _calculationQueryFactory;
+        private readonly ICalculationQuery _calculationQuery;
         private readonly IDatabaseGateway _databaseGateway;
-        private readonly IDataRepository<Calculation> _repository;
+        private readonly ICalculationQueryFactory _calculationQueryFactory;
+        private readonly IFormulaQuery _formulaQuery;
+        private readonly ILimitQuery _limitQuery;
 
         public CalculationRepository(IDatabaseGateway databaseGateway, ICalculationQueryFactory calculationQueryFactory,
-            IDataRepository<Calculation> dataRowMapper)
+            ICalculationQuery calculationQuery, IFormulaQuery formulaQuery, ILimitQuery limitQuery)
         {
-            _repository = dataRowMapper;
+            Guard.AgainstNull(databaseGateway, "databaseGateway");
+            Guard.AgainstNull(calculationQueryFactory, "calculationQueryFactory");
+            Guard.AgainstNull(calculationQuery, "calculationQuery");
+            Guard.AgainstNull(formulaQuery, "formulaQuery");
+            Guard.AgainstNull(limitQuery, "limitQuery");
+
             _databaseGateway = databaseGateway;
             _calculationQueryFactory = calculationQueryFactory;
+            _calculationQuery = calculationQuery;
+            _formulaQuery = formulaQuery;
+            _limitQuery = limitQuery;
         }
 
         public override void Add(Calculation item)
@@ -32,12 +43,55 @@ namespace Shuttle.Abacus.DataAccess
 
         public override Calculation Get(Guid id)
         {
-            var result = _repository.FetchItemUsing(_calculationQueryFactory.Get(id));
+            var calculationRow = _calculationQuery.Get(id);
 
-            if (result == null)
+            if (calculationRow == null)
             {
                 throw Exceptions.MissingEntity<Calculation>(id);
             }
+
+            Calculation result;
+
+            switch (CalculationColumns.Type.MapFrom(calculationRow).ToLower())
+            {
+                case "collection":
+                {
+                    result = new CalculationCollection(
+                        id,
+                        CalculationColumns.Name.MapFrom(calculationRow));
+
+                    break;
+                }
+                default:
+                {
+                    result = new FormulaCalculation(
+                        id,
+                        CalculationColumns.Name.MapFrom(calculationRow),
+                        CalculationColumns.Required.MapFrom(calculationRow));
+
+                    break;
+                }
+            }
+
+            var formulaOwner = result as IFormulaOwner;
+
+            if (formulaOwner != null)
+            {
+                _formulaQuery.PopulateOwner(formulaOwner);
+            }
+
+            _limitQuery.PopulateOwner(result);
+
+            var calculationOwner = result as ICalculationOwner;
+
+            if (calculationOwner != null)
+            {
+                _calculationQuery.PopulateOwner(calculationOwner);
+            }
+
+            //TODO:
+            //_graphNodeArgumentDataRowMapper.FetchAllUsing(GraphNodeArgumentQueryFactory.AllForCalculation(result))
+            //    .ForEach(result.AddGraphNodeArgument);
 
             return result;
         }
@@ -68,11 +122,6 @@ namespace Shuttle.Abacus.DataAccess
             _databaseGateway.ExecuteUsing(GraphNodeArgumentQueryFactory.RemoveFor(item.Id));
 
             AddGraphNodeArguments(item);
-        }
-
-        public IEnumerable<Calculation> AllForOwner(Guid ownerId)
-        {
-            return _repository.FetchAllUsing(_calculationQueryFactory.AllForOwner(ownerId));
         }
 
         public void SaveOwnershipGraph(Method method)

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
+using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.UI.Core.Formatters;
 using Shuttle.Abacus.UI.Core.Presentation;
@@ -8,9 +10,9 @@ namespace Shuttle.Abacus.UI.UI.Constraint
 {
     public interface IConstraintView : IView
     {
-        void PopulateFactors(IEnumerable<ArgumentDTO> items);
+        void PopulateArguments(IEnumerable<DataRow> items);
         void SetContraintTypes(IEnumerable<ConstraintTypeDTO> items);
-        ArgumentDTO ArgumentDto { get; }
+        DataRow ArgumentDto { get; }
         ConstraintTypeDTO ConstraintTypeDTO { get; }
         void EnableAnswerSelection();
         void EnableAnswerEntry();
@@ -19,7 +21,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
         bool HasAnswer { get; }
         bool HasArgument { get; }
         bool HasConstraint { get; }
-        List<ConstraintDTO> Constraints { get; set; }
+        List<OwnedConstraint> Constraints { get; set; }
         
         ComboBox ValueSelectionControl { get; }
         TextBox FormattedControl { get; }
@@ -27,7 +29,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
         void ShowAnswerError(string message);
         void ShowArgumentError();
         void ShowConstraintError();
-        void AddConstraint(ArgumentDTO argumentDto, ConstraintTypeDTO constraintTypeDTO, string valueSelection);
+        void AddConstraint(DataRow argumentDto, ConstraintTypeDTO constraintTypeDTO, string valueSelection);
         void ShowAllConstraints();
         void ShowAnswerCatalogConstraints();
         

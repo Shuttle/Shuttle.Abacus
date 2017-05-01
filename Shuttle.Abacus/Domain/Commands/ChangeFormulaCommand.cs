@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Shuttle.Abacus.DTO;
 
 namespace Shuttle.Abacus.Domain
 {
@@ -8,7 +7,7 @@ namespace Shuttle.Abacus.Domain
     {
         public Guid CalculationId { get; set; }
         public Guid FormulaId { get; set; }
-        public List<OperationDTO> Operations { get; set; }
-        public List<ConstraintDTO> Constraints { get; set; }
+        public List<FormulaOperation> Operations { get; set; }
+        public List<OwnedConstraint> Constraints { get; set; }
     }
 }

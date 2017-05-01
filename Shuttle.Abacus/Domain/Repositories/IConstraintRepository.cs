@@ -5,10 +5,6 @@ namespace Shuttle.Abacus.Domain
 {
     public interface IConstraintRepository
     {
-        void SaveForOwner(IConstraintOwner owner);
-
         IEnumerable<IConstraint> AllForOwner(Guid ownerId);
-        void SetArgumentName(Guid argumentId, string argumentName);
-        void SetArgumentAnswerType(Guid argumentId, string answerType);
     }
 }

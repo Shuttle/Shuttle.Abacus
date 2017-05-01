@@ -8,8 +8,8 @@ namespace Shuttle.Abacus.DataAccess
     {
         IQuery AllForOwner(Guid ownerId);
         IQuery Get(Guid limitId);
-        IQuery Add(ILimitOwner owner, Limit item);
+        IQuery Add(string ownerName, Guid ownerId, Limit limit);
         IQuery Remove(Guid id);
-        IQuery Save(Limit item);
+        IQuery Save(Limit limit);
     }
 }

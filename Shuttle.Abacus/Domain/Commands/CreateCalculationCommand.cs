@@ -14,6 +14,6 @@ namespace Shuttle.Abacus.Domain
         public string Name { get; set; }
         public bool Required { get; set; }
 
-        public List<GraphNodeArgumentDTO> GraphNodeArguments { get; set; }
+        public List<GraphNodeDataRow> GraphNodeArguments { get; set; }
     }
 }

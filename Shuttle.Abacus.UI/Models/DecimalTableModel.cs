@@ -6,7 +6,7 @@ namespace Shuttle.Abacus.UI.Models
 {
     public class DecimalTableModel
     {
-        public IEnumerable<ArgumentDTO> Factors { get; set; }
+        public IEnumerable<DataRow> ArgumentRows { get; set; }
         public IEnumerable<ConstraintTypeDTO> ConstraintTypes { get; set; }
         public DataRow DecimalTableRow { get; set; }
         public DataTable ConstrainedDecimalValues { get; set; }

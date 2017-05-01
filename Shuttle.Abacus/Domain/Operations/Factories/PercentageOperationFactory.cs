@@ -2,7 +2,7 @@ namespace Shuttle.Abacus.Domain
 {
     public class PercentageOperationFactory : IOperationFactory
     {
-        public FormulaOperation Create(IValueSource valueSource)
+        public Operation Create(IValueSource valueSource)
         {
             return new PercentageOperation(valueSource);
         }

@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.DTO;
 using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.DataAccess
 {
@@ -59,6 +61,20 @@ namespace Shuttle.Abacus.DataAccess
         public IEnumerable<DataRow> GraphNodeArguments(Guid calculationId)
         {
             return _databaseGateway.GetRowsUsing(_calculationQueryFactory.GraphNodeArguments(calculationId));
+        }
+
+        public void PopulateOwner(ICalculationOwner owner)
+        {
+            Guard.AgainstNull(owner, "owner");
+
+            foreach (var row in _databaseGateway.GetRowsUsing(_calculationQueryFactory.AllForOwner(owner.Id)))
+            {
+                owner.AddCalculation(
+                    new CalculationItem(
+                    CalculationColumns.Id.MapFrom(row),
+                    CalculationColumns.Name.MapFrom(row),
+                    CalculationColumns.Type.MapFrom(row)));
+            }
         }
     }
 }

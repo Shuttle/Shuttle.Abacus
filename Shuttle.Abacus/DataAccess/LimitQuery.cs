@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using Shuttle.Abacus.Domain;
 using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
@@ -24,6 +25,18 @@ namespace Shuttle.Abacus.DataAccess
         public DataRow Get(Guid limitId)
         {
             return _databaseGateway.GetSingleRowUsing(_limitQueryFactory.Get(limitId));
+        }
+
+        public void PopulateOwner(ILimitOwner owner)
+        {
+            foreach (var row in _databaseGateway.GetRowsUsing(_limitQueryFactory.AllForOwner(owner.Id)))
+            {
+                owner.AddLimit(
+                    new OwnedLimit(
+                        LimitColumns.Id.MapFrom(row),
+                        LimitColumns.Name.MapFrom(row),
+                        LimitColumns.Type.MapFrom(row)));
+            }
         }
     }
 }

@@ -3,7 +3,7 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class RoundingOperation : FormulaOperation
+    public class RoundingOperation : Operation
     {
         public RoundingOperation(IValueSource source)
             : base(source)
@@ -30,11 +30,6 @@ namespace Shuttle.Abacus.Domain
         public override string Name
         {
             get { return "Rounding"; }
-        }
-
-        public override FormulaOperation Copy()
-        {
-            return new RoundingOperation(ValueSource.Copy());
         }
     }
 }

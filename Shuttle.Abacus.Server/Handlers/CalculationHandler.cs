@@ -1,3 +1,4 @@
+using System;
 using Shuttle.Abacus.ApplicationService;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.DTO;
@@ -17,8 +18,6 @@ namespace Shuttle.Abacus.Server.Handlers
         IMessageHandler<GrabCalculationsCommand>
     {
         private readonly IFactoryProvider<IArgumentAnswerFactory> _argumentAnswerFactoryProvider;
-        private readonly Infrastructure.IMapper<ArgumentDTO, Argument> _argumentDTOMapper;
-        private readonly IFactoryProvider<ICalculationFactory> _calculationFactoryProvider;
         private readonly ICalculationRepository _calculationRepository;
         private readonly IFactoryProvider<IConstraintFactory> _constraintFactoryProvider;
         private readonly ILimitRepository _limitRepository;
@@ -29,30 +28,24 @@ namespace Shuttle.Abacus.Server.Handlers
         public CalculationHandler(
             IDatabaseContextFactory databaseContextFactory,
             IMethodRepository methodRepository,
-            IFactoryProvider<ICalculationFactory> calculationFactoryProvider,
             ICalculationRepository calculationRepository,
             IFactoryProvider<IConstraintFactory> constraintFactoryProvider,
             IFactoryProvider<IArgumentAnswerFactory> argumentAnswerFactoryProvider,
-            IMapper<ArgumentDTO, Argument> argumentDTOMapper,
             ILimitRepository limitRepository,
             ITaskFactory taskFactory)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(methodRepository, "methodRepository");
-            Guard.AgainstNull(calculationFactoryProvider, "calculationFactoryProvider");
             Guard.AgainstNull(calculationRepository, "calculationRepository");
             Guard.AgainstNull(constraintFactoryProvider, "constraintFactoryProvider");
             Guard.AgainstNull(argumentAnswerFactoryProvider, "argumentAnswerFactoryProvider");
-            Guard.AgainstNull(argumentDTOMapper, "argumentDTOMapper");
             Guard.AgainstNull(limitRepository, "limitRepository");
             Guard.AgainstNull(taskFactory, "taskFactory");
 
             _databaseContextFactory = databaseContextFactory;
             _methodRepository = methodRepository;
-            _argumentDTOMapper = argumentDTOMapper;
             _limitRepository = limitRepository;
             _taskFactory = taskFactory;
-            _calculationFactoryProvider = calculationFactoryProvider;
             _calculationRepository = calculationRepository;
             _constraintFactoryProvider = constraintFactoryProvider;
             _argumentAnswerFactoryProvider = argumentAnswerFactoryProvider;
@@ -74,7 +67,7 @@ namespace Shuttle.Abacus.Server.Handlers
 
                 //TODO
                 //message.GraphNodeArguments.ForEach(
-                //    item => calculation.AddGraphNodeArgument(_argumentDTOMapper.MapFrom(item.ArgumentDTO), item.Format));
+                //    item => calculation.AddGraphNodeArgument(_argumentDTOMapper.MapFrom(item.DataRow), item.Format));
 
                 _calculationRepository.Save(calculation);
             }
@@ -100,15 +93,17 @@ namespace Shuttle.Abacus.Server.Handlers
 
             using (_databaseContextFactory.Create())
             {
-                var calculation = _calculationFactoryProvider.Get(message.Type).Create(message.Name, message.Required);
+                throw new NotImplementedException();
+                //_calculationRepository.Add();
+                //var calculation = _calculationFactoryProvider.Get(message.Type).Create(message.Name, message.Required);
 
-                //TODO
+                ////TODO
                 //message.GraphNodeArguments.ForEach(
-                //    item => calculation.AddGraphNodeArgument(_argumentDTOMapper.MapFrom(item.ArgumentDTO), item.Format));
+                //    item => calculation.AddGraphNodeArgument(_argumentDTOMapper.MapFrom(item.DataRow), item.Format));
 
-                var method = _methodRepository.Get(message.MethodId);
+                //var method = _methodRepository.Get(message.MethodId);
 
-                method.ProcessCommand(message, calculation);
+                //method.ProcessCommand(message, calculation);
             }
         }
 
@@ -150,16 +145,18 @@ namespace Shuttle.Abacus.Server.Handlers
         {
             var message = context.Message;
 
-            using (_databaseContextFactory.Create())
-            {
-                _taskFactory.Create<ISetCalculationConstraintsTask>().Execute(
-                    _calculationRepository
-                        .Get(message.CalculationId)
-                        .ProcessCommand(
-                            message,
-                            _constraintFactoryProvider,
-                            _argumentAnswerFactoryProvider, _argumentDTOMapper));
-            }
+            throw new NotImplementedException();
+
+            //using (_databaseContextFactory.Create())
+            //{
+            //    _taskFactory.Create<ISetCalculationConstraintsTask>().Execute(
+            //        _calculationRepository
+            //            .Get(message.CalculationId)
+            //            .ProcessCommand(
+            //                message,
+            //                _constraintFactoryProvider,
+            //                _argumentAnswerFactoryProvider, _argumentDTOMapper));
+            //}
         }
     }
 }

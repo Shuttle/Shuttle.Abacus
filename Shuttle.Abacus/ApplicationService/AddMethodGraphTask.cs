@@ -24,20 +24,7 @@ namespace Shuttle.Abacus.ApplicationService
         {
             methodRepository.Add(method);
 
-            SaveLimits(method);
             SaveCalculations(method, method);
-        }
-
-        private void SaveLimits(ILimitOwner limitOwner)
-        {
-            limitOwner.Limits.ForEach(limit =>
-                {
-                    limitRepository.Add(limitOwner, limit);
-
-                    limit.Constraints.ForEach(constraint => constraintRepository.SaveForOwner(limit));
-
-                    SaveFormulas(limit);
-                });
         }
 
         private void SaveFormulas(IFormulaOwner formulaOwner)
@@ -45,16 +32,9 @@ namespace Shuttle.Abacus.ApplicationService
             formulaOwner.Formulas.ForEach(formula =>
                 {
                     formulaRepository.Add(formulaOwner, formula);
-
-                    SaveConstraints(formula);
                 });
 
             formulaRepository.SaveOrdered(formulaOwner);
-        }
-
-        private void SaveConstraints(IConstraintOwner constraintOwner)
-        {
-            constraintOwner.Constraints.ForEach(constraint => constraintRepository.SaveForOwner(constraintOwner));
         }
 
         private void SaveCalculations(Method method, ICalculationOwner owner)
@@ -69,8 +49,6 @@ namespace Shuttle.Abacus.ApplicationService
                     {
                         SaveCalculations(method, calculationOwner);
                     }
-
-                    SaveLimits(calculation);
 
                     var formulaOwner = calculation as IFormulaOwner;
 

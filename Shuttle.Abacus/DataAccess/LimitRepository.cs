@@ -10,18 +10,26 @@ namespace Shuttle.Abacus.DataAccess
     {
         private readonly IDatabaseGateway _databaseGateway;
         private readonly ILimitQueryFactory _limitQueryFactory;
-        private readonly IDataRepository<Limit> _repository;
+        private readonly IFormulaQueryFactory _formulaQueryFactory;
+        private readonly IConstraintQueryFactory _constraintQueryFactory;
 
-        public LimitRepository(IDatabaseGateway databaseGateway, ILimitQueryFactory limitQueryFactory, IDataRepository<Limit> repository)
+        public LimitRepository(IDatabaseGateway databaseGateway, ILimitQueryFactory limitQueryFactory, 
+            IFormulaQueryFactory formulaQueryFactory, IConstraintQueryFactory constraintQueryFactory)
         {
-            _repository = repository;
+            Guard.AgainstNull(databaseGateway, "databaseGateway");
+            Guard.AgainstNull(limitQueryFactory, "limitQueryFactory");
+            Guard.AgainstNull(formulaQueryFactory, "formulaQueryFactory");
+            Guard.AgainstNull(constraintQueryFactory, "constraintQueryFactory");
+
             _databaseGateway = databaseGateway;
             _limitQueryFactory = limitQueryFactory;
+            _formulaQueryFactory = formulaQueryFactory;
+            _constraintQueryFactory = constraintQueryFactory;
         }
 
-        public override void Add(Limit item)
+        public void Add(string ownerName, Guid ownerId, Limit limit)
         {
-            throw new NotImplementedException();
+            _databaseGateway.ExecuteUsing(_limitQueryFactory.Add(ownerName, ownerId, limit));
         }
 
         public override void Remove(Guid id)
@@ -31,19 +39,35 @@ namespace Shuttle.Abacus.DataAccess
 
         public override Limit Get(Guid id)
         {
-            var result = _repository.FetchItemUsing(_limitQueryFactory.Get(id));
+            var limitRow = _databaseGateway.GetSingleRowUsing(_limitQueryFactory.Get(id));
 
-            if (result == null)
+            if (limitRow == null)
             {
                 throw Exceptions.MissingEntity("Limit", id);
             }
 
-            return result;
-        }
+            var result = new Limit(id, LimitColumns.Name.MapFrom(limitRow), LimitColumns.Type.MapFrom(limitRow));
 
-        public void Add(ILimitOwner owner, Limit limit)
-        {
-            _databaseGateway.ExecuteUsing(_limitQueryFactory.Add(owner, limit));
+            foreach (var row in _databaseGateway.GetRowsUsing(_formulaQueryFactory.AllForOwner(id)))
+            {
+                result.AddFormula(
+                    new OwnedFormula(
+                        FormulaColumns.Id.MapFrom(row),
+                        FormulaColumns.SequenceNumber.MapFrom(row),
+                        FormulaColumns.Description.MapFrom(row)));
+            }
+
+            foreach (var row in _databaseGateway.GetRowsUsing(_constraintQueryFactory.All(id)))
+            {
+                result.AddConstraint(
+                    new OwnedConstraint(
+                    ConstraintColumns.SequenceNumber.MapFrom(row),
+                    ConstraintColumns.ArgumentId.MapFrom(row),
+                    ConstraintColumns.Name.MapFrom(row),
+                    ConstraintColumns.Answer.MapFrom(row)));
+            }
+
+            return result;
         }
 
         public void Save(Limit limit)
@@ -51,9 +75,9 @@ namespace Shuttle.Abacus.DataAccess
             _databaseGateway.ExecuteUsing(_limitQueryFactory.Save(limit));
         }
 
-        public IEnumerable<Limit> AllForOwner(Guid ownerId)
+        public override void Add(Limit item)
         {
-            return _repository.FetchAllUsing(_limitQueryFactory.AllForOwner(ownerId));
+            throw new NotImplementedException();
         }
     }
 }

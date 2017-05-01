@@ -6,6 +6,8 @@ namespace Shuttle.Abacus.Domain
 {
     public class FormulaCalculation : Calculation, IFormulaOwner
     {
+        private readonly List<OwnedFormula> _formulas = new List<OwnedFormula>();
+
         public FormulaCalculation(string name)
             : this(name, false)
         {
@@ -22,7 +24,7 @@ namespace Shuttle.Abacus.Domain
         }
 
         public FormulaCalculation(Guid id, string name, bool required)
-            : base(name, required)
+            : base(id, name, required)
         {
             Id = id;
 
@@ -137,6 +139,13 @@ namespace Shuttle.Abacus.Domain
         public IEnumerable<Guid> RequiredCalculationIds()
         {
             return Formulas.RequiredCalculationIds();
+        }
+
+        public void AddFormula(OwnedFormula item)
+        {
+            Guard.AgainstNull(item, "item");
+
+            _formulas.Add(item);
         }
     }
 }

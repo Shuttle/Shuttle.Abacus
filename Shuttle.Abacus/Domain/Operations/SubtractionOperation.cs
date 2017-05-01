@@ -2,7 +2,7 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class SubtractionOperation : FormulaOperation
+    public class SubtractionOperation : Operation
     {
         public SubtractionOperation(IValueSource source)
             : base(source)
@@ -29,11 +29,6 @@ namespace Shuttle.Abacus.Domain
         public override decimal Operand(IMethodContext methodContext, IFormulaCalculationContext calculationContext)
         {
             return ValueSource.Operand(methodContext, calculationContext);
-        }
-
-        public override FormulaOperation Copy()
-        {
-            return new SubtractionOperation(ValueSource.Copy());
         }
     }
 }

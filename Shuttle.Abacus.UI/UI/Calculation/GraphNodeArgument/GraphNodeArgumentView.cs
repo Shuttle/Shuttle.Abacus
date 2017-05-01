@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
+using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.UI.Core.Extensions;
@@ -19,15 +21,15 @@ namespace Shuttle.Abacus.UI.UI.Calculation.GraphNodeArgument
             lvw = new ListViewExtender(ArgumentListView);
         }
 
-        public void PopulateFactors(IEnumerable<ArgumentDTO> list)
+        public void PopulateArguments(IEnumerable<DataRow> rows)
         {
             Argument.DisplayMember = "Name";
-            list.ForEach(item => Argument.Items.Add(item));
+            rows.ForEach(item => Argument.Items.Add(item));
         }
 
-        public ArgumentDTO ArgumentDto
+        public DataRow ArgumentRow
         {
-            get { return Argument.SelectedItem as ArgumentDTO; }
+            get { return Argument.SelectedItem as DataRow; }
         }
 
         public string FormatValue
@@ -45,20 +47,20 @@ namespace Shuttle.Abacus.UI.UI.Calculation.GraphNodeArgument
             get { return Format.Text.Length > 0; }
         }
 
-        public IEnumerable<GraphNodeArgumentDTO> GraphNodeArguments
+        public IEnumerable<GraphNodeDataRow> GraphNodeArguments
         {
             get
             {
-                var result = new List<GraphNodeArgumentDTO>();
+                var result = new List<GraphNodeDataRow>();
 
                 foreach (ListViewItem item in ArgumentListView.Items)
                 {
                     var tag = (ItemTag) item.Tag;
 
                     //TODO
-                    //result.Add(new GraphNodeArgumentDTO
+                    //result.Add(new GraphNodeDataRow
                     //               {
-                    //                   ArgumentDTO = tag.ArgumentDTO,
+                    //                   DataRow = tag.DataRow,
                     //                   Format = tag.Format
                     //               });
                 }
@@ -68,8 +70,7 @@ namespace Shuttle.Abacus.UI.UI.Calculation.GraphNodeArgument
             set
             {
                 //TODO
-                //value.ForEach(dto => AddArgument(dto.ArgumentDTO, dto.Format)); 
-                
+                //value.ForEach(dto => AddArgument(dto.DataRow, dto.Format)); 
             }
         }
 
@@ -84,13 +85,13 @@ namespace Shuttle.Abacus.UI.UI.Calculation.GraphNodeArgument
             SetError(Format, "Please enter a format to use.");
         }
 
-        public void AddArgument(ArgumentDTO argumentDto, string format)
+        public void AddArgumentRow(DataRow row, string format)
         {
             var item = new ListViewItem();
 
             item.SubItems.Add(string.Empty);
 
-            ArgumentListView.Items.Add(PopulateItem(item, argumentDto, format));
+            ArgumentListView.Items.Add(PopulateItem(item, row, format));
         }
 
         private void MoveUpButton_Click(object sender, EventArgs e)
@@ -107,16 +108,16 @@ namespace Shuttle.Abacus.UI.UI.Calculation.GraphNodeArgument
         {
             if (Presenter.ArgumentOK())
             {
-                AddArgument(ArgumentDto, FormatValue);
+                AddArgumentRow(ArgumentRow, FormatValue);
             }
         }
 
-        private static ListViewItem PopulateItem(ListViewItem item, ArgumentDTO argumentDto, string format)
+        private static ListViewItem PopulateItem(ListViewItem item, DataRow row, string format)
         {
-            item.Text = argumentDto.Name;
+            item.Text = ArgumentColumns.Name.MapFrom(row);
             item.SubItems[1].Text = format;
 
-            item.Tag = new ItemTag(argumentDto, format);
+            item.Tag = new ItemTag(row, format);
 
             return item;
         }
@@ -171,18 +172,18 @@ namespace Shuttle.Abacus.UI.UI.Calculation.GraphNodeArgument
                 return;
             }
 
-            PopulateItem(lvw.SelectedItem(), ArgumentDto, FormatValue);
+            PopulateItem(lvw.SelectedItem(), ArgumentRow, FormatValue);
         }
 
         private class ItemTag
         {
-            public ItemTag(ArgumentDTO argumentDto, string format)
+            public ItemTag(DataRow row, string format)
             {
-                ArgumentDTO = argumentDto;
+                ArgumentRow = row;
                 Format = format;
             }
 
-            public ArgumentDTO ArgumentDTO { get; private set; }
+            public DataRow ArgumentRow { get; private set; }
             public string Format { get; private set; }
         }
     }

@@ -1,16 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Abacus.Domain;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
     public class Argument
     {
+        private static readonly List<string> Numbers = new List<string>
+                                                       {
+                                                           "decimal", "integer", "money"
+                                                       };
+
         public static Argument MethodName = new Argument(Guid.Empty) { Name = "Method Name", AnswerType = "Text" };
 
-        private readonly List<ArgumentRestrictedAnswer> answers = new List<ArgumentRestrictedAnswer>();
+        private readonly List<ArgumentRestrictedAnswer> _answers = new List<ArgumentRestrictedAnswer>();
 
 
         public Argument()
@@ -39,12 +43,12 @@ namespace Shuttle.Abacus.Domain
 
         public IEnumerable<ArgumentRestrictedAnswer> RestrictedAnswers
         {
-            get { return new ReadOnlyCollection<ArgumentRestrictedAnswer>(answers); }
+            get { return new ReadOnlyCollection<ArgumentRestrictedAnswer>(_answers); }
         }
 
         public bool HasRestrictedAnswers
         {
-            get { return answers.Count > 0; }
+            get { return _answers.Count > 0; }
         }
 
         public Guid Id { get; private set; }
@@ -54,7 +58,7 @@ namespace Shuttle.Abacus.Domain
             Name = command.Name;
             AnswerType = command.AnswerType;
 
-            answers.Clear();
+            _answers.Clear();
 
             command.ArgumentAnswers.ForEach(adding => AddArgumentAnswer(adding.Answer));
 
@@ -63,7 +67,7 @@ namespace Shuttle.Abacus.Domain
 
         public void AddArgumentAnswer(string answer)
         {
-            answers.ForEach
+            _answers.ForEach
                 (
                 current =>
                 {
@@ -74,12 +78,42 @@ namespace Shuttle.Abacus.Domain
                 }
                 );
 
-            answers.Add(new ArgumentRestrictedAnswer(answer));
+            _answers.Add(new ArgumentRestrictedAnswer(answer));
         }
 
         public ArgumentRestrictedAnswer FindAnswer(string answer)
         {
-            return answers.Find(item => item.Answer.Equals(answer, StringComparison.InvariantCultureIgnoreCase));
+            return _answers.Find(item => item.Answer.Equals(answer, StringComparison.InvariantCultureIgnoreCase));
+        }
+
+        public bool IsNumber
+        {
+            get { return !string.IsNullOrEmpty(AnswerType) && Numbers.Contains(AnswerType.ToLower()); }
+        }
+
+        public bool HasAnswerCatalog
+        {
+            get { return _answers != null && _answers.Count > 0; }
+        }
+
+        public bool IsMoney
+        {
+            get { return AnswerType.ToLower() == "money"; }
+        }
+
+        public bool IsText
+        {
+            get { return AnswerType.ToLower() == "text"; }
+        }
+
+        public bool CanOnlyCompareEquality
+        {
+            get { return HasAnswerCatalog || IsText; }
+        }
+
+        public bool HasArgumentName(string name)
+        {
+            return _answers.Find(item => item.Answer.Equals(name, StringComparison.InvariantCultureIgnoreCase)) != null;
         }
     }
 }

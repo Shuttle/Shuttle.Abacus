@@ -107,7 +107,7 @@ namespace Shuttle.Abacus.UI.UI.Formula
                 case Enumeration.ValueSourceType.ArgumentAnswer:
                     {
                         View.EnableValueSelection("Argument");
-                        View.PopulateFactors(Model.Arguments);
+                        View.PopulateArguments(Model.ArgumentRows);
 
                         break;
                     }

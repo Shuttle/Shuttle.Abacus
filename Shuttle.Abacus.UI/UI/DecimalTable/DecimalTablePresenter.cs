@@ -89,7 +89,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             {
                 View.ApplyColumnArgument();
 
-                var dto = View.ColumnArgumentDTO;
+                var dto = View.ColumnDataRow;
 
                 if (dto.CanOnlyCompareEquality)
                 {
@@ -136,29 +136,29 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             return decimal.TryParse(value, out dec);
         }
 
-        public bool IsValidAnswer(ArgumentDTO argumentDto, object value)
+        public bool IsValidAnswer(DataRow row, object value)
         {
-            if (string.IsNullOrEmpty(argumentDto.AnswerType))
+            if (string.IsNullOrEmpty(row.AnswerType))
             {
                 return true;
             }
 
-            if (argumentDto.HasAnswerCatalog && !HasValidArgumentAnswer(argumentDto, Convert.ToString(value)))
+            if (row.HasAnswerCatalog && !HasValidArgumentAnswer(row, Convert.ToString(value)))
             {
                 return false;
             }
 
-            if (argumentDto.IsText)
+            if (row.IsText)
             {
                 return !string.IsNullOrEmpty(Convert.ToString(value));
             }
 
             return
-                valueTypeValidatorProvider.Get(argumentDto.AnswerType).Validate(Convert.ToString(value))
+                valueTypeValidatorProvider.Get(row.AnswerType).Validate(Convert.ToString(value))
                     .OK;
         }
 
-        private static bool HasValidArgumentAnswer(ArgumentDTO dto, string value)
+        private static bool HasValidArgumentAnswer(DataRow dto, string value)
         {
             foreach (var answer in dto.Answers)
             {
@@ -204,7 +204,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             View.DecimalTableNameRules = decimalTableRules.DecimalTableNameRules();
             View.RowArgumentRules = decimalTableRules.RowArgumentRules();
 
-            View.PopulateFactors(Model.Factors);
+            View.PopulateArguments(Model.ArgumentRows);
 
             if (Model.DecimalTableRow == null)
             {
@@ -213,20 +213,20 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
             View.DecimalTableNameValue = DecimalTableColumns.Name.MapFrom(Model.DecimalTableRow);
 
-            var rowArgumentDTO = GetArgumentDTO(DecimalTableColumns.RowArgumentId.MapFrom(Model.DecimalTableRow));
+            var rowDataRow = GetDataRow(DecimalTableColumns.RowArgumentId.MapFrom(Model.DecimalTableRow));
 
-            if (rowArgumentDTO == null)
+            if (rowDataRow == null)
             {
                 return;
             }
 
-            View.RowArgumentValue = rowArgumentDTO.Name;
+            View.RowArgumentValue = rowDataRow.Name;
 
-            var columnArgumentDTO = GetArgumentDTO(DecimalTableColumns.ColumnArgumentId.MapFrom(Model.DecimalTableRow));
+            var columnDataRow = GetDataRow(DecimalTableColumns.ColumnArgumentId.MapFrom(Model.DecimalTableRow));
 
-            if (columnArgumentDTO != null)
+            if (columnDataRow != null)
             {
-                View.ColumnArgumentValue = columnArgumentDTO.Name;
+                View.ColumnArgumentValue = columnDataRow.Name;
             }
 
             foreach (DataRow row in Model.ConstrainedDecimalValues.Rows)
@@ -242,9 +242,9 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             }
         }
 
-        private ArgumentDTO GetArgumentDTO(Guid id)
+        private DataRow GetDataRow(Guid id)
         {
-            foreach (var dto in Model.Factors)
+            foreach (var dto in Model.ArgumentRows)
             {
                 if (dto.Id.Equals(id))
                 {

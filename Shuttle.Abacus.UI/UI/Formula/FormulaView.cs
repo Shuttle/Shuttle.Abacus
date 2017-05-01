@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
+using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.UI.Core.Presentation;
@@ -67,23 +69,24 @@ namespace Shuttle.Abacus.UI.UI.Formula
             ValueSelection.Enabled = false;
         }
 
-        public List<OperationDTO> Operations
+        public List<FormulaOperation> Operations
         {
             get
             {
-                var result = new List<OperationDTO>();
+                var result = new List<FormulaOperation>();
+                var sequenceNumber = 1;
 
                 foreach (ListViewItem item in OperationsListView.Items)
                 {
                     var tag = (ItemTag) item.Tag;
 
-                    result.Add(new OperationDTO
-                               {
-                                   OperationType = tag.OperationType,
-                                   ValueSourceType = tag.ValueSourceType,
-                                   ValueSelection = tag.ValueSelection,
-                                   Text = tag.Text
-                               });
+                    result.Add(new FormulaOperation(
+                        sequenceNumber++,
+                        tag.Operation,
+                        tag.ValueSource,
+                        tag.ValueSelection,
+                        "???"
+                    ));
                 }
 
                 return result;
@@ -145,14 +148,15 @@ namespace Shuttle.Abacus.UI.UI.Formula
             enumerable.ForEach(source => ValueSource.Items.Add(source));
         }
 
-        public void PopulateFactors(IEnumerable<ArgumentDTO> enumerable)
+        public void PopulateArguments(IEnumerable<DataRow> rows)
         {
-            enumerable.ForEach(item =>
+            throw new NotImplementedException();
+            rows.ForEach(item =>
                 {
-                    if (item.IsNumber)
-                    {
-                        ValueSelection.Items.Add(new SelectionItem(item.Id, item.Name));
-                    }
+                    //if (item.IsNumber)
+                    //{
+                    //    ValueSelection.Items.Add(new SelectionItem(item.Id, item.Name));
+                    //}
                 });
         }
 

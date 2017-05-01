@@ -58,7 +58,6 @@
     <Compile Include="Calculator\LimitsTest.cs" />
     <Compile Include="Calculator\MethodContextTest.cs" />
     <Compile Include="Calculator\Operations\FormulaOperationTest.cs" />
-    <Compile Include="Calculator\Operations\OperationFactoryTest.cs" />
     <Compile Include="DecimalTableTest.cs" />
     <Compile Include="DecimalValueTest.cs" />
     <Compile Include="GraphNodeArgumentTest.cs" />

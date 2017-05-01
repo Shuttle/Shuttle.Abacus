@@ -16,18 +16,20 @@ namespace Shuttle.Abacus.Domain
 
         public DecimalTable Create(Guid decimalTableId, DecimalTableCommand command)
         {
-            var result = new DecimalTable(decimalTableId, command.DecimalTableName, command.RowArgumentDto.Id, command.ColumnArgumentDTO.Id);
+            var result = new DecimalTable(decimalTableId, command.DecimalTableName, command.RowArgumentId, command.ColumnArgumentId);
+
+            throw new NotImplementedException();
 
             foreach (var dto in command.DecimalValueDTOs)
             {
                 var value = new DecimalValue(Guid.NewGuid(), dto.Column, dto.Row, dto.Value);
 
-                foreach (var constraintDTO in dto.ConstraintDTOs)
-                {
-                    //TODO
-                    //value.AddConstraint(
-                    //    constraintFactoryProvider.Get(constraintDTO.ConstraintTypeDTO.Name).Create(constraintDTO.ArgumentDto.Id, argumentAnswerFactoryProvider.Get(constraintDTO.ArgumentDto.AnswerType).Create(constraintDTO.ArgumentDto.Name, constraintDTO.Value)));
-                }
+                //TODO
+                //foreach (var constraintDTO in dto.ConstraintDTOs)
+                //{
+                //    ////value.AddConstraint(
+                //    ////    constraintFactoryProvider.Get(constraintDTO.ConstraintTypeDTO.Name).Create(constraintDTO.ArgumentDto.Id, argumentAnswerFactoryProvider.Get(constraintDTO.ArgumentDto.AnswerType).Create(constraintDTO.ArgumentDto.Name, constraintDTO.Value)));
+                //}
 
                 result.AddDecimalValue(value);
             }

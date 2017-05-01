@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Data;
@@ -9,17 +8,19 @@ namespace Shuttle.Abacus.DataAccess
 {
     public class FormulaRepository : Repository<Formula>, IFormulaRepository
     {
-        private readonly IConstraintRepository _constraintRepository;
         private readonly IDatabaseGateway _databaseGateway;
         private readonly IFormulaQueryFactory _formulaQueryFactory;
-        private readonly IDataRepository<Formula> _repository;
+        private readonly IConstraintQuery _constraintQuery;
 
-        public FormulaRepository(IDatabaseGateway databaseGateway, IFormulaQueryFactory formulaQueryFactory, IDataRepository<Formula> repository, IConstraintRepository constraintRepository)
+        public FormulaRepository(IDatabaseGateway databaseGateway, IFormulaQueryFactory formulaQueryFactory, IConstraintQuery constraintQuery)
         {
-            _repository = repository;
-            _constraintRepository = constraintRepository;
+            Guard.AgainstNull(databaseGateway, "databaseGateway");
+            Guard.AgainstNull(formulaQueryFactory, "formulaQueryFactory");
+            Guard.AgainstNull(constraintQuery, "constraintQuery");
+
             _databaseGateway = databaseGateway;
             _formulaQueryFactory = formulaQueryFactory;
+            _constraintQuery = constraintQuery;
         }
 
         public override void Add(Formula item)
@@ -34,23 +35,34 @@ namespace Shuttle.Abacus.DataAccess
 
         public override Formula Get(Guid id)
         {
-            var result = _repository.FetchItemUsing(_formulaQueryFactory.Get(id));
+            var formulaRow = _databaseGateway.GetSingleRowUsing(_formulaQueryFactory.Get(id));
 
-            if (result == null)
+            Guarded.Entity<Formula>(formulaRow, id);
+
+            var result = new Formula(id);
+
+            foreach (var row in _databaseGateway.GetRowsUsing(_formulaQueryFactory.GetOperations(id)))
             {
-                throw Exceptions.MissingEntity<Formula>(id);
+                result.AddOperation(new FormulaOperation(
+                    FormulaOperationColumns.SequenceNumber.MapFrom(row),
+                    FormulaOperationColumns.Operation.MapFrom(row),
+                    FormulaOperationColumns.ValueSource.MapFrom(row),
+                    FormulaOperationColumns.ValueSelection.MapFrom(row),
+                    FormulaOperationColumns.Text.MapFrom(row)));
             }
+
+            _constraintQuery.GetOwned(result);
 
             return result;
         }
 
         public void Add(IFormulaOwner owner, Formula formula)
         {
-            _databaseGateway.ExecuteUsing(_formulaQueryFactory.Add(owner, formula));
+            _databaseGateway.ExecuteUsing(_formulaQueryFactory.Add(owner.OwnerName, owner.Id, formula));
 
             AddOperations(formula);
 
-            _constraintRepository.SaveForOwner(formula);
+            _constraintQuery.SaveOwned(formula);
         }
 
         public void Save(Formula item)
@@ -60,7 +72,7 @@ namespace Shuttle.Abacus.DataAccess
 
             AddOperations(item);
 
-            _constraintRepository.SaveForOwner(item);
+            _constraintQuery.SaveOwned(item);
         }
 
         public void SaveOrdered(IFormulaOwner owner)
@@ -75,9 +87,13 @@ namespace Shuttle.Abacus.DataAccess
             });
         }
 
-        public IEnumerable<Formula> AllForOwner(Guid ownerId)
+        public void Add(string ownerName, Guid ownerId, Formula formula)
         {
-            return _repository.FetchAllUsing(_formulaQueryFactory.AllForOwner(ownerId));
+            _databaseGateway.ExecuteUsing(_formulaQueryFactory.Add(ownerName, ownerId, formula));
+
+            AddOperations(formula);
+
+            _constraintQuery.SaveOwned(formula);
         }
 
         private void AddOperations(Formula formula)

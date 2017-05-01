@@ -53,7 +53,7 @@ where
                 .AddParameterValue(FormulaColumns.Id, id);
         }
 
-        public IQuery Add(IFormulaOwner owner, Formula item)
+        public IQuery Add(string ownerName, Guid ownerId, Formula formula)
         {
             return RawQuery.Create(@"
 insert into Formula
@@ -72,11 +72,11 @@ values
     @SequenceNumber,
     @Description
 )")
-                .AddParameterValue(FormulaColumns.Id, item.Id)
-                .AddParameterValue(FormulaColumns.OwnerName, owner.OwnerName)
-                .AddParameterValue(FormulaColumns.OwnerId, owner.Id)
-                .AddParameterValue(FormulaColumns.Description, item.Description())
-                .AddParameterValue(FormulaColumns.SequenceNumber, owner.Formulas.Count());
+                .AddParameterValue(FormulaColumns.Id, formula.Id)
+                .AddParameterValue(FormulaColumns.OwnerName, ownerName)
+                .AddParameterValue(FormulaColumns.OwnerId, ownerId)
+                .AddParameterValue(FormulaColumns.Description, formula.Description())
+                .AddParameterValue(FormulaColumns.SequenceNumber, formula.SequenceNumber);
         }
 
         public IQuery Remove(Guid id)
@@ -95,12 +95,6 @@ values
 
         public IQuery AddOperation(Formula formula, FormulaOperation operation, int sequenceNumber)
         {
-            var valueSelectionHolder = operation.ValueSource as IValueSelectionHolder;
-
-            var valueSelection = valueSelectionHolder == null
-                ? string.Empty
-                : valueSelectionHolder.ValueSelection;
-
             return RawQuery.Create(@"
 insert into FormulaOperation
 (
@@ -122,10 +116,10 @@ values
 )
 ")
                 .AddParameterValue(FormulaOperationColumns.FormulaId, formula.Id)
-                .AddParameterValue(FormulaOperationColumns.Operation, operation.Name)
-                .AddParameterValue(FormulaOperationColumns.ValueSource, operation.ValueSource.Name)
-                .AddParameterValue(FormulaOperationColumns.ValueSelection, valueSelection)
-                .AddParameterValue(FormulaOperationColumns.Text, operation.ValueSource.Text)
+                .AddParameterValue(FormulaOperationColumns.Operation, operation)
+                .AddParameterValue(FormulaOperationColumns.ValueSource, operation.ValueSource)
+                .AddParameterValue(FormulaOperationColumns.ValueSelection, operation.ValueSelection)
+                .AddParameterValue(FormulaOperationColumns.Text, operation.ValueSource)
                 .AddParameterValue(FormulaOperationColumns.SequenceNumber, sequenceNumber);
         }
 

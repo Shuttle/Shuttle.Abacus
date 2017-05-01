@@ -11,6 +11,7 @@ namespace Shuttle.Abacus.Domain
         ISpecification<IMethodContext>
     {
         private readonly List<IConstraint> constraints = new List<IConstraint>();
+        private readonly List<OwnedConstraint> _constraints = new List<OwnedConstraint>();
 
         public DecimalValue(decimal value)
             : this(Guid.NewGuid(), -1, -1, value)
@@ -35,9 +36,9 @@ namespace Shuttle.Abacus.Domain
             get { return "DecimalValue"; }
         }
 
-        public IEnumerable<IConstraint> Constraints
+        public IEnumerable<OwnedConstraint> Constraints
         {
-            get { return new ReadOnlyCollection<IConstraint>(constraints); }
+            get { return new ReadOnlyCollection<OwnedConstraint>(_constraints); }
         }
 
         public IConstraintOwner AddConstraint(IConstraint constraint)
@@ -47,6 +48,13 @@ namespace Shuttle.Abacus.Domain
             constraints.Add(constraint);
 
             return this;
+        }
+
+        public void AddConstraint(OwnedConstraint item)
+        {
+            Guard.AgainstNull(item, "item");
+
+            _constraints.Add(item);
         }
 
         public bool IsSatisfiedBy(IMethodContext collectionMethodContext)

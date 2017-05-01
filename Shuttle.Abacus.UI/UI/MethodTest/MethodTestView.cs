@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Infrastructure;
@@ -55,20 +56,22 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
 
         public bool HasInvalidArgumentAnswers()
         {
+            throw new NotImplementedException();
+
             foreach (ListViewItem item in ArgumentAnswersListView.Items)
             {
-                if (Guid.Empty.Equals(((ArgumentDTO)item.Tag).Id))
-                {
-                    return true;
-                }
+                //if (Guid.Empty.Equals(((DataRow)item.Tag).Id))
+                //{
+                //    return true;
+                //}
             }
 
             return false;
         }
 
-        public ArgumentDTO ArgumentDto
+        public DataRow ArgumentRow
         {
-            get { return Argument.SelectedItem as ArgumentDTO; }
+            get { return Argument.SelectedItem as DataRow; }
         }
 
         public bool HasArgument
@@ -102,7 +105,7 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
             list.ForEach(dto => Answer.Items.Add(dto.Answer));
         }
 
-        public void PopulateFactors(IEnumerable<ArgumentDTO> items)
+        public void PopulateFactors(IEnumerable<DataRow> items)
         {
             Answer.Items.Clear();
 
@@ -122,7 +125,7 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
 
         public void AddArgumentAnswer(Guid argumentId, string answer)
         {
-            var dto = FindArgumentDTO(argumentId);
+            var dto = FindDataRow(argumentId);
 
             if (dto == null)
             {
@@ -136,7 +139,7 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
             ArgumentAnswersListView.Items.Add(PopulateItem(item, dto, answer));
         }
 
-        public void AddArgument(ArgumentDTO dto)
+        public void AddArgument(DataRow dto)
         {
             Argument.Items.Add(dto);
         }
@@ -147,24 +150,30 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
             set { Answer.Text = value; }
         }
 
-        private ListViewItem PopulateItem(ListViewItem item, ArgumentDTO dto, string answer)
+        private ListViewItem PopulateItem(ListViewItem item, DataRow dto, string answer)
         {
             item.SubItems[1].Text = answer;
 
-            item.Tag = dto;
-            item.Text = dto.Name;
+            throw new NotImplementedException();
+
+            //TODO
+            //item.Tag = dto;
+            //item.Text = dto.Name;
 
             return item;
         }
 
-        private ArgumentDTO FindArgumentDTO(Guid argumentId)
+        private DataRow FindDataRow(Guid argumentId)
         {
-            foreach (ArgumentDTO dto in Argument.Items)
+            throw new NotImplementedException();
+
+            foreach (DataRow dto in Argument.Items)
             {
-                if (dto.Id.Equals(argumentId))
-                {
-                    return dto;
-                }
+                //TODO
+                //if (dto.Id.Equals(argumentId))
+                //{
+                //    return dto;
+                //}
             }
 
             return null;
@@ -193,21 +202,24 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
                 return;
             }
 
-            var argumentDTO = (ArgumentDTO)Argument.SelectedItem;
+            var argumentDTO = (DataRow)Argument.SelectedItem;
 
-            foreach (ListViewItem item in ArgumentAnswersListView.Items)
-            {
-                if (argumentDTO.Name != item.Text)
-                {
-                    continue;
-                }
+            throw new NotImplementedException();
 
-                PopulateItem(item, argumentDTO, Answer.Text);
+            //TODO
+            //foreach (ListViewItem item in ArgumentAnswersListView.Items)
+            //{
+            //    if (argumentDTO.Name != item.Text)
+            //    {
+            //        continue;
+            //    }
 
-                return;
-            }
+            //    PopulateItem(item, argumentDTO, Answer.Text);
 
-            AddArgumentAnswer(argumentDTO.Id, Answer.Text);
+            //    return;
+            //}
+
+            //AddArgumentAnswer(argumentDTO.Id, Answer.Text);
         }
 
         private void ArgumentName_SelectedIndexChanged(object sender, EventArgs e)
@@ -224,13 +236,16 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
                 return;
             }
 
-            foreach (ArgumentDTO item in Argument.Items)
+            throw new NotImplementedException();
+
+            foreach (DataRow item in Argument.Items)
             {
-                if (item.Name !=
-                    ArgumentAnswersListView.SelectedItems[0].SubItems[0].Text)
-                {
-                    continue;
-                }
+                //TODO
+                //if (item.Name !=
+                //    ArgumentAnswersListView.SelectedItems[0].SubItems[0].Text)
+                //{
+                //    continue;
+                //}
 
                 Argument.SelectedItem = item;
 

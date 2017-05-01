@@ -3,7 +3,7 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class SquareRootOperation : FormulaOperation
+    public class SquareRootOperation : Operation
     {
         public SquareRootOperation(IValueSource source)
             : base(source)
@@ -30,11 +30,6 @@ namespace Shuttle.Abacus.Domain
         public override decimal Operand(IMethodContext methodContext, IFormulaCalculationContext calculationContext)
         {
             return ValueSource.Operand(methodContext, calculationContext);
-        }
-
-        public override FormulaOperation Copy()
-        {
-            return new SquareRootOperation(ValueSource.Copy());
         }
     }
 }

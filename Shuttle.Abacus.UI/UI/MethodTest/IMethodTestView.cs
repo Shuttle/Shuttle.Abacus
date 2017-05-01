@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Invariants.Core;
@@ -17,7 +18,7 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
 
         IList ArgumentAnswers { get; }
 
-        ArgumentDTO ArgumentDto { get; }
+        DataRow ArgumentRow { get; }
         bool HasArgument { get; }
         bool HasAnswer { get; }
         string AnswerValue { get; }
@@ -30,11 +31,11 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
         void EnableAnswerSelection();
         void EnableAnswerEntry();
         void PopulateAnswerCatalog(IEnumerable<ArgumentRestrictedAnswerDTO> list);
-        void PopulateFactors(IEnumerable<ArgumentDTO> items);
+        void PopulateFactors(IEnumerable<DataRow> items);
         void ShowArgumentError();
         void ShowAnswerError(string message);
         void AddArgumentAnswer(Guid argumentId, string answer);
-        void AddArgument(ArgumentDTO dto);
+        void AddArgument(DataRow dto);
         bool HasInvalidArgumentAnswers();
 
         void AttachValueFormatter(MoneyFormatter formatter);
