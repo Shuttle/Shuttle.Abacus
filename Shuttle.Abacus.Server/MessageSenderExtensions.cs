@@ -1,4 +1,5 @@
 ﻿using Shuttle.Abacus.Messages;
+using Shuttle.Abacus.Messages.v1;
 using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;
 

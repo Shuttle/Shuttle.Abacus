@@ -1,17 +1,23 @@
-using System.Collections.Generic;
+using System;
 using System.Data;
-using Shuttle.Abacus.DTO;
+using Shuttle.Abacus.DataAccess;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Models
 {
     public class FormulaModel
     {
-        public IEnumerable<DecimalTableDTO> DecimalTables { get; set; }
-        public IEnumerable<CalculationDTO> PrecedingCalculations { get; set; }
-        public IEnumerable<MethodDTO> Methods { get; set; }
-        public IEnumerable<DataRow> ArgumentRows { get; set; }
-        public IEnumerable<OperationDTO> FormulaOperations { get; set; }
-        public IEnumerable<OperationTypeDTO> OperationTypes { get; set; }
-        public IEnumerable<ValueSourceTypeDTO> ValueSourceTypes { get; set; }
+        private readonly DataRow _row;
+
+        public FormulaModel(DataRow row)
+        {
+            Guard.AgainstNull(row, "row");
+
+            _row = row;
+        }
+
+        public Guid Id => FormulaColumns.Id.MapFrom(_row);
+        public int SequenceNumber => FormulaColumns.SequenceNumber.MapFrom(_row);
+        public string Description => FormulaColumns.Description.MapFrom(_row);
     }
 }

@@ -1,31 +1,43 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using Shuttle.Abacus.DataAccess;
-using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Interfaces;
 using Shuttle.Abacus.Invariants.Values;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
+using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.UI.DecimalTable
 {
     public class DecimalTablePresenter : Presenter<IDecimalTableView, DecimalTableModel>, IDecimalTablePresenter
     {
-        private bool previousRowArgumentWasText;
-        private bool previousColumnArgumentWasText;
+        private readonly IArgumentQuery _argumentQuery;
 
-        private readonly IDecimalTableRules decimalTableRules;
-        private readonly IValueTypeValidatorProvider valueTypeValidatorProvider;
+        private readonly IDatabaseContextFactory _databaseContextFactory;
+        private readonly IDecimalTableRules _decimalTableRules;
+        private readonly IValueTypeValidatorProvider _valueTypeValidatorProvider;
+        private bool _previousColumnArgumentWasText;
+        private bool _previousRowArgumentWasText;
 
-        public DecimalTablePresenter(IDecimalTableView view, IDecimalTableRules decimalTableRules, IValueTypeValidatorProvider valueTypeValidatorProvider)
+        public DecimalTablePresenter(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
+            IDecimalTableView view, IDecimalTableRules decimalTableRules,
+            IValueTypeValidatorProvider valueTypeValidatorProvider)
             : base(view)
         {
-            this.decimalTableRules = decimalTableRules;
-            this.valueTypeValidatorProvider = valueTypeValidatorProvider;
+            Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
+            Guard.AgainstNull(argumentQuery, "argumentQuery");
+            Guard.AgainstNull(decimalTableRules, "decimalTableRules");
+            Guard.AgainstNull(valueTypeValidatorProvider, "valueTypeValidatorProvider");
+
+            _databaseContextFactory = databaseContextFactory;
+            _argumentQuery = argumentQuery;
+            _decimalTableRules = decimalTableRules;
+            _valueTypeValidatorProvider = valueTypeValidatorProvider;
 
             Text = "Decimal Table";
             Image = Resources.Image_DecimalTable;
@@ -34,9 +46,9 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
         public void DecimalTableNameExited()
         {
             WorkItem.Text = string.Format("Decimal Table{0}",
-                                          View.DecimalTableNameValue.Length > 0
-                                              ? " : " + View.DecimalTableNameValue
-                                              : string.Empty);
+                View.DecimalTableNameValue.Length > 0
+                    ? " : " + View.DecimalTableNameValue
+                    : string.Empty);
         }
 
         public void RowArgumentChanged()
@@ -48,35 +60,45 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
             View.EnableColumnArgument();
 
-            var argumentModel = View.ArgumentModel;
+            var argumentModel = View.RowArgumentModel;
 
-            if (argumentModel.CanOnlyCompareEquality)
+            IEnumerable<string> answers;
+
+            using (_databaseContextFactory.Create())
             {
-                if (argumentModel.HasAnswerCatalog)
-                {
-                    View.EnableRowAnswerSelection(argumentModel.Answers);
+                answers =
+                    _argumentQuery.Answers(argumentModel.Id)
+                        .Map(row => ArgumentColumns.RestrictedAnswerColumns.Answer.MapFrom(row))
+                        .ToList();
+            }
 
-                    previousRowArgumentWasText = false;
+            if (argumentModel.IsText())
+            {
+                if (argumentModel.IsText() || answers.Any())
+                {
+                    View.EnableRowAnswerSelection(answers);
+
+                    _previousRowArgumentWasText = false;
                 }
                 else
                 {
-                    if (!previousRowArgumentWasText)
+                    if (!_previousRowArgumentWasText)
                     {
                         View.EnableRowAnswerEntry();
                     }
 
-                    previousRowArgumentWasText = true;
+                    _previousRowArgumentWasText = true;
                 }
 
                 View.ShowRowAnswerCatalogConstraints();
             }
             else
             {
-                if (!previousRowArgumentWasText)
+                if (!_previousRowArgumentWasText)
                 {
                     View.EnableRowAnswerEntry();
 
-                    previousRowArgumentWasText = true;
+                    _previousRowArgumentWasText = true;
                 }
 
                 View.ShowRowAllConstraints();
@@ -89,35 +111,37 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             {
                 View.ApplyColumnArgument();
 
-                var dto = View.ColumnRow;
+                var argumentModel = View.ColumnArgumentModel;
 
-                if (dto.CanOnlyCompareEquality)
+                var answers = ColumnAnswers().ToList();
+
+                if (argumentModel.IsText() || answers.Any())
                 {
-                    if (dto.HasAnswerCatalog)
+                    if (answers.Any())
                     {
-                        View.EnableColumnAnswerSelection(dto.Answers);
+                        View.EnableColumnAnswerSelection(answers);
 
-                        previousColumnArgumentWasText = false;
+                        _previousColumnArgumentWasText = false;
                     }
                     else
                     {
-                        if (!previousColumnArgumentWasText)
+                        if (!_previousColumnArgumentWasText)
                         {
                             View.EnableColumnAnswerEntry();
                         }
 
-                        previousColumnArgumentWasText = true;
+                        _previousColumnArgumentWasText = true;
                     }
 
                     View.ShowColumnAnswerCatalogConstraints();
                 }
                 else
                 {
-                    if (!previousColumnArgumentWasText)
+                    if (!_previousColumnArgumentWasText)
                     {
                         View.EnableColumnAnswerEntry();
 
-                        previousColumnArgumentWasText = true;
+                        _previousColumnArgumentWasText = true;
                     }
 
                     View.ShowColumnAllConstraints();
@@ -136,39 +160,26 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             return decimal.TryParse(value, out dec);
         }
 
-        public bool IsValidAnswer(DataRow row, object value)
+        public bool IsValidAnswer(ArgumentModel model, object value)
         {
-            if (string.IsNullOrEmpty(row.AnswerType))
+            if (string.IsNullOrEmpty(model.AnswerType))
             {
                 return true;
             }
 
-            if (row.HasAnswerCatalog && !HasValidArgumentAnswer(row, Convert.ToString(value)))
+            if (model.HasAnswerCatalog && !HasValidArgumentAnswer(model, Convert.ToString(value)))
             {
                 return false;
             }
 
-            if (row.IsText)
+            if (model.IsText)
             {
                 return !string.IsNullOrEmpty(Convert.ToString(value));
             }
 
             return
-                valueTypeValidatorProvider.Get(row.AnswerType).Validate(Convert.ToString(value))
+                _valueTypeValidatorProvider.Get(model.AnswerType).Validate(Convert.ToString(value))
                     .OK;
-        }
-
-        private static bool HasValidArgumentAnswer(DataRow dto, string value)
-        {
-            foreach (var answer in dto.Answers)
-            {
-                if (answer.Answer.Equals(value, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         public void ShowInvalidDecimalTableMessage()
@@ -177,22 +188,42 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
                 Result.Create().AddFailureMessage("The decimal table has invalid values.  Please investigate."));
         }
 
-        public ConstraintTypeDTO GetConstraintType(string name)
+        public IEnumerable<string> ColumnAnswers()
         {
-            foreach (var dto in ConstraintTypes)
+            return ArgumentAnswers(View.ColumnArgumentModel.Id);
+        }
+
+        private IEnumerable<string> ArgumentAnswers(Guid id)
+        {
+            using (_databaseContextFactory.Create())
             {
-                if (dto.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase))
+                return
+                    _argumentQuery.Answers(id)
+                        .Map(row => ArgumentColumns.RestrictedAnswerColumns.Answer.MapFrom(row));
+            }
+        }
+
+        public IEnumerable<string> RowAnswers()
+        {
+            return ArgumentAnswers(View.RowArgumentModel.Id);
+        }
+
+        public IEnumerable<ConstraintTypeModel> ConstraintTypes
+        {
+            get { return Model.ConstraintTypes; }
+        }
+
+        private bool HasValidArgumentAnswer(ArgumentModel model, string value)
+        {
+            foreach (var answer in ArgumentAnswers(model.Id))
+            {
+                if (answer.Equals(value, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    return dto;
+                    return true;
                 }
             }
 
-            throw new MissingEntityException(string.Format("Could not find contraint type with name '{0}'.", name));
-        }
-
-        public IEnumerable<ConstraintTypeDTO> ConstraintTypes
-        {
-            get { return Model.ConstraintTypes; }
+            return false;
         }
 
         public override void OnInitialize()
@@ -201,8 +232,8 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
             Guard.AgainstNull(Model, "Model");
 
-            View.DecimalTableNameRules = decimalTableRules.DecimalTableNameRules();
-            View.RowArgumentRules = decimalTableRules.RowArgumentRules();
+            View.DecimalTableNameRules = _decimalTableRules.DecimalTableNameRules();
+            View.RowArgumentRules = _decimalTableRules.RowArgumentRules();
 
             View.PopulateArguments(Model.ArgumentRows);
 
@@ -238,7 +269,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
                     ConstraintColumns.Name.MapFrom(row),
                     ConstraintColumns.ArgumentName.MapFrom(row),
                     ConstraintColumns.Answer.MapFrom(row)
-                    );
+                );
             }
         }
 

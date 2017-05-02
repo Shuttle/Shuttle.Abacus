@@ -2,6 +2,8 @@
 using Shuttle.Abacus.ApplicationService;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Messages;
+using Shuttle.Abacus.Messages.v1;
+using Shuttle.Abacus.Messages.v1.TransferObjects;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;

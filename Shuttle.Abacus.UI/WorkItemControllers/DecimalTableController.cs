@@ -1,4 +1,5 @@
 using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Messages.v1;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.DecimalTable;
@@ -35,9 +36,9 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             var command = new CreateDecimalTableCommand
                           {
                               DecimalTableName = view.DecimalTableNameValue,
-                              RowArgumentDto = view.ArgumentModel,
-                              ColumnDataRow = view.ColumnRow,
-                              DecimalValueDTOs = view.DecimalValueDTOs()
+                              RowArgumentDto = view.RowArgumentModel,
+                              ColumnDataRow = view.ColumnArgumentModel,
+                              DecimalValues = view.DecimalValues()
                           };
 
             Send(command);
@@ -63,9 +64,9 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                           {
                               DecimalTableId = message.DecimalTableId,
                               DecimalTableName = view.DecimalTableNameValue,
-                              RowArgumentDto = view.ArgumentModel,
-                              ColumnDataRow = view.ColumnRow,
-                              DecimalValueDTOs = view.DecimalValueDTOs()
+                              RowArgumentDto = view.RowArgumentModel,
+                              ColumnDataRow = view.ColumnArgumentModel,
+                              DecimalValues = view.DecimalValues()
                           };
 
             Send(command,

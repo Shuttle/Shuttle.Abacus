@@ -35,7 +35,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                  {
                      OwnerName = message.OwnerName,
                      OwnerId = message.OwnerId,
-                     Operations = formulaView.Operations,
+                     Operations = formulaView.FormulaOperations,
                      Constraints = constraintView.Constraints
                  });
         }
@@ -54,7 +54,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                  {
                      CalculationId = message.OwnerId,
                      FormulaId = message.FormulaId,
-                     Operations = formulaView.Operations,
+                     Operations = formulaView.FormulaOperations,
                      Constraints = constraintView.Constraints
                  }, () =>
                     MessageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));

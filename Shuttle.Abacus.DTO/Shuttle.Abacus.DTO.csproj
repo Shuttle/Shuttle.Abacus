@@ -41,12 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArgumentAnswerDTO.cs" />
-    <Compile Include="ArgumentRestrictedAnswerDTO.cs" />
     <Compile Include="CalculationDTO.cs" />
     <Compile Include="ConstraintDTO.cs" />
     <Compile Include="ConstraintTypeDTO.cs" />
-    <Compile Include="DecimalTableDTO.cs" />
-    <Compile Include="DecimalValueDTO.cs" />
     <Compile Include="GraphNodeArgumentDTO.cs" />
     <Compile Include="GraphNodeDTO.cs" />
     <Compile Include="MethodContextDTO.cs" />

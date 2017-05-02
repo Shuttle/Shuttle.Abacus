@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Shuttle.Abacus.Infrastructure;
 
-namespace Shuttle.Abacus.Messages
+namespace Shuttle.Abacus.Messages.v1
 {
     public class ReplyMessage
     {

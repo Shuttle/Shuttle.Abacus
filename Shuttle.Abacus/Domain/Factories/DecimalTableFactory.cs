@@ -20,7 +20,7 @@ namespace Shuttle.Abacus.Domain
 
             throw new NotImplementedException();
 
-            foreach (var dto in command.DecimalValueDTOs)
+            foreach (var dto in command.DecimalValues)
             {
                 var value = new DecimalValue(Guid.NewGuid(), dto.Column, dto.Row, dto.Value);
 

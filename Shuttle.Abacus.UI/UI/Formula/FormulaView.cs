@@ -6,6 +6,7 @@ using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Models;
 
 namespace Shuttle.Abacus.UI.UI.Formula
 {
@@ -69,7 +70,7 @@ namespace Shuttle.Abacus.UI.UI.Formula
             ValueSelection.Enabled = false;
         }
 
-        public List<FormulaOperation> Operations
+        public List<FormulaOperation> FormulaOperations
         {
             get
             {
@@ -80,18 +81,23 @@ namespace Shuttle.Abacus.UI.UI.Formula
                 {
                     var tag = (ItemTag) item.Tag;
 
-                    result.Add(new FormulaOperation(
-                        sequenceNumber++,
-                        tag.Operation,
-                        tag.ValueSource,
-                        tag.ValueSelection,
-                        "???"
-                    ));
+                    //TODO
+                    //result.Add(new FormulaOperation(
+                    //    sequenceNumber++,
+                    //    tag.Operation,
+                    //    tag.ValueSource,
+                    //    tag.ValueSelection,
+                    //    "???"
+                    //));
                 }
 
                 return result;
             }
-            set { value.ForEach(dto => AddOperation(dto.OperationType, dto.ValueSourceType, dto.ValueSelection, dto.Text)); }
+            set
+            {
+                //TODO
+                //value.ForEach(dto => AddOperation(dto.OperationType, dto.ValueSourceType, dto.ValueSelection, dto.Text));
+            }
         }
 
         public string ValueSourceValue
@@ -226,11 +232,11 @@ namespace Shuttle.Abacus.UI.UI.Formula
             }
         }
 
-        public void PopulateDecimalTables(IEnumerable<DecimalTableDTO> enumerable)
+        public void PopulateDecimalTables(IEnumerable<DecimalTableModel> list)
         {
-            foreach (var dto in enumerable)
+            foreach (var model in list)
             {
-                ValueSelection.Items.Add(new SelectionItem(dto.DecimalTableId, dto.Name));
+                ValueSelection.Items.Add(new SelectionItem(model.Id, model.Name));
             }
         }
 

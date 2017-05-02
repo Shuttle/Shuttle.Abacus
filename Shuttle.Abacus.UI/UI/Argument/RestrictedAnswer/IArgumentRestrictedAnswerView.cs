@@ -8,7 +8,7 @@ namespace Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer
 {
     public interface IArgumentRestrictedAnswerView : IView
     {
-        List<ArgumentRestrictedAnswerDTO> ArgumentAnswerCatalog { get; set; }
+        List<string> Answers { get; set; }
         IRuleCollection<object> ArgumentRestrictedAnswerRules { set; }
         bool HasAnswer();
         void ShowAnswerError(string message);

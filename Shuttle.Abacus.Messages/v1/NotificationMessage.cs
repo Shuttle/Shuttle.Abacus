@@ -1,7 +1,7 @@
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.Messages
+namespace Shuttle.Abacus.Messages.v1
 {
     public class NotificationMessage
     {

@@ -32,7 +32,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                           {
                               Name = view.ArgumentNameValue,
                               AnswerType = view.AnswerTypeValue,
-                              Answers = mappingListView.ArgumentAnswerCatalog
+                              Answers = mappingListView.Answers
                           };
 
             Send(command);
@@ -53,7 +53,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                               ArgumentId = message.ArgumentId,
                               Name = view.ArgumentNameValue,
                               AnswerType = view.AnswerTypeValue,
-                              ArgumentAnswers = mappingListView.ArgumentAnswerCatalog
+                              ArgumentAnswers = mappingListView.Answers
                           };
 
             Send(command, () =>

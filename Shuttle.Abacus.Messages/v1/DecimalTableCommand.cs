@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Shuttle.Abacus.DTO;
+using Shuttle.Abacus.Messages.v1.TransferObjects;
 
-namespace Shuttle.Abacus.Domain
+namespace Shuttle.Abacus.Messages.v1
 {
     public class DecimalTableCommand
     {
@@ -10,6 +10,6 @@ namespace Shuttle.Abacus.Domain
         public string DecimalTableName { get; set; }
         public Guid RowArgumentId { get; set; }
         public Guid ColumnArgumentId { get; set; }
-        public List<DecimalValueDTO> DecimalValueDTOs { get; set; }
+        public List<DecimalValue> DecimalValues { get; set; }
     }
 }

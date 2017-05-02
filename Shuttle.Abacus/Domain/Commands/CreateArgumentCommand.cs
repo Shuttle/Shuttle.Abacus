@@ -7,6 +7,7 @@ namespace Shuttle.Abacus.Domain
     {
         public string Name { get; set; }
         public string AnswerType { get; set; }
-        public List<ArgumentRestrictedAnswerDTO> Answers { get; set; }
+        //TODO
+        //public List<ArgumentRestrictedAnswerDTO> Answers { get; set; }
     }
 }

@@ -86,30 +86,6 @@ namespace Shuttle.Abacus.Domain
             return _answers.Find(item => item.Answer.Equals(answer, StringComparison.InvariantCultureIgnoreCase));
         }
 
-        public bool IsNumber
-        {
-            get { return !string.IsNullOrEmpty(AnswerType) && Numbers.Contains(AnswerType.ToLower()); }
-        }
-
-        public bool HasAnswerCatalog
-        {
-            get { return _answers != null && _answers.Count > 0; }
-        }
-
-        public bool IsMoney
-        {
-            get { return AnswerType.ToLower() == "money"; }
-        }
-
-        public bool IsText
-        {
-            get { return AnswerType.ToLower() == "text"; }
-        }
-
-        public bool CanOnlyCompareEquality
-        {
-            get { return HasAnswerCatalog || IsText; }
-        }
 
         public bool HasArgumentName(string name)
         {

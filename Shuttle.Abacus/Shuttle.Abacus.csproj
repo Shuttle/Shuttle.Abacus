@@ -139,9 +139,6 @@
     <Compile Include="DataAccess\Mapping\ArgumentDataReaderMapper.cs" />
     <Compile Include="DataAccess\Mapping\CalculationDTOMapper.cs" />
     <Compile Include="DataAccess\Mapping\ConstraintDataTableMapper.cs" />
-    <Compile Include="DataAccess\Mapping\DecimalTableDataRowMapper.cs" />
-    <Compile Include="DataAccess\Mapping\DecimalTableDTOMapper.cs" />
-    <Compile Include="DataAccess\Mapping\DecimalValueDataRowMapper.cs" />
     <Compile Include="DataAccess\Mapping\IMethodTestDTOMapper.cs" />
     <Compile Include="DataAccess\Mapping\MethodDTOMapper.cs" />
     <Compile Include="DataAccess\Mapping\MethodTestDTOMapper.cs" />
@@ -235,13 +232,11 @@
     <Compile Include="Domain\Commands\CopyMethodCommand.cs" />
     <Compile Include="Domain\Commands\CreateArgumentCommand.cs" />
     <Compile Include="Domain\Commands\CreateCalculationCommand.cs" />
-    <Compile Include="Domain\Commands\CreateDecimalTableCommand.cs" />
     <Compile Include="Domain\Commands\CreateFormulaCommand.cs" />
     <Compile Include="Domain\Commands\CreateLimitCommand.cs" />
     <Compile Include="Domain\Commands\CreateMethodCommand.cs" />
     <Compile Include="Domain\Commands\CreateMethodTestCommand.cs" />
     <Compile Include="Domain\Commands\CreateSystemUserCommand.cs" />
-    <Compile Include="Domain\Commands\DecimalTableCommand.cs" />
     <Compile Include="Domain\Commands\DeleteArgumentCommand.cs" />
     <Compile Include="Domain\Commands\DeleteCalculationCommand.cs" />
     <Compile Include="Domain\Commands\DeleteFormulaCommand.cs" />
@@ -253,7 +248,6 @@
     <Compile Include="Domain\Commands\RunMethodTestCommand.cs" />
     <Compile Include="Domain\Commands\SetCalculationConstraintsCommand.cs" />
     <Compile Include="Domain\Commands\SetPermissionsCommand.cs" />
-    <Compile Include="Domain\Commands\UpdateDecimalTableCommand.cs" />
     <Compile Include="Domain\Constraints\Constraint.cs" />
     <Compile Include="Domain\Constraints\EqualsConstraint.cs" />
     <Compile Include="Domain\Constraints\Factories\EqualsConstraintFactory.cs" />

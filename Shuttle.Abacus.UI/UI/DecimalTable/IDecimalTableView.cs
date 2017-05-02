@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Data;
 using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Invariants.Core;
+using Shuttle.Abacus.Messages.v1;
+using Shuttle.Abacus.Messages.v1.TransferObjects;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
 
@@ -12,27 +14,27 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
         string DecimalTableNameValue { get; set; }
         IRuleCollection<object> DecimalTableNameRules { set; }
         IRuleCollection<object> RowArgumentRules { set; }
-        ArgumentModel ArgumentModel { get; }
+        ArgumentModel RowArgumentModel { get; }
         bool GridInitialized { get; }
         string RowArgumentValue { get; set; }
         string ColumnArgumentValue { get; set; }
         bool HasColumnArgument { get; }
-        DataRow ColumnRow { get; }
+        ArgumentModel ColumnArgumentModel { get; }
         void PopulateArguments(IEnumerable<DataRow> rows);
         void EnableColumnArgument();
         void ShowRowAnswerCatalogConstraints();
         void ShowRowAllConstraints();
-        void EnableRowAnswerSelection(List<ArgumentRestrictedAnswerDTO> answers);
+        void EnableRowAnswerSelection(IEnumerable<string> answers);
         void EnableRowAnswerEntry();
         void ShowColumnAnswerCatalogConstraints();
         void ShowColumnAllConstraints();
-        void EnableColumnAnswerSelection(List<ArgumentRestrictedAnswerDTO> answers);
+        void EnableColumnAnswerSelection(IEnumerable<string> answers);
         void EnableColumnAnswerEntry();
         void InitializeGrid();
         void RowFactorsOnly();
         void ApplyColumnArgument();
         bool HasInvalidDecimalTable();
-        List<DecimalValueDTO> DecimalValueDTOs();
+        List<DecimalValue> DecimalValues();
         void AddDecimalValue(int column, int row, decimal value, string constraint, string argument, string answer);
     }
 }

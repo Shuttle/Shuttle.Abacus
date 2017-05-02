@@ -9,6 +9,7 @@ namespace Shuttle.Abacus.Domain
         public Guid ArgumentId { get; set; }
         public string Name { get; set; }
         public string AnswerType { get; set; }
-        public List<ArgumentRestrictedAnswerDTO> ArgumentAnswers { get; set; }
+        //TODO
+        //public List<ArgumentRestrictedAnswerDTO> Answers { get; set; }
     }
 }

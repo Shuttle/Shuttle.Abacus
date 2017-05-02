@@ -1,4 +1,4 @@
-﻿namespace Shuttle.Abacus.Messages
+﻿namespace Shuttle.Abacus.Messages.v1.TransferObjects
 {
     public class Permission
     {

@@ -35,24 +35,24 @@ namespace Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer
             SetError(Answer, message);
         }
 
-        public List<ArgumentRestrictedAnswerDTO> ArgumentAnswerCatalog
+        public List<string> Answers
         {
             get
             {
-                var result = new List<ArgumentRestrictedAnswerDTO>();
+                var result = new List<string>();
 
                 foreach (ListViewItem item in AnswerListView.Items)
                 {
-                    result.Add(new ArgumentRestrictedAnswerDTO(item.Text));
+                    result.Add(item.Text);
                 }
 
                 return result;
             }
             set
             {
-                foreach (var dto in value)
+                foreach (var item in value)
                 {
-                    AnswerListView.Items.Add(dto.Answer);
+                    AnswerListView.Items.Add(item);
                 }
             }
         }

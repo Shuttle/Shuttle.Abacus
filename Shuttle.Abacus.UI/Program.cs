@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Castle.Windsor;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Messages;
+using Shuttle.Abacus.Messages.v1;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Messages.Core;

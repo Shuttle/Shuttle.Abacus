@@ -4,7 +4,7 @@ using Shuttle.Esb;
 
 namespace Shuttle.Abacus.UI.Handlers
 {
-    public class ReplyMessageHandler : Esb.IMessageHandler<Abacus.Messages.ReplyMessage>
+    public class ReplyMessageHandler : Esb.IMessageHandler<Abacus.Messages.v1.ReplyMessage>
     {
         private readonly IMessageBus _messageBus;
 
@@ -13,7 +13,7 @@ namespace Shuttle.Abacus.UI.Handlers
             _messageBus = messageBus;
         }
 
-        public void ProcessMessage(IHandlerContext<Abacus.Messages.ReplyMessage> context)
+        public void ProcessMessage(IHandlerContext<Abacus.Messages.v1.ReplyMessage> context)
         {
             var message = context.Message;
             var result = new Result

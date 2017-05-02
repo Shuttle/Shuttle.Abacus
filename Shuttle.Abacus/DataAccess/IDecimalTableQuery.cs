@@ -8,9 +8,8 @@ namespace Shuttle.Abacus.DataAccess
     public interface IDecimalTableQuery
     {
         IEnumerable<DataRow> All();
-        IEnumerable<DecimalTableDTO> AllDTOs();
         DataRow Get(Guid id);
         DataTable ConstrainedDecimalValues(Guid id);
-        DataTable QueryDecimalTable(Guid decimalTableId);
+        DataTable DecimalTableReport(Guid decimalTableId);
     }
 }

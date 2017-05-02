@@ -29,5 +29,10 @@ namespace Shuttle.Abacus.UI.Models
         {
             return AnswerType.Equals("Money", StringComparison.OrdinalIgnoreCase);
         }
+
+        public bool IsNumber
+        {
+            get { return !string.IsNullOrEmpty(AnswerType) && Numbers.Contains(AnswerType.ToLower()); }
+        }
     }
 }
