@@ -35,8 +35,8 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             var command = new CreateDecimalTableCommand
                           {
                               DecimalTableName = view.DecimalTableNameValue,
-                              RowArgumentDto = view.RowArgumentDto,
-                              ColumnDataRow = view.ColumnDataRow,
+                              RowArgumentDto = view.ArgumentModel,
+                              ColumnDataRow = view.ColumnRow,
                               DecimalValueDTOs = view.DecimalValueDTOs()
                           };
 
@@ -63,8 +63,8 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                           {
                               DecimalTableId = message.DecimalTableId,
                               DecimalTableName = view.DecimalTableNameValue,
-                              RowArgumentDto = view.RowArgumentDto,
-                              ColumnDataRow = view.ColumnDataRow,
+                              RowArgumentDto = view.ArgumentModel,
+                              ColumnDataRow = view.ColumnRow,
                               DecimalValueDTOs = view.DecimalValueDTOs()
                           };
 

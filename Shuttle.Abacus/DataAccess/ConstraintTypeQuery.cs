@@ -1,6 +1,7 @@
 using System.Collections.Generic;
-using Shuttle.Abacus.DTO;
+using System.Data;
 using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.DataAccess
 {
@@ -8,18 +9,19 @@ namespace Shuttle.Abacus.DataAccess
     {
         private readonly IDatabaseGateway _databaseGateway;
         private readonly IConstraintTypeQueryFactory _constraintTypeQueryFactory;
-        private readonly IDataTableMapper<ConstraintTypeDTO> _constraintTypeDTOMapper;
 
-        public ConstraintTypeQuery(IDatabaseGateway databaseGateway, IConstraintTypeQueryFactory constraintTypeQueryFactory, IDataTableMapper<ConstraintTypeDTO> constraintTypeDtoMapper)
+        public ConstraintTypeQuery(IDatabaseGateway databaseGateway, IConstraintTypeQueryFactory constraintTypeQueryFactory)
         {
+            Guard.AgainstNull(databaseGateway, "databaseGateway");
+            Guard.AgainstNull(constraintTypeQueryFactory, "constraintTypeQueryFactory");
+
             _databaseGateway = databaseGateway;
             _constraintTypeQueryFactory = constraintTypeQueryFactory;
-            _constraintTypeDTOMapper = constraintTypeDtoMapper;
         }
         
-        public IEnumerable<ConstraintTypeDTO> All()
+        public IEnumerable<DataRow> All()
         {
-            return _constraintTypeDTOMapper.MapFrom(_databaseGateway.GetDataTableFor(_constraintTypeQueryFactory.All()));
+            return _databaseGateway.GetRowsUsing(_constraintTypeQueryFactory.All());
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Shuttle.Abacus.DataAccess
             return _databaseGateway.GetSingleRowUsing(_argumentQueryFactory.Get(id));
         }
 
-        public IEnumerable<DataRow> GetAnswerCatalog(Guid id)
+        public IEnumerable<DataRow> Answers(Guid id)
         {
             return _databaseGateway.GetRowsUsing(_argumentQueryFactory.GetRestrictedAnswer(id));
         }

@@ -3,6 +3,7 @@ using System.Data;
 using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Invariants.Core;
 using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Models;
 
 namespace Shuttle.Abacus.UI.UI.DecimalTable
 {
@@ -11,12 +12,12 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
         string DecimalTableNameValue { get; set; }
         IRuleCollection<object> DecimalTableNameRules { set; }
         IRuleCollection<object> RowArgumentRules { set; }
-        DataRow RowArgumentDto { get; }
+        ArgumentModel ArgumentModel { get; }
         bool GridInitialized { get; }
         string RowArgumentValue { get; set; }
         string ColumnArgumentValue { get; set; }
         bool HasColumnArgument { get; }
-        DataRow ColumnDataRow { get; }
+        DataRow ColumnRow { get; }
         void PopulateArguments(IEnumerable<DataRow> rows);
         void EnableColumnArgument();
         void ShowRowAnswerCatalogConstraints();

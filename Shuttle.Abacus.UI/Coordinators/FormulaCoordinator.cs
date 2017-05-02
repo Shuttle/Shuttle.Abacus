@@ -379,7 +379,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return new FormulaModel
                 {
                     DecimalTables = _decimalTableQuery.AllDTOs(),
-                    ArgumentRows = _argumentQuery.AllDTOs(),
+                    ArgumentRows = _argumentQuery.All(),
                     PrecedingCalculations =
                         ownerName.ToLower() == "calculation"
                             ? _calculationQuery.DTOsBeforeCalculation(methodId, ownerId)

@@ -66,7 +66,6 @@
     <Compile Include="ApplicationService\SetCalculationConstraintsTask.cs" />
     <Compile Include="ApplicationService\SetPermissionsTask.cs" />
     <Compile Include="ApplicationService\TaskFactory.cs" />
-    <Compile Include="DataAccess\AnswerTypeQuery.cs" />
     <Compile Include="DataAccess\ArgumentQuery.cs" />
     <Compile Include="DataAccess\ArgumentRepository.cs" />
     <Compile Include="DataAccess\CalculationQuery.cs" />
@@ -77,7 +76,6 @@
     <Compile Include="DataAccess\DecimalTableRepository.cs" />
     <Compile Include="DataAccess\DecimalValueRepository.cs" />
     <Compile Include="DataAccess\Definitions\AnswerTypeColumns.cs" />
-    <Compile Include="DataAccess\AnswerTypeQueryFactory.cs" />
     <Compile Include="DataAccess\Definitions\ArgumentColumns.cs" />
     <Compile Include="DataAccess\ArgumentQueryFactory.cs" />
     <Compile Include="DataAccess\Definitions\CalculationColumns.cs" />
@@ -97,7 +95,6 @@
     <Compile Include="DataAccess\Definitions\GraphNodeArgumentColumns.cs" />
     <Compile Include="DataAccess\GraphNodeArgumentQueryFactory.cs" />
     <Compile Include="DataAccess\Guarded.cs" />
-    <Compile Include="DataAccess\IAnswerTypeQueryFactory.cs" />
     <Compile Include="DataAccess\IArgumentQueryFactory.cs" />
     <Compile Include="DataAccess\ICalculationQueryFactory.cs" />
     <Compile Include="DataAccess\IConstraintQueryFactory.cs" />
@@ -142,7 +139,6 @@
     <Compile Include="DataAccess\Mapping\ArgumentDataReaderMapper.cs" />
     <Compile Include="DataAccess\Mapping\CalculationDTOMapper.cs" />
     <Compile Include="DataAccess\Mapping\ConstraintDataTableMapper.cs" />
-    <Compile Include="DataAccess\Mapping\ConstraintTypeDTOMapper.cs" />
     <Compile Include="DataAccess\Mapping\DecimalTableDataRowMapper.cs" />
     <Compile Include="DataAccess\Mapping\DecimalTableDTOMapper.cs" />
     <Compile Include="DataAccess\Mapping\DecimalValueDataRowMapper.cs" />
@@ -154,14 +150,12 @@
     <Compile Include="DataAccess\Mapping\SystemUserDataReaderMapper.cs" />
     <Compile Include="DataAccess\Mapping\MethodTestDataTableMapper.cs" />
     <Compile Include="DataAccess\Mapping\ValueSourceTypeDTOMapper.cs" />
-    <Compile Include="DataAccess\Mapping\ValueTypeDTOMapper.cs" />
     <Compile Include="DataAccess\MethodQuery.cs" />
     <Compile Include="DataAccess\MethodRepository.cs" />
     <Compile Include="DataAccess\MethodTestQuery.cs" />
     <Compile Include="DataAccess\MethodTestRepository.cs" />
     <Compile Include="DataAccess\OperationTypeQuery.cs" />
     <Compile Include="DataAccess\BooleanArgumentDTOPipe.cs" />
-    <Compile Include="DataAccess\IAnswerTypeQuery.cs" />
     <Compile Include="DataAccess\IArgumentQuery.cs" />
     <Compile Include="DataAccess\ICalculationQuery.cs" />
     <Compile Include="DataAccess\IConstraintQuery.cs" />

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using Shuttle.Abacus.DTO;
+using System.Data;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public interface IConstraintTypeQuery
     {
-        IEnumerable<ConstraintTypeDTO> All();
+        IEnumerable<DataRow> All();
     }
 }

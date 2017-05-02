@@ -48,13 +48,13 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
             View.EnableColumnArgument();
 
-            var dto = View.RowArgumentDto;
+            var argumentModel = View.ArgumentModel;
 
-            if (dto.CanOnlyCompareEquality)
+            if (argumentModel.CanOnlyCompareEquality)
             {
-                if (dto.HasAnswerCatalog)
+                if (argumentModel.HasAnswerCatalog)
                 {
-                    View.EnableRowAnswerSelection(dto.Answers);
+                    View.EnableRowAnswerSelection(argumentModel.Answers);
 
                     previousRowArgumentWasText = false;
                 }
@@ -89,7 +89,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             {
                 View.ApplyColumnArgument();
 
-                var dto = View.ColumnDataRow;
+                var dto = View.ColumnRow;
 
                 if (dto.CanOnlyCompareEquality)
                 {

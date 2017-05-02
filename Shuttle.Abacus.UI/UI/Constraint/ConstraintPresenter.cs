@@ -1,20 +1,37 @@
+using System;
+using System.Linq;
+using Shuttle.Abacus.DataAccess;
+using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Values;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Formatters;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
+using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.UI.Constraint
 {
     public class ConstraintPresenter : Presenter<IConstraintView, ConstraintModel>, IConstraintPresenter
     {
-        private readonly IValueTypeValidatorProvider valueTypeValidatorProvider;
+        private readonly IDatabaseContextFactory _databaseContextFactory;
+        private readonly IArgumentQuery _argumentQuery;
+        private readonly IConstraintTypeQuery _constraintTypeQuery;
+        private readonly IValueTypeValidatorProvider _valueTypeValidatorProvider;
 
-        public ConstraintPresenter(IConstraintView view, IValueTypeValidatorProvider valueTypeValidatorProvider)
+        public ConstraintPresenter(IConstraintView view, IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery, IConstraintTypeQuery constraintTypeQuery, IValueTypeValidatorProvider valueTypeValidatorProvider)
             : base(view)
         {
-            this.valueTypeValidatorProvider = valueTypeValidatorProvider;
+            Guard.AgainstNull(view, "view");
+            Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
+            Guard.AgainstNull(argumentQuery, "argumentQuery");
+            Guard.AgainstNull(constraintTypeQuery, "constraintTypeQuery");
+            Guard.AgainstNull(valueTypeValidatorProvider, "valueTypeValidatorProvider");
+
+            _databaseContextFactory = databaseContextFactory;
+            _argumentQuery = argumentQuery;
+            _constraintTypeQuery = constraintTypeQuery;
+            _valueTypeValidatorProvider = valueTypeValidatorProvider;
 
             Text = "Constraint Details";
             Image = Resources.Image_Constraint;
@@ -22,17 +39,19 @@ namespace Shuttle.Abacus.UI.UI.Constraint
 
         public void ArgumentChanged()
         {
-            var dto = View.ArgumentDto;
+            var model = View.ArgumentModel;
 
             View.DetachValueFormatter();
 
-            if (dto.CanOnlyCompareEquality)
+            var answerRows = _argumentQuery.Answers(model.Id).ToList();
+
+            if (answerRows.Any() || model.IsText())
             {
-                if (dto.HasAnswerCatalog)
+                if (answerRows.Any())
                 {
                     View.EnableAnswerSelection();
 
-                    View.PopulateAnswerCatalogValues(dto.Answers);
+                    View.PopulateAnswers(answerRows);
                 }
                 else
                 {
@@ -43,7 +62,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
             }
             else
             {
-                if (dto.IsMoney)
+                if (model.IsMoney())
                 {
                     View.AttachValueFormatter(new MoneyFormatter(View.ValueSelectionControl, View.FormattedControl));
                 }
@@ -70,7 +89,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
                 return false;
             }
 
-            if (View.ArgumentDto.HasAnswerCatalog)
+            if (View.HasAnswers)
             {
                 if (!View.HasAnswer)
                 {
@@ -90,8 +109,10 @@ namespace Shuttle.Abacus.UI.UI.Constraint
 
                 if (View.HasArgument)
                 {
-                    var validator = valueTypeValidatorProvider.Has(View.ArgumentDto.AnswerType)
-                                        ? valueTypeValidatorProvider.Get(View.ArgumentDto.AnswerType)
+                    var answerType = View.ArgumentModel.AnswerType;
+
+                    var validator = _valueTypeValidatorProvider.Has(answerType)
+                                        ? _valueTypeValidatorProvider.Get(answerType)
                                         : null;
 
                     if (validator != null)
@@ -120,8 +141,11 @@ namespace Shuttle.Abacus.UI.UI.Constraint
                 throw new NullDependencyException("Model");
             }
 
-            View.PopulateArguments(Model.ArgumentRows);
-            View.SetContraintTypes(Model.ConstraintTypes);
+            using (_databaseContextFactory.Create())
+            {
+                View.PopulateArguments(_argumentQuery.All().Map(row => new ArgumentModel(row)));
+                View.SetContraintTypes(_constraintTypeQuery.All().Map(row=> new ConstraintTypeModel(row)));
+            }
 
             if (Model.Constraints == null)
             {
@@ -130,7 +154,8 @@ namespace Shuttle.Abacus.UI.UI.Constraint
 
             foreach (var constraint in Model.Constraints)
             {
-                View.AddConstraint(constraint.DataRow, constraint.ConstraintTypeDTO, constraint.Value);
+                //TODO
+                //View.AddConstraint(constraint.DataRow, constraint.ConstraintTypeDTO, constraint.Value);
             }
         }
     }

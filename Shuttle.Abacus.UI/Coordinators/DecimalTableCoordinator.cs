@@ -231,7 +231,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             {
                 return new DecimalTableModel
                 {
-                    ArgumentRows = _argumentQuery.AllDTOs()
+                    ArgumentRows = _argumentQuery.All()
                     //TODO
                     //ConstraintTypes = _constraintQuery.ConstraintTypes()
                 };

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using Shuttle.Abacus.DTO;
-using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Core;
 using Shuttle.Abacus.UI.Core.Presentation;
 
@@ -36,22 +34,9 @@ namespace Shuttle.Abacus.UI.UI.Argument
             set { ViewValidator.Control(AnswerType).ShouldSatisfy(value); }
         }
 
-        public bool HasValueType
+        public bool HasAnswerType
         {
             get { return AnswerType.Text.Length > 0; }
-        }
-
-        public AnswerTypeDTO AnswerTypeDTO
-        {
-            get { return AnswerType.SelectedItem as AnswerTypeDTO; }
-        }
-
-        public void PopulateAnswerTypes(IEnumerable<AnswerTypeDTO> items)
-        {
-            AnswerType.Items.Clear();
-            AnswerType.DisplayMember = "Text";
-
-            items.ForEach(item => AnswerType.Items.Add(item));
         }
 
         private void AnswerType_SelectedIndexChanged(object sender, EventArgs e)

@@ -232,7 +232,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             {
                 return new MethodTestModel
                 {
-                    ArgumentRows = _argumentQuery.AllDTOs()
+                    ArgumentRows = _argumentQuery.All()
                 };
             }
         }

@@ -120,7 +120,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .ShowIn<IContextToolbarPresenter>()
                     .AddPresenter<ICalculationPresenter>()
                     .AddPresenter<IGraphNodeArgumentPresenter>()
-                    .WithModel(new ArgumentDisplayModel(_argumentQuery.AllDTOs()))
+                    .WithModel(new ArgumentDisplayModel(_argumentQuery.All()))
                     .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).
                     AsDefault()
                     .AssignInitiator(message);
@@ -140,7 +140,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .ShowIn<IContextToolbarPresenter>()
                     .AddPresenter<ICalculationPresenter>().WithModel(_calculationQuery.Get(message.CalculationId))
                     .AddPresenter<IGraphNodeArgumentPresenter>()
-                    .WithModel(new ArgumentDisplayModel(_argumentQuery.AllDTOs())
+                    .WithModel(new ArgumentDisplayModel(_argumentQuery.All())
                     {
                         GraphNodeArguments =
                             _calculationQuery.GraphNodeArguments(message.CalculationId).CopyToDataTable()

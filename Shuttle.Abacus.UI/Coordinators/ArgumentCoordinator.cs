@@ -23,20 +23,16 @@ namespace Shuttle.Abacus.UI.Coordinators
 {
     public class ArgumentCoordinator : Coordinator, IArgumentCoordinator
     {
-        private readonly IAnswerTypeQuery _answerTypeQuery;
         private readonly IArgumentQuery _argumentQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
 
-        public ArgumentCoordinator(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
-            IAnswerTypeQuery answerTypeQuery)
+        public ArgumentCoordinator(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(argumentQuery, "argumentQuery");
-            Guard.AgainstNull(answerTypeQuery, "answerTypeQuery");
 
             _databaseContextFactory = databaseContextFactory;
             _argumentQuery = argumentQuery;
-            _answerTypeQuery = answerTypeQuery;
         }
 
         public void HandleMessage(ExplorerInitializeMessage message)
@@ -88,7 +84,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .Create("New Argument")
                 .ControlledBy<IArgumentController>()
                 .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<IArgumentPresenter>().WithModel(BuildArgumentModel())
+                .AddPresenter<IArgumentPresenter>()
                 .AddPresenter<IArgumentRestrictedAnswerPresenter>()
                 .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).
                 AsDefault()
@@ -127,19 +123,15 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(EditArgumentMessage message)
         {
-            var model = BuildArgumentModel();
-
             using (_databaseContextFactory.Create())
             {
-                model.ArgumentRow = _argumentQuery.Get(message.ArgumentId);
-
                 var item = WorkItemManager
                     .Create("Edit Argument")
                     .ControlledBy<IArgumentController>()
                     .ShowIn<IContextToolbarPresenter>()
-                    .AddPresenter<IArgumentPresenter>().WithModel(model)
+                    .AddPresenter<IArgumentPresenter>().WithModel(new ArgumentModel(_argumentQuery.Get(message.ArgumentId)))
                     .AddPresenter<IArgumentRestrictedAnswerPresenter>()
-                    .WithModel(_argumentQuery.GetAnswerCatalog(message.ArgumentId))
+                    .WithModel(_argumentQuery.Answers(message.ArgumentId))
                     .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).
                     AsDefault()
                     .AssignInitiator(message);
@@ -193,22 +185,11 @@ namespace Shuttle.Abacus.UI.Coordinators
                     {
                         message.AddRow(message.Item.Text, _argumentQuery.Get(message.Item.Key));
 
-                        message.AddTable("Answer Catalog", _argumentQuery.GetAnswerCatalog(message.Item.Key));
+                        message.AddTable("Answer Catalog", _argumentQuery.Answers(message.Item.Key));
 
                         break;
                     }
                 }
-            }
-        }
-
-        private ArgumentModel BuildArgumentModel()
-        {
-            using (_databaseContextFactory.Create())
-            {
-                return new ArgumentModel
-                {
-                    AnswerTypes = _answerTypeQuery.All()
-                };
             }
         }
 

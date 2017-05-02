@@ -77,7 +77,7 @@ namespace Shuttle.Abacus.Invariants.Core
                     var message = new ResultMessage(rule.Message.Text);
 
                     message.Messages.AddRange(
-                        rule.Message.DetailMessages.MapAllUsing(StringToResultMessageMapper.Instance));
+                        rule.Message.DetailMessages.Map(StringToResultMessageMapper.Instance));
 
                     result.AddFailureMessage(message);
                 }

@@ -41,23 +41,5 @@ namespace Shuttle.Abacus.Domain
 
             return result;
         }
-
-        public static IEnumerable<AnswerTypeDTO> ValueTypes(this IEnumerable<IArgumentAnswerFactory> factories)
-        {
-            var result = new List<AnswerTypeDTO>();
-
-            foreach (var factory in factories)
-            {
-                result.Add(new AnswerTypeDTO
-                {
-                    Name = factory.Name,
-                    Text = factory.Text
-                });
-            }
-
-            result.Sort((x, y) => x.Text.CompareTo(y.Text));
-
-            return result;
-        }
     }
 }

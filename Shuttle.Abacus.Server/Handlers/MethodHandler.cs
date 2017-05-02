@@ -58,9 +58,11 @@ namespace Shuttle.Abacus.Server.Handlers
 
         public void ProcessMessage(IHandlerContext<CreateMethodCommand> context)
         {
+            var message = context.Message;
+
             using (_databaseContextFactory.Create())
             {
-                _methodRepository.Add(new Method(context.Message));
+                _methodRepository.Add(new Method(message.MethodName));
             }
         }
 

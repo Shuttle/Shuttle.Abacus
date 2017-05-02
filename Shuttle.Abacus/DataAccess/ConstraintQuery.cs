@@ -30,9 +30,9 @@ namespace Shuttle.Abacus.DataAccess
         {
             var constraints = new List<ConstraintDTO>();
 
-            foreach (DataRow row in _databaseGateway.GetRowsUsing(_constraintQueryFactory.All(ownerId)))
+            foreach (var row in _databaseGateway.GetRowsUsing(_constraintQueryFactory.All(ownerId)))
             {
-                var argumentResult = _argumentQuery.DataRow(ConstraintColumns.ArgumentId.MapFrom(row));
+                var argumentResult = _argumentQuery.Get(ConstraintColumns.ArgumentId.MapFrom(row));
 
                 var constraintName = ConstraintColumns.Name.MapFrom(row);
 
@@ -48,7 +48,7 @@ namespace Shuttle.Abacus.DataAccess
                     //        ? type.Text
                     //        : constraintName
                     //},
-                    DataRow = argumentResult,
+                    //DataRow = argumentResult,
                     Value = ConstraintColumns.Answer.MapFrom(row)
                 });
             }

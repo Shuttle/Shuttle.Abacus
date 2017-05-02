@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnswerTypeDTO.cs" />
     <Compile Include="ArgumentAnswerDTO.cs" />
     <Compile Include="ArgumentRestrictedAnswerDTO.cs" />
     <Compile Include="CalculationDTO.cs" />

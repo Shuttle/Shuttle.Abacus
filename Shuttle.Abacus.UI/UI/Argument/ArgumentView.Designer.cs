@@ -92,9 +92,9 @@
 
         }
 
+        private System.Windows.Forms.ComboBox AnswerType;
         private System.Windows.Forms.TextBox ArgumentName;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox AnswerType;
         private System.Windows.Forms.Label label3;
     }
 }

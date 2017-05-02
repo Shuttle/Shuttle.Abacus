@@ -2,63 +2,64 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
+using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Domain;
-using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.UI.Core.Extensions;
 using Shuttle.Abacus.UI.Core.Formatters;
 using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Models;
 
 namespace Shuttle.Abacus.UI.UI.Constraint
 {
     public partial class ConstraintView : GenericConstraintView, IConstraintView
     {
-        private readonly ListViewExtender lvw ;
-        private MoneyFormatter valueFormatter;
-        private IEnumerable<ConstraintTypeDTO> constraintTypes;
+        private readonly ListViewExtender _listViewExtender ;
+        private MoneyFormatter _valueFormatter;
+        private IEnumerable<ConstraintTypeModel> _constraintTypes;
 
         public ConstraintView()
         {
             InitializeComponent();
 
-            lvw = new ListViewExtender(ConstraintsListView);
+            _listViewExtender = new ListViewExtender(ConstraintsListView);
         }
 
-        public void PopulateArguments(IEnumerable<DataRow> items)
+        public void PopulateArguments(IEnumerable<ArgumentModel> items)
         {
             Answer.Items.Clear();
 
-            Argument.DisplayMember = "Name";
+            Argument.DisplayMember = "ConstraintName";
             items.ForEach(item => Argument.Items.Add(item));
         }
 
-        public void SetContraintTypes(IEnumerable<ConstraintTypeDTO> items)
+        public void SetContraintTypes(IEnumerable<ConstraintTypeModel> list)
         {
-            constraintTypes = items;
+            _constraintTypes = list;
         }
 
-        public void PopulateConstraintTypes(bool restrictToAnswerCatalog)
+        public void PopulateConstraintTypes(bool restricted)
         {
             Constraint.Items.Clear();
             Constraint.DisplayMember = "Text";
 
-            constraintTypes.ForEach(item =>
+            _constraintTypes.ForEach(model =>
                 {
-                    if (!restrictToAnswerCatalog || item.EnabledForAnswerCatalog)
+                    if (!restricted || model.EnabledForRestrictedAnswers)
                     {
-                        Constraint.Items.Add(item);
+                        Constraint.Items.Add(model);
                     }
                 });
         }
 
-        public DataRow ArgumentDto
+        public ArgumentModel ArgumentModel
         {
-            get { return Argument.SelectedItem as DataRow; }
+            get { return Argument.SelectedItem as ArgumentModel; }
         }
 
-        public ConstraintTypeDTO ConstraintTypeDTO
+        public ConstraintTypeModel ConstraintTypeModel
         {
-            get { return Constraint.SelectedItem as ConstraintTypeDTO; }
+            get { return Constraint.SelectedItem as ConstraintTypeModel; }
         }
 
         public void EnableAnswerSelection()
@@ -73,15 +74,17 @@ namespace Shuttle.Abacus.UI.UI.Constraint
             Answer.Items.Clear();
         }
 
-        public void PopulateAnswerCatalogValues(IEnumerable<ArgumentRestrictedAnswerDTO> list)
+        public void PopulateAnswers(IEnumerable<DataRow> rows)
         {
             Answer.Items.Clear();
 
-            list.ForEach(dto =>
+            rows.ForEach(row =>
                 {
-                    if (!ContainsAnswerName(dto.Answer))
+                    var answer = ArgumentColumns.RestrictedAnswerColumns.Answer.MapFrom(row);
+
+                    if (!ContainsAnswerName(answer))
                     {
-                        Answer.Items.Add(dto.Answer);
+                        Answer.Items.Add(answer);
                     }
                 });
         }
@@ -110,6 +113,11 @@ namespace Shuttle.Abacus.UI.UI.Constraint
             get { return Answer.Text.Length > 0; }
         }
 
+        public bool HasAnswers
+        {
+            get { return Answer.Items.Count > 0; }
+        }
+
         public bool HasArgument
         {
             get { return Argument.Text.Length > 0; }
@@ -134,13 +142,26 @@ namespace Shuttle.Abacus.UI.UI.Constraint
                     result.Add(new OwnedConstraint(
                         sequenceNumber,
                         tag.ArgumentId,
-                        tag.Name,
+                        tag.ConstraintName,
                         tag.ValueSelection));
                 }
 
                 return result;
             }
-            set { value.ForEach(dto => AddConstraint(dto.DataRow, dto.ConstraintTypeDTO, dto.Value)); }
+            set { value.ForEach(constraint => AddConstraint(constraint.ArgumentId, GetArgumentName(constraint.ArgumentId), constraint.Name, constraint.Answer)); }
+        }
+
+        private string GetArgumentName(Guid argumentId)
+        {
+            foreach (DataRow row in Answer.Items)
+            {
+                if (ArgumentColumns.Id.MapFrom(row).Equals(argumentId))
+                {
+                    return ArgumentColumns.Name.MapFrom(row);
+                }
+            }
+
+            return "(not found)";
         }
 
         public ComboBox ValueSelectionControl
@@ -168,15 +189,14 @@ namespace Shuttle.Abacus.UI.UI.Constraint
             SetError(Constraint, "Please select the constraint to use.");
         }
 
-        public void AddConstraint(DataRow argumentDto, ConstraintTypeDTO constraintTypeDTO,
-                                  string valueSelection)
+        public void AddConstraint(Guid argumentId, string argumentName, string constraintName, string valueSelection)
         {
             var item = new ListViewItem();
 
             item.SubItems.Add(string.Empty);
             item.SubItems.Add(string.Empty);
 
-            ConstraintsListView.Items.Add(PopulateItem(item, argumentDto, constraintTypeDTO, valueSelection));
+            ConstraintsListView.Items.Add(PopulateItem(item, argumentId, argumentName, constraintName, valueSelection));
         }
 
         public void ShowAllConstraints()
@@ -191,21 +211,21 @@ namespace Shuttle.Abacus.UI.UI.Constraint
 
         public void AttachValueFormatter(MoneyFormatter formatter)
         {
-            valueFormatter = formatter;
+            _valueFormatter = formatter;
         }
 
         public void DetachValueFormatter()
         {
             FormattedTextBox.Text = string.Empty;
 
-            if (valueFormatter == null)
+            if (_valueFormatter == null)
             {
                 return;
             }
 
-            valueFormatter.Dispose();
+            _valueFormatter.Dispose();
 
-            valueFormatter = null;
+            _valueFormatter = null;
         }
 
         private void ArgumentName_SelectedIndexChanged(object sender, EventArgs e)
@@ -229,25 +249,24 @@ namespace Shuttle.Abacus.UI.UI.Constraint
         {
             if (Presenter.ConstraintOK())
             {
-                AddConstraint(ArgumentDto, ConstraintTypeDTO, AnswerValue);
+                AddConstraint(ArgumentModel.Id, ArgumentModel.Name, ConstraintTypeModel.Name, AnswerValue);
             }
         }
 
-        private static ListViewItem PopulateItem(ListViewItem item, DataRow argumentDto,
-                                                 ConstraintTypeDTO constraintTypeDTO, string valueSelection)
+        private static ListViewItem PopulateItem(ListViewItem item, Guid argumentId, string argumentName, string constraintName, string valueSelection)
         {
-            item.Text = argumentDto.Name;
-            item.SubItems[1].Text = constraintTypeDTO.Text;
+            item.Text = argumentName;
+            item.SubItems[1].Text = constraintName;
             item.SubItems[2].Text = valueSelection;
 
-            item.Tag = new ItemTag(argumentDto, constraintTypeDTO, valueSelection);
+            item.Tag = new ItemTag(argumentId, constraintName, valueSelection);
 
             return item;
         }
 
         private void ConstraintsListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var item = lvw.SelectedItem();
+            var item = _listViewExtender.SelectedItem();
 
             var b = item != null;
 
@@ -266,12 +285,12 @@ namespace Shuttle.Abacus.UI.UI.Constraint
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
-            lvw.RemoveSelectedItem();
+            _listViewExtender.RemoveSelectedItem();
         }
 
         private void ApplyButton_Click(object sender, EventArgs e)
         {
-            if (!lvw.HasSelectedItem)
+            if (!_listViewExtender.HasSelectedItem)
             {
                 return;
             }
@@ -281,32 +300,31 @@ namespace Shuttle.Abacus.UI.UI.Constraint
                 return;
             }
 
-            PopulateItem(lvw.SelectedItem(), ArgumentDto, ConstraintTypeDTO, AnswerValue);
+            PopulateItem(_listViewExtender.SelectedItem(), ArgumentModel.Id, ArgumentModel.Name, ConstraintTypeModel.Name, AnswerValue);
         }
 
         private class ItemTag
         {
-            public ItemTag(DataRow argumentDto, ConstraintTypeDTO constraintTypeDTO,
-                           string valueSelection)
+            public ItemTag(Guid argumentId, string constraintName, string valueSelection)
             {
-                ArgumentDto = argumentDto;
-                ConstraintTypeDTO = constraintTypeDTO;
+                ArgumentId = argumentId;
+                ConstraintName = constraintName;
                 ValueSelection = valueSelection;
             }
 
-            public DataRow ArgumentDto { get; private set; }
-            public ConstraintTypeDTO ConstraintTypeDTO { get; private set; }
+            public Guid ArgumentId { get; private set; }
+            public string ConstraintName { get; private set; }
             public string ValueSelection { get; private set; }
         }
 
         private void MoveUpButton_Click(object sender, EventArgs e)
         {
-            lvw.MoveSelectedUp();
+            _listViewExtender.MoveSelectedUp();
         }
 
         private void MoveDownButton_Click(object sender, EventArgs e)
         {
-            lvw.MoveSelectedDown();
+            _listViewExtender.MoveSelectedDown();
         }
 
         private void Answer_SelectedIndexChanged(object sender, EventArgs e)

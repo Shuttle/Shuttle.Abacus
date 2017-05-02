@@ -3,8 +3,6 @@ using System.Linq;
 using System.Text;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Domain;
-using Shuttle.Abacus.Infrastructure;
-using Shuttle.Abacus.Messages;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;
@@ -23,7 +21,8 @@ namespace Shuttle.Abacus.Server.Handlers
         private readonly IMethodTestRepository _methodTestRepository;
 
         public ArgumentHandler(IDatabaseContextFactory databaseContextFactory, IArgumentRepository argumentRepository,
-            IMethodTestRepository methodTestRepository, IConstraintRepository constraintRepository, IMethodTestQuery methodTestQuery)
+            IMethodTestRepository methodTestRepository, IConstraintRepository constraintRepository,
+            IMethodTestQuery methodTestQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(argumentRepository, "argumentRepository");

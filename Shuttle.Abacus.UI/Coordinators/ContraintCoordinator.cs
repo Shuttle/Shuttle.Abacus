@@ -113,7 +113,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             {
                 return new ConstraintModel
                 {
-                    ArgumentRows = _argumentQuery.AllDTOs(),
+                    ArgumentRows = _argumentQuery.All(),
                     //TODO
                     //ConstraintTypes = _constraintQuery.ConstraintTypes(),
                     Constraints = _constraintQuery.DTOsForOwner(calculationId)

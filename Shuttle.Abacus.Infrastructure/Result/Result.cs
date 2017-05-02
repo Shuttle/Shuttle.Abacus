@@ -35,7 +35,7 @@ namespace Shuttle.Abacus.Infrastructure
 
         public IResult AddFailureMessages(IEnumerable<string> messages)
         {
-            FailureMessages.AddRange(messages.MapAllUsing(mapper));
+            FailureMessages.AddRange(messages.Map(mapper));
 
             return this;
         }
@@ -63,7 +63,7 @@ namespace Shuttle.Abacus.Infrastructure
 
         public IResult AddSuccessMessages(IEnumerable<string> messages)
         {
-            SuccessMessages.AddRange(messages.MapAllUsing(mapper));
+            SuccessMessages.AddRange(messages.Map(mapper));
 
             return this;
         }
@@ -111,7 +111,7 @@ namespace Shuttle.Abacus.Infrastructure
 
         public IResult<TValue> AddFailureMessages(IEnumerable<string> messages)
         {
-            FailureMessages.AddRange(messages.MapAllUsing(mapper));
+            FailureMessages.AddRange(messages.Map(mapper));
 
             return this;
         }
@@ -139,7 +139,7 @@ namespace Shuttle.Abacus.Infrastructure
 
         public IResult<TValue> AddSuccessMessages(IEnumerable<string> messages)
         {
-            SuccessMessages.AddRange(messages.MapAllUsing(mapper));
+            SuccessMessages.AddRange(messages.Map(mapper));
 
             return this;
         }
