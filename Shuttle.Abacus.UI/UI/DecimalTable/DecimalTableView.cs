@@ -106,7 +106,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             get { return ColumnArgument.SelectedIndex > 0; }
         }
 
-        public void PopulateArguments(IEnumerable<DataRow> rows)
+        public void PopulateArguments(IEnumerable<ArgumentModel> rows)
         {
             RowArgument.DisplayMember = "Name";
             ColumnArgument.DisplayMember = "Name";

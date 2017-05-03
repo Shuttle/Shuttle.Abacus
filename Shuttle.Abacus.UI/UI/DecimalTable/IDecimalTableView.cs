@@ -20,7 +20,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
         string ColumnArgumentValue { get; set; }
         bool HasColumnArgument { get; }
         ArgumentModel ColumnArgumentModel { get; }
-        void PopulateArguments(IEnumerable<DataRow> rows);
+        void PopulateArguments(IEnumerable<ArgumentModel> rows);
         void EnableColumnArgument();
         void ShowRowAnswerCatalogConstraints();
         void ShowRowAllConstraints();

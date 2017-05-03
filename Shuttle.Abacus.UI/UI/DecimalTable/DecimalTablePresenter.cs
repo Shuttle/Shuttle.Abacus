@@ -17,25 +17,33 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
     public class DecimalTablePresenter : Presenter<IDecimalTableView, DecimalTableModel>, IDecimalTablePresenter
     {
         private readonly IArgumentQuery _argumentQuery;
+        private readonly IConstraintTypeQuery _constraintTypeQuery;
 
         private readonly IDatabaseContextFactory _databaseContextFactory;
+        private readonly IDecimalTableQuery _decimalTableQuery;
         private readonly IDecimalTableRules _decimalTableRules;
         private readonly IValueTypeValidatorProvider _valueTypeValidatorProvider;
+        private IEnumerable<ConstraintTypeModel> _constraintTypeModels = new List<ConstraintTypeModel>();
         private bool _previousColumnArgumentWasText;
         private bool _previousRowArgumentWasText;
 
         public DecimalTablePresenter(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
-            IDecimalTableView view, IDecimalTableRules decimalTableRules,
+            IDecimalTableQuery decimalTableQuery, IConstraintTypeQuery constraintTypeQuery, IDecimalTableView view,
+            IDecimalTableRules decimalTableRules,
             IValueTypeValidatorProvider valueTypeValidatorProvider)
             : base(view)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(argumentQuery, "argumentQuery");
+            Guard.AgainstNull(decimalTableQuery, "decimalTableQuery");
+            Guard.AgainstNull(constraintTypeQuery, "constraintTypeQuery");
             Guard.AgainstNull(decimalTableRules, "decimalTableRules");
             Guard.AgainstNull(valueTypeValidatorProvider, "valueTypeValidatorProvider");
 
             _databaseContextFactory = databaseContextFactory;
             _argumentQuery = argumentQuery;
+            _decimalTableQuery = decimalTableQuery;
+            _constraintTypeQuery = constraintTypeQuery;
             _decimalTableRules = decimalTableRules;
             _valueTypeValidatorProvider = valueTypeValidatorProvider;
 
@@ -167,18 +175,19 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
                 return true;
             }
 
-            if (model.HasAnswerCatalog && !HasValidArgumentAnswer(model, Convert.ToString(value)))
+            if (!HasValidArgumentAnswer(model, Convert.ToString(value)))
             {
                 return false;
             }
 
-            if (model.IsText)
+            if (model.IsText())
             {
                 return !string.IsNullOrEmpty(Convert.ToString(value));
             }
 
             return
-                _valueTypeValidatorProvider.Get(model.AnswerType).Validate(Convert.ToString(value))
+                _valueTypeValidatorProvider.Get(model.AnswerType)
+                    .Validate(Convert.ToString(value))
                     .OK;
         }
 
@@ -193,16 +202,6 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             return ArgumentAnswers(View.ColumnArgumentModel.Id);
         }
 
-        private IEnumerable<string> ArgumentAnswers(Guid id)
-        {
-            using (_databaseContextFactory.Create())
-            {
-                return
-                    _argumentQuery.Answers(id)
-                        .Map(row => ArgumentColumns.RestrictedAnswerColumns.Answer.MapFrom(row));
-            }
-        }
-
         public IEnumerable<string> RowAnswers()
         {
             return ArgumentAnswers(View.RowArgumentModel.Id);
@@ -213,9 +212,26 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             get { return Model.ConstraintTypes; }
         }
 
+        private IEnumerable<string> ArgumentAnswers(Guid id)
+        {
+            using (_databaseContextFactory.Create())
+            {
+                return
+                    _argumentQuery.Answers(id)
+                        .Map(row => ArgumentColumns.RestrictedAnswerColumns.Answer.MapFrom(row));
+            }
+        }
+
         private bool HasValidArgumentAnswer(ArgumentModel model, string value)
         {
-            foreach (var answer in ArgumentAnswers(model.Id))
+            var answers = ArgumentAnswers(model.Id).ToList();
+
+            if (!answers.Any())
+            {
+                return true;
+            }
+
+            foreach (var answer in answers)
             {
                 if (answer.Equals(value, StringComparison.InvariantCultureIgnoreCase))
                 {
@@ -235,55 +251,42 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             View.DecimalTableNameRules = _decimalTableRules.DecimalTableNameRules();
             View.RowArgumentRules = _decimalTableRules.RowArgumentRules();
 
-            View.PopulateArguments(Model.ArgumentRows);
-
-            if (Model.DecimalTableRow == null)
+            using (_databaseContextFactory.Create())
             {
-                return;
-            }
+                _constraintTypeModels = _constraintTypeQuery.All().Map(row => new ConstraintTypeModel(row));
 
-            View.DecimalTableNameValue = DecimalTableColumns.Name.MapFrom(Model.DecimalTableRow);
+                View.PopulateArguments(_argumentQuery.All().Map(row => new ArgumentModel(row)));
 
-            var rowDataRow = GetDataRow(DecimalTableColumns.RowArgumentId.MapFrom(Model.DecimalTableRow));
+                View.DecimalTableNameValue = Model.Name;
 
-            if (rowDataRow == null)
-            {
-                return;
-            }
+                var rowArgumentRow = _argumentQuery.Get(Model.RowArgumentId);
 
-            View.RowArgumentValue = rowDataRow.Name;
-
-            var columnDataRow = GetDataRow(DecimalTableColumns.ColumnArgumentId.MapFrom(Model.DecimalTableRow));
-
-            if (columnDataRow != null)
-            {
-                View.ColumnArgumentValue = columnDataRow.Name;
-            }
-
-            foreach (DataRow row in Model.ConstrainedDecimalValues.Rows)
-            {
-                View.AddDecimalValue(
-                    DecimalValueColumns.ColumnIndex.MapFrom(row),
-                    DecimalValueColumns.RowIndex.MapFrom(row),
-                    DecimalValueColumns.DecimalValue.MapFrom(row),
-                    ConstraintColumns.Name.MapFrom(row),
-                    ConstraintColumns.ArgumentName.MapFrom(row),
-                    ConstraintColumns.Answer.MapFrom(row)
-                );
-            }
-        }
-
-        private DataRow GetDataRow(Guid id)
-        {
-            foreach (var dto in Model.ArgumentRows)
-            {
-                if (dto.Id.Equals(id))
+                if (rowArgumentRow == null)
                 {
-                    return dto;
+                    return;
+                }
+
+                View.RowArgumentValue = ArgumentColumns.Name.MapFrom(rowArgumentRow);
+
+                var columnArumentRow = _argumentQuery.Get(Model.ColumnArgumentId);
+
+                if (columnArumentRow != null)
+                {
+                    View.ColumnArgumentValue = ArgumentColumns.Name.MapFrom(columnArumentRow);
+                }
+
+                foreach (DataRow row in _decimalTableQuery.Values(Model.Id).Rows)
+                {
+                    View.AddDecimalValue(
+                        DecimalValueColumns.ColumnIndex.MapFrom(row),
+                        DecimalValueColumns.RowIndex.MapFrom(row),
+                        DecimalValueColumns.DecimalValue.MapFrom(row),
+                        ConstraintColumns.Name.MapFrom(row),
+                        ConstraintColumns.ArgumentName.MapFrom(row),
+                        ConstraintColumns.Answer.MapFrom(row)
+                    );
                 }
             }
-
-            return null;
         }
     }
 }

@@ -10,11 +10,11 @@ namespace Shuttle.Abacus.UI.UI.Argument
 {
     public class ArgumentPresenter : Presenter<IArgumentView, ArgumentModel>, IArgumentPresenter
     {
-        private readonly IArgumentRules argumentRules;
+        private readonly IArgumentRules _argumentRules;
 
         public ArgumentPresenter(IArgumentView view, IArgumentRules argumentRules) : base(view)
         {
-            this.argumentRules = argumentRules;
+            this._argumentRules = argumentRules;
 
             Text = "Argument Details";
             Image = Resources.Image_Argument;
@@ -32,8 +32,8 @@ namespace Shuttle.Abacus.UI.UI.Argument
 
             Guard.AgainstNull(Model, "Model");
 
-            View.ArgumentNameRules = argumentRules.ArgumentNameRules();
-            View.AnswerTypeRules = argumentRules.AnswerTypeRules();
+            View.ArgumentNameRules = _argumentRules.ArgumentNameRules();
+            View.AnswerTypeRules = _argumentRules.AnswerTypeRules();
 
             if (Model.Row == null)
             {
