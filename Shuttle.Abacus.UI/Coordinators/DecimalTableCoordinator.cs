@@ -154,7 +154,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             using (_databaseContextFactory.Create())
             {
                 model.DecimalTableRow = _decimalTableQuery.Get(message.DecimalTableId);
-                model.ConstrainedDecimalValues = _decimalTableQuery.ConstrainedDecimalValues(message.DecimalTableId);
+                model.ConstrainedDecimalValues = _decimalTableQuery.GetValues(message.DecimalTableId);
             }
 
             var item = WorkItemManager
@@ -181,7 +181,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             using (_databaseContextFactory.Create())
             {
                 decimalTableModel.ConstrainedDecimalValues =
-                    _decimalTableQuery.ConstrainedDecimalValues(message.DecimalTableId);
+                    _decimalTableQuery.GetValues(message.DecimalTableId);
                 decimalTableModel.DecimalTableRow = _decimalTableQuery.Get(message.DecimalTableId);
             }
 

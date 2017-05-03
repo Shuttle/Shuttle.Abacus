@@ -30,7 +30,7 @@ namespace Shuttle.Abacus.DataAccess
             return _databaseGateway.GetSingleRowUsing(_decimalTableQueryFactory.Get(id));
         }
 
-        public DataTable ConstrainedDecimalValues(Guid id)
+        public DataTable GetValues(Guid id)
         {
             return _databaseGateway.GetDataTableFor(_decimalTableQueryFactory.ConstrainedDecimalValues(id));
         }

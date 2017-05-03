@@ -275,8 +275,6 @@
     <Compile Include="Domain\Events\MethodTestRunEvent.cs" />
     <Compile Include="Domain\Extensions\EnumerableExtensions.cs" />
     <Compile Include="Domain\Extensions\NumberExtensions.cs" />
-    <Compile Include="Domain\Factories\DecimalTableFactory.cs" />
-    <Compile Include="Domain\Factories\IDecimalTableFactory.cs" />
     <Compile Include="Domain\Formula\Formula.cs" />
     <Compile Include="Domain\Formula\FormulaCollection.cs" />
     <Compile Include="Domain\Formula\OwnedFormula.cs" />
@@ -421,6 +419,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domain\Factories\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

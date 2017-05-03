@@ -23,7 +23,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
         private readonly IDecimalTableQuery _decimalTableQuery;
         private readonly IDecimalTableRules _decimalTableRules;
         private readonly IValueTypeValidatorProvider _valueTypeValidatorProvider;
-        private IEnumerable<ConstraintTypeModel> _constraintTypeModels = new List<ConstraintTypeModel>();
+        private IEnumerable<ConstraintTypeModel> _constraintTypes = new List<ConstraintTypeModel>();
         private bool _previousColumnArgumentWasText;
         private bool _previousRowArgumentWasText;
 
@@ -209,7 +209,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
         public IEnumerable<ConstraintTypeModel> ConstraintTypes
         {
-            get { return Model.ConstraintTypes; }
+            get { return _constraintTypes; }
         }
 
         private IEnumerable<string> ArgumentAnswers(Guid id)
@@ -253,7 +253,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
             using (_databaseContextFactory.Create())
             {
-                _constraintTypeModels = _constraintTypeQuery.All().Map(row => new ConstraintTypeModel(row));
+                _constraintTypes = _constraintTypeQuery.All().Map(row => new ConstraintTypeModel(row));
 
                 View.PopulateArguments(_argumentQuery.All().Map(row => new ArgumentModel(row)));
 

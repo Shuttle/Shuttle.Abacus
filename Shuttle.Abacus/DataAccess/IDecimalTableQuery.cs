@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Shuttle.Abacus.DTO;
 
 namespace Shuttle.Abacus.DataAccess
 {
@@ -9,7 +8,7 @@ namespace Shuttle.Abacus.DataAccess
     {
         IEnumerable<DataRow> All();
         DataRow Get(Guid id);
-        DataTable ConstrainedDecimalValues(Guid id);
+        DataTable GetValues(Guid id);
         DataTable DecimalTableReport(Guid decimalTableId);
     }
 }
