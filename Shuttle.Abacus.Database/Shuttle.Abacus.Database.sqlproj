@@ -80,5 +80,6 @@
     <Build Include="dbo\Tables\SystemUserPermission.sql" />
     <Build Include="dbo\Tables\Calculation.sql" />
     <Build Include="dbo\Tables\MethodTest.sql" />
+    <Build Include="dbo\Tables\SubscriberMessageType.sql" />
   </ItemGroup>
 </Project>

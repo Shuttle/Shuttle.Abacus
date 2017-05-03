@@ -1,15 +1,18 @@
 using System;
 using System.Collections.Generic;
-using Shuttle.Abacus.DTO;
 
-namespace Shuttle.Abacus.Domain
+namespace Shuttle.Abacus.Messages.v1
 {
     public class ChangeArgumentCommand
     {
+        public ChangeArgumentCommand()
+        {
+            Answers = new List<string>();
+        }
+
         public Guid ArgumentId { get; set; }
         public string Name { get; set; }
         public string AnswerType { get; set; }
-        //TODO
-        //public List<ArgumentRestrictedAnswerDTO> Answers { get; set; }
+        public List<string> Answers { get; set; }
     }
 }

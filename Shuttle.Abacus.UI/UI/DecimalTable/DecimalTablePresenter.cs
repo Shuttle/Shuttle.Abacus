@@ -275,7 +275,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
                     View.ColumnArgumentValue = ArgumentColumns.Name.MapFrom(columnArumentRow);
                 }
 
-                foreach (DataRow row in _decimalTableQuery.Values(Model.Id).Rows)
+                foreach (DataRow row in _decimalTableQuery.GetValues(Model.Id).Rows)
                 {
                     View.AddDecimalValue(
                         DecimalValueColumns.ColumnIndex.MapFrom(row),

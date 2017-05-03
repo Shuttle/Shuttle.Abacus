@@ -10,34 +10,25 @@ namespace Shuttle.Abacus.Domain
     {
         private readonly List<MethodTestArgumentAnswer> answers = new List<MethodTestArgumentAnswer>();
 
-        public MethodTest(Guid id)
+        public MethodTest(Guid methodId, string description, decimal expectedResult)
+            : this(Guid.NewGuid(), methodId, description, expectedResult)
         {
+        }
+
+        public MethodTest(Guid id, Guid methodId, string description, decimal expectedResult)
+        {
+            Guard.AgainstNullOrEmptyString(description, "description");
+
             Id = id;
+            MethodId = methodId;
+            Description = description;
+            ExpectedResult = expectedResult;
         }
 
         public Guid Id { get; private set; }
-
-        public MethodTest(CreateMethodTestCommand command)
-        {
-            MethodId = command.MethodId;
-            Description = command.Description;
-            ExpectedResult = command.ExpectedResult;
-
-            foreach (var item in command.ArgumentAnswers)
-            {
-                AddArgumentAnswer(new MethodTestArgumentAnswer(item.ArgumentId, item.ArgumentName, item.AnswerType, item.Answer));
-            }
-
-            EnforceInvariants();
-        }
-
-        public MethodTest()
-        {
-        }
-
-        public Guid MethodId { get; set; }
-        public string Description { get; set; }
-        public decimal ExpectedResult { get; set; }
+        public Guid MethodId { get; private set; }
+        public string Description { get; private set; }
+        public decimal ExpectedResult { get; private set; }
 
         public IEnumerable<MethodTestArgumentAnswer> ArgumentAnswers
         {
@@ -47,29 +38,6 @@ namespace Shuttle.Abacus.Domain
         public IEnumerable<MethodTestArgumentAnswer> Answers
         {
             get { return new ReadOnlyCollection<MethodTestArgumentAnswer>(answers); }
-        }
-
-        private void EnforceInvariants()
-        {
-            Guard.Against<InvalidStateException>(Id.Equals(Guid.Empty), "An ID is required.");
-            Guard.Against<InvalidStateException>(string.IsNullOrEmpty(Description), "The description may not be empty.");
-        }
-
-        public MethodTest ProcessCommand(ChangeMethodTestCommand command)
-        {
-            Description = command.Description;
-            ExpectedResult = command.ExpectedResult;
-
-            answers.Clear();
-
-            foreach (var item in command.ArgumentAnswers)
-            {
-                AddArgumentAnswer(new MethodTestArgumentAnswer(item.ArgumentId, item.ArgumentName, item.AnswerType, item.Answer));
-            }
-
-            EnforceInvariants();
-
-            return this;
         }
 
         public void AddArgumentAnswer(MethodTestArgumentAnswer answer)

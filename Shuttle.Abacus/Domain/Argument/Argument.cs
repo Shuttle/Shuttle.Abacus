@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
@@ -14,7 +13,7 @@ namespace Shuttle.Abacus.Domain
 
         public static Argument MethodName = new Argument(Guid.Empty) { Name = "Method Name", AnswerType = "Text" };
 
-        private readonly List<ArgumentRestrictedAnswer> _answers = new List<ArgumentRestrictedAnswer>();
+        private readonly List<string> _answers = new List<string>();
 
 
         public Argument()
@@ -27,23 +26,13 @@ namespace Shuttle.Abacus.Domain
             Id = id;
         }
 
-        public Argument ProcessCommand(CreateArgumentCommand command)
-        {
-            Name = command.Name;
-            AnswerType = command.AnswerType;
-
-            command.Answers.ForEach(adding => AddArgumentAnswer(adding.Answer));
-
-            return this;
-        }
-
         public string Name { get; set; }
         public string AnswerType { get; set; }
         public bool IsSystemData { get; set; }
 
-        public IEnumerable<ArgumentRestrictedAnswer> RestrictedAnswers
+        public IEnumerable<string> RestrictedAnswers
         {
-            get { return new ReadOnlyCollection<ArgumentRestrictedAnswer>(_answers); }
+            get { return new ReadOnlyCollection<string>(_answers); }
         }
 
         public bool HasRestrictedAnswers
@@ -53,43 +42,29 @@ namespace Shuttle.Abacus.Domain
 
         public Guid Id { get; private set; }
 
-        public Argument ProcessCommand(ChangeArgumentCommand command)
+        public Argument AddArgumentAnswer(string answer)
         {
-            Name = command.Name;
-            AnswerType = command.AnswerType;
-
-            _answers.Clear();
-
-            command.ArgumentAnswers.ForEach(adding => AddArgumentAnswer(adding.Answer));
+            if (!ContainsAnswer(answer))
+            {
+                _answers.Add(answer);
+            }
 
             return this;
         }
 
-        public void AddArgumentAnswer(string answer)
+        public bool ContainsAnswer(string answer)
         {
-            _answers.ForEach
-                (
-                current =>
-                {
-                    if (current.Answer.Equals(answer, StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        throw new DuplicateEntryException(string.Format("Duplicate answer '{0}'.", answer));
-                    }
-                }
-                );
-
-            _answers.Add(new ArgumentRestrictedAnswer(answer));
+            return _answers.Find(item=> item.Equals(answer)) != null;
         }
 
-        public ArgumentRestrictedAnswer FindAnswer(string answer)
+        public Argument AddArgumentAnswers(IEnumerable<string> answers)
         {
-            return _answers.Find(item => item.Answer.Equals(answer, StringComparison.InvariantCultureIgnoreCase));
-        }
+            foreach (var answer in answers)
+            {
+                AddArgumentAnswer(answer);
+            }
 
-
-        public bool HasArgumentName(string name)
-        {
-            return _answers.Find(item => item.Answer.Equals(name, StringComparison.InvariantCultureIgnoreCase)) != null;
+            return this;
         }
     }
 }

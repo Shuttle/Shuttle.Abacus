@@ -99,7 +99,7 @@ where
                     .AddParameterValue(ArgumentColumns.RestrictedAnswerColumns.ArgumentId, argument.Id);
         }
 
-        public IQuery SaveRestrictedAnswers(Argument argument, ArgumentRestrictedAnswer argumentRestrictedAnswer)
+        public IQuery SaveRestrictedAnswers(Argument argument, string answer)
         {
             return RawQuery.Create(@"
 insert into ArgumentRestrictedAnswer
@@ -114,7 +114,7 @@ values
 )
 ")
                 .AddParameterValue(ArgumentColumns.RestrictedAnswerColumns.ArgumentId, argument.Id)
-                .AddParameterValue(ArgumentColumns.RestrictedAnswerColumns.Answer, argumentRestrictedAnswer.Answer);
+                .AddParameterValue(ArgumentColumns.RestrictedAnswerColumns.Answer, answer);
         }
     }
 }

@@ -1,8 +1,10 @@
 using System;
+using System.Data;
 using System.Windows.Forms;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Messages.v1;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.Core;
@@ -93,11 +95,9 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             {
                 var dto = ((DataRow)item.Tag);
 
-                command.ArgumentAnswers.Add(new ArgumentAnswerDTO
+                command.ArgumentAnswers.Add(new ArgumentAnswer
                 {
                     ArgumentId = dto.Id,
-                    ArgumentName = item.Text,
-                    AnswerType = dto.AnswerType,
                     Answer = item.SubItems[1].Text
                 });
             }

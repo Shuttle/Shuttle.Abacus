@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
-using Shuttle.Abacus.DTO;
+using Shuttle.Abacus.Messages.v1.TransferObjects;
 
-namespace Shuttle.Abacus.Domain
+namespace Shuttle.Abacus.Messages.v1
 {
     public class CreateMethodTestCommand
     {
         public CreateMethodTestCommand()
         {
-            ArgumentAnswers = new List<ArgumentAnswerDTO>();
+            ArgumentAnswers = new List<ArgumentAnswer>();
         }
 
         public Guid MethodTestId { get; set; }
@@ -16,6 +16,6 @@ namespace Shuttle.Abacus.Domain
         public string Description { get; set; }
         public decimal ExpectedResult { get; set; }
 
-        public List<ArgumentAnswerDTO> ArgumentAnswers { get; private set; }
+        public List<ArgumentAnswer> ArgumentAnswers { get; private set; }
     }
 }

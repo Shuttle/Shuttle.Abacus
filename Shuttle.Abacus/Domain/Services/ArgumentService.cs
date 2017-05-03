@@ -7,16 +7,16 @@ namespace Shuttle.Abacus.Domain
 {
     public class ArgumentService : IArgumentService
     {
-        private readonly IFactoryProvider<IArgumentAnswerFactory> argumentAnswerFactoryProvider;
+        private readonly IArgumentAnswerFactory argumentAnswerFactory;
         private readonly IPipeline pipeline;
         private readonly IArgumentRepository argumentRepository;
 
         public ArgumentService(IArgumentRepository argumentRepository,
-                             IFactoryProvider<IArgumentAnswerFactory> argumentAnswerFactoryProvider,
+                             IArgumentAnswerFactory argumentAnswerFactory,
                              IPipeline pipeline)
         {
             this.argumentRepository = argumentRepository;
-            this.argumentAnswerFactoryProvider = argumentAnswerFactoryProvider;
+            this.argumentAnswerFactory = argumentAnswerFactory;
             this.pipeline = pipeline;
         }
 
@@ -30,7 +30,8 @@ namespace Shuttle.Abacus.Domain
 
             foreach (var pair in answers)
             {
-                if (!string.IsNullOrEmpty(pair.Value))
+                var answer = pair.Value;
+                if (!string.IsNullOrEmpty(answer))
                 {
                     var argument = arguments.Find(pair.Key);
 
@@ -40,23 +41,12 @@ namespace Shuttle.Abacus.Domain
                     }
                     else
                     {
-                        if (argument.HasRestrictedAnswers)
+                        if (argument.HasRestrictedAnswers && !argument.ContainsAnswer(answer))
                         {
-                            var answer = argument.FindAnswer(pair.Value);
+                            result.AddWarningMessage(string.Format("Answer '{0}' is not valid for argument '{1}'.", answer, argument.Name));
+                        }
 
-                            if (answer == null)
-                            {
-                                result.AddWarningMessage(string.Format("Answer '{0}' is not valid for argument '{1}'.", pair.Value, argument.Name));
-                            }
-                            else
-                            {
-                                result.AddArgumentAnswer(argumentAnswerFactoryProvider.Get(argument.AnswerType).Create(argument.Name, answer.Answer));
-                            }
-                        }
-                        else
-                        {
-                            result.AddArgumentAnswer(argumentAnswerFactoryProvider.Get(argument.AnswerType).Create(argument.Name, pair.Value));
-                        }
+                        result.AddArgumentAnswer(argumentAnswerFactory.Create(argument.AnswerType, argument.Name, answer));
                     }
                 }
                 else

@@ -25,6 +25,7 @@ namespace Shuttle.Abacus.UI.Coordinators
         private readonly IArgumentQuery _argumentQuery;
         private readonly ICalculationQuery _calculationQuery;
         private readonly IConstraintQuery _constraintQuery;
+        private readonly IConstraintTypeQuery _constraintTypeQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IDecimalTableQuery _decimalTableQuery;
         private readonly IFormulaQuery _formulaQuery;
@@ -33,7 +34,7 @@ namespace Shuttle.Abacus.UI.Coordinators
         private readonly IValueSourceTypeQuery _valueSourceTypeQuery;
 
         public FormulaCoordinator(IDatabaseContextFactory databaseContextFactory, IFormulaQuery formulaQuery,
-            IConstraintQuery constraintQuery,
+            IConstraintQuery constraintQuery, IConstraintTypeQuery constraintTypeQuery,
             IArgumentQuery argumentQuery, ICalculationQuery calculationQuery,
             IOperationTypeQuery operationTypeQuery, IValueSourceTypeQuery valueSourceTypeQuery,
             IDecimalTableQuery decimalTableQuery, IMethodQuery methodQuery)
@@ -41,6 +42,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(formulaQuery, "_formulaQuery");
             Guard.AgainstNull(constraintQuery, "_constraintQuery");
+            Guard.AgainstNull(constraintTypeQuery, "constraintTypeQuery");
             Guard.AgainstNull(argumentQuery, "_argumentQuery");
             Guard.AgainstNull(calculationQuery, "_calculationQuery");
             Guard.AgainstNull(operationTypeQuery, "operationTypeQueryy");
@@ -57,6 +59,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             _valueSourceTypeQuery = valueSourceTypeQuery;
 
             _constraintQuery = constraintQuery;
+            _constraintTypeQuery = constraintTypeQuery;
             _argumentQuery = argumentQuery;
         }
 
@@ -205,31 +208,28 @@ namespace Shuttle.Abacus.UI.Coordinators
             using (_databaseContextFactory.Create())
             {
                 formulaModel.FormulaOperations = _formulaQuery.OperationDTOs(message.FormulaId);
+
+                var constraintModel = BuildConstraintModel(formulaModel);
+
+                if (constraintModel == null)
+                {
+                    return;
+                }
+
+                constraintModel.ConstraintRows = _constraintQuery.AllForOwner(message.FormulaId);
+
+                var item = WorkItemManager
+                    .Create("Edit formula")
+                    .ControlledBy<IFormulaController>()
+                    .ShowIn<IContextToolbarPresenter>()
+                    .AddPresenter<IFormulaPresenter>().WithModel(formulaModel)
+                    .AddPresenter<IConstraintPresenter>().WithModel(constraintModel)
+                    .AddNavigationItem(
+                        NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
+                    .AssignInitiator(message);
+
+                HostInWorkspace<ITabbedWorkspacePresenter>(item);
             }
-
-            var constraintModel = BuildConstraintModel(formulaModel);
-
-            if (constraintModel == null)
-            {
-                return;
-            }
-
-            using (_databaseContextFactory.Create())
-            {
-                constraintModel.Constraints = _constraintQuery.DTOsForOwner(message.FormulaId);
-            }
-
-            var item = WorkItemManager
-                .Create("Edit formula")
-                .ControlledBy<IFormulaController>()
-                .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<IFormulaPresenter>().WithModel(formulaModel)
-                .AddPresenter<IConstraintPresenter>().WithModel(constraintModel)
-                .AddNavigationItem(
-                    NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
-                .AssignInitiator(message);
-
-            HostInWorkspace<ITabbedWorkspacePresenter>(item);
         }
 
         public void HandleMessage(ResourceRefreshItemTextMessage message)
@@ -309,7 +309,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
             using (_databaseContextFactory.Create())
             {
-                constraintModel.Constraints = _constraintQuery.DTOsForOwner(message.FormulaId);
+                constraintModel.ConstraintRows = _constraintQuery.AllForOwner(message.FormulaId);
             }
 
             var item = WorkItemManager
@@ -366,9 +366,9 @@ namespace Shuttle.Abacus.UI.Coordinators
         {
             return new ConstraintModel
             {
-                ArgumentRows = formulaModel.ArgumentRows
-                //TODO
-                //ConstraintTypes = _constraintQuery.ConstraintTypes()
+                ArgumentRows = _argumentQuery.All(),
+                ConstraintRows = _constraintQuery.AllForOwner(formulaModel.Id),
+                ConstraintTypeRows = _constraintTypeQuery.All()
             };
         }
 
@@ -378,7 +378,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             {
                 return new FormulaModel
                 {
-                    DecimalTables = _decimalTableQuery.AllDTOs(),
+                    DecimalTables = _decimalTableQuery.All(),
                     ArgumentRows = _argumentQuery.All(),
                     PrecedingCalculations =
                         ownerName.ToLower() == "calculation"

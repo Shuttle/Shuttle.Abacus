@@ -147,12 +147,12 @@ namespace Shuttle.Abacus.UI.UI.Constraint
                 View.SetContraintTypes(_constraintTypeQuery.All().Map(row=> new ConstraintTypeModel(row)));
             }
 
-            if (Model.Constraints == null)
+            if (Model.ConstraintRows == null)
             {
                 return;
             }
 
-            foreach (var constraint in Model.Constraints)
+            foreach (var constraint in Model.ConstraintRows)
             {
                 //TODO
                 //View.AddConstraint(constraint.DataRow, constraint.ConstraintTypeDTO, constraint.Value);

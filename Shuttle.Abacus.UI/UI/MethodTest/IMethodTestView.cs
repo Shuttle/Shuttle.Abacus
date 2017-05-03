@@ -30,7 +30,7 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
         TextBox FormattedControl { get; }
         void EnableAnswerSelection();
         void EnableAnswerEntry();
-        void PopulateAnswerCatalog(IEnumerable<ArgumentRestrictedAnswerDTO> list);
+        void PopulateAnswerCatalog(IEnumerable<string> answers);
         void PopulateFactors(IEnumerable<DataRow> items);
         void ShowArgumentError();
         void ShowAnswerError(string message);

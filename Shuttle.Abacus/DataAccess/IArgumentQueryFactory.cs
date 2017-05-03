@@ -14,6 +14,6 @@ namespace Shuttle.Abacus.DataAccess
         IQuery GetDTO(Guid id);
         IQuery Save(Argument item);
         IQuery RemoveRestrictedAnswers(Argument argument);
-        IQuery SaveRestrictedAnswers(Argument argument, ArgumentRestrictedAnswer argumentRestrictedAnswer);
+        IQuery SaveRestrictedAnswers(Argument argument, string answer);
     }
 }

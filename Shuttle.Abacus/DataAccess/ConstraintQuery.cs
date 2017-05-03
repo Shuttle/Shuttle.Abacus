@@ -21,39 +21,9 @@ namespace Shuttle.Abacus.DataAccess
             _argumentQuery = argumentQuery;
         }
 
-        public IEnumerable<DataRow> QueryAllForOwner(Guid ownerId)
+        public IEnumerable<DataRow> AllForOwner(Guid ownerId)
         {
             return _databaseGateway.GetRowsUsing(_constraintQueryFactory.All(ownerId));
-        }
-
-        public IEnumerable<ConstraintDTO> DTOsForOwner(Guid ownerId)
-        {
-            var constraints = new List<ConstraintDTO>();
-
-            foreach (var row in _databaseGateway.GetRowsUsing(_constraintQueryFactory.All(ownerId)))
-            {
-                var argumentResult = _argumentQuery.Get(ConstraintColumns.ArgumentId.MapFrom(row));
-
-                var constraintName = ConstraintColumns.Name.MapFrom(row);
-
-                //var type =
-                //    types.Find(item => item.Name.Equals(constraintName, StringComparison.InvariantCultureIgnoreCase));
-
-                constraints.Add(new ConstraintDTO
-                {
-                    //ConstraintTypeDTO = new ConstraintTypeDTO
-                    //{
-                    //    Name = constraintName,
-                    //    Text = type != null
-                    //        ? type.Text
-                    //        : constraintName
-                    //},
-                    //DataRow = argumentResult,
-                    Value = ConstraintColumns.Answer.MapFrom(row)
-                });
-            }
-
-            return constraints;
         }
 
         public void GetOwned(IConstraintOwner owner)

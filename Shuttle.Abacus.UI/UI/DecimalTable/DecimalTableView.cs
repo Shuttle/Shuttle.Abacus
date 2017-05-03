@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Infrastructure;
@@ -28,10 +29,10 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             ValueGridView.CellValidating += ValueGridView_CellValidating;
 
             errorCellStyle = new DataGridViewCellStyle
-                             {
-                                 BackColor = Color.Red,
-                                 ForeColor = Color.White
-                             };
+            {
+                BackColor = Color.Red,
+                ForeColor = Color.White
+            };
         }
 
         static void ValueGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -139,7 +140,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
             Presenter.ConstraintTypes.ForEach(item =>
             {
-                if (!restrictToAnswerCatalog || item.EnabledForAnswerCatalog)
+                if (!restrictToAnswerCatalog || item.EnabledForRestrictedAnswers)
                 {
                     combo.Items.Add(item);
                 }
@@ -309,27 +310,27 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
                     var cell = ValueGridView[column, row];
 
                     var decimalValue = new DecimalValue
-                              {
-                                  Row = row,
-                                  Column = column,
-                                  Value = decimal.Parse(Convert.ToString(cell.Value))
-                              };
+                    {
+                        Row = row,
+                        Column = column,
+                        Value = decimal.Parse(Convert.ToString(cell.Value))
+                    };
 
                     decimalValue.Constraints.Add(new Abacus.Messages.v1.TransferObjects.Constraint
-                                           {
-                                               ArgumentId = RowArgumentModel.Id,
-                                               Name = RowConstraintName(row),
-                                               Value = RowConstraintAnswer(row)
-                                           });
+                    {
+                        ArgumentId = RowArgumentModel.Id,
+                        Name = RowConstraintName(row),
+                        Answer = RowConstraintAnswer(row)
+                    });
 
                     if (HasColumnArgument)
                     {
-                        decimalValue.ConstraintDTOs.Add(new ConstraintDTO
-                                               {
-                                                   DataRow = ColumnArgumentModel,
-                                                   ConstraintTypeDTO = ColumnConstraintTypeDTO(column),
-                                                   Value = ColumnConstraintAnswer(column)
-                                               });
+                        decimalValue.Constraints.Add(new Abacus.Messages.v1.TransferObjects.Constraint
+                        {
+                            ArgumentId = ColumnArgumentModel.Id,
+                            Name = ColumnArgumentModel.Name,
+                            Answer = ColumnConstraintAnswer(column)
+                        });
                     }
 
                     result.Add(decimalValue);
@@ -406,11 +407,6 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
         private string ColumnConstraintAnswer(int column)
         {
             return Convert.ToString(ValueGridView[column, 1].Value);
-        }
-
-        private ConstraintTypeDTO ColumnConstraintTypeDTO(int column)
-        {
-            return Presenter.GetConstraintType((string)ValueGridView[column, 0].Value);
         }
 
         private string RowConstraintAnswer(int row)
@@ -517,7 +513,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             {
                 var cell = ValueGridView[column, 1];
 
-                if (Presenter.IsValidAnswer(Presenter.ColumnAnswers(), cell.Value))
+                if (Presenter.IsValidAnswer(ColumnArgumentModel, cell.Value))
                 {
                     cell.Style = null;
 
@@ -622,10 +618,10 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
         private void MakeAnswerSelectionCell(int column, int row, IEnumerable<string> answers)
         {
             var cell = new DataGridViewComboBoxCell
-                       {
-                           DisplayMember = "Name",
-                           DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox
-                       };
+            {
+                DisplayMember = "Name",
+                DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox
+            };
 
             answers.ForEach(item => cell.Items.Add(item));
 
@@ -636,21 +632,25 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
         private void MakeAnswerEntryCell(int column, int row)
         {
             ValueGridView[column, row] = new DataGridViewTextBoxCell
-                                        {
-                                            ReadOnly = false
-                                        };
+            {
+                ReadOnly = false
+            };
 
             ValueGridView[column, row].ReadOnly = false;
         }
 
         private bool IsRowAnswerCell(int columnIndex, int rowIndex)
         {
-            return !RowArgumentModel.HasAnswerCatalog && columnIndex == 1 && rowIndex > 1;
+            return columnIndex == 1 && rowIndex > 1;
+            //TODO
+            //return !RowArgumentModel.HasAnswerCatalog && columnIndex == 1 && rowIndex > 1;
         }
 
         private bool IsColumnAnswerCell(int columnIndex, int rowIndex)
         {
-            return !ColumnArgumentModel.HasAnswerCatalog && columnIndex > 1 && rowIndex == 1;
+            return columnIndex > 1 && rowIndex == 1;
+            //TODO
+            //return !ColumnArgumentModel.HasAnswerCatalog && columnIndex > 1 && rowIndex == 1;
         }
 
         private static bool IsValueCell(int columnIndex, int rowIndex)
@@ -661,15 +661,15 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
         private void MakeConstraintCell(int column, int row)
         {
             var cell = new DataGridViewComboBoxCell
-                       {
-                           DisplayMember = "Text",
-                           DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox
-                       };
+            {
+                DisplayMember = "Text",
+                DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox
+            };
 
             ValueGridView[column, row] = cell;
             ValueGridView[column, row].ReadOnly = false;
 
-            PopulateConstraintTypes(cell, RowArgumentModel.HasAnswerCatalog);
+            PopulateConstraintTypes(cell, Presenter.RowAnswers().Any());
         }
 
         private void AddRow()
@@ -680,9 +680,9 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
             MakeConstraintCell(0, row);
 
-            if (RowArgumentModel.HasAnswerCatalog)
+            if (Presenter.RowAnswers().Any())
             {
-                MakeAnswerSelectionCell(1, row, RowArgumentModel.Answers);
+                MakeAnswerSelectionCell(1, row, Presenter.RowAnswers());
             }
             else
             {
@@ -816,9 +816,9 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
             MakeConstraintCell(column, 0);
 
-            if (ColumnArgumentModel.HasAnswerCatalog)
+            if (Presenter.ColumnAnswers().Any())
             {
-                MakeAnswerSelectionCell(column, 1, ColumnArgumentModel.Answers);
+                MakeAnswerSelectionCell(column, 1, Presenter.ColumnAnswers());
             }
             else
             {

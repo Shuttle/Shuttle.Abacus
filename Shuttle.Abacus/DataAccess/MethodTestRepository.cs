@@ -44,16 +44,6 @@ namespace Shuttle.Abacus.DataAccess
             AddArgumentAnswers(item);
         }
 
-        public void SetArgumentName(Guid argumentId, string argumentName)
-        {
-            _databaseGateway.ExecuteUsing(_methodTestQueryFactory.SetArgumentName(argumentId, argumentName));
-        }
-
-        public void SetArgumentAnswerType(Guid argumentId, string answerType)
-        {
-            _databaseGateway.ExecuteUsing(_methodTestQueryFactory.SetArgumentAnswerType(argumentId, answerType));
-        }
-
         private void AddArgumentAnswers(MethodTest test)
         {
             test.ArgumentAnswers.ForEach(

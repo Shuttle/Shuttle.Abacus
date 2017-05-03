@@ -98,11 +98,11 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
             Answer.Items.Clear();
         }
 
-        public void PopulateAnswerCatalog(IEnumerable<ArgumentRestrictedAnswerDTO> list)
+        public void PopulateAnswerCatalog(IEnumerable<string> answers)
         {
             Answer.Items.Clear();
 
-            list.ForEach(dto => Answer.Items.Add(dto.Answer));
+            answers.ForEach(answer => Answer.Items.Add(answer));
         }
 
         public void PopulateFactors(IEnumerable<DataRow> items)

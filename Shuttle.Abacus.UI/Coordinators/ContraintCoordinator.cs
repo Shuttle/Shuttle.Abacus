@@ -19,19 +19,22 @@ namespace Shuttle.Abacus.UI.Coordinators
     public class ConstraintCoordinator : Coordinator, IConstraintCoordinator
     {
         private readonly IArgumentQuery _argumentQuery;
+        private readonly IConstraintTypeQuery _constraintTypeQuery;
         private readonly IConstraintQuery _constraintQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
 
         public ConstraintCoordinator(IDatabaseContextFactory databaseContextFactory, IConstraintQuery constraintQuery,
-            IArgumentQuery argumentQuery)
+            IArgumentQuery argumentQuery, IConstraintTypeQuery constraintTypeQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(constraintQuery, "constraintQuery");
             Guard.AgainstNull(argumentQuery, "argumentQuery");
+            Guard.AgainstNull(constraintTypeQuery, "constraintTypeQuery");
 
             _databaseContextFactory = databaseContextFactory;
             _constraintQuery = constraintQuery;
             _argumentQuery = argumentQuery;
+            _constraintTypeQuery = constraintTypeQuery;
         }
 
         public void HandleMessage(PopulateResourceMessage message)
@@ -51,7 +54,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
                     using (_databaseContextFactory.Create())
                     {
-                        foreach (var row in _constraintQuery.QueryAllForOwner(ownerId))
+                        foreach (var row in _constraintQuery.AllForOwner(ownerId))
                         {
                             message.Resources.Add(
                                 new Resource(ResourceKeys.Constraint, Guid.Empty,
@@ -114,9 +117,8 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return new ConstraintModel
                 {
                     ArgumentRows = _argumentQuery.All(),
-                    //TODO
-                    //ConstraintTypes = _constraintQuery.ConstraintTypes(),
-                    Constraints = _constraintQuery.DTOsForOwner(calculationId)
+                    ConstraintTypeRows = _constraintTypeQuery.All(),
+                    ConstraintRows = _constraintQuery.AllForOwner(calculationId)
                 };
             }
         }

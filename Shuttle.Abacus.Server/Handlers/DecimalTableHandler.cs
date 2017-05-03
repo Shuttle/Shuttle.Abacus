@@ -13,22 +13,18 @@ namespace Shuttle.Abacus.Server.Handlers
     {
         private readonly IConstraintRepository _constraintRepository;
         private readonly IDatabaseContextFactory _databaseContextFactory;
-        private readonly IDecimalTableFactory _decimalTableFactory;
         private readonly IDecimalTableRepository _decimalTableRepository;
         private readonly IDecimalValueRepository _decimalValueRepository;
 
-        public DecimalTableHandler(IDatabaseContextFactory databaseContextFactory,
-            IDecimalTableFactory decimalTableFactory, IDecimalTableRepository decimalTableRepository,
+        public DecimalTableHandler(IDatabaseContextFactory databaseContextFactory, IDecimalTableRepository decimalTableRepository,
             IDecimalValueRepository decimalValueRepository, IConstraintRepository constraintRepository)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
-            Guard.AgainstNull(decimalTableFactory, "decimalTableFactory");
             Guard.AgainstNull(decimalTableRepository, "decimalTableRepository");
             Guard.AgainstNull(decimalValueRepository, "decimalValueRepository");
             Guard.AgainstNull(constraintRepository, "constraintRepository");
 
             _databaseContextFactory = databaseContextFactory;
-            _decimalTableFactory = decimalTableFactory;
             _decimalTableRepository = decimalTableRepository;
             _decimalValueRepository = decimalValueRepository;
             _constraintRepository = constraintRepository;
@@ -40,7 +36,7 @@ namespace Shuttle.Abacus.Server.Handlers
 
             using (_databaseContextFactory.Create())
             {
-                var table = _decimalTableFactory.Create(Guid.NewGuid(), message);
+                var table = new DecimalTable(Guid.NewGuid(), message.DecimalTableName,message.RowArgumentId,message.ColumnArgumentId);
 
                 _decimalTableRepository.Add(table);
 
@@ -57,7 +53,7 @@ namespace Shuttle.Abacus.Server.Handlers
 
             using (_databaseContextFactory.Create())
             {
-                var table = _decimalTableFactory.Create(message.DecimalTableId, message);
+                var table = new DecimalTable(message.DecimalTableId, message.DecimalTableName, message.RowArgumentId, message.ColumnArgumentId);
 
                 _decimalValueRepository.RemoveAllForDecimalTable(message.DecimalTableId);
 
