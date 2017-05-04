@@ -192,15 +192,10 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(EditFormulaMessage message)
         {
-            var formulaModel = BuildFormulaModel(message.FormulaId);
-
-            if (formulaModel == null)
-            {
-                return;
-            }
-
             using (_databaseContextFactory.Create())
             {
+                var formulaModel = BuildFormulaModel().With(_formulaQuery.Get(message.FormulaId));
+
                 var constraintModel = BuildConstraintModel(formulaModel);
 
                 if (constraintModel == null)
@@ -278,12 +273,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(NewFormulaFromExistingMessage message)
         {
-            var formulaModel = BuildFormulaModel(message.FormulaId);
-
-            if (formulaModel == null)
-            {
-                return;
-            }
+            var formulaModel = BuildFormulaModel();
 
             var constraintModel = BuildConstraintModel(formulaModel);
 
@@ -357,11 +347,11 @@ namespace Shuttle.Abacus.UI.Coordinators
             };
         }
 
-        private FormulaModel BuildFormulaModel(Guid id)
+        private FormulaModel BuildFormulaModel()
         {
             using (_databaseContextFactory.Create())
             {
-                return new FormulaModel(_formulaQuery.Get(id));
+                return new FormulaModel();
             }
         }
     }

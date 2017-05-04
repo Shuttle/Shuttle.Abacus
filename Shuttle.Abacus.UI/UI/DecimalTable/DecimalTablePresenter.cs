@@ -255,7 +255,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             {
                 _constraintTypes = _constraintTypeQuery.All().Map(row => new ConstraintTypeModel(row));
 
-                View.PopulateArguments(_argumentQuery.All().Map(row => new ArgumentModel(row)));
+                View.PopulateArguments(_argumentQuery.All().Map(row => new ArgumentModel().Using(row)));
 
                 View.DecimalTableNameValue = Model.Name;
 

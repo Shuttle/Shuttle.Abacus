@@ -46,9 +46,7 @@
     <Compile Include="MethodContextDTO.cs" />
     <Compile Include="MethodDTO.cs" />
     <Compile Include="MethodTestDTO.cs" />
-    <Compile Include="OperationDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ValueSourceTypeDTO.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

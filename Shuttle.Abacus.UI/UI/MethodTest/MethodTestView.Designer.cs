@@ -35,8 +35,8 @@
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.FormattedTextBox = new System.Windows.Forms.TextBox();
-            this.Answer = new System.Windows.Forms.ComboBox();
+            this.FormattedControl = new System.Windows.Forms.TextBox();
+            this.ValueSelectionControl = new System.Windows.Forms.ComboBox();
             this.ValueSelectionLabel = new System.Windows.Forms.Label();
             this.Argument = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -119,8 +119,8 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.FormattedTextBox);
-            this.groupBox1.Controls.Add(this.Answer);
+            this.groupBox1.Controls.Add(this.FormattedControl);
+            this.groupBox1.Controls.Add(this.ValueSelectionControl);
             this.groupBox1.Controls.Add(this.ValueSelectionLabel);
             this.groupBox1.Controls.Add(this.Argument);
             this.groupBox1.Controls.Add(this.label5);
@@ -133,24 +133,24 @@
             // 
             // FormattedTextBox
             // 
-            this.FormattedTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.FormattedControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.FormattedTextBox.Location = new System.Drawing.Point(244, 72);
-            this.FormattedTextBox.Name = "FormattedTextBox";
-            this.FormattedTextBox.ReadOnly = true;
-            this.FormattedTextBox.Size = new System.Drawing.Size(184, 20);
-            this.FormattedTextBox.TabIndex = 7;
+            this.FormattedControl.Location = new System.Drawing.Point(244, 72);
+            this.FormattedControl.Name = "FormattedControl";
+            this.FormattedControl.ReadOnly = true;
+            this.FormattedControl.Size = new System.Drawing.Size(184, 20);
+            this.FormattedControl.TabIndex = 7;
             // 
             // Answer
             // 
-            this.Answer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.ValueSelectionControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.Answer.FormattingEnabled = true;
-            this.Answer.Location = new System.Drawing.Point(244, 40);
-            this.Answer.Name = "Answer";
-            this.Answer.Size = new System.Drawing.Size(183, 21);
-            this.Answer.TabIndex = 3;
-            this.Answer.SelectedIndexChanged += new System.EventHandler(this.ValueSelection_SelectedIndexChanged);
+            this.ValueSelectionControl.FormattingEnabled = true;
+            this.ValueSelectionControl.Location = new System.Drawing.Point(244, 40);
+            this.ValueSelectionControl.Name = "ValueSelectionControl";
+            this.ValueSelectionControl.Size = new System.Drawing.Size(183, 21);
+            this.ValueSelectionControl.TabIndex = 3;
+            this.ValueSelectionControl.SelectedIndexChanged += new System.EventHandler(this.ValueSelection_SelectedIndexChanged);
             // 
             // ValueSelectionLabel
             // 
@@ -236,12 +236,10 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox Answer;
         private System.Windows.Forms.Label ValueSelectionLabel;
         private System.Windows.Forms.ComboBox Argument;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button ApplyButton;
         private System.Windows.Forms.Button RemoveButton;
-        private System.Windows.Forms.TextBox FormattedTextBox;
     }
 }

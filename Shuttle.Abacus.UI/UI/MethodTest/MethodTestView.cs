@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
-using Shuttle.Abacus.DTO;
+using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Core;
 using Shuttle.Abacus.UI.Core.Formatters;
 using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Models;
 
 namespace Shuttle.Abacus.UI.UI.MethodTest
 {
@@ -33,15 +34,25 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
                 decimal dec;
 
                 return decimal.TryParse(ExpectedResult.Text, out dec)
-                           ? dec
-                           : 0;
+                    ? dec
+                    : 0;
             }
             set { ExpectedResult.Text = Convert.ToString(value); }
         }
 
-        public IList ArgumentAnswers
+        public IEnumerable<ArgumentAnswerModel> ArgumentAnswers
         {
-            get { return ArgumentAnswersListView.Items; }
+            get
+            {
+                var result = new List<ArgumentAnswerModel>();
+
+                foreach (ListViewItem item in ArgumentAnswersListView.Items)
+                {
+                    result.Add((ArgumentAnswerModel)item.Tag);
+                }
+
+                return result;
+            }
         }
 
         public IRuleCollection<object> DescriptionRules
@@ -69,9 +80,9 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
             return false;
         }
 
-        public DataRow ArgumentRow
+        public ArgumentModel ArgumentModel
         {
-            get { return Argument.SelectedItem as DataRow; }
+            get { return Argument.SelectedItem as ArgumentModel; }
         }
 
         public bool HasArgument
@@ -81,36 +92,36 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
 
         public bool HasAnswer
         {
-            get { return Answer.Text.Length > 0; }
+            get { return ValueSelectionControl.Text.Length > 0; }
         }
 
         public void EnableAnswerSelection()
         {
             ValueSelectionLabel.Text = "Selection";
-            Answer.DropDownStyle = ComboBoxStyle.DropDownList;
+            ValueSelectionControl.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         public void EnableAnswerEntry()
         {
             ValueSelectionLabel.Text = "Value";
-            Answer.DropDownStyle = ComboBoxStyle.DropDown;
-            Answer.Text = string.Empty;
-            Answer.Items.Clear();
+            ValueSelectionControl.DropDownStyle = ComboBoxStyle.DropDown;
+            ValueSelectionControl.Text = string.Empty;
+            ValueSelectionControl.Items.Clear();
         }
 
-        public void PopulateAnswerCatalog(IEnumerable<string> answers)
+        public void PopulateAnswers(IEnumerable<string> answers)
         {
-            Answer.Items.Clear();
+            ValueSelectionControl.Items.Clear();
 
-            answers.ForEach(answer => Answer.Items.Add(answer));
+            answers.ForEach(answer => ValueSelectionControl.Items.Add(answer));
         }
 
-        public void PopulateFactors(IEnumerable<DataRow> items)
+        public void PopulateArguments(IEnumerable<ArgumentModel> arguments)
         {
-            Answer.Items.Clear();
+            ValueSelectionControl.Items.Clear();
 
             Argument.DisplayMember = "Name";
-            items.ForEach(item => Argument.Items.Add(item));
+            arguments.ForEach(item => Argument.Items.Add(item));
         }
 
         public void ShowArgumentError()
@@ -120,63 +131,65 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
 
         public void ShowAnswerError(string message)
         {
-            SetError(Answer, message);
+            SetError(ValueSelectionControl, message);
         }
 
-        public void AddArgumentAnswer(Guid argumentId, string answer)
+        public void AddArgumentAnswer(ArgumentModel argument, string answer)
         {
-            var dto = FindDataRow(argumentId);
-
-            if (dto == null)
-            {
-                return;
-            }
-
             var item = new ListViewItem();
 
             item.SubItems.Add(string.Empty);
 
-            ArgumentAnswersListView.Items.Add(PopulateItem(item, dto, answer));
+            ArgumentAnswersListView.Items.Add(PopulateItem(item, argument, answer));
         }
 
-        public void AddArgument(DataRow dto)
+        public void AddArgument(ArgumentModel model)
         {
-            Argument.Items.Add(dto);
+            Argument.Items.Add(model);
         }
 
         public string AnswerValue
         {
-            get { return Answer.Text; }
-            set { Answer.Text = value; }
+            get { return ValueSelectionControl.Text; }
+            set { ValueSelectionControl.Text = value; }
         }
 
-        private ListViewItem PopulateItem(ListViewItem item, DataRow dto, string answer)
+        public ComboBox ValueSelectionControl { get; private set; }
+
+        public TextBox FormattedControl { get; private set; }
+
+        public void AttachValueFormatter(MoneyFormatter formatter)
         {
-            item.SubItems[1].Text = answer;
-
-            throw new NotImplementedException();
-
-            //TODO
-            //item.Tag = dto;
-            //item.Text = dto.Name;
-
-            return item;
+            valueFormatter = formatter;
         }
 
-        private DataRow FindDataRow(Guid argumentId)
+        public void DetachValueFormatter()
         {
-            throw new NotImplementedException();
+            FormattedControl.Text = string.Empty;
 
-            foreach (DataRow dto in Argument.Items)
+            if (valueFormatter == null)
             {
-                //TODO
-                //if (dto.Id.Equals(argumentId))
-                //{
-                //    return dto;
-                //}
+                return;
             }
 
-            return null;
+            valueFormatter.Dispose();
+
+            valueFormatter = null;
+        }
+
+        private ListViewItem PopulateItem(ListViewItem item, ArgumentModel argument, string answer)
+        {
+            item.SubItems[1].Text = answer;
+            item.Text = argument.Name;
+
+            item.Tag = new ArgumentAnswerModel
+            {
+                ArgumentId = argument.Id,
+                Argument = argument.Name,
+                Answer = answer
+            };
+
+            return item;
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
@@ -249,7 +262,7 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
 
                 Argument.SelectedItem = item;
 
-                Answer.Text = ArgumentAnswersListView.SelectedItems[0].SubItems[1].Text;
+                ValueSelectionControl.Text = ArgumentAnswersListView.SelectedItems[0].SubItems[1].Text;
 
                 return;
             }
@@ -257,38 +270,8 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
 
         private void ValueSelection_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SetError(Answer, string.Empty);
+            SetError(ValueSelectionControl, string.Empty);
         }
-
-        public ComboBox ValueSelectionControl
-        {
-            get { return Answer; }
-        }
-
-        public TextBox FormattedControl
-        {
-            get { return FormattedTextBox; }
-        }
-
-        public void AttachValueFormatter(MoneyFormatter formatter)
-        {
-            valueFormatter = formatter;
-        }
-
-        public void DetachValueFormatter()
-        {
-            FormattedTextBox.Text = string.Empty;
-
-            if (valueFormatter == null)
-            {
-                return;
-            }
-
-            valueFormatter.Dispose();
-
-            valueFormatter = null;
-        }
-
     }
 
     public class GenericMethodTestView : View<IMethodTestPresenter>

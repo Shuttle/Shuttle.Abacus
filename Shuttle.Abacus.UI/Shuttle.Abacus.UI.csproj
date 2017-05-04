@@ -284,6 +284,7 @@
     <Compile Include="Messages\WorkItem\WorkItemReadyMessage.cs" />
     <Compile Include="Messages\WorkItem\WorkItemSitedMessage.cs" />
     <Compile Include="Messages\WorkItem\WorkItemTextChangedMessage.cs" />
+    <Compile Include="Models\ArgumentAnswerModel.cs" />
     <Compile Include="Models\ArgumentDisplayModel.cs" />
     <Compile Include="Models\ArgumentModel.cs" />
     <Compile Include="Models\ConstraintModel.cs" />
@@ -291,10 +292,13 @@
     <Compile Include="Models\DecimalTableModel.cs" />
     <Compile Include="Models\DecimalValueModel.cs" />
     <Compile Include="Models\FormulaModel.cs" />
+    <Compile Include="Models\FormulaOperationModel.cs" />
     <Compile Include="Models\MethodTestModel.cs" />
+    <Compile Include="Models\OperationTypeModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\SimpleGridModel.cs" />
     <Compile Include="Models\SimpleListModel.cs" />
+    <Compile Include="Models\ValueSourceTypeModel.cs" />
     <Compile Include="Navigation\DefaultNavigationMap.cs" />
     <Compile Include="Navigation\IMessageResourceItemStore.cs" />
     <Compile Include="Navigation\INavigationItem.cs" />

@@ -1,4 +1,5 @@
 using System.Data;
+using System.Linq;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Interfaces;
@@ -8,19 +9,31 @@ using Shuttle.Abacus.UI.Core.Formatters;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Abacus.UI.Models;
+using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.UI.MethodTest
 {
     public class MethodTestPresenter : Presenter<IMethodTestView, MethodTestModel>, IMethodTestPresenter
     {
-        private readonly IMethodTestRules testRules;
-        private readonly IValueTypeValidatorProvider valueTypeValidatorProvider;
+        private readonly IArgumentQuery _argumentQuery;
+        private readonly IDatabaseContextFactory _databaseContextFactory;
+        private readonly IMethodTestRules _rules;
+        private readonly IValueTypeValidatorProvider _valueTypeValidatorProvider;
 
-        public MethodTestPresenter(IMethodTestView view, IMethodTestRules testRules, IValueTypeValidatorProvider valueTypeValidatorProvider)
+        public MethodTestPresenter(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
+            IMethodTestView view, IMethodTestRules rules, IValueTypeValidatorProvider valueTypeValidatorProvider)
             : base(view)
         {
-            this.testRules = testRules;
-            this.valueTypeValidatorProvider = valueTypeValidatorProvider;
+            Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
+            Guard.AgainstNull(argumentQuery, "argumentQuery");
+            Guard.AgainstNull(rules, "rules");
+            Guard.AgainstNull(valueTypeValidatorProvider, "valueTypeValidatorProvider");
+
+            _databaseContextFactory = databaseContextFactory;
+            _argumentQuery = argumentQuery;
+            _rules = rules;
+            _valueTypeValidatorProvider = valueTypeValidatorProvider;
 
             Text = "Test Details";
 
@@ -29,24 +42,29 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
 
         public void ArgumentChanged()
         {
-            var dto = View.ArgumentRow;
+            var model = View.ArgumentModel;
 
             View.DetachValueFormatter();
 
-            if (dto.HasAnswerCatalog)
+            using (_databaseContextFactory.Create())
             {
-                View.EnableAnswerSelection();
+                var answers = _argumentQuery.Answers(model.Id).ToList();
 
-                View.PopulateAnswerCatalog(dto.Answers);
-            }
-            else
-            {
-                if (dto.IsMoney)
+                if (answers.Any())
                 {
-                    View.AttachValueFormatter(new MoneyFormatter(View.ValueSelectionControl, View.FormattedControl));
-                }
+                    View.EnableAnswerSelection();
 
-                View.EnableAnswerEntry();
+                    View.PopulateAnswers(answers.Map(row=>ArgumentColumns.RestrictedAnswerColumns.Answer.MapFrom(row)));
+                }
+                else
+                {
+                    if (model.IsMoney())
+                    {
+                        View.AttachValueFormatter(new MoneyFormatter(View.ValueSelectionControl, View.FormattedControl));
+                    }
+
+                    View.EnableAnswerEntry();
+                }
             }
         }
 
@@ -61,22 +79,15 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
 
             if (!View.HasAnswer)
             {
-                if (View.ArgumentRow.HasAnswerCatalog)
-                {
-                    View.ShowAnswerError("Please make a selection");
-                }
-                else
-                {
-                    View.ShowAnswerError("Please enter a value.");
-                }
+                View.ShowAnswerError("Please enter a value.");
 
                 return false;
             }
 
-            if (View.ArgumentRow.IsNumber)
+            if (View.ArgumentModel.IsNumber)
             {
                 var result =
-                    valueTypeValidatorProvider.Get(View.ArgumentRow.AnswerType)
+                    _valueTypeValidatorProvider.Get(View.ArgumentModel.AnswerType)
                         .Validate(View.AnswerValue);
 
                 if (!result.OK)
@@ -100,12 +111,12 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
         {
             base.OnInitialize();
 
-            View.DescriptionRules = testRules.DescriptionRules();
-            View.ExpectedResultRules = testRules.ExpectedResultRules();
+            View.DescriptionRules = _rules.DescriptionRules();
+            View.ExpectedResultRules = _rules.ExpectedResultRules();
 
-            foreach (var dto in Model.ArgumentRows)
+            foreach (var row in Model.ArgumentRows)
             {
-                View.AddArgument(dto);
+                View.AddArgument(new ArgumentModel().Using(row));
             }
 
             if (Model.MethodTestRow == null)
@@ -118,9 +129,7 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
 
             foreach (DataRow row in Model.ArgumentAnswers.Rows)
             {
-                View.AddArgumentAnswer(
-                    MethodTestColumns.ArgumentAnswerColumns.ArgumentId.MapFrom(row),
-                    MethodTestColumns.ArgumentAnswerColumns.Answer.MapFrom(row));
+                View.AddArgumentAnswer(new ArgumentAnswerModel().Using(row));
             }
         }
     }

@@ -46,16 +46,12 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                               ExpectedResult = view.ExpectedResultValue
                           };
 
-            foreach (ListViewItem item in view.ArgumentAnswers)
+            foreach (var model in view.ArgumentAnswers)
             {
-                var dto = ((DataRow) item.Tag);
-
-                command.ArgumentAnswers.Add(new ArgumentAnswerDTO
+                command.ArgumentAnswers.Add(new Abacus.Messages.v1.TransferObjects.ArgumentAnswer
                                           {
-                                              ArgumentId = dto.Id,
-                                              ArgumentName = item.Text, 
-                                              AnswerType = dto.AnswerType,
-                                              Answer = item.SubItems[1].Text
+                                              ArgumentId = model.ArgumentId,
+                                              Answer = model.Answer
                                           });
             }
 
@@ -91,14 +87,12 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                               ExpectedResult = view.ExpectedResultValue
                           };
 
-            foreach (ListViewItem item in view.ArgumentAnswers)
+            foreach (var model in view.ArgumentAnswers)
             {
-                var dto = ((DataRow)item.Tag);
-
-                command.ArgumentAnswers.Add(new ArgumentAnswer
+                command.ArgumentAnswers.Add(new Shuttle.Abacus.Messages.v1.TransferObjects.ArgumentAnswer
                 {
-                    ArgumentId = dto.Id,
-                    Answer = item.SubItems[1].Text
+                    ArgumentId = model.ArgumentId,
+                    Answer = model.Answer
                 });
             }
 

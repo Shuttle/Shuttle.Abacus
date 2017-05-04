@@ -143,7 +143,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
 
             using (_databaseContextFactory.Create())
             {
-                View.PopulateArguments(_argumentQuery.All().Map(row => new ArgumentModel(row)));
+                View.PopulateArguments(_argumentQuery.All().Map(row => new ArgumentModel().Using(row)));
                 View.SetContraintTypes(_constraintTypeQuery.All().Map(row=> new ConstraintTypeModel(row)));
             }
 

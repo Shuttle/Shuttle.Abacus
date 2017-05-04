@@ -10,20 +10,29 @@ namespace Shuttle.Abacus.UI.Models
     {
         private static readonly List<string> Numbers = new List<string>
         {
-            "decimal", "integer", "money"
+            "decimal",
+            "integer",
+            "money"
         };
 
-        public DataRow Row { get; }
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string AnswerType { get; set; }
 
-        public Guid Id => ArgumentColumns.Id.MapFrom(Row);
-        public string Name => ArgumentColumns.Name.MapFrom(Row);
-        public string AnswerType => ArgumentColumns.AnswerType.MapFrom(Row);
+        public bool IsNumber
+        {
+            get { return !string.IsNullOrEmpty(AnswerType) && Numbers.Contains(AnswerType.ToLower()); }
+        }
 
-        public ArgumentModel(DataRow row)
+        public ArgumentModel Using(DataRow row)
         {
             Guard.AgainstNull(row, "row");
 
-            Row = row;
+            Id = ArgumentColumns.Id.MapFrom(row);
+            Name = ArgumentColumns.Name.MapFrom(row);
+            AnswerType = ArgumentColumns.AnswerType.MapFrom(row);
+
+            return this;
         }
 
         public bool IsText()
@@ -34,11 +43,6 @@ namespace Shuttle.Abacus.UI.Models
         public bool IsMoney()
         {
             return AnswerType.Equals("Money", StringComparison.OrdinalIgnoreCase);
-        }
-
-        public bool IsNumber
-        {
-            get { return !string.IsNullOrEmpty(AnswerType) && Numbers.Contains(AnswerType.ToLower()); }
         }
     }
 }

@@ -1,4 +1,3 @@
-using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Messages.v1;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
@@ -12,7 +11,8 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class DecimalTableController : WorkItemController, IDecimalTableController
     {
-        public DecimalTableController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository) 
+        public DecimalTableController(IServiceBus serviceBus, IMessageBus messageBus,
+            ICallbackRepository callbackRepository)
             : base(serviceBus, messageBus, callbackRepository)
         {
         }
@@ -34,12 +34,12 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             }
 
             var command = new CreateDecimalTableCommand
-                          {
-                              DecimalTableName = view.DecimalTableNameValue,
-                              RowArgumentDto = view.RowArgumentModel,
-                              ColumnDataRow = view.ColumnArgumentModel,
-                              DecimalValues = view.DecimalValues()
-                          };
+            {
+                DecimalTableName = view.DecimalTableNameValue,
+                RowArgumentId = view.RowArgumentModel.Id,
+                ColumnArgumentId = view.ColumnArgumentModel.Id,
+                DecimalValues = view.DecimalValues()
+            };
 
             Send(command);
         }
@@ -61,17 +61,17 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             }
 
             var command = new UpdateDecimalTableCommand
-                          {
-                              DecimalTableId = message.DecimalTableId,
-                              DecimalTableName = view.DecimalTableNameValue,
-                              RowArgumentDto = view.RowArgumentModel,
-                              ColumnDataRow = view.ColumnArgumentModel,
-                              DecimalValues = view.DecimalValues()
-                          };
+            {
+                DecimalTableId = message.DecimalTableId,
+                DecimalTableName = view.DecimalTableNameValue,
+                RowArgumentId = view.RowArgumentModel.Id,
+                ColumnArgumentId = view.ColumnArgumentModel.Id,
+                DecimalValues = view.DecimalValues()
+            };
 
             Send(command,
-                 () =>
-                 MessageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
+                () =>
+                    MessageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
         }
     }
 }

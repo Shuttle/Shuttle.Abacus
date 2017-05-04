@@ -27,8 +27,7 @@ namespace Shuttle.Abacus.Infrastructure
             return new EnumerableActions<T>(itemsToMap).MapAllUsing(mapper);
         }
 
-        public static IEnumerable<TOutput> Map<T, TOutput>(this IEnumerable<T> itemsToMap,
-                                                                 Func<T, TOutput> mapper)
+        public static List<TOutput> Map<T, TOutput>(this IEnumerable<T> itemsToMap, Func<T, TOutput> mapper)
         {
             var result = new List<TOutput>();
 

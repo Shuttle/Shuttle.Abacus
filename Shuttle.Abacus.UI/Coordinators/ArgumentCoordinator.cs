@@ -129,7 +129,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .Create("Edit Argument")
                     .ControlledBy<IArgumentController>()
                     .ShowIn<IContextToolbarPresenter>()
-                    .AddPresenter<IArgumentPresenter>().WithModel(new ArgumentModel(_argumentQuery.Get(message.ArgumentId)))
+                    .AddPresenter<IArgumentPresenter>().WithModel(new ArgumentModel().Using(_argumentQuery.Get(message.ArgumentId)))
                     .AddPresenter<IArgumentRestrictedAnswerPresenter>()
                     .WithModel(_argumentQuery.Answers(message.ArgumentId))
                     .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).

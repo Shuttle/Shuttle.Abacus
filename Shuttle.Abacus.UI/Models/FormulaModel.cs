@@ -8,19 +8,24 @@ namespace Shuttle.Abacus.UI.Models
 {
     public class FormulaModel
     {
-        private readonly DataRow _row;
-
-        public FormulaModel(DataRow row)
+        public FormulaModel With(DataRow row)
         {
             Guard.AgainstNull(row, "row");
 
-            _row = row;
+            Id = FormulaColumns.Id.MapFrom(row);
+            SequenceNumber = FormulaColumns.SequenceNumber.MapFrom(row);
+            Description = FormulaColumns.Description.MapFrom(row);
+
+            return this;
         }
 
-        public Guid Id => FormulaColumns.Id.MapFrom(_row);
-        public int SequenceNumber => FormulaColumns.SequenceNumber.MapFrom(_row);
-        public string Description => FormulaColumns.Description.MapFrom(_row);
+        public Guid Id { get; set; }
+        public int SequenceNumber { get; set; }
+        public string Description { get; set; }
 
         public IEnumerable<string> OperationTypes { get; set; }
+        public IEnumerable<ValueSourceTypeModel> ValueSourceTypes { get; set; }
+        public IEnumerable<FormulaOperationModel> FormulaOperations { get; set; }
+        public IEnumerable<ArgumentModel> Arguments { get; set; }
     }
 }

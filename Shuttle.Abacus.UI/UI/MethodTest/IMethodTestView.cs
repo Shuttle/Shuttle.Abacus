@@ -7,6 +7,7 @@ using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Invariants.Core;
 using Shuttle.Abacus.UI.Core.Formatters;
 using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Models;
 
 namespace Shuttle.Abacus.UI.UI.MethodTest
 {
@@ -16,9 +17,9 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
 
         decimal ExpectedResultValue { get; set; }
 
-        IList ArgumentAnswers { get; }
+        IEnumerable<ArgumentAnswerModel> ArgumentAnswers { get; }
 
-        DataRow ArgumentRow { get; }
+        ArgumentModel ArgumentModel { get; }
         bool HasArgument { get; }
         bool HasAnswer { get; }
         string AnswerValue { get; }
@@ -30,12 +31,12 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
         TextBox FormattedControl { get; }
         void EnableAnswerSelection();
         void EnableAnswerEntry();
-        void PopulateAnswerCatalog(IEnumerable<string> answers);
-        void PopulateFactors(IEnumerable<DataRow> items);
+        void PopulateAnswers(IEnumerable<string> answers);
+        void PopulateArguments(IEnumerable<ArgumentModel> arguments);
         void ShowArgumentError();
         void ShowAnswerError(string message);
-        void AddArgumentAnswer(Guid argumentId, string answer);
-        void AddArgument(DataRow dto);
+        void AddArgumentAnswer(ArgumentModel argument, string answer);
+        void AddArgument(ArgumentModel model);
         bool HasInvalidArgumentAnswers();
 
         void AttachValueFormatter(MoneyFormatter formatter);

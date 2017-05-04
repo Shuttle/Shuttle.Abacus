@@ -35,15 +35,8 @@ namespace Shuttle.Abacus.UI.UI.Argument
             View.ArgumentNameRules = _argumentRules.ArgumentNameRules();
             View.AnswerTypeRules = _argumentRules.AnswerTypeRules();
 
-            if (Model.Row == null)
-            {
-                return;
-            }
-
-            var row = Model.Row;
-
-            View.ArgumentNameValue = ArgumentColumns.Name.MapFrom(row);
-            View.AnswerTypeValue = ArgumentColumns.AnswerType.MapFrom(row);
+            View.ArgumentNameValue = Model.Name;
+            View.AnswerTypeValue = Model.AnswerType;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
         bool HasAnswers { get; }
         bool HasArgument { get; }
         bool HasConstraint { get; }
-        List<OwnedConstraint> Constraints { get; set; }
+        List<ConstraintModel> Constraints { get; set; }
         
         ComboBox ValueSelectionControl { get; }
         TextBox FormattedControl { get; }

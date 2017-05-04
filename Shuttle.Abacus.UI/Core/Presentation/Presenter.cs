@@ -30,7 +30,7 @@ namespace Shuttle.Abacus.UI.Core.Presentation
 
         public event PresenterTextChanged TextChanged = delegate { };
         public event PresenterImageChanged ImageChanged = delegate { };
-        
+
         public void Show()
         {
             MessageBus.Publish(new ShowPresenterMessage(WorkItem, this));
@@ -54,6 +54,8 @@ namespace Shuttle.Abacus.UI.Core.Presentation
 
         protected Presenter(TView view)
         {
+            Guard.AgainstNull(view, "view");
+
             IView = view;
 
             view.AttachPresenter(this);
@@ -80,7 +82,7 @@ namespace Shuttle.Abacus.UI.Core.Presentation
                 if (result == null)
                 {
                     throw new InvalidCastException(string.Format(Localisation.Resources.NullSafeCasting, IView.GetType().FullName,
-                                                                 typeof (TView).FullName));
+                                                                 typeof(TView).FullName));
                 }
 
                 return result;
@@ -95,7 +97,7 @@ namespace Shuttle.Abacus.UI.Core.Presentation
         }
 
         public Message CancelMessage { get; private set; }
-        
+
         public bool HasCancelMessage
         {
             get { return CancelMessage != null; }

@@ -1,6 +1,7 @@
 using System;
-using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Messages.v1;
+using Shuttle.Abacus.Messages.v1.TransferObjects;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.Core;
@@ -17,7 +18,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class FormulaController : WorkItemController, IFormulaController
     {
-        public FormulaController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository) 
+        public FormulaController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository)
             : base(serviceBus, messageBus, callbackRepository)
         {
         }
@@ -33,12 +34,24 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             var constraintView = WorkItem.GetView<IConstraintView>();
 
             Send(new CreateFormulaCommand
-                 {
-                     OwnerName = message.OwnerName,
-                     OwnerId = message.OwnerId,
-                     Operations = formulaView.FormulaOperations,
-                     Constraints = constraintView.Constraints
-                 });
+            {
+                OwnerName = message.OwnerName,
+                OwnerId = message.OwnerId,
+                Operations = formulaView.FormulaOperations.Map(item => new FormulaOperation
+                {
+                    SequenceNumber = item.SequenceNumber,
+                    ValueSelection = item.ValueSelection,
+                    Operation = item.Operation,
+                    ValueSource = item.ValueSource,
+                    Text = item.Text
+                }),
+                Constraints = constraintView.Constraints.Map(item => new Constraint
+                {
+                    ArgumentId = item.ArgumentId,
+                    Name = item.Name,
+                    Answer = item.Answer
+                })
+            });
         }
 
         public void HandleMessage(EditFormulaMessage message)
@@ -52,13 +65,25 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             var constraintView = WorkItem.GetView<IConstraintView>();
 
             Send(new ChangeFormulaCommand
-                 {
-                     CalculationId = message.OwnerId,
-                     FormulaId = message.FormulaId,
-                     Operations = formulaView.FormulaOperations,
-                     Constraints = constraintView.Constraints
-                 }, () =>
-                    MessageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
+            {
+                CalculationId = message.OwnerId,
+                FormulaId = message.FormulaId,
+                Operations = formulaView.FormulaOperations.Map(item => new FormulaOperation
+                {
+                    SequenceNumber = item.SequenceNumber,
+                    ValueSelection = item.ValueSelection,
+                    Operation = item.Operation,
+                    ValueSource = item.ValueSource,
+                    Text = item.Text
+                }),
+                Constraints = constraintView.Constraints.Map(item => new Constraint
+                {
+                    ArgumentId = item.ArgumentId,
+                    Name = item.Name,
+                    Answer = item.Answer
+                })
+            }, () =>
+                MessageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
         }
 
         public void HandleMessage(MoveUpMessage message)
@@ -80,10 +105,10 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             var view = WorkItem.GetView<ISimpleListView>();
 
             var command = new ChangeFormulaOrderCommand
-                          {
-                              OwnerId = message.OwnerId,
-                              OwnerName = message.OwnerName,
-                          };
+            {
+                OwnerId = message.OwnerId,
+                OwnerName = message.OwnerName
+            };
 
             foreach (var item in view.Items)
             {
@@ -96,10 +121,10 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
         public void HandleMessage(DeleteFormulaMessage message)
         {
             Send(new DeleteFormulaCommand
-                 {
-                     FormulaId = message.FormulaId
-                 },
-                 () => MessageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
+                {
+                    FormulaId = message.FormulaId
+                },
+                () => MessageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
         }
     }
 }

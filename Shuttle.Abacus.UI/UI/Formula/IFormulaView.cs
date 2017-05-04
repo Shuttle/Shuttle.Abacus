@@ -10,18 +10,18 @@ namespace Shuttle.Abacus.UI.UI.Formula
     public interface IFormulaView : IView
     {
         string ValueSourceValue { get; set; }
-        ValueSourceTypeDTO ValueSourceTypeDTO { get; }
+        ValueSourceTypeModel ValueSourceTypeModel { get; }
         string ValueSelectionValue { get; set; }
         string ValueSelectionText { get; }
         bool HasValueSource { get; }
         bool HasValueSelection { get; }
         bool HasOperation { get; }
         string OperationValue { get; set; }
-        OperationTypeDTO OperationTypeDTO { get; }
+        OperationTypeModel OperationTypeModel { get; }
         bool HasSelectedItem { get; }
         List<FormulaOperation> FormulaOperations { get; set; }
-        void PopulateValueSources(IEnumerable<ValueSourceTypeDTO> enumerable);
-        void PopulateArguments(IEnumerable<DataRow> rows);
+        void PopulateValueSources(IEnumerable<ValueSourceTypeModel> models);
+        void PopulateArguments(IEnumerable<ArgumentModel> arguments);
         void EnableValueSelection(string text);
         void EnableValueEntry(string text);
         void ShowValueSourceError();
@@ -32,8 +32,8 @@ namespace Shuttle.Abacus.UI.UI.Formula
         void RemoveSelectedItem();
         void DisableValues();
 
-        void AddOperation(OperationTypeDTO operationType, ValueSourceTypeDTO valueSourceType, string valueSelection, string text);
-        void PopulateOperations(IEnumerable<OperationTypeDTO> enumerable);
+        void AddOperation(string operationType, string valueSourceType, string valueSelection, string text);
+        void PopulateOperations(IEnumerable<string> enumerable);
         void PopulateValues(IEnumerable<string> enumerable);
         void PopulateDecimalTables(IEnumerable<DecimalTableModel> list);
         void PopulateMethods(IEnumerable<MethodDTO> enumerable);

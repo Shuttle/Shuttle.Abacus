@@ -1,3 +1,4 @@
+using System;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Values;
 using Shuttle.Abacus.Localisation;
@@ -35,7 +36,7 @@ namespace Shuttle.Abacus.UI.UI.Formula
                 return false;
             }
 
-            switch (View.ValueSourceTypeDTO.Type.ToLower())
+            switch (View.ValueSourceTypeModel.Type.ToLower())
             {
                 case "selection":
                     {
@@ -100,14 +101,14 @@ namespace Shuttle.Abacus.UI.UI.Formula
 
         public void ValueSourceChanged()
         {
-            var type = Enumeration.Cast<Enumeration.ValueSourceType>(View.ValueSourceTypeDTO.Name);
+            var type = Enumeration.Cast<Enumeration.ValueSourceType>(View.ValueSourceTypeModel.Name);
 
             switch (type)
             {
                 case Enumeration.ValueSourceType.ArgumentAnswer:
                     {
                         View.EnableValueSelection("Argument");
-                        View.PopulateArguments(Model.ArgumentRows);
+                        View.PopulateArguments(Model.Arguments);
 
                         break;
                     }
@@ -120,22 +121,25 @@ namespace Shuttle.Abacus.UI.UI.Formula
                 case Enumeration.ValueSourceType.CalculationResult:
                 case Enumeration.ValueSourceType.CalculationSubTotal:
                     {
+                        throw new NotImplementedException();
                         View.EnableValueSelection("Calculation");
-                        View.PopulatePrecedingCalculations(Model.PrecedingCalculations);
+                        //View.PopulatePrecedingCalculations(Model.PrecedingCalculations);
 
                         break;
                     }
                 case Enumeration.ValueSourceType.DecimalTable:
                     {
+                        throw new NotImplementedException();
                         View.EnableValueSelection("Decimal Table");
-                        View.PopulateDecimalTables(Model.DecimalTables);
+                        //View.PopulateDecimalTables(Model.DecimalTables);
 
                         break;
                     }
                 case Enumeration.ValueSourceType.MethodResult:
                     {
+                        throw new NotImplementedException();
                         View.EnableValueSelection("Method");
-                        View.PopulateMethods(Model.Methods);
+                        //View.PopulateMethods(Model.Methods);
 
                         break;
                     }

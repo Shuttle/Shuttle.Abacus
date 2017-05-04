@@ -33,9 +33,9 @@ namespace Shuttle.Abacus.UI.UI.Formula
             get { return Operation.SelectedIndex > -1; }
         }
 
-        public OperationTypeDTO OperationTypeDTO
+        public OperationTypeModel OperationTypeModel
         {
-            get { return Operation.SelectedItem as OperationTypeDTO; }
+            get { return Operation.SelectedItem as OperationTypeModel; }
         }
 
         public bool HasSelectedItem
@@ -106,22 +106,22 @@ namespace Shuttle.Abacus.UI.UI.Formula
             set { ValueSource.Text = value; }
         }
 
-        public ValueSourceTypeDTO ValueSourceTypeDTO
+        public ValueSourceTypeModel ValueSourceTypeModel
         {
-            get { return ValueSource.SelectedItem as ValueSourceTypeDTO; }
+            get { return ValueSource.SelectedItem as ValueSourceTypeModel; }
         }
 
         public string ValueSelectionValue
         {
             get
             {
-                return ValueSourceTypeDTO.IsSelection
+                return ValueSourceTypeModel.IsSelection
                            ? ((SelectionItem) ValueSelection.SelectedItem).Id.ToString("n")
                            : ValueSelection.Text;
             }
             set
             {
-                if (ValueSourceTypeDTO.IsSelection)
+                if (ValueSourceTypeModel.IsSelection)
                 {
                     ValueSelection.SelectedItem = FindSelection(new Guid(value));
                 }
@@ -147,17 +147,17 @@ namespace Shuttle.Abacus.UI.UI.Formula
             get { return ValueSelection.Text.Length > 0; }
         }
 
-        public void PopulateValueSources(IEnumerable<ValueSourceTypeDTO> enumerable)
+        public void PopulateValueSources(IEnumerable<ValueSourceTypeModel> models)
         {
             ValueSource.DisplayMember = "Text";
 
-            enumerable.ForEach(source => ValueSource.Items.Add(source));
+            models.ForEach(source => ValueSource.Items.Add(source));
         }
 
-        public void PopulateArguments(IEnumerable<DataRow> rows)
+        public void PopulateArguments(IEnumerable<ArgumentModel> arguments)
         {
             throw new NotImplementedException();
-            rows.ForEach(item =>
+            arguments.ForEach(item =>
                 {
                     //if (item.IsNumber)
                     //{
@@ -206,8 +206,7 @@ namespace Shuttle.Abacus.UI.UI.Formula
             }
         }
 
-        public void AddOperation(OperationTypeDTO operationType, ValueSourceTypeDTO valueSourceType,
-                                 string valueSelection, string text)
+        public void AddOperation(string operationType, string valueSourceType, string valueSelection, string text)
         {
             var item = new ListViewItem();
 
@@ -217,7 +216,7 @@ namespace Shuttle.Abacus.UI.UI.Formula
             OperationsListView.Items.Add(PopulateItem(item, operationType, valueSourceType, valueSelection, text));
         }
 
-        public void PopulateOperations(IEnumerable<OperationTypeDTO> enumerable)
+        public void PopulateOperations(IEnumerable<string> enumerable)
         {
             Operation.DisplayMember = "Text";
 
@@ -261,12 +260,12 @@ namespace Shuttle.Abacus.UI.UI.Formula
             return null;
         }
 
-        private static ListViewItem PopulateItem(ListViewItem item, OperationTypeDTO operationType,
-                                                 ValueSourceTypeDTO valueSourceType, string valueSelection, string text)
+        private static ListViewItem PopulateItem(ListViewItem item, string operationType,
+                                                 string valueSourceType, string valueSelection, string text)
         {
-            item.Text = operationType.Text;
+            item.Text = operationType;
 
-            item.SubItems[1].Text = valueSourceType.Text;
+            item.SubItems[1].Text = valueSourceType;
             item.SubItems[2].Text = text;
 
             item.Tag = new ItemTag(operationType, valueSourceType, valueSelection, text);
@@ -285,7 +284,7 @@ namespace Shuttle.Abacus.UI.UI.Formula
         {
             if (Presenter.CanAddOperation())
             {
-                AddOperation(OperationTypeDTO, ValueSourceTypeDTO, ValueSelectionValue, ValueSelectionText);
+                AddOperation(OperationTypeModel.Name, ValueSourceTypeModel.Name, ValueSelectionValue, ValueSelectionText);
             }
         }
 
@@ -382,7 +381,7 @@ namespace Shuttle.Abacus.UI.UI.Formula
                 return;
             }
 
-            PopulateItem(SelectedItem(), OperationTypeDTO, ValueSourceTypeDTO, ValueSelectionValue, ValueSelectionText);
+            PopulateItem(SelectedItem(), OperationTypeModel.Name, ValueSourceTypeModel.Name, ValueSelectionValue, ValueSelectionText);
         }
 
         private void ValueSource_SelectedIndexChanged(object sender, EventArgs e)
@@ -394,7 +393,7 @@ namespace Shuttle.Abacus.UI.UI.Formula
 
         private class ItemTag
         {
-            public ItemTag(OperationTypeDTO operationType, ValueSourceTypeDTO valueSourceType, string valueSelection,
+            public ItemTag(string operationType, string valueSourceType, string valueSelection,
                            string text)
             {
                 OperationType = operationType;
@@ -403,8 +402,8 @@ namespace Shuttle.Abacus.UI.UI.Formula
                 Text = text;
             }
 
-            public OperationTypeDTO OperationType { get; private set; }
-            public ValueSourceTypeDTO ValueSourceType { get; private set; }
+            public string OperationType { get; private set; }
+            public string ValueSourceType { get; private set; }
             public string ValueSelection { get; private set; }
             public string Text { get; private set; }
         }
