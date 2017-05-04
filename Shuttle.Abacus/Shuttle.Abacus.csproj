@@ -332,9 +332,7 @@
     <Compile Include="Domain\Repositories\IMethodTestRepository.cs" />
     <Compile Include="Domain\Repositories\ISystemUserRepository.cs" />
     <Compile Include="Domain\Services\ArgumentService.cs" />
-    <Compile Include="Domain\Services\FormulaOwnerService.cs" />
     <Compile Include="Domain\Services\IArgumentService.cs" />
-    <Compile Include="Domain\Services\IFormulaOwnerService.cs" />
     <Compile Include="Domain\SystemUser.cs" />
     <Compile Include="Domain\ValueSource\ArgumentAnswerValueSource.cs" />
     <Compile Include="Domain\ValueSource\CalculationResultValueSource.cs" />

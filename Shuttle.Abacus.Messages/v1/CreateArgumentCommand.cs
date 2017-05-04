@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Shuttle.Abacus.Domain
+namespace Shuttle.Abacus.Messages.v1
 {
     public class CreateArgumentCommand
     {

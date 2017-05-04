@@ -121,35 +121,6 @@ namespace Shuttle.Abacus.Domain
             return result;
         }
 
-        public Formula ProcessCommand(ChangeFormulaCommand command)
-        {
-            _operations.Clear();
-
-            var sequencuNumber = 1;
-
-            command.Operations.ForEach(
-                operation => AddOperation(new FormulaOperation(
-                    sequencuNumber++,
-                    operation.Operation,
-                    operation.ValueSource,
-                    operation.ValueSelection,
-                    operation.Text)));
-
-            constraints.Clear();
-
-            sequencuNumber = 1;
-
-            command.Constraints.ForEach(
-                constraint =>
-                    AddConstraint(new OwnedConstraint(
-                        sequencuNumber++,
-                        constraint.ArgumentId,
-                        constraint.Name,
-                        constraint.Answer)));
-
-            return this;
-        }
-
         public string Description()
         {
             if (constraints.Count == 0)

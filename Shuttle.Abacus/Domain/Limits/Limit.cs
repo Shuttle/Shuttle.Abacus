@@ -66,11 +66,6 @@ namespace Shuttle.Abacus.Domain
             get { return calculation.Formulas; }
         }
 
-        public void ProcessCommand(ChangeFormulaOrderCommand command, IFormulaOwnerService service)
-        {
-            service.ProcessCommand(command, this);
-        }
-
         public void AssignFormulas(FormulaCollection collection)
         {
             calculation.AssignFormulas(collection);
@@ -121,14 +116,6 @@ namespace Shuttle.Abacus.Domain
             constraints.ForEach(constraint => result.AddConstraint(constraint.Copy()));
 
             return result;
-        }
-
-        public void ProcessCommand(ChangeLimitCommand command)
-        {
-            Guard.AgainstNull(command, "command");
-
-            Name = command.Name;
-            Type = command.Type;
         }
     }
 }

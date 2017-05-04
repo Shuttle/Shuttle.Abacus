@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
@@ -15,7 +16,7 @@ namespace Shuttle.Abacus.Server.Handlers
         IMessageHandler<RunMethodTestCommand>,
         IMessageHandler<PrintMethodTestCommand>
     {
-        private readonly IFactoryProvider<IArgumentAnswerFactory> _argumentAnswerFactoryProvider;
+        private readonly IArgumentAnswerFactory _argumentAnswerFactoryProvider;
         private readonly IArgumentRepository _argumentRepository;
         private readonly ICalculationLoggerFactory _calculationLoggerFactory;
         private readonly IDatabaseContextFactory _databaseContextFactory;
@@ -23,7 +24,7 @@ namespace Shuttle.Abacus.Server.Handlers
 
         public MethodTestHandler(IDatabaseContextFactory databaseContextFactory,
             IMethodTestRepository methodTestRepository, ICalculationLoggerFactory calculationLoggerFactory,
-            IFactoryProvider<IArgumentAnswerFactory> argumentAnswerFactoryProvider,
+            IArgumentAnswerFactory argumentAnswerFactoryProvider,
             IArgumentRepository argumentRepository)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
@@ -45,17 +46,31 @@ namespace Shuttle.Abacus.Server.Handlers
 
             using (_databaseContextFactory.Create())
             {
-                _methodTestRepository.Save(
-                    _methodTestRepository.Get(message.MethodTestId)
-                        .ProcessCommand(message));
+                var test = new MethodTest(message.MethodTestId, message.MethodId, message.Description, message.ExpectedResult);
+
+                foreach (var answer in message.ArgumentAnswers)
+                {
+                    test.AddArgumentAnswer(new MethodTestArgumentAnswer(answer.ArgumentId, answer.Answer));
+                }
+
+                _methodTestRepository.Save(test);
             }
         }
 
         public void ProcessMessage(IHandlerContext<CreateMethodTestCommand> context)
         {
+            var message = context.Message;
+
             using (_databaseContextFactory.Create())
             {
-                _methodTestRepository.Add(new MethodTest(context.Message));
+                var test = new MethodTest(message.MethodTestId, message.MethodId, message.Description, message.ExpectedResult);
+
+                foreach (var answer in message.ArgumentAnswers)
+                {
+                    test.AddArgumentAnswer(new MethodTestArgumentAnswer(answer.ArgumentId, answer.Answer));
+                }
+
+                _methodTestRepository.Add(test);
             }
         }
 
@@ -145,6 +160,7 @@ namespace Shuttle.Abacus.Server.Handlers
 
         private MethodContext GetContext(MethodTest test)
         {
+            throw new InvalidOperationException();
             using (_databaseContextFactory.Create())
             {
                 var method = _methodTestRepository.Get<Method>(test.MethodId);
@@ -157,19 +173,20 @@ namespace Shuttle.Abacus.Server.Handlers
                 {
                     var argument = arguments.Find(answer.ArgumentId);
 
-                    if (argument == null)
-                    {
-                        context.Log(
-                            "Could not find argument '{0}' in the master list.  The answer will be ignored.",
-                            answer.ArgumentName);
-                    }
-                    else
-                    {
-                        context.AddArgumentAnswer(
-                            _argumentAnswerFactoryProvider.Get(answer.AnswerType).Create(
-                                argument.Name,
-                                answer.Answer));
-                    }
+                    //TODO
+                    //if (argument == null)
+                    //{
+                    //    context.Log(
+                    //        "Could not find argument '{0}' in the master list.  The answer will be ignored.",
+                    //        answer.ArgumentName);
+                    //}
+                    //else
+                    //{
+                    //    context.AddArgumentAnswer(
+                    //        _argumentAnswerFactoryProvider.Get(answer.AnswerType).Create(
+                    //            argument.Name,
+                    //            answer.Answer));
+                    //}
                 }
 
                 if (context.LoggerEnabled)

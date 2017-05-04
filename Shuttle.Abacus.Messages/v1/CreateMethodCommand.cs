@@ -1,4 +1,4 @@
-namespace Shuttle.Abacus.Domain
+namespace Shuttle.Abacus.Messages.v1
 {
     public class CreateMethodCommand
     {

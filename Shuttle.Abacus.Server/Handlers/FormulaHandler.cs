@@ -4,6 +4,7 @@ using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Messages.v1;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;
@@ -16,13 +17,12 @@ namespace Shuttle.Abacus.Server.Handlers
         IMessageHandler<DeleteFormulaCommand>,
         IMessageHandler<ChangeFormulaOrderCommand>
     {
-        private readonly IFactoryProvider<IArgumentAnswerFactory> _argumentAnswerFactoryProvider;
-        private readonly IFactoryProvider<IConstraintFactory> _constraintFactoryProvider;
+        private readonly IArgumentAnswerFactory _argumentAnswerFactoryProvider;
+        private readonly IConstraintFactory _constraintFactoryProvider;
         private readonly IDatabaseContextFactory _databaseContextFactory;
-        private readonly IFormulaOwnerService _formulaOwnerService;
         private readonly IFormulaQuery _formulaQuery;
         private readonly IFormulaRepository _formulaRepository;
-        private readonly IFactoryProvider<IOperationFactory> _operationFactoryProvider;
+        private readonly IOperationFactory _operationFactoryProvider;
         private readonly IRepositoryProvider _repositoryProvider;
         private readonly ITaskFactory _taskFactory;
         private readonly IFactoryProvider<IValueSourceFactory> _valueSourceFactoryProvider;
@@ -31,18 +31,16 @@ namespace Shuttle.Abacus.Server.Handlers
         (
             IDatabaseContextFactory databaseContextFactory,
             IFormulaQuery formulaQuery,
-            IFormulaRepository formulaRepository, IFactoryProvider<IOperationFactory> operationFactoryProvider,
+            IFormulaRepository formulaRepository, IOperationFactory operationFactoryProvider,
             IFactoryProvider<IValueSourceFactory> valueSourceFactoryProvider,
-            IFactoryProvider<IConstraintFactory> constraintFactoryProvider,
-            IFactoryProvider<IArgumentAnswerFactory> argumentAnswerFactoryProvider,
-            IFormulaOwnerService formulaOwnerService,
+            IConstraintFactory constraintFactoryProvider,
+            IArgumentAnswerFactory argumentAnswerFactoryProvider,
             ITaskFactory taskFactory,
             IRepositoryProvider repositoryProvider)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(formulaQuery, "formulaQuery");
             Guard.AgainstNull(formulaRepository, "formulaRepository");
-            Guard.AgainstNull(formulaOwnerService, "formulaOwnerService");
             Guard.AgainstNull(taskFactory, "taskFactory");
             Guard.AgainstNull(repositoryProvider, "repositoryProvider");
             Guard.AgainstNull(operationFactoryProvider, "operationFactoryProvider");
@@ -53,7 +51,6 @@ namespace Shuttle.Abacus.Server.Handlers
             _databaseContextFactory = databaseContextFactory;
             _formulaQuery = formulaQuery;
             _formulaRepository = formulaRepository;
-            _formulaOwnerService = formulaOwnerService;
             _taskFactory = taskFactory;
             _repositoryProvider = repositoryProvider;
             _operationFactoryProvider = operationFactoryProvider;
@@ -83,6 +80,7 @@ namespace Shuttle.Abacus.Server.Handlers
 
         public void ProcessMessage(IHandlerContext<ChangeFormulaOrderCommand> context)
         {
+            throw new NotImplementedException();
             var message = context.Message;
 
             using (_databaseContextFactory.Create())
@@ -91,7 +89,8 @@ namespace Shuttle.Abacus.Server.Handlers
                     _repositoryProvider.Get(message.OwnerName).Get<IFormulaOwner>(
                         message.OwnerId);
 
-                owner.ProcessCommand(message, _formulaOwnerService);
+                //TODO
+                //owner.ProcessCommand(message, _formulaOwnerService);
             }
         }
 
@@ -102,15 +101,27 @@ namespace Shuttle.Abacus.Server.Handlers
             using (_databaseContextFactory.Create())
             {
                 var formula = new Formula();
+                var sequenceNumber = 1;
 
                 foreach (var constraint in message.Constraints)
                 {
-                    formula.AddConstraint(constraint);
+                    formula.AddConstraint(new OwnedConstraint(
+                        sequenceNumber++,
+                        constraint.ArgumentId,
+                        constraint.Name,
+                        constraint.Answer));
                 }
+
+                sequenceNumber = 1;
 
                 foreach (var operation in message.Operations)
                 {
-                    formula.AddOperation(operation);
+                    formula.AddOperation(new FormulaOperation(
+                        sequenceNumber++,
+                        operation.Operation,
+                        operation.ValueSource,
+                        operation.ValueSelection,
+                        operation.Text));
                 }
 
                 _formulaRepository.Add(message.OwnerName, message.OwnerId, formula);

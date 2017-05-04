@@ -1,5 +1,6 @@
 using Shuttle.Abacus.ApplicationService;
 using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Messages.v1;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;

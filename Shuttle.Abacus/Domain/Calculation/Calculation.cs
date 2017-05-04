@@ -150,34 +150,6 @@ namespace Shuttle.Abacus.Domain
             Name = name;
         }
 
-        public Calculation ProcessCommand(SetCalculationConstraintsCommand command)
-        {
-            constraints.Clear();
-
-            throw new NotImplementedException();
-
-            //command.Constraints.ForEach(
-            //    constraint =>
-            //        AddConstraint(
-            //            constraintFactoryProvider.Get(constraint.ConstraintTypeDTO.Name)
-            //                .Create(constraint.DataRow.Id,
-            //                    argumentAnswerFactoryProvider.
-            //                        Get(
-            //                            constraint.DataRow.
-            //                                AnswerType).Create(
-            //                            constraint.DataRow.
-            //                                Name,
-            //                            constraint.Value))));
-
-            return this;
-        }
-
-        public void ProcessCommand(ChangeCalculationCommand command)
-        {
-            Name = command.Name;
-            Required = command.Required;
-        }
-
         public abstract Calculation Copy(IDictionary<Guid, Guid> idMap);
 
         protected void Copy(Calculation calculation)

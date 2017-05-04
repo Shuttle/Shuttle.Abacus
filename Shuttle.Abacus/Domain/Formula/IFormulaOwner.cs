@@ -8,8 +8,6 @@ namespace Shuttle.Abacus.Domain
         Formula AddFormula(Formula formula);
         void AddFormula(OwnedFormula item);
 
-        void ProcessCommand(ChangeFormulaOrderCommand command, IFormulaOwnerService service);
-
         void AssignFormulas(FormulaCollection collection);
         FormulaRemoved RemoveFormula(Guid formulaId);
     }

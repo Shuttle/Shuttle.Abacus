@@ -38,11 +38,6 @@ namespace Shuttle.Abacus.Domain
 
         public FormulaCollection Formulas { get; private set; }
 
-        public void ProcessCommand(ChangeFormulaOrderCommand command, IFormulaOwnerService service)
-        {
-            service.ProcessCommand(command, this);
-        }
-
         public void AssignFormulas(FormulaCollection collection)
         {
             Formulas = collection;

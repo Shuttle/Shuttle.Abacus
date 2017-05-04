@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Shuttle.Abacus.DTO;
 
-namespace Shuttle.Abacus.Domain
+namespace Shuttle.Abacus.Messages.v1
 {
     public class ChangeCalculationCommand
     {

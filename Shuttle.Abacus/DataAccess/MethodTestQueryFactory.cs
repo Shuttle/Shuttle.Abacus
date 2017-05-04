@@ -127,7 +127,6 @@ values
 )")
                 .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.MethodTestId, test.Id)
                 .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.ArgumentId, argumentAnswer.ArgumentId)
-                .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.ArgumentName, argumentAnswer.ArgumentName)
                 .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.AnswerType, argumentAnswer.AnswerType)
                 .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.Answer, argumentAnswer.Answer);
         }

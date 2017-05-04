@@ -3,6 +3,7 @@ using Shuttle.Abacus.ApplicationService;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Messages.v1;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;
@@ -17,9 +18,9 @@ namespace Shuttle.Abacus.Server.Handlers
         IMessageHandler<DeleteCalculationCommand>,
         IMessageHandler<GrabCalculationsCommand>
     {
-        private readonly IFactoryProvider<IArgumentAnswerFactory> _argumentAnswerFactoryProvider;
+        private readonly IArgumentAnswerFactory _argumentAnswerFactoryProvider;
         private readonly ICalculationRepository _calculationRepository;
-        private readonly IFactoryProvider<IConstraintFactory> _constraintFactoryProvider;
+        private readonly IConstraintFactory _constraintFactoryProvider;
         private readonly ILimitRepository _limitRepository;
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IMethodRepository _methodRepository;
@@ -29,8 +30,8 @@ namespace Shuttle.Abacus.Server.Handlers
             IDatabaseContextFactory databaseContextFactory,
             IMethodRepository methodRepository,
             ICalculationRepository calculationRepository,
-            IFactoryProvider<IConstraintFactory> constraintFactoryProvider,
-            IFactoryProvider<IArgumentAnswerFactory> argumentAnswerFactoryProvider,
+            IConstraintFactory constraintFactoryProvider,
+            IArgumentAnswerFactory argumentAnswerFactoryProvider,
             ILimitRepository limitRepository,
             ITaskFactory taskFactory)
         {
@@ -53,13 +54,13 @@ namespace Shuttle.Abacus.Server.Handlers
 
         public void ProcessMessage(IHandlerContext<ChangeCalculationCommand> context)
         {
+            throw new NotImplementedException();
+
             var message = context.Message;
 
             using (_databaseContextFactory.Create())
             {
-                var method = _methodRepository.Get(message.MethodId);
-
-                method.ProcessCommand(message);
+                var method = new Method(message.MethodId, message.Name);
 
                 var calculation = method.CalculationCollection.Get(message.CalculationId);
 
@@ -75,13 +76,15 @@ namespace Shuttle.Abacus.Server.Handlers
 
         public void ProcessMessage(IHandlerContext<ChangeCalculationOrderCommand> context)
         {
+            throw new NotImplementedException();
             var message = context.Message;
 
             using (_databaseContextFactory.Create())
             {
                 var method = _methodRepository.Get(message.MethodId);
 
-                method.ProcessCommand(message);
+                //TODO
+                //method.ProcessCommand(message);
 
                 _calculationRepository.SaveOrdered(method);
             }
@@ -109,6 +112,7 @@ namespace Shuttle.Abacus.Server.Handlers
 
         public void ProcessMessage(IHandlerContext<DeleteCalculationCommand> context)
         {
+            throw new NotImplementedException();
             var message = context.Message;
 
             using (_databaseContextFactory.Create())
@@ -116,7 +120,8 @@ namespace Shuttle.Abacus.Server.Handlers
                 var method = _methodRepository.Get(message.MethodId);
                 var calculation = _calculationRepository.Get(message.CalculationId);
 
-                method.ProcessCommand(message);
+                //TODO
+                //method.ProcessCommand(message);
 
                 foreach (var limit in method.Limits)
                 {
@@ -129,13 +134,15 @@ namespace Shuttle.Abacus.Server.Handlers
 
         public void ProcessMessage(IHandlerContext<GrabCalculationsCommand> context)
         {
+            throw new NotImplementedException();
             var message = context.Message;
 
             using (_databaseContextFactory.Create())
             {
                 var method = _methodRepository.Get(message.MethodId);
 
-                method.ProcessCommand(message);
+                //TODO
+                //method.ProcessCommand(message);
 
                 _calculationRepository.SaveOwnershipGraph(method);
             }
