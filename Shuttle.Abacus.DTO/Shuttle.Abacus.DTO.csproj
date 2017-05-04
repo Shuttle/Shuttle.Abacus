@@ -47,7 +47,6 @@
     <Compile Include="MethodDTO.cs" />
     <Compile Include="MethodTestDTO.cs" />
     <Compile Include="OperationDTO.cs" />
-    <Compile Include="OperationTypeDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValueSourceTypeDTO.cs" />
   </ItemGroup>

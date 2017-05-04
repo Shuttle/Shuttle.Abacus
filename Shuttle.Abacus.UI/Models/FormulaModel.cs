@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Core.Infrastructure;
@@ -19,5 +20,7 @@ namespace Shuttle.Abacus.UI.Models
         public Guid Id => FormulaColumns.Id.MapFrom(_row);
         public int SequenceNumber => FormulaColumns.SequenceNumber.MapFrom(_row);
         public string Description => FormulaColumns.Description.MapFrom(_row);
+
+        public IEnumerable<string> OperationTypes { get; set; }
     }
 }
