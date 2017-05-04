@@ -165,40 +165,34 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(NewFormulaMessage message)
         {
-            var formulaModel = BuildFormulaModel(message.MethodId,
-                message.OwnerName,
-                message.OwnerId);
+            throw new NotImplementedException();
+            //var formulaModel = BuildFormulaModel(message.
+            //    message.OwnerName,
+            //    message.OwnerId);
 
-            if (formulaModel == null)
-            {
-                return;
-            }
+            //var constraintModel = BuildConstraintModel(formulaModel);
 
-            var constraintModel = BuildConstraintModel(formulaModel);
+            //if (constraintModel == null)
+            //{
+            //    return;
+            //}
 
-            if (constraintModel == null)
-            {
-                return;
-            }
+            //var item = WorkItemManager
+            //    .Create("New formula")
+            //    .ControlledBy<IFormulaController>()
+            //    .ShowIn<IContextToolbarPresenter>()
+            //    .AddPresenter<IFormulaPresenter>().WithModel(formulaModel)
+            //    .AddPresenter<IConstraintPresenter>().WithModel(constraintModel)
+            //    .AddNavigationItem(
+            //        NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
+            //    .AssignInitiator(message);
 
-            var item = WorkItemManager
-                .Create("New formula")
-                .ControlledBy<IFormulaController>()
-                .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<IFormulaPresenter>().WithModel(formulaModel)
-                .AddPresenter<IConstraintPresenter>().WithModel(constraintModel)
-                .AddNavigationItem(
-                    NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
-                .AssignInitiator(message);
-
-            HostInWorkspace<ITabbedWorkspacePresenter>(item);
+            //HostInWorkspace<ITabbedWorkspacePresenter>(item);
         }
 
         public void HandleMessage(EditFormulaMessage message)
         {
-            var formulaModel = BuildFormulaModel(message.MethodId,
-                message.OwnerName,
-                message.OwnerId);
+            var formulaModel = BuildFormulaModel(message.FormulaId);
 
             if (formulaModel == null)
             {
@@ -207,8 +201,6 @@ namespace Shuttle.Abacus.UI.Coordinators
 
             using (_databaseContextFactory.Create())
             {
-                formulaModel.FormulaOperations = _formulaQuery.OperationDTOs(message.FormulaId);
-
                 var constraintModel = BuildConstraintModel(formulaModel);
 
                 if (constraintModel == null)
@@ -286,18 +278,11 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(NewFormulaFromExistingMessage message)
         {
-            var formulaModel = BuildFormulaModel(message.MethodId,
-                message.OwnerName,
-                message.OwnerId);
+            var formulaModel = BuildFormulaModel(message.FormulaId);
 
             if (formulaModel == null)
             {
                 return;
-            }
-
-            using (_databaseContextFactory.Create())
-            {
-                formulaModel.FormulaOperations = _formulaQuery.OperationDTOs(message.FormulaId);
             }
 
             var constraintModel = BuildConstraintModel(formulaModel);
@@ -372,22 +357,11 @@ namespace Shuttle.Abacus.UI.Coordinators
             };
         }
 
-        private FormulaModel BuildFormulaModel(Guid methodId, string ownerName, Guid ownerId)
+        private FormulaModel BuildFormulaModel(Guid id)
         {
             using (_databaseContextFactory.Create())
             {
-                return new FormulaModel
-                {
-                    DecimalTables = _decimalTableQuery.All(),
-                    ArgumentRows = _argumentQuery.All(),
-                    PrecedingCalculations =
-                        ownerName.ToLower() == "calculation"
-                            ? _calculationQuery.DTOsBeforeCalculation(methodId, ownerId)
-                            : _calculationQuery.DTOsForMethod(methodId),
-                    OperationTypes = _operationTypeQuery.AllDTOs(),
-                    ValueSourceTypes = _valueSourceTypeQuery.AllDTOs(),
-                    Methods = _methodQuery.AllDTOs()
-                };
+                return new FormulaModel(_formulaQuery.Get(id));
             }
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Messages.v1;
 using Shuttle.Core.Data;
@@ -25,13 +26,12 @@ namespace Shuttle.Abacus.Server.Handlers
 
         public void ProcessMessage(IHandlerContext<ChangeLimitCommand> context)
         {
+            throw new NotImplementedException("Need to add constraints / dependent objects");
             var message = context.Message;
 
             using (_databaseContextFactory.Create())
             {
-                var limit = _limitRepository.Get(message.LimitId);
-
-                limit.ProcessCommand(message);
+                var limit = new Limit(message.LimitId, message.Name, message.Type);
 
                 _limitRepository.Save(limit);
             }

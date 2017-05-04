@@ -142,7 +142,6 @@
     <Compile Include="DataAccess\Mapping\CalculationDTOMapper.cs" />
     <Compile Include="DataAccess\Mapping\IMethodTestDTOMapper.cs" />
     <Compile Include="DataAccess\Mapping\MethodDTOMapper.cs" />
-    <Compile Include="DataAccess\Mapping\MethodTestDTOMapper.cs" />
     <Compile Include="DataAccess\Mapping\OperationDTOMapper.cs" />
     <Compile Include="DataAccess\Mapping\OperationTypeDTOMapper.cs" />
     <Compile Include="DataAccess\Mapping\SystemUserDataReaderMapper.cs" />

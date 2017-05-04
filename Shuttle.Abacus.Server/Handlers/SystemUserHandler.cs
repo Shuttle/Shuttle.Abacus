@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Shuttle.Abacus.ApplicationService;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Messages;
@@ -34,20 +35,22 @@ namespace Shuttle.Abacus.Server.Handlers
 
         public void ProcessMessage(IHandlerContext<ChangeLoginNameCommand> context)
         {
+            throw new NotImplementedException();
             var message = context.Message;
 
             using (_databaseContextFactory.Create())
             {
-                _taskFactory.Create<IChangeLoginNameTask>().Execute(
-                    _systemUserRepository.Get(message.SystemUserId).ProcessCommand(message));
+                //_taskFactory.Create<IChangeLoginNameTask>().Execute(
+                //    _systemUserRepository.Get(message.SystemUserId).ProcessCommand(message));
             }
         }
 
         public void ProcessMessage(IHandlerContext<CreateSystemUserCommand> context)
         {
+            throw new NotImplementedException();
             using (_databaseContextFactory.Create())
             {
-                _systemUserRepository.Add(new SystemUser(context.Message));
+                //_systemUserRepository.Add(new SystemUser(context.Message));
             }
         }
 
@@ -85,12 +88,12 @@ namespace Shuttle.Abacus.Server.Handlers
 
         public void ProcessMessage(IHandlerContext<SetPermissionsCommand> context)
         {
-            var message = context.Message;
+            throw new NotImplementedException(); var message = context.Message;
 
             using (_databaseContextFactory.Create())
             {
-                _taskFactory.Create<ISetPermissionsTask>().Execute(
-                    _systemUserRepository.Get(message.SystemUserId).ProcessCommand(message));
+                //_taskFactory.Create<ISetPermissionsTask>().Execute(
+                //    _systemUserRepository.Get(message.SystemUserId).ProcessCommand(message));
             }
         }
     }

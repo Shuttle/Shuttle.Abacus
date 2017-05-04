@@ -1,4 +1,5 @@
 using System;
+using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Localisation;
@@ -28,8 +29,7 @@ namespace Shuttle.Abacus.UI.Coordinators
         private readonly IDecimalTableQuery _decimalTableQuery;
 
         public DecimalTableCoordinator(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
-            IDecimalTableQuery decimalTableQuery,
-            IConstraintQuery constraintQuery)
+            IDecimalTableQuery decimalTableQuery, IConstraintQuery constraintQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(argumentQuery, "argumentQuery");
@@ -139,7 +139,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .Create("New Decimal Table")
                 .ControlledBy<IDecimalTableController>()
                 .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<IDecimalTablePresenter>().WithModel(BuildDecimalTableModel())
+                .AddPresenter<IDecimalTablePresenter>()
                 .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).
                 AsDefault()
                 .AssignInitiator(message);
@@ -149,55 +149,41 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(EditDecimalTableMessage message)
         {
-            var model = BuildDecimalTableModel();
-
             using (_databaseContextFactory.Create())
             {
-                model.DecimalTableRow = _decimalTableQuery.Get(message.DecimalTableId);
-                model.ConstrainedDecimalValues = _decimalTableQuery.GetValues(message.DecimalTableId);
+                var item = WorkItemManager
+                    .Create(string.Format("Decimal Table: {0}", message.DecimalTableName))
+                    .ControlledBy<IDecimalTableController>()
+                    .ShowIn<IContextToolbarPresenter>()
+                    .AddPresenter<IDecimalTablePresenter>()
+                    .WithModel(new DecimalTableModel(_decimalTableQuery.Get(message.DecimalTableId)))
+                    .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
+                    .AsDefault()
+                    .AssignInitiator(message);
+
+                HostInWorkspace<ITabbedWorkspacePresenter>(item);
             }
-
-            var item = WorkItemManager
-                .Create(string.Format("Decimal Table: {0}", message.DecimalTableName))
-                .ControlledBy<IDecimalTableController>()
-                .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<IDecimalTablePresenter>().WithModel(model)
-                .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).
-                AsDefault()
-                .AssignInitiator(message);
-
-            HostInWorkspace<ITabbedWorkspacePresenter>(item);
         }
 
         public void HandleMessage(NewDecimalTableFromExistingMessage message)
         {
-            var decimalTableModel = BuildDecimalTableModel();
-
-            if (decimalTableModel == null)
-            {
-                return;
-            }
-
             using (_databaseContextFactory.Create())
             {
-                decimalTableModel.ConstrainedDecimalValues =
-                    _decimalTableQuery.GetValues(message.DecimalTableId);
-                decimalTableModel.DecimalTableRow = _decimalTableQuery.Get(message.DecimalTableId);
+                var item = WorkItemManager
+                    .Create("New Decimal Table")
+                    .ControlledBy<IDecimalTableController>()
+                    .ShowIn<IContextToolbarPresenter>()
+                    .AddPresenter<IDecimalTablePresenter>()
+                    .WithModel(new DecimalTableModel(_decimalTableQuery.Get(message.DecimalTableId)))
+                    .AddNavigationItem(
+                        NavigationItemFactory.Create<NewDecimalTableMessage>()
+                            .AssignResourceItem(
+                                ResourceItems.Submit))
+                    .AsDefault()
+                    .AssignInitiator(message.WithRefreshOwner());
+
+                HostInWorkspace<ITabbedWorkspacePresenter>(item);
             }
-
-            var item = WorkItemManager
-                .Create("New Decimal Table")
-                .ControlledBy<IDecimalTableController>()
-                .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<IDecimalTablePresenter>().WithModel(decimalTableModel)
-                .AddNavigationItem(
-                    NavigationItemFactory.Create<NewDecimalTableMessage>().AssignResourceItem(
-                        ResourceItems.Submit))
-                .
-                AsDefault()
-                .AssignInitiator(message.WithRefreshOwner());
-
-            HostInWorkspace<ITabbedWorkspacePresenter>(item);
         }
 
         public void HandleMessage(SummaryViewRequestedMessage message)
@@ -222,19 +208,6 @@ namespace Shuttle.Abacus.UI.Coordinators
                         break;
                     }
                 }
-            }
-        }
-
-        private DecimalTableModel BuildDecimalTableModel()
-        {
-            using (_databaseContextFactory.Create())
-            {
-                return new DecimalTableModel
-                {
-                    ArgumentRows = _argumentQuery.All()
-                    //TODO
-                    //ConstraintTypes = _constraintQuery.ConstraintTypes()
-                };
             }
         }
     }

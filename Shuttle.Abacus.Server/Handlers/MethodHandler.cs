@@ -1,3 +1,4 @@
+using System;
 using Shuttle.Abacus.ApplicationService;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Messages.v1;
@@ -33,32 +34,35 @@ namespace Shuttle.Abacus.Server.Handlers
 
         public void ProcessMessage(IHandlerContext<ChangeMethodCommand> context)
         {
+            throw new NotImplementedException();
+
             var message = context.Message;
 
             using (_databaseContextFactory.Create())
             {
-                _taskFactory.Create<IChangeMethodTask>().Execute(
-                    _methodRepository.Get(message.MethodId).ProcessCommand(message));
+                _methodRepository.Save(new Method(message.MethodId, message.MethodName));
             }
         }
 
         public void ProcessMessage(IHandlerContext<CopyMethodCommand> context)
         {
+            throw new NotImplementedException();
             var message = context.Message;
 
             using (_databaseContextFactory.Create())
             {
-                var method = _methodRepository
-                    .Get(message.MethodId)
-                    .Copy()
-                    .ProcessCommand(message);
+                //var method = _methodRepository
+                //    .Get(message.MethodId)
+                //    .Copy()
+                //    .ProcessCommand(message);
 
-                _taskFactory.Create<IAddMethodGraphTask>().Execute(method);
+                //_taskFactory.Create<IAddMethodGraphTask>().Execute(method);
             }
         }
 
         public void ProcessMessage(IHandlerContext<CreateMethodCommand> context)
         {
+            throw new NotImplementedException();
             var message = context.Message;
 
             using (_databaseContextFactory.Create())
@@ -69,6 +73,7 @@ namespace Shuttle.Abacus.Server.Handlers
 
         public void ProcessMessage(IHandlerContext<DeleteMethodCommand> context)
         {
+            throw new NotImplementedException();
             var message = context.Message;
 
             using (_databaseContextFactory.Create())

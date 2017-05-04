@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Core.Infrastructure;
@@ -7,6 +8,11 @@ namespace Shuttle.Abacus.UI.Models
 {
     public class ArgumentModel
     {
+        private static readonly List<string> Numbers = new List<string>
+        {
+            "decimal", "integer", "money"
+        };
+
         public DataRow Row { get; }
 
         public Guid Id => ArgumentColumns.Id.MapFrom(Row);

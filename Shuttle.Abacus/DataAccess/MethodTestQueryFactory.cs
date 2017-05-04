@@ -127,7 +127,6 @@ values
 )")
                 .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.MethodTestId, test.Id)
                 .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.ArgumentId, argumentAnswer.ArgumentId)
-                .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.AnswerType, argumentAnswer.AnswerType)
                 .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.Answer, argumentAnswer.Answer);
         }
 
@@ -156,21 +155,5 @@ values
 
         //    return query;
         //}
-
-        public IQuery SetArgumentName(Guid argumentId, string argumentName)
-        {
-            return RawQuery.Create(
-                    "update MethodTestArgumentAnswer set ArgumentName = @ArgumentName where ArgumentId = @ArgumentId")
-                .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.ArgumentName, argumentName)
-                .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.ArgumentId, argumentId);
-        }
-
-        public IQuery SetArgumentAnswerType(Guid argumentId, string answerType)
-        {
-            return RawQuery.Create(
-                    "update MethodTestArgumentAnswer set AnswerType = @AnswerType where ArgumentId = @ArgumentId")
-                .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.AnswerType, answerType)
-                .AddParameterValue(MethodTestColumns.ArgumentAnswerColumns.ArgumentId, argumentId);
-        }
     }
 }

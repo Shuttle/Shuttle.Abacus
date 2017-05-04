@@ -14,7 +14,5 @@ namespace Shuttle.Abacus.DataAccess
         IQuery Remove(Guid id);
         IQuery Add(MethodTest item);
         IQuery AddArgumentAnswer(MethodTest test, MethodTestArgumentAnswer argumentAnswer);
-        IQuery SetArgumentName(Guid argumentId, string argumentName);
-        IQuery SetArgumentAnswerType(Guid argumentId, string answerType);
     }
 }

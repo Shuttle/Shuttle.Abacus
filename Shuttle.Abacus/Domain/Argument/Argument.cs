@@ -6,11 +6,6 @@ namespace Shuttle.Abacus.Domain
 {
     public class Argument
     {
-        private static readonly List<string> Numbers = new List<string>
-                                                       {
-                                                           "decimal", "integer", "money"
-                                                       };
-
         public static Argument MethodName = new Argument(Guid.Empty) { Name = "Method Name", AnswerType = "Text" };
 
         private readonly List<string> _answers = new List<string>();
