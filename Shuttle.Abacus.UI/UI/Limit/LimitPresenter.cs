@@ -15,7 +15,7 @@ namespace Shuttle.Abacus.UI.UI.Limit
         {
             Guard.AgainstNull(limitRules, "limitRules");
 
-            this._limitRules = limitRules;
+            _limitRules = limitRules;
             Text = "Limit Details";
             Image = Resources.Image_Limit;
         }
@@ -23,9 +23,9 @@ namespace Shuttle.Abacus.UI.UI.Limit
         public void LimitNameExited()
         {
             WorkItem.Text = string.Format("Limit{0}",
-                                          View.LimitNameValue.Length > 0
-                                              ? " : " + View.LimitNameValue
-                                              : string.Empty);
+                View.LimitNameValue.Length > 0
+                    ? " : " + View.LimitNameValue
+                    : string.Empty);
         }
 
         public override void OnInitialize()
