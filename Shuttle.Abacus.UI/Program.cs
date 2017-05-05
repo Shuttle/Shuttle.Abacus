@@ -20,11 +20,11 @@ namespace Shuttle.Abacus.UI
     {
         private static Splash _splash;
 
-        private static readonly WindsorContainer _container = new WindsorContainer();
+        private static readonly WindsorContainer Container = new WindsorContainer();
         private static IServiceBus _bus;
 
-        private static IMessageBus messageBus;
-        private static Thread splashThread;
+        private static IMessageBus _messageBus;
+        private static Thread _splashThread;
 
         [STAThread]
         private static void Main()
@@ -39,13 +39,13 @@ namespace Shuttle.Abacus.UI
             Application.SetCompatibleTextRenderingDefault(false);
             Application.DoEvents();
 
-            splashThread = new Thread(ShowSplash);
+            _splashThread = new Thread(ShowSplash);
 
-            splashThread.Start();
+            _splashThread.Start();
 
-            DependencyWiring.Start(_container).AddWindowsComponents().AddCaching();
+            DependencyWiring.Start(Container).AddWindowsComponents().AddCaching();
 
-            var container = new WindsorComponentContainer(_container);
+            var container = new WindsorComponentContainer(Container);
 
             ServiceBus.Register(container);
 
@@ -65,9 +65,9 @@ namespace Shuttle.Abacus.UI
                     );
             }
 
-            messageBus = DependencyResolver.Resolve<IMessageBus>();
+            _messageBus = DependencyResolver.Resolve<IMessageBus>();
 
-            messageBus.Publish(new StartShellMessage());
+            _messageBus.Publish(new StartShellMessage());
 
             Login(string.Format(@"{0}\{1}",
                 Environment.UserDomainName,
@@ -90,7 +90,7 @@ namespace Shuttle.Abacus.UI
             }
             try
             {
-                _container.Dispose();
+                Container.Dispose();
             }
             catch
             {
@@ -104,7 +104,7 @@ namespace Shuttle.Abacus.UI
                 _splash.Invoke(new MethodInvoker(_splash.Close));
             }
 
-            splashThread.Join();
+            _splashThread.Join();
         }
 
         private static void AssemblyLoad(object sender, AssemblyLoadEventArgs args)

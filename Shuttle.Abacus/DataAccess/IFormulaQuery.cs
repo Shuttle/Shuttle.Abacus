@@ -9,7 +9,6 @@ namespace Shuttle.Abacus.DataAccess
     public interface IFormulaQuery
     {
         IEnumerable<DataRow> AllForOwner(Guid ownerId);
-        IEnumerable<OperationDTO> OperationDTOs(Guid formulaId);
         IEnumerable<DataRow> Operations(Guid formulaId);
         DataRow Get(Guid id);
         void PopulateOwner(IFormulaOwner owner);

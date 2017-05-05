@@ -129,7 +129,7 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
 
             foreach (DataRow row in Model.ArgumentAnswers.Rows)
             {
-                View.AddArgumentAnswer(new ArgumentAnswerModel().Using(row));
+                View.AddArgumentAnswer(Model.GetArgument(MethodTestColumns.ArgumentAnswerColumns.ArgumentId.MapFrom(row)), MethodTestColumns.ArgumentAnswerColumns.Answer.MapFrom(row));
             }
         }
     }

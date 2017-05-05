@@ -12,23 +12,19 @@ namespace Shuttle.Abacus.DataAccess
     {
         private readonly IDatabaseGateway _databaseGateway;
         private readonly IFormulaQueryFactory _formulaQueryFactory;
-        private readonly IDataTableRepository<OperationDTO> _operationRepository;
 
-        public FormulaQuery(IDatabaseGateway databaseGateway, IFormulaQueryFactory formulaQueryFactory, IDataTableRepository<OperationDTO> operationRepository)
+        public FormulaQuery(IDatabaseGateway databaseGateway, IFormulaQueryFactory formulaQueryFactory)
         {
+            Guard.AgainstNull(databaseGateway, "databaseGateway");
+            Guard.AgainstNull(formulaQueryFactory, "formulaQueryFactory");
+
             _databaseGateway = databaseGateway;
             _formulaQueryFactory = formulaQueryFactory;
-            _operationRepository = operationRepository;
         }
 
         public IEnumerable<DataRow> AllForOwner(Guid ownerId)
         {
             return _databaseGateway.GetRowsUsing(_formulaQueryFactory.AllForOwner(ownerId));
-        }
-
-        public IEnumerable<OperationDTO> OperationDTOs(Guid formulaId)
-        {
-                return _operationRepository.FetchAllUsing(_formulaQueryFactory.GetOperations(formulaId));
         }
 
         public IEnumerable<DataRow> Operations(Guid formulaId)

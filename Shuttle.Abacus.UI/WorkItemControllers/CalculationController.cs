@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.DTO;
+using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Messages.v1;
+using Shuttle.Abacus.Messages.v1.TransferObjects;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.Calculation;
@@ -20,8 +21,9 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class CalculationController : WorkItemController, ICalculationController
     {
-        public CalculationController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository) 
-            : base(serviceBus, messageBus, callbackRepository) 
+        public CalculationController(IServiceBus serviceBus, IMessageBus messageBus,
+            ICallbackRepository callbackRepository)
+            : base(serviceBus, messageBus, callbackRepository)
         {
         }
 
@@ -36,15 +38,15 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             var graphNodeArgumentView = WorkItem.GetView<IGraphNodeArgumentView>();
 
             var command = new CreateCalculationCommand
-                          {
-                              MethodId = message.MethodId,
-                              OwnerName = message.OwnerName,
-                              OwnerId = message.OwnerId,
-                              Type = calculationView.TypeValue,
-                              Name = calculationView.CalculationNameValue,
-                              Required = calculationView.RequiredValue,
-                              GraphNodeArguments = new List<GraphNodeDataRow>(graphNodeArgumentView.GraphNodeArguments)
-                          };
+            {
+                MethodId = message.MethodId,
+                OwnerName = message.OwnerName,
+                OwnerId = message.OwnerId,
+                Type = calculationView.TypeValue,
+                Name = calculationView.CalculationNameValue,
+                Required = calculationView.RequiredValue,
+                GraphNodeArguments = new List<GraphNodeDataRow>(graphNodeArgumentView.GraphNodeArguments)
+            };
 
             Send(command);
         }
@@ -68,10 +70,10 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             var view = WorkItem.GetView<ISimpleListView>();
 
             var command = new ChangeCalculationOrderCommand
-                          {
-                              OwnerId = message.OwnerId,
-                              MethodId = message.MethodId,
-                          };
+            {
+                OwnerId = message.OwnerId,
+                MethodId = message.MethodId
+            };
 
             foreach (var item in view.Items)
             {
@@ -86,10 +88,15 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             var constraintView = WorkItem.GetView<IConstraintView>();
 
             Send(new SetCalculationConstraintsCommand
-                 {
-                     CalculationId = message.CalculationId,
-                     Constraints = constraintView.Constraints
-                 });
+            {
+                CalculationId = message.CalculationId,
+                Constraints = constraintView.Constraints.Map(item => new Constraint
+                {
+                    Name = item.Name,
+                    Answer = item.Answer,
+                    ArgumentId = item.ArgumentId
+                })
+            });
         }
 
         public void HandleMessage(EditCalculationMessage message)
@@ -98,29 +105,30 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             var graphNodeArgumentView = WorkItem.GetView<IGraphNodeArgumentView>();
 
             var command = new ChangeCalculationCommand
-                          {
-                              MethodId = message.MethodId,
-                              CalculationId = message.CalculationId,
-                              OwnerId = message.OwnerId,
-                              OwnerName = message.OwnerName,
-                              Name = calculationView.CalculationNameValue,
-                              Required = calculationView.RequiredValue,
-                              GraphNodeArguments = new List<GraphNodeDataRow>(graphNodeArgumentView.GraphNodeArguments)
-                          };
+            {
+                MethodId = message.MethodId,
+                CalculationId = message.CalculationId,
+                OwnerId = message.OwnerId,
+                OwnerName = message.OwnerName,
+                Name = calculationView.CalculationNameValue,
+                Required = calculationView.RequiredValue,
+                GraphNodeArguments = new List<GraphNodeDataRow>(graphNodeArgumentView.GraphNodeArguments)
+            };
 
             Send(command,
-                 () =>
-                 MessageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
+                () =>
+                    MessageBus.Publish(
+                        new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
         }
 
         public void HandleMessage(DeleteCalculationMessage message)
         {
             Send(new DeleteCalculationCommand
-                 {
-                     MethodId = message.MethodId,
-                     CalculationId = message.CalculationId
-                 },
-                 () => MessageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
+                {
+                    MethodId = message.MethodId,
+                    CalculationId = message.CalculationId
+                },
+                () => MessageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
         }
 
         public void HandleMessage(GrabCalculationsMessage message)
@@ -133,10 +141,10 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             }
 
             var command = new GrabCalculationsCommand
-                          {
-                              GrabberCalculationId = message.GrabberCalculationId,
-                              MethodId = message.MethodId
-                          };
+            {
+                GrabberCalculationId = message.GrabberCalculationId,
+                MethodId = message.MethodId
+            };
 
             foreach (var item in view.CheckedItems)
             {
@@ -144,7 +152,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             }
 
             Send(command,
-                 () => MessageBus.Publish(new ResourceRefreshItemMessage(message.MethodResource)));
+                () => MessageBus.Publish(new ResourceRefreshItemMessage(message.MethodResource)));
         }
     }
 }

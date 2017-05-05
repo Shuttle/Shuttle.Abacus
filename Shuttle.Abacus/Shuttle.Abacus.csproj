@@ -142,10 +142,7 @@
     <Compile Include="DataAccess\Mapping\CalculationDTOMapper.cs" />
     <Compile Include="DataAccess\Mapping\IMethodTestDTOMapper.cs" />
     <Compile Include="DataAccess\Mapping\MethodDTOMapper.cs" />
-    <Compile Include="DataAccess\Mapping\OperationDTOMapper.cs" />
-    <Compile Include="DataAccess\Mapping\OperationTypeDTOMapper.cs" />
     <Compile Include="DataAccess\Mapping\SystemUserDataReaderMapper.cs" />
-    <Compile Include="DataAccess\Mapping\ValueSourceTypeDTOMapper.cs" />
     <Compile Include="DataAccess\MethodQuery.cs" />
     <Compile Include="DataAccess\MethodRepository.cs" />
     <Compile Include="DataAccess\MethodTestQuery.cs" />
@@ -233,7 +230,6 @@
     <Compile Include="Domain\Events\FormulaRemoved.cs" />
     <Compile Include="Domain\Events\MethodTestPrintEvent.cs" />
     <Compile Include="Domain\Events\MethodTestRunEvent.cs" />
-    <Compile Include="Domain\Extensions\EnumerableExtensions.cs" />
     <Compile Include="Domain\Extensions\NumberExtensions.cs" />
     <Compile Include="Domain\Formula\Formula.cs" />
     <Compile Include="Domain\Formula\FormulaCollection.cs" />

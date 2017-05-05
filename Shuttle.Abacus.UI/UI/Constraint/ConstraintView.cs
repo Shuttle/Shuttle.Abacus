@@ -128,7 +128,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
             get { return Constraint.Text.Length > 0; }
         }
 
-        public List<ConstraintModel> Constraints
+        public List<OwnedConstraint> Constraints
         {
             get
             {

@@ -2,7 +2,7 @@ using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
 {
-    public class ConstraintTypeQueryFactory
+    public class ConstraintTypeQueryFactory : IConstraintTypeQueryFactory
     {
         public IQuery All()
         {
