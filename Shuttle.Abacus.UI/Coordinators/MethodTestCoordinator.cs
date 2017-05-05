@@ -53,10 +53,11 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .AddNavigationItem(NavigationItemFactory.Create<InvertMarksMessage>());
 
             var item = WorkItemManager
-                .Create(string.Format("Tests: {0}", message.MethodName))
+                .Create($"Tests: {message.MethodName}")
                 .ControlledBy<IMethodTestManagerController>()
                 .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter(presenter).WithModel(new SimpleListModel(_testQuery.FetchForMethodId(message.MethodId)))
+                .AddPresenter(presenter)
+                .WithModel(new SimpleListModel("MethodTestId", _testQuery.FetchForMethodId(message.MethodId)))
                 .AddPresenter<IMethodTestResultPresenter>()
                 .AssignInitiator(message);
 
@@ -94,9 +95,10 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .Create("New test case")
                 .ControlledBy<IMethodTestController>()
                 .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<IMethodTestPresenter>().WithModel(BuildModel())
-                .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).
-                AsDefault()
+                .AddPresenter<IMethodTestPresenter>()
+                .WithModel(BuildModel())
+                .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
+                .AsDefault()
                 .AssignInitiator(message);
 
             HostInWorkspace<ITabbedWorkspacePresenter>(item);
@@ -124,8 +126,10 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .Create("Test: " + MethodTestColumns.Description.MapFrom(row))
                 .ControlledBy<IMethodTestController>()
                 .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<IMethodTestPresenter>().WithModel(model)
-                .AddNavigationItem(NavigationItemFactory.Create(new ChangeMethodTestMessage(message))).AsDefault()
+                .AddPresenter<IMethodTestPresenter>()
+                .WithModel(model)
+                .AddNavigationItem(NavigationItemFactory.Create(new ChangeMethodTestMessage(message)))
+                .AsDefault()
                 .AssignInitiator(message);
 
             HostInWorkspace<ITabbedWorkspacePresenter>(item);
@@ -167,8 +171,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             view.AddRun(
                 message.Event.MethodTestId,
                 message.Event.MethodTestDescription,
-                message.Event.ExpectedResult,
-                message.Event.MethodContext);
+                message.Event.ExpectedResult);
 
             view.ShowView();
         }
@@ -191,10 +194,12 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .Create(string.Format("New test case from '{0}'", MethodTestColumns.Description.MapFrom(row)))
                 .ControlledBy<IMethodTestController>()
                 .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<IMethodTestPresenter>().WithModel(model)
+                .AddPresenter<IMethodTestPresenter>()
+                .WithModel(model)
                 .AddNavigationItem(
                     NavigationItemFactory.Create(new NewMethodTestMessage(message))
-                        .AssignResourceItem(ResourceItems.Submit)).AsDefault()
+                        .AssignResourceItem(ResourceItems.Submit))
+                .AsDefault()
                 .AssignInitiator(message);
 
             HostInWorkspace<ITabbedWorkspacePresenter>(item);
@@ -250,7 +255,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
             using (_databaseContextFactory.Create())
             {
-                presenter.AssignModel(new SimpleListModel(_testQuery.FetchForMethodId(methodId)));
+                presenter.AssignModel(new SimpleListModel("MethodTestId", _testQuery.FetchForMethodId(methodId)));
             }
 
             presenter.Refresh();

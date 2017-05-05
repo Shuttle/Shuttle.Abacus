@@ -1,3 +1,4 @@
+using System;
 using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
@@ -50,36 +51,37 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(MethodTestPrintMessage message)
         {
-            var table = new DataTable("RunEvents");
+            throw new NotImplementedException();
+            //var table = new DataTable("RunEvents");
 
-            table.Columns.Add(new DataColumn("MethodTestName", typeof(string)));
-            table.Columns.Add(new DataColumn("ExpectedResult", typeof(decimal)));
-            table.Columns.Add(new DataColumn("ActualResult", typeof(decimal)));
-            table.Columns.Add(new DataColumn("CalculationLog", typeof(string)));
+            //table.Columns.Add(new DataColumn("MethodTestName", typeof(string)));
+            //table.Columns.Add(new DataColumn("ExpectedResult", typeof(decimal)));
+            //table.Columns.Add(new DataColumn("ActualResult", typeof(decimal)));
+            //table.Columns.Add(new DataColumn("CalculationLog", typeof(string)));
 
-            foreach (var testResult in message.Event.RunEvents)
-            {
-                var logLines = testResult.MethodContext.GetLog().Replace("\n", string.Empty).Split("\r".ToCharArray());
+            //foreach (var testResult in message.Event.RunEvents)
+            //{
+            //    var logLines = testResult.MethodContext.GetLog().Replace("\n", string.Empty).Split("\r".ToCharArray());
 
-                foreach (var line in logLines)
-                {
-                    var row = table.NewRow();
+            //    foreach (var line in logLines)
+            //    {
+            //        var row = table.NewRow();
 
-                    row["MethodTestName"] = testResult.MethodTestDescription;
-                    row["ExpectedResult"] = testResult.ExpectedResult;
-                    row["ActualResult"] = testResult.MethodContext.Total;
-                    row["CalculationLog"] = line.Replace("\t", Tab);
+            //        row["MethodTestName"] = testResult.MethodTestDescription;
+            //        row["ExpectedResult"] = testResult.ExpectedResult;
+            //        row["ActualResult"] = testResult.MethodContext.Total;
+            //        row["CalculationLog"] = line.Replace("\t", Tab);
 
-                    table.Rows.Add(row);
-                }
-            }
+            //        table.Rows.Add(row);
+            //    }
+            //}
 
-            var model = new ReportModel
-            {
-                ReportDatasetName = "ReportsDataSet_MethodTestResult",
-                ReportDefinitionName = "Abacus.Reporting.Reports.MethodTest.rdlc",
-                ReportData = table
-            };
+            //var model = new ReportModel
+            //{
+            //    ReportDatasetName = "ReportsDataSet_MethodTestResult",
+            //    ReportDefinitionName = "Abacus.Reporting.Reports.MethodTest.rdlc",
+            //    ReportData = table
+            //};
 
             //var item = WorkItemManager
             //    .Create("Test Results Report")

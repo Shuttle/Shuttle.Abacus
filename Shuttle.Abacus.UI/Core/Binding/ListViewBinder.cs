@@ -9,43 +9,53 @@ namespace Shuttle.Abacus.UI.Core.Binding
 {
     public class ListViewBinder : IBinder<ListView>
     {
-        private static readonly Type fortype = typeof(ListView);
+        private static readonly Type Fortype = typeof(ListView);
 
-        public void Bind(IEnumerable<DataRow> rows, ListView to)
+        public void Bind(string keyColumnName, IEnumerable<DataRow> rows, ListView to)
         {
-            Bind(rows, to, new List<string>(), new List<string>());
+            Bind(keyColumnName, rows, to, new List<string>(), new List<string>());
         }
 
         public Type ForType
         {
-            get { return fortype; }
+            get { return Fortype; }
         }
 
-        public void Bind(IEnumerable<DataRow> rows, ListView to, IEnumerable<string> visibleColumns,
-            IEnumerable<string> hiddenColumns)
+        public void Bind(string keyColumnName, IEnumerable<DataRow> rows, ListView to,
+            IEnumerable<string> visibleColumns, IEnumerable<string> hiddenColumns)
         {
             to.Columns.Clear();
             to.Items.Clear();
 
-            if (!rows.Any())
+            var enumerableRows = rows as IList<DataRow> ?? rows.ToList();
+
+            if (!enumerableRows.Any())
             {
                 return;
             }
 
-            BuildColumns(rows.First().Table.Columns, to, visibleColumns, hiddenColumns);
+            var enumerableVisibleColumns = visibleColumns as IList<string> ?? visibleColumns.ToList();
+            var enumerableHiddenColumns = hiddenColumns as IList<string> ?? hiddenColumns.ToList();
 
-            foreach (var row in rows)
+            BuildColumns(keyColumnName, enumerableRows.First().Table.Columns, to, enumerableVisibleColumns,
+                enumerableHiddenColumns);
+
+            foreach (var row in enumerableRows)
             {
                 var item = to.Items.Add(string.Empty);
-
-                //TODO
-                //item.Name = Convert.ToString(row[keyColumn]);
 
                 var textSet = false;
 
                 foreach (DataColumn column in row.Table.Columns)
                 {
-                    if (!IsColumnVisible(column, visibleColumns, hiddenColumns))
+                    if (column.ColumnName.Equals(keyColumnName, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        item.Name = Convert.ToString(row[keyColumnName]);
+
+                        continue;
+                    }
+
+                    if (!IsColumnVisible(column, enumerableVisibleColumns, enumerableHiddenColumns))
                     {
                         continue;
                     }
@@ -66,15 +76,19 @@ namespace Shuttle.Abacus.UI.Core.Binding
             }
         }
 
-        private static void BuildColumns(DataColumnCollection columns, ListView to, IEnumerable<string> visibleColumns,
-            IEnumerable<string> hiddenColumns)
+        private static void BuildColumns(string keyColumnName, DataColumnCollection columns, ListView to,
+            IEnumerable<string> visibleColumns, IEnumerable<string> hiddenColumns)
         {
             foreach (DataColumn column in columns)
             {
-                if (IsColumnVisible(column, visibleColumns, hiddenColumns))
+                if (column.ColumnName.Equals(keyColumnName, StringComparison.InvariantCultureIgnoreCase)
+                    ||
+                    !IsColumnVisible(column, visibleColumns, hiddenColumns))
                 {
-                    AddHeader(column, to);
+                    continue;
                 }
+
+                AddHeader(column, to);
             }
         }
 

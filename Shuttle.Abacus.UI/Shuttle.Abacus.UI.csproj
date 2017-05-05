@@ -287,12 +287,15 @@
     <Compile Include="Models\ArgumentAnswerModel.cs" />
     <Compile Include="Models\ArgumentDisplayModel.cs" />
     <Compile Include="Models\ArgumentModel.cs" />
+    <Compile Include="Models\CalculationModel.cs" />
     <Compile Include="Models\ConstraintModel.cs" />
     <Compile Include="Models\ConstraintTypeModel.cs" />
     <Compile Include="Models\DecimalTableModel.cs" />
     <Compile Include="Models\DecimalValueModel.cs" />
     <Compile Include="Models\FormulaModel.cs" />
     <Compile Include="Models\FormulaOperationModel.cs" />
+    <Compile Include="Models\LimitModel.cs" />
+    <Compile Include="Models\MethodModel.cs" />
     <Compile Include="Models\MethodTestModel.cs" />
     <Compile Include="Models\OperationTypeModel.cs" />
     <Compile Include="Models\ReportModel.cs" />

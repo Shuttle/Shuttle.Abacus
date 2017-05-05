@@ -115,7 +115,8 @@ namespace Shuttle.Abacus.Server.Handlers
                             MethodTestId = id,
                             MethodTestDescription = test.Description,
                             ExpectedResult = test.ExpectedResult,
-                            MethodContext = methodContext.DTO()
+                            //TODO
+                            //MethodContext = methodContext.DTO()
                         }
                     );
                 }
@@ -152,7 +153,8 @@ namespace Shuttle.Abacus.Server.Handlers
                         MethodTestId = id,
                         MethodTestDescription = test.Description,
                         ExpectedResult = test.ExpectedResult,
-                        MethodContext = methodContext.DTO()
+                        //TODO
+                        //MethodContext = methodContext.DTO()
                     }, c => c.Reply());
                 }
             }

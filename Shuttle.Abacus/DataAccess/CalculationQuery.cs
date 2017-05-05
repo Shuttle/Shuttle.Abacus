@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using Shuttle.Abacus.Domain;
-using Shuttle.Abacus.DTO;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 
@@ -10,16 +9,16 @@ namespace Shuttle.Abacus.DataAccess
 {
     public class CalculationQuery : ICalculationQuery
     {
-        private readonly IDataTableMapper<CalculationDTO> _calculationDTOMapper;
         private readonly ICalculationQueryFactory _calculationQueryFactory;
         private readonly IDatabaseGateway _databaseGateway;
 
-        public CalculationQuery(IDatabaseGateway databaseGateway, ICalculationQueryFactory calculationQueryFactory,
-            IDataTableMapper<CalculationDTO> calculationDTOMapper)
+        public CalculationQuery(IDatabaseGateway databaseGateway, ICalculationQueryFactory calculationQueryFactory)
         {
+            Guard.AgainstNull(databaseGateway, "databaseGateway");
+            Guard.AgainstNull(calculationQueryFactory, "calculationQueryFactory");
+
             _databaseGateway = databaseGateway;
             _calculationQueryFactory = calculationQueryFactory;
-            _calculationDTOMapper = calculationDTOMapper;
         }
 
         public IEnumerable<DataRow> AllForOwner(Guid ownerId)
@@ -30,7 +29,8 @@ namespace Shuttle.Abacus.DataAccess
         public DataTable AllBeforeCalculation(Guid methodId, Guid calculationId)
         {
             return
-                _databaseGateway.GetDataTableFor(_calculationQueryFactory.AllBeforeCalculation(methodId, calculationId));
+                _databaseGateway.GetDataTableFor(
+                    _calculationQueryFactory.AllBeforeCalculation(methodId, calculationId));
         }
 
         public DataRow Get(Guid id)
@@ -41,16 +41,6 @@ namespace Shuttle.Abacus.DataAccess
         public IEnumerable<DataRow> AllForMethod(Guid methodId)
         {
             return _databaseGateway.GetRowsUsing(_calculationQueryFactory.AllForMethod(methodId));
-        }
-
-        public IEnumerable<CalculationDTO> DTOsBeforeCalculation(Guid methodId, Guid calculationId)
-        {
-            return _calculationDTOMapper.MapFrom(AllBeforeCalculation(methodId, calculationId));
-        }
-
-        public IEnumerable<CalculationDTO> DTOsForMethod(Guid methodId)
-        {
-            return _calculationDTOMapper.MapFrom(AllForMethod(methodId).CopyToDataTable());
         }
 
         public IEnumerable<DataRow> AllForMethod(Guid methodId, Guid grabberCalculationId)
@@ -71,9 +61,9 @@ namespace Shuttle.Abacus.DataAccess
             {
                 owner.AddCalculation(
                     new CalculationItem(
-                    CalculationColumns.Id.MapFrom(row),
-                    CalculationColumns.Name.MapFrom(row),
-                    CalculationColumns.Type.MapFrom(row)));
+                        CalculationColumns.Id.MapFrom(row),
+                        CalculationColumns.Name.MapFrom(row),
+                        CalculationColumns.Type.MapFrom(row)));
             }
         }
     }

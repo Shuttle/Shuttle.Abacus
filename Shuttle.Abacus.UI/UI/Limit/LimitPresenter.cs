@@ -2,16 +2,20 @@ using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Invariants.Interfaces;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Models;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.UI.Limit
 {
-    public class LimitPresenter : Presenter<ILimitView>, ILimitPresenter
+    public class LimitPresenter : Presenter<ILimitView, LimitModel>, ILimitPresenter
     {
-        private readonly ILimitRules limitRules;
+        private readonly ILimitRules _limitRules;
 
         public LimitPresenter(ILimitView view, ILimitRules limitRules) : base(view)
         {
-            this.limitRules = limitRules;
+            Guard.AgainstNull(limitRules, "limitRules");
+
+            this._limitRules = limitRules;
             Text = "Limit Details";
             Image = Resources.Image_Limit;
         }
@@ -28,8 +32,8 @@ namespace Shuttle.Abacus.UI.UI.Limit
         {
             base.OnInitialize();
 
-            View.LimitNameRules = limitRules.LimitNameRules();
-            View.TypeRules = limitRules.TypeRules();
+            View.LimitNameRules = _limitRules.LimitNameRules();
+            View.TypeRules = _limitRules.TypeRules();
 
             if (Model == null)
             {

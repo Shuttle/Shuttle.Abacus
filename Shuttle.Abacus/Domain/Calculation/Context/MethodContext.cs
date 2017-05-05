@@ -113,11 +113,12 @@ namespace Shuttle.Abacus.Domain
 
         public List<GraphNodeDTO> GraphNodes()
         {
-            var result = new List<GraphNodeDTO>();
+            throw new NotImplementedException();
+            //var result = new List<GraphNodeDTO>();
 
-            AddGraphNodeDTOs(result, GraphNode.GraphNodes);
+            //AddGraphNodeDTOs(result, GraphNode.GraphNodes);
 
-            return result;
+            //return result;
         }
 
         public void AddErrorMessage(string message)
@@ -316,47 +317,48 @@ namespace Shuttle.Abacus.Domain
         {
         }
 
-        public MethodContextDTO DTO()
-        {
-            var result = new MethodContextDTO
-                         {
-                             Total = Total.Value
-                         };
+        //TODO
+        //public MethodContextDTO DTO()
+        //{
+        //    var result = new MethodContextDTO
+        //                 {
+        //                     Total = Total.Value
+        //                 };
 
-            AddGraphNodeDTOs(result.GraphNodes, GraphNode.GraphNodes);
+        //    AddGraphNodeDTOs(result.GraphNodes, GraphNode.GraphNodes);
 
-            result.SetLog(LogText);
+        //    result.SetLog(LogText);
 
-            result.ErrorMessages = new List<string>(logger.ErrorMessages);
-            result.WarningMessages = new List<string>(logger.WarningMessages);
-            result.InformationMessages = new List<string>(logger.InformationMessages);
+        //    result.ErrorMessages = new List<string>(logger.ErrorMessages);
+        //    result.WarningMessages = new List<string>(logger.WarningMessages);
+        //    result.InformationMessages = new List<string>(logger.InformationMessages);
 
-            return result;
-        }
+        //    return result;
+        //}
 
-        private void AddGraphNodeDTOs(ICollection<GraphNodeDTO> to, GraphNodeCollection from)
-        {
-            foreach (var item in from)
-            {
-                var dto = new GraphNodeDTO
-                {
-                    Name = item.Name,
-                    Total = item.Total,
-                    SubTotal = item.SubTotal
-                };
+        //private void AddGraphNodeDTOs(ICollection<GraphNodeDTO> to, GraphNodeCollection from)
+        //{
+        //    foreach (var item in from)
+        //    {
+        //        var dto = new GraphNodeDTO
+        //        {
+        //            Name = item.Name,
+        //            Total = item.Total,
+        //            SubTotal = item.SubTotal
+        //        };
 
-                foreach (var argument in item.GraphNodeArguments)
-                {
-                    dto.AddGraphNodeArgument(argument.Argument.Name, argument.DisplayString(this));
-                }
+        //        foreach (var argument in item.GraphNodeArguments)
+        //        {
+        //            dto.AddGraphNodeArgument(argument.Argument.Name, argument.DisplayString(this));
+        //        }
 
-                if (item.GraphNodes.Any())
-                {
-                    AddGraphNodeDTOs(dto.GraphNodes, item.GraphNodes);
-                }
+        //        if (item.GraphNodes.Any())
+        //        {
+        //            AddGraphNodeDTOs(dto.GraphNodes, item.GraphNodes);
+        //        }
 
-                to.Add(dto);
-            }
-        }
+        //        to.Add(dto);
+        //    }
+        //}
     }
 }

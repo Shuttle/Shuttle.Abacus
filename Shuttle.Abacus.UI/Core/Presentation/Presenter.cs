@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.UI.Core.EventArgs;
@@ -21,7 +20,80 @@ namespace Shuttle.Abacus.UI.Core.Presentation
         where TView : class, IView
         where TModel : class
     {
-        private readonly IList<INavigationItem> navigationItems;
+        private readonly IList<INavigationItem> _navigationItems;
+        private INavigationItem _buildNavigationItem;
+
+        private Image _image;
+        private string _text;
+        private IWorkItem _workItem;
+
+        protected Presenter(TView view)
+        {
+            Guard.AgainstNull(view, "view");
+
+            IView = view;
+
+            view.AttachPresenter(this);
+
+            Text = GetType().Name;
+            Image = Localisation.Resources.Image_Presenter;
+
+            TrackChanges = true;
+
+            _navigationItems = new List<INavigationItem>();
+        }
+
+        public TView View
+        {
+            get
+            {
+                var result = IView as TView;
+
+                if (result == null)
+                {
+                    throw new InvalidCastException(string.Format(Localisation.Resources.NullSafeCasting,
+                        IView.GetType().FullName,
+                        typeof(TView).FullName));
+                }
+
+                return result;
+            }
+        }
+
+        public TModel Model { get; private set; }
+
+        public IViewValidatorFactory ViewValidatorFactory
+        {
+            set { View.AttachViewValidator(value.Create(View.ViewValidationManager)); }
+        }
+
+        public Message CancelMessage { get; private set; }
+
+        public bool HasCancelMessage
+        {
+            get { return CancelMessage != null; }
+        }
+
+        public Message DefaultMessage { get; private set; }
+
+        public bool HasDefaultMessage
+        {
+            get { return DefaultMessage != null; }
+        }
+
+        public IPresenter AsDefault()
+        {
+            DefaultMessage = _buildNavigationItem.Message;
+
+            return this;
+        }
+
+        public IPresenter AsCancel()
+        {
+            CancelMessage = _buildNavigationItem.Message;
+
+            return this;
+        }
 
         public virtual void Dispose()
         {
@@ -47,83 +119,23 @@ namespace Shuttle.Abacus.UI.Core.Presentation
             return result;
         }
 
-        private Image image;
-        private string text;
-        private IWorkItem workItem;
-        private INavigationItem buildNavigationItem;
-
-        protected Presenter(TView view)
-        {
-            Guard.AgainstNull(view, "view");
-
-            IView = view;
-
-            view.AttachPresenter(this);
-
-            Text = GetType().Name;
-            Image = Localisation.Resources.Image_Presenter;
-
-            TrackChanges = true;
-
-            navigationItems = new List<INavigationItem>();
-        }
-
         public IEnumerable<INavigationItem> NavigationItems
         {
-            get { return navigationItems; }
+            get { return _navigationItems; }
         }
 
-        public TView View
-        {
-            get
-            {
-                var result = IView as TView;
-
-                if (result == null)
-                {
-                    throw new InvalidCastException(string.Format(Localisation.Resources.NullSafeCasting, IView.GetType().FullName,
-                                                                 typeof(TView).FullName));
-                }
-
-                return result;
-            }
-        }
-
-        public Message DefaultMessage { get; private set; }
-
-        public bool HasDefaultMessage
-        {
-            get { return DefaultMessage != null; }
-        }
-
-        public Message CancelMessage { get; private set; }
-
-        public bool HasCancelMessage
-        {
-            get { return CancelMessage != null; }
-        }
-
-        public TModel Model { get; private set; }
         public IMessageBus MessageBus { get; set; }
-
-        public IViewValidatorFactory ViewValidatorFactory
-        {
-            set
-            {
-                View.AttachViewValidator(value.Create(View.ViewValidationManager));
-            }
-        }
 
         public INavigationItemFactory NavigationItemFactory { get; set; }
 
         public string Text
         {
-            get { return text; }
+            get { return _text; }
             set
             {
-                var from = text;
+                var from = _text;
 
-                text = value;
+                _text = value;
 
                 TextChanged(this, new PresenterTextChangedArgs(from, value));
             }
@@ -131,10 +143,10 @@ namespace Shuttle.Abacus.UI.Core.Presentation
 
         public Image Image
         {
-            get { return image; }
+            get { return _image; }
             set
             {
-                image = value;
+                _image = value;
 
                 ImageChanged(this, new PresenterImageChangedArgs(value));
             }
@@ -142,12 +154,12 @@ namespace Shuttle.Abacus.UI.Core.Presentation
 
         public IWorkItem WorkItem
         {
-            get { return workItem; }
+            get { return _workItem; }
             set
             {
-                Guard.AgainstReassignment(workItem, "WorkItem");
+                Guard.AgainstReassignment(_workItem, "WorkItem");
 
-                workItem = value;
+                _workItem = value;
             }
         }
 
@@ -202,6 +214,17 @@ namespace Shuttle.Abacus.UI.Core.Presentation
             Model = dto as TModel;
         }
 
+        public IPresenter AddNavigationItem(INavigationItem navigationItem)
+        {
+            Guard.AgainstNull(navigationItem, "navigationItem");
+
+            _navigationItems.Add(navigationItem);
+
+            _buildNavigationItem = navigationItem;
+
+            return this;
+        }
+
         public virtual void OnViewReady()
         {
         }
@@ -232,31 +255,6 @@ namespace Shuttle.Abacus.UI.Core.Presentation
             return result;
         }
 
-        public IPresenter AddNavigationItem(INavigationItem navigationItem)
-        {
-            Guard.AgainstNull(navigationItem, "navigationItem");
-
-            navigationItems.Add(navigationItem);
-
-            buildNavigationItem = navigationItem;
-
-            return this;
-        }
-
-        public IPresenter AsDefault()
-        {
-            DefaultMessage = buildNavigationItem.Message;
-
-            return this;
-        }
-
-        public IPresenter AsCancel()
-        {
-            CancelMessage = buildNavigationItem.Message;
-
-            return this;
-        }
-
         protected void DontTrackChanges()
         {
             TrackChanges = false;
@@ -271,12 +269,4 @@ namespace Shuttle.Abacus.UI.Core.Presentation
     public delegate void PresenterImageChanged(object sender, PresenterImageChangedArgs args);
 
     public delegate void PresenterTextChanged(object sender, PresenterTextChangedArgs args);
-
-    public abstract class Presenter<TView> : Presenter<TView, IEnumerable<DataRow>> where TView : class, IView
-    {
-        protected Presenter(TView view)
-            : base(view)
-        {
-        }
-    }
 }

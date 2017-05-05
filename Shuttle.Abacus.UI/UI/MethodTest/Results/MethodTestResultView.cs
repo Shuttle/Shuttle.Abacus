@@ -23,18 +23,6 @@ namespace Shuttle.Abacus.UI.UI.MethodTest.Results
             get { return MethodTestListView.SelectedItems[0]; }
         }
 
-        public MethodContextDTO SelectedDTO
-        {
-            get
-            {
-                if (!HasSelectedItem)
-                {
-                    return null;
-                }
-
-                return (MethodContextDTO) SelectedItem.Tag;
-            }
-        }
 
         public bool HasSelectedItem
         {
@@ -43,7 +31,8 @@ namespace Shuttle.Abacus.UI.UI.MethodTest.Results
 
         public void ShowCalculationLog()
         {
-            CalculationLog.Text = SelectedDTO.GetLog();
+            throw new NotImplementedException();
+            //CalculationLog.Text = SelectedDTO.GetLog();
         }
 
         public void BuildDisplayTree(string name, List<GraphNodeDTO> items)
@@ -91,37 +80,38 @@ namespace Shuttle.Abacus.UI.UI.MethodTest.Results
             item.SubItems.Add(dto.SubTotal.ToString(Resources.FormatDecimal));
         }
 
-        public void AddRun(Guid id, string description, decimal expectedResult, MethodContextDTO contextDTO)
+        public void AddRun(Guid id, string description, decimal expectedResult)
         {
-            Invoke(() =>
-                       {
-                           Remove(id);
+            throw new NotImplementedException();
+            //Invoke(() =>
+            //           {
+            //               Remove(id);
 
-                           var ok = expectedResult.Equals(contextDTO.Total);
+            //               var ok = expectedResult.Equals(contextDTO.Total);
 
-                           var errorFree = contextDTO.ErrorMessages.Count == 0;
+            //               var errorFree = contextDTO.ErrorMessages.Count == 0;
 
-                           var item = MethodTestListView.Items.Add(id.ToString(), description, ok && errorFree
-                                                                                                   ? "Success"
-                                                                                                   : "Error");
+            //               var item = MethodTestListView.Items.Add(id.ToString(), description, ok && errorFree
+            //                                                                                       ? "Success"
+            //                                                                                       : "Error");
 
-                           if (ok && errorFree)
-                           {
-                               item.SubItems.Add("Success");
-                               item.SubItems[1].ForeColor = Color.Green;
-                           }
-                           else
-                           {
-                               item.SubItems.Add(errorFree
-                                                     ? string.Format("Expected monthy total of {0} but was {1}",
-                                                                     expectedResult,
-                                                                     contextDTO.Total)
-                                                     : "Error(s)");
-                               item.SubItems[1].ForeColor = Color.Red;
-                           }
+            //               if (ok && errorFree)
+            //               {
+            //                   item.SubItems.Add("Success");
+            //                   item.SubItems[1].ForeColor = Color.Green;
+            //               }
+            //               else
+            //               {
+            //                   item.SubItems.Add(errorFree
+            //                                         ? string.Format("Expected monthy total of {0} but was {1}",
+            //                                                         expectedResult,
+            //                                                         contextDTO.Total)
+            //                                         : "Error(s)");
+            //                   item.SubItems[1].ForeColor = Color.Red;
+            //               }
 
-                           item.Tag = contextDTO;
-                       });
+            //               item.Tag = contextDTO;
+            //           });
         }
 
         public void ClearResultDisplays()

@@ -1,23 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Shuttle.Abacus.DTO;
 using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public class MethodQuery : IMethodQuery
     {
         private readonly IDatabaseGateway _databaseGateway;
-        private readonly IDataTableMapper<MethodDTO> _methodDTOMapper;
         private readonly IMethodQueryFactory _methodQueryFactory;
 
-        public MethodQuery(IDatabaseGateway databaseGateway, IMethodQueryFactory methodQueryFactory,
-            IDataTableMapper<MethodDTO> methodDTOMapper)
+        public MethodQuery(IDatabaseGateway databaseGateway, IMethodQueryFactory methodQueryFactory)
         {
+            Guard.AgainstNull(databaseGateway, "databaseGateway");
+            Guard.AgainstNull(methodQueryFactory, "methodQueryFactory");
+
             _databaseGateway = databaseGateway;
             _methodQueryFactory = methodQueryFactory;
-            _methodDTOMapper = methodDTOMapper;
         }
 
         public IEnumerable<DataRow> All()
@@ -28,11 +28,6 @@ namespace Shuttle.Abacus.DataAccess
         public DataRow Get(Guid id)
         {
             return _databaseGateway.GetSingleRowUsing(_methodQueryFactory.Get(id));
-        }
-
-        public IEnumerable<MethodDTO> AllDTOs()
-        {
-            return _methodDTOMapper.MapFrom(All().CopyToDataTable());
         }
     }
 }

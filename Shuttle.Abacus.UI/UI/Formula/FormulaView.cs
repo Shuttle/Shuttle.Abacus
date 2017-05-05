@@ -198,9 +198,9 @@ namespace Shuttle.Abacus.UI.UI.Formula
             ValueSelection.Text = string.Empty;
         }
 
-        public void PopulatePrecedingCalculations(IEnumerable<CalculationDTO> enumerable)
+        public void PopulatePrecedingCalculations(IEnumerable<CalculationModel> models)
         {
-            foreach (var dto in enumerable)
+            foreach (var dto in models)
             {
                 ValueSelection.Items.Add(new SelectionItem(dto.CalculationId, dto.Name));
             }
@@ -239,11 +239,11 @@ namespace Shuttle.Abacus.UI.UI.Formula
             }
         }
 
-        public void PopulateMethods(IEnumerable<MethodDTO> enumerable)
+        public void PopulateMethods(IEnumerable<MethodModel> models)
         {
-            foreach (var dto in enumerable)
+            foreach (var model in models)
             {
-                ValueSelection.Items.Add(new SelectionItem(dto.MethodId, dto.MethodName));
+                ValueSelection.Items.Add(new SelectionItem(model.MethodId, model.MethodName));
             }
         }
 

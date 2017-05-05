@@ -117,7 +117,6 @@
     <Compile Include="Domain\Limits\OwnedLimit.cs" />
     <Compile Include="DataAccess\LimitQueryFactory.cs" />
     <Compile Include="DataAccess\Definitions\MethodColumns.cs" />
-    <Compile Include="DataAccess\Mapping\ArgumentDataRowMapper.cs" />
     <Compile Include="DataAccess\Mapping\SystemDataRowMapper.cs" />
     <Compile Include="DataAccess\MethodQueryFactory.cs" />
     <Compile Include="DataAccess\Definitions\MethodTestColumns.cs" />
@@ -138,10 +137,6 @@
     <Compile Include="DataAccess\Infrastructure\IDataTableRepository.cs" />
     <Compile Include="DataAccess\LimitQuery.cs" />
     <Compile Include="DataAccess\LimitRepository.cs" />
-    <Compile Include="DataAccess\Mapping\ArgumentDataReaderMapper.cs" />
-    <Compile Include="DataAccess\Mapping\CalculationDTOMapper.cs" />
-    <Compile Include="DataAccess\Mapping\IMethodTestDTOMapper.cs" />
-    <Compile Include="DataAccess\Mapping\MethodDTOMapper.cs" />
     <Compile Include="DataAccess\Mapping\SystemUserDataReaderMapper.cs" />
     <Compile Include="DataAccess\MethodQuery.cs" />
     <Compile Include="DataAccess\MethodRepository.cs" />

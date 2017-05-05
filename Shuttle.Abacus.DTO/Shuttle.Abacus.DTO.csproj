@@ -40,12 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalculationDTO.cs" />
     <Compile Include="GraphNodeArgumentDTO.cs" />
     <Compile Include="GraphNodeDTO.cs" />
-    <Compile Include="MethodContextDTO.cs" />
-    <Compile Include="MethodDTO.cs" />
-    <Compile Include="MethodTestDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

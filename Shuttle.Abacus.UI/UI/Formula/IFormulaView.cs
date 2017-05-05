@@ -26,7 +26,7 @@ namespace Shuttle.Abacus.UI.UI.Formula
         void EnableValueEntry(string text);
         void ShowValueSourceError();
         void ShowValueSelectionError(string message);
-        void PopulatePrecedingCalculations(IEnumerable<CalculationDTO> enumerable);
+        void PopulatePrecedingCalculations(IEnumerable<CalculationModel> models);
 
         void ShowOperationTypeError();
         void RemoveSelectedItem();
@@ -36,6 +36,6 @@ namespace Shuttle.Abacus.UI.UI.Formula
         void PopulateOperations(IEnumerable<string> enumerable);
         void PopulateValues(IEnumerable<string> enumerable);
         void PopulateDecimalTables(IEnumerable<DecimalTableModel> list);
-        void PopulateMethods(IEnumerable<MethodDTO> enumerable);
+        void PopulateMethods(IEnumerable<MethodModel> models);
     }
 }

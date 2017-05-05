@@ -7,11 +7,10 @@ namespace Shuttle.Abacus.UI.UI.MethodTest.Results
 {
     public interface IMethodTestResultView : IView
     {
-        void AddRun(Guid id, string description, decimal expectedResult, MethodContextDTO contextDTO);
+        void AddRun(Guid id, string description, decimal expectedResult);
 
         void ClearResultDisplays();
         bool HasSelectedItem { get; }
-        MethodContextDTO SelectedDTO { get; }
         void ShowCalculationLog();
         void BuildDisplayTree(string name, List<GraphNodeDTO> items);
         void ClearDisplayList();

@@ -17,8 +17,8 @@ namespace Shuttle.Abacus.UI.Coordinators
 {
     public class SystemUserCoordinator : Coordinator, ISystemUserCoordinator
     {
-        private ISystemUserQuery _systemUserQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
+        private readonly ISystemUserQuery _systemUserQuery;
 
         public SystemUserCoordinator(IDatabaseContextFactory databaseContextFactory, ISystemUserQuery systemUserQuery)
         {
@@ -28,7 +28,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             _databaseContextFactory = databaseContextFactory;
             _systemUserQuery = systemUserQuery;
         }
-        
+
         public void HandleMessage(ListSystemUserMessage message)
         {
             using (_databaseContextFactory.Create())
@@ -37,7 +37,8 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .Create("Users")
                     .ControlledBy<ISystemUserListController>()
                     .ShowIn<IContextToolbarPresenter>()
-                    .AddPresenter<ISimpleListPresenter>().WithModel(new SimpleListModel(_systemUserQuery.All()))
+                    .AddPresenter<ISimpleListPresenter>()
+                    .WithModel(new SimpleListModel("SystemUserId", _systemUserQuery.All()))
                     .AddNavigationItem(NavigationItemFactory.Create<EditLoginNameMessage>())
                     .AddNavigationItem(NavigationItemFactory.Create<EditPermissionsMessage>());
 
@@ -54,7 +55,8 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .AddPresenter<ISystemUserPresenter>()
                 .AddPresenter<IPermissionsPresenter>()
                 .AddNavigationItem(
-                NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
+                    NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
+                .AsDefault()
                 .AssignInitiator(message);
 
             HostInWorkspace<ITabbedWorkspacePresenter>(item);
@@ -69,9 +71,11 @@ namespace Shuttle.Abacus.UI.Coordinators
                         .Create("Edit user")
                         .ControlledBy<ISystemUserController>()
                         .ShowIn<IContextToolbarPresenter>()
-                        .AddPresenter<ISystemUserPresenter>().WithModel(_systemUserQuery.Get(message.SystemUserId))
+                        .AddPresenter<ISystemUserPresenter>()
+                        .WithModel(_systemUserQuery.Get(message.SystemUserId))
                         .AddNavigationItem(
-                            NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
+                            NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
+                        .AsDefault()
                         .AssignInitiator(message);
 
                 item.GetPresenter<ISystemUserPresenter>().HandleMessage(message);
@@ -84,12 +88,13 @@ namespace Shuttle.Abacus.UI.Coordinators
         {
             var item =
                 WorkItemManager
-                    .Create(string.Format("Permissions: {0}", message.LoginName))
+                    .Create($"Permissions: {message.LoginName}")
                     .ControlledBy<ISystemUserController>()
                     .ShowIn<IContextToolbarPresenter>()
-                    .AddPresenter<IPermissionsPresenter>().WithModel(_systemUserQuery.GetPermissions(message.SystemUserId))
-                    .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).
-                    AsDefault()
+                    .AddPresenter<IPermissionsPresenter>()
+                    .WithModel(_systemUserQuery.GetPermissions(message.SystemUserId))
+                    .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
+                    .AsDefault()
                     .AssignInitiator(message);
 
             HostInWorkspace<ITabbedWorkspacePresenter>(item);

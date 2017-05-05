@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
@@ -209,10 +208,13 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .Create("Edit formula")
                     .ControlledBy<IFormulaController>()
                     .ShowIn<IContextToolbarPresenter>()
-                    .AddPresenter<IFormulaPresenter>().WithModel(formulaModel)
-                    .AddPresenter<IConstraintPresenter>().WithModel(constraintModel)
+                    .AddPresenter<IFormulaPresenter>()
+                    .WithModel(formulaModel)
+                    .AddPresenter<IConstraintPresenter>()
+                    .WithModel(constraintModel)
                     .AddNavigationItem(
-                        NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
+                        NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
+                    .AsDefault()
                     .AssignInitiator(message);
 
                 HostInWorkspace<ITabbedWorkspacePresenter>(item);
@@ -222,7 +224,7 @@ namespace Shuttle.Abacus.UI.Coordinators
         public void HandleMessage(ResourceRefreshItemTextMessage message)
         {
             if (!message.Item.ResourceKey.Equals(ResourceKeys.Formula) ||
-                                                message.Item.Type != Resource.ResourceType.Item)
+                message.Item.Type != Resource.ResourceType.Item)
             {
                 return;
             }
@@ -235,30 +237,24 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(ChangeFormulaOrderMessage message)
         {
-            var model = new SimpleListModel
-            {
-                VisibleColumns = new List<string>
-                {
-                    "Description"
-                }
-            };
-
             using (_databaseContextFactory.Create())
             {
-                model.Rows = _formulaQuery.AllForOwner(message.OwnerId);
+                var model = new SimpleListModel("FormulaId", _formulaQuery.AllForOwner(message.OwnerId))
+                    .AddVisibleColumn("Description");
+
+                var item = WorkItemManager
+                    .Create($"'{message.OwnerText}' Formulas")
+                    .ControlledBy<IFormulaController>()
+                    .ShowIn<IContextToolbarPresenter>()
+                    .AddPresenter<ISimpleListPresenter>()
+                    .WithModel(model)
+                    .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
+                    .AddNavigationItem(NavigationItemFactory.Create<MoveDownMessage>())
+                    .AddNavigationItem(NavigationItemFactory.Create<MoveUpMessage>())
+                    .AssignInitiator(message);
+
+                HostInWorkspace<ITabbedWorkspacePresenter>(item);
             }
-
-            var item = WorkItemManager
-                .Create(string.Format("'{0}' Formulas", message.OwnerText))
-                .ControlledBy<IFormulaController>()
-                .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<ISimpleListPresenter>().WithModel(model)
-                .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
-                .AddNavigationItem(NavigationItemFactory.Create<MoveDownMessage>())
-                .AddNavigationItem(NavigationItemFactory.Create<MoveUpMessage>())
-                .AssignInitiator(message);
-
-            HostInWorkspace<ITabbedWorkspacePresenter>(item);
         }
 
         public void HandleMessage(DeleteFormulaMessage message)
@@ -291,12 +287,14 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .Create("New formula")
                 .ControlledBy<IFormulaController>()
                 .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<IFormulaPresenter>().WithModel(formulaModel)
-                .AddPresenter<IConstraintPresenter>().WithModel(constraintModel)
+                .AddPresenter<IFormulaPresenter>()
+                .WithModel(formulaModel)
+                .AddPresenter<IConstraintPresenter>()
+                .WithModel(constraintModel)
                 .AddNavigationItem(
                     NavigationItemFactory.Create(new NewFormulaMessage(message))
-                        .AssignResourceItem(ResourceItems.Submit)).
-                AsDefault()
+                        .AssignResourceItem(ResourceItems.Submit))
+                .AsDefault()
                 .AssignInitiator(message.WithRefreshOwner());
 
             HostInWorkspace<ITabbedWorkspacePresenter>(item);

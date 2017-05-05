@@ -8,9 +8,9 @@ using Shuttle.Abacus.UI.Core.Presentation;
 
 namespace Shuttle.Abacus.UI.UI.Summary
 {
-    public class SummaryPresenter : Presenter<ISummaryView>, ISummaryPresenter
+    public class SummaryPresenter : Presenter<ISummaryView, IEnumerable<DataRow>>, ISummaryPresenter
     {
-        private readonly object[] emptyValue = {"(empty)"};
+        private readonly object[] _emptyValue = {"(empty)"};
 
         public SummaryPresenter(ISummaryView view)
             : base(view)
@@ -70,7 +70,7 @@ namespace Shuttle.Abacus.UI.UI.Summary
                         }
                         else
                         {
-                            View.AddRow(emptyValue);
+                            View.AddRow(_emptyValue);
                         }
 
                         break;

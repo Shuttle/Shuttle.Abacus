@@ -1,3 +1,4 @@
+using System;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
 
@@ -24,9 +25,10 @@ namespace Shuttle.Abacus.UI.UI.MethodTest.Results
 
             View.ShowCalculationLog();
             
-            var dto = View.SelectedDTO;
+            throw new NotImplementedException();
+            //var dto = View.SelectedDTO;
 
-            View.BuildDisplayTree("Test", dto.GraphNodes);
+            //View.BuildDisplayTree("Test", dto.GraphNodes);
         }
 
         public void GraphNodeSelected()

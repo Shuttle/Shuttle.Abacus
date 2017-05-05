@@ -155,30 +155,24 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(ChangeCalculationOrderMessage message)
         {
-            var model = new SimpleListModel
-            {
-                VisibleColumns = new List<string>
-                {
-                    CalculationColumns.Name
-                }
-            };
-
             using (_databaseContextFactory.Create())
             {
-                model.Rows = _calculationQuery.AllForOwner(message.OwnerId);
-            }
+                var model = new SimpleListModel("CalculationId", _calculationQuery.AllForOwner(message.OwnerId))
+                    .AddVisibleColumn(CalculationColumns.Name);
 
-            var item = WorkItemManager
-                    .Create(string.Format("'{0}' Calculations", message.OwnerText))
+                var item = WorkItemManager
+                    .Create($"'{message.OwnerText}' Calculations")
                     .ControlledBy<ICalculationController>()
                     .ShowIn<IContextToolbarPresenter>()
-                    .AddPresenter<ISimpleListPresenter>().WithModel(model)
+                    .AddPresenter<ISimpleListPresenter>()
+                    .WithModel(model)
                     .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
                     .AddNavigationItem(NavigationItemFactory.Create<MoveDownMessage>())
                     .AddNavigationItem(NavigationItemFactory.Create<MoveUpMessage>())
                     .AssignInitiator(message);
 
-            HostInWorkspace<ITabbedWorkspacePresenter>(item);
+                HostInWorkspace<ITabbedWorkspacePresenter>(item);
+            }
         }
 
         public void HandleMessage(ResourceMenuRequestMessage message)
@@ -292,11 +286,9 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .ShowIn<IContextToolbarPresenter>()
                     .AddPresenter<ISimpleListPresenter>()
                     .WithModel(
-                        new SimpleListModel(_calculationQuery.AllForMethod(message.MethodId,
-                            message.GrabberCalculationId))
-                        {
-                            HasCheckBoxes = true
-                        })
+                        new SimpleListModel("CalculationId",
+                                _calculationQuery.AllForMethod(message.MethodId, message.GrabberCalculationId))
+                            .WithCheckBoxes())
                     .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
                     .AssignInitiator(message);
 

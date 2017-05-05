@@ -12,8 +12,6 @@ namespace Shuttle.Abacus.DataAccess
         DataTable AllBeforeCalculation(Guid methodId, Guid calculationId);
         DataRow Get(Guid id);
         IEnumerable<DataRow> AllForMethod(Guid methodId);
-        IEnumerable<CalculationDTO> DTOsBeforeCalculation(Guid methodId, Guid calculationId);
-        IEnumerable<CalculationDTO> DTOsForMethod(Guid methodId);
         IEnumerable<DataRow> AllForMethod(Guid methodId, Guid grabberCalculationId);
         IEnumerable<DataRow> GraphNodeArguments(Guid calculationId);
 

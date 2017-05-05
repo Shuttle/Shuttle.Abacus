@@ -2,10 +2,13 @@
 using Shuttle.Abacus.Invariants.Interfaces;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Models;
 
 namespace Shuttle.Abacus.UI.UI.Calculation
 {
-    public class CalculationPresenter : Presenter<ICalculationView>, ICalculationPresenter
+    public class CalculationPresenter : 
+        Presenter<ICalculationView, CalculationModel>, 
+        ICalculationPresenter
     {
         private readonly ICalculationRules calculationRules;
 

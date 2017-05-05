@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 
-namespace Shuttle.Abacus.DTO
+namespace Shuttle.Abacus.UI.Models
 {
-    public class MethodDTO
+    public class MethodModel
     {
         public Guid MethodId { get; set; }
         public string MethodName { get; set; }

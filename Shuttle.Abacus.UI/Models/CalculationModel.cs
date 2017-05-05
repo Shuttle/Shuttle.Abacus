@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 
-namespace Shuttle.Abacus.DTO
+namespace Shuttle.Abacus.UI.Models
 {
-    public class CalculationDTO
+    public class CalculationModel
     {
         public Guid CalculationId { get; set; }
         public string Name { get; set; }
