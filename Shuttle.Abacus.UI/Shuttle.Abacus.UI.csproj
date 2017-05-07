@@ -97,11 +97,10 @@
     <Compile Include="Coordinators\Interfaces\IDecimalTableCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\IDefaultCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\IFormulaCoordinator.cs" />
-    <Compile Include="Coordinators\Interfaces\IMethodCoordinator.cs" />
-    <Compile Include="Coordinators\Interfaces\IMethodTestManagerCoordinator.cs" />
+    <Compile Include="Coordinators\Interfaces\ITestCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\IReportCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\ISystemUserCoordinator.cs" />
-    <Compile Include="Coordinators\MethodTestCoordinator.cs" />
+    <Compile Include="Coordinators\TestCoordinator.cs" />
     <Compile Include="Coordinators\ReportCoordinator.cs" />
     <Compile Include="Coordinators\SystemUserCoordinator.cs" />
     <Compile Include="Core\Binding\BinderProvider.cs" />

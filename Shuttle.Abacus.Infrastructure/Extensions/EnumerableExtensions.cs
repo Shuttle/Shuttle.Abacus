@@ -11,7 +11,7 @@ namespace Shuttle.Abacus.Infrastructure
         }
 
         public static Result GetResultOfVisitingAllItemsWith<T, Result>(this IEnumerable<T> items,
-                                                                        IValueReturningVisitor<Result, T> visitor)
+            IValueReturningVisitor<Result, T> visitor)
         {
             return new EnumerableActions<T>(items).GetResultOfVisitingAllItemsWith(visitor);
         }
@@ -22,7 +22,7 @@ namespace Shuttle.Abacus.Infrastructure
         }
 
         public static IEnumerable<Output> Map<T, Output>(this IEnumerable<T> itemsToMap,
-                                                                 IMapper<T, Output> mapper)
+            IMapper<T, Output> mapper)
         {
             return new EnumerableActions<T>(itemsToMap).MapAllUsing(mapper);
         }
@@ -48,8 +48,15 @@ namespace Shuttle.Abacus.Infrastructure
 
         public static void ForEach<T>(this IEnumerable<T> collection, Action<T> action)
         {
-            foreach (T item in collection)
+            if (collection == null)
+            {
+                return;
+            }
+
+            foreach (var item in collection)
+            {
                 action(item);
+            }
         }
 
         public static void ForEach<T>(this IEnumerator<T> collection, Action<T> action)
@@ -58,7 +65,8 @@ namespace Shuttle.Abacus.Infrastructure
                 action(collection.Current);
         }
 
-        public static IEnumerable<TOutput> ConvertTo<TInput, TOutput>(this IEnumerable<TInput> collection) where TInput : TOutput 
+        public static IEnumerable<TOutput> ConvertTo<TInput, TOutput>(this IEnumerable<TInput> collection)
+            where TInput : TOutput
         {
             var result = new List<TOutput>();
 

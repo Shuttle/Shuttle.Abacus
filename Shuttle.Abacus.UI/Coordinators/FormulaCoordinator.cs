@@ -65,9 +65,6 @@ namespace Shuttle.Abacus.UI.Coordinators
                 return;
             }
 
-            Guid ownerId;
-            string ownerName;
-
             switch (message.Item.Type)
             {
                 case Resource.ResourceType.Container:
@@ -87,7 +84,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 {
                     message.NavigationItems.Add(
                         NavigationItemFactory.Create(
-                            new NewFormulaFromExistingMessage(message.RelatedItems[ResourceKeys.Formula].Key)));
+                            new NewFormulaFromExistingMessage(message.Item.Key)));
 
                     message.NavigationItems.Add(
                         NavigationItemFactory.Create(
@@ -119,50 +116,51 @@ namespace Shuttle.Abacus.UI.Coordinators
                         {
                             message.Resources.Add(
                                 new Resource(ResourceKeys.Formula, FormulaColumns.Id.MapFrom(row),
-                                        FormulaColumns.Name.MapFrom(row), ImageResources.Formula)
-                                    .AsLeaf());
+                                        FormulaColumns.Name.MapFrom(row), ImageResources.Formula));
                         }
                     }
 
                     break;
                 }
+                case Resource.ResourceType.Item:
+                    {
+                        message.Resources.Add(
+                            new Resource(ResourceKeys.Constraint, Guid.NewGuid(), "Constraints",
+                                         ImageResources.Constraint).AsContainer());
+
+                        break;
+                    }
             }
         }
 
         public void HandleMessage(NewFormulaMessage message)
         {
-            throw new NotImplementedException();
-            //var formulaModel = BuildFormulaModel(message.
-            //    message.OwnerName,
-            //    message.OwnerId);
+            using (_databaseContextFactory.Create())
+            {
+                var formulaModel = new FormulaModel();
+                var constraintModel = ConstraintModel(formulaModel);
 
-            //var constraintModel = BuildConstraintModel(formulaModel);
+                var item = WorkItemManager
+                    .Create("New formula")
+                    .ControlledBy<IFormulaController>()
+                    .ShowIn<IContextToolbarPresenter>()
+                    .AddPresenter<IFormulaPresenter>().WithModel(formulaModel)
+                    .AddPresenter<IConstraintPresenter>().WithModel(constraintModel)
+                    .AddNavigationItem(
+                        NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
+                    .AssignInitiator(message);
 
-            //if (constraintModel == null)
-            //{
-            //    return;
-            //}
-
-            //var item = WorkItemManager
-            //    .Create("New formula")
-            //    .ControlledBy<IFormulaController>()
-            //    .ShowIn<IContextToolbarPresenter>()
-            //    .AddPresenter<IFormulaPresenter>().WithModel(formulaModel)
-            //    .AddPresenter<IConstraintPresenter>().WithModel(constraintModel)
-            //    .AddNavigationItem(
-            //        NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
-            //    .AssignInitiator(message);
-
-            //HostInWorkspace<ITabbedWorkspacePresenter>(item);
+                HostInWorkspace<ITabbedWorkspacePresenter>(item);
+            }
         }
 
         public void HandleMessage(EditFormulaMessage message)
         {
             using (_databaseContextFactory.Create())
             {
-                var formulaModel = BuildFormulaModel().With(_formulaQuery.Get(message.FormulaId));
+                var formulaModel = new FormulaModel().Using(_formulaQuery.Get(message.FormulaId));
 
-                var constraintModel = BuildConstraintModel(formulaModel);
+                var constraintModel = ConstraintModel(formulaModel);
 
                 if (constraintModel == null)
                 {
@@ -214,14 +212,8 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(NewFormulaFromExistingMessage message)
         {
-            var formulaModel = BuildFormulaModel();
-
-            var constraintModel = BuildConstraintModel(formulaModel);
-
-            if (constraintModel == null)
-            {
-                return;
-            }
+            var formulaModel = new FormulaModel();
+            var constraintModel = ConstraintModel(formulaModel);
 
             using (_databaseContextFactory.Create())
             {
@@ -275,7 +267,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             }
         }
 
-        private ConstraintModel BuildConstraintModel(FormulaModel formulaModel)
+        private ConstraintModel ConstraintModel(FormulaModel formulaModel)
         {
             return new ConstraintModel
             {
@@ -283,14 +275,6 @@ namespace Shuttle.Abacus.UI.Coordinators
                 ConstraintRows = _constraintQuery.AllForOwner(formulaModel.Id),
                 ConstraintTypeRows = _constraintTypeQuery.All()
             };
-        }
-
-        private FormulaModel BuildFormulaModel()
-        {
-            using (_databaseContextFactory.Create())
-            {
-                return new FormulaModel();
-            }
         }
 
         public void HandleMessage(ExplorerInitializeMessage message)

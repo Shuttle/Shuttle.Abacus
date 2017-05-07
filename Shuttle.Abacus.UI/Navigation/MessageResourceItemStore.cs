@@ -33,7 +33,7 @@ namespace Shuttle.Abacus.UI.Navigation
                 .RegisterResourceItem<NewMethodFromExistingMessage>(new ResourceItem("NewFromThis", "Copy"))
                 .RegisterResourceItem<EditMethodMessage>()
                 .RegisterResourceItem<DeleteMethodMessage>()
-                .RegisterResourceItem<ManageMethodTestsMessage>(new ResourceItem("Manage", "MethodTest"))
+                .RegisterResourceItem<ManageMethodTestsMessage>(new ResourceItem("Manage", "Test"))
                 .RegisterResourceItem<NewMethodTestMessage>()
                 .RegisterResourceItem<NewMethodTestFromExistingMessage>(new ResourceItem("NewFromSelected", "Copy"))
                 .RegisterResourceItem<EditMethodTestMessage>()

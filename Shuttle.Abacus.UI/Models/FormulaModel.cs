@@ -8,7 +8,12 @@ namespace Shuttle.Abacus.UI.Models
 {
     public class FormulaModel
     {
-        public FormulaModel With(DataRow row)
+        public FormulaModel()
+        {
+            Id = Guid.Empty;
+        }
+
+        public FormulaModel Using(DataRow row)
         {
             Guard.AgainstNull(row, "row");
 

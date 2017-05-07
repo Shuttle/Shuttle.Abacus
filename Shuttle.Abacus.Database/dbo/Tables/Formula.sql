@@ -1,8 +1,8 @@
-﻿CREATE TABLE [dbo].[Formula](
-	[FormulaId] [uniqueidentifier] NOT NULL,
-	[Name] [varchar](300) NOT NULL,
- CONSTRAINT [PK_Formula] PRIMARY KEY NONCLUSTERED 
-(
-	[FormulaId] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+﻿CREATE TABLE [dbo].[Formula] (
+    [FormulaId]          UNIQUEIDENTIFIER NOT NULL,
+    [Name]               VARCHAR (120)    NOT NULL,
+    [MaximumFormulaName] VARCHAR (120)    CONSTRAINT [DF_Formula_MaximumFormulaName] DEFAULT ('') NOT NULL,
+    [MinimumFormulaName] VARCHAR (120)    CONSTRAINT [DF_Formula_MinimumFormulaName] DEFAULT ('') NOT NULL,
+    CONSTRAINT [PK_Formula] PRIMARY KEY NONCLUSTERED ([FormulaId] ASC)
+);
+

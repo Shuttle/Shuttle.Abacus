@@ -5,12 +5,13 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.DataAccess
 {
-    public class ConstraintTypeQuery :IConstraintTypeQuery
+    public class ConstraintTypeQuery : IConstraintTypeQuery
     {
-        private readonly IDatabaseGateway _databaseGateway;
         private readonly IConstraintTypeQueryFactory _constraintTypeQueryFactory;
+        private readonly IDatabaseGateway _databaseGateway;
 
-        public ConstraintTypeQuery(IDatabaseGateway databaseGateway, IConstraintTypeQueryFactory constraintTypeQueryFactory)
+        public ConstraintTypeQuery(IDatabaseGateway databaseGateway,
+            IConstraintTypeQueryFactory constraintTypeQueryFactory)
         {
             Guard.AgainstNull(databaseGateway, "databaseGateway");
             Guard.AgainstNull(constraintTypeQueryFactory, "constraintTypeQueryFactory");
@@ -18,7 +19,7 @@ namespace Shuttle.Abacus.DataAccess
             _databaseGateway = databaseGateway;
             _constraintTypeQueryFactory = constraintTypeQueryFactory;
         }
-        
+
         public IEnumerable<DataRow> All()
         {
             return _databaseGateway.GetRowsUsing(_constraintTypeQueryFactory.All());

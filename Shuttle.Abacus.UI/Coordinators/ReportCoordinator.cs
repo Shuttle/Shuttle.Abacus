@@ -79,7 +79,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             //var model = new ReportModel
             //{
             //    ReportDatasetName = "ReportsDataSet_MethodTestResult",
-            //    ReportDefinitionName = "Abacus.Reporting.Reports.MethodTest.rdlc",
+            //    ReportDefinitionName = "Abacus.Reporting.Reports.Test.rdlc",
             //    ReportData = table
             //};
 

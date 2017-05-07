@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Data;
 using Shuttle.Abacus.DataAccess;
+using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Core.Resources;
 using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.UI.Messages.Explorer;
 using Shuttle.Abacus.UI.Messages.Resources;
 using Shuttle.Abacus.UI.Messages.TestCase;
 using Shuttle.Abacus.UI.Models;
@@ -20,15 +22,15 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Coordinators
 {
-    public class MethodTestCoordinator :
+    public class TestCoordinator :
         Coordinator,
-        IMethodTestManagerCoordinator
+        ITestCoordinator
     {
         private readonly IArgumentQuery _argumentQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IMethodTestQuery _testQuery;
 
-        public MethodTestCoordinator(IDatabaseContextFactory databaseContextFactory, IMethodTestQuery testQuery,
+        public TestCoordinator(IDatabaseContextFactory databaseContextFactory, IMethodTestQuery testQuery,
             IArgumentQuery argumentQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
@@ -66,7 +68,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(ResourceMenuRequestMessage message)
         {
-            if (!message.Item.ResourceKey.Equals(ResourceKeys.MethodTest))
+            if (!message.Item.ResourceKey.Equals(ResourceKeys.Test))
             {
                 return;
             }
@@ -206,7 +208,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(SummaryViewRequestedMessage message)
         {
-            if (SummaryViewManager.CanIgnore(message, ResourceKeys.MethodTest))
+            if (SummaryViewManager.CanIgnore(message, ResourceKeys.Test))
             {
                 return;
             }
@@ -264,6 +266,18 @@ namespace Shuttle.Abacus.UI.Coordinators
             }
 
             presenter.Refresh();
+        }
+
+        public void HandleMessage(ExplorerInitializeMessage message)
+        {
+            if (!Permissions.Test.IsSatisfiedBy(Session.Permissions))
+            {
+                return;
+            }
+
+            message.Items.Add(
+                new Resource(ResourceKeys.Test, Guid.NewGuid(), "Tests", ImageResources.Test)
+                    .AsContainer());
         }
     }
 }

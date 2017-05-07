@@ -732,16 +732,6 @@ namespace Shuttle.Abacus.Localisation {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Image_MethodTest {
-            get {
-                object obj = ResourceManager.GetObject("Image_MethodTest", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap Image_MethodTestDelete {
             get {
                 object obj = ResourceManager.GetObject("Image_MethodTestDelete", resourceCulture);
@@ -895,6 +885,16 @@ namespace Shuttle.Abacus.Localisation {
         public static System.Drawing.Bitmap Image_SystemUserNew {
             get {
                 object obj = ResourceManager.GetObject("Image_SystemUserNew", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Image_Test {
+            get {
+                object obj = ResourceManager.GetObject("Image_Test", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -22,7 +22,7 @@ namespace Shuttle.Abacus.UI.Messages.TestCase
 
         public override IPermission RequiredPermission
         {
-            get { return Permissions.MethodTest; }
+            get { return Permissions.Test; }
         }
 
     }

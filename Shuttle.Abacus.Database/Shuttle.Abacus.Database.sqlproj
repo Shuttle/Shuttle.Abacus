@@ -69,15 +69,15 @@
     <Build Include="dbo\Tables\Formula.sql" />
     <Build Include="dbo\Tables\Constraint.sql" />
     <Build Include="dbo\Tables\SystemUser.sql" />
-    <Build Include="dbo\Tables\DecimalTable.sql" />
-    <Build Include="dbo\Tables\MethodTestArgumentAnswer.sql" />
-    <Build Include="dbo\Tables\ArgumentRestrictedAnswer.sql" />
     <Build Include="dbo\Tables\GraphNodeArgument.sql" />
     <Build Include="dbo\Tables\FormulaOperation.sql" />
-    <Build Include="dbo\Tables\DecimalValue.sql" />
     <Build Include="dbo\Tables\SystemUserPermission.sql" />
-    <Build Include="dbo\Tables\MethodTest.sql" />
     <Build Include="dbo\Tables\SubscriberMessageType.sql" />
+    <Build Include="dbo\Tables\TestArgumentValue.sql" />
+    <Build Include="dbo\Tables\Test.sql" />
+    <Build Include="dbo\Tables\MatrixElement.sql" />
+    <Build Include="dbo\Tables\Matrix.sql" />
+    <Build Include="dbo\Tables\ArgumentValue.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Shuttle.Abacus.Database.refactorlog" />

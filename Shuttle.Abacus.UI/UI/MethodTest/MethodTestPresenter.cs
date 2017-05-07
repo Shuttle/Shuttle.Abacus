@@ -37,7 +37,7 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
 
             Text = "Test Details";
 
-            Image = Resources.Image_MethodTest;
+            Image = Resources.Image_Test;
         }
 
         public void ArgumentChanged()

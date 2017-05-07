@@ -13,7 +13,7 @@ select
     ExpectedResult,
     Description
 from
-    MethodTest
+    Test
 ";
 
         public IQuery All()
@@ -57,7 +57,7 @@ order by
 select
     Description
 from
-    MethodTest mt
+    Test mt
 inner join
     MethodTestArgumentAnswer mtaa on
         (mtaa.MethodTestId = mt.MethodTestId)
@@ -79,14 +79,14 @@ where
         public IQuery Remove(Guid id)
         {
             return
-                RawQuery.Create("delete from MethodTest where MethodTestId = @MethodTestId")
+                RawQuery.Create("delete from Test where MethodTestId = @MethodTestId")
                     .AddParameterValue(MethodTestColumns.Id, id);
         }
 
         public IQuery Add(MethodTest item)
         {
             return RawQuery.Create(@"
-insert into MethodTest
+insert into Test
 (
     MethodTestId,
     MethodId,
@@ -143,7 +143,7 @@ values
         //                AnswerType,
         //                Answer
         //            from
-        //                MethodTest mt
+        //                Test mt
         //                    inner join
         //                MethodTestArgumentAnswer mtaa
         //                    on (mtaa.MethodTestId = mt.MethodTestId)

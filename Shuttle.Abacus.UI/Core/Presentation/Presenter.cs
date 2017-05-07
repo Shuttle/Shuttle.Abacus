@@ -258,7 +258,7 @@ namespace Shuttle.Abacus.UI.Core.Presentation
         }
     }
 
-    public abstract class Presenter<TView, TModel> : Presenter<TView>
+    public abstract class Presenter<TView, TModel> : Presenter<TView>, IPresenter<TModel>
         where TView : class, IView where TModel : class
     {
         protected Presenter(TView view) : base(view)
@@ -267,11 +267,12 @@ namespace Shuttle.Abacus.UI.Core.Presentation
 
         public TModel Model { get; private set; }
 
-        public void AssignModel<T>(T dto)
+        public void AssignModel(TModel model)
         {
-            Model = dto as TModel;
-        }
+            Guard.AgainstNull(model, "model");
 
+            Model = model;
+        }
     }
 
 
