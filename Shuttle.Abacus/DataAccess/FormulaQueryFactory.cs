@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Shuttle.Abacus.Domain;
 using Shuttle.Core.Data;
 
@@ -11,23 +10,13 @@ namespace Shuttle.Abacus.DataAccess
         private readonly string SelectClause = @"
 select 
     FormulaId,
-    OwnerName,
-    OwnerId,
-    SequenceNumber,
-    Description
+    Name,
+    MaximumFormulaName,
+    MinimumFormulaName
 from
     Formula
 ";
 
-
-        public IQuery AllForOwner(Guid ownerId)
-        {
-            return RawQuery.Create(string.Concat(SelectClause, @"
-where
-    OwnerId = @OwnerId
-"))
-                .AddParameterValue(FormulaColumns.OwnerId, ownerId);
-        }
 
         public IQuery GetOperations(Guid id)
         {
@@ -53,30 +42,21 @@ where
                 .AddParameterValue(FormulaColumns.Id, id);
         }
 
-        public IQuery Add(string ownerName, Guid ownerId, Formula formula)
+        public IQuery Add(Formula formula)
         {
             return RawQuery.Create(@"
 insert into Formula
 (
     FormulaId,
-    OwnerName,
-    OwnerId,
-    SequenceNumber,
-    Description
+    Name
 )
 values
 (
     @FormulaId,
-    @OwnerName,
-    @OwnerId,
-    @SequenceNumber,
-    @Description
+    @Name
 )")
                 .AddParameterValue(FormulaColumns.Id, formula.Id)
-                .AddParameterValue(FormulaColumns.OwnerName, ownerName)
-                .AddParameterValue(FormulaColumns.OwnerId, ownerId)
-                .AddParameterValue(FormulaColumns.Description, formula.Description())
-                .AddParameterValue(FormulaColumns.SequenceNumber, formula.SequenceNumber);
+                .AddParameterValue(FormulaColumns.Name, formula.Name);
         }
 
         public IQuery Remove(Guid id)
@@ -129,26 +109,17 @@ values
 update 
     Formula
 set
-    Description = @Description
+    Name = @Name
 where
     FormulaId = @FormulaId
 ")
-                .AddParameterValue(FormulaColumns.Description, item.Description())
+                .AddParameterValue(FormulaColumns.Name, item.Name)
                 .AddParameterValue(FormulaColumns.Id, item.Id);
         }
 
-        public IQuery SetSequenceNumber(Formula formula, int sequence)
+        public IQuery All()
         {
-            return RawQuery.Create(@"
-update 
-    Formula
-set
-    SequenceNumber = @SequenceNumber
-where
-    FormulaId = @FormulaId
-")
-                .AddParameterValue(FormulaColumns.SequenceNumber, sequence)
-                .AddParameterValue(FormulaColumns.Id, formula.Id);
+            return RawQuery.Create(SelectClause);
         }
     }
 }

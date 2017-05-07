@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
-using System.Linq;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Core.State;
@@ -13,35 +12,34 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
 {
     public class WorkItem : IWorkItemBuilderPresenter
     {
-        private readonly IList<INavigationItem> navigationItems;
-        private readonly IList<IPresenter> presenters;
-        private readonly State<IWorkItem> state;
-        private readonly IWorkItemManager workItemManager;
+        private readonly IList<INavigationItem> _navigationItems;
+        private readonly IList<IPresenter> _presenters;
+        private readonly IWorkItemManager _workItemManager;
 
-        private string text;
-        private string textBeforeWaiting;
+        private INavigationItem _navigationItem;
+        private IPresenter _presenter;
 
-        private INavigationItem buildNavigationItem;
-        private IPresenter buildPresenter;
+        private string _text;
+        private string _textBeforeWaiting;
 
         public WorkItem(string text, IWorkItemManager workItemManager, IWorkItemController workItemController,
-                        IWorkItemPresenter workItemPresenter)
+            IWorkItemPresenter workItemPresenter)
             : this(Guid.NewGuid(), text, workItemManager, workItemController, workItemPresenter)
         {
         }
 
         public WorkItem(Guid workItemId, string text, IWorkItemManager workItemManager,
-                        IWorkItemController workItemController,
-                        IWorkItemPresenter workItemPresenter)
+            IWorkItemController workItemController,
+            IWorkItemPresenter workItemPresenter)
         {
-            this.workItemManager = workItemManager;
+            _workItemManager = workItemManager;
 
             Id = workItemId;
 
-            presenters = new List<IPresenter>();
-            navigationItems = new List<INavigationItem>();
+            _presenters = new List<IPresenter>();
+            _navigationItems = new List<INavigationItem>();
 
-            this.text = text;
+            _text = text;
 
             DefaultMessage = null;
             CancelMessage = null;
@@ -52,13 +50,13 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
             WorkItemController = workItemController;
             WorkItemController.AssignWorkItem(this);
 
-            state = new State<IWorkItem>(this);
+            State = new State<IWorkItem>(this);
 
             Image = null;
         }
 
-        public IWorkItemController WorkItemController { get; private set; }
-        public IWorkItemPresenter WorkItemPresenter { get; private set; }
+        public IWorkItemController WorkItemController { get; }
+        public IWorkItemPresenter WorkItemPresenter { get; }
 
         public Message ActiveDefaultMessage { get; private set; }
         public Message DefaultMessage { get; private set; }
@@ -77,8 +75,8 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
             get
             {
                 return Initiator != null
-                           ? Initiator.ToolTipText
-                           : string.Empty;
+                    ? Initiator.ToolTipText
+                    : string.Empty;
             }
         }
 
@@ -89,36 +87,33 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
             get { return ActiveCancelMessage != null; }
         }
 
-        public State<IWorkItem> State
-        {
-            get { return state; }
-        }
+        public State<IWorkItem> State { get; }
 
         public Image Image { get; set; }
 
         public IEnumerable<INavigationItem> NavigationItems
         {
-            get { return navigationItems; }
+            get { return _navigationItems; }
         }
 
         public string Text
         {
-            get { return text; }
+            get { return _text; }
             set
             {
-                text = value + (IsWaiting
-                                    ? " (waiting)"
-                                    : string.Empty);
+                _text = value + (IsWaiting
+                            ? " (waiting)"
+                            : string.Empty);
 
-                workItemManager.TextChanged(this);
+                _workItemManager.TextChanged(this);
             }
         }
 
-        public Guid Id { get; private set; }
+        public Guid Id { get; }
 
         public IEnumerable<IPresenter> Presenters
         {
-            get { return new ReadOnlyCollection<IPresenter>(presenters); }
+            get { return new ReadOnlyCollection<IPresenter>(_presenters); }
         }
 
         public IWorkItem AssignWorkItemImage(Image image)
@@ -130,21 +125,21 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
 
         public IWorkItemBuilderPresenter AddPresenter<T>() where T : IPresenter
         {
-            return AddPresenter(workItemManager.CreatePresenter<T>());
+            return AddPresenter(_workItemManager.CreatePresenter<T>());
         }
 
         public IWorkItemBuilderPresenter AddPresenter(IPresenter presenter)
         {
-            workItemManager.Invoke(() =>
-                {
-                    presenter.WorkItem = this;
+            _workItemManager.Invoke(() =>
+            {
+                presenter.WorkItem = this;
 
-                    presenters.Add(presenter);
+                _presenters.Add(presenter);
 
-                    WorkItemPresenter.AddPresenter(presenter);
+                WorkItemPresenter.AddPresenter(presenter);
 
-                    buildPresenter = presenter;
-                });
+                _presenter = presenter;
+            });
 
             return this;
         }
@@ -153,18 +148,18 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
         {
             Guard.AgainstNull(navigationItem, "navigationItem");
 
-            navigationItems.Add(navigationItem);
+            _navigationItems.Add(navigationItem);
 
-            buildNavigationItem = navigationItem;
+            _navigationItem = navigationItem;
 
             return this;
         }
 
         public T GetPresenter<T>() where T : IPresenter
         {
-            var type = typeof (T);
+            var type = typeof(T);
 
-            foreach (var presenter in presenters)
+            foreach (var presenter in _presenters)
             {
                 if (type.IsAssignableFrom(presenter.GetType()))
                 {
@@ -177,9 +172,9 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
 
         public T GetView<T>() where T : IView
         {
-            var type = typeof (T);
+            var type = typeof(T);
 
-            foreach (var presenter in presenters)
+            foreach (var presenter in _presenters)
             {
                 if (type.IsAssignableFrom(presenter.IView.GetType()))
                 {
@@ -248,71 +243,81 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
 
         public void Waiting()
         {
-            textBeforeWaiting = text;
+            _textBeforeWaiting = _text;
 
             IsWaiting = true;
 
-            text += " (waiting)";
+            _text += " (waiting)";
 
-            workItemManager.TextChanged(this);
-            workItemManager.Waiting(this);
+            _workItemManager.TextChanged(this);
+            _workItemManager.Waiting(this);
         }
 
         public void Ready()
         {
             IsWaiting = false;
 
-            Text = textBeforeWaiting;
+            Text = _textBeforeWaiting;
 
-            workItemManager.Ready(this);
+            _workItemManager.Ready(this);
         }
 
         public IEnumerable<object> Subscribers
         {
             get
             {
-                return new List<object>(presenters)
-                       {
-                           WorkItemController
-                       };
+                return new List<object>(_presenters)
+                {
+                    WorkItemController
+                };
             }
         }
 
         public IWorkItem AsDefault()
         {
-            ActiveDefaultMessage = buildNavigationItem.Message;
+            ActiveDefaultMessage = _navigationItem.Message;
 
-            DefaultMessage = buildNavigationItem.Message;
+            DefaultMessage = _navigationItem.Message;
 
             return this;
         }
 
         public IWorkItem AsCancel()
         {
-            CancelMessage = buildNavigationItem.Message;
+            CancelMessage = _navigationItem.Message;
 
-            ActiveCancelMessage = buildNavigationItem.Message;
+            ActiveCancelMessage = _navigationItem.Message;
 
             return this;
         }
 
         public IWorkItemBuilderPresenter WithModel<T>(T presenterModel) where T : class
         {
-            buildPresenter.AssignModel(presenterModel);
+            var presenter = _presenter as IPresenter<T>;
+
+            if (presenter == null)
+            {
+                throw new InvalidOperationException(
+                    string.Format(
+                        "Cannot assign model of type '{0}' to presenter of type '{1}' as the presenter does not accept a model.",
+                        typeof(T).FullName, _presenter.GetType().FullName));
+            }
+
+            presenter.AssignModel(presenterModel);
 
             return this;
         }
 
         public IWorkItemBuilderPresenter AssignText(string presenterText)
         {
-            buildPresenter.Text = presenterText;
+            _presenter.Text = presenterText;
 
             return this;
         }
 
         public IWorkItemBuilderPresenter AssignImage(Image presenterImage)
         {
-            buildPresenter.Image = presenterImage;
+            _presenter.Image = presenterImage;
 
             return this;
         }
@@ -325,7 +330,7 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
         public override bool Equals(object obj)
         {
             return !ReferenceEquals(null, obj) &&
-                   (ReferenceEquals(this, obj) || obj.GetType() == typeof (WorkItem) && Equals((WorkItem) obj));
+                   (ReferenceEquals(this, obj) || obj.GetType() == typeof(WorkItem) && Equals((WorkItem) obj));
         }
 
         public override int GetHashCode()

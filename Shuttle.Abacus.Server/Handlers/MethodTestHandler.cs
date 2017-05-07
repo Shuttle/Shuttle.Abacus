@@ -116,7 +116,7 @@ namespace Shuttle.Abacus.Server.Handlers
                             MethodTestDescription = test.Description,
                             ExpectedResult = test.ExpectedResult,
                             //TODO
-                            //MethodContext = methodContext.DTO()
+                            //FormulaContext = methodContext.DTO()
                         }
                     );
                 }
@@ -154,52 +154,52 @@ namespace Shuttle.Abacus.Server.Handlers
                         MethodTestDescription = test.Description,
                         ExpectedResult = test.ExpectedResult,
                         //TODO
-                        //MethodContext = methodContext.DTO()
+                        //FormulaContext = methodContext.DTO()
                     }, c => c.Reply());
                 }
             }
         }
 
-        private MethodContext GetContext(MethodTest test)
+        private FormulaContext GetContext(MethodTest test)
         {
             throw new InvalidOperationException();
-            using (_databaseContextFactory.Create())
-            {
-                var method = _methodTestRepository.Get<Method>(test.MethodId);
+            //using (_databaseContextFactory.Create())
+            //{
+            //    var method = _methodTestRepository.Get<Formula>(test.MethodId);
 
-                var arguments = _argumentRepository.All();
+            //    var arguments = _argumentRepository.All();
 
-                var context = new MethodContext(method.MethodName, _calculationLoggerFactory.Create());
+            //    var context = new FormulaContext((string) method.MethodName);
 
-                foreach (var answer in test.Answers)
-                {
-                    var argument = arguments.Find(answer.ArgumentId);
+            //    foreach (var answer in test.Answers)
+            //    {
+            //        var argument = arguments.Find(answer.ArgumentId);
 
-                    //TODO
-                    //if (argument == null)
-                    //{
-                    //    context.Log(
-                    //        "Could not find argument '{0}' in the master list.  The answer will be ignored.",
-                    //        answer.ArgumentName);
-                    //}
-                    //else
-                    //{
-                    //    context.AddArgumentAnswer(
-                    //        _argumentAnswerFactoryProvider.Get(answer.AnswerType).Create(
-                    //            argument.Name,
-                    //            answer.Answer));
-                    //}
-                }
+            //        //TODO
+            //        //if (argument == null)
+            //        //{
+            //        //    context.Log(
+            //        //        "Could not find argument '{0}' in the master list.  The answer will be ignored.",
+            //        //        answer.ArgumentName);
+            //        //}
+            //        //else
+            //        //{
+            //        //    context.AddArgumentAnswer(
+            //        //        _argumentAnswerFactoryProvider.Get(answer.AnswerType).Create(
+            //        //            argument.Name,
+            //        //            answer.Answer));
+            //        //}
+            //    }
 
-                if (context.LoggerEnabled)
-                {
-                    context.Log();
-                }
+            //    if (context.LoggerEnabled)
+            //    {
+            //        context.Log();
+            //    }
 
-                method.Calculate(context);
+            //    method.Calculate(context);
 
-                return context;
-            }
+            //    return context;
+            //}
         }
     }
 }

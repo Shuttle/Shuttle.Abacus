@@ -12,13 +12,12 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Core.Presentation
 {
-    public abstract class Presenter<TView, TModel> :
+    public abstract class Presenter<TView> :
         IPresenter,
         IHaveDefaultMessage,
         IHaveCancelMessage,
         INavigationItemConfiguration<IPresenter>
         where TView : class, IView
-        where TModel : class
     {
         private readonly IList<INavigationItem> _navigationItems;
         private INavigationItem _buildNavigationItem;
@@ -59,8 +58,6 @@ namespace Shuttle.Abacus.UI.Core.Presentation
                 return result;
             }
         }
-
-        public TModel Model { get; private set; }
 
         public IViewValidatorFactory ViewValidatorFactory
         {
@@ -209,11 +206,6 @@ namespace Shuttle.Abacus.UI.Core.Presentation
             MessageBus.Publish(new StatusMessage(message));
         }
 
-        public void AssignModel<T>(T dto)
-        {
-            Model = dto as TModel;
-        }
-
         public IPresenter AddNavigationItem(INavigationItem navigationItem)
         {
             Guard.AgainstNull(navigationItem, "navigationItem");
@@ -265,6 +257,23 @@ namespace Shuttle.Abacus.UI.Core.Presentation
             WorkItem.WorkItemPresenter.ResetChanges();
         }
     }
+
+    public abstract class Presenter<TView, TModel> : Presenter<TView>
+        where TView : class, IView where TModel : class
+    {
+        protected Presenter(TView view) : base(view)
+        {
+        }
+
+        public TModel Model { get; private set; }
+
+        public void AssignModel<T>(T dto)
+        {
+            Model = dto as TModel;
+        }
+
+    }
+
 
     public delegate void PresenterImageChanged(object sender, PresenterImageChangedArgs args);
 

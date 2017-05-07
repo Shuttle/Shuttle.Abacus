@@ -1,10 +1,8 @@
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Messages.Calculation;
 using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Abacus.UI.Messages.DecimalTable;
 using Shuttle.Abacus.UI.Messages.FactorAnswer;
 using Shuttle.Abacus.UI.Messages.Formula;
-using Shuttle.Abacus.UI.Messages.Limit;
 using Shuttle.Abacus.UI.Messages.Report;
 using Shuttle.Abacus.UI.Messages.Section;
 using Shuttle.Abacus.UI.Messages.SystemUser;
@@ -26,11 +24,6 @@ namespace Shuttle.Abacus.UI.Navigation
                 .RegisterResourceItem<NewSystemUserMessage>()
                 .RegisterResourceItem<EditLoginNameMessage>(new ResourceItem("EditLoginName", "SystemUserEdit"))
                 .RegisterResourceItem<EditPermissionsMessage>(new ResourceItem("EditPermissions", "PermissionsEdit"))
-                .RegisterResourceItem<NewCalculationMessage>()
-                .RegisterResourceItem<EditCalculationMessage>()
-                .RegisterResourceItem<DeleteCalculationMessage>()
-                .RegisterResourceItem<GrabCalculationsMessage>(new ResourceItem("GrabCalculations", "Grab"))
-                .RegisterResourceItem<ChangeCalculationOrderMessage>(new ResourceItem("ChangeOrder"))
                 .RegisterResourceItem<MoveUpMessage>(new ResourceItem("MoveUp", "UpArrow"))
                 .RegisterResourceItem<MoveDownMessage>(new ResourceItem("MoveDown", "DownArrow"))
                 .RegisterResourceItem<NewArgumentMessage>()
@@ -50,14 +43,10 @@ namespace Shuttle.Abacus.UI.Navigation
                 .RegisterResourceItem<PrintMethodTestMessage>(new ResourceItem("Print", "Report"))
                 .RegisterResourceItem<NewFormulaMessage>()
                 .RegisterResourceItem<NewFormulaFromExistingMessage>(new ResourceItem("NewFromThis", "Copy"))
-                .RegisterResourceItem<ChangeFormulaOrderMessage>(new ResourceItem("ChangeOrder"))
                 .RegisterResourceItem<EditFormulaMessage>()
                 .RegisterResourceItem<DeleteFormulaMessage>()
                 .RegisterResourceItem<PasteFormulaMessage>(new ResourceItem("Paste"))
-                .RegisterResourceItem<ManageCalculationConstraintsMessage>(new ResourceItem("Manage", "Constraint"))
-                .RegisterResourceItem<NewLimitMessage>()
-                .RegisterResourceItem<EditLimitMessage>()
-                .RegisterResourceItem<DeleteLimitMessage>()
+                .RegisterResourceItem<ManageFormulaConstraintsMessage>(new ResourceItem("Manage", "Constraint"))
                 .RegisterResourceItem<NewDecimalTableMessage>()
                 .RegisterResourceItem<EditDecimalTableMessage>()
                 .RegisterResourceItem<DecimalTableReportMessage>(new ResourceItem("ReportDecimalTable", "Report"))

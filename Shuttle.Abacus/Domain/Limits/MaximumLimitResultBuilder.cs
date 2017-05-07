@@ -2,40 +2,41 @@ using Shuttle.Abacus.Localisation;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class MaximumLimitResultBuilder : LimitResultBuilder
+    public class MaximumLimitResultBuilder 
     {
-        private readonly Calculation calculation;
+        private readonly Formula _formula;
         private readonly ICalculationResult value;
 
-        public MaximumLimitResultBuilder(Calculation calculation, ICalculationResult value)
+        public MaximumLimitResultBuilder(Formula formula, ICalculationResult value)
         {
-            this.calculation = calculation;
+            _formula = formula;
             this.value = value;
         }
 
-        public override void Using(IMethodContext methodContext)
+        public void Using(IMethodContext methodContext)
         {
-            var result = calculation.Execute(methodContext, calculation.CalculationContext(methodContext));
+            //TODO
+            //var result = _formula.Execute(methodContext, _formula.CalculationContext(methodContext));
 
-            if (!methodContext.OK)
-            {
-                return;
-            }
+            //if (!methodContext.OK)
+            //{
+            //    return;
+            //}
 
-            var applyLimit = value.Value > result.Value ;
+            //var applyLimit = value.Value > result.Value;
 
-            if (methodContext.LoggerEnabled)
-            {
-                methodContext.Log("Maximum limit: {0} ({1})", result.Value.ToString(Resources.FormatDecimal),
-                            applyLimit
-                                ? "limit applied"
-                                : "below limit - ok");
-            }
+            //if (methodContext.LoggerEnabled)
+            //{
+            //    methodContext.Log("Maximum limit: {0} ({1})", result.Value.ToString(Resources.FormatDecimal),
+            //        applyLimit
+            //            ? "limit applied"
+            //            : "below limit - ok");
+            //}
 
-            if (applyLimit)
-            {
-                value.Limit(result.Value);
-            }
+            //if (applyLimit)
+            //{
+            //    value.Limit(result.Value);
+            //}
         }
     }
 }

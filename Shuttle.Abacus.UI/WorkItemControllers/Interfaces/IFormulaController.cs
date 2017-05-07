@@ -11,8 +11,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers.Interfaces
         IMessageHandler<MoveDownMessage>,
         IMessageHandler<NewFormulaMessage>,
         IMessageHandler<EditFormulaMessage>,
-        IMessageHandler<DeleteFormulaMessage>,
-        IMessageHandler<ChangeFormulaOrderMessage>
+        IMessageHandler<DeleteFormulaMessage>
     {
         
     }

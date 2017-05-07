@@ -6,7 +6,7 @@ namespace Shuttle.Abacus.Domain
 {
     public class Argument
     {
-        public static Argument MethodName = new Argument(Guid.Empty) { Name = "Method Name", AnswerType = "Text" };
+        public static Argument MethodName = new Argument(Guid.Empty) { Name = "Formula Name", AnswerType = "Text" };
 
         private readonly List<string> _answers = new List<string>();
 

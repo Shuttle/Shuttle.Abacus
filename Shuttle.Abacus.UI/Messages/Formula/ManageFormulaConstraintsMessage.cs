@@ -4,14 +4,16 @@ using Shuttle.Abacus.UI.Core.Messaging;
 
 namespace Shuttle.Abacus.UI.Messages.Formula
 {
-    public class EditFormulaMessage : Message
+    public class ManageFormulaConstraintsMessage : Message
     {
-        public EditFormulaMessage(Guid formulaId)
+        public string FormulaName { get; private set; }
+        public Guid FormulaId { get; private set; }
+
+        public ManageFormulaConstraintsMessage(string formulaName, Guid formulaId)
         {
+            FormulaName = formulaName;
             FormulaId = formulaId;
         }
-
-        public Guid FormulaId { get; private set; }
 
         public override IPermission RequiredPermission
         {

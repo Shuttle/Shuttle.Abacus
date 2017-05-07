@@ -1,27 +1,25 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using Shuttle.Abacus.DTO;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class Formula : ISpecification<IMethodContext>,
-        IConstraintOwner
+    public class Formula : IConstraintOwner
     {
         private readonly List<OwnedConstraint> _constraints = new List<OwnedConstraint>();
         private readonly List<IConstraint> constraints = new List<IConstraint>();
         private readonly List<FormulaOperation> _operations = new List<FormulaOperation>();
 
-        public Formula()
-            : this(Guid.NewGuid())
+        public Formula(string name)
+            : this(Guid.NewGuid(), name)
         {
         }
 
-        public Formula(Guid id)
+        public Formula(Guid id, string name)
         {
             Id = id;
+            Name = name;
         }
 
         public IEnumerable<FormulaOperation> Operations
@@ -30,6 +28,23 @@ namespace Shuttle.Abacus.Domain
         }
 
         public Guid Id { get; }
+        public string Name { get; }
+        public string MaximumFormulaName { get; private set; }
+        public string MinimumFormulaName { get; private set; }
+
+        public Formula WithMaximum(string formulaName)
+        {
+            MaximumFormulaName = formulaName;
+
+            return this;
+        }
+
+        public Formula WithMinimum(string formulaName)
+        {
+            MinimumFormulaName = formulaName;
+
+            return this;
+        }
 
         public IEnumerable<OwnedConstraint> Constraints
         {
@@ -61,15 +76,13 @@ namespace Shuttle.Abacus.Domain
             get { return _operations.Count > 0; }
         }
 
-        public int SequenceNumber { get; set; }
-
-        public bool IsSatisfiedBy(IMethodContext collectionMethodContext)
-        {
-            return
-                OperationsSatisfied(collectionMethodContext)
-                &&
-                ConstraintSatisfied(collectionMethodContext);
-        }
+        //public bool IsSatisfiedBy(IMethodContext collectionMethodContext)
+        //{
+        //    return
+        //        OperationsSatisfied(collectionMethodContext)
+        //        &&
+        //        ConstraintSatisfied(collectionMethodContext);
+        //}
 
         //public IEnumerable<Guid> RequiredCalculationIds()
         //{
@@ -93,52 +106,33 @@ namespace Shuttle.Abacus.Domain
         //    return result;
         //}
 
-        private bool ConstraintSatisfied(IMethodContext collectionContext)
-        {
-            foreach (var constraint in constraints)
-            {
-                if (!constraint.IsSatisfiedBy(collectionContext))
-                {
-                    return false;
-                }
-            }
+        //private bool ConstraintSatisfied(IMethodContext collectionContext)
+        //{
+        //    foreach (var constraint in constraints)
+        //    {
+        //        if (!constraint.IsSatisfiedBy(collectionContext))
+        //        {
+        //            return false;
+        //        }
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
-        private bool OperationsSatisfied(IMethodContext collectionContext)
-        {
-            var result = true;
+        //private bool OperationsSatisfied(IMethodContext collectionContext)
+        //{
+        //    var result = true;
 
-            //foreach (var operation in _operations)
-            //{
-            //    if (!operation.IsSatisfiedBy(collectionContext))
-            //    {
-            //        result = false;
-            //    }
-            //}
+        //    //foreach (var operation in _operations)
+        //    //{
+        //    //    if (!operation.IsSatisfiedBy(collectionContext))
+        //    //    {
+        //    //        result = false;
+        //    //    }
+        //    //}
 
-            return result;
-        }
-
-        public string Description()
-        {
-            if (constraints.Count == 0)
-            {
-                return "(unconstrained)";
-            }
-
-            var result = new StringBuilder();
-
-            foreach (var constraint in constraints)
-            {
-                result.AppendFormat("{0}{1}", result.Length > 0
-                    ? " and "
-                    : string.Empty, constraint.Description());
-            }
-
-            return result.ToString();
-        }
+        //    return result;
+        //}
 
         public Formula AddOperation(FormulaOperation operation)
         {
@@ -147,65 +141,66 @@ namespace Shuttle.Abacus.Domain
             return this;
         }
 
-        public decimal Execute(IMethodContext methodContext, IFormulaCalculationContext calculationContext)
-        {
-            Guard.AgainstNull(calculationContext, "context");
+        //public decimal Execute(IMethodContext methodContext, IFormulaCalculationContext calculationContext)
+        //{
+        //    Guard.AgainstNull(calculationContext, "context");
 
-            throw new NotImplementedException();
+        //    throw new NotImplementedException();
 
-            //if (methodContext.LoggerEnabled)
-            //{
-            //    methodContext.Log("Executing formula:");
+        //    //if (methodContext.LoggerEnabled)
+        //    //{
+        //    //    methodContext.Log("Executing formula:");
 
-            //    if (constraints.Count > 0)
-            //    {
-            //        constraints.ForEach(
-            //            constraint => methodContext.Log("\t{0}", constraint.Description()));
-            //    }
-            //    else
-            //    {
-            //        methodContext.Log("\t(no contraints)");
-            //    }
+        //    //    if (constraints.Count > 0)
+        //    //    {
+        //    //        constraints.ForEach(
+        //    //            constraint => methodContext.Log("\t{0}", constraint.Description()));
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        methodContext.Log("\t(no contraints)");
+        //    //    }
 
-            //    methodContext.Log();
-            //}
+        //    //    methodContext.Log();
+        //    //}
 
-            //calculationContext.ZeroFormulaTotal();
+        //    //calculationContext.ZeroFormulaTotal();
 
-            //foreach (var operation in _operations)
-            //{
-            //    var operand = operation.Operand(methodContext, calculationContext);
+        //    //foreach (var operation in _operations)
+        //    //{
+        //    //    var operand = operation.Operand(methodContext, calculationContext);
 
-            //    if (methodContext.LoggerEnabled)
-            //    {
-            //        methodContext.Log("{0}\t{1}", operation.Symbol,
-            //            operation.ValueSource.Description(operand, methodContext));
-            //    }
+        //    //    if (methodContext.LoggerEnabled)
+        //    //    {
+        //    //        methodContext.Log("{0}\t{1}", operation.Symbol,
+        //    //            operation.ValueSource.Description(operand, methodContext));
+        //    //    }
 
-            //    calculationContext.SetFormulaTotal(operation.Execute(calculationContext.FormulaTotal, operand));
+        //    //    calculationContext.SetFormulaTotal(operation.Execute(calculationContext.FormulaTotal, operand));
 
-            //    if (!methodContext.OK)
-            //    {
-            //        return 0;
-            //    }
-            //}
+        //    //    if (!methodContext.OK)
+        //    //    {
+        //    //        return 0;
+        //    //    }
+        //    //}
 
-            //if (methodContext.LoggerEnabled)
-            //{
-            //    methodContext.Log();
-            //}
+        //    //if (methodContext.LoggerEnabled)
+        //    //{
+        //    //    methodContext.Log();
+        //    //}
 
-            //return calculationContext.FormulaTotal;
-        }
+        //    //return calculationContext.FormulaTotal;
+        //}
 
         public Formula Copy()
         {
-            var result = new Formula();
+            throw new NotImplementedException();
+            //var result = new Formula();
 
-            _constraints.ForEach(constraint => result.AddConstraint(constraint));
-            _operations.ForEach(operation => result.AddOperation(operation));
+            //_constraints.ForEach(constraint => result.AddConstraint(constraint));
+            //_operations.ForEach(operation => result.AddOperation(operation));
 
-            return result;
+            //return result;
         }
     }
 }

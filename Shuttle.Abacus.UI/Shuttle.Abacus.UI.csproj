@@ -88,24 +88,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Coordinators\ArgumentCoordinator.cs" />
-    <Compile Include="Coordinators\CalculationCoordinator.cs" />
     <Compile Include="Coordinators\ContraintCoordinator.cs" />
     <Compile Include="Coordinators\DecimalTableCoordinator.cs" />
     <Compile Include="Coordinators\DefaultCoordinator.cs" />
     <Compile Include="Coordinators\FormulaCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\IArgumentCoordinator.cs" />
-    <Compile Include="Coordinators\Interfaces\ICalculationCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\IConstraintCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\IDecimalTableCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\IDefaultCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\IFormulaCoordinator.cs" />
-    <Compile Include="Coordinators\Interfaces\ILimitCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\IMethodCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\IMethodTestManagerCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\IReportCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\ISystemUserCoordinator.cs" />
-    <Compile Include="Coordinators\LimitCoordinator.cs" />
-    <Compile Include="Coordinators\MethodCoordinator.cs" />
     <Compile Include="Coordinators\MethodTestCoordinator.cs" />
     <Compile Include="Coordinators\ReportCoordinator.cs" />
     <Compile Include="Coordinators\SystemUserCoordinator.cs" />
@@ -202,12 +197,6 @@
     <Compile Include="Handlers\SystemUserHandler.cs" />
     <Compile Include="Handlers\UIHandler.cs" />
     <Compile Include="IUIService.cs" />
-    <Compile Include="Messages\Calculation\ChangeCalculationOrderMessage.cs" />
-    <Compile Include="Messages\Calculation\DeleteCalculationMessage.cs" />
-    <Compile Include="Messages\Calculation\EditCalculationMessage.cs" />
-    <Compile Include="Messages\Calculation\GrabCalculationsMessage.cs" />
-    <Compile Include="Messages\Calculation\ManageCalculationConstraintsMessage.cs" />
-    <Compile Include="Messages\Calculation\NewCalculationMessage.cs" />
     <Compile Include="Messages\Core\ActivateShellMessage.cs" />
     <Compile Include="Messages\Core\ApplicationExitMessage.cs" />
     <Compile Include="Messages\Core\ConfigureShellMessage.cs" />
@@ -239,15 +228,12 @@
     <Compile Include="Messages\Argument\DeleteArgumentMessage.cs" />
     <Compile Include="Messages\Argument\EditArgumentMessage.cs" />
     <Compile Include="Messages\Argument\NewArgumentMessage.cs" />
-    <Compile Include="Messages\Formula\ChangeFormulaOrderMessage.cs" />
     <Compile Include="Messages\Formula\DeleteFormulaMessage.cs" />
     <Compile Include="Messages\Formula\EditFormulaMessage.cs" />
+    <Compile Include="Messages\Formula\ManageFormulaConstraintsMessage.cs" />
     <Compile Include="Messages\Formula\NewFormulaFromExistingMessage.cs" />
     <Compile Include="Messages\Formula\NewFormulaMessage.cs" />
     <Compile Include="Messages\Formula\PasteFormulaMessage.cs" />
-    <Compile Include="Messages\Limit\DeleteLimitMessage.cs" />
-    <Compile Include="Messages\Limit\EditLimitMessage.cs" />
-    <Compile Include="Messages\Limit\NewLimitMessage.cs" />
     <Compile Include="Messages\Report\DecimalTableReportMessage.cs" />
     <Compile Include="Messages\Resources\PopulateResourceMessage.cs" />
     <Compile Include="Messages\Resources\ResourceMenuRequestMessage.cs" />
@@ -287,7 +273,6 @@
     <Compile Include="Models\ArgumentAnswerModel.cs" />
     <Compile Include="Models\ArgumentDisplayModel.cs" />
     <Compile Include="Models\ArgumentModel.cs" />
-    <Compile Include="Models\CalculationModel.cs" />
     <Compile Include="Models\ConstraintModel.cs" />
     <Compile Include="Models\ConstraintTypeModel.cs" />
     <Compile Include="Models\DecimalTableModel.cs" />
@@ -295,12 +280,13 @@
     <Compile Include="Models\FormulaModel.cs" />
     <Compile Include="Models\FormulaOperationModel.cs" />
     <Compile Include="Models\LimitModel.cs" />
-    <Compile Include="Models\MethodModel.cs" />
     <Compile Include="Models\MethodTestModel.cs" />
+    <Compile Include="Models\MethodTestResultModel.cs" />
     <Compile Include="Models\OperationTypeModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\SimpleGridModel.cs" />
     <Compile Include="Models\SimpleListModel.cs" />
+    <Compile Include="Models\SystemUserModel.cs" />
     <Compile Include="Models\ValueSourceTypeModel.cs" />
     <Compile Include="Navigation\DefaultNavigationMap.cs" />
     <Compile Include="Navigation\IMessageResourceItemStore.cs" />
@@ -340,24 +326,6 @@
     </Compile>
     <Compile Include="UI\Argument\RestrictedAnswer\IArgumentRestrictedAnswerPresenter.cs" />
     <Compile Include="UI\Argument\RestrictedAnswer\IArgumentRestrictedAnswerView.cs" />
-    <Compile Include="UI\Calculation\CalculationPresenter.cs" />
-    <Compile Include="UI\Calculation\CalculationView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Calculation\CalculationView.Designer.cs">
-      <DependentUpon>CalculationView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Calculation\GraphNodeArgument\GraphNodeArgumentPresenter.cs" />
-    <Compile Include="UI\Calculation\GraphNodeArgument\GraphNodeArgumentView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Calculation\GraphNodeArgument\GraphNodeArgumentView.Designer.cs">
-      <DependentUpon>GraphNodeArgumentView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Calculation\GraphNodeArgument\IGraphNodeArgumentPresenter.cs" />
-    <Compile Include="UI\Calculation\GraphNodeArgument\IGraphNodeArgumentView.cs" />
-    <Compile Include="UI\Calculation\ICalculationPresenter.cs" />
-    <Compile Include="UI\Calculation\ICalculationView.cs" />
     <Compile Include="UI\Constraint\ConstraintPresenter.cs" />
     <Compile Include="UI\Constraint\ConstraintView.cs">
       <SubType>UserControl</SubType>
@@ -394,15 +362,6 @@
     <Compile Include="UI\Grid\SimpleGridView.Designer.cs">
       <DependentUpon>SimpleGridView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Limit\ILimitPresenter.cs" />
-    <Compile Include="UI\Limit\ILimitView.cs" />
-    <Compile Include="UI\Limit\LimitPresenter.cs" />
-    <Compile Include="UI\Limit\LimitView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Limit\LimitView.Designer.cs">
-      <DependentUpon>LimitView.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\List\ISimpleListPresenter.cs" />
     <Compile Include="UI\List\ISimpleListView.cs" />
     <Compile Include="UI\List\SimpleListPresenter.cs" />
@@ -429,15 +388,6 @@
     </Compile>
     <Compile Include="UI\MethodTest\Results\MethodTestResultView.Designer.cs">
       <DependentUpon>MethodTestResultView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Method\IMethodPresenter.cs" />
-    <Compile Include="UI\Method\IMethodView.cs" />
-    <Compile Include="UI\Method\MethodPresenter.cs" />
-    <Compile Include="UI\Method\MethodView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\Method\MethodView.Designer.cs">
-      <DependentUpon>MethodView.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Shell\Explorer\ExplorerPartialPresenter.cs" />
     <Compile Include="UI\Shell\Explorer\ExplorerPartialView.cs" />
@@ -521,23 +471,17 @@
     <Compile Include="UI\WorkItem\ContextToolbar\IContextToolbarPresenter.cs" />
     <Compile Include="UI\WorkItem\ContextToolbar\IContextToolbarView.cs" />
     <Compile Include="WorkItemControllers\ArgumentController.cs" />
-    <Compile Include="WorkItemControllers\CalculationController.cs" />
     <Compile Include="WorkItemControllers\DecimalTableController.cs" />
     <Compile Include="WorkItemControllers\FormulaController.cs" />
     <Compile Include="WorkItemControllers\Interfaces\IArgumentController.cs" />
-    <Compile Include="WorkItemControllers\Interfaces\ICalculationController.cs" />
     <Compile Include="WorkItemControllers\Interfaces\IDecimalTableController.cs" />
     <Compile Include="WorkItemControllers\Interfaces\IFormulaController.cs" />
-    <Compile Include="WorkItemControllers\Interfaces\ILimitController.cs" />
-    <Compile Include="WorkItemControllers\Interfaces\IMethodController.cs" />
     <Compile Include="WorkItemControllers\Interfaces\IMethodTestController.cs" />
     <Compile Include="WorkItemControllers\Interfaces\IMethodTestManagerController.cs" />
     <Compile Include="WorkItemControllers\Interfaces\IReportController.cs" />
     <Compile Include="WorkItemControllers\Interfaces\ISummaryController.cs" />
     <Compile Include="WorkItemControllers\Interfaces\ISystemUserController.cs" />
     <Compile Include="WorkItemControllers\Interfaces\ISystemUserListController.cs" />
-    <Compile Include="WorkItemControllers\LimitController.cs" />
-    <Compile Include="WorkItemControllers\MethodController.cs" />
     <Compile Include="WorkItemControllers\MethodTestController.cs" />
     <Compile Include="WorkItemControllers\MethodTestManagerController.cs" />
     <Compile Include="WorkItemControllers\ReportController.cs" />
@@ -565,12 +509,6 @@
     <EmbeddedResource Include="UI\Argument\RestrictedAnswer\ArgumentRestrictedAnswerView.resx">
       <DependentUpon>ArgumentRestrictedAnswerView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Calculation\CalculationView.resx">
-      <DependentUpon>CalculationView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Calculation\GraphNodeArgument\GraphNodeArgumentView.resx">
-      <DependentUpon>GraphNodeArgumentView.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\Constraint\ConstraintView.resx">
       <DependentUpon>ConstraintView.cs</DependentUpon>
     </EmbeddedResource>
@@ -583,9 +521,6 @@
     <EmbeddedResource Include="UI\Grid\SimpleGridView.resx">
       <DependentUpon>SimpleGridView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Limit\LimitView.resx">
-      <DependentUpon>LimitView.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\List\SimpleListView.resx">
       <DependentUpon>SimpleListView.cs</DependentUpon>
     </EmbeddedResource>
@@ -594,9 +529,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\MethodTest\Results\MethodTestResultView.resx">
       <DependentUpon>MethodTestResultView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Method\MethodView.resx">
-      <DependentUpon>MethodView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Shell\ModalWorkspace\ModalWorkspaceForm.resx">
       <DependentUpon>ModalWorkspaceForm.cs</DependentUpon>

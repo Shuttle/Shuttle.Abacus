@@ -35,8 +35,6 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 
             Send(new CreateFormulaCommand
             {
-                OwnerName = message.OwnerName,
-                OwnerId = message.OwnerId,
                 Operations = formulaView.FormulaOperations.Map(item => new FormulaOperation
                 {
                     SequenceNumber = item.SequenceNumber,
@@ -66,7 +64,6 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 
             Send(new ChangeFormulaCommand
             {
-                CalculationId = message.OwnerId,
                 FormulaId = message.FormulaId,
                 Operations = formulaView.FormulaOperations.Map(item => new FormulaOperation
                 {
@@ -98,24 +95,6 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             var view = WorkItem.GetView<ISimpleListView>();
 
             view.MoveDown(view.SelectedItem());
-        }
-
-        public void HandleMessage(ChangeFormulaOrderMessage message)
-        {
-            var view = WorkItem.GetView<ISimpleListView>();
-
-            var command = new ChangeFormulaOrderCommand
-            {
-                OwnerId = message.OwnerId,
-                OwnerName = message.OwnerName
-            };
-
-            foreach (var item in view.Items)
-            {
-                command.OrderedIds.Add(new Guid(item.Name));
-            }
-
-            Send(command);
         }
 
         public void HandleMessage(DeleteFormulaMessage message)

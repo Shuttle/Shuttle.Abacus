@@ -81,11 +81,8 @@
   <ItemGroup>
     <Compile Include="MessageSenderExtensions.cs" />
     <Compile Include="Handlers\ArgumentHandler.cs" />
-    <Compile Include="Handlers\CalculationHandler.cs" />
     <Compile Include="Handlers\DecimalTableHandler.cs" />
     <Compile Include="Handlers\FormulaHandler.cs" />
-    <Compile Include="Handlers\LimitHandler.cs" />
-    <Compile Include="Handlers\MethodHandler.cs" />
     <Compile Include="Handlers\MethodTestHandler.cs" />
     <Compile Include="Handlers\SystemUserHandler.cs" />
     <Compile Include="Host.cs" />

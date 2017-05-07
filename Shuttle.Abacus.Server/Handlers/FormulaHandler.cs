@@ -2,7 +2,6 @@ using System;
 using Shuttle.Abacus.ApplicationService;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Domain;
-using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Messages.v1;
 using Shuttle.Core.Data;
@@ -14,8 +13,7 @@ namespace Shuttle.Abacus.Server.Handlers
     public class FormulaHandler :
         IMessageHandler<CreateFormulaCommand>,
         IMessageHandler<ChangeFormulaCommand>,
-        IMessageHandler<DeleteFormulaCommand>,
-        IMessageHandler<ChangeFormulaOrderCommand>
+        IMessageHandler<DeleteFormulaCommand>
     {
         private readonly IArgumentAnswerFactory _argumentAnswerFactoryProvider;
         private readonly IConstraintFactory _constraintFactoryProvider;
@@ -78,29 +76,13 @@ namespace Shuttle.Abacus.Server.Handlers
             }
         }
 
-        public void ProcessMessage(IHandlerContext<ChangeFormulaOrderCommand> context)
-        {
-            throw new NotImplementedException();
-            var message = context.Message;
-
-            using (_databaseContextFactory.Create())
-            {
-                var owner =
-                    _repositoryProvider.Get(message.OwnerName).Get<IFormulaOwner>(
-                        message.OwnerId);
-
-                //TODO
-                //owner.ProcessCommand(message, _formulaOwnerService);
-            }
-        }
-
         public void ProcessMessage(IHandlerContext<CreateFormulaCommand> context)
         {
             var message = context.Message;
 
             using (_databaseContextFactory.Create())
             {
-                var formula = new Formula();
+                var formula = new Formula(message.Name);
                 var sequenceNumber = 1;
 
                 foreach (var constraint in message.Constraints)
@@ -124,7 +106,7 @@ namespace Shuttle.Abacus.Server.Handlers
                         operation.Text));
                 }
 
-                _formulaRepository.Add(message.OwnerName, message.OwnerId, formula);
+                _formulaRepository.Add(formula);
 
                 //var owner =
                 //    _repositoryProvider.Get(message.OwnerName).Get<IFormulaOwner>(message.OwnerId);
@@ -147,13 +129,7 @@ namespace Shuttle.Abacus.Server.Handlers
 
             using (_databaseContextFactory.Create())
             {
-                var row = _formulaQuery.Get(message.FormulaId);
-
-                var owner =
-                    _repositoryProvider.Get(FormulaColumns.OwnerName.MapFrom(row)).Get<IFormulaOwner>(
-                        FormulaColumns.OwnerId.MapFrom(row));
-
-                owner.RemoveFormula(message.FormulaId);
+                _formulaRepository.Remove(message.FormulaId);
             }
         }
     }

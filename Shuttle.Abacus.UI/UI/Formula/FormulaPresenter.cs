@@ -138,8 +138,8 @@ namespace Shuttle.Abacus.UI.UI.Formula
                 case Enumeration.ValueSourceType.MethodResult:
                     {
                         throw new NotImplementedException();
-                        View.EnableValueSelection("Method");
-                        //View.PopulateMethods(Model.Methods);
+                        View.EnableValueSelection("Formula");
+                        //View.PopulateFormulas(Model.Methods);
 
                         break;
                     }

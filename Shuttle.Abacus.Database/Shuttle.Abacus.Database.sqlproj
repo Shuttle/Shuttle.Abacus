@@ -67,10 +67,8 @@
     <Build Include="dbo\Tables\ValueSourceType.sql" />
     <Build Include="dbo\Tables\Argument.sql" />
     <Build Include="dbo\Tables\Formula.sql" />
-    <Build Include="dbo\Tables\Limit.sql" />
     <Build Include="dbo\Tables\Constraint.sql" />
     <Build Include="dbo\Tables\SystemUser.sql" />
-    <Build Include="dbo\Tables\Method.sql" />
     <Build Include="dbo\Tables\DecimalTable.sql" />
     <Build Include="dbo\Tables\MethodTestArgumentAnswer.sql" />
     <Build Include="dbo\Tables\ArgumentRestrictedAnswer.sql" />
@@ -78,8 +76,10 @@
     <Build Include="dbo\Tables\FormulaOperation.sql" />
     <Build Include="dbo\Tables\DecimalValue.sql" />
     <Build Include="dbo\Tables\SystemUserPermission.sql" />
-    <Build Include="dbo\Tables\Calculation.sql" />
     <Build Include="dbo\Tables\MethodTest.sql" />
     <Build Include="dbo\Tables\SubscriberMessageType.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Shuttle.Abacus.Database.refactorlog" />
   </ItemGroup>
 </Project>

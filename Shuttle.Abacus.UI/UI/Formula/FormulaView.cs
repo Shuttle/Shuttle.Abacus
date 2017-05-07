@@ -198,14 +198,6 @@ namespace Shuttle.Abacus.UI.UI.Formula
             ValueSelection.Text = string.Empty;
         }
 
-        public void PopulatePrecedingCalculations(IEnumerable<CalculationModel> models)
-        {
-            foreach (var dto in models)
-            {
-                ValueSelection.Items.Add(new SelectionItem(dto.CalculationId, dto.Name));
-            }
-        }
-
         public void AddOperation(string operationType, string valueSourceType, string valueSelection, string text)
         {
             var item = new ListViewItem();
@@ -239,11 +231,11 @@ namespace Shuttle.Abacus.UI.UI.Formula
             }
         }
 
-        public void PopulateMethods(IEnumerable<MethodModel> models)
+        public void PopulateFormulas(IEnumerable<FormulaModel> models)
         {
             foreach (var model in models)
             {
-                ValueSelection.Items.Add(new SelectionItem(model.MethodId, model.MethodName));
+                ValueSelection.Items.Add(new SelectionItem(model.Id, model.Name));
             }
         }
 
@@ -390,6 +382,8 @@ namespace Shuttle.Abacus.UI.UI.Formula
 
             Presenter.ValueSourceChanged();
         }
+
+        public string NameValue { get; set; }
 
         private class ItemTag
         {

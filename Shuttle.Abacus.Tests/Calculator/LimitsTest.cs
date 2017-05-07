@@ -19,7 +19,7 @@ namespace Shuttle.Abacus.Tests
 
         //    calculation.AddLimit(limit);
 
-        //    var methodContext = new MethodContext();
+        //    var methodContext = new FormulaContext();
 
         //    Assert.AreEqual(100, calculation.Execute(methodContext, new FormulaCalculationContext(methodContext)).Value);
         //}
@@ -37,7 +37,7 @@ namespace Shuttle.Abacus.Tests
 
         //    calculation.AddLimit(limit);
 
-        //    var methodContext = new MethodContext();
+        //    var methodContext = new FormulaContext();
 
         //    Assert.AreEqual(100, calculation.Execute(methodContext, new FormulaCalculationContext(methodContext)).Value);
         //}

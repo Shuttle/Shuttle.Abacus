@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.DTO;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
@@ -22,11 +21,6 @@ namespace Shuttle.Abacus.DataAccess
             _formulaQueryFactory = formulaQueryFactory;
         }
 
-        public IEnumerable<DataRow> AllForOwner(Guid ownerId)
-        {
-            return _databaseGateway.GetRowsUsing(_formulaQueryFactory.AllForOwner(ownerId));
-        }
-
         public IEnumerable<DataRow> Operations(Guid formulaId)
         {
             return _databaseGateway.GetRowsUsing(_formulaQueryFactory.GetOperations(formulaId));
@@ -37,18 +31,9 @@ namespace Shuttle.Abacus.DataAccess
             return _databaseGateway.GetSingleRowUsing(_formulaQueryFactory.Get(id));
         }
 
-        public void PopulateOwner(IFormulaOwner owner)
+        public IEnumerable<DataRow> All()
         {
-            Guard.AgainstNull(owner, "owner");
-
-            foreach (var row in _databaseGateway.GetRowsUsing(_formulaQueryFactory.AllForOwner(owner.Id)))
-            {
-                owner.AddFormula(
-                    new OwnedFormula(
-                        FormulaColumns.Id.MapFrom(row),
-                        FormulaColumns.SequenceNumber.MapFrom(row),
-                        FormulaColumns.Description.MapFrom(row)));
-            }
+            return _databaseGateway.GetRowsUsing(_formulaQueryFactory.All());
         }
     }
 }

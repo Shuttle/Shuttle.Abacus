@@ -1,41 +1,43 @@
+using System;
 using Shuttle.Abacus.Localisation;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class MinimumLimitResultBuilder : LimitResultBuilder
+    public class MinimumLimitResultBuilder 
     {
-        private readonly Calculation calculation;
+        private readonly Formula _formula;
         private readonly ICalculationResult value;
 
-        public MinimumLimitResultBuilder(Calculation calculation, ICalculationResult value)
+        public MinimumLimitResultBuilder(Formula formula, ICalculationResult value)
         {
-            this.calculation = calculation;
+            this._formula = formula;
             this.value = value;
         }
 
-        public override void Using(IMethodContext methodContext)
+        public void Using(IMethodContext methodContext)
         {
-            var result = calculation.Execute(methodContext, calculation.CalculationContext(methodContext));
+            throw new NotImplementedException();
+            //var result = _formula.Execute(methodContext, _formula.CalculationContext(methodContext));
 
-            if (!methodContext.OK)
-            {
-                return;
-            }
+            //if (!methodContext.OK)
+            //{
+            //    return;
+            //}
 
-            var applyLimit = value.Value < result.Value;
+            //var applyLimit = value.Value < result.Value;
 
-            if (methodContext.LoggerEnabled)
-            {
-                methodContext.Log("Minimum limit: {0} ({1})", result.Value.ToString(Resources.FormatDecimal),
-                            applyLimit
-                                ? "limit applied"
-                                : "above limit - ok");
-            }
+            //if (methodContext.LoggerEnabled)
+            //{
+            //    methodContext.Log("Minimum limit: {0} ({1})", result.Value.ToString(Resources.FormatDecimal),
+            //                applyLimit
+            //                    ? "limit applied"
+            //                    : "above limit - ok");
+            //}
 
-            if (applyLimit)
-            {
-                value.Limit(result.Value);
-            }
+            //if (applyLimit)
+            //{
+            //    value.Limit(result.Value);
+            //}
         }
     }
 }

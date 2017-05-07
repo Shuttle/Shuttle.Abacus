@@ -1,10 +1,11 @@
 using System;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.UI.Models;
 
 namespace Shuttle.Abacus.UI.UI.MethodTest.Results
 {
-    public class MethodTestResultPresenter : Presenter<IMethodTestResultView>, IMethodTestResultPresenter
+    public class MethodTestResultPresenter : Presenter<IMethodTestResultView, MethodTestResultModel>, IMethodTestResultPresenter
     {
         public MethodTestResultPresenter(IMethodTestResultView view) : base(view)
         {

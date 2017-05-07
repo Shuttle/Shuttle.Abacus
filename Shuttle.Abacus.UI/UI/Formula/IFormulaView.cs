@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Data;
 using Shuttle.Abacus.Domain;
-using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
 
@@ -20,13 +18,13 @@ namespace Shuttle.Abacus.UI.UI.Formula
         OperationTypeModel OperationTypeModel { get; }
         bool HasSelectedItem { get; }
         List<FormulaOperation> FormulaOperations { get; set; }
+        string NameValue { get; set; }
         void PopulateValueSources(IEnumerable<ValueSourceTypeModel> models);
         void PopulateArguments(IEnumerable<ArgumentModel> arguments);
         void EnableValueSelection(string text);
         void EnableValueEntry(string text);
         void ShowValueSourceError();
         void ShowValueSelectionError(string message);
-        void PopulatePrecedingCalculations(IEnumerable<CalculationModel> models);
 
         void ShowOperationTypeError();
         void RemoveSelectedItem();
@@ -36,6 +34,5 @@ namespace Shuttle.Abacus.UI.UI.Formula
         void PopulateOperations(IEnumerable<string> enumerable);
         void PopulateValues(IEnumerable<string> enumerable);
         void PopulateDecimalTables(IEnumerable<DecimalTableModel> list);
-        void PopulateMethods(IEnumerable<MethodModel> models);
     }
 }

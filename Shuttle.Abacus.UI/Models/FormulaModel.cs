@@ -13,15 +13,13 @@ namespace Shuttle.Abacus.UI.Models
             Guard.AgainstNull(row, "row");
 
             Id = FormulaColumns.Id.MapFrom(row);
-            SequenceNumber = FormulaColumns.SequenceNumber.MapFrom(row);
-            Description = FormulaColumns.Description.MapFrom(row);
+            Name = FormulaColumns.Name.MapFrom(row);
 
             return this;
         }
 
         public Guid Id { get; set; }
-        public int SequenceNumber { get; set; }
-        public string Description { get; set; }
+        public string Name { get; set; }
 
         public IEnumerable<string> OperationTypes { get; set; }
         public IEnumerable<ValueSourceTypeModel> ValueSourceTypes { get; set; }

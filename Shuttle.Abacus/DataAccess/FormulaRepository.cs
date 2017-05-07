@@ -23,9 +23,13 @@ namespace Shuttle.Abacus.DataAccess
             _constraintQuery = constraintQuery;
         }
 
-        public override void Add(Formula item)
+        public override void Add(Formula formula)
         {
-            throw new NotImplementedException();
+            _databaseGateway.ExecuteUsing(_formulaQueryFactory.Add(formula));
+
+            AddOperations(formula);
+
+            _constraintQuery.SaveOwned(formula);
         }
 
         public override void Remove(Guid id)
@@ -39,7 +43,7 @@ namespace Shuttle.Abacus.DataAccess
 
             Guarded.Entity<Formula>(formulaRow, id);
 
-            var result = new Formula(id);
+            var result = new Formula(id, FormulaColumns.Name.MapFrom(formulaRow));
 
             foreach (var row in _databaseGateway.GetRowsUsing(_formulaQueryFactory.GetOperations(id)))
             {
@@ -56,15 +60,6 @@ namespace Shuttle.Abacus.DataAccess
             return result;
         }
 
-        public void Add(IFormulaOwner owner, Formula formula)
-        {
-            _databaseGateway.ExecuteUsing(_formulaQueryFactory.Add(owner.OwnerName, owner.Id, formula));
-
-            AddOperations(formula);
-
-            _constraintQuery.SaveOwned(formula);
-        }
-
         public void Save(Formula item)
         {
             _databaseGateway.ExecuteUsing(_formulaQueryFactory.Save(item));
@@ -73,27 +68,6 @@ namespace Shuttle.Abacus.DataAccess
             AddOperations(item);
 
             _constraintQuery.SaveOwned(item);
-        }
-
-        public void SaveOrdered(IFormulaOwner owner)
-        {
-            var sequence = 1;
-
-            owner.Formulas.ForEach(formula =>
-            {
-                _databaseGateway.ExecuteUsing(_formulaQueryFactory.SetSequenceNumber(formula, sequence));
-
-                sequence++;
-            });
-        }
-
-        public void Add(string ownerName, Guid ownerId, Formula formula)
-        {
-            _databaseGateway.ExecuteUsing(_formulaQueryFactory.Add(ownerName, ownerId, formula));
-
-            AddOperations(formula);
-
-            _constraintQuery.SaveOwned(formula);
         }
 
         private void AddOperations(Formula formula)

@@ -11,7 +11,7 @@ namespace Shuttle.Abacus.UI.UI.Shell.Explorer
         {
             orderedKeys = new List<ResourceKey>
                           {
-                              ResourceKeys.Method, ResourceKeys.DecimalTable, ResourceKeys.Argument
+                              ResourceKeys.Formula, ResourceKeys.DecimalTable, ResourceKeys.Argument
                           };
         }
 

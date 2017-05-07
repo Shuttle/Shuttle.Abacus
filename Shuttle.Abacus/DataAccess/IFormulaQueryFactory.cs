@@ -6,14 +6,13 @@ namespace Shuttle.Abacus.DataAccess
 {
     public interface IFormulaQueryFactory
     {
-        IQuery AllForOwner(Guid ownerId);
         IQuery GetOperations(Guid id);
         IQuery Get(Guid id);
-        IQuery Add(string ownerName, Guid ownerId, Formula formula);
+        IQuery Add(Formula formula);
         IQuery Remove(Guid id);
         IQuery RemoveOperations(Formula formula);
         IQuery AddOperation(Formula formula, FormulaOperation operation, int sequenceNumber);
         IQuery Save(Formula item);
-        IQuery SetSequenceNumber(Formula formula, int sequence);
+        IQuery All();
     }
 }

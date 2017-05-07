@@ -18,7 +18,7 @@ namespace Shuttle.Abacus.Tests
 
         //    var collection = new CalculationCollection((string) "subtotal1");
 
-        //    calculation.AddFormula(new Formula(new CalculationSubTotalValueSource(collection)));
+        //    calculation.AddFormula(new Formula(new FormulaSubTotalValueSource(collection)));
 
         //    list = calculation.RequiredCalculationIds();
 

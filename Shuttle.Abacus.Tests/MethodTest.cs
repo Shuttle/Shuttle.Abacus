@@ -10,7 +10,7 @@ namespace Shuttle.Abacus.Tests
         //[Test]
         //public void Should_be_able_to_apply_limits()
         //{
-        //    var method = new Method { MethodName = "method" };
+        //    var method = new Formula { MethodName = "method" };
 
         //    var formula = new FormulaCalculation("formula", true);
 
@@ -23,7 +23,7 @@ namespace Shuttle.Abacus.Tests
 
         //    method.AddCalculation(formula);
 
-        //    var context = new MethodContext();
+        //    var context = new FormulaContext();
 
         //    method.Calculate(context);
 
@@ -38,7 +38,7 @@ namespace Shuttle.Abacus.Tests
 
         //    method.AddLimit(limit);
 
-        //    context = new MethodContext();
+        //    context = new FormulaContext();
 
         //    method.Calculate(context);
 
@@ -48,9 +48,9 @@ namespace Shuttle.Abacus.Tests
         //[Test]
         //public void Should_be_able_to_calculate_sub_calculations()
         //{
-        //    var method = new Method
+        //    var method = new Formula
         //                  {
-        //                      MethodName = "Method"
+        //                      MethodName = "Formula"
         //                  };
 
         //    var level1 = new CalculationCollection((string) "level1");
@@ -72,7 +72,7 @@ namespace Shuttle.Abacus.Tests
 
         //    method.AddCalculation(level1);
 
-        //    var context = new MethodContext();
+        //    var context = new FormulaContext();
 
         //    method.Calculate(context);
 
@@ -82,7 +82,7 @@ namespace Shuttle.Abacus.Tests
         //[Test]
         //public void Should_be_able_to_create_a_copy_of_a_method()
         //{
-        //    var method = new Method();
+        //    var method = new Formula();
 
         //    method.AddCalculation(new FormulaCalculation("one", true));
         //    method.AddCalculation(new FormulaCalculation("two", true));
@@ -94,7 +94,7 @@ namespace Shuttle.Abacus.Tests
         //[Test]
         //public void Should_not_be_able_to_add_calculations_that_contain_formulas_using_subtotals_not_yet_registered()
         //{
-        //    var method = new Method();
+        //    var method = new Formula();
 
         //    var basepremium = new FormulaCalculation("basepremium", true);
 
@@ -109,7 +109,7 @@ namespace Shuttle.Abacus.Tests
         //    var usesbasepremium = new FormulaCalculation("usesbasepremium", true);
 
         //    usesbasepremium.AddFormula(
-        //        new Formula().AddOperation(new AdditionOperation(new CalculationSubTotalValueSource(basepremium))));
+        //        new Formula().AddOperation(new AdditionOperation(new FormulaSubTotalValueSource(basepremium))));
 
         //    method.AddCalculation(usesbasepremium);
 
@@ -117,7 +117,7 @@ namespace Shuttle.Abacus.Tests
 
         //    usesbogus.AddFormula(
         //        new Formula().AddOperation(
-        //            new AdditionOperation(new CalculationSubTotalValueSource(new FormulaCalculation("bogus", true)))));
+        //            new AdditionOperation(new FormulaSubTotalValueSource(new FormulaCalculation("bogus", true)))));
 
         //    method.AddCalculation(usesbogus);
 

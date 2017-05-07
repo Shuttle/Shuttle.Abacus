@@ -12,19 +12,19 @@ namespace Shuttle.Abacus.Tests
         {
             var rate = new DecimalValue(10);
 
-            Assert.IsTrue(rate.IsSatisfiedBy(new MethodContext()));
+            Assert.IsTrue(rate.IsSatisfiedBy(new FormulaContext()));
 
             var answer = new TextArgumentAnswer("argument", "one");
 
             rate.AddConstraint(new EqualsConstraint(Guid.NewGuid(), answer));
 
-            var contextTrue = new MethodContext();
+            var contextTrue = new FormulaContext();
 
             contextTrue.AddArgumentAnswer(answer);
 
             Assert.IsTrue(rate.IsSatisfiedBy(contextTrue));
 
-            var contextFalse = new MethodContext();
+            var contextFalse = new FormulaContext();
 
             contextFalse.AddArgumentAnswer(new TextArgumentAnswer("argument", "two"));
 

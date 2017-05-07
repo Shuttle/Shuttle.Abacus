@@ -58,34 +58,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="v1\ChangeArgumentCommand.cs" />
-    <Compile Include="v1\ChangeCalculationCommand.cs" />
-    <Compile Include="v1\ChangeCalculationOrderCommand.cs" />
     <Compile Include="v1\ChangeFormulaCommand.cs" />
-    <Compile Include="v1\ChangeFormulaOrderCommand.cs" />
-    <Compile Include="v1\ChangeLimitCommand.cs" />
     <Compile Include="v1\ChangeLoginNameCommand.cs" />
-    <Compile Include="v1\ChangeMethodCommand.cs" />
     <Compile Include="v1\ChangeMethodTestCommand.cs" />
-    <Compile Include="v1\CopyMethodCommand.cs" />
     <Compile Include="v1\CreateArgumentCommand.cs" />
-    <Compile Include="v1\CreateCalculationCommand.cs" />
     <Compile Include="v1\CreateDecimalTableCommand.cs" />
     <Compile Include="v1\CreateFormulaCommand.cs" />
-    <Compile Include="v1\CreateLimitCommand.cs" />
-    <Compile Include="v1\CreateMethodCommand.cs" />
     <Compile Include="v1\CreateMethodTestCommand.cs" />
     <Compile Include="v1\CreateSystemUserCommand.cs" />
     <Compile Include="v1\DecimalTableCommand.cs" />
     <Compile Include="v1\DeleteArgumentCommand.cs" />
-    <Compile Include="v1\DeleteCalculationCommand.cs" />
     <Compile Include="v1\DeleteFormulaCommand.cs" />
     <Compile Include="v1\DeleteLimitCommand.cs" />
-    <Compile Include="v1\DeleteMethodCommand.cs" />
     <Compile Include="v1\DeleteMethodTestCommand.cs" />
     <Compile Include="v1\GrabCalculationsCommand.cs" />
     <Compile Include="v1\PrintMethodTestCommand.cs" />
     <Compile Include="v1\RunMethodTestCommand.cs" />
-    <Compile Include="v1\SetCalculationConstraintsCommand.cs" />
     <Compile Include="v1\SetPermissionsCommand.cs" />
     <Compile Include="v1\TransferObjects\ArgumentAnswer.cs" />
     <Compile Include="v1\TransferObjects\Constraint.cs" />

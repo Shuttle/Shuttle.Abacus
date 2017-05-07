@@ -77,8 +77,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 {
                     message.NavigationItems.Add(
                         NavigationItemFactory.Create(
-                            new ManageMethodTestsMessage(message.RelatedItems[ResourceKeys.Method].Key,
-                                message.RelatedItems[ResourceKeys.Method].Text)));
+                            new ManageMethodTestsMessage(message.Item.Key, message.Item.Text)));
 
                     break;
                 }
@@ -218,8 +217,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 {
                     case Resource.ResourceType.Container:
                     {
-                        message.AddTable("Test Cases",
-                            _testQuery.FetchForMethodId(message.RelatedItems[ResourceKeys.Method].Key));
+                        message.AddTable("Test Cases", _testQuery.All());
 
                         break;
                     }
@@ -255,7 +253,14 @@ namespace Shuttle.Abacus.UI.Coordinators
 
             using (_databaseContextFactory.Create())
             {
-                presenter.AssignModel(new SimpleListModel("MethodTestId", _testQuery.FetchForMethodId(methodId)));
+                var modelPresenter = presenter as IPresenter<SimpleListModel>;
+
+                if (modelPresenter == null)
+                {
+                    throw new InvalidOperationException();
+                }
+
+                modelPresenter.AssignModel(new SimpleListModel("MethodTestId", _testQuery.FetchForMethodId(methodId)));
             }
 
             presenter.Refresh();

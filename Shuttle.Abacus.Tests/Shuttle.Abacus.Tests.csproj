@@ -50,7 +50,7 @@
   <ItemGroup>
     <Compile Include="ArgumentTest.cs" />
     <Compile Include="Calculator\CalculationCollectionTest.cs" />
-    <Compile Include="Calculator\CalculationContextTest.cs" />
+    <Compile Include="Calculator\FormulaContextTest.cs" />
     <Compile Include="Calculator\CalculationTest.cs" />
     <Compile Include="Calculator\CompleteCalculationTest.cs" />
     <Compile Include="Calculator\ConstraintTest.cs" />

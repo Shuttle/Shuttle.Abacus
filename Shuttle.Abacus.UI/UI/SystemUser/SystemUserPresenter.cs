@@ -1,3 +1,4 @@
+using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Invariants.Interfaces;
 using Shuttle.Abacus.Localisation;
@@ -8,7 +9,7 @@ using Shuttle.Core.Infrastructure;
 namespace Shuttle.Abacus.UI.UI.SystemUser
 {
     public class SystemUserPresenter :
-        Presenter<ISystemUserView>,
+        Presenter<ISystemUserView, DataRow>,
         ISystemUserPresenter
     {
         private readonly ISystemUserRules _systemUserRules;
@@ -26,7 +27,7 @@ namespace Shuttle.Abacus.UI.UI.SystemUser
 
         public void HandleMessage(EditLoginNameMessage message)
         {
-            View.LoginNameValue = SystemUserColumns.LoginName.MapFrom(Model.GetRow());
+            View.LoginNameValue = SystemUserColumns.LoginName.MapFrom(Model);
         }
 
         public void LoginNameExited()

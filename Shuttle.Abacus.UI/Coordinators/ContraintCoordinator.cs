@@ -4,7 +4,7 @@ using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Core.Resources;
-using Shuttle.Abacus.UI.Messages.Calculation;
+using Shuttle.Abacus.UI.Messages.Formula;
 using Shuttle.Abacus.UI.Messages.Resources;
 using Shuttle.Abacus.UI.Models;
 using Shuttle.Abacus.UI.UI.Constraint;
@@ -50,7 +50,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 {
                     var ownerId = message.RelatedResources.Contains(ResourceKeys.Formula)
                         ? message.RelatedResources[ResourceKeys.Formula].Key
-                        : message.RelatedResources[ResourceKeys.Calculation].Key;
+                        : message.RelatedResources[ResourceKeys.Formula].Key;
 
                     using (_databaseContextFactory.Create())
                     {
@@ -81,17 +81,17 @@ namespace Shuttle.Abacus.UI.Coordinators
                 {
                     message.NavigationItems.Add(
                         NavigationItemFactory.Create(
-                            new ManageCalculationConstraintsMessage(message.RelatedItems[ResourceKeys.Calculation].Text,
-                                message.RelatedItems[ResourceKeys.Calculation].Key)));
+                            new ManageFormulaConstraintsMessage(message.RelatedItems[ResourceKeys.Formula].Text,
+                                message.RelatedItems[ResourceKeys.Formula].Key)));
 
                     break;
                 }
             }
         }
 
-        public void HandleMessage(ManageCalculationConstraintsMessage message)
+        public void HandleMessage(ManageFormulaConstraintsMessage message)
         {
-            var constraintModel = BuildConstraintModel(message.CalculationId);
+            var constraintModel = BuildConstraintModel(message.FormulaId);
 
             if (constraintModel == null)
             {
@@ -99,8 +99,8 @@ namespace Shuttle.Abacus.UI.Coordinators
             }
 
             var item = WorkItemManager
-                .Create(string.Format("Calculation constraints: {0}", message.CalculationName))
-                .ControlledBy<ICalculationController>()
+                .Create(string.Format("Formula constraints: {0}", message.FormulaName))
+                .ControlledBy<IFormulaController>()
                 .ShowIn<IContextToolbarPresenter>()
                 .AddPresenter<IConstraintPresenter>().WithModel(constraintModel)
                 .AddNavigationItem(

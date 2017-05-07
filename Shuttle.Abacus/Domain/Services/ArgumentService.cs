@@ -26,7 +26,7 @@ namespace Shuttle.Abacus.Domain
 
             var arguments = argumentRepository.All();
 
-            IMethodContext result = new MethodContext(name);
+            IMethodContext result = new FormulaContext(name);
 
             foreach (var pair in answers)
             {

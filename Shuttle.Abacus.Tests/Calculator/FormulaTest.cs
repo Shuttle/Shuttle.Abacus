@@ -11,7 +11,7 @@ namespace Shuttle.Abacus.Tests
         //{
         //    var formula = new Formula(new DecimalValueSource(250));
 
-        //    var methodContext = new MethodContext();
+        //    var methodContext = new FormulaContext();
 
         //    Assert.AreEqual(250, formula.Execute(methodContext, new FormulaCalculationContext(methodContext)));
         //}
@@ -26,7 +26,7 @@ namespace Shuttle.Abacus.Tests
         //    formula.AddOperation(new MultiplicationOperation(new DecimalValueSource(5)));
         //    formula.AddOperation(new DivisionOperation(new DecimalValueSource(2)));
 
-        //    var methodContext = new MethodContext();
+        //    var methodContext = new FormulaContext();
 
         //    Assert.AreEqual(20, formula.Execute(methodContext, new FormulaCalculationContext(methodContext)));
         //}
@@ -48,11 +48,11 @@ namespace Shuttle.Abacus.Tests
         //    formula.AddOperation(new MultiplicationOperation(new DecimalValueSource(-150)));
         //    formula.AddOperation(new RoundingOperation(new DecimalValueSource(2)));
         //    formula.AddOperation(
-        //        new MultiplicationOperation(new CalculationSubTotalValueSource(new FormulaCalculation("TOTAL", true))));
+        //        new MultiplicationOperation(new FormulaSubTotalValueSource(new FormulaCalculation("TOTAL", true))));
         //    formula.AddOperation(new DivisionOperation(new DecimalValueSource(100)));
 
         //    var context =
-        //        new MethodContext("test")
+        //        new FormulaContext("test")
         //            .AddArgumentAnswer(new DecimalArgumentAnswer("VoluntaryExcess", 1000))
         //            .AddArgumentAnswer(new DecimalArgumentAnswer("SumInsured", 980000));
 

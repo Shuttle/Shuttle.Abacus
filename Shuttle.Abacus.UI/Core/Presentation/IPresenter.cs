@@ -29,7 +29,6 @@ namespace Shuttle.Abacus.UI.Core.Presentation
 
         void PublishReadyStatus();
         void PublishStatus(string message);
-        void AssignModel<T>(T dto);
 
         event PresenterTextChanged TextChanged;
         event PresenterImageChanged ImageChanged;
@@ -37,5 +36,10 @@ namespace Shuttle.Abacus.UI.Core.Presentation
         void Show();
         
         IEnumerable<INavigationItem> MergedNavigationItems();
+    }
+
+    public interface IPresenter<in TModel> : IPresenter
+    {
+        void AssignModel(TModel model);
     }
 }
