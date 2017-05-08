@@ -1,6 +1,4 @@
-﻿using Shuttle.Abacus.DataAccess;
-using Shuttle.Abacus.Domain;
-using Shuttle.Abacus.Invariants.Interfaces;
+﻿using Shuttle.Abacus.Invariants.Interfaces;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
@@ -14,16 +12,18 @@ namespace Shuttle.Abacus.UI.UI.Argument
 
         public ArgumentPresenter(IArgumentView view, IArgumentRules argumentRules) : base(view)
         {
-            this._argumentRules = argumentRules;
+            Guard.AgainstNull(argumentRules, "argumentRules");
 
-            Text = "Argument Details";
+            _argumentRules = argumentRules;
+
+            Text = "Argument";
             Image = Resources.Image_Argument;
         }
 
         public void ArgumentNameExited()
         {
             WorkItem.Text = string.Format("Argument{0}",
-                                          View.ArgumentNameValue.Length > 0 ? " : " + View.ArgumentNameValue : string.Empty);
+                View.ArgumentNameValue.Length > 0 ? " : " + View.ArgumentNameValue : string.Empty);
         }
 
         public override void OnInitialize()

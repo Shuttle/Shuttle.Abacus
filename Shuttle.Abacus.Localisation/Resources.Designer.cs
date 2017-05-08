@@ -382,49 +382,9 @@ namespace Shuttle.Abacus.Localisation {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Image_ArgumentRestrictedAnswer {
+        public static System.Drawing.Bitmap Image_ArgumentValue {
             get {
-                object obj = ResourceManager.GetObject("Image_ArgumentRestrictedAnswer", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Image_Calculation {
-            get {
-                object obj = ResourceManager.GetObject("Image_Calculation", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Image_CalculationDelete {
-            get {
-                object obj = ResourceManager.GetObject("Image_CalculationDelete", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Image_CalculationEdit {
-            get {
-                object obj = ResourceManager.GetObject("Image_CalculationEdit", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Image_CalculationNew {
-            get {
-                object obj = ResourceManager.GetObject("Image_CalculationNew", resourceCulture);
+                object obj = ResourceManager.GetObject("Image_ArgumentValue", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -485,46 +445,6 @@ namespace Shuttle.Abacus.Localisation {
         public static System.Drawing.Bitmap Image_Copy {
             get {
                 object obj = ResourceManager.GetObject("Image_Copy", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Image_DecimalTable {
-            get {
-                object obj = ResourceManager.GetObject("Image_DecimalTable", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Image_DecimalTableDelete {
-            get {
-                object obj = ResourceManager.GetObject("Image_DecimalTableDelete", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Image_DecimalTableEdit {
-            get {
-                object obj = ResourceManager.GetObject("Image_DecimalTableEdit", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Image_DecimalTableNew {
-            get {
-                object obj = ResourceManager.GetObject("Image_DecimalTableNew", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -622,6 +542,16 @@ namespace Shuttle.Abacus.Localisation {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Image_FormulaOperation {
+            get {
+                object obj = ResourceManager.GetObject("Image_FormulaOperation", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Image_Grab {
             get {
                 object obj = ResourceManager.GetObject("Image_Grab", resourceCulture);
@@ -692,9 +622,9 @@ namespace Shuttle.Abacus.Localisation {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Image_Method {
+        public static System.Drawing.Bitmap Image_Matrix {
             get {
-                object obj = ResourceManager.GetObject("Image_Method", resourceCulture);
+                object obj = ResourceManager.GetObject("Image_Matrix", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -702,9 +632,9 @@ namespace Shuttle.Abacus.Localisation {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Image_MethodDelete {
+        public static System.Drawing.Bitmap Image_MatrixDelete {
             get {
-                object obj = ResourceManager.GetObject("Image_MethodDelete", resourceCulture);
+                object obj = ResourceManager.GetObject("Image_MatrixDelete", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -712,9 +642,9 @@ namespace Shuttle.Abacus.Localisation {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Image_MethodEdit {
+        public static System.Drawing.Bitmap Image_MatrixEdit {
             get {
-                object obj = ResourceManager.GetObject("Image_MethodEdit", resourceCulture);
+                object obj = ResourceManager.GetObject("Image_MatrixEdit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -722,59 +652,9 @@ namespace Shuttle.Abacus.Localisation {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Image_MethodNew {
+        public static System.Drawing.Bitmap Image_MatrixNew {
             get {
-                object obj = ResourceManager.GetObject("Image_MethodNew", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Image_MethodTestDelete {
-            get {
-                object obj = ResourceManager.GetObject("Image_MethodTestDelete", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Image_MethodTestEdit {
-            get {
-                object obj = ResourceManager.GetObject("Image_MethodTestEdit", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Image_MethodTestError {
-            get {
-                object obj = ResourceManager.GetObject("Image_MethodTestError", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Image_MethodTestNew {
-            get {
-                object obj = ResourceManager.GetObject("Image_MethodTestNew", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap Image_MethodTestRun {
-            get {
-                object obj = ResourceManager.GetObject("Image_MethodTestRun", resourceCulture);
+                object obj = ResourceManager.GetObject("Image_MatrixNew", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -895,6 +775,56 @@ namespace Shuttle.Abacus.Localisation {
         public static System.Drawing.Bitmap Image_Test {
             get {
                 object obj = ResourceManager.GetObject("Image_Test", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Image_TestDelete {
+            get {
+                object obj = ResourceManager.GetObject("Image_TestDelete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Image_TestEdit {
+            get {
+                object obj = ResourceManager.GetObject("Image_TestEdit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Image_TestError {
+            get {
+                object obj = ResourceManager.GetObject("Image_TestError", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Image_TestNew {
+            get {
+                object obj = ResourceManager.GetObject("Image_TestNew", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Image_TestRun {
+            get {
+                object obj = ResourceManager.GetObject("Image_TestRun", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

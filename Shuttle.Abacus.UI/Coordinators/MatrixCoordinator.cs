@@ -21,14 +21,14 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Coordinators
 {
-    public class DecimalTableCoordinator : Coordinator, IDecimalTableCoordinator
+    public class MatrixCoordinator : Coordinator, IMatrixCoordinator
     {
         private readonly IArgumentQuery _argumentQuery;
         private readonly IConstraintQuery _constraintQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IMatrixQuery _decimalTableQuery;
 
-        public DecimalTableCoordinator(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
+        public MatrixCoordinator(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
             IMatrixQuery decimalTableQuery, IConstraintQuery constraintQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
@@ -50,13 +50,13 @@ namespace Shuttle.Abacus.UI.Coordinators
             }
 
             message.Items.Add(
-                new Resource(ResourceKeys.DecimalTable, Guid.NewGuid(), "Decimal Tables", ImageResources.DecimalTable)
+                new Resource(ResourceKeys.Matrix, Guid.NewGuid(), "Matrices", ImageResources.DecimalTable)
                     .AsContainer());
         }
 
         public void HandleMessage(ResourceMenuRequestMessage message)
         {
-            if (!message.Item.ResourceKey.Equals(ResourceKeys.DecimalTable))
+            if (!message.Item.ResourceKey.Equals(ResourceKeys.Matrix))
             {
                 return;
             }
@@ -92,7 +92,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(PopulateResourceMessage message)
         {
-            if (!message.Resource.ResourceKey.Equals(ResourceKeys.DecimalTable))
+            if (!message.Resource.ResourceKey.Equals(ResourceKeys.Matrix))
             {
                 return;
             }
@@ -107,7 +107,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                             var row in
                             _decimalTableQuery.All())
                         {
-                            message.Resources.Add(new Resource(ResourceKeys.DecimalTable,
+                            message.Resources.Add(new Resource(ResourceKeys.Matrix,
                                 DecimalTableColumns.Id.MapFrom(row),
                                 DecimalTableColumns.Name.MapFrom(row),
                                 ImageResources.DecimalTable).AsLeaf());
@@ -121,7 +121,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(ResourceRefreshItemTextMessage message)
         {
-            if (!message.Item.ResourceKey.Equals(ResourceKeys.DecimalTable) ||
+            if (!message.Item.ResourceKey.Equals(ResourceKeys.Matrix) ||
                                                 message.Item.Type != Resource.ResourceType.Item)
             {
                 return;
@@ -188,7 +188,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(SummaryViewRequestedMessage message)
         {
-            if (SummaryViewManager.CanIgnore(message, ResourceKeys.DecimalTable))
+            if (SummaryViewManager.CanIgnore(message, ResourceKeys.Matrix))
             {
                 return;
             }

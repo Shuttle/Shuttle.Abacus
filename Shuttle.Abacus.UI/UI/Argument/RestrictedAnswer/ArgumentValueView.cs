@@ -7,9 +7,9 @@ using Shuttle.Abacus.UI.Core.Presentation;
 
 namespace Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer
 {
-    public partial class ArgumentRestrictedAnswerView : GenericArgumentRestrictedAnswerView, IArgumentRestrictedAnswerView
+    public partial class ArgumentValueView : GenericArgumentRestrictedAnswerView, IArgumentValueView
     {
-        public ArgumentRestrictedAnswerView()
+        public ArgumentValueView()
         {
             InitializeComponent();
         }
@@ -25,17 +25,17 @@ namespace Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer
             set { Answer.Text = value; }
         }
 
-        public bool HasAnswer()
+        public bool HasValue()
         {
             return Answer.Text.Length > 0;
         }
 
-        public void ShowAnswerError(string message)
+        public void ShowValueError(string message)
         {
             SetError(Answer, message);
         }
 
-        public List<string> Answers
+        public List<string> Values
         {
             get
             {
@@ -57,7 +57,7 @@ namespace Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer
             }
         }
 
-        public IRuleCollection<object> ArgumentRestrictedAnswerRules
+        public IRuleCollection<object> ArgumentValueRules
         {
             set
             {
@@ -65,7 +65,7 @@ namespace Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer
             }
         }
 
-        public ListViewItem AddRestrictedAnswer(string answer)
+        public ListViewItem AddValue(string answer)
         {
             var item = new ListViewItem(answer);
 
@@ -110,7 +110,7 @@ namespace Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer
 
         private void Answer_TextChanged(object sender, EventArgs e)
         {
-            ShowAnswerError(string.Empty);
+            ShowValueError(string.Empty);
         }
 
         private void AnswerListView_SelectedIndexChanged(object sender, EventArgs e)
@@ -127,16 +127,16 @@ namespace Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            if (!Presenter.AnswerOK())
+            if (!Presenter.IsValueOK())
             {
                 return;
             }
 
-            AddRestrictedAnswer(AnswerValue);
+            AddValue(AnswerValue);
         }
     }
 
-    public class GenericArgumentRestrictedAnswerView : View<IArgumentRestrictedAnswerPresenter>
+    public class GenericArgumentRestrictedAnswerView : View<IArgumentValuePresenter>
     {
     }
 }

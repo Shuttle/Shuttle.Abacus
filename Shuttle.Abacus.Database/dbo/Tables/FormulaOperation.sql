@@ -1,15 +1,11 @@
-﻿CREATE TABLE [dbo].[FormulaOperation](
-	[FormulaId] [uniqueidentifier] NOT NULL,
-	[Operation] [varchar](120) NOT NULL,
-	[ValueSource] [varchar](120) NOT NULL,
-	[ValueSelection] [varchar](120) NOT NULL,
-	[SequenceNumber] [int] NOT NULL,
-	[Text] [varchar](120) NOT NULL
-) ON [PRIMARY]
-GO
-/****** Object:  ForeignKey [FK_FormulaOperation_Formula]    Script Date: 01/14/2010 11:00:06 ******/
-ALTER TABLE [dbo].[FormulaOperation]  WITH CHECK ADD  CONSTRAINT [FK_FormulaOperation_Formula] FOREIGN KEY([FormulaId])
-REFERENCES [dbo].[Formula] ([FormulaId])
-GO
+﻿CREATE TABLE [dbo].[FormulaOperation] (
+    [FormulaId]      UNIQUEIDENTIFIER NOT NULL,
+    [SequenceNumber] INT              NOT NULL,
+    [Operation]      VARCHAR (120)    NOT NULL,
+    [ValueSource]    VARCHAR (120)    NOT NULL,
+    [ValueSelection] VARCHAR (120)    NOT NULL,
+    [Text]           VARCHAR (120)    NOT NULL,
+    CONSTRAINT [PK_FormulaOperation] PRIMARY KEY CLUSTERED ([FormulaId] ASC, [SequenceNumber] ASC),
+    CONSTRAINT [FK_FormulaOperation_Formula] FOREIGN KEY ([FormulaId]) REFERENCES [dbo].[Formula] ([FormulaId])
+);
 
-ALTER TABLE [dbo].[FormulaOperation] CHECK CONSTRAINT [FK_FormulaOperation_Formula]

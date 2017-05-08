@@ -2,8 +2,8 @@
 
 namespace Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer
 {
-    public interface IArgumentRestrictedAnswerPresenter : IPresenter
+    public interface IArgumentValuePresenter : IPresenter
     {
-        bool AnswerOK();
+        bool IsValueOK();
     }
 }

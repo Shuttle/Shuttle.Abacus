@@ -15,8 +15,8 @@ select
 from
     Argument a
 left join
-    ArgumentValue ara
-        on (a.ArgumentId = ara.ArgumentId) 
+    ArgumentValue av
+        on (a.ArgumentId = ava.ArgumentId) 
 ";
         private readonly string SelectClause = @"
 select
@@ -101,15 +101,15 @@ where
         public IQuery SaveValue(Argument argument, string value)
         {
             return RawQuery.Create(@"
-insert into ArgumentRestrictedAnswer
+insert into ArgumentValue
 (
     ArgumentId,
-    Answer
+    Value
 )
 values
 (
     @ArgumentId,
-    @Answer
+    @Value
 )
 ")
                 .AddParameterValue(ArgumentColumns.ValueColumns.ArgumentId, argument.Id)

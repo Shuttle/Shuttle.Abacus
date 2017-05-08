@@ -1,5 +1,3 @@
-using System;
-using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Values;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
@@ -20,62 +18,6 @@ namespace Shuttle.Abacus.UI.UI.Formula
             Image = Resources.Image_Formula;
         }
 
-        public bool CanAddOperation()
-        {
-            if (!View.HasOperation)
-            {
-                View.ShowOperationTypeError();
-
-                return false;
-            }
-
-            if (!View.HasValueSource)
-            {
-                View.ShowValueSourceError();
-
-                return false;
-            }
-
-            switch (View.ValueSourceTypeModel.Type.ToLower())
-            {
-                case "selection":
-                    {
-                        if (!View.HasValueSelection)
-                        {
-                            View.ShowValueSelectionError("Please make a selection.");
-
-                            return false;
-                        }
-
-                        break;
-                    }
-                case "fixed":
-                    {
-                        if (!View.HasValueSelection)
-                        {
-                            View.ShowValueSelectionError("Please enter a value.");
-
-                            return false;
-                        }
-
-                        var result =
-                            valueTypeValidatorProvider.Get(DecimalValueTypeValidator.TypeName)
-                                .Validate(View.ValueSelectionValue);
-
-                        if (!result.OK)
-                        {
-                            View.ShowValueSelectionError(result.ToString());
-
-                            return false;
-                        }
-
-                        break;
-                    }
-            }
-
-            return true;
-        }
-
         public override void OnInitialize()
         {
             base.OnInitialize();
@@ -85,9 +27,6 @@ namespace Shuttle.Abacus.UI.UI.Formula
                 throw new NullDependencyException("Model");
             }
 
-            View.PopulateOperations(Model.OperationTypes);
-            View.PopulateValueSources(Model.ValueSourceTypes);
-
             if (Model.FormulaOperations == null)
             {
                 return;
@@ -95,63 +34,7 @@ namespace Shuttle.Abacus.UI.UI.Formula
 
             foreach (var formulaOperation in Model.FormulaOperations)
             {
-                View.AddOperation(formulaOperation.OperationType, formulaOperation.ValueSourceType, formulaOperation.ValueSelection, formulaOperation.Text);
             }
         }
-
-        public void ValueSourceChanged()
-        {
-            var type = Enumeration.Cast<Enumeration.ValueSourceType>(View.ValueSourceTypeModel.Name);
-
-            switch (type)
-            {
-                case Enumeration.ValueSourceType.ArgumentAnswer:
-                    {
-                        View.EnableValueSelection("Argument");
-                        View.PopulateArguments(Model.Arguments);
-
-                        break;
-                    }
-                case Enumeration.ValueSourceType.Decimal:
-                    {
-                        View.EnableValueEntry("Value");
-
-                        break;
-                    }
-                case Enumeration.ValueSourceType.CalculationResult:
-                case Enumeration.ValueSourceType.CalculationSubTotal:
-                    {
-                        throw new NotImplementedException();
-                        View.EnableValueSelection("Calculation");
-                        //View.PopulatePrecedingCalculations(Model.PrecedingCalculations);
-
-                        break;
-                    }
-                case Enumeration.ValueSourceType.DecimalTable:
-                    {
-                        throw new NotImplementedException();
-                        View.EnableValueSelection("Decimal Table");
-                        //View.PopulateDecimalTables(Model.DecimalTables);
-
-                        break;
-                    }
-                case Enumeration.ValueSourceType.MethodResult:
-                    {
-                        throw new NotImplementedException();
-                        View.EnableValueSelection("Formula");
-                        //View.PopulateFormulas(Model.Methods);
-
-                        break;
-                    }
-                case Enumeration.ValueSourceType.CalculationTotal:
-                case Enumeration.ValueSourceType.FormulaTotal:
-                    {
-                        View.DisableValues();
-
-                        break;
-                    }
-            }
-        }
-
     }
 }

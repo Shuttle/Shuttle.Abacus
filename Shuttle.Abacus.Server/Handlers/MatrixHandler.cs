@@ -11,23 +11,20 @@ namespace Shuttle.Abacus.Server.Handlers
         IMessageHandler<CreateMatrixCommand>,
         IMessageHandler<UpdateMatrixCommand>
     {
-        private readonly IConstraintRepository _constraintRepository;
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IMatrixRepository _matrixRepository;
         private readonly IMatrixElementRepository _matrixElementRepository;
 
         public MatrixHandler(IDatabaseContextFactory databaseContextFactory, IMatrixRepository matrixRepository,
-            IMatrixElementRepository matrixElementRepository, IConstraintRepository constraintRepository)
+            IMatrixElementRepository matrixElementRepository)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(matrixRepository, "matrixRepository");
             Guard.AgainstNull(matrixElementRepository, "matrixElementRepository");
-            Guard.AgainstNull(constraintRepository, "constraintRepository");
 
             _databaseContextFactory = databaseContextFactory;
             _matrixRepository = matrixRepository;
             _matrixElementRepository = matrixElementRepository;
-            _constraintRepository = constraintRepository;
         }
 
         public void ProcessMessage(IHandlerContext<CreateMatrixCommand> context)

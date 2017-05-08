@@ -10,7 +10,7 @@ namespace Shuttle.Abacus.UI.UI.MethodTest.Results
         public TestResultPresenter(ITestResultView view) : base(view)
         {
             Text = "Results";
-            Image = Resources.Image_MethodTestRun;
+            Image = Resources.Image_TestRun;
 
             DontTrackChanges();
         }

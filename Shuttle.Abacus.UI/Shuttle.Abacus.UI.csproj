@@ -89,12 +89,12 @@
   <ItemGroup>
     <Compile Include="Coordinators\ArgumentCoordinator.cs" />
     <Compile Include="Coordinators\ContraintCoordinator.cs" />
-    <Compile Include="Coordinators\DecimalTableCoordinator.cs" />
+    <Compile Include="Coordinators\MatrixCoordinator.cs" />
     <Compile Include="Coordinators\DefaultCoordinator.cs" />
     <Compile Include="Coordinators\FormulaCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\IArgumentCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\IConstraintCoordinator.cs" />
-    <Compile Include="Coordinators\Interfaces\IDecimalTableCoordinator.cs" />
+    <Compile Include="Coordinators\Interfaces\IMatrixCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\IDefaultCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\IFormulaCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\ITestCoordinator.cs" />
@@ -229,6 +229,7 @@
     <Compile Include="Messages\Argument\NewArgumentMessage.cs" />
     <Compile Include="Messages\Formula\DeleteFormulaMessage.cs" />
     <Compile Include="Messages\Formula\EditFormulaMessage.cs" />
+    <Compile Include="Messages\Formula\ManageFormulaOperationsMessage.cs" />
     <Compile Include="Messages\Formula\ManageFormulaConstraintsMessage.cs" />
     <Compile Include="Messages\Formula\NewFormulaFromExistingMessage.cs" />
     <Compile Include="Messages\Formula\NewFormulaMessage.cs" />
@@ -271,14 +272,16 @@
     <Compile Include="Messages\WorkItem\WorkItemTextChangedMessage.cs" />
     <Compile Include="Models\ArgumentAnswerModel.cs" />
     <Compile Include="Models\ArgumentDisplayModel.cs" />
-    <Compile Include="Models\ArgumentModel.cs" />
     <Compile Include="Models\ConstraintModel.cs" />
     <Compile Include="Models\ConstraintTypeModel.cs" />
+    <Compile Include="Models\FormulaViewModel.cs" />
+    <Compile Include="Models\FormulaOperationPresenterModel.cs" />
     <Compile Include="Models\MatrixModel.cs" />
     <Compile Include="Models\DecimalValueModel.cs" />
     <Compile Include="Models\FormulaModel.cs" />
     <Compile Include="Models\FormulaOperationModel.cs" />
     <Compile Include="Models\LimitModel.cs" />
+    <Compile Include="Models\OperationModel.cs" />
     <Compile Include="Models\TestModel.cs" />
     <Compile Include="Models\TestResultModel.cs" />
     <Compile Include="Models\OperationTypeModel.cs" />
@@ -314,17 +317,18 @@
     <Compile Include="UI\Argument\ArgumentView.Designer.cs">
       <DependentUpon>ArgumentView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\ArgumentModel.cs" />
     <Compile Include="UI\Argument\IArgumentPresenter.cs" />
     <Compile Include="UI\Argument\IArgumentView.cs" />
-    <Compile Include="UI\Argument\RestrictedAnswer\ArgumentRestrictedAnswerPresenter.cs" />
-    <Compile Include="UI\Argument\RestrictedAnswer\ArgumentRestrictedAnswerView.cs">
+    <Compile Include="UI\Argument\RestrictedAnswer\ArgumentValuePresenter.cs" />
+    <Compile Include="UI\Argument\RestrictedAnswer\ArgumentValueView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Argument\RestrictedAnswer\ArgumentRestrictedAnswerView.Designer.cs">
-      <DependentUpon>ArgumentRestrictedAnswerView.cs</DependentUpon>
+    <Compile Include="UI\Argument\RestrictedAnswer\ArgumentValueView.Designer.cs">
+      <DependentUpon>ArgumentValueView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Argument\RestrictedAnswer\IArgumentRestrictedAnswerPresenter.cs" />
-    <Compile Include="UI\Argument\RestrictedAnswer\IArgumentRestrictedAnswerView.cs" />
+    <Compile Include="UI\Argument\RestrictedAnswer\IArgumentValuePresenter.cs" />
+    <Compile Include="UI\Argument\RestrictedAnswer\IArgumentValueView.cs" />
     <Compile Include="UI\Constraint\ConstraintPresenter.cs" />
     <Compile Include="UI\Constraint\ConstraintView.cs">
       <SubType>UserControl</SubType>
@@ -334,6 +338,15 @@
     </Compile>
     <Compile Include="UI\Constraint\IConstraintPresenter.cs" />
     <Compile Include="UI\Constraint\IConstraintView.cs" />
+    <Compile Include="UI\FormulaOperation\FormulaOperationPresenter.cs" />
+    <Compile Include="UI\FormulaOperation\FormulaOperationView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\FormulaOperation\FormulaOperationView.Designer.cs">
+      <DependentUpon>FormulaOperationView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FormulaOperation\IFormulaOperationPresenter.cs" />
+    <Compile Include="UI\FormulaOperation\IFormulaOperationView.cs" />
     <Compile Include="UI\Matrix\MatrixPresenter.cs" />
     <Compile Include="UI\Matrix\MatrixView.cs">
       <SubType>UserControl</SubType>
@@ -470,6 +483,8 @@
     <Compile Include="UI\WorkItem\ContextToolbar\IContextToolbarPresenter.cs" />
     <Compile Include="UI\WorkItem\ContextToolbar\IContextToolbarView.cs" />
     <Compile Include="WorkItemControllers\ArgumentController.cs" />
+    <Compile Include="WorkItemControllers\FormulaOperationController.cs" />
+    <Compile Include="WorkItemControllers\Interfaces\IFormulaOperationController.cs" />
     <Compile Include="WorkItemControllers\MatrixController.cs" />
     <Compile Include="WorkItemControllers\FormulaController.cs" />
     <Compile Include="WorkItemControllers\Interfaces\IArgumentController.cs" />
@@ -505,11 +520,14 @@
     <EmbeddedResource Include="UI\Argument\ArgumentView.resx">
       <DependentUpon>ArgumentView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Argument\RestrictedAnswer\ArgumentRestrictedAnswerView.resx">
-      <DependentUpon>ArgumentRestrictedAnswerView.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Argument\RestrictedAnswer\ArgumentValueView.resx">
+      <DependentUpon>ArgumentValueView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Constraint\ConstraintView.resx">
       <DependentUpon>ConstraintView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FormulaOperation\FormulaOperationView.resx">
+      <DependentUpon>FormulaOperationView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Matrix\MatrixView.resx">
       <DependentUpon>MatrixView.cs</DependentUpon>

@@ -84,7 +84,7 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
                 return false;
             }
 
-            if (View.ArgumentModel.IsNumber)
+            if (View.ArgumentModel.IsNumber())
             {
                 var result =
                     _valueTypeValidatorProvider.Get(View.ArgumentModel.AnswerType)
@@ -116,7 +116,7 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
 
             foreach (var row in Model.ArgumentRows)
             {
-                View.AddArgument(new ArgumentModel().Using(row));
+                View.AddArgument(new ArgumentModel(row));
             }
 
             if (Model.MethodTestRow == null)

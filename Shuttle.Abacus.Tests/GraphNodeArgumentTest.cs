@@ -21,7 +21,7 @@ namespace Shuttle.Abacus.Tests
 
         //    var answer = new DecimalArgumentAnswer(name, value);
 
-        //    var context = new FormulaContext().AddArgumentAnswer(answer);
+        //    var context = new FormulaContext().AddValue(answer);
 
         //    var display1 = new GraphNodeArgument(argument, "{0}");
 

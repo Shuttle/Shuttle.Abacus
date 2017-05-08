@@ -1,6 +1,6 @@
 ﻿namespace Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer
 {
-    partial class ArgumentRestrictedAnswerView
+    partial class ArgumentValueView
     {
         /// <summary> 
         /// Required designer variable.
@@ -125,7 +125,7 @@
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
-            // ArgumentRestrictedAnswerView
+            // ArgumentValueView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -134,7 +134,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.removeMapping);
             this.Controls.Add(this.AnswerListView);
-            this.Name = "ArgumentRestrictedAnswerView";
+            this.Name = "ArgumentValueView";
             this.Size = new System.Drawing.Size(478, 374);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

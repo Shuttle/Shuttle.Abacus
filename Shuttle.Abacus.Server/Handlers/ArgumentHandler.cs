@@ -1,4 +1,5 @@
-﻿using Shuttle.Abacus.Domain;
+﻿using System;
+using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Messages.v1;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
@@ -14,12 +15,10 @@ namespace Shuttle.Abacus.Server.Handlers
         private readonly IArgumentRepository _argumentRepository;
         private readonly IDatabaseContextFactory _databaseContextFactory;
 
-        public ArgumentHandler(IDatabaseContextFactory databaseContextFactory, IArgumentRepository argumentRepository,
-            IConstraintRepository constraintRepository)
+        public ArgumentHandler(IDatabaseContextFactory databaseContextFactory, IArgumentRepository argumentRepository)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(argumentRepository, "argumentRepository");
-            Guard.AgainstNull(constraintRepository, "constraintRepository");
 
             _databaseContextFactory = databaseContextFactory;
             _argumentRepository = argumentRepository;
@@ -31,13 +30,9 @@ namespace Shuttle.Abacus.Server.Handlers
 
             using (_databaseContextFactory.Create())
             {
-                var argument = new Argument(message.ArgumentId)
-                {
-                    Name = message.Name,
-                    AnswerType = message.AnswerType
-                };
+                var argument = new Argument(message.ArgumentId, message.Name, message.AnswerType);
 
-                argument.AddArgumentAnswers(message.Answers);
+                argument.AddValues(message.Answers);
 
                 _argumentRepository.Save(argument);
             }
@@ -51,13 +46,9 @@ namespace Shuttle.Abacus.Server.Handlers
 
             using (_databaseContextFactory.Create())
             {
-                var argument = new Argument
-                {
-                    Name = message.Name,
-                    AnswerType = message.AnswerType
-                };
+                var argument = new Argument(Guid.NewGuid(), message.Name, message.AnswerType);
 
-                argument.AddArgumentAnswers(message.Answers);
+                argument.AddValues(message.Answers);
 
                 _argumentRepository.Add(argument);
             }

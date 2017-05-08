@@ -23,13 +23,13 @@ namespace Shuttle.Abacus.Tests
 
         //    var contextTrue = new FormulaContext();
 
-        //    contextTrue.AddArgumentAnswer(answer);
+        //    contextTrue.AddValue(answer);
 
         //    Assert.IsTrue(table.IsSatisfiedBy(contextTrue));
 
         //    var contextFalse = new FormulaContext();
 
-        //    contextFalse.AddArgumentAnswer(new TextArgumentAnswer("argument", "two"));
+        //    contextFalse.AddValue(new TextArgumentAnswer("argument", "two"));
 
         //    Assert.IsFalse(table.IsSatisfiedBy(contextFalse));
         //}

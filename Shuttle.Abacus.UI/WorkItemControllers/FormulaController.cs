@@ -35,20 +35,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 
             Send(new CreateFormulaCommand
             {
-                Operations = formulaView.FormulaOperations.Map(item => new FormulaOperation
-                {
-                    SequenceNumber = item.SequenceNumber,
-                    ValueSelection = item.ValueSelection,
-                    Operation = item.Operation,
-                    ValueSource = item.ValueSource,
-                    Text = item.Text
-                }),
-                Constraints = constraintView.Constraints.Map(item => new Constraint
-                {
-                    ArgumentId = item.ArgumentId,
-                    Name = item.Name,
-                    Answer = item.Answer
-                })
+
             });
         }
 
@@ -65,20 +52,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             Send(new ChangeFormulaCommand
             {
                 FormulaId = message.FormulaId,
-                Operations = formulaView.FormulaOperations.Map(item => new FormulaOperation
-                {
-                    SequenceNumber = item.SequenceNumber,
-                    ValueSelection = item.ValueSelection,
-                    Operation = item.Operation,
-                    ValueSource = item.ValueSource,
-                    Text = item.Text
-                }),
-                Constraints = constraintView.Constraints.Map(item => new Constraint
-                {
-                    ArgumentId = item.ArgumentId,
-                    Name = item.Name,
-                    Answer = item.Answer
-                })
+
             }, () =>
                 MessageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
         }

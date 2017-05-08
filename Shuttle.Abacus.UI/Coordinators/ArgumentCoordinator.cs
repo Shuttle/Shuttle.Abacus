@@ -5,7 +5,6 @@ using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Core.Resources;
-using Shuttle.Abacus.UI.Core.State;
 using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Abacus.UI.Messages.Explorer;
 using Shuttle.Abacus.UI.Messages.FactorAnswer;
@@ -56,22 +55,22 @@ namespace Shuttle.Abacus.UI.Coordinators
             switch (message.Item.Type)
             {
                 case Resource.ResourceType.Container:
-                    {
-                        message.NavigationItems.Add(NavigationItemFactory.Create<NewArgumentMessage>());
+                {
+                    message.NavigationItems.Add(NavigationItemFactory.Create<NewArgumentMessage>());
 
-                        break;
-                    }
+                    break;
+                }
                 case Resource.ResourceType.Item:
-                    {
-                        message.NavigationItems.Add(
-                            NavigationItemFactory.Create(new EditArgumentMessage(message.Item.Key)));
+                {
+                    message.NavigationItems.Add(
+                        NavigationItemFactory.Create(new EditArgumentMessage(message.Item.Key)));
 
-                        message.NavigationItems.Add(
-                            NavigationItemFactory.Create(new DeleteArgumentMessage(message.Item.Key, message.Item.Text,
-                                message.UpstreamItems[0])));
+                    message.NavigationItems.Add(
+                        NavigationItemFactory.Create(new DeleteArgumentMessage(message.Item.Key, message.Item.Text,
+                            message.UpstreamItems[0])));
 
-                        break;
-                    }
+                    break;
+                }
             }
         }
 
@@ -81,10 +80,9 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .Create("New Argument")
                 .ControlledBy<IArgumentController>()
                 .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<IArgumentPresenter>()
-                .AddPresenter<IArgumentRestrictedAnswerPresenter>()
-                .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).
-                AsDefault()
+                .AddPresenter<IArgumentPresenter>().WithModel(new ArgumentModel())
+                .AddPresenter<IArgumentValuePresenter>()
+                .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
                 .AssignInitiator(message);
 
             HostInWorkspace<ITabbedWorkspacePresenter>(item);
@@ -100,20 +98,20 @@ namespace Shuttle.Abacus.UI.Coordinators
             switch (message.Resource.Type)
             {
                 case Resource.ResourceType.Container:
+                {
+                    using (_databaseContextFactory.Create())
                     {
-                        using (_databaseContextFactory.Create())
+                        foreach (var row in _argumentQuery.All())
                         {
-                            foreach (var row in _argumentQuery.All())
-                            {
-                                message.Resources.Add(new Resource(ResourceKeys.Argument,
-                                    ArgumentColumns.Id.MapFrom(row),
-                                    ArgumentColumns.Name.MapFrom(row),
-                                    ImageResources.Argument).AsLeaf());
-                            }
+                            message.Resources.Add(new Resource(ResourceKeys.Argument,
+                                ArgumentColumns.Id.MapFrom(row),
+                                ArgumentColumns.Name.MapFrom(row),
+                                ImageResources.Argument).AsLeaf());
                         }
-
-                        break;
                     }
+
+                    break;
+                }
             }
         }
 
@@ -125,8 +123,9 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .Create("Edit Argument")
                     .ControlledBy<IArgumentController>()
                     .ShowIn<IContextToolbarPresenter>()
-                    .AddPresenter<IArgumentPresenter>().WithModel(new ArgumentModel().Using(_argumentQuery.Get(message.ArgumentId)))
-                    .AddPresenter<IArgumentRestrictedAnswerPresenter>()
+                    .AddPresenter<IArgumentPresenter>()
+                    .WithModel(new ArgumentModel(_argumentQuery.Get(message.ArgumentId)))
+                    .AddPresenter<IArgumentValuePresenter>()
                     .WithModel(_argumentQuery.GetValues(message.ArgumentId))
                     .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).
                     AsDefault()
@@ -172,19 +171,19 @@ namespace Shuttle.Abacus.UI.Coordinators
                 switch (message.Item.Type)
                 {
                     case Resource.ResourceType.Container:
-                        {
-                            message.AddTable("Arguments", _argumentQuery.All());
+                    {
+                        message.AddTable("Arguments", _argumentQuery.All());
 
-                            break;
-                        }
+                        break;
+                    }
                     case Resource.ResourceType.Item:
-                        {
-                            message.AddRow(message.Item.Text, _argumentQuery.Get(message.Item.Key));
+                    {
+                        message.AddRow(message.Item.Text, _argumentQuery.Get(message.Item.Key));
 
-                            message.AddTable("Answer Catalog", _argumentQuery.GetValues(message.Item.Key));
+                        message.AddTable("Answer Catalog", _argumentQuery.GetValues(message.Item.Key));
 
-                            break;
-                        }
+                        break;
+                    }
                 }
             }
         }

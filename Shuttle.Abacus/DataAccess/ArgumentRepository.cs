@@ -8,30 +8,26 @@ namespace Shuttle.Abacus.DataAccess
 {
     public class ArgumentRepository : Repository<Argument>, IArgumentRepository
     {
-        private readonly IArgumentQueryFactory _argumentQueryFactory;
+        private readonly IArgumentQueryFactory _queryFactory;
         private readonly IDatabaseGateway _databaseGateway;
-        private readonly IDataRepository<Argument> _repository;
 
-        public ArgumentRepository(IDatabaseGateway databaseGateway, IArgumentQueryFactory argumentQueryFactory,
-            IDataRepository<Argument> repository)
+        public ArgumentRepository(IDatabaseGateway databaseGateway, IArgumentQueryFactory queryFactory)
         {
             Guard.AgainstNull(databaseGateway, "databaseGateway");
-            Guard.AgainstNull(argumentQueryFactory, "argumentQueryFactory");
-            Guard.AgainstNull(repository, "repository");
+            Guard.AgainstNull(queryFactory, "queryFactory");
 
-            _repository = repository;
             _databaseGateway = databaseGateway;
-            _argumentQueryFactory = argumentQueryFactory;
+            _queryFactory = queryFactory;
         }
 
         public override void Add(Argument item)
         {
-            _databaseGateway.ExecuteUsing(_argumentQueryFactory.Add(item));
+            _databaseGateway.ExecuteUsing(_queryFactory.Add(item));
         }
 
         public override void Remove(Guid id)
         {
-            _databaseGateway.ExecuteUsing(_argumentQueryFactory.Remove(id));
+            _databaseGateway.ExecuteUsing(_queryFactory.Remove(id));
         }
 
         public override Argument Get(Guid id)
@@ -39,24 +35,33 @@ namespace Shuttle.Abacus.DataAccess
             return Guarded.Entity(Find(id), id);
         }
 
-        public ArgumentCollection All()
-        {
-            return new ArgumentCollection(_repository.FetchAllUsing(_argumentQueryFactory.All()));
-        }
-
         public void Save(Argument argument)
         {
-            _databaseGateway.ExecuteUsing(_argumentQueryFactory.Save(argument));
+            _databaseGateway.ExecuteUsing(_queryFactory.Save(argument));
 
-            _databaseGateway.ExecuteUsing(_argumentQueryFactory.RemoveValues(argument));
+            _databaseGateway.ExecuteUsing(_queryFactory.RemoveValues(argument));
 
-            argument.RestrictedAnswers.ForEach(
-                mapping => _databaseGateway.ExecuteUsing(_argumentQueryFactory.SaveValue(argument, mapping)));
+            argument.Values.ForEach(
+                mapping => _databaseGateway.ExecuteUsing(_queryFactory.SaveValue(argument, mapping)));
         }
 
         public Argument Find(Guid id)
         {
-            return _repository.FetchItemUsing(_argumentQueryFactory.Get(id));
+            var row = _databaseGateway.GetSingleRowUsing(_queryFactory.Get(id));
+
+            if (row == null)
+            {
+                return null;
+            }
+
+            var result = new Argument(id, ArgumentColumns.Name.MapFrom(row), ArgumentColumns.AnswerType.MapFrom(row));
+
+            foreach (var valueRow in _databaseGateway.GetRowsUsing(_queryFactory.GetValues(id)))
+            {
+                result.AddValue(ArgumentColumns.ValueColumns.Value.MapFrom(valueRow));
+            }
+
+            return result;
         }
     }
 }

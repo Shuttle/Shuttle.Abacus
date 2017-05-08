@@ -6,22 +6,22 @@ using Shuttle.Abacus.UI.Core.Presentation;
 
 namespace Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer
 {
-    public class ArgumentRestrictedAnswerPresenter : Presenter<IArgumentRestrictedAnswerView, IEnumerable<DataRow>>,
-                                                IArgumentRestrictedAnswerPresenter
+    public class ArgumentValuePresenter : Presenter<IArgumentValueView, IEnumerable<DataRow>>,
+                                                IArgumentValuePresenter
     {
-        public ArgumentRestrictedAnswerPresenter(IArgumentRestrictedAnswerView view) : base(view)
+        public ArgumentValuePresenter(IArgumentValueView view) : base(view)
         {
-            Text = "Restricted ArgumentValues Details";
-            Image = Resources.Image_ArgumentRestrictedAnswer;
+            Text = "Values";
+            Image = Resources.Image_ArgumentValue;
         }
 
-        public bool AnswerOK()
+        public bool IsValueOK()
         {
             var result = true;
 
-            if (!View.HasAnswer())
+            if (!View.HasValue())
             {
-                View.ShowAnswerError("Please enter an answer.");
+                View.ShowValueError("Please enter a value.");
 
                 result = false;
             }
@@ -40,7 +40,7 @@ namespace Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer
 
             foreach (var row in Model)
             {
-                View.AddRestrictedAnswer(ArgumentColumns.ValueColumns.Value.MapFrom(row));
+                View.AddValue(ArgumentColumns.ValueColumns.Value.MapFrom(row));
             }
         }
     }

@@ -27,13 +27,13 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             }
 
             var view = WorkItem.GetView<IArgumentView>();
-            var mappingListView = WorkItem.GetView<IArgumentRestrictedAnswerView>();
+            var mappingListView = WorkItem.GetView<IArgumentValueView>();
 
             var command = new CreateArgumentCommand
                           {
                               Name = view.ArgumentNameValue,
                               AnswerType = view.AnswerTypeValue,
-                              Answers = mappingListView.Answers
+                              Answers = mappingListView.Values
                           };
 
             Send(command);
@@ -47,14 +47,14 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             }
 
             var view = WorkItem.GetView<IArgumentView>();
-            var mappingListView = WorkItem.GetView<IArgumentRestrictedAnswerView>();
+            var mappingListView = WorkItem.GetView<IArgumentValueView>();
 
             var command = new ChangeArgumentCommand
                           {
                               ArgumentId = message.ArgumentId,
                               Name = view.ArgumentNameValue,
                               AnswerType = view.AnswerTypeValue,
-                              Answers = mappingListView.Answers
+                              Answers = mappingListView.Values
                           };
 
             Send(command, () =>

@@ -15,9 +15,9 @@ namespace Shuttle.Abacus.UI.Coordinators
     {
         private const string Tab = "   ";
         private readonly IDatabaseContextFactory _databaseContextFactory;
-        public MatrixQuery _matrixQuery;
+        public IMatrixQuery _matrixQuery;
 
-        public ReportCoordinator(IDatabaseContextFactory databaseContextFactory, MatrixQuery matrixQuery)
+        public ReportCoordinator(IDatabaseContextFactory databaseContextFactory, IMatrixQuery matrixQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(matrixQuery, "matrixQuery");

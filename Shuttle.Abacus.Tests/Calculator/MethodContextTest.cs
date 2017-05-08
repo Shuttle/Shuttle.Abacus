@@ -12,7 +12,7 @@ namespace Shuttle.Abacus.Tests
         //{
         //    var context = new FormulaContext(string.Empty);
 
-        //    context.AddArgumentAnswer(new DecimalArgumentAnswer("SumInsured", 300000));
+        //    context.AddValue(new DecimalArgumentAnswer("SumInsured", 300000));
 
         //    Assert.AreSame(ArgumentAnswer.Null, context.GetArgumentAnswer("blah"));
         //    Assert.AreEqual(300000, context.GetArgumentAnswer("SumInsured").Answer);
@@ -44,7 +44,7 @@ namespace Shuttle.Abacus.Tests
         //{
         //    var methodContext = new FormulaContext(string.Empty);
 
-        //    methodContext.AddArgumentAnswer(new IntegerArgumentAnswer("input", 10));
+        //    methodContext.AddValue(new IntegerArgumentAnswer("input", 10));
 
         //    methodContext.IncrementSubTotal(new CalculationCollectionResult(new CalculationCollection("result"), 25));
         //    methodContext.AddResult(new FormulaCalculationResult(new FormulaCalculation("result"), 25));

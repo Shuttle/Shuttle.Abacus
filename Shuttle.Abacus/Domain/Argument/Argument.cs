@@ -6,57 +6,43 @@ namespace Shuttle.Abacus.Domain
 {
     public class Argument
     {
-        public static Argument MethodName = new Argument(Guid.Empty) { Name = "Formula Name", AnswerType = "Text" };
+        private readonly List<string> _values = new List<string>();
 
-        private readonly List<string> _answers = new List<string>();
-
-
-        public Argument()
-            : this(Guid.NewGuid())
-        {
-        }
-
-        public Argument(Guid id)
+        public Argument(Guid id, string name, string answerType)
         {
             Id = id;
+            Name = name;
+            AnswerType = answerType;
         }
 
-        public string Name { get; set; }
-        public string AnswerType { get; set; }
-        public bool IsSystemData { get; set; }
+        public string Name { get; private set; }
+        public string AnswerType { get; private set; }
 
-        public IEnumerable<string> RestrictedAnswers
-        {
-            get { return new ReadOnlyCollection<string>(_answers); }
-        }
-
-        public bool HasRestrictedAnswers
-        {
-            get { return _answers.Count > 0; }
-        }
+        public IEnumerable<string> Values => new ReadOnlyCollection<string>(_values);
+        public bool HasValues => _values.Count > 0;
 
         public Guid Id { get; private set; }
 
-        public Argument AddArgumentAnswer(string answer)
+        public Argument AddValue(string value)
         {
-            if (!ContainsAnswer(answer))
+            if (!_values.Contains(value))
             {
-                _answers.Add(answer);
+                _values.Add(value);
             }
 
             return this;
         }
 
-        public bool ContainsAnswer(string answer)
+        public bool ContainsValue(string value)
         {
-            return _answers.Find(item=> item.Equals(answer)) != null;
+            return _values.Contains(value);
         }
 
-        public Argument AddArgumentAnswers(IEnumerable<string> answers)
+        public Argument AddValues(IEnumerable<string> values)
         {
-            foreach (var answer in answers)
+            foreach (var value in values)
             {
-                AddArgumentAnswer(answer);
+                AddValue(value);
             }
 
             return this;

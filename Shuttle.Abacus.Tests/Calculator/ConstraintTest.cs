@@ -17,13 +17,13 @@ namespace Shuttle.Abacus.Tests
 
         //    var context1 = new FormulaContext(string.Empty);
 
-        //    context1.AddArgumentAnswer(new IntegerArgumentAnswer("Version", 1));
+        //    context1.AddValue(new IntegerArgumentAnswer("Version", 1));
 
         //    Assert.IsFalse(formula.IsSatisfiedBy(context1));
 
         //    var context2 = new FormulaContext(string.Empty);
 
-        //    context2.AddArgumentAnswer(new IntegerArgumentAnswer("Version", 6));
+        //    context2.AddValue(new IntegerArgumentAnswer("Version", 6));
 
         //    Assert.IsTrue(formula.IsSatisfiedBy(context2));
         //}
@@ -37,13 +37,13 @@ namespace Shuttle.Abacus.Tests
 
         //    var context1 = new FormulaContext(string.Empty);
 
-        //    context1.AddArgumentAnswer(new IntegerArgumentAnswer("Version", 1));
+        //    context1.AddValue(new IntegerArgumentAnswer("Version", 1));
 
         //    Assert.IsFalse(formula.IsSatisfiedBy(context1));
 
         //    var context2 = new FormulaContext(string.Empty);
 
-        //    context2.AddArgumentAnswer(new IntegerArgumentAnswer("Version", 6));
+        //    context2.AddValue(new IntegerArgumentAnswer("Version", 6));
 
         //    Assert.IsTrue(formula.IsSatisfiedBy(context2));
         //}
@@ -57,13 +57,13 @@ namespace Shuttle.Abacus.Tests
 
         //    var context1 = new FormulaContext(string.Empty);
 
-        //    context1.AddArgumentAnswer(new IntegerArgumentAnswer("Version", 1));
+        //    context1.AddValue(new IntegerArgumentAnswer("Version", 1));
 
         //    Assert.IsTrue(formula.IsSatisfiedBy(context1));
 
         //    var context2 = new FormulaContext(string.Empty);
 
-        //    context2.AddArgumentAnswer(new IntegerArgumentAnswer("Version", 6));
+        //    context2.AddValue(new IntegerArgumentAnswer("Version", 6));
 
         //    Assert.IsFalse(formula.IsSatisfiedBy(context2));
         //}

@@ -30,5 +30,10 @@ namespace Shuttle.Abacus.UI.Models
         public IEnumerable<ValueSourceTypeModel> ValueSourceTypes { get; set; }
         public IEnumerable<FormulaOperationModel> FormulaOperations { get; set; }
         public IEnumerable<ArgumentModel> Arguments { get; set; }
+
+        public string OperationType { get; set; }
+        public string ValueSourceType { get; set; }
+        public string ValueSelection { get; set; }
+        public string Text { get; set; }
     }
 }

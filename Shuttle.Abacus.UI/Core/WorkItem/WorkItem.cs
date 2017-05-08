@@ -299,7 +299,7 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
             {
                 throw new InvalidOperationException(
                     string.Format(
-                        "Cannot assign model of type '{0}' to presenter of type '{1}' as the presenter does not accept a model.",
+                        "Cannot assign model of type '{0}' to presenter of type '{1}' as the presenter does not accept a model of that type.",
                         typeof(T).FullName, _presenter.GetType().FullName));
             }
 

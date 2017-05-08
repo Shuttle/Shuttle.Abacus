@@ -20,7 +20,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
         private readonly IConstraintTypeQuery _constraintTypeQuery;
 
         private readonly IDatabaseContextFactory _databaseContextFactory;
-        private readonly MatrixQuery _matrixQuery;
+        private readonly IMatrixQuery _matrixQuery;
         private readonly IDecimalTableRules _decimalTableRules;
         private readonly IValueTypeValidatorProvider _valueTypeValidatorProvider;
         private IEnumerable<ConstraintTypeModel> _constraintTypes = new List<ConstraintTypeModel>();
@@ -28,7 +28,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
         private bool _previousRowArgumentWasText;
 
         public MatrixPresenter(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
-            MatrixQuery matrixQuery, IConstraintTypeQuery constraintTypeQuery, IMatrixView view,
+            IMatrixQuery matrixQuery, IConstraintTypeQuery constraintTypeQuery, IMatrixView view,
             IDecimalTableRules decimalTableRules,
             IValueTypeValidatorProvider valueTypeValidatorProvider)
             : base(view)
@@ -47,8 +47,8 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             _decimalTableRules = decimalTableRules;
             _valueTypeValidatorProvider = valueTypeValidatorProvider;
 
-            Text = "Decimal Table";
-            Image = Resources.Image_DecimalTable;
+            Text = "Matrix";
+            Image = Resources.Image_Matrix;
         }
 
         public void DecimalTableNameExited()
@@ -255,7 +255,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             {
                 _constraintTypes = _constraintTypeQuery.All().Map(row => new ConstraintTypeModel(row));
 
-                View.PopulateArguments(_argumentQuery.All().Map(row => new ArgumentModel().Using(row)));
+                View.PopulateArguments(_argumentQuery.All().Map(row => new ArgumentModel(row)));
 
                 View.DecimalTableNameValue = Model.Name;
 

@@ -166,7 +166,6 @@
     <Compile Include="Domain\ArgumentAnswer\NullArgumentAnswer.cs" />
     <Compile Include="Domain\ArgumentAnswer\TextArgumentAnswer.cs" />
     <Compile Include="Domain\Argument\Argument.cs" />
-    <Compile Include="Domain\Argument\ArgumentCollection.cs" />
     <Compile Include="Domain\Constraints\Constraint.cs" />
     <Compile Include="Domain\Constraints\EqualsConstraint.cs" />
     <Compile Include="Domain\Constraints\IConstraintFactory.cs" />
@@ -256,7 +255,6 @@
     <Compile Include="Policy\SystemUserPolicy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\Repositories\IArgumentRepository.cs" />
-    <Compile Include="Domain\Repositories\IConstraintRepository.cs" />
     <Compile Include="Domain\Repositories\IMatrixRepository.cs" />
     <Compile Include="Domain\Repositories\IMatrixElementRepository.cs" />
     <Compile Include="Domain\Repositories\IFormulaRepository.cs" />

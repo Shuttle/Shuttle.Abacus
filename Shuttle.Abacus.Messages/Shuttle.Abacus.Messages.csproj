@@ -82,7 +82,7 @@
     <Compile Include="v1\LoginCompletedEvent.cs" />
     <Compile Include="v1\NotificationMessage.cs" />
     <Compile Include="v1\LoginTimeoutCommand.cs" />
-    <Compile Include="v1\TransferObjects\FormulaOperation.cs" />
+    <Compile Include="v1\TransferObjects\Operation.cs" />
     <Compile Include="v1\TransferObjects\Permission.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="v1\ReplyMessage.cs" />

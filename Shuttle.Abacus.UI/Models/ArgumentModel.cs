@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using Shuttle.Abacus.DataAccess;
@@ -15,24 +15,26 @@ namespace Shuttle.Abacus.UI.Models
             "money"
         };
 
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string AnswerType { get; set; }
-
-        public bool IsNumber
+        public ArgumentModel()
         {
-            get { return !string.IsNullOrEmpty(AnswerType) && Numbers.Contains(AnswerType.ToLower()); }
         }
 
-        public ArgumentModel Using(DataRow row)
+        public ArgumentModel(DataRow row)
         {
             Guard.AgainstNull(row, "row");
 
             Id = ArgumentColumns.Id.MapFrom(row);
             Name = ArgumentColumns.Name.MapFrom(row);
             AnswerType = ArgumentColumns.AnswerType.MapFrom(row);
+        }
 
-            return this;
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string AnswerType { get; set; }
+
+        public bool IsNumber()
+        {
+            return !string.IsNullOrEmpty(AnswerType) && Numbers.Contains(AnswerType.ToLower());
         }
 
         public bool IsText()

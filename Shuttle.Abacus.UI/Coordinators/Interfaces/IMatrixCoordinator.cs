@@ -6,7 +6,7 @@ using Shuttle.Abacus.UI.Messages.Resources;
 
 namespace Shuttle.Abacus.UI.Coordinators.Interfaces
 {
-    public interface IDecimalTableCoordinator :
+    public interface IMatrixCoordinator :
         IMessageHandler<ExplorerInitializeMessage>,
         IMessageHandler<ResourceMenuRequestMessage>,
         IMessageHandler<PopulateResourceMessage>,

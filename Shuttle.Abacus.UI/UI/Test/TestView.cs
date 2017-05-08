@@ -228,7 +228,7 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
             //    return;
             //}
 
-            //AddArgumentAnswer(argumentDTO.Id, Answer.Text);
+            //AddValue(argumentDTO.Id, Answer.Text);
         }
 
         private void ArgumentName_SelectedIndexChanged(object sender, EventArgs e)
