@@ -23,14 +23,14 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             WorkItem.GetView<ISimpleListView>().ShowCheckboxes();
         }
 
-        public void HandleMessage(NewMethodTestMessage message)
+        public void HandleMessage(NewTestMessage message)
         {
             message.WorkItemId = WorkItem.Id;
 
             MessageBus.Publish(message);
         }
 
-        public void HandleMessage(EditMethodTestMessage message)
+        public void HandleMessage(EditTestMessage message)
         {
             var view = WorkItem.GetView<ISimpleListView>();
 
@@ -41,13 +41,13 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 
             var item = view.SelectedItem();
 
-            message.MethodTestId = new Guid(item.Name);
+            message.TestId = new Guid(item.Name);
             message.WorkItemId = WorkItem.Id;
 
             MessageBus.Publish(message);
         }
 
-        public void HandleMessage(RemoveMethodTestMessage message)
+        public void HandleMessage(RemoveTestMessage message)
         {
             var view = WorkItem.GetView<ISimpleListView>();
 
@@ -63,7 +63,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 
             message.WorkItemId = WorkItem.Id;
 
-            var command = new DeleteMethodTestCommand();
+            var command = new DeleteTestCommand();
 
             foreach (var item in view.ElectedItems)
             {
@@ -72,7 +72,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 
             Send(command,
                            () =>
-                           MessageBus.Publish(new MethodTestRemovedMessage(WorkItem.Id, message.MethodId)));
+                           MessageBus.Publish(new TestRemovedMessage(WorkItem.Id, message.MethodId)));
         }
 
         public void HandleMessage(MarkAllMessage message)
@@ -85,7 +85,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             WorkItem.GetView<ISimpleListView>().InvertMarks();
         }
 
-        public void HandleMessage(RunMethodTestMessage message)
+        public void HandleMessage(RunTestMessage message)
         {
             var view = WorkItem.GetView<ISimpleListView>();
 
@@ -94,7 +94,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                 return;
             }
 
-            var command = new RunMethodTestCommand(WorkItem.Id);
+            var command = new RunTestCommand(WorkItem.Id);
 
             foreach (var item in view.ElectedItems)
             {
@@ -104,7 +104,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             Send(command);
         }
 
-        public void HandleMessage(NewMethodTestFromExistingMessage message)
+        public void HandleMessage(NewTestFromExistingMessage message)
         {
             var view = WorkItem.GetView<ISimpleListView>();
 
@@ -121,7 +121,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             MessageBus.Publish(message);
         }
 
-        public void HandleMessage(PrintMethodTestMessage message)
+        public void HandleMessage(PrintTestMessage message)
         {
             var view = WorkItem.GetView<ISimpleListView>();
 
@@ -130,7 +130,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                 return;
             }
 
-            var command = new PrintMethodTestCommand(WorkItem.Id);
+            var command = new PrintTestCommand(WorkItem.Id);
 
             foreach (var item in view.ElectedItems)
             {

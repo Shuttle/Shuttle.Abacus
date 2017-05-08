@@ -223,7 +223,7 @@ namespace Shuttle.Abacus.UI.UI.Formula
             }
         }
 
-        public void PopulateDecimalTables(IEnumerable<DecimalTableModel> list)
+        public void PopulateDecimalTables(IEnumerable<MatrixModel> list)
         {
             foreach (var model in list)
             {

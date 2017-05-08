@@ -8,7 +8,7 @@ namespace Shuttle.Abacus.UI.Coordinators.Interfaces
     public interface IReportCoordinator :
         ICoordinator,
         IMessageHandler<DecimalTableReportMessage>,
-        IMessageHandler<MethodTestPrintMessage>
+        IMessageHandler<TestPrintMessage>
     {
 
     }

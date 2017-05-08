@@ -16,14 +16,14 @@ namespace Shuttle.Abacus.Tests
         //                  {
         //                      Name = "One", 
         //                      AnswerType = "Boolean",
-        //                      Answers = new List<ArgumentRestrictedAnswerDTO>()
+        //                      ArgumentValues = new List<ArgumentRestrictedAnswerDTO>()
         //                  };
 
-        //    command.Answers.Add(new ArgumentRestrictedAnswerDTO("One"));
-        //    command.Answers.Add(new ArgumentRestrictedAnswerDTO("Two"));
-        //    command.Answers.Add(new ArgumentRestrictedAnswerDTO("Three"));
+        //    command.ArgumentValues.Add(new ArgumentRestrictedAnswerDTO("One"));
+        //    command.ArgumentValues.Add(new ArgumentRestrictedAnswerDTO("Two"));
+        //    command.ArgumentValues.Add(new ArgumentRestrictedAnswerDTO("Three"));
 
-        //    Assert.AreEqual(3, command.Answers.Count);
+        //    Assert.AreEqual(3, command.ArgumentValues.Count);
         //}
 
         //[Test]
@@ -33,12 +33,12 @@ namespace Shuttle.Abacus.Tests
         //                  {
         //                      Name = "One", 
         //                      AnswerType = "Boolean",
-        //                      Answers = new List<ArgumentRestrictedAnswerDTO>()
+        //                      ArgumentValues = new List<ArgumentRestrictedAnswerDTO>()
         //                  };
 
-        //    command.Answers.Add(new ArgumentRestrictedAnswerDTO("One"));
-        //    command.Answers.Add(new ArgumentRestrictedAnswerDTO("One"));
-        //    command.Answers.Add(new ArgumentRestrictedAnswerDTO("Three"));
+        //    command.ArgumentValues.Add(new ArgumentRestrictedAnswerDTO("One"));
+        //    command.ArgumentValues.Add(new ArgumentRestrictedAnswerDTO("One"));
+        //    command.ArgumentValues.Add(new ArgumentRestrictedAnswerDTO("Three"));
 
         //    Assert.Throws<DuplicateEntryException>(() => new Argument().ProcessCommand(command));
         //}

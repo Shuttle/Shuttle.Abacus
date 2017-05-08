@@ -11,14 +11,14 @@ namespace Shuttle.Abacus.UI.Coordinators.Interfaces
         ICoordinator,
         IMessageHandler<ExplorerInitializeMessage>,
         IMessageHandler<ResourceMenuRequestMessage>,
-        IMessageHandler<ManageMethodTestsMessage>,
-        IMessageHandler<NewMethodTestMessage>,
-        IMessageHandler<NewMethodTestFromExistingMessage>,
-        IMessageHandler<EditMethodTestMessage>,
-        IMessageHandler<MethodTestCreatedMessage>,
-        IMessageHandler<MethodTestChangedMessage>,
-        IMessageHandler<MethodTestRemovedMessage>,
-        IMessageHandler<MethodTestRunMessage>,
+        IMessageHandler<ManageTestsMessage>,
+        IMessageHandler<NewTestMessage>,
+        IMessageHandler<NewTestFromExistingMessage>,
+        IMessageHandler<EditTestMessage>,
+        IMessageHandler<TestCreatedMessage>,
+        IMessageHandler<TestChangedMessage>,
+        IMessageHandler<TestRemovedMessage>,
+        IMessageHandler<TestRunMessage>,
         IMessageHandler<SummaryViewRequestedMessage>
     {
 

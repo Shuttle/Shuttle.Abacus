@@ -7,15 +7,15 @@ namespace Shuttle.Abacus.UI.WorkItemControllers.Interfaces
 {
     public interface IMethodTestManagerController :
         IWorkItemController,
-        IMessageHandler<NewMethodTestMessage>,
-        IMessageHandler<NewMethodTestFromExistingMessage>,
-        IMessageHandler<EditMethodTestMessage>,
-        IMessageHandler<RemoveMethodTestMessage>,
-        IMessageHandler<RunMethodTestMessage>,
+        IMessageHandler<NewTestMessage>,
+        IMessageHandler<NewTestFromExistingMessage>,
+        IMessageHandler<EditTestMessage>,
+        IMessageHandler<RemoveTestMessage>,
+        IMessageHandler<RunTestMessage>,
         IMessageHandler<ListReadyMessage>,
         IMessageHandler<MarkAllMessage>,
         IMessageHandler<InvertMarksMessage>,
-        IMessageHandler<PrintMethodTestMessage>
+        IMessageHandler<PrintTestMessage>
     {
     }
 }

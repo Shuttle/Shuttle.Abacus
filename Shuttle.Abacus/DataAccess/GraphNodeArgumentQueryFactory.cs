@@ -23,14 +23,14 @@ where
 insert into GraphNodeArgument
 (
     CalculationId,
-    ArgumentId,
+    ArgumentName,
     Format,
     SequenceNumber
 )
 values
 (
     @CalculationId,
-    @ArgumentId,
+    @ArgumentName,
     @Format,
     @SequenceNumber
 )
@@ -45,7 +45,7 @@ values
         {
             return RawQuery.Create(@"
 select
-    ArgumentId,
+    ArgumentName,
     Format
 from
     GraphNodeArgument

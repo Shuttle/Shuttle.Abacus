@@ -8,6 +8,6 @@ namespace Shuttle.Abacus.DataAccess
     {
         IEnumerable<DataRow> All();
         DataRow Get(Guid id);
-        IEnumerable<DataRow> Answers(Guid id);
+        IEnumerable<DataRow> GetValues(Guid id);
     }
 }

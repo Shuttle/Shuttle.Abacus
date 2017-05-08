@@ -48,10 +48,10 @@ namespace Shuttle.Abacus.DataAccess
         {
             _databaseGateway.ExecuteUsing(_argumentQueryFactory.Save(argument));
 
-            _databaseGateway.ExecuteUsing(_argumentQueryFactory.RemoveRestrictedAnswers(argument));
+            _databaseGateway.ExecuteUsing(_argumentQueryFactory.RemoveValues(argument));
 
             argument.RestrictedAnswers.ForEach(
-                mapping => _databaseGateway.ExecuteUsing(_argumentQueryFactory.SaveRestrictedAnswers(argument, mapping)));
+                mapping => _databaseGateway.ExecuteUsing(_argumentQueryFactory.SaveValue(argument, mapping)));
         }
 
         public Argument Find(Guid id)

@@ -11,7 +11,7 @@ namespace Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer
     {
         public ArgumentRestrictedAnswerPresenter(IArgumentRestrictedAnswerView view) : base(view)
         {
-            Text = "Restricted Answers Details";
+            Text = "Restricted ArgumentValues Details";
             Image = Resources.Image_ArgumentRestrictedAnswer;
         }
 
@@ -40,7 +40,7 @@ namespace Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer
 
             foreach (var row in Model)
             {
-                View.AddRestrictedAnswer(ArgumentColumns.RestrictedAnswerColumns.Answer.MapFrom(row));
+                View.AddRestrictedAnswer(ArgumentColumns.ValueColumns.Value.MapFrom(row));
             }
         }
     }

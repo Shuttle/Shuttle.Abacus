@@ -7,51 +7,51 @@ namespace Shuttle.Abacus.Domain
         IValueSelectionHolder,
         ISpecification<IMethodContext>
     {
-        private readonly DecimalTable decimalTable;
+        private readonly Matrix matrix;
 
-        public DecimalTableValueSource(DecimalTable decimalTable)
+        public DecimalTableValueSource(Matrix matrix)
         {
-            this.decimalTable = decimalTable;
+            this.matrix = matrix;
         }
 
         public bool IsSatisfiedBy(IMethodContext collectionMethodContext)
         {
-            return decimalTable.IsSatisfiedBy(collectionMethodContext);
+            return matrix.IsSatisfiedBy(collectionMethodContext);
         }
 
         public string ValueSelection
         {
-            get { return decimalTable.Id.ToString("n"); }
+            get { return matrix.Id.ToString("n"); }
         }
 
         public decimal Operand(IMethodContext methodContext, ICalculationContext calculationContext)
         {
-            return decimalTable.Get(methodContext).Value;
+            return matrix.Get(methodContext).Value;
         }
 
         public string Description(decimal operand, IMethodContext methodContext)
         {
-            var rate = decimalTable.Find(methodContext);
+            var rate = matrix.Find(methodContext);
 
             return rate != null
-                       ? string.Format("{0} (from rate table '{1}' - {2})", rate.Value, decimalTable.Name,
+                       ? string.Format("{0} (from rate table '{1}' - {2})", rate.Value, matrix.Name,
                                        rate.Description(methodContext))
                        : string.Empty;
         }
 
         public string Name
         {
-            get { return "DecimalTable"; }
+            get { return "Matrix"; }
         }
 
         public object Text
         {
-            get { return decimalTable.Name; }
+            get { return matrix.Name; }
         }
 
         public IValueSource Copy()
         {
-            return new DecimalTableValueSource(decimalTable);
+            return new DecimalTableValueSource(matrix);
         }
     }
 }

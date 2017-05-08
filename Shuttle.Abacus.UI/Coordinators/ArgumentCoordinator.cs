@@ -56,14 +56,12 @@ namespace Shuttle.Abacus.UI.Coordinators
             switch (message.Item.Type)
             {
                 case Resource.ResourceType.Container:
-                {
-                    message.NavigationItems.Add(NavigationItemFactory.Create<NewArgumentMessage>());
+                    {
+                        message.NavigationItems.Add(NavigationItemFactory.Create<NewArgumentMessage>());
 
-                    break;
-                }
+                        break;
+                    }
                 case Resource.ResourceType.Item:
-                {
-                    if (!message.Item.State.Get<bool>(StateKeys.IsSystemData))
                     {
                         message.NavigationItems.Add(
                             NavigationItemFactory.Create(new EditArgumentMessage(message.Item.Key)));
@@ -71,10 +69,9 @@ namespace Shuttle.Abacus.UI.Coordinators
                         message.NavigationItems.Add(
                             NavigationItemFactory.Create(new DeleteArgumentMessage(message.Item.Key, message.Item.Text,
                                 message.UpstreamItems[0])));
-                    }
 
-                    break;
-                }
+                        break;
+                    }
             }
         }
 
@@ -103,21 +100,20 @@ namespace Shuttle.Abacus.UI.Coordinators
             switch (message.Resource.Type)
             {
                 case Resource.ResourceType.Container:
-                {
-                    using (_databaseContextFactory.Create())
                     {
-                        foreach (var row in _argumentQuery.All())
+                        using (_databaseContextFactory.Create())
                         {
-                            message.Resources.Add(new Resource(ResourceKeys.Argument,
-                                ArgumentColumns.Id.MapFrom(row),
-                                ArgumentColumns.Name.MapFrom(row),
-                                ImageResources.Argument).AsLeaf().State.Add(
-                                StateKeys.IsSystemData, ArgumentColumns.IsSystemData.MapFrom(row)));
+                            foreach (var row in _argumentQuery.All())
+                            {
+                                message.Resources.Add(new Resource(ResourceKeys.Argument,
+                                    ArgumentColumns.Id.MapFrom(row),
+                                    ArgumentColumns.Name.MapFrom(row),
+                                    ImageResources.Argument).AsLeaf());
+                            }
                         }
-                    }
 
-                    break;
-                }
+                        break;
+                    }
             }
         }
 
@@ -131,7 +127,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .ShowIn<IContextToolbarPresenter>()
                     .AddPresenter<IArgumentPresenter>().WithModel(new ArgumentModel().Using(_argumentQuery.Get(message.ArgumentId)))
                     .AddPresenter<IArgumentRestrictedAnswerPresenter>()
-                    .WithModel(_argumentQuery.Answers(message.ArgumentId))
+                    .WithModel(_argumentQuery.GetValues(message.ArgumentId))
                     .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).
                     AsDefault()
                     .AssignInitiator(message);
@@ -176,26 +172,21 @@ namespace Shuttle.Abacus.UI.Coordinators
                 switch (message.Item.Type)
                 {
                     case Resource.ResourceType.Container:
-                    {
-                        message.AddTable("Arguments", _argumentQuery.All());
+                        {
+                            message.AddTable("Arguments", _argumentQuery.All());
 
-                        break;
-                    }
+                            break;
+                        }
                     case Resource.ResourceType.Item:
-                    {
-                        message.AddRow(message.Item.Text, _argumentQuery.Get(message.Item.Key));
+                        {
+                            message.AddRow(message.Item.Text, _argumentQuery.Get(message.Item.Key));
 
-                        message.AddTable("Answer Catalog", _argumentQuery.Answers(message.Item.Key));
+                            message.AddTable("Answer Catalog", _argumentQuery.GetValues(message.Item.Key));
 
-                        break;
-                    }
+                            break;
+                        }
                 }
             }
-        }
-
-        public static class StateKeys
-        {
-            public static readonly StateKey IsSystemData = new StateKey("IsSystemData");
         }
     }
 }

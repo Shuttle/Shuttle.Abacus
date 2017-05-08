@@ -11,7 +11,7 @@ namespace Shuttle.Abacus.DataAccess
 select
     OwnerName,
     OwnerId,
-    ArgumentId,
+    ArgumentName,
     ArgumentName,
     Name,
     Answer,
@@ -49,7 +49,7 @@ insert into Constraint
 (
     OwnerName,
     OwnerId,
-    ArgumentId,
+    ArgumentName,
     Name,
     Answer,
     SequenceNumber
@@ -58,7 +58,7 @@ values
 (
     @OwnerName,
     @OwnerId,
-    @ArgumentId,
+    @ArgumentName,
     @Name,
     @Answer,
     @SequenceNumber

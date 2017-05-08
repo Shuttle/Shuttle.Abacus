@@ -15,15 +15,15 @@ namespace Shuttle.Abacus.UI.Coordinators
     {
         private const string Tab = "   ";
         private readonly IDatabaseContextFactory _databaseContextFactory;
-        public IDecimalTableQuery _decimalTableQuery;
+        public MatrixQuery _matrixQuery;
 
-        public ReportCoordinator(IDatabaseContextFactory databaseContextFactory, IDecimalTableQuery decimalTableQuery)
+        public ReportCoordinator(IDatabaseContextFactory databaseContextFactory, MatrixQuery matrixQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
-            Guard.AgainstNull(decimalTableQuery, "decimalTableQuery");
+            Guard.AgainstNull(matrixQuery, "matrixQuery");
 
             _databaseContextFactory = databaseContextFactory;
-            _decimalTableQuery = decimalTableQuery;
+            _matrixQuery = matrixQuery;
         }
 
 
@@ -34,8 +34,8 @@ namespace Shuttle.Abacus.UI.Coordinators
                 var model = new ReportModel
                 {
                     ReportDatasetName = "ReportsDataSet_DecimalTable",
-                    ReportDefinitionName = "Abacus.Reporting.Reports.DecimalTable.rdlc",
-                    ReportData = _decimalTableQuery.DecimalTableReport(message.DecimalTableId)
+                    ReportDefinitionName = "Abacus.Reporting.Reports.Matrix.rdlc",
+                    ReportData = _matrixQuery.Report(message.DecimalTableId)
                 };
             }
 
@@ -49,7 +49,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             //HostInWorkspace<ITabbedWorkspacePresenter>(item);
         }
 
-        public void HandleMessage(MethodTestPrintMessage message)
+        public void HandleMessage(TestPrintMessage message)
         {
             throw new NotImplementedException();
             //var table = new DataTable("RunEvents");

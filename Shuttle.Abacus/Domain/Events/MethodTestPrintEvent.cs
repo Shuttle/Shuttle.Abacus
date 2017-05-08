@@ -6,9 +6,9 @@ namespace Shuttle.Abacus.Domain
     {
         public MethodTestPrintEvent()
         {
-            RunEvents = new List<MethodTestRunEvent>();
+            RunEvents = new List<TestRunEvent>();
         }
 
-        public List<MethodTestRunEvent> RunEvents { get; set; }
+        public List<TestRunEvent> RunEvents { get; set; }
     }
 }

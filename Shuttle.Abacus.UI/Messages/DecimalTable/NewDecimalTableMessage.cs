@@ -7,7 +7,7 @@ namespace Shuttle.Abacus.UI.Messages.DecimalTable
     {
         public override IPermission RequiredPermission
         {
-            get { return Permissions.DecimalTable; }
+            get { return Permissions.Matrix; }
         }
     }
 }

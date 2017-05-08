@@ -15,8 +15,8 @@ namespace Shuttle.Abacus.UI.Models
         {
             Guard.AgainstNull(row, "row");
 
-            ArgumentId = MethodTestColumns.ArgumentAnswerColumns.ArgumentId.MapFrom(row);
-            Answer = MethodTestColumns.ArgumentAnswerColumns.Answer.MapFrom(row);
+            ArgumentId = TestColumns.ArgumentValueColumns.ArgumentName.MapFrom(row);
+            Answer = TestColumns.ArgumentValueColumns.Value.MapFrom(row);
 
             return this;
         }

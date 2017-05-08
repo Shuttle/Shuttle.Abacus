@@ -43,7 +43,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
 
             View.DetachValueFormatter();
 
-            var answerRows = _argumentQuery.Answers(model.Id).ToList();
+            var answerRows = _argumentQuery.GetValues(model.Id).ToList();
 
             if (answerRows.Any() || model.IsText())
             {

@@ -11,9 +11,9 @@ namespace Shuttle.Abacus.Tests
         //[Test]
         //public void Should_be_able_to_create_a_table_and_add_an_argument_constraint()
         //{
-        //    var table = new DecimalTable(Guid.NewGuid(), "Some DecimalValue Table", Guid.Empty, Guid.Empty);
+        //    var table = new Matrix(Guid.NewGuid(), "Some MatrixElement Table", Guid.Empty, Guid.Empty);
 
-        //    var value = new DecimalValue(10);
+        //    var value = new MatrixElement(10);
 
         //    var answer = new TextArgumentAnswer("argument", "one");
 

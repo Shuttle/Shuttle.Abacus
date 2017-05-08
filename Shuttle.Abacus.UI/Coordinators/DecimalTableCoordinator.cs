@@ -26,10 +26,10 @@ namespace Shuttle.Abacus.UI.Coordinators
         private readonly IArgumentQuery _argumentQuery;
         private readonly IConstraintQuery _constraintQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
-        private readonly IDecimalTableQuery _decimalTableQuery;
+        private readonly IMatrixQuery _decimalTableQuery;
 
         public DecimalTableCoordinator(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
-            IDecimalTableQuery decimalTableQuery, IConstraintQuery constraintQuery)
+            IMatrixQuery decimalTableQuery, IConstraintQuery constraintQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(argumentQuery, "argumentQuery");
@@ -44,7 +44,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(ExplorerInitializeMessage message)
         {
-            if (!Permissions.DecimalTable.IsSatisfiedBy(Session.Permissions))
+            if (!Permissions.Matrix.IsSatisfiedBy(Session.Permissions))
             {
                 return;
             }
@@ -137,9 +137,9 @@ namespace Shuttle.Abacus.UI.Coordinators
         {
             var item = WorkItemManager
                 .Create("New Decimal Table")
-                .ControlledBy<IDecimalTableController>()
+                .ControlledBy<IMatrixController>()
                 .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<IDecimalTablePresenter>()
+                .AddPresenter<IMatrixPresenter>()
                 .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).
                 AsDefault()
                 .AssignInitiator(message);
@@ -153,10 +153,10 @@ namespace Shuttle.Abacus.UI.Coordinators
             {
                 var item = WorkItemManager
                     .Create(string.Format("Decimal Table: {0}", message.DecimalTableName))
-                    .ControlledBy<IDecimalTableController>()
+                    .ControlledBy<IMatrixController>()
                     .ShowIn<IContextToolbarPresenter>()
-                    .AddPresenter<IDecimalTablePresenter>()
-                    .WithModel(new DecimalTableModel(_decimalTableQuery.Get(message.DecimalTableId)))
+                    .AddPresenter<IMatrixPresenter>()
+                    .WithModel(new MatrixModel(_decimalTableQuery.Get(message.DecimalTableId)))
                     .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
                     .AsDefault()
                     .AssignInitiator(message);
@@ -171,10 +171,10 @@ namespace Shuttle.Abacus.UI.Coordinators
             {
                 var item = WorkItemManager
                     .Create("New Decimal Table")
-                    .ControlledBy<IDecimalTableController>()
+                    .ControlledBy<IMatrixController>()
                     .ShowIn<IContextToolbarPresenter>()
-                    .AddPresenter<IDecimalTablePresenter>()
-                    .WithModel(new DecimalTableModel(_decimalTableQuery.Get(message.DecimalTableId)))
+                    .AddPresenter<IMatrixPresenter>()
+                    .WithModel(new MatrixModel(_decimalTableQuery.Get(message.DecimalTableId)))
                     .AddNavigationItem(
                         NavigationItemFactory.Create<NewDecimalTableMessage>()
                             .AssignResourceItem(

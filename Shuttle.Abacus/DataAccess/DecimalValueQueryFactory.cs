@@ -12,21 +12,21 @@ select
     DecimalTableId,
     ColumnIndex,
     RowIndex,
-    DecimalValue
+    MatrixElement
 from
-    DecimalValue
+    MatrixElement
 ";
 
-        public static IQuery Add(DecimalTable decimalTable, DecimalValue item)
+        public static IQuery Add(Matrix matrix, MatrixElement item)
         {
             return RawQuery.Create(@"
-insert into DecimalValue
+insert into MatrixElement
 (
     DecimalValueId,
     DecimalTableId,
     ColumnIndex,
     RowIndex,
-    DecimalValue
+    MatrixElement
 )
 values
 (
@@ -34,18 +34,18 @@ values
     @DecimalTableId,
     @ColumnIndex,
     @RowIndex,
-    @DecimalValue
+    @MatrixElement
 )")
                 .AddParameterValue(DecimalValueColumns.Id, item.Id)
-                .AddParameterValue(DecimalValueColumns.DecimalTableId, decimalTable.Id)
+                .AddParameterValue(DecimalValueColumns.DecimalTableId, matrix.Id)
                 .AddParameterValue(DecimalValueColumns.ColumnIndex, item.Column)
                 .AddParameterValue(DecimalValueColumns.RowIndex, item.Row)
                 .AddParameterValue(DecimalValueColumns.DecimalValue, item.Value);
         }
 
-        public static IQuery Remove(DecimalValue item)
+        public static IQuery Remove(MatrixElement item)
         {
-            return RawQuery.Create("delete from DecimalValue where DecimalValueId = @DecimalValueId").AddParameterValue(DecimalValueColumns.Id, item.Id);
+            return RawQuery.Create("delete from MatrixElement where DecimalValueId = @DecimalValueId").AddParameterValue(DecimalValueColumns.Id, item.Id);
         }
 
         public static IQuery Get(Guid id)
@@ -68,14 +68,14 @@ where
 
         public static IQuery RemoveAllForDecimalTable(Guid decimalTableId)
         {
-            return RawQuery.Create("delete from DecimalValue where DecimalTableId = @DecimalTableId").AddParameterValue(DecimalValueColumns.DecimalTableId, decimalTableId);
+            return RawQuery.Create("delete from MatrixElement where DecimalTableId = @DecimalTableId").AddParameterValue(DecimalValueColumns.DecimalTableId, decimalTableId);
         }
 
         public static IQuery RemoveConstraintsForDecimalTable(Guid decimalTableId)
         {
             return
                 RawQuery.Create(
-                    "delete from [Constraint] from [Constraint] c inner join [DecimalValue] dv on (dv.DecimalValueId = c.OwnerId) where dv.DecimalTableId = @DecimalTableId")
+                    "delete from [Constraint] from [Constraint] c inner join [MatrixElement] dv on (dv.DecimalValueId = c.OwnerId) where dv.DecimalTableId = @DecimalTableId")
                     .AddParameterValue(DecimalValueColumns.DecimalTableId, decimalTableId);
         }
     }

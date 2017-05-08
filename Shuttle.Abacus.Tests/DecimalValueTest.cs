@@ -10,7 +10,7 @@ namespace Shuttle.Abacus.Tests
         [Test]
         public void Should_be_able_to_create_a_new_value_and_constrain_it()
         {
-            var rate = new DecimalValue(10);
+            var rate = new MatrixElement(10);
 
             Assert.IsTrue(rate.IsSatisfiedBy(new FormulaContext()));
 

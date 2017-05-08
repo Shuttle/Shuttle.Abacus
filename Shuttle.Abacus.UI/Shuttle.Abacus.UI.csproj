@@ -247,20 +247,20 @@
     <Compile Include="Messages\SystemUser\EditPermissionsMessage.cs" />
     <Compile Include="Messages\SystemUser\ListSystemUserMessage.cs" />
     <Compile Include="Messages\SystemUser\NewSystemUserMessage.cs" />
-    <Compile Include="Messages\TestCase\ChangeMethodTestMessage.cs" />
-    <Compile Include="Messages\TestCase\DeleteMethodTestMessage.cs" />
-    <Compile Include="Messages\TestCase\EditMethodTestMessage.cs" />
-    <Compile Include="Messages\TestCase\ManageMethodTestsMessage.cs" />
-    <Compile Include="Messages\TestCase\MethodTestChangedMessage.cs" />
-    <Compile Include="Messages\TestCase\MethodTestCreatedMessage.cs" />
-    <Compile Include="Messages\TestCase\MethodTestPrintMessage.cs" />
-    <Compile Include="Messages\TestCase\MethodTestRemovedMessage.cs" />
-    <Compile Include="Messages\TestCase\MethodTestRunMessage.cs" />
-    <Compile Include="Messages\TestCase\NewMethodTestFromExistingMessage.cs" />
-    <Compile Include="Messages\TestCase\NewMethodTestMessage.cs" />
-    <Compile Include="Messages\TestCase\PrintMethodTestMessage.cs" />
-    <Compile Include="Messages\TestCase\RemoveMethodTestMessage.cs" />
-    <Compile Include="Messages\TestCase\RunMethodTestMessage.cs" />
+    <Compile Include="Messages\Test\ChangeTestMessage.cs" />
+    <Compile Include="Messages\Test\DeleteTestMessage.cs" />
+    <Compile Include="Messages\Test\EditTestMessage.cs" />
+    <Compile Include="Messages\Test\ManageTestsMessage.cs" />
+    <Compile Include="Messages\Test\TestChangedMessage.cs" />
+    <Compile Include="Messages\Test\TestCreatedMessage.cs" />
+    <Compile Include="Messages\Test\TestPrintMessage.cs" />
+    <Compile Include="Messages\Test\TestRemovedMessage.cs" />
+    <Compile Include="Messages\Test\TestRunMessage.cs" />
+    <Compile Include="Messages\Test\NewTestFromExistingMessage.cs" />
+    <Compile Include="Messages\Test\NewTestMessage.cs" />
+    <Compile Include="Messages\Test\PrintTestMessage.cs" />
+    <Compile Include="Messages\Test\RemoveTestMessage.cs" />
+    <Compile Include="Messages\Test\RunTestMessage.cs" />
     <Compile Include="Messages\WorkItem\RefreshWorkItemDispatcherMessage.cs" />
     <Compile Include="Messages\WorkItem\RefreshWorkItemDispatcherTextMessage.cs" />
     <Compile Include="Messages\WorkItem\WorkItemBusyMessage.cs" />
@@ -274,13 +274,13 @@
     <Compile Include="Models\ArgumentModel.cs" />
     <Compile Include="Models\ConstraintModel.cs" />
     <Compile Include="Models\ConstraintTypeModel.cs" />
-    <Compile Include="Models\DecimalTableModel.cs" />
+    <Compile Include="Models\MatrixModel.cs" />
     <Compile Include="Models\DecimalValueModel.cs" />
     <Compile Include="Models\FormulaModel.cs" />
     <Compile Include="Models\FormulaOperationModel.cs" />
     <Compile Include="Models\LimitModel.cs" />
-    <Compile Include="Models\MethodTestModel.cs" />
-    <Compile Include="Models\MethodTestResultModel.cs" />
+    <Compile Include="Models\TestModel.cs" />
+    <Compile Include="Models\TestResultModel.cs" />
     <Compile Include="Models\OperationTypeModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\SimpleGridModel.cs" />
@@ -334,15 +334,15 @@
     </Compile>
     <Compile Include="UI\Constraint\IConstraintPresenter.cs" />
     <Compile Include="UI\Constraint\IConstraintView.cs" />
-    <Compile Include="UI\DecimalTable\DecimalTablePresenter.cs" />
-    <Compile Include="UI\DecimalTable\DecimalTableView.cs">
+    <Compile Include="UI\Matrix\MatrixPresenter.cs" />
+    <Compile Include="UI\Matrix\MatrixView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\DecimalTable\DecimalTableView.Designer.cs">
-      <DependentUpon>DecimalTableView.cs</DependentUpon>
+    <Compile Include="UI\Matrix\MatrixView.Designer.cs">
+      <DependentUpon>MatrixView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\DecimalTable\IDecimalTablePresenter.cs" />
-    <Compile Include="UI\DecimalTable\IDecimalTableView.cs" />
+    <Compile Include="UI\Matrix\IMatrixPresenter.cs" />
+    <Compile Include="UI\Matrix\IMatrixView.cs" />
     <Compile Include="UI\Formula\FormulaPresenter.cs" />
     <Compile Include="UI\Formula\FormulaView.cs">
       <SubType>UserControl</SubType>
@@ -370,23 +370,23 @@
     <Compile Include="UI\List\SimpleListView.Designer.cs">
       <DependentUpon>SimpleListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\MethodTest\IMethodTestPresenter.cs" />
-    <Compile Include="UI\MethodTest\IMethodTestView.cs" />
-    <Compile Include="UI\MethodTest\MethodTestPresenter.cs" />
-    <Compile Include="UI\MethodTest\MethodTestView.cs">
+    <Compile Include="UI\Test\ITestPresenter.cs" />
+    <Compile Include="UI\Test\ITestView.cs" />
+    <Compile Include="UI\Test\TestPresenter.cs" />
+    <Compile Include="UI\Test\TestView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\MethodTest\MethodTestView.Designer.cs">
-      <DependentUpon>MethodTestView.cs</DependentUpon>
+    <Compile Include="UI\Test\TestView.Designer.cs">
+      <DependentUpon>TestView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\MethodTest\Results\IMethodTestResultPresenter.cs" />
-    <Compile Include="UI\MethodTest\Results\IMethodTestResultView.cs" />
-    <Compile Include="UI\MethodTest\Results\MethodTestResultPresenter.cs" />
-    <Compile Include="UI\MethodTest\Results\MethodTestResultView.cs">
+    <Compile Include="UI\Test\Results\ITestResultPresenter.cs" />
+    <Compile Include="UI\Test\Results\ITestResultView.cs" />
+    <Compile Include="UI\Test\Results\TestResultPresenter.cs" />
+    <Compile Include="UI\Test\Results\TestResultView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\MethodTest\Results\MethodTestResultView.Designer.cs">
-      <DependentUpon>MethodTestResultView.cs</DependentUpon>
+    <Compile Include="UI\Test\Results\TestResultView.Designer.cs">
+      <DependentUpon>TestResultView.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Shell\Explorer\ExplorerPartialPresenter.cs" />
     <Compile Include="UI\Shell\Explorer\ExplorerPartialView.cs" />
@@ -470,18 +470,18 @@
     <Compile Include="UI\WorkItem\ContextToolbar\IContextToolbarPresenter.cs" />
     <Compile Include="UI\WorkItem\ContextToolbar\IContextToolbarView.cs" />
     <Compile Include="WorkItemControllers\ArgumentController.cs" />
-    <Compile Include="WorkItemControllers\DecimalTableController.cs" />
+    <Compile Include="WorkItemControllers\MatrixController.cs" />
     <Compile Include="WorkItemControllers\FormulaController.cs" />
     <Compile Include="WorkItemControllers\Interfaces\IArgumentController.cs" />
-    <Compile Include="WorkItemControllers\Interfaces\IDecimalTableController.cs" />
+    <Compile Include="WorkItemControllers\Interfaces\IMatrixController.cs" />
     <Compile Include="WorkItemControllers\Interfaces\IFormulaController.cs" />
-    <Compile Include="WorkItemControllers\Interfaces\IMethodTestController.cs" />
+    <Compile Include="WorkItemControllers\Interfaces\ITestController.cs" />
     <Compile Include="WorkItemControllers\Interfaces\IMethodTestManagerController.cs" />
     <Compile Include="WorkItemControllers\Interfaces\IReportController.cs" />
     <Compile Include="WorkItemControllers\Interfaces\ISummaryController.cs" />
     <Compile Include="WorkItemControllers\Interfaces\ISystemUserController.cs" />
     <Compile Include="WorkItemControllers\Interfaces\ISystemUserListController.cs" />
-    <Compile Include="WorkItemControllers\MethodTestController.cs" />
+    <Compile Include="WorkItemControllers\TestController.cs" />
     <Compile Include="WorkItemControllers\MethodTestManagerController.cs" />
     <Compile Include="WorkItemControllers\ReportController.cs" />
     <Compile Include="WorkItemControllers\SummaryController.cs" />
@@ -511,8 +511,8 @@
     <EmbeddedResource Include="UI\Constraint\ConstraintView.resx">
       <DependentUpon>ConstraintView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\DecimalTable\DecimalTableView.resx">
-      <DependentUpon>DecimalTableView.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Matrix\MatrixView.resx">
+      <DependentUpon>MatrixView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Formula\FormulaView.resx">
       <DependentUpon>FormulaView.cs</DependentUpon>
@@ -523,11 +523,11 @@
     <EmbeddedResource Include="UI\List\SimpleListView.resx">
       <DependentUpon>SimpleListView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\MethodTest\MethodTestView.resx">
-      <DependentUpon>MethodTestView.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Test\TestView.resx">
+      <DependentUpon>TestView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\MethodTest\Results\MethodTestResultView.resx">
-      <DependentUpon>MethodTestResultView.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Test\Results\TestResultView.resx">
+      <DependentUpon>TestResultView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Shell\ModalWorkspace\ModalWorkspaceForm.resx">
       <DependentUpon>ModalWorkspaceForm.cs</DependentUpon>

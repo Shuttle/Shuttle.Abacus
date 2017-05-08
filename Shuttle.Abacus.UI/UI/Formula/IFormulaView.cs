@@ -33,6 +33,6 @@ namespace Shuttle.Abacus.UI.UI.Formula
         void AddOperation(string operationType, string valueSourceType, string valueSelection, string text);
         void PopulateOperations(IEnumerable<string> enumerable);
         void PopulateValues(IEnumerable<string> enumerable);
-        void PopulateDecimalTables(IEnumerable<DecimalTableModel> list);
+        void PopulateDecimalTables(IEnumerable<MatrixModel> list);
     }
 }

@@ -27,7 +27,7 @@ namespace Shuttle.Abacus.UI.Coordinators
         private readonly IConstraintQuery _constraintQuery;
         private readonly IConstraintTypeQuery _constraintTypeQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
-        private readonly IDecimalTableQuery _decimalTableQuery;
+        private readonly IMatrixQuery _decimalTableQuery;
         private readonly IFormulaQuery _formulaQuery;
         private readonly IOperationTypeQuery _operationTypeQuery;
         private readonly IValueSourceTypeQuery _valueSourceTypeQuery;
@@ -36,7 +36,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             IConstraintQuery constraintQuery, IConstraintTypeQuery constraintTypeQuery,
             IArgumentQuery argumentQuery,
             IOperationTypeQuery operationTypeQuery, IValueSourceTypeQuery valueSourceTypeQuery,
-            IDecimalTableQuery decimalTableQuery)
+            IMatrixQuery decimalTableQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(formulaQuery, "_formulaQuery");

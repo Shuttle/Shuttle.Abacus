@@ -14,12 +14,12 @@ namespace Shuttle.Abacus.DataAccess
 
     //        if (!item.HasArgumentName("True"))
     //        {
-    //            item.Answers.Add(new ArgumentRestrictedAnswerDTO("True"));
+    //            item.ArgumentValues.Add(new ArgumentRestrictedAnswerDTO("True"));
     //        }
 
     //        if (!item.HasArgumentName("False"))
     //        {
-    //            item.Answers.Add(new ArgumentRestrictedAnswerDTO("False"));
+    //            item.ArgumentValues.Add(new ArgumentRestrictedAnswerDTO("False"));
     //        }
     //    }
     //}

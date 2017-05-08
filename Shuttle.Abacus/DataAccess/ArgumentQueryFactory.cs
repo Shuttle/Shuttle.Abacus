@@ -11,19 +11,18 @@ select
     a.ArgumentId,
     Name,
     AnswerType,
-    Answer
+    Value
 from
     Argument a
 left join
-    ArgumentRestrictedAnswer ara
+    ArgumentValue ara
         on (a.ArgumentId = ara.ArgumentId) 
 ";
         private readonly string SelectClause = @"
 select
     ArgumentId,
     Name,
-    AnswerType,
-    IsSystemData
+    AnswerType
 from
     Argument
 ";
@@ -38,10 +37,10 @@ from
             return new RawQuery(string.Concat(SelectClause, "where ArgumentId = @ArgumentId")).AddParameterValue(ArgumentColumns.Id, id);
         }
 
-        public IQuery GetRestrictedAnswer(Guid id)
+        public IQuery GetValues(Guid id)
         {
-            return RawQuery.Create("select Answer from ArgumentRestrictedAnswer where ArgumentId = @ArgumentId")
-                .AddParameterValue(ArgumentColumns.RestrictedAnswerColumns.ArgumentId, id);
+            return RawQuery.Create("select Value from ArgumentValue where ArgumentId = @ArgumentId")
+                .AddParameterValue(ArgumentColumns.ValueColumns.ArgumentId, id);
         }
 
         public IQuery Add(Argument item)
@@ -93,13 +92,13 @@ where
         }
 
 
-        public IQuery RemoveRestrictedAnswers(Argument argument)
+        public IQuery RemoveValues(Argument argument)
         {
-            return RawQuery.Create("delete from ArgumentRestrictedAnswer where ArgumentId = @ArgumentId")
-                    .AddParameterValue(ArgumentColumns.RestrictedAnswerColumns.ArgumentId, argument.Id);
+            return RawQuery.Create("delete from ArgumentValue where ArgumentId = @ArgumentId")
+                    .AddParameterValue(ArgumentColumns.ValueColumns.ArgumentId, argument.Id);
         }
 
-        public IQuery SaveRestrictedAnswers(Argument argument, string answer)
+        public IQuery SaveValue(Argument argument, string value)
         {
             return RawQuery.Create(@"
 insert into ArgumentRestrictedAnswer
@@ -113,8 +112,8 @@ values
     @Answer
 )
 ")
-                .AddParameterValue(ArgumentColumns.RestrictedAnswerColumns.ArgumentId, argument.Id)
-                .AddParameterValue(ArgumentColumns.RestrictedAnswerColumns.Answer, answer);
+                .AddParameterValue(ArgumentColumns.ValueColumns.ArgumentId, argument.Id)
+                .AddParameterValue(ArgumentColumns.ValueColumns.Value, value);
         }
     }
 }

@@ -80,7 +80,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
 
             rows.ForEach(row =>
                 {
-                    var answer = ArgumentColumns.RestrictedAnswerColumns.Answer.MapFrom(row);
+                    var answer = ArgumentColumns.ValueColumns.Value.MapFrom(row);
 
                     if (!ContainsAnswerName(answer))
                     {
