@@ -9,36 +9,31 @@ namespace Shuttle.Abacus.DataAccess
     {
         private string SelectClause = @"
 select
-    OwnerName,
-    OwnerId,
+    FormulaId,
+    SequenceNumber,
     ArgumentName,
-    ArgumentName,
-    Name,
-    Answer,
-    AnswerType,
-    Description,
-    SequenceNumber
+    ComparisonType,
+    Value
 from
-    [Constraint]
+    FormulaConstraint
 ";
 
-        public IQuery All(Guid ownerId)
+        public IQuery All(Guid formulaId)
         {
-            throw new NotImplementedException();
-//            return RawQuery.Create(string.Concat(SelectClause, @"
-//where
-//    OwnerId = @OwnerId
-//order by
-//    SequenceNumber
-//"))
-//                .AddParameterValue(FormulaColumns.ConstraintColumns.OwnerId, ownerId);
+            return RawQuery.Create(string.Concat(SelectClause, @"
+where
+    FormulaId = @FormulaId
+order by
+    SequenceNumber
+"))
+                .AddParameterValue(FormulaColumns.Id, formulaId);
         }
 
         public IQuery Remove(Guid ownerId)
         {
             throw new NotImplementedException();
             //return RawQuery.Create("delete from [Constraint] where OwnerId = @OwnerId")
-            //    .AddParameterValue(FormulaColumns.ConstraintColumns.OwnerId, ownerId);
+            //    .AddParameterValue(FormulaColumns.ConstraintColumns.OwnerId, formulaId);
         }
 
 //        public IQuery Add(IConstraintOwner owner, FormulaConstraint constraint)
