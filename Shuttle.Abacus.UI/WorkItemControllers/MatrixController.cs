@@ -62,7 +62,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 
             var command = new UpdateMatrixCommand
             {
-                DecimalTableId = message.DecimalTableId,
+                MatrixId = message.MatrixId,
                 DecimalTableName = view.DecimalTableNameValue,
                 RowArgumentId = view.RowArgumentModel.Id,
                 ColumnArgumentId = view.ColumnArgumentModel.Id,

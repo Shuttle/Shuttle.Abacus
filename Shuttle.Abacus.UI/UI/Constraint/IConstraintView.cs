@@ -24,7 +24,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
         bool HasAnswers { get; }
         bool HasArgument { get; }
         bool HasConstraint { get; }
-        List<OwnedConstraint> Constraints { get; set; }
+        List<FormulaConstraint> Constraints { get; set; }
         
         ComboBox ValueSelectionControl { get; }
         TextBox FormattedControl { get; }
@@ -32,7 +32,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
         void ShowAnswerError(string message);
         void ShowArgumentError();
         void ShowConstraintError();
-        void AddConstraint(Guid argumentId, string argumentName, string constraintName, string valueSelection);
+        void AddConstraint(string argumentName, string comparisonType, string value);
         void ShowAllConstraints();
         void ShowAnswerCatalogConstraints();
         

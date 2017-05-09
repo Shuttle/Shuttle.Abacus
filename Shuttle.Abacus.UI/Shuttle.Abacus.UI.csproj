@@ -277,7 +277,7 @@
     <Compile Include="Models\FormulaViewModel.cs" />
     <Compile Include="Models\FormulaOperationPresenterModel.cs" />
     <Compile Include="Models\MatrixModel.cs" />
-    <Compile Include="Models\DecimalValueModel.cs" />
+    <Compile Include="Models\MatrixElementModel.cs" />
     <Compile Include="Models\FormulaModel.cs" />
     <Compile Include="Models\FormulaOperationModel.cs" />
     <Compile Include="Models\LimitModel.cs" />

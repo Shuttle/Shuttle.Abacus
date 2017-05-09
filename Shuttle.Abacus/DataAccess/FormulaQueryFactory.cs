@@ -7,6 +7,7 @@ namespace Shuttle.Abacus.DataAccess
     public class FormulaQueryFactory : IFormulaQueryFactory
     {
         public const string OperationTableName = "FormulaOperation";
+
         private readonly string SelectClause = @"
 select 
     FormulaId,
@@ -73,6 +74,28 @@ values
                     .AddParameterValue(FormulaColumns.Id, formula.Id);
         }
 
+        public IQuery RemoveConstraints(Formula formula)
+        {
+            return
+                RawQuery.Create("delete from FormulaConstraint where FormulaId = @FormulaId")
+                    .AddParameterValue(FormulaColumns.Id, formula.Id);
+        }
+
+        public IQuery GetConstraints(Guid id)
+        {
+            return RawQuery.Create(@"
+select
+    FormulaId,
+    SequenceNumber,
+    ArgumentName,
+    ComparisonType,
+    Value
+from
+    FormulaConstraint
+")
+                .AddParameterValue(FormulaOperationColumns.FormulaId, id);
+        }
+
         public IQuery AddOperation(Formula formula, FormulaOperation operation, int sequenceNumber)
         {
             return RawQuery.Create(@"
@@ -120,6 +143,32 @@ where
         public IQuery All()
         {
             return RawQuery.Create(SelectClause);
+        }
+
+        public IQuery AddConstraint(Formula formula, FormulaConstraint constraint)
+        {
+            return RawQuery.Create(@"
+insert into Constraint
+(
+    FormulaId,
+    SequenceNumber
+    ArgumentName,
+    ComparisonType,
+    Value
+)
+values
+(
+    @FormulaId,
+    @SequenceNumber
+    @ArgumentName,
+    @ComparisonType,
+    @Value
+)")
+                .AddParameterValue(FormulaColumns.Id, formula.Id)
+                .AddParameterValue(FormulaColumns.ConstraintColumns.SequenceNumber, constraint.SequenceNumber)
+                .AddParameterValue(FormulaColumns.ConstraintColumns.ArgumentName, constraint.ArgumentName)
+                .AddParameterValue(FormulaColumns.ConstraintColumns.ComparisonType, constraint.ComparisonType)
+                .AddParameterValue(FormulaColumns.ConstraintColumns.Value, constraint.Value);
         }
     }
 }

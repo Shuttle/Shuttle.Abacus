@@ -8,7 +8,7 @@ namespace Shuttle.Abacus.Domain
     public class Matrix :
         ISpecification<IMethodContext>
     {
-        private static readonly MatrixElement ZeroMatrixElement = new MatrixElement(0);
+        //private static readonly MatrixElement ZeroMatrixElement = new MatrixElement(0);
 
         private readonly List<MatrixElement> _values = new List<MatrixElement>();
 
@@ -27,7 +27,7 @@ namespace Shuttle.Abacus.Domain
 
         public string Name { get; private set; }
 
-        public IEnumerable<MatrixElement> DecimalValues
+        public IEnumerable<MatrixElement> Elements
         {
             get { return new ReadOnlyCollection<MatrixElement>(_values); }
         }
@@ -37,15 +37,16 @@ namespace Shuttle.Abacus.Domain
 
         public bool IsSatisfiedBy(IMethodContext item)
         {
-            foreach (var value in DecimalValues)
-            {
-                if (value.IsSatisfiedBy(item))
-                {
-                    return true;
-                }
-            }
+            throw new NotImplementedException();
+            //foreach (var value in Elements)
+            //{
+            //    if (value.IsSatisfiedBy(item))
+            //    {
+            //        return true;
+            //    }
+            //}
 
-            return false;
+            //return false;
         }
 
         public void AddDecimalValue(MatrixElement matrixElement)
@@ -55,32 +56,34 @@ namespace Shuttle.Abacus.Domain
             _values.Add(matrixElement);
         }
 
-        public MatrixElement Get(IMethodContext collectionContext)
-        {
-            var result = Find(collectionContext);
+        //public MatrixElement Get(IMethodContext collectionContext)
+        //{
+        //    var result = Find(collectionContext);
 
-            if (result != null)
-            {
-                return result;
-            }
+        //    if (result != null)
+        //    {
+        //        return result;
+        //    }
 
-            collectionContext.AddErrorMessage(string.Format("Could not find a qualifying value in decimal table '{0}'.", Name));
+        //    collectionContext.AddErrorMessage(string.Format("Could not find a qualifying value in decimal table '{0}'.", Name));
 
-            return ZeroMatrixElement;
-        }
+        //    return ZeroMatrixElement;
+        //}
 
         public MatrixElement Find(IMethodContext collectionContext)
         {
-            return _values.Find(value => value.IsSatisfiedBy(collectionContext));
+            throw new NotImplementedException();
+            //return _values.Find(value => value.IsSatisfiedBy(collectionContext));
         }
 
         public Matrix Copy()
         {
-            var result = new Matrix(Guid.NewGuid(), Name, RowArgumentId, ColumnArgumentId);
+            throw new NotImplementedException();
+            //var result = new Matrix(Guid.NewGuid(), Name, RowArgumentId, ColumnArgumentId);
 
-            _values.ForEach(value => result.AddDecimalValue(value.Copy()));
+            //_values.ForEach(value => result.AddDecimalValue(value.Copy()));
 
-            return result;
+            //return result;
         }
     }
 }

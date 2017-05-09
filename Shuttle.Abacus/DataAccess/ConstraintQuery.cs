@@ -26,31 +26,31 @@ namespace Shuttle.Abacus.DataAccess
             return _databaseGateway.GetRowsUsing(_constraintQueryFactory.All(ownerId));
         }
 
-        public void GetOwned(IConstraintOwner owner)
-        {
-            Guard.AgainstNull(owner, "owner");
+        //public void GetOwned(IConstraintOwner owner)
+        //{
+        //    Guard.AgainstNull(owner, "owner");
 
-            foreach (var row in _databaseGateway.GetRowsUsing(_constraintQueryFactory.All(owner.Id)))
-            {
-                owner.AddConstraint(new OwnedConstraint(
-                    ConstraintColumns.SequenceNumber.MapFrom(row),
-                    ConstraintColumns.ArgumentId.MapFrom(row),
-                    ConstraintColumns.Name.MapFrom(row),
-                    ConstraintColumns.Answer.MapFrom(row)
-                ));
-            }
-        }
+        //    foreach (var row in _databaseGateway.GetRowsUsing(_constraintQueryFactory.All(owner.Id)))
+        //    {
+        //        owner.AddConstraint(new FormulaConstraint(
+        //            ConstraintColumns.SequenceNumber.MapFrom(row),
+        //            ConstraintColumns.ArgumentId.MapFrom(row),
+        //            ConstraintColumns.Name.MapFrom(row),
+        //            ConstraintColumns.Answer.MapFrom(row)
+        //        ));
+        //    }
+        //}
 
-        public void SaveOwned(IConstraintOwner owner)
-        {
-            Guard.AgainstNull(owner, "owner");
+        //public void SaveOwned(IConstraintOwner owner)
+        //{
+        //    Guard.AgainstNull(owner, "owner");
 
-            _databaseGateway.ExecuteUsing(_constraintQueryFactory.Remove(owner.Id));
+        //    _databaseGateway.ExecuteUsing(_constraintQueryFactory.Remove(owner.Id));
 
-            foreach (var constraint in owner.Constraints)
-            {
-                _databaseGateway.ExecuteUsing(_constraintQueryFactory.Add(owner, constraint));
-            }
-        }
+        //    foreach (var constraint in owner.Constraints)
+        //    {
+        //        _databaseGateway.ExecuteUsing(_constraintQueryFactory.Add(owner, constraint));
+        //    }
+        //}
     }
 }

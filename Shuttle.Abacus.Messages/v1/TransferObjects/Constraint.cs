@@ -4,8 +4,8 @@ namespace Shuttle.Abacus.Messages.v1.TransferObjects
 {
     public class Constraint
     {
-        public Guid ArgumentId { get; set; }
-        public string Name { get; set; }
-        public string Answer { get; set; }
+        public string ArgumentName { get; set; }
+        public string ComparisonType { get; set; }
+        public string Value { get; set; }
     }
 }

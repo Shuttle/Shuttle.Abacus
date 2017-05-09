@@ -35,6 +35,6 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
         void ApplyColumnArgument();
         bool HasInvalidDecimalTable();
         List<DecimalValue> DecimalValues();
-        void AddDecimalValue(int column, int row, decimal value, string constraint, string argument, string answer);
+        void AddElement(int column, int row, decimal value);
     }
 }

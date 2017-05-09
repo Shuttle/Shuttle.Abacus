@@ -5,10 +5,9 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class Formula : IConstraintOwner
+    public class Formula
     {
-        private readonly List<OwnedConstraint> _constraints = new List<OwnedConstraint>();
-        private readonly List<IConstraint> constraints = new List<IConstraint>();
+        private readonly List<FormulaConstraint> _constraints = new List<FormulaConstraint>();
         private readonly List<FormulaOperation> _operations = new List<FormulaOperation>();
 
         public Formula(string name)
@@ -22,10 +21,7 @@ namespace Shuttle.Abacus.Domain
             Name = name;
         }
 
-        public IEnumerable<FormulaOperation> Operations
-        {
-            get { return new ReadOnlyCollection<FormulaOperation>(_operations); }
-        }
+        public IEnumerable<FormulaOperation> Operations => new ReadOnlyCollection<FormulaOperation>(_operations);
 
         public Guid Id { get; }
         public string Name { get; }
@@ -46,35 +42,17 @@ namespace Shuttle.Abacus.Domain
             return this;
         }
 
-        public IEnumerable<OwnedConstraint> Constraints
-        {
-            get { return new ReadOnlyCollection<OwnedConstraint>(_constraints); }
-        }
+        public IEnumerable<FormulaConstraint> Constraints => new ReadOnlyCollection<FormulaConstraint>(_constraints);
 
-        public IConstraintOwner AddConstraint(IConstraint constraint)
-        {
-            Guard.AgainstNull(constraint, "constraint");
-
-            constraints.Add(constraint);
-
-            return this;
-        }
-
-        public void AddConstraint(OwnedConstraint item)
+        public void AddConstraint(FormulaConstraint item)
         {
             Guard.AgainstNull(item, "item");
 
             _constraints.Add(item);
         }
 
-        public string OwnerName
-        {
-            get { return "Formula"; }
-        }
-
-        public bool HasOperations {
-            get { return _operations.Count > 0; }
-        }
+        public string OwnerName => "Formula";
+        public bool HasOperations => _operations.Count > 0;
 
         //public bool IsSatisfiedBy(IMethodContext collectionMethodContext)
         //{

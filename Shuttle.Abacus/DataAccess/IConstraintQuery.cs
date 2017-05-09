@@ -8,7 +8,7 @@ namespace Shuttle.Abacus.DataAccess
     public interface IConstraintQuery
     {
         IEnumerable<DataRow> AllForOwner(Guid ownerId);
-        void GetOwned(IConstraintOwner owner);
-        void SaveOwned(IConstraintOwner owner);
+        //void GetOwned(IConstraintOwner owner);
+        //void SaveOwned(IConstraintOwner owner);
     }
 }

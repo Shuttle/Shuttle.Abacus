@@ -68,14 +68,12 @@
     <Compile Include="DataAccess\Definitions\AnswerTypeColumns.cs" />
     <Compile Include="DataAccess\Definitions\ArgumentColumns.cs" />
     <Compile Include="DataAccess\ArgumentQueryFactory.cs" />
-    <Compile Include="DataAccess\Definitions\ConstraintColumns.cs" />
     <Compile Include="DataAccess\ConstraintQueryFactory.cs" />
     <Compile Include="DataAccess\Definitions\ConstraintTypeColumns.cs" />
     <Compile Include="DataAccess\ConstraintTypeQueryFactory.cs" />
-    <Compile Include="DataAccess\Definitions\DecimalTableColumns.cs" />
+    <Compile Include="DataAccess\Definitions\MatrixColumns.cs" />
     <Compile Include="DataAccess\MatrixQueryFactory.cs" />
-    <Compile Include="DataAccess\Definitions\DecimalTableTableAccess.cs" />
-    <Compile Include="DataAccess\Definitions\DecimalValueColumns.cs" />
+    <Compile Include="DataAccess\Definitions\ElementColumns.cs" />
     <Compile Include="DataAccess\DecimalValueQueryFactory.cs" />
     <Compile Include="DataAccess\Definitions\FormulaColumns.cs" />
     <Compile Include="DataAccess\Definitions\FormulaOperationColumns.cs" />
@@ -96,7 +94,7 @@
     <Compile Include="DataAccess\IValueSourceTypeQueryFactory.cs" />
     <Compile Include="Domain\ArgumentAnswer\ArgumentAnswerFactory.cs" />
     <Compile Include="Domain\Constraints\ConstraintFactory.cs" />
-    <Compile Include="Domain\Constraints\OwnedConstraint.cs" />
+    <Compile Include="Domain\Constraints\FormulaConstraint.cs" />
     <Compile Include="Domain\Formula\Context\CalculationCollectionContext.cs" />
     <Compile Include="Domain\Formula\Context\FormulaCalculationContext.cs" />
     <Compile Include="Domain\Formula\Context\ICalculationCollectionContext.cs" />

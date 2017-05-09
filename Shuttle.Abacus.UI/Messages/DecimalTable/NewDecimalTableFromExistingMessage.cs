@@ -8,10 +8,10 @@ namespace Shuttle.Abacus.UI.Messages.DecimalTable
     {
         public NewDecimalTableFromExistingMessage(Guid decimalTableId)
         {
-            DecimalTableId = decimalTableId;
+            MatrixId = decimalTableId;
         }
 
-        public Guid DecimalTableId { get; private set; }
+        public Guid MatrixId { get; private set; }
 
         public override IPermission RequiredPermission
         {

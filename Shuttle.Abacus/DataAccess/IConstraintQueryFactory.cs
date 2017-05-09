@@ -8,6 +8,6 @@ namespace Shuttle.Abacus.DataAccess
     {
         IQuery All(Guid ownerId);
         IQuery Remove(Guid ownerId);
-        IQuery Add(IConstraintOwner owner, OwnedConstraint constraint1);
+        //IQuery Add(IConstraintOwner owner, FormulaConstraint constraint1);
     }
 }

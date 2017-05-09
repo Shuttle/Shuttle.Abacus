@@ -50,7 +50,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             }
 
             message.Items.Add(
-                new Resource(ResourceKeys.Matrix, Guid.NewGuid(), "Matrices", ImageResources.DecimalTable)
+                new Resource(ResourceKeys.Matrix, Guid.NewGuid(), "Matrixes", ImageResources.Matrix)
                     .AsContainer());
         }
 
@@ -108,9 +108,9 @@ namespace Shuttle.Abacus.UI.Coordinators
                             _decimalTableQuery.All())
                         {
                             message.Resources.Add(new Resource(ResourceKeys.Matrix,
-                                DecimalTableColumns.Id.MapFrom(row),
-                                DecimalTableColumns.Name.MapFrom(row),
-                                ImageResources.DecimalTable).AsLeaf());
+                                MatrixColumns.Id.MapFrom(row),
+                                MatrixColumns.Name.MapFrom(row),
+                                ImageResources.Matrix).AsLeaf());
                         }
 
                         break;
@@ -129,7 +129,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
             using (_databaseContextFactory.Create())
             {
-                message.Item.AssignText(DecimalTableColumns.Name.MapFrom(_decimalTableQuery.Get(message.Item.Key)));
+                message.Item.AssignText(MatrixColumns.Name.MapFrom(_decimalTableQuery.Get(message.Item.Key)));
             }
         }
 
@@ -156,7 +156,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .ControlledBy<IMatrixController>()
                     .ShowIn<IContextToolbarPresenter>()
                     .AddPresenter<IMatrixPresenter>()
-                    .WithModel(new MatrixModel(_decimalTableQuery.Get(message.DecimalTableId)))
+                    .WithModel(new MatrixModel(_decimalTableQuery.Get(message.MatrixId)))
                     .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
                     .AsDefault()
                     .AssignInitiator(message);
@@ -174,7 +174,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .ControlledBy<IMatrixController>()
                     .ShowIn<IContextToolbarPresenter>()
                     .AddPresenter<IMatrixPresenter>()
-                    .WithModel(new MatrixModel(_decimalTableQuery.Get(message.DecimalTableId)))
+                    .WithModel(new MatrixModel(_decimalTableQuery.Get(message.MatrixId)))
                     .AddNavigationItem(
                         NavigationItemFactory.Create<NewDecimalTableMessage>()
                             .AssignResourceItem(

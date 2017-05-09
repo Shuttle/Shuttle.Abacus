@@ -277,13 +277,10 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
                 foreach (DataRow row in _matrixQuery.GetValues(Model.Id).Rows)
                 {
-                    View.AddDecimalValue(
-                        DecimalValueColumns.ColumnIndex.MapFrom(row),
-                        DecimalValueColumns.RowIndex.MapFrom(row),
-                        DecimalValueColumns.DecimalValue.MapFrom(row),
-                        ConstraintColumns.Name.MapFrom(row),
-                        ConstraintColumns.ArgumentName.MapFrom(row),
-                        ConstraintColumns.Answer.MapFrom(row)
+                    View.AddElement(
+                        MatrixColumns.ElementColumns.ColumnIndex.MapFrom(row),
+                        MatrixColumns.ElementColumns.RowIndex.MapFrom(row),
+                        MatrixColumns.ElementColumns.DecimalValue.MapFrom(row)
                     );
                 }
             }

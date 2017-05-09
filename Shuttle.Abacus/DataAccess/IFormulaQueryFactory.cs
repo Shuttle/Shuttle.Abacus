@@ -14,5 +14,8 @@ namespace Shuttle.Abacus.DataAccess
         IQuery AddOperation(Formula formula, FormulaOperation operation, int sequenceNumber);
         IQuery Save(Formula item);
         IQuery All();
+        IQuery AddConstraint(Formula formula, FormulaConstraint constraint);
+        IQuery RemoveConstraints(Formula formula);
+        IQuery GetConstraints(Guid id);
     }
 }

@@ -6,7 +6,7 @@ namespace Shuttle.Abacus.Messages.v1
 {
     public class DecimalTableCommand
     {
-        public Guid DecimalTableId { get; set; }
+        public Guid MatrixId { get; set; }
         public string DecimalTableName { get; set; }
         public Guid RowArgumentId { get; set; }
         public Guid ColumnArgumentId { get; set; }

@@ -70,7 +70,6 @@
     <Build Include="dbo\Tables\ValueSourceType.sql" />
     <Build Include="dbo\Tables\Argument.sql" />
     <Build Include="dbo\Tables\Formula.sql" />
-    <Build Include="dbo\Tables\Constraint.sql" />
     <Build Include="dbo\Tables\SystemUser.sql" />
     <Build Include="dbo\Tables\GraphNodeArgument.sql" />
     <Build Include="dbo\Tables\SystemUserPermission.sql" />
@@ -82,6 +81,7 @@
     <Build Include="dbo\Tables\ArgumentValue.sql" />
     <Build Include="dbo\Tables\Operation.sql" />
     <Build Include="dbo\Tables\FormulaOperation.sql" />
+    <Build Include="dbo\Tables\FormulaConstraint.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Shuttle.Abacus.Database.refactorlog" />

@@ -35,7 +35,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 {
                     ReportDatasetName = "ReportsDataSet_DecimalTable",
                     ReportDefinitionName = "Abacus.Reporting.Reports.Matrix.rdlc",
-                    ReportData = _matrixQuery.Report(message.DecimalTableId)
+                    ReportData = _matrixQuery.Report(message.MatrixId)
                 };
             }
 

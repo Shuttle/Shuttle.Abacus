@@ -9,3 +9,12 @@
     CONSTRAINT [FK_FormulaOperation_Formula] FOREIGN KEY ([FormulaId]) REFERENCES [dbo].[Formula] ([FormulaId])
 );
 
+
+
+
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_FormulaOperation]
+    ON [dbo].[FormulaOperation]([FormulaId] ASC);
+

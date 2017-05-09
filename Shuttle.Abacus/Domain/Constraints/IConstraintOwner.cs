@@ -2,10 +2,10 @@ using System.Collections.Generic;
 
 namespace Shuttle.Abacus.Domain
 {
-    public interface IConstraintOwner : IOwner
+    public interface IConstraintOwnerx : IOwner
     {
-        IEnumerable<OwnedConstraint> Constraints { get; }
-        IConstraintOwner AddConstraint(IConstraint constraint);
-        void AddConstraint(OwnedConstraint item);
+        IEnumerable<FormulaConstraint> Constraints { get; }
+        IConstraintOwnerx AddConstraint(IConstraint constraint);
+        void AddConstraint(FormulaConstraint item);
     }
 }

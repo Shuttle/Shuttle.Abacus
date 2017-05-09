@@ -37,7 +37,7 @@ namespace Shuttle.Abacus.Server.Handlers
 
                 _matrixRepository.Add(table);
 
-                foreach (var value in table.DecimalValues)
+                foreach (var value in table.Elements)
                 {
                     _matrixElementRepository.Add(table, value);
                 }
@@ -50,13 +50,13 @@ namespace Shuttle.Abacus.Server.Handlers
 
             using (_databaseContextFactory.Create())
             {
-                var table = new Matrix(message.DecimalTableId, message.DecimalTableName, message.RowArgumentId, message.ColumnArgumentId);
+                var table = new Matrix(message.MatrixId, message.DecimalTableName, message.RowArgumentId, message.ColumnArgumentId);
 
-                _matrixElementRepository.RemoveAllForDecimalTable(message.DecimalTableId);
+                _matrixElementRepository.RemoveAllForDecimalTable(message.MatrixId);
 
                 _matrixRepository.Save(table);
 
-                foreach (var value in table.DecimalValues)
+                foreach (var value in table.Elements)
                 {
                     _matrixElementRepository.Add(table, value);
                 }

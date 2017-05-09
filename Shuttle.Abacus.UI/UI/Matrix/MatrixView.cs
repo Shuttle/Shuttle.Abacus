@@ -318,18 +318,18 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
                     decimalValue.Constraints.Add(new Abacus.Messages.v1.TransferObjects.Constraint
                     {
-                        ArgumentId = RowArgumentModel.Id,
-                        Name = RowConstraintName(row),
-                        Answer = RowConstraintAnswer(row)
+                        ArgumentName = RowArgumentModel.Name,
+                        ComparisonType = RowComparisonType(row),
+                        Value = RowConstraintValue(row)
                     });
 
                     if (HasColumnArgument)
                     {
                         decimalValue.Constraints.Add(new Abacus.Messages.v1.TransferObjects.Constraint
                         {
-                            ArgumentId = ColumnArgumentModel.Id,
-                            Name = ColumnArgumentModel.Name,
-                            Answer = ColumnConstraintAnswer(column)
+                            ArgumentName = ColumnArgumentModel.Name,
+                            ComparisonType = ColumnComparisonType(column),
+                            Value = ColumnConstraintValue(column)
                         });
                     }
 
@@ -340,20 +340,20 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             return result;
         }
 
-        public void AddDecimalValue(int column, int row, decimal value, string constraint, string argument, string answer)
+        public void AddElement(int column, int row, decimal value)
         {
             EnsureRowsTo(row);
             EnsureColumnsTo(column);
 
-            if (IsRowArgument(argument))
-            {
-                SetRowConstraint(row, constraint, answer);
-            }
+            //if (IsRowArgument(argument))
+            //{
+            //    SetRowConstraint(row, constraint, answer);
+            //}
 
-            if (IsColumnArgument(argument))
-            {
-                SetColumnConstraint(column, constraint, answer);
-            }
+            //if (IsColumnArgument(argument))
+            //{
+            //    SetColumnConstraint(column, constraint, answer);
+            //}
 
             if (ValidCoordinates(column, row))
             {
@@ -404,12 +404,12 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             }
         }
 
-        private string ColumnConstraintAnswer(int column)
+        private string ColumnConstraintValue(int column)
         {
             return Convert.ToString(ValueGridView[column, 1].Value);
         }
 
-        private string RowConstraintAnswer(int row)
+        private string RowConstraintValue(int row)
         {
             return Convert.ToString(ValueGridView[1, row].Value);
         }
@@ -426,9 +426,14 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             set { ColumnArgument.Text = value; }
         }
 
-        private string RowConstraintName(int row)
+        private string RowComparisonType(int row)
         {
             return (string)ValueGridView[0, row].Value;
+        }
+
+        private string ColumnComparisonType(int column)
+        {
+            return (string)ValueGridView[column, 0].Value;
         }
 
         private bool HasInvalidColumnConstraints()

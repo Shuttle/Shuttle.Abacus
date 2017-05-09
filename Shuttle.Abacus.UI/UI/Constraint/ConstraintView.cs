@@ -128,27 +128,27 @@ namespace Shuttle.Abacus.UI.UI.Constraint
             get { return Constraint.Text.Length > 0; }
         }
 
-        public List<OwnedConstraint> Constraints
+        public List<FormulaConstraint> Constraints
         {
             get
             {
-                var result = new List<OwnedConstraint>();
+                var result = new List<FormulaConstraint>();
                 var sequenceNumber = 1;
 
                 foreach (ListViewItem item in ConstraintsListView.Items)
                 {
                     var tag = (ItemTag) item.Tag;
 
-                    result.Add(new OwnedConstraint(
+                    result.Add(new FormulaConstraint(
                         sequenceNumber,
-                        tag.ArgumentId,
+                        tag.ArgumentName,
                         tag.ConstraintName,
                         tag.ValueSelection));
                 }
 
                 return result;
             }
-            set { value.ForEach(constraint => AddConstraint(constraint.ArgumentId, GetArgumentName(constraint.ArgumentId), constraint.Name, constraint.Answer)); }
+            set { value.ForEach(constraint => AddConstraint(constraint.ArgumentName, constraint.ComparisonType, constraint.Value)); }
         }
 
         private string GetArgumentName(Guid argumentId)
@@ -189,14 +189,14 @@ namespace Shuttle.Abacus.UI.UI.Constraint
             SetError(Constraint, "Please select the constraint to use.");
         }
 
-        public void AddConstraint(Guid argumentId, string argumentName, string constraintName, string valueSelection)
+        public void AddConstraint(string argumentName, string comparisonType, string value)
         {
             var item = new ListViewItem();
 
             item.SubItems.Add(string.Empty);
             item.SubItems.Add(string.Empty);
 
-            ConstraintsListView.Items.Add(PopulateItem(item, argumentId, argumentName, constraintName, valueSelection));
+            ConstraintsListView.Items.Add(PopulateItem(item, argumentName, comparisonType, value));
         }
 
         public void ShowAllConstraints()
@@ -249,17 +249,17 @@ namespace Shuttle.Abacus.UI.UI.Constraint
         {
             if (Presenter.ConstraintOK())
             {
-                AddConstraint(ArgumentModel.Id, ArgumentModel.Name, ConstraintTypeModel.Name, AnswerValue);
+                AddConstraint(ArgumentModel.Name, ConstraintTypeModel.Name, AnswerValue);
             }
         }
 
-        private static ListViewItem PopulateItem(ListViewItem item, Guid argumentId, string argumentName, string constraintName, string valueSelection)
+        private static ListViewItem PopulateItem(ListViewItem item, string argumentName, string comparisonType, string value)
         {
             item.Text = argumentName;
-            item.SubItems[1].Text = constraintName;
-            item.SubItems[2].Text = valueSelection;
+            item.SubItems[1].Text = comparisonType;
+            item.SubItems[2].Text = value;
 
-            item.Tag = new ItemTag(argumentId, constraintName, valueSelection);
+            item.Tag = new ItemTag(argumentName, comparisonType, value);
 
             return item;
         }
@@ -300,19 +300,19 @@ namespace Shuttle.Abacus.UI.UI.Constraint
                 return;
             }
 
-            PopulateItem(_listViewExtender.SelectedItem(), ArgumentModel.Id, ArgumentModel.Name, ConstraintTypeModel.Name, AnswerValue);
+            PopulateItem(_listViewExtender.SelectedItem(), ArgumentModel.Name, ConstraintTypeModel.Name, AnswerValue);
         }
 
         private class ItemTag
         {
-            public ItemTag(Guid argumentId, string constraintName, string valueSelection)
+            public ItemTag(string argumentName, string comparisonType, string value)
             {
-                ArgumentId = argumentId;
-                ConstraintName = constraintName;
-                ValueSelection = valueSelection;
+                ArgumentName = argumentName;
+                ConstraintName = comparisonType;
+                ValueSelection = value;
             }
 
-            public Guid ArgumentId { get; private set; }
+            public string ArgumentName { get; private set; }
             public string ConstraintName { get; private set; }
             public string ValueSelection { get; private set; }
         }

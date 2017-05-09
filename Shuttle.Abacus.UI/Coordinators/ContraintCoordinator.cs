@@ -58,7 +58,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                         {
                             message.Resources.Add(
                                 new Resource(ResourceKeys.Constraint, Guid.Empty,
-                                        ConstraintColumns.Description.MapFrom(row), ImageResources.Constraint)
+                                        FormulaColumns.ConstraintColumns.ArgumentName.MapFrom(row), ImageResources.Constraint)
                                     .AsLeaf());
                         }
                     }

@@ -16,9 +16,9 @@ namespace Shuttle.Abacus.UI.Models
 
         private readonly DataRow _row;
 
-        public Guid Id => DecimalTableColumns.Id.MapFrom(_row);
-        public string Name => DecimalTableColumns.Name.MapFrom(_row);
-        public Guid RowArgumentId => DecimalTableColumns.RowArgumentId.MapFrom(_row);
-        public Guid ColumnArgumentId => DecimalTableColumns.RowArgumentId.MapFrom(_row);
+        public Guid Id => MatrixColumns.Id.MapFrom(_row);
+        public string Name => MatrixColumns.Name.MapFrom(_row);
+        public Guid RowArgumentId => MatrixColumns.RowArgumentId.MapFrom(_row);
+        public Guid ColumnArgumentId => MatrixColumns.RowArgumentId.MapFrom(_row);
     }
 }

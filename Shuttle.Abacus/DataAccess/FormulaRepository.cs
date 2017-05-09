@@ -8,11 +8,12 @@ namespace Shuttle.Abacus.DataAccess
 {
     public class FormulaRepository : Repository<Formula>, IFormulaRepository
     {
+        private readonly IConstraintQuery _constraintQuery;
         private readonly IDatabaseGateway _databaseGateway;
         private readonly IFormulaQueryFactory _formulaQueryFactory;
-        private readonly IConstraintQuery _constraintQuery;
 
-        public FormulaRepository(IDatabaseGateway databaseGateway, IFormulaQueryFactory formulaQueryFactory, IConstraintQuery constraintQuery)
+        public FormulaRepository(IDatabaseGateway databaseGateway, IFormulaQueryFactory formulaQueryFactory,
+            IConstraintQuery constraintQuery)
         {
             Guard.AgainstNull(databaseGateway, "databaseGateway");
             Guard.AgainstNull(formulaQueryFactory, "formulaQueryFactory");
@@ -28,8 +29,7 @@ namespace Shuttle.Abacus.DataAccess
             _databaseGateway.ExecuteUsing(_formulaQueryFactory.Add(formula));
 
             AddOperations(formula);
-
-            _constraintQuery.SaveOwned(formula);
+            AddConstraints(formula);
         }
 
         public override void Remove(Guid id)
@@ -55,19 +55,29 @@ namespace Shuttle.Abacus.DataAccess
                     FormulaOperationColumns.Text.MapFrom(row)));
             }
 
-            _constraintQuery.GetOwned(result);
+            foreach (var row in _databaseGateway.GetRowsUsing(_formulaQueryFactory.GetConstraints(id)))
+            {
+            }
 
             return result;
         }
 
-        public void Save(Formula item)
+        public void Save(Formula formula)
         {
-            _databaseGateway.ExecuteUsing(_formulaQueryFactory.Save(item));
-            _databaseGateway.ExecuteUsing(_formulaQueryFactory.RemoveOperations(item));
+            _databaseGateway.ExecuteUsing(_formulaQueryFactory.Save(formula));
+            _databaseGateway.ExecuteUsing(_formulaQueryFactory.RemoveOperations(formula));
+            _databaseGateway.ExecuteUsing(_formulaQueryFactory.RemoveConstraints(formula));
 
-            AddOperations(item);
+            AddOperations(formula);
+            AddConstraints(formula);
+        }
 
-            _constraintQuery.SaveOwned(item);
+        private void AddConstraints(Formula formula)
+        {
+            foreach (var constraint in formula.Constraints)
+            {
+                _databaseGateway.ExecuteUsing(_formulaQueryFactory.AddConstraint(formula, constraint));
+            }
         }
 
         private void AddOperations(Formula formula)

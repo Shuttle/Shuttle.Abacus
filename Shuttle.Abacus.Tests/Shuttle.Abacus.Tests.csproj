@@ -59,7 +59,7 @@
     <Compile Include="Calculator\MethodContextTest.cs" />
     <Compile Include="Calculator\Operations\FormulaOperationTest.cs" />
     <Compile Include="DecimalTableTest.cs" />
-    <Compile Include="DecimalValueTest.cs" />
+    <Compile Include="MatrixElementTest.cs" />
     <Compile Include="GraphNodeArgumentTest.cs" />
     <Compile Include="MaximumLengthRuleTest.cs" />
     <Compile Include="MethodTest.cs" />

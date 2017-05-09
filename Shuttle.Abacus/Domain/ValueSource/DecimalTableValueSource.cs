@@ -1,3 +1,4 @@
+using System;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
@@ -26,17 +27,19 @@ namespace Shuttle.Abacus.Domain
 
         public decimal Operand(IMethodContext methodContext, ICalculationContext calculationContext)
         {
-            return matrix.Get(methodContext).Value;
+            throw new NotImplementedException();
+            //return matrix.Get(methodContext).Value;
         }
 
         public string Description(decimal operand, IMethodContext methodContext)
         {
             var rate = matrix.Find(methodContext);
 
-            return rate != null
-                       ? string.Format("{0} (from rate table '{1}' - {2})", rate.Value, matrix.Name,
-                                       rate.Description(methodContext))
-                       : string.Empty;
+            throw new NotImplementedException();
+            //return rate != null
+            //           ? string.Format("{0} (from rate table '{1}' - {2})", rate.Value, matrix.Name,
+            //                           rate.Description(methodContext))
+            //           : string.Empty;
         }
 
         public string Name

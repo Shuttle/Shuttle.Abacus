@@ -10,7 +10,7 @@ namespace Shuttle.Abacus.DataAccess
         {
             return RawQuery.Create(@"
 select
-    DecimalTableId,
+    MatrixId,
     Name
 from
     Matrix
@@ -22,14 +22,14 @@ order by
         {
             return RawQuery.Create(@"
 select
-    DecimalTableId,
+    MatrixId,
     Name,
     ColumnArgumentId,
     RowArgumentId
 from
     Matrix
 ")
-                .AddParameterValue(DecimalTableColumns.Id, id);
+                .AddParameterValue(MatrixColumns.Id, id);
         }
 
         public IQuery ConstrainedDecimalValues(Guid id)
@@ -51,9 +51,9 @@ from
                     [Constraint] c on
                         (c.OwnerId = dv.DecimalValueId)
                 where
-                    dv.DecimalTableId = @DecimalTableId");
+                    dv.MatrixId = @MatrixId");
 
-            query.AddParameterValue(DecimalValueColumns.DecimalTableId, id);
+            query.AddParameterValue(MatrixColumns.ElementColumns.MatrixId, id);
 
             return query;
         }
@@ -62,12 +62,12 @@ from
         {
             return RawQuery.Create(@"
 select
-    DecimalTableId,
+    MatrixId,
     Name
 from
     Matrix
 ")
-                .AddParameterValue(DecimalTableColumns.Id, id);
+                .AddParameterValue(MatrixColumns.Id, id);
         }
 
         public IQuery Report(Guid decimalTableId)
@@ -82,7 +82,7 @@ from
                             dv.RowIndex,
                             dv.ColumnIndex,
                             dv.MatrixElement,
-                            (select MAX(ColumnIndex) from MatrixElement mc where mc.DecimalTableId = dt.DecimalTableId) As MaxColumn,
+                            (select MAX(ColumnIndex) from MatrixElement mc where mc.MatrixId = dt.MatrixId) As MaxColumn,
                             rc.Name As RowConstraint,
                             rc.Answer As RowConstraintTitle,
                             cc.Name As ColumnConstraint,
@@ -91,7 +91,7 @@ from
 	                        Matrix dt
                         inner join 
 	                        MatrixElement dv on 
-		                        dt.DecimalTableId = dv.DecimalTableId
+		                        dt.MatrixId = dv.MatrixId
                         inner join 
 	                        Argument ra on 
 		                        dt.RowArgumentId = ra.ArgumentName
@@ -109,14 +109,14 @@ from
 		                        and 
 		                        cc.SequenceNumber=2
                         where 
-                            dt.DecimalTableId = @DecimalTableId
+                            dt.MatrixId = @MatrixId
                         order by 
 	                        dt.Name, 
 	                        dv.RowIndex, 
 	                        dv.ColumnIndex
                     ");
 
-            query.AddParameterValue(DecimalTableColumns.Id, decimalTableId);
+            query.AddParameterValue(MatrixColumns.Id, decimalTableId);
 
             return query;
         }
@@ -126,29 +126,29 @@ from
             return RawQuery.Create(@"
 insert into Matrix
 (
-    DecimalTableId,
+    MatrixId,
     Name,
     RowArgumentId,
     ColumnArgumentId
 )
 values
 (
-    @DecimalTableId,
+    @MatrixId,
     @Name,
     @RowArgumentId,
     @ColumnArgumentId
 )")
-                .AddParameterValue(DecimalTableColumns.Id, item.Id)
-                .AddParameterValue(DecimalTableColumns.Name, item.Name)
-                .AddParameterValue(DecimalTableColumns.RowArgumentId, item.RowArgumentId)
-                .AddParameterValue(DecimalTableColumns.ColumnArgumentId, item.ColumnArgumentId);
+                .AddParameterValue(MatrixColumns.Id, item.Id)
+                .AddParameterValue(MatrixColumns.Name, item.Name)
+                .AddParameterValue(MatrixColumns.RowArgumentId, item.RowArgumentId)
+                .AddParameterValue(MatrixColumns.ColumnArgumentId, item.ColumnArgumentId);
         }
 
         public IQuery Remove(Guid id)
         {
             return
-                RawQuery.Create("delete from Matrix where DecimalTableId = @DecimalTableId")
-                    .AddParameterValue(DecimalTableColumns.Id, id);
+                RawQuery.Create("delete from Matrix where MatrixId = @MatrixId")
+                    .AddParameterValue(MatrixColumns.Id, id);
         }
 
         public IQuery Save(Matrix item)
@@ -159,12 +159,12 @@ update Matrix set
     RowArgumentId = @RowArgumentId,
     ColumnArgumentId = @ColumnArgumentId
 where
-    DecimalTableId = @DecimalTableId
+    MatrixId = @MatrixId
 ")
-                .AddParameterValue(DecimalTableColumns.Name, item.Name)
-                .AddParameterValue(DecimalTableColumns.RowArgumentId, item.RowArgumentId)
-                .AddParameterValue(DecimalTableColumns.ColumnArgumentId, item.ColumnArgumentId)
-                .AddParameterValue(DecimalTableColumns.Id, item.Id);
+                .AddParameterValue(MatrixColumns.Name, item.Name)
+                .AddParameterValue(MatrixColumns.RowArgumentId, item.RowArgumentId)
+                .AddParameterValue(MatrixColumns.ColumnArgumentId, item.ColumnArgumentId)
+                .AddParameterValue(MatrixColumns.Id, item.Id);
         }
     }
 }

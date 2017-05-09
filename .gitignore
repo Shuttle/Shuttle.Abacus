@@ -235,3 +235,4 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 *.jfm
+Shuttle.Abacus.Database/Shuttle.Abacus.Database.jfm

@@ -87,11 +87,11 @@ namespace Shuttle.Abacus.Server.Handlers
 
                 foreach (var constraint in message.Constraints)
                 {
-                    formula.AddConstraint(new OwnedConstraint(
+                    formula.AddConstraint(new FormulaConstraint(
                         sequenceNumber++,
-                        constraint.ArgumentId,
-                        constraint.Name,
-                        constraint.Answer));
+                        constraint.ArgumentName,
+                        constraint.ComparisonType,
+                        constraint.Value));
                 }
 
                 sequenceNumber = 1;
