@@ -10,26 +10,25 @@ namespace Shuttle.Abacus.Domain
         private readonly List<FormulaConstraint> _constraints = new List<FormulaConstraint>();
         private readonly List<FormulaOperation> _operations = new List<FormulaOperation>();
 
-        public Formula(string name)
-            : this(Guid.NewGuid(), name)
-        {
-        }
-
-        public Formula(Guid id, string name)
+        public Formula(Guid id, string name, string executionType)
         {
             Id = id;
             Name = name;
+            ExecutionType = executionType;
         }
 
         public IEnumerable<FormulaOperation> Operations => new ReadOnlyCollection<FormulaOperation>(_operations);
 
         public Guid Id { get; }
         public string Name { get; }
+        public string ExecutionType { get; }
         public string MaximumFormulaName { get; private set; }
         public string MinimumFormulaName { get; private set; }
 
         public Formula WithMaximum(string formulaName)
         {
+            Guard.AgainstNullOrEmptyString(formulaName, "formulaName");
+
             MaximumFormulaName = formulaName;
 
             return this;
@@ -37,6 +36,8 @@ namespace Shuttle.Abacus.Domain
 
         public Formula WithMinimum(string formulaName)
         {
+            Guard.AgainstNullOrEmptyString(formulaName, "formulaName");
+
             MinimumFormulaName = formulaName;
 
             return this;

@@ -66,7 +66,7 @@
     <Compile Include="v1\CreateFormulaCommand.cs" />
     <Compile Include="v1\CreateTestCommand.cs" />
     <Compile Include="v1\CreateSystemUserCommand.cs" />
-    <Compile Include="v1\DecimalTableCommand.cs" />
+    <Compile Include="v1\MatrixCommand.cs" />
     <Compile Include="v1\DeleteArgumentCommand.cs" />
     <Compile Include="v1\DeleteFormulaCommand.cs" />
     <Compile Include="v1\DeleteLimitCommand.cs" />
@@ -77,7 +77,7 @@
     <Compile Include="v1\SetPermissionsCommand.cs" />
     <Compile Include="v1\TransferObjects\ArgumentAnswer.cs" />
     <Compile Include="v1\TransferObjects\Constraint.cs" />
-    <Compile Include="v1\TransferObjects\DecimalValue.cs" />
+    <Compile Include="v1\TransferObjects\MatrixElement.cs" />
     <Compile Include="v1\LoginCommand.cs" />
     <Compile Include="v1\LoginCompletedEvent.cs" />
     <Compile Include="v1\NotificationMessage.cs" />

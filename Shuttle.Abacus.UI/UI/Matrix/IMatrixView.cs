@@ -34,7 +34,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
         void RowFactorsOnly();
         void ApplyColumnArgument();
         bool HasInvalidDecimalTable();
-        List<DecimalValue> DecimalValues();
+        List<MatrixElement> DecimalValues();
         void AddElement(int column, int row, decimal value);
     }
 }

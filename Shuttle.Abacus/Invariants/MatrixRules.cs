@@ -3,7 +3,7 @@ using Shuttle.Abacus.Invariants.Interfaces;
 
 namespace Shuttle.Abacus.Invariants
 {
-    public class DecimalTableRules : IDecimalTableRules
+    public class MatrixRules : IMatrixRules
     {
         public IRuleCollection<object> DecimalTableNameRules()
         {

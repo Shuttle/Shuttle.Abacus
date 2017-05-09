@@ -12,8 +12,8 @@ namespace Shuttle.Abacus.Server.Handlers
         IMessageHandler<UpdateMatrixCommand>
     {
         private readonly IDatabaseContextFactory _databaseContextFactory;
-        private readonly IMatrixRepository _matrixRepository;
         private readonly IMatrixElementRepository _matrixElementRepository;
+        private readonly IMatrixRepository _matrixRepository;
 
         public MatrixHandler(IDatabaseContextFactory databaseContextFactory, IMatrixRepository matrixRepository,
             IMatrixElementRepository matrixElementRepository)
@@ -33,7 +33,8 @@ namespace Shuttle.Abacus.Server.Handlers
 
             using (_databaseContextFactory.Create())
             {
-                var table = new Matrix(Guid.NewGuid(), message.DecimalTableName,message.RowArgumentId,message.ColumnArgumentId);
+                var table = new Matrix(Guid.NewGuid(), message.DecimalTableName, message.RowArgumentName,
+                    message.ColumnArgumentName);
 
                 _matrixRepository.Add(table);
 
@@ -50,7 +51,8 @@ namespace Shuttle.Abacus.Server.Handlers
 
             using (_databaseContextFactory.Create())
             {
-                var table = new Matrix(message.MatrixId, message.DecimalTableName, message.RowArgumentId, message.ColumnArgumentId);
+                var table = new Matrix(message.MatrixId, message.DecimalTableName, message.RowArgumentName,
+                    message.ColumnArgumentName);
 
                 _matrixElementRepository.RemoveAllForDecimalTable(message.MatrixId);
 

@@ -3,17 +3,16 @@ using Shuttle.Abacus.Invariants.Interfaces;
 
 namespace Shuttle.Abacus.Invariants
 {
-    public class ArgumentRules : IArgumentRules
+    public class FormulaRules : IFormulaRules
     {
-        public IRuleCollection<object> ArgumentNameRules()
+        public IRuleCollection<object> FormulaNameRules()
         {
             return Rule.With().Required().MaximumLength(120).Create();
         }
 
-        public IRuleCollection<object> ValueTypeRules()
+        public IRuleCollection<object> ExecutionTypeRules()
         {
             return Rule.With().Required().Create();
         }
-
     }
 }

@@ -1,6 +1,6 @@
 namespace Shuttle.Abacus.Messages.v1
 {
-    public class UpdateMatrixCommand : DecimalTableCommand
+    public class UpdateMatrixCommand : MatrixCommand
     {
     }
 }

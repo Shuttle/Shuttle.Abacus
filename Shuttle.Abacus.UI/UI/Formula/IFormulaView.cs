@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Shuttle.Abacus.Invariants.Core;
 using Shuttle.Abacus.UI.Core.Presentation;
 
 namespace Shuttle.Abacus.UI.UI.Formula
@@ -8,6 +9,10 @@ namespace Shuttle.Abacus.UI.UI.Formula
         string NameValue { get; set; }
         string MaximumFormulaNameValue { get; set; }
         string MinimumFormulaNameValue { get; set; }
+        IRuleCollection<object> FormulaNameRules { set; }
+        IRuleCollection<object> ExecutionTypeRules { set; }
+        string ExecutionTypeValue { get; set; }
+
         void PopulateFormulas(IEnumerable<string> formulaNames);
     }
 }

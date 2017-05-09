@@ -12,15 +12,12 @@ namespace Shuttle.Abacus.Domain
 
         private readonly List<MatrixElement> _values = new List<MatrixElement>();
 
-        public Matrix(Guid id, string name, Guid rowArgumentId, Guid? columnArgumentId)
+        public Matrix(Guid id, string name, string rowArgumentName, string columnArgumentName)
         {
             Id = id;
             Name = name;
-            RowArgumentId = rowArgumentId;
-
-            ColumnArgumentId = Guid.Empty.Equals(columnArgumentId)
-                                 ? null
-                                 : columnArgumentId;
+            RowArgumentName = rowArgumentName;
+            ColumnArgumentName = columnArgumentName;
         }
 
         public Guid Id { get; private set; }
@@ -32,8 +29,8 @@ namespace Shuttle.Abacus.Domain
             get { return new ReadOnlyCollection<MatrixElement>(_values); }
         }
 
-        public Guid RowArgumentId { get; private set; }
-        public Guid? ColumnArgumentId { get; private set; }
+        public string RowArgumentName { get; private set; }
+        public string ColumnArgumentName { get; private set; }
 
         public bool IsSatisfiedBy(IMethodContext item)
         {

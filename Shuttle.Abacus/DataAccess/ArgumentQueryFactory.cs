@@ -115,5 +115,10 @@ values
                 .AddParameterValue(ArgumentColumns.ValueColumns.ArgumentId, argument.Id)
                 .AddParameterValue(ArgumentColumns.ValueColumns.Value, value);
         }
+
+        public IQuery Get(string name)
+        {
+            return new RawQuery(string.Concat(SelectClause, "where ArgumentName = @ArgumentName")).AddParameterValue(ArgumentColumns.Name, name);
+        }
     }
 }

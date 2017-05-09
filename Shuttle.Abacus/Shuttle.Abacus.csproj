@@ -74,7 +74,7 @@
     <Compile Include="DataAccess\Definitions\MatrixColumns.cs" />
     <Compile Include="DataAccess\MatrixQueryFactory.cs" />
     <Compile Include="DataAccess\Definitions\ElementColumns.cs" />
-    <Compile Include="DataAccess\DecimalValueQueryFactory.cs" />
+    <Compile Include="DataAccess\MatrixElementQueryFactory.cs" />
     <Compile Include="DataAccess\Definitions\FormulaColumns.cs" />
     <Compile Include="DataAccess\Definitions\FormulaOperationColumns.cs" />
     <Compile Include="DataAccess\FormulaQueryFactory.cs" />
@@ -216,6 +216,7 @@
     <Compile Include="Domain\Operations\SquareRootOperation.cs" />
     <Compile Include="Domain\Operations\SubtractionOperation.cs" />
     <Compile Include="Domain\VersionedEntity.cs" />
+    <Compile Include="Invariants\FormulaRules.cs" />
     <Compile Include="Invariants\ArgumentRules.cs" />
     <Compile Include="Invariants\Core\IRule.cs" />
     <Compile Include="Invariants\Core\IRuleCollection.cs" />
@@ -232,9 +233,10 @@
     <Compile Include="Invariants\Core\Rules\IntegerRule.cs" />
     <Compile Include="Invariants\Core\Rules\MaximumLengthRule.cs" />
     <Compile Include="Invariants\Core\Rules\MinimumLengthRule.cs" />
-    <Compile Include="Invariants\DecimalTableRules.cs" />
+    <Compile Include="Invariants\Interfaces\IFormulaRules.cs" />
+    <Compile Include="Invariants\MatrixRules.cs" />
     <Compile Include="Invariants\Interfaces\IArgumentRules.cs" />
-    <Compile Include="Invariants\Interfaces\IDecimalTableRules.cs" />
+    <Compile Include="Invariants\Interfaces\IMatrixRules.cs" />
     <Compile Include="Invariants\Interfaces\ILimitRules.cs" />
     <Compile Include="Invariants\Interfaces\IMethodTestRules.cs" />
     <Compile Include="Invariants\Interfaces\ISystemUserRules.cs" />

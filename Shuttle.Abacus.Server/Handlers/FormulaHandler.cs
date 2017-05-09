@@ -82,45 +82,22 @@ namespace Shuttle.Abacus.Server.Handlers
 
             using (_databaseContextFactory.Create())
             {
-                var formula = new Formula(message.Name);
-                var sequenceNumber = 1;
+                var formula = new Formula(Guid.NewGuid(), message.Name, message.ExecutionType);
 
-                foreach (var constraint in message.Constraints)
+                if (!string.IsNullOrEmpty(message.MaximumFormulaName))
                 {
-                    formula.AddConstraint(new FormulaConstraint(
-                        sequenceNumber++,
-                        constraint.ArgumentName,
-                        constraint.ComparisonType,
-                        constraint.Value));
+                    formula.WithMaximum(message.MaximumFormulaName);
                 }
 
-                sequenceNumber = 1;
-
-                foreach (var operation in message.Operations)
+                if (!string.IsNullOrEmpty(message.MinimumFormulaName))
                 {
-                    formula.AddOperation(new FormulaOperation(
-                        sequenceNumber++,
-                        operation.Operation,
-                        operation.ValueSource,
-                        operation.ValueSelection,
-                        operation.Text));
+                    formula.WithMaximum(message.MinimumFormulaName);
                 }
 
                 _formulaRepository.Add(formula);
-
-                //var owner =
-                //    _repositoryProvider.Get(message.OwnerName).Get<IFormulaOwner>(message.OwnerId);
-
-                //var formula = new Formula(message,
-                //    _operationFactoryProvider,
-                //    _valueSourceFactoryProvider,
-                //    _constraintFactoryProvider,
-                //    _argumentAnswerFactoryProvider);
-
-                //owner.AddFormula(formula);
-
-                //_taskFactory.Create<ICreateFormulaTask>().Execute(new OwnerModel(owner, formula));
             }
+
+            context.ReplyOK();
         }
 
         public void ProcessMessage(IHandlerContext<DeleteFormulaCommand> context)

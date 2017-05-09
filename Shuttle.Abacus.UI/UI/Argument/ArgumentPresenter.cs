@@ -33,7 +33,7 @@ namespace Shuttle.Abacus.UI.UI.Argument
             Guard.AgainstNull(Model, "Model");
 
             View.ArgumentNameRules = _argumentRules.ArgumentNameRules();
-            View.AnswerTypeRules = _argumentRules.AnswerTypeRules();
+            View.AnswerTypeRules = _argumentRules.ValueTypeRules();
 
             View.ArgumentNameValue = Model.Name;
             View.AnswerTypeValue = Model.AnswerType;

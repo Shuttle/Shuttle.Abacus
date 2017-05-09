@@ -14,11 +14,11 @@ namespace Shuttle.Abacus.DataAccess
         public static readonly MappedColumn<int> SequenceNumber = new MappedColumn<int>("SequenceNumber", DbType.Int32);
 
         public static readonly MappedColumn<string> ValueSelection = new MappedColumn<string>("ValueSelection",
-                                                                                            DbType.AnsiString, 120);
+                                                                                            DbType.AnsiString);
 
-        public static readonly MappedColumn<string> Text = new MappedColumn<string>("Text", DbType.AnsiString, 120);
+        public static readonly MappedColumn<string> Text = new MappedColumn<string>("Text", DbType.AnsiString);
 
         public static readonly MappedColumn<string> ValueSource = new MappedColumn<string>("ValueSource",
-                                                                                         DbType.AnsiString, 120);
+                                                                                         DbType.AnsiString);
     }
 }

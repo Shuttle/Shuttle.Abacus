@@ -128,20 +128,20 @@ insert into Matrix
 (
     MatrixId,
     Name,
-    RowArgumentId,
-    ColumnArgumentId
+    RowArgumentName,
+    ColumnArgumentName
 )
 values
 (
     @MatrixId,
     @Name,
-    @RowArgumentId,
-    @ColumnArgumentId
+    @RowArgumentName,
+    @ColumnArgumentName
 )")
                 .AddParameterValue(MatrixColumns.Id, item.Id)
                 .AddParameterValue(MatrixColumns.Name, item.Name)
-                .AddParameterValue(MatrixColumns.RowArgumentId, item.RowArgumentId)
-                .AddParameterValue(MatrixColumns.ColumnArgumentId, item.ColumnArgumentId);
+                .AddParameterValue(MatrixColumns.RowArgumentName, item.RowArgumentName)
+                .AddParameterValue(MatrixColumns.ColumnArgumentName, item.ColumnArgumentName);
         }
 
         public IQuery Remove(Guid id)
@@ -156,14 +156,14 @@ values
             return RawQuery.Create(@"
 update Matrix set
     Name = @Name,
-    RowArgumentId = @RowArgumentId,
-    ColumnArgumentId = @ColumnArgumentId
+    RowArgumentName = @RowArgumentName,
+    ColumnArgumentName = @ColumnArgumentName
 where
     MatrixId = @MatrixId
 ")
                 .AddParameterValue(MatrixColumns.Name, item.Name)
-                .AddParameterValue(MatrixColumns.RowArgumentId, item.RowArgumentId)
-                .AddParameterValue(MatrixColumns.ColumnArgumentId, item.ColumnArgumentId)
+                .AddParameterValue(MatrixColumns.RowArgumentName, item.RowArgumentName)
+                .AddParameterValue(MatrixColumns.ColumnArgumentName, item.ColumnArgumentName)
                 .AddParameterValue(MatrixColumns.Id, item.Id);
         }
     }

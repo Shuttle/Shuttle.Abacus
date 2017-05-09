@@ -4,7 +4,7 @@ using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
 {
-    public class DecimalValueQueryFactory
+    public class MatrixElementQueryFactory
     {
         private static string SelectClause = @"
 select

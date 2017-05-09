@@ -2,7 +2,7 @@
 
 namespace Shuttle.Abacus.Messages.v1.TransferObjects
 {
-    public class DecimalValue
+    public class MatrixElement
     {
         public int Row { get; set; }
         public int Column { get; set; }

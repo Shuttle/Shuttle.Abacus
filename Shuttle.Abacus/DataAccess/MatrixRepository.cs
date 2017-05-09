@@ -1,25 +1,22 @@
 using System;
-using System.Collections.Generic;
 using Shuttle.Abacus.Domain;
-using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Data;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public class MatrixRepository : Repository<Matrix>, IMatrixRepository
     {
-        private readonly ICache _cache;
         private readonly IDatabaseGateway _databaseGateway;
-        private readonly MatrixQueryFactory _matrixQueryFactory;
-        private readonly IDataRepository<Matrix> _repository;
+        private readonly IMatrixQueryFactory _matrixQueryFactory;
 
-        public MatrixRepository(IDatabaseGateway databaseGateway,
-            MatrixQueryFactory matrixQueryFactory, IDataRepository<Matrix> repository, ICache cache)
+        public MatrixRepository(IDatabaseGateway databaseGateway, IMatrixQueryFactory matrixQueryFactory)
         {
-            _repository = repository;
+            Guard.AgainstNull(databaseGateway, "databaseGateway");
+            Guard.AgainstNull(matrixQueryFactory, "matrixQueryFactory");
+
             _databaseGateway = databaseGateway;
             _matrixQueryFactory = matrixQueryFactory;
-            _cache = cache;
         }
 
         public override void Add(Matrix item)
@@ -34,30 +31,17 @@ namespace Shuttle.Abacus.DataAccess
 
         public override Matrix Get(Guid id)
         {
-            var key = string.Format("Matrix|{0}", id);
+            var matrixRow = _databaseGateway.GetSingleRowUsing(_matrixQueryFactory.Get(id));
 
-            var result = _cache.Get<Matrix>(key);
+            Guarded.Entity<Matrix>(matrixRow, id);
 
-            if (result != null)
-            {
-                return result;
-            }
-
-            result = _repository.FetchItemUsing(_matrixQueryFactory.Get(id));
-
-            if (result == null)
-            {
-                throw Exceptions.MissingEntity<DecimalValueQueryFactory>(id);
-            }
-
-            _cache.Add(key, result);
+            var result = new Matrix(
+                MatrixColumns.Id.MapFrom(matrixRow),
+                MatrixColumns.Name.MapFrom(matrixRow),
+                MatrixColumns.RowArgumentName.MapFrom(matrixRow),
+                MatrixColumns.ColumnArgumentName.MapFrom(matrixRow));
 
             return result;
-        }
-
-        public IEnumerable<Matrix> All()
-        {
-            return _repository.FetchAllUsing(_matrixQueryFactory.All());
         }
 
         public void Save(Matrix matrix)

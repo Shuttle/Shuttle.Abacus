@@ -18,7 +18,7 @@ namespace Shuttle.Abacus.UI.Models
 
         public Guid Id => MatrixColumns.Id.MapFrom(_row);
         public string Name => MatrixColumns.Name.MapFrom(_row);
-        public Guid RowArgumentId => MatrixColumns.RowArgumentId.MapFrom(_row);
-        public Guid ColumnArgumentId => MatrixColumns.RowArgumentId.MapFrom(_row);
+        public string RowArgumentName => MatrixColumns.RowArgumentName.MapFrom(_row);
+        public string ColumnArgumentName => MatrixColumns.RowArgumentName.MapFrom(_row);
     }
 }

@@ -33,18 +33,18 @@ namespace Shuttle.Abacus.DataAccess
 
         public void Add(Matrix matrix, MatrixElement matrixElement)
         {
-            gateway.ExecuteUsing(DecimalValueQueryFactory.Add(matrix, matrixElement));
+            gateway.ExecuteUsing(MatrixElementQueryFactory.Add(matrix, matrixElement));
         }
 
         public IEnumerable<MatrixElement> AllForDecimalTable(Matrix matrix)
         {
-            return repository.FetchAllUsing(DecimalValueQueryFactory.AllForDecimalTable(matrix.Id));
+            return repository.FetchAllUsing(MatrixElementQueryFactory.AllForDecimalTable(matrix.Id));
         }
 
         public void RemoveAllForDecimalTable(Guid decimalTableId)
         {
-            gateway.ExecuteUsing(DecimalValueQueryFactory.RemoveConstraintsForDecimalTable(decimalTableId));
-            gateway.ExecuteUsing(DecimalValueQueryFactory.RemoveAllForDecimalTable(decimalTableId));
+            gateway.ExecuteUsing(MatrixElementQueryFactory.RemoveConstraintsForDecimalTable(decimalTableId));
+            gateway.ExecuteUsing(MatrixElementQueryFactory.RemoveAllForDecimalTable(decimalTableId));
         }
     }
 }

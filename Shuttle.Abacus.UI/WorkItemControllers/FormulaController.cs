@@ -31,11 +31,13 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             }
 
             var formulaView = WorkItem.GetView<IFormulaView>();
-            var constraintView = WorkItem.GetView<IConstraintView>();
 
             Send(new CreateFormulaCommand
             {
-
+                Name = formulaView.NameValue,
+                MaximumFormulaName = formulaView.MaximumFormulaNameValue,
+                MinimumFormulaName = formulaView.MinimumFormulaNameValue,
+                ExecutionType = formulaView.ExecutionTypeValue
             });
         }
 

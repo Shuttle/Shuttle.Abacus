@@ -299,9 +299,9 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             return false;
         }
 
-        public List<DecimalValue> DecimalValues()
+        public List<MatrixElement> DecimalValues()
         {
-            var result = new List<DecimalValue>();
+            var result = new List<MatrixElement>();
 
             for (var column = 2; column <= ValueGridView.ColumnCount - 1; column++)
             {
@@ -309,7 +309,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
                 {
                     var cell = ValueGridView[column, row];
 
-                    var decimalValue = new DecimalValue
+                    var decimalValue = new MatrixElement
                     {
                         Row = row,
                         Column = column,

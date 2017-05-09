@@ -35,5 +35,10 @@ namespace Shuttle.Abacus.DataAccess
         {
             return _databaseGateway.GetRowsUsing(_argumentQueryFactory.GetValues(id));
         }
+
+        public DataRow Get(string name)
+        {
+            return _databaseGateway.GetSingleRowUsing(_argumentQueryFactory.Get(name));
+        }
     }
 }

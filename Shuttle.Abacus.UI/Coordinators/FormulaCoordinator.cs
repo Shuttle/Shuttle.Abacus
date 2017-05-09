@@ -138,14 +138,12 @@ namespace Shuttle.Abacus.UI.Coordinators
             using (_databaseContextFactory.Create())
             {
                 var formulaModel = new FormulaModel();
-                var constraintModel = ConstraintModel(formulaModel);
 
                 var item = WorkItemManager
                     .Create("New formula")
                     .ControlledBy<IFormulaController>()
                     .ShowIn<IContextToolbarPresenter>()
                     .AddPresenter<IFormulaPresenter>().WithModel(formulaModel)
-                    .AddPresenter<IConstraintPresenter>().WithModel(constraintModel)
                     .AddNavigationItem(
                         NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
                     .AssignInitiator(message);
@@ -158,16 +156,7 @@ namespace Shuttle.Abacus.UI.Coordinators
         {
             using (_databaseContextFactory.Create())
             {
-                var formulaModel = new FormulaModel().Using(_formulaQuery.Get(message.FormulaId));
-
-                var constraintModel = ConstraintModel(formulaModel);
-
-                if (constraintModel == null)
-                {
-                    return;
-                }
-
-                constraintModel.ConstraintRows = _constraintQuery.AllForOwner(message.FormulaId);
+                var formulaModel = new FormulaModel(_formulaQuery.Get(message.FormulaId));
 
                 var item = WorkItemManager
                     .Create("Edit formula")
@@ -176,7 +165,6 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .AddPresenter<IFormulaPresenter>()
                     .WithModel(formulaModel)
                     .AddPresenter<IConstraintPresenter>()
-                    .WithModel(constraintModel)
                     .AddNavigationItem(
                         NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
                     .AsDefault()
@@ -213,12 +201,6 @@ namespace Shuttle.Abacus.UI.Coordinators
         public void HandleMessage(NewFormulaFromExistingMessage message)
         {
             var formulaModel = new FormulaModel();
-            var constraintModel = ConstraintModel(formulaModel);
-
-            using (_databaseContextFactory.Create())
-            {
-                constraintModel.ConstraintRows = _constraintQuery.AllForOwner(message.FormulaId);
-            }
 
             var item = WorkItemManager
                 .Create("New formula")
@@ -226,8 +208,6 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .ShowIn<IContextToolbarPresenter>()
                 .AddPresenter<IFormulaPresenter>()
                 .WithModel(formulaModel)
-                .AddPresenter<IConstraintPresenter>()
-                .WithModel(constraintModel)
                 .AddNavigationItem(
                     NavigationItemFactory.Create(new NewFormulaMessage(message))
                         .AssignResourceItem(ResourceItems.Submit))

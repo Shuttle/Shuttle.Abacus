@@ -15,5 +15,6 @@ namespace Shuttle.Abacus.DataAccess
         IQuery Save(Argument item);
         IQuery RemoveValues(Argument argument);
         IQuery SaveValue(Argument argument, string value);
+        IQuery Get(string name);
     }
 }

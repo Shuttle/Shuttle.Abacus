@@ -21,7 +21,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IMatrixQuery _matrixQuery;
-        private readonly IDecimalTableRules _decimalTableRules;
+        private readonly IMatrixRules _matrixRules;
         private readonly IValueTypeValidatorProvider _valueTypeValidatorProvider;
         private IEnumerable<ConstraintTypeModel> _constraintTypes = new List<ConstraintTypeModel>();
         private bool _previousColumnArgumentWasText;
@@ -29,7 +29,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
         public MatrixPresenter(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
             IMatrixQuery matrixQuery, IConstraintTypeQuery constraintTypeQuery, IMatrixView view,
-            IDecimalTableRules decimalTableRules,
+            IMatrixRules matrixRules,
             IValueTypeValidatorProvider valueTypeValidatorProvider)
             : base(view)
         {
@@ -37,14 +37,14 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             Guard.AgainstNull(argumentQuery, "argumentQuery");
             Guard.AgainstNull(matrixQuery, "matrixQuery");
             Guard.AgainstNull(constraintTypeQuery, "constraintTypeQuery");
-            Guard.AgainstNull(decimalTableRules, "decimalTableRules");
+            Guard.AgainstNull(matrixRules, "matrixRules");
             Guard.AgainstNull(valueTypeValidatorProvider, "valueTypeValidatorProvider");
 
             _databaseContextFactory = databaseContextFactory;
             _argumentQuery = argumentQuery;
             _matrixQuery = matrixQuery;
             _constraintTypeQuery = constraintTypeQuery;
-            _decimalTableRules = decimalTableRules;
+            _matrixRules = matrixRules;
             _valueTypeValidatorProvider = valueTypeValidatorProvider;
 
             Text = "Matrix";
@@ -248,8 +248,8 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
             Guard.AgainstNull(Model, "Model");
 
-            View.DecimalTableNameRules = _decimalTableRules.DecimalTableNameRules();
-            View.RowArgumentRules = _decimalTableRules.RowArgumentRules();
+            View.DecimalTableNameRules = _matrixRules.DecimalTableNameRules();
+            View.RowArgumentRules = _matrixRules.RowArgumentRules();
 
             using (_databaseContextFactory.Create())
             {
@@ -259,7 +259,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
                 View.DecimalTableNameValue = Model.Name;
 
-                var rowArgumentRow = _argumentQuery.Get(Model.RowArgumentId);
+                var rowArgumentRow = _argumentQuery.Get(Model.RowArgumentName);
 
                 if (rowArgumentRow == null)
                 {
@@ -268,7 +268,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
                 View.RowArgumentValue = ArgumentColumns.Name.MapFrom(rowArgumentRow);
 
-                var columnArumentRow = _argumentQuery.Get(Model.ColumnArgumentId);
+                var columnArumentRow = _argumentQuery.Get(Model.ColumnArgumentName);
 
                 if (columnArumentRow != null)
                 {
