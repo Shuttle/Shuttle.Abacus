@@ -108,6 +108,8 @@ namespace Shuttle.Abacus.Server.Handlers
             {
                 _formulaRepository.Remove(message.FormulaId);
             }
+
+            context.ReplyOK();
         }
     }
 }
