@@ -4,16 +4,17 @@ using Abacus.Domain;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using log4net;
-using Shuttle.Abacus.ApplicationService;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Values;
+using Shuttle.Abacus.Server.EventHandlers;
 using Shuttle.Core.Castle;
 using Shuttle.Core.Data;
 using Shuttle.Core.Host;
 using Shuttle.Core.Infrastructure;
 using Shuttle.Core.Log4Net;
 using Shuttle.Esb;
+using Shuttle.Recall;
 using IPipeline = Shuttle.Core.Infrastructure.IPipeline;
 using Pipeline = Shuttle.Core.Infrastructure.Pipeline;
 
@@ -21,13 +22,19 @@ namespace Shuttle.Abacus.Server
 {
     public class Host : IHost, IDisposable
     {
+        private IEventProcessor _eventProcessor;
+        private IEventStore _eventStore;
+
         private IServiceBus _bus;
         private WindsorContainer _container;
 
         public void Dispose()
         {
             _bus.Dispose();
+            _eventProcessor?.Dispose();
+            _eventStore?.AttemptDispose();
             _container.Dispose();
+
             LogManager.Shutdown();
         }
 
@@ -41,11 +48,30 @@ namespace Shuttle.Abacus.Server
 
             var container = new WindsorComponentContainer(_container);
 
+            RegisterEventStore(container);
+
             ServiceBus.Register(container);
 
             container.Resolve<IDatabaseContextFactory>().ConfigureWith("Abacus");
 
             _bus = ServiceBus.Create(container).Start();
+        }
+
+        private void RegisterEventStore(WindsorComponentContainer container)
+        {
+            EventStore.Register(container);
+
+            _eventStore = EventStore.Create(container);
+
+            container.Register<SystemUserHandler>();
+            container.Register<FormulaHandler>();
+
+            _eventProcessor = container.Resolve<IEventProcessor>();
+
+            //_eventProcessor.AddProjection(new Projection("SystemUser").AddEventHandler(container.Resolve<SystemUserHandler>()));
+            _eventProcessor.AddProjection(new Projection("Formula").AddEventHandler(container.Resolve<FormulaHandler>()));
+
+            _eventProcessor.Start();
         }
 
         private void Wire()
@@ -149,13 +175,6 @@ namespace Shuttle.Abacus.Server
                     .Pick()
                     .If(type => !type.IsInterface && type.Name.EndsWith("Policy"))
                     .WithService.Select((type, basetype) => FindInterface("Policy", type)));
-
-            _container.Register(
-                Classes
-                    .FromAssemblyNamed("Shuttle.Abacus")
-                    .Pick()
-                    .If(type => type.Name.EndsWith("ArgumentAnswerProvider"))
-                    .WithService.Select((type, basetype) => FindGenericInterface(typeof(IPipe<>), type)));
 
             _container.Register(
                 Classes

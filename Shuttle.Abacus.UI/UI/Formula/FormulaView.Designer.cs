@@ -32,8 +32,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.MinimumFormulaName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.ExecutionType = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -84,33 +82,10 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Minimum formula name";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 47);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Execution type";
-            // 
-            // ExecutionType
-            // 
-            this.ExecutionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ExecutionType.FormattingEnabled = true;
-            this.ExecutionType.Items.AddRange(new object[] {
-            "All",
-            "First"});
-            this.ExecutionType.Location = new System.Drawing.Point(11, 63);
-            this.ExecutionType.Name = "ExecutionType";
-            this.ExecutionType.Size = new System.Drawing.Size(214, 21);
-            this.ExecutionType.TabIndex = 3;
-            // 
             // FormulaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.ExecutionType);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.MinimumFormulaName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.MaximumFormulaName);
@@ -129,7 +104,5 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox MinimumFormulaName;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox ExecutionType;
     }
 }

@@ -239,7 +239,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                         //var result = _formulaQuery.OperationsSummary(message.Item.Key);
                         var result = _formulaQuery.Get(message.Item.Key);
 
-                        message.AddTable("Formula Operations", new[] {result});
+                        message.AddRow("Formula Operations", result);
 
                         break;
                     }

@@ -32,17 +32,6 @@ namespace Shuttle.Abacus.UI.UI.Formula
         {
             set { ViewValidator.Control(FormulaName).ShouldSatisfy(value); }
         }
-
-        public IRuleCollection<object> ExecutionTypeRules
-        {
-            set { ViewValidator.Control(ExecutionType).ShouldSatisfy(value); }
-        }
-
-        public string ExecutionTypeValue
-        {
-            get { return (string) ExecutionType.SelectedItem; }
-            set { ExecutionType.SelectedItem = value; } 
-        }
     }
 
     public class GenericFormulaView : View<IFormulaPresenter>

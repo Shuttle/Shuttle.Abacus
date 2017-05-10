@@ -43,7 +43,7 @@ namespace Shuttle.Abacus.DataAccess
 
             Guarded.Entity<Formula>(formulaRow, id);
 
-            var result = new Formula(id, FormulaColumns.Name.MapFrom(formulaRow), FormulaColumns.ExecutionType.MapFrom(formulaRow));
+            var result = new Formula(id);
 
             foreach (var row in _databaseGateway.GetRowsUsing(_formulaQueryFactory.GetOperations(id)))
             {

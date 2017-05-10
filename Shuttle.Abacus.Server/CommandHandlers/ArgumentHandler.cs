@@ -5,7 +5,7 @@ using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;
 
-namespace Shuttle.Abacus.Server.Handlers
+namespace Shuttle.Abacus.Server.CommandHandlers
 {
     public class ArgumentHandler :
         IMessageHandler<CreateArgumentCommand>,

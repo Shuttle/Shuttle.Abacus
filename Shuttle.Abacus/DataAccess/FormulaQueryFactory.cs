@@ -1,6 +1,8 @@
 using System;
 using Shuttle.Abacus.Domain;
+using Shuttle.Abacus.Events.Formula.v1;
 using Shuttle.Core.Data;
+using Shuttle.Recall;
 
 namespace Shuttle.Abacus.DataAccess
 {
@@ -45,26 +47,12 @@ where
 
         public IQuery Add(Formula formula)
         {
-            return RawQuery.Create(@"
-insert into Formula
-(
-    FormulaId,
-    Name
-)
-values
-(
-    @FormulaId,
-    @Name
-)")
-                .AddParameterValue(FormulaColumns.Id, formula.Id)
-                .AddParameterValue(FormulaColumns.Name, formula.Name);
+            throw new NotImplementedException();
         }
 
         public IQuery Remove(Guid id)
         {
-            return
-                RawQuery.Create("delete from Formula where FormulaId = @FormulaId")
-                    .AddParameterValue(FormulaColumns.Id, id);
+            throw new NotImplementedException();
         }
 
         public IQuery RemoveOperations(Formula formula)
@@ -94,6 +82,36 @@ from
     FormulaConstraint
 ")
                 .AddParameterValue(FormulaOperationColumns.FormulaId, id);
+        }
+
+        public IQuery Registered(PrimitiveEvent primitiveEvent, Registered registered)
+        {
+            return RawQuery.Create(@"
+insert into Formula
+(
+    FormulaId,
+    Name,
+    MaximumFormulaName,
+    MinimumFormulaName
+)
+values
+(
+    @FormulaId,
+    @Name,
+    @MaximumFormulaName,
+    @MinimumFormulaName
+)")
+                .AddParameterValue(FormulaColumns.Id, primitiveEvent.Id)
+                .AddParameterValue(FormulaColumns.Name, registered.Name)
+                .AddParameterValue(FormulaColumns.MaximumFormulaName, registered.MaximumFormulaName)
+                .AddParameterValue(FormulaColumns.MinimumFormulaName, registered.MinimumFormulaName);
+        }
+
+        public IQuery Removed(PrimitiveEvent primitiveEvent, Removed removed)
+        {
+            return
+                RawQuery.Create("delete from Formula where FormulaId = @FormulaId")
+                    .AddParameterValue(FormulaColumns.Id, primitiveEvent.Id);
         }
 
         public IQuery AddOperation(Formula formula, FormulaOperation operation, int sequenceNumber)

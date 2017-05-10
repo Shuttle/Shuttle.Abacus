@@ -1,10 +1,9 @@
-namespace Shuttle.Abacus.Messages.v1
+﻿namespace Shuttle.Abacus.Events.Formula.v1
 {
-    public class CreateFormulaCommand
+    public class Registered
     {
         public string Name { get; set; }
         public string MaximumFormulaName { get; set; }
         public string MinimumFormulaName { get; set; }
-        public string ExecutionType { get; set; }
     }
 }

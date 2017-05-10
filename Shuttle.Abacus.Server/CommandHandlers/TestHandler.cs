@@ -1,13 +1,12 @@
 using System;
 using System.Diagnostics;
 using Shuttle.Abacus.Domain;
-using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Messages.v1;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;
 
-namespace Shuttle.Abacus.Server.Handlers
+namespace Shuttle.Abacus.Server.CommandHandlers
 {
     public class TestHandler :
         IMessageHandler<CreateTestCommand>,

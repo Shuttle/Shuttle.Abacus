@@ -31,7 +31,7 @@ namespace Shuttle.Abacus.UI.Messages.Core
 
         public void AddRow(string name, DataRow row)
         {
-            namedQueryResults.Add(new NamedQueryResult(name, NamedQueryResult.DisplayType.Row, new[] {row}));
+            namedQueryResults.Add(new NamedQueryResult(name, NamedQueryResult.DisplayType.Row, row != null ? new List<DataRow> { row } : new List<DataRow>()));
         }
     }
 }

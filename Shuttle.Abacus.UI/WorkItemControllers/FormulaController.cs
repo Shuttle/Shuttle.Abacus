@@ -32,12 +32,11 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 
             var formulaView = WorkItem.GetView<IFormulaView>();
 
-            Send(new CreateFormulaCommand
+            Send(new RegisterFormulaCommand
             {
                 Name = formulaView.NameValue,
                 MaximumFormulaName = formulaView.MaximumFormulaNameValue,
-                MinimumFormulaName = formulaView.MinimumFormulaNameValue,
-                ExecutionType = formulaView.ExecutionTypeValue
+                MinimumFormulaName = formulaView.MinimumFormulaNameValue
             });
         }
 
@@ -75,7 +74,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 
         public void HandleMessage(DeleteFormulaMessage message)
         {
-            Send(new DeleteFormulaCommand
+            Send(new RemoveFormulaCommand
                 {
                     FormulaId = message.FormulaId
                 },

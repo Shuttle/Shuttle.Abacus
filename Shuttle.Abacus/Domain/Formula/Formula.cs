@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Shuttle.Abacus.Events.Formula.v1;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
@@ -10,40 +11,23 @@ namespace Shuttle.Abacus.Domain
         private readonly List<FormulaConstraint> _constraints = new List<FormulaConstraint>();
         private readonly List<FormulaOperation> _operations = new List<FormulaOperation>();
 
-        public Formula(Guid id, string name, string executionType)
+        public Formula(Guid id)
         {
             Id = id;
-            Name = name;
-            ExecutionType = executionType;
         }
 
         public IEnumerable<FormulaOperation> Operations => new ReadOnlyCollection<FormulaOperation>(_operations);
 
         public Guid Id { get; }
-        public string Name { get; }
-        public string ExecutionType { get; }
+        public string Name { get; set; }
         public string MaximumFormulaName { get; private set; }
         public string MinimumFormulaName { get; private set; }
 
-        public Formula WithMaximum(string formulaName)
-        {
-            Guard.AgainstNullOrEmptyString(formulaName, "formulaName");
-
-            MaximumFormulaName = formulaName;
-
-            return this;
-        }
-
-        public Formula WithMinimum(string formulaName)
-        {
-            Guard.AgainstNullOrEmptyString(formulaName, "formulaName");
-
-            MinimumFormulaName = formulaName;
-
-            return this;
-        }
-
         public IEnumerable<FormulaConstraint> Constraints => new ReadOnlyCollection<FormulaConstraint>(_constraints);
+
+        public string OwnerName => "Formula";
+        public bool HasOperations => _operations.Count > 0;
+        public bool Removed { get; private set; }
 
         public void AddConstraint(FormulaConstraint item)
         {
@@ -51,9 +35,6 @@ namespace Shuttle.Abacus.Domain
 
             _constraints.Add(item);
         }
-
-        public string OwnerName => "Formula";
-        public bool HasOperations => _operations.Count > 0;
 
         //public bool IsSatisfiedBy(IMethodContext collectionMethodContext)
         //{
@@ -180,6 +161,43 @@ namespace Shuttle.Abacus.Domain
             //_operations.ForEach(operation => result.AddOperation(operation));
 
             //return result;
+        }
+
+        public Registered Register(string name, string maximumFormulaName, string minimumFormulaName)
+        {
+            Guard.AgainstNullOrEmptyString(name, "name");
+
+            return On(new Registered
+            {
+                Name = name,
+                MinimumFormulaName = minimumFormulaName ?? string.Empty,
+                MaximumFormulaName = maximumFormulaName ?? string.Empty
+            });
+        }
+
+        public Registered On(Registered registered)
+        {
+            Guard.AgainstNull(registered, "registered");
+
+            Name = registered.Name;
+            MinimumFormulaName = registered.MinimumFormulaName;
+            MaximumFormulaName = registered.MaximumFormulaName;
+
+            return registered;
+        }
+
+        public Removed Remove()
+        {
+            return On(new Removed());
+        }
+
+        public Removed On(Removed removed)
+        {
+            Guard.AgainstNull(removed, "removed");
+
+            Removed = true;
+
+            return removed;
         }
     }
 }

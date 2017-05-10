@@ -10,8 +10,6 @@ namespace Shuttle.Abacus.UI.UI.Formula
         string MaximumFormulaNameValue { get; set; }
         string MinimumFormulaNameValue { get; set; }
         IRuleCollection<object> FormulaNameRules { set; }
-        IRuleCollection<object> ExecutionTypeRules { set; }
-        string ExecutionTypeValue { get; set; }
 
         void PopulateFormulas(IEnumerable<string> formulaNames);
     }

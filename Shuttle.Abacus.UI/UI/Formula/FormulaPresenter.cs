@@ -28,12 +28,10 @@ namespace Shuttle.Abacus.UI.UI.Formula
             Guard.AgainstNull(Model, "Model");
 
             View.FormulaNameRules = _formulaRules.FormulaNameRules();
-            View.ExecutionTypeRules = _formulaRules.ExecutionTypeRules();
 
             View.NameValue = Model.Name;
             View.MaximumFormulaNameValue = Model.MaximumFormulaName;
             View.MinimumFormulaNameValue = Model.MinimumFormulaName;
-            View.ExecutionTypeValue = Model.ExecutionType;
         }
     }
 }
