@@ -48,8 +48,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Shuttle.Core.Infrastructure, Version=8.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Core.Infrastructure.8.0.1\lib\net452-full\Shuttle.Core.Infrastructure.dll</HintPath>
+    <Reference Include="Shuttle.Core.Infrastructure, Version=8.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Core.Infrastructure.8.0.2\lib\net452-full\Shuttle.Core.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core">
@@ -58,7 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="v1\ChangeArgumentCommand.cs" />
-    <Compile Include="v1\ChangeFormulaCommand.cs" />
     <Compile Include="v1\ChangeLoginNameCommand.cs" />
     <Compile Include="v1\ChangeTestCommand.cs" />
     <Compile Include="v1\CreateArgumentCommand.cs" />
@@ -68,6 +67,9 @@
     <Compile Include="v1\CreateSystemUserCommand.cs" />
     <Compile Include="v1\MatrixCommand.cs" />
     <Compile Include="v1\DeleteArgumentCommand.cs" />
+    <Compile Include="v1\RenameFormulaCommand.cs" />
+    <Compile Include="v1\SetFormulaMinimumCommand.cs" />
+    <Compile Include="v1\SetFormulaMaxmimumCommand.cs" />
     <Compile Include="v1\RemoveFormulaCommand.cs" />
     <Compile Include="v1\DeleteLimitCommand.cs" />
     <Compile Include="v1\DeleteTestCommand.cs" />

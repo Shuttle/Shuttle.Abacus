@@ -47,7 +47,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 {
                     message.NavigationItems.Add(
                         NavigationItemFactory.Create(
-                            new NewFormulaMessage()));
+                            new RegisterFormulaMessage()));
 
                     if (Clipboard.Contains(ResourceKeys.Formula))
                     {
@@ -60,11 +60,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 {
                     message.NavigationItems.Add(
                         NavigationItemFactory.Create(
-                            new NewFormulaFromExistingMessage(message.Item.Key)));
-
-                    message.NavigationItems.Add(
-                        NavigationItemFactory.Create(
-                            new EditFormulaMessage(message.Item.Key)));
+                            new RenameFormulaMessage(message.Item.Key)));
 
                     message.NavigationItems.Add(
                         NavigationItemFactory.Create(
@@ -113,7 +109,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             }
         }
 
-        public void HandleMessage(NewFormulaMessage message)
+        public void HandleMessage(RegisterFormulaMessage message)
         {
             using (_databaseContextFactory.Create())
             {
@@ -132,7 +128,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             }
         }
 
-        public void HandleMessage(EditFormulaMessage message)
+        public void HandleMessage(RenameFormulaMessage message)
         {
             using (_databaseContextFactory.Create())
             {
@@ -149,12 +145,11 @@ namespace Shuttle.Abacus.UI.Coordinators
                 var formulaModel = new FormulaModel(row);
 
                 var item = WorkItemManager
-                    .Create("Edit formula")
+                    .Create("Rename formula")
                     .ControlledBy<IFormulaController>()
                     .ShowIn<IContextToolbarPresenter>()
                     .AddPresenter<IFormulaPresenter>()
                     .WithModel(formulaModel)
-                    .AddPresenter<IConstraintPresenter>()
                     .AddNavigationItem(
                         NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
                     .AsDefault()
@@ -187,26 +182,6 @@ namespace Shuttle.Abacus.UI.Coordinators
 
             WorkItemControllerFactory.Create<IFormulaController>().HandleMessage(message);
         }
-
-        public void HandleMessage(NewFormulaFromExistingMessage message)
-        {
-            var formulaModel = new FormulaModel();
-
-            var item = WorkItemManager
-                .Create("New formula")
-                .ControlledBy<IFormulaController>()
-                .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<IFormulaPresenter>()
-                .WithModel(formulaModel)
-                .AddNavigationItem(
-                    NavigationItemFactory.Create(new NewFormulaMessage(message))
-                        .AssignResourceItem(ResourceItems.Submit))
-                .AsDefault()
-                .AssignInitiator(message.WithRefreshOwner());
-
-            HostInWorkspace<ITabbedWorkspacePresenter>(item);
-        }
-
         public void HandleMessage(SummaryViewRequestedMessage message)
         {
             if (SummaryViewManager.CanIgnore(message, ResourceKeys.Formula))

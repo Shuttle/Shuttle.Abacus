@@ -10,9 +10,8 @@ namespace Shuttle.Abacus.UI.Coordinators.Interfaces
         IMessageHandler<ExplorerInitializeMessage>,
         IMessageHandler<ResourceMenuRequestMessage>,
         IMessageHandler<PopulateResourceMessage>,
-        IMessageHandler<NewFormulaMessage>,
-        IMessageHandler<NewFormulaFromExistingMessage>,
-        IMessageHandler<EditFormulaMessage>,
+        IMessageHandler<RegisterFormulaMessage>,
+        IMessageHandler<RenameFormulaMessage>,
         IMessageHandler<DeleteFormulaMessage>,
         IMessageHandler<ResourceRefreshItemTextMessage>,
         IMessageHandler<SummaryViewRequestedMessage>

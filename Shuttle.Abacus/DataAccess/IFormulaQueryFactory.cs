@@ -21,5 +21,6 @@ namespace Shuttle.Abacus.DataAccess
         IQuery GetConstraints(Guid id);
         IQuery Registered(PrimitiveEvent primitiveEvent, Registered registered);
         IQuery Removed(PrimitiveEvent primitiveEvent, Removed removed);
+        IQuery Renamed(PrimitiveEvent primitiveEvent, Renamed renamed);
     }
 }

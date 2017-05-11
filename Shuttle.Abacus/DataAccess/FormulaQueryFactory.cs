@@ -90,21 +90,15 @@ from
 insert into Formula
 (
     FormulaId,
-    Name,
-    MaximumFormulaName,
-    MinimumFormulaName
+    Name
 )
 values
 (
     @FormulaId,
-    @Name,
-    @MaximumFormulaName,
-    @MinimumFormulaName
+    @Name
 )")
                 .AddParameterValue(FormulaColumns.Id, primitiveEvent.Id)
-                .AddParameterValue(FormulaColumns.Name, registered.Name)
-                .AddParameterValue(FormulaColumns.MaximumFormulaName, registered.MaximumFormulaName)
-                .AddParameterValue(FormulaColumns.MinimumFormulaName, registered.MinimumFormulaName);
+                .AddParameterValue(FormulaColumns.Name, registered.Name);
         }
 
         public IQuery Removed(PrimitiveEvent primitiveEvent, Removed removed)
@@ -112,6 +106,20 @@ values
             return
                 RawQuery.Create("delete from Formula where FormulaId = @FormulaId")
                     .AddParameterValue(FormulaColumns.Id, primitiveEvent.Id);
+        }
+
+        public IQuery Renamed(PrimitiveEvent primitiveEvent, Renamed renamed)
+        {
+            return RawQuery.Create(@"
+update 
+    Formula 
+set
+    Name = @Name
+where
+    FormulaId = @FormulaId
+)")
+                .AddParameterValue(FormulaColumns.Id, primitiveEvent.Id)
+                .AddParameterValue(FormulaColumns.Name, renamed.Name);
         }
 
         public IQuery AddOperation(Formula formula, FormulaOperation operation, int sequenceNumber)

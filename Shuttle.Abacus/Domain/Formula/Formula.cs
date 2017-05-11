@@ -163,15 +163,13 @@ namespace Shuttle.Abacus.Domain
             //return result;
         }
 
-        public Registered Register(string name, string maximumFormulaName, string minimumFormulaName)
+        public Registered Register(string name)
         {
             Guard.AgainstNullOrEmptyString(name, "name");
 
             return On(new Registered
             {
-                Name = name,
-                MinimumFormulaName = minimumFormulaName ?? string.Empty,
-                MaximumFormulaName = maximumFormulaName ?? string.Empty
+                Name = name
             });
         }
 
@@ -180,14 +178,17 @@ namespace Shuttle.Abacus.Domain
             Guard.AgainstNull(registered, "registered");
 
             Name = registered.Name;
-            MinimumFormulaName = registered.MinimumFormulaName;
-            MaximumFormulaName = registered.MaximumFormulaName;
 
             return registered;
         }
 
         public Removed Remove()
         {
+            if (Removed)
+            {
+                throw new DomainException("Already removed.");
+            }
+
             return On(new Removed());
         }
 
@@ -198,6 +199,37 @@ namespace Shuttle.Abacus.Domain
             Removed = true;
 
             return removed;
+        }
+
+        public bool IsNamed(string name)
+        {
+            Guard.AgainstNullOrEmptyString(name, "name");
+
+            return Name.Equals(name, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        public Renamed Rename(string name)
+        {
+            Guard.AgainstNullOrEmptyString(name, "name");
+
+            if (IsNamed(name))
+            {
+                throw new DomainException(string.Format("Already named '{0}'.", name));
+            }
+
+            return On(new Renamed
+            {
+                Name = name
+            });
+        }
+
+        public Renamed On(Renamed renamed)
+        {
+            Guard.AgainstNull(renamed, "renamed");
+
+            Name = renamed.Name;
+
+            return renamed;
         }
     }
 }

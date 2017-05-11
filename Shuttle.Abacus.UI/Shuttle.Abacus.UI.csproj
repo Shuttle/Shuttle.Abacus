@@ -53,12 +53,12 @@
       <HintPath>..\packages\Shuttle.Core.Data.8.0.0\lib\net452-full\Shuttle.Core.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Shuttle.Core.Infrastructure, Version=8.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Core.Infrastructure.8.0.1\lib\net452-full\Shuttle.Core.Infrastructure.dll</HintPath>
+    <Reference Include="Shuttle.Core.Infrastructure, Version=8.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Core.Infrastructure.8.0.2\lib\net452-full\Shuttle.Core.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Shuttle.Esb, Version=8.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Esb.8.0.1\lib\net452-full\Shuttle.Esb.dll</HintPath>
+    <Reference Include="Shuttle.Esb, Version=8.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Esb.8.0.5\lib\net452-full\Shuttle.Esb.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Shuttle.Esb.Module.PurgeQueues, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -228,11 +228,10 @@
     <Compile Include="Messages\Argument\EditArgumentMessage.cs" />
     <Compile Include="Messages\Argument\NewArgumentMessage.cs" />
     <Compile Include="Messages\Formula\DeleteFormulaMessage.cs" />
-    <Compile Include="Messages\Formula\EditFormulaMessage.cs" />
     <Compile Include="Messages\Formula\ManageFormulaOperationsMessage.cs" />
     <Compile Include="Messages\Formula\ManageFormulaConstraintsMessage.cs" />
-    <Compile Include="Messages\Formula\NewFormulaFromExistingMessage.cs" />
-    <Compile Include="Messages\Formula\NewFormulaMessage.cs" />
+    <Compile Include="Messages\Formula\RenameFormulaMessage.cs" />
+    <Compile Include="Messages\Formula\RegisterFormulaMessage.cs" />
     <Compile Include="Messages\Formula\PasteFormulaMessage.cs" />
     <Compile Include="Messages\Report\DecimalTableReportMessage.cs" />
     <Compile Include="Messages\Resources\PopulateResourceMessage.cs" />

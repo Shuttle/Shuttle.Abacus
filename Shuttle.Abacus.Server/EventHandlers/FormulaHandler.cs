@@ -7,6 +7,7 @@ namespace Shuttle.Abacus.Server.EventHandlers
 {
     public class FormulaHandler :
         IEventHandler<Registered>,
+        IEventHandler<Renamed>,
         IEventHandler<Removed>
     {
         private readonly IFormulaQuery _query;
@@ -26,6 +27,11 @@ namespace Shuttle.Abacus.Server.EventHandlers
         public void ProcessEvent(IEventHandlerContext<Removed> context)
         {
             _query.Removed(context.PrimitiveEvent, context.Event);
+        }
+
+        public void ProcessEvent(IEventHandlerContext<Renamed> context)
+        {
+            _query.Renamed(context.PrimitiveEvent, context.Event);
         }
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Events.Formula.v1;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
@@ -9,7 +8,7 @@ using Shuttle.Recall;
 
 namespace Shuttle.Abacus.DataAccess
 {
-    public class FormulaQuery :IFormulaQuery
+    public class FormulaQuery : IFormulaQuery
     {
         private readonly IDatabaseGateway _databaseGateway;
         private readonly IFormulaQueryFactory _formulaQueryFactory;
@@ -46,6 +45,11 @@ namespace Shuttle.Abacus.DataAccess
         public void Removed(PrimitiveEvent primitiveEvent, Removed removed)
         {
             _databaseGateway.ExecuteUsing(_formulaQueryFactory.Removed(primitiveEvent, removed));
+        }
+
+        public void Renamed(PrimitiveEvent primitiveEvent, Renamed renamed)
+        {
+            _databaseGateway.ExecuteUsing(_formulaQueryFactory.Renamed(primitiveEvent, renamed));
         }
     }
 }
