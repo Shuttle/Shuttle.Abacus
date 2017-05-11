@@ -12,7 +12,6 @@ using Shuttle.Abacus.UI.Messages.Resources;
 using Shuttle.Abacus.UI.Models;
 using Shuttle.Abacus.UI.UI.Constraint;
 using Shuttle.Abacus.UI.UI.Formula;
-using Shuttle.Abacus.UI.UI.List;
 using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
@@ -23,39 +22,16 @@ namespace Shuttle.Abacus.UI.Coordinators
 {
     public class FormulaCoordinator : Coordinator, IFormulaCoordinator
     {
-        private readonly IArgumentQuery _argumentQuery;
-        private readonly IConstraintQuery _constraintQuery;
-        private readonly IConstraintTypeQuery _constraintTypeQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
-        private readonly IMatrixQuery _decimalTableQuery;
         private readonly IFormulaQuery _formulaQuery;
-        private readonly IOperationTypeQuery _operationTypeQuery;
-        private readonly IValueSourceTypeQuery _valueSourceTypeQuery;
 
-        public FormulaCoordinator(IDatabaseContextFactory databaseContextFactory, IFormulaQuery formulaQuery,
-            IConstraintQuery constraintQuery, IConstraintTypeQuery constraintTypeQuery,
-            IArgumentQuery argumentQuery,
-            IOperationTypeQuery operationTypeQuery, IValueSourceTypeQuery valueSourceTypeQuery,
-            IMatrixQuery decimalTableQuery)
+        public FormulaCoordinator(IDatabaseContextFactory databaseContextFactory, IFormulaQuery formulaQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(formulaQuery, "_formulaQuery");
-            Guard.AgainstNull(constraintQuery, "_constraintQuery");
-            Guard.AgainstNull(constraintTypeQuery, "constraintTypeQuery");
-            Guard.AgainstNull(argumentQuery, "_argumentQuery");
-            Guard.AgainstNull(operationTypeQuery, "operationTypeQueryy");
-            Guard.AgainstNull(valueSourceTypeQuery, "_valueSourceTypeQuery");
-            Guard.AgainstNull(decimalTableQuery, "_decimalTableQuery");
 
             _databaseContextFactory = databaseContextFactory;
             _formulaQuery = formulaQuery;
-            _decimalTableQuery = decimalTableQuery;
-            _operationTypeQuery = operationTypeQuery;
-            _valueSourceTypeQuery = valueSourceTypeQuery;
-
-            _constraintQuery = constraintQuery;
-            _constraintTypeQuery = constraintTypeQuery;
-            _argumentQuery = argumentQuery;
         }
 
         public void HandleMessage(ResourceMenuRequestMessage message)
@@ -116,20 +92,24 @@ namespace Shuttle.Abacus.UI.Coordinators
                         {
                             message.Resources.Add(
                                 new Resource(ResourceKeys.Formula, FormulaColumns.Id.MapFrom(row),
-                                        FormulaColumns.Name.MapFrom(row), ImageResources.Formula));
+                                    FormulaColumns.Name.MapFrom(row), ImageResources.Formula));
                         }
                     }
 
                     break;
                 }
                 case Resource.ResourceType.Item:
-                    {
-                        message.Resources.Add(
-                            new Resource(ResourceKeys.Constraint, Guid.NewGuid(), "Constraints",
-                                         ImageResources.Constraint).AsContainer());
+                {
+                    message.Resources.Add(
+                        new Resource(ResourceKeys.Constraint, Guid.NewGuid(), "Constraints",
+                            ImageResources.Constraint).AsContainer());
 
-                        break;
-                    }
+                    message.Resources.Add(
+                        new Resource(ResourceKeys.Constraint, Guid.NewGuid(), "Constraints",
+                            ImageResources.Constraint).AsContainer());
+
+                    break;
+                }
             }
         }
 
@@ -160,7 +140,8 @@ namespace Shuttle.Abacus.UI.Coordinators
 
                 if (row == null)
                 {
-                    MessageBus.Publish(new ResultNotificationMessage(new Result().AddFailureMessage("Formula not found.")));
+                    MessageBus.Publish(
+                        new ResultNotificationMessage(new Result().AddFailureMessage("Formula not found.")));
 
                     return;
                 }
@@ -254,16 +235,6 @@ namespace Shuttle.Abacus.UI.Coordinators
                     }
                 }
             }
-        }
-
-        private ConstraintModel ConstraintModel(FormulaModel formulaModel)
-        {
-            return new ConstraintModel
-            {
-                ArgumentRows = _argumentQuery.All(),
-                ConstraintRows = _constraintQuery.AllForOwner(formulaModel.Id),
-                ConstraintTypeRows = _constraintTypeQuery.All()
-            };
         }
 
         public void HandleMessage(ExplorerInitializeMessage message)
