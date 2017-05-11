@@ -20,6 +20,6 @@ namespace Shuttle.Abacus.UI.Navigation
         INavigationItem Copy();
 
         bool GraphHasPermittedItems(IPermissionCollection permissions);
-        INavigationItem AssignResourceItem(ResourceItem item);
+        INavigationItem WithResourceItem(ResourceItem item);
     }
 }

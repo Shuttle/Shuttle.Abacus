@@ -104,7 +104,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .ShowIn<IContextToolbarPresenter>()
                 .AddPresenter<IConstraintPresenter>().WithModel(constraintModel)
                 .AddNavigationItem(
-                    NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
+                    NavigationItemFactory.Create(message).WithResourceItem(ResourceItems.Submit)).AsDefault()
                 .AssignInitiator(message);
 
             HostInWorkspace<ITabbedWorkspacePresenter>(item);

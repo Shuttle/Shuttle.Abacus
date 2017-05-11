@@ -98,7 +98,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .ShowIn<IContextToolbarPresenter>()
                 .AddPresenter<ITestPresenter>()
                 .WithModel(BuildModel())
-                .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
+                .AddNavigationItem(NavigationItemFactory.Create(message).WithResourceItem(ResourceItems.Submit))
                 .AsDefault()
                 .AssignInitiator(message);
 
@@ -199,7 +199,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .WithModel(model)
                 .AddNavigationItem(
                     NavigationItemFactory.Create(new NewTestMessage(message))
-                        .AssignResourceItem(ResourceItems.Submit))
+                        .WithResourceItem(ResourceItems.Submit))
                 .AsDefault()
                 .AssignInitiator(message);
 

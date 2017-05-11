@@ -10,7 +10,7 @@ using Shuttle.Abacus.UI.Messages.Explorer;
 using Shuttle.Abacus.UI.Messages.Formula;
 using Shuttle.Abacus.UI.Messages.Resources;
 using Shuttle.Abacus.UI.Models;
-using Shuttle.Abacus.UI.UI.Constraint;
+using Shuttle.Abacus.UI.Navigation;
 using Shuttle.Abacus.UI.UI.Formula;
 using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
@@ -22,6 +22,9 @@ namespace Shuttle.Abacus.UI.Coordinators
 {
     public class FormulaCoordinator : Coordinator, IFormulaCoordinator
     {
+        private readonly INavigationItem _register = new NavigationItem(new ResourceItem("Register", "Formula")).AssignMessage(new RegisterFormulaMessage());
+        private readonly INavigationItem _rename = new NavigationItem(new ResourceItem("Rename", "Formula"));
+
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IFormulaQuery _formulaQuery;
 
@@ -44,30 +47,21 @@ namespace Shuttle.Abacus.UI.Coordinators
             switch (message.Item.Type)
             {
                 case Resource.ResourceType.Container:
-                {
-                    message.NavigationItems.Add(
-                        NavigationItemFactory.Create(
-                            new RegisterFormulaMessage()));
-
-                    if (Clipboard.Contains(ResourceKeys.Formula))
                     {
-                        message.NavigationItems.Add(NavigationItemFactory.Create<PasteFormulaMessage>());
+                        message.NavigationItems.Add(_register);
+
+                        break;
                     }
-
-                    break;
-                }
                 case Resource.ResourceType.Item:
-                {
-                    message.NavigationItems.Add(
-                        NavigationItemFactory.Create(
-                            new RenameFormulaMessage(message.Item.Key)));
+                    {
+                        message.NavigationItems.Add(_rename.AssignMessage(new RenameFormulaMessage(message.Item.Key)));
 
-                    message.NavigationItems.Add(
-                        NavigationItemFactory.Create(
-                            new DeleteFormulaMessage(message.Item.Text, message.Item.Key, message.UpstreamItems[0])));
+                        message.NavigationItems.Add(
+                            NavigationItemFactory.Create(
+                                new DeleteFormulaMessage(message.Item.Text, message.Item.Key, message.UpstreamItems[0])));
 
-                    break;
-                }
+                        break;
+                    }
             }
         }
 
@@ -81,31 +75,31 @@ namespace Shuttle.Abacus.UI.Coordinators
             switch (message.Resource.Type)
             {
                 case Resource.ResourceType.Container:
-                {
-                    using (_databaseContextFactory.Create())
                     {
-                        foreach (var row in _formulaQuery.All())
+                        using (_databaseContextFactory.Create())
                         {
-                            message.Resources.Add(
-                                new Resource(ResourceKeys.Formula, FormulaColumns.Id.MapFrom(row),
-                                    FormulaColumns.Name.MapFrom(row), ImageResources.Formula));
+                            foreach (var row in _formulaQuery.All())
+                            {
+                                message.Resources.Add(
+                                    new Resource(ResourceKeys.Formula, FormulaColumns.Id.MapFrom(row),
+                                        FormulaColumns.Name.MapFrom(row), ImageResources.Formula));
+                            }
                         }
+
+                        break;
                     }
-
-                    break;
-                }
                 case Resource.ResourceType.Item:
-                {
-                    message.Resources.Add(
-                        new Resource(ResourceKeys.FormulaOperation, Guid.NewGuid(), "Operations",
-                            ImageResources.FormulaOperation).AsContainer());
+                    {
+                        message.Resources.Add(
+                            new Resource(ResourceKeys.FormulaOperation, Guid.NewGuid(), "Operations",
+                                ImageResources.FormulaOperation).AsContainer());
 
-                    message.Resources.Add(
-                        new Resource(ResourceKeys.FormulaConstraint, Guid.NewGuid(), "Constraints",
-                            ImageResources.FormulaConstraint).AsContainer());
+                        message.Resources.Add(
+                            new Resource(ResourceKeys.FormulaConstraint, Guid.NewGuid(), "Constraints",
+                                ImageResources.FormulaConstraint).AsContainer());
 
-                    break;
-                }
+                        break;
+                    }
             }
         }
 
@@ -120,8 +114,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .ControlledBy<IFormulaController>()
                     .ShowIn<IContextToolbarPresenter>()
                     .AddPresenter<IFormulaPresenter>().WithModel(formulaModel)
-                    .AddNavigationItem(
-                        NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
+                    .AddNavigationItem(_register).AsDefault()
                     .AssignInitiator(message);
 
                 HostInWorkspace<ITabbedWorkspacePresenter>(item);
@@ -150,9 +143,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .ShowIn<IContextToolbarPresenter>()
                     .AddPresenter<IFormulaPresenter>()
                     .WithModel(formulaModel)
-                    .AddNavigationItem(
-                        NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
-                    .AsDefault()
+                    .AddNavigationItem(_rename).AsDefault()
                     .AssignInitiator(message);
 
                 HostInWorkspace<ITabbedWorkspacePresenter>(item);
@@ -194,20 +185,20 @@ namespace Shuttle.Abacus.UI.Coordinators
                 switch (message.Item.Type)
                 {
                     case Resource.ResourceType.Container:
-                    {
-                        message.AddTable("Formulas", _formulaQuery.All());
+                        {
+                            message.AddTable("Formulas", _formulaQuery.All());
 
-                        break;
-                    }
+                            break;
+                        }
                     case Resource.ResourceType.Item:
-                    {
-                        //var result = _formulaQuery.OperationsSummary(message.Item.Key);
-                        var result = _formulaQuery.Get(message.Item.Key);
+                        {
+                            //var result = _formulaQuery.OperationsSummary(message.Item.Key);
+                            var result = _formulaQuery.Get(message.Item.Key);
 
-                        message.AddRow("Formula Operations", result);
+                            message.AddRow("Formula Operations", result);
 
-                        break;
-                    }
+                            break;
+                        }
                 }
             }
         }

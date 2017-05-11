@@ -82,7 +82,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .ShowIn<IContextToolbarPresenter>()
                 .AddPresenter<IArgumentPresenter>().WithModel(new ArgumentModel())
                 .AddPresenter<IArgumentValuePresenter>()
-                .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).AsDefault()
+                .AddNavigationItem(NavigationItemFactory.Create(message).WithResourceItem(ResourceItems.Submit)).AsDefault()
                 .AssignInitiator(message);
 
             HostInWorkspace<ITabbedWorkspacePresenter>(item);
@@ -127,7 +127,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .WithModel(new ArgumentModel(_argumentQuery.Get(message.ArgumentId)))
                     .AddPresenter<IArgumentValuePresenter>()
                     .WithModel(_argumentQuery.GetValues(message.ArgumentId))
-                    .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).
+                    .AddNavigationItem(NavigationItemFactory.Create(message).WithResourceItem(ResourceItems.Submit)).
                     AsDefault()
                     .AssignInitiator(message);
 

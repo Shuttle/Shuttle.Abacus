@@ -117,7 +117,7 @@ set
     Name = @Name
 where
     FormulaId = @FormulaId
-)")
+")
                 .AddParameterValue(FormulaColumns.Id, primitiveEvent.Id)
                 .AddParameterValue(FormulaColumns.Name, renamed.Name);
         }

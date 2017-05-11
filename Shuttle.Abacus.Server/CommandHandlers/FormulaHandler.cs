@@ -82,6 +82,12 @@ namespace Shuttle.Abacus.Server.CommandHandlers
             using (_databaseContextFactory.Create())
             {
                 var stream = _eventStore.Get(message.FormulaId);
+
+                if (stream.IsEmpty)
+                {
+                    return;
+                }
+
                 var formula = new Formula(message.FormulaId);
 
                 stream.Apply(formula);

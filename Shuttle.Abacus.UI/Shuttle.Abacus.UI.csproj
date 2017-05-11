@@ -232,7 +232,6 @@
     <Compile Include="Messages\Formula\ManageFormulaConstraintsMessage.cs" />
     <Compile Include="Messages\Formula\RenameFormulaMessage.cs" />
     <Compile Include="Messages\Formula\RegisterFormulaMessage.cs" />
-    <Compile Include="Messages\Formula\PasteFormulaMessage.cs" />
     <Compile Include="Messages\Report\DecimalTableReportMessage.cs" />
     <Compile Include="Messages\Resources\PopulateResourceMessage.cs" />
     <Compile Include="Messages\Resources\ResourceMenuRequestMessage.cs" />

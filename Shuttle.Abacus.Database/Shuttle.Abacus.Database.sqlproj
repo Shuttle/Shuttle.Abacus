@@ -90,4 +90,7 @@
   <ItemGroup>
     <RefactorLog Include="Shuttle.Abacus.Database.refactorlog" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="clear-projections.sql" />
+  </ItemGroup>
 </Project>

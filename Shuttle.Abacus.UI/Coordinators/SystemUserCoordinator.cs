@@ -55,7 +55,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .AddPresenter<ISystemUserPresenter>()
                 .AddPresenter<IPermissionsPresenter>()
                 .AddNavigationItem(
-                    NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
+                    NavigationItemFactory.Create(message).WithResourceItem(ResourceItems.Submit))
                 .AsDefault()
                 .AssignInitiator(message);
 
@@ -74,7 +74,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                         .AddPresenter<ISystemUserPresenter>()
                         .WithModel(_systemUserQuery.Get(message.SystemUserId))
                         .AddNavigationItem(
-                            NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
+                            NavigationItemFactory.Create(message).WithResourceItem(ResourceItems.Submit))
                         .AsDefault()
                         .AssignInitiator(message);
 
@@ -93,7 +93,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .ShowIn<IContextToolbarPresenter>()
                     .AddPresenter<IPermissionsPresenter>()
                     .WithModel(_systemUserQuery.GetPermissions(message.SystemUserId))
-                    .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
+                    .AddNavigationItem(NavigationItemFactory.Create(message).WithResourceItem(ResourceItems.Submit))
                     .AsDefault()
                     .AssignInitiator(message);
 

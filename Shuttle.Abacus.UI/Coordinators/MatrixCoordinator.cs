@@ -140,7 +140,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .ControlledBy<IMatrixController>()
                 .ShowIn<IContextToolbarPresenter>()
                 .AddPresenter<IMatrixPresenter>()
-                .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit)).
+                .AddNavigationItem(NavigationItemFactory.Create(message).WithResourceItem(ResourceItems.Submit)).
                 AsDefault()
                 .AssignInitiator(message);
 
@@ -157,7 +157,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .ShowIn<IContextToolbarPresenter>()
                     .AddPresenter<IMatrixPresenter>()
                     .WithModel(new MatrixModel(_decimalTableQuery.Get(message.MatrixId)))
-                    .AddNavigationItem(NavigationItemFactory.Create(message).AssignResourceItem(ResourceItems.Submit))
+                    .AddNavigationItem(NavigationItemFactory.Create(message).WithResourceItem(ResourceItems.Submit))
                     .AsDefault()
                     .AssignInitiator(message);
 
@@ -177,7 +177,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .WithModel(new MatrixModel(_decimalTableQuery.Get(message.MatrixId)))
                     .AddNavigationItem(
                         NavigationItemFactory.Create<NewDecimalTableMessage>()
-                            .AssignResourceItem(
+                            .WithResourceItem(
                                 ResourceItems.Submit))
                     .AsDefault()
                     .AssignInitiator(message.WithRefreshOwner());

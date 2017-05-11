@@ -23,7 +23,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
         {
         }
 
-        public void HandleMessage(NewFormulaMessage message)
+        public void HandleMessage(RegisterFormulaMessage message)
         {
             if (!WorkItem.PresentationValid())
             {
@@ -34,13 +34,12 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 
             Send(new RegisterFormulaCommand
             {
-                Name = formulaView.NameValue,
-                MaximumFormulaName = formulaView.MaximumFormulaNameValue,
-                MinimumFormulaName = formulaView.MinimumFormulaNameValue
+                Name = formulaView.NameValue
             });
         }
 
-        public void HandleMessage(EditFormulaMessage message)
+
+        public void HandleMessage(RenameFormulaMessage message)
         {
             if (!WorkItem.PresentationValid())
             {
@@ -48,36 +47,21 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             }
 
             var formulaView = WorkItem.GetView<IFormulaView>();
-            var constraintView = WorkItem.GetView<IConstraintView>();
 
-            Send(new ChangeFormulaCommand
+            Send(new RenameFormulaCommand
             {
                 FormulaId = message.FormulaId,
-
+                Name = formulaView.NameValue
             }, () =>
                 MessageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
-        }
-
-        public void HandleMessage(MoveUpMessage message)
-        {
-            var view = WorkItem.GetView<ISimpleListView>();
-
-            view.MoveUp(view.SelectedItem());
-        }
-
-        public void HandleMessage(MoveDownMessage message)
-        {
-            var view = WorkItem.GetView<ISimpleListView>();
-
-            view.MoveDown(view.SelectedItem());
         }
 
         public void HandleMessage(DeleteFormulaMessage message)
         {
             Send(new RemoveFormulaCommand
-                {
-                    FormulaId = message.FormulaId
-                },
+            {
+                FormulaId = message.FormulaId
+            },
                 () => MessageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
         }
     }

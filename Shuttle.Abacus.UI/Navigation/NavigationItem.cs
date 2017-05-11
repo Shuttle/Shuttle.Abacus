@@ -84,13 +84,11 @@ namespace Shuttle.Abacus.UI.Navigation
             return false;
         }
 
-        public INavigationItem AssignResourceItem(ResourceItem item)
+        public INavigationItem WithResourceItem(ResourceItem item)
         {
             Guard.AgainstNull(item, "item");
 
-            resourceItem = item;
-
-            return this;
+            return new NavigationItem(item).AssignMessage(Message);
         }
 
         public INavigationItem AssignMessage(Message message)

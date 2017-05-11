@@ -1236,11 +1236,29 @@ namespace Shuttle.Abacus.Localisation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Register.
+        /// </summary>
+        public static string Text_Register {
+            get {
+                return ResourceManager.GetString("Text_Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Remove.
         /// </summary>
         public static string Text_Remove {
             get {
                 return ResourceManager.GetString("Text_Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Re&amp;name.
+        /// </summary>
+        public static string Text_Rename {
+            get {
+                return ResourceManager.GetString("Text_Rename", resourceCulture);
             }
         }
         
