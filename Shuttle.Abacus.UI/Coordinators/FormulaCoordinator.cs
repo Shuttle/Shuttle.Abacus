@@ -156,7 +156,16 @@ namespace Shuttle.Abacus.UI.Coordinators
         {
             using (_databaseContextFactory.Create())
             {
-                var formulaModel = new FormulaModel(_formulaQuery.Get(message.FormulaId));
+                var row = _formulaQuery.Get(message.FormulaId);
+
+                if (row == null)
+                {
+                    MessageBus.Publish(new ResultNotificationMessage(new Result().AddFailureMessage("Formula not found.")));
+
+                    return;
+                }
+
+                var formulaModel = new FormulaModel(row);
 
                 var item = WorkItemManager
                     .Create("Edit formula")
