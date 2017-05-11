@@ -402,16 +402,6 @@ namespace Shuttle.Abacus.Localisation {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Image_Constraint {
-            get {
-                object obj = ResourceManager.GetObject("Image_Constraint", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap Image_ConstraintDelete {
             get {
                 object obj = ResourceManager.GetObject("Image_ConstraintDelete", resourceCulture);
@@ -505,6 +495,16 @@ namespace Shuttle.Abacus.Localisation {
         public static System.Drawing.Bitmap Image_Formula {
             get {
                 object obj = ResourceManager.GetObject("Image_Formula", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Image_FormulaConstraint {
+            get {
+                object obj = ResourceManager.GetObject("Image_FormulaConstraint", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

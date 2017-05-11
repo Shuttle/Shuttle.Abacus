@@ -101,12 +101,12 @@ namespace Shuttle.Abacus.UI.Coordinators
                 case Resource.ResourceType.Item:
                 {
                     message.Resources.Add(
-                        new Resource(ResourceKeys.Constraint, Guid.NewGuid(), "Constraints",
-                            ImageResources.Constraint).AsContainer());
+                        new Resource(ResourceKeys.FormulaOperation, Guid.NewGuid(), "Operations",
+                            ImageResources.FormulaOperation).AsContainer());
 
                     message.Resources.Add(
-                        new Resource(ResourceKeys.Constraint, Guid.NewGuid(), "Constraints",
-                            ImageResources.Constraint).AsContainer());
+                        new Resource(ResourceKeys.FormulaConstraint, Guid.NewGuid(), "Constraints",
+                            ImageResources.FormulaConstraint).AsContainer());
 
                     break;
                 }

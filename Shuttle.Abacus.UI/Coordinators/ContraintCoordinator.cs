@@ -39,7 +39,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(PopulateResourceMessage message)
         {
-            if (!message.Resource.ResourceKey.Equals(ResourceKeys.Constraint))
+            if (!message.Resource.ResourceKey.Equals(ResourceKeys.FormulaConstraint))
             {
                 return;
             }
@@ -57,8 +57,8 @@ namespace Shuttle.Abacus.UI.Coordinators
                         foreach (var row in _constraintQuery.AllForOwner(ownerId))
                         {
                             message.Resources.Add(
-                                new Resource(ResourceKeys.Constraint, Guid.Empty,
-                                        FormulaColumns.ConstraintColumns.ArgumentName.MapFrom(row), ImageResources.Constraint)
+                                new Resource(ResourceKeys.FormulaConstraint, Guid.Empty,
+                                        FormulaColumns.ConstraintColumns.ArgumentName.MapFrom(row), ImageResources.FormulaConstraint)
                                     .AsLeaf());
                         }
                     }
@@ -70,7 +70,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(ResourceMenuRequestMessage message)
         {
-            if (!message.Item.ResourceKey.Equals(ResourceKeys.Constraint))
+            if (!message.Item.ResourceKey.Equals(ResourceKeys.FormulaConstraint))
             {
                 return;
             }

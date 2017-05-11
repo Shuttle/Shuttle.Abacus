@@ -4,9 +4,10 @@ namespace Shuttle.Abacus.UI.Core.Resources
 {
     public class ResourceKeys
     {
-        public static readonly ResourceKey Constraint = new ResourceKey("resource://abacus/constraint", Permissions.Formula);
-        public static readonly ResourceKey Test = new ResourceKey("resource://abacus/methodtest", Permissions.Test);
         public static readonly ResourceKey Formula = new ResourceKey("resource://abacus/formula", Permissions.Formula);
+        public static readonly ResourceKey FormulaOperation = new ResourceKey("resource://abacus/formula-operation", Permissions.Formula);
+        public static readonly ResourceKey FormulaConstraint = new ResourceKey("resource://abacus/formula-constraint", Permissions.Formula);
+        public static readonly ResourceKey Test = new ResourceKey("resource://abacus/test", Permissions.Test);
         public static readonly ResourceKey Matrix = new ResourceKey("resource://abacus/matrix", Permissions.Matrix);
         public static readonly ResourceKey Argument = new ResourceKey("resource://abacus/argument", Permissions.Argument);
     }

@@ -34,7 +34,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
             _valueTypeValidatorProvider = valueTypeValidatorProvider;
 
             Text = "Constraint Details";
-            Image = Resources.Image_Constraint;
+            Image = Resources.Image_FormulaConstraint;
         }
 
         public void ArgumentChanged()
