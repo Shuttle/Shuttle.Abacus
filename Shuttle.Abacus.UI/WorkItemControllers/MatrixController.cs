@@ -17,7 +17,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
         {
         }
 
-        public void HandleMessage(NewDecimalTableMessage message)
+        public void HandleMessage(NewMatrixMessage message)
         {
             if (!WorkItem.PresentationValid())
             {
@@ -44,7 +44,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             Send(command);
         }
 
-        public void HandleMessage(EditDecimalTableMessage message)
+        public void HandleMessage(EditMatrixMessage message)
         {
             if (!WorkItem.PresentationValid())
             {

@@ -4,65 +4,89 @@ using Shuttle.Abacus.Messages.v1;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;
+using Shuttle.Recall;
 
 namespace Shuttle.Abacus.Server.CommandHandlers
 {
     public class ArgumentHandler :
-        IMessageHandler<CreateArgumentCommand>,
-        IMessageHandler<ChangeArgumentCommand>,
-        IMessageHandler<DeleteArgumentCommand>
+        IMessageHandler<RegisterArgumentCommand>,
+        IMessageHandler<RenameArgumentCommand>,
+        IMessageHandler<RemoveArgumentCommand>
     {
-        private readonly IArgumentRepository _argumentRepository;
         private readonly IDatabaseContextFactory _databaseContextFactory;
+        private readonly IEventStore _eventStore;
 
-        public ArgumentHandler(IDatabaseContextFactory databaseContextFactory, IArgumentRepository argumentRepository)
+        public ArgumentHandler(IDatabaseContextFactory databaseContextFactory, IEventStore eventStore)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
-            Guard.AgainstNull(argumentRepository, "argumentRepository");
+            Guard.AgainstNull(eventStore, "eventStore");
 
             _databaseContextFactory = databaseContextFactory;
-            _argumentRepository = argumentRepository;
+            _eventStore = eventStore;
         }
 
-        public void ProcessMessage(IHandlerContext<ChangeArgumentCommand> context)
+        public void ProcessMessage(IHandlerContext<RegisterArgumentCommand> context)
         {
             var message = context.Message;
 
             using (_databaseContextFactory.Create())
             {
-                var argument = new Argument(message.ArgumentId, message.Name, message.AnswerType);
+                var argument = new Argument(Guid.NewGuid());
+                var stream = new EventStream(argument.Id);
 
-                argument.AddValues(message.Answers);
+                stream.AddEvent(argument.Register(message.Name, message.AnswerType));
 
-                _argumentRepository.Save(argument);
+                _eventStore.Save(stream);
             }
 
             context.ReplyOK();
         }
 
-        public void ProcessMessage(IHandlerContext<CreateArgumentCommand> context)
+        public void ProcessMessage(IHandlerContext<RemoveArgumentCommand> context)
         {
             var message = context.Message;
 
             using (_databaseContextFactory.Create())
             {
-                var argument = new Argument(Guid.NewGuid(), message.Name, message.AnswerType);
+                var stream = _eventStore.Get(message.ArgumentId);
+                var argument = new Argument(message.ArgumentId);
 
-                argument.AddValues(message.Answers);
+                stream.Apply(argument);
 
-                _argumentRepository.Add(argument);
+                if (!argument.Removed)
+                {
+                    stream.AddEvent(argument.Remove());
+
+                    _eventStore.Save(stream);
+                }
             }
 
             context.ReplyOK();
         }
 
-        public void ProcessMessage(IHandlerContext<DeleteArgumentCommand> context)
+        public void ProcessMessage(IHandlerContext<RenameArgumentCommand> context)
         {
             var message = context.Message;
 
             using (_databaseContextFactory.Create())
             {
-                _argumentRepository.Remove(message.ArgumentId);
+                var stream = _eventStore.Get(message.ArgumentId);
+
+                if (stream.IsEmpty)
+                {
+                    return;
+                }
+
+                var argument = new Argument(message.ArgumentId);
+
+                stream.Apply(argument);
+
+                if (!argument.IsNamed(message.Name))
+                {
+                    stream.AddEvent(argument.Rename(message.Name));
+
+                    _eventStore.Save(stream);
+                }
             }
 
             context.ReplyOK();

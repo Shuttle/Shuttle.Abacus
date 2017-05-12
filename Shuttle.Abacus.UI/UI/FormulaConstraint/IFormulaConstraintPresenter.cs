@@ -1,8 +1,8 @@
 using Shuttle.Abacus.UI.Core.Presentation;
 
-namespace Shuttle.Abacus.UI.UI.Constraint
+namespace Shuttle.Abacus.UI.UI.FormulaConstraint
 {
-    public interface IConstraintPresenter : IPresenter
+    public interface IFormulaConstraintPresenter : IPresenter
     {
         void ArgumentChanged();
         bool ConstraintOK();

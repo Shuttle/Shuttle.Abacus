@@ -8,8 +8,8 @@ namespace Shuttle.Abacus.DataAccess
 {
     public class ArgumentRepository : Repository<Argument>, IArgumentRepository
     {
-        private readonly IArgumentQueryFactory _queryFactory;
         private readonly IDatabaseGateway _databaseGateway;
+        private readonly IArgumentQueryFactory _queryFactory;
 
         public ArgumentRepository(IDatabaseGateway databaseGateway, IArgumentQueryFactory queryFactory)
         {
@@ -54,7 +54,7 @@ namespace Shuttle.Abacus.DataAccess
                 return null;
             }
 
-            var result = new Argument(id, ArgumentColumns.Name.MapFrom(row), ArgumentColumns.AnswerType.MapFrom(row));
+            var result = new Argument(id);
 
             foreach (var valueRow in _databaseGateway.GetRowsUsing(_queryFactory.GetValues(id)))
             {

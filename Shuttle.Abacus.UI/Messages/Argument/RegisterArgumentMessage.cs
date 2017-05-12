@@ -3,7 +3,7 @@ using Shuttle.Abacus.UI.Core.Messaging;
 
 namespace Shuttle.Abacus.UI.Messages.FactorAnswer
 {
-    public class NewArgumentMessage : Message
+    public class RegisterArgumentMessage : Message
     {
         public override IPermission RequiredPermission
         {

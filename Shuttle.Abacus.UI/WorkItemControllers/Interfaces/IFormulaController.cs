@@ -8,7 +8,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers.Interfaces
         IWorkItemController,
         IMessageHandler<RegisterFormulaMessage>,
         IMessageHandler<RenameFormulaMessage>,
-        IMessageHandler<DeleteFormulaMessage>
+        IMessageHandler<RemoveFormulaMessage>
     {
         
     }

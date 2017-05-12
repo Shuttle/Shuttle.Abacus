@@ -6,8 +6,8 @@ namespace Shuttle.Abacus.UI.WorkItemControllers.Interfaces
 {
     public interface IMatrixController :
         IWorkItemController,
-        IMessageHandler<NewDecimalTableMessage>,
-        IMessageHandler<EditDecimalTableMessage>
+        IMessageHandler<NewMatrixMessage>,
+        IMessageHandler<EditMatrixMessage>
     {
         
     }

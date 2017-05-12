@@ -2,15 +2,14 @@ using System.Collections.Generic;
 
 namespace Shuttle.Abacus.Messages.v1
 {
-    public class CreateArgumentCommand
+    public class RegisterArgumentCommand
     {
-        public CreateArgumentCommand()
+        public RegisterArgumentCommand()
         {
-            Answers = new List<string>();
+            new List<string>();
         }
 
         public string Name { get; set; }
         public string AnswerType { get; set; }
-        public List<string> Answers { get; set; }
     }
 }

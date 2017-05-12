@@ -1,16 +1,13 @@
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
-using Shuttle.Abacus.Domain;
-using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.UI.Core.Formatters;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
 
-namespace Shuttle.Abacus.UI.UI.Constraint
+namespace Shuttle.Abacus.UI.UI.FormulaConstraint
 {
-    public interface IConstraintView : IView
+    public interface IFormulaConstraintView : IView
     {
         void PopulateArguments(IEnumerable<ArgumentModel> items);
         void SetContraintTypes(IEnumerable<ConstraintTypeModel> list);
@@ -24,7 +21,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
         bool HasAnswers { get; }
         bool HasArgument { get; }
         bool HasConstraint { get; }
-        List<FormulaConstraint> Constraints { get; set; }
+        List<Domain.FormulaConstraint> Constraints { get; set; }
         
         ComboBox ValueSelectionControl { get; }
         TextBox FormattedControl { get; }

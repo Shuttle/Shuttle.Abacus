@@ -11,8 +11,8 @@ namespace Shuttle.Abacus.UI.Coordinators.Interfaces
         IMessageHandler<ResourceMenuRequestMessage>,
         IMessageHandler<PopulateResourceMessage>,
         IMessageHandler<ResourceRefreshItemTextMessage>,
-        IMessageHandler<NewDecimalTableMessage>,
-        IMessageHandler<EditDecimalTableMessage>,
+        IMessageHandler<NewMatrixMessage>,
+        IMessageHandler<EditMatrixMessage>,
         IMessageHandler<NewDecimalTableFromExistingMessage>,
         IMessageHandler<SummaryViewRequestedMessage>
     {

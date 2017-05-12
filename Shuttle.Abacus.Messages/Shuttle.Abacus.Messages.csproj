@@ -57,16 +57,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="v1\ChangeArgumentCommand.cs" />
+    <Compile Include="v1\RenameArgumentCommand.cs" />
     <Compile Include="v1\ChangeLoginNameCommand.cs" />
     <Compile Include="v1\ChangeTestCommand.cs" />
-    <Compile Include="v1\CreateArgumentCommand.cs" />
+    <Compile Include="v1\RegisterArgumentCommand.cs" />
     <Compile Include="v1\CreateMatrixCommand.cs" />
     <Compile Include="v1\FormulaCommand.cs" />
     <Compile Include="v1\CreateTestCommand.cs" />
     <Compile Include="v1\CreateSystemUserCommand.cs" />
     <Compile Include="v1\MatrixCommand.cs" />
-    <Compile Include="v1\DeleteArgumentCommand.cs" />
+    <Compile Include="v1\RemoveArgumentCommand.cs" />
     <Compile Include="v1\RenameFormulaCommand.cs" />
     <Compile Include="v1\SetFormulaMinimumCommand.cs" />
     <Compile Include="v1\SetFormulaMaxmimumCommand.cs" />

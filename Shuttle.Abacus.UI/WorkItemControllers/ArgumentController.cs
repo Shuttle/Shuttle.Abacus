@@ -2,6 +2,7 @@
 using Shuttle.Abacus.Messages.v1;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.UI.Messages.Argument;
 using Shuttle.Abacus.UI.Messages.FactorAnswer;
 using Shuttle.Abacus.UI.Messages.Resources;
 using Shuttle.Abacus.UI.Messages.WorkItem;
@@ -19,7 +20,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
         {
         }
 
-        public void HandleMessage(NewArgumentMessage message)
+        public void HandleMessage(RegisterArgumentMessage message)
         {
             if (!WorkItem.PresentationValid())
             {
@@ -27,19 +28,17 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             }
 
             var view = WorkItem.GetView<IArgumentView>();
-            var mappingListView = WorkItem.GetView<IArgumentValueView>();
 
-            var command = new CreateArgumentCommand
+            var command = new RegisterArgumentCommand
                           {
                               Name = view.ArgumentNameValue,
-                              AnswerType = view.AnswerTypeValue,
-                              Answers = mappingListView.Values
+                              AnswerType = view.AnswerTypeValue
                           };
 
             Send(command);
         }
 
-        public void HandleMessage(EditArgumentMessage message)
+        public void HandleMessage(RenameArgumentMessage message)
         {
             if (!WorkItem.PresentationValid())
             {
@@ -47,14 +46,11 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             }
 
             var view = WorkItem.GetView<IArgumentView>();
-            var mappingListView = WorkItem.GetView<IArgumentValueView>();
 
-            var command = new ChangeArgumentCommand
+            var command = new RenameArgumentCommand
                           {
                               ArgumentId = message.ArgumentId,
-                              Name = view.ArgumentNameValue,
-                              AnswerType = view.AnswerTypeValue,
-                              Answers = mappingListView.Values
+                              Name = view.ArgumentNameValue
                           };
 
             Send(command, () =>
@@ -62,9 +58,9 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                               new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
         }
 
-        public void HandleMessage(DeleteArgumentMessage message)
+        public void HandleMessage(RemoveArgumentMessage message)
         {
-            Send(new DeleteArgumentCommand
+            Send(new RemoveArgumentCommand
                  {
                      ArgumentId = message.ArgumentId
                  },

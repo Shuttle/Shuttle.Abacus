@@ -3,7 +3,7 @@ using Shuttle.Abacus.UI.Core.Messaging;
 
 namespace Shuttle.Abacus.UI.Messages.DecimalTable
 {
-    public class NewDecimalTableMessage : Message
+    public class NewMatrixMessage : Message
     {
         public override IPermission RequiredPermission
         {

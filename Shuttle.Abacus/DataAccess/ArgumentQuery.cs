@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using Shuttle.Abacus.DTO;
+using Shuttle.Abacus.Events.Argument.v1;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
+using Shuttle.Recall;
 
 namespace Shuttle.Abacus.DataAccess
 {
@@ -39,6 +41,21 @@ namespace Shuttle.Abacus.DataAccess
         public DataRow Get(string name)
         {
             return _databaseGateway.GetSingleRowUsing(_argumentQueryFactory.Get(name));
+        }
+
+        public void Registered(PrimitiveEvent primitiveEvent, Registered registered)
+        {
+            _databaseGateway.ExecuteUsing(_argumentQueryFactory.Registered(primitiveEvent, registered));
+        }
+
+        public void Removed(PrimitiveEvent primitiveEvent, Removed removed)
+        {
+            _databaseGateway.ExecuteUsing(_argumentQueryFactory.Removed(primitiveEvent, removed));
+        }
+
+        public void Renamed(PrimitiveEvent primitiveEvent, Renamed renamed)
+        {
+            _databaseGateway.ExecuteUsing(_argumentQueryFactory.Renamed(primitiveEvent, renamed));
         }
     }
 }

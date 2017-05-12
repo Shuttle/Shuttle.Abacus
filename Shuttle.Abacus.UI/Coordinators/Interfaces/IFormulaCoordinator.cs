@@ -12,7 +12,7 @@ namespace Shuttle.Abacus.UI.Coordinators.Interfaces
         IMessageHandler<PopulateResourceMessage>,
         IMessageHandler<RegisterFormulaMessage>,
         IMessageHandler<RenameFormulaMessage>,
-        IMessageHandler<DeleteFormulaMessage>,
+        IMessageHandler<RemoveFormulaMessage>,
         IMessageHandler<ResourceRefreshItemTextMessage>,
         IMessageHandler<SummaryViewRequestedMessage>
     {

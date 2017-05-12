@@ -5,9 +5,9 @@ using Shuttle.Abacus.UI.Core.Resources;
 
 namespace Shuttle.Abacus.UI.Messages.Formula
 {
-    public class DeleteFormulaMessage : Message
+    public class RemoveFormulaMessage : Message
     {
-        public DeleteFormulaMessage(string text, Guid formulaId, Resource ownerResource)
+        public RemoveFormulaMessage(string text, Guid formulaId, Resource ownerResource)
         {
             Text = text;
             FormulaId = formulaId;

@@ -2,7 +2,7 @@ using System;
 
 namespace Shuttle.Abacus.Messages.v1
 {
-    public class DeleteArgumentCommand 
+    public class RemoveArgumentCommand 
     {
         public Guid ArgumentId { get; set; }
     }

@@ -221,6 +221,10 @@
     <Compile Include="Domain\Operations\SquareRootOperation.cs" />
     <Compile Include="Domain\Operations\SubtractionOperation.cs" />
     <Compile Include="Domain\VersionedEntity.cs" />
+    <Compile Include="Events\Argument.v1\Registered.cs" />
+    <Compile Include="Events\Argument.v1\Removed.cs" />
+    <Compile Include="Events\Argument.v1\Renamed.cs" />
+    <Compile Include="Events\Argument.v1\AnswerTypeChanged.cs" />
     <Compile Include="Events\Formula.v1\Renamed.cs" />
     <Compile Include="Events\Formula.v1\Registered.cs" />
     <Compile Include="Events\Formula.v1\Removed.cs" />

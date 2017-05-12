@@ -219,20 +219,20 @@
     <Compile Include="Messages\Core\SummaryViewActivatedMessage.cs" />
     <Compile Include="Messages\Core\WorkCompletedMessage.cs" />
     <Compile Include="Messages\Core\WorkStartedMessage.cs" />
-    <Compile Include="Messages\DecimalTable\EditDecimalTableMessage.cs" />
+    <Compile Include="Messages\DecimalTable\EditMatrixMessage.cs" />
     <Compile Include="Messages\DecimalTable\NewDecimalTableFromExistingMessage.cs" />
-    <Compile Include="Messages\DecimalTable\NewDecimalTableMessage.cs" />
+    <Compile Include="Messages\DecimalTable\NewMatrixMessage.cs" />
     <Compile Include="Messages\Explorer\ExplorerInitializeMessage.cs" />
     <Compile Include="Messages\Argument\ArgumentUpdatedMessage.cs" />
-    <Compile Include="Messages\Argument\DeleteArgumentMessage.cs" />
-    <Compile Include="Messages\Argument\EditArgumentMessage.cs" />
-    <Compile Include="Messages\Argument\NewArgumentMessage.cs" />
-    <Compile Include="Messages\Formula\DeleteFormulaMessage.cs" />
+    <Compile Include="Messages\Argument\RemoveArgumentMessage.cs" />
+    <Compile Include="Messages\Argument\RenameArgumentMessage.cs" />
+    <Compile Include="Messages\Argument\RegisterArgumentMessage.cs" />
+    <Compile Include="Messages\Formula\RemoveFormulaMessage.cs" />
     <Compile Include="Messages\Formula\ManageFormulaOperationsMessage.cs" />
     <Compile Include="Messages\Formula\ManageFormulaConstraintsMessage.cs" />
     <Compile Include="Messages\Formula\RenameFormulaMessage.cs" />
     <Compile Include="Messages\Formula\RegisterFormulaMessage.cs" />
-    <Compile Include="Messages\Report\DecimalTableReportMessage.cs" />
+    <Compile Include="Messages\Report\MatrixReportMessage.cs" />
     <Compile Include="Messages\Resources\PopulateResourceMessage.cs" />
     <Compile Include="Messages\Resources\ResourceMenuRequestMessage.cs" />
     <Compile Include="Messages\Resources\ResourceRefreshItemMessage.cs" />
@@ -270,7 +270,7 @@
     <Compile Include="Messages\WorkItem\WorkItemTextChangedMessage.cs" />
     <Compile Include="Models\ArgumentAnswerModel.cs" />
     <Compile Include="Models\ArgumentDisplayModel.cs" />
-    <Compile Include="Models\ConstraintModel.cs" />
+    <Compile Include="Models\FormulaConstraintModel.cs" />
     <Compile Include="Models\ConstraintTypeModel.cs" />
     <Compile Include="Models\FormulaViewModel.cs" />
     <Compile Include="Models\FormulaOperationPresenterModel.cs" />
@@ -318,24 +318,24 @@
     <Compile Include="Models\ArgumentModel.cs" />
     <Compile Include="UI\Argument\IArgumentPresenter.cs" />
     <Compile Include="UI\Argument\IArgumentView.cs" />
-    <Compile Include="UI\Argument\RestrictedAnswer\ArgumentValuePresenter.cs" />
-    <Compile Include="UI\Argument\RestrictedAnswer\ArgumentValueView.cs">
+    <Compile Include="UI\ArgumentValue\ArgumentValuePresenter.cs" />
+    <Compile Include="UI\ArgumentValue\ArgumentValueView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Argument\RestrictedAnswer\ArgumentValueView.Designer.cs">
+    <Compile Include="UI\ArgumentValue\ArgumentValueView.Designer.cs">
       <DependentUpon>ArgumentValueView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Argument\RestrictedAnswer\IArgumentValuePresenter.cs" />
-    <Compile Include="UI\Argument\RestrictedAnswer\IArgumentValueView.cs" />
-    <Compile Include="UI\Constraint\ConstraintPresenter.cs" />
-    <Compile Include="UI\Constraint\ConstraintView.cs">
+    <Compile Include="UI\ArgumentValue\IArgumentValuePresenter.cs" />
+    <Compile Include="UI\ArgumentValue\IArgumentValueView.cs" />
+    <Compile Include="UI\FormulaConstraint\FormulaConstraintPresenter.cs" />
+    <Compile Include="UI\FormulaConstraint\FormulaConstraintView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Constraint\ConstraintView.Designer.cs">
-      <DependentUpon>ConstraintView.cs</DependentUpon>
+    <Compile Include="UI\FormulaConstraint\FormulaConstraintView.Designer.cs">
+      <DependentUpon>FormulaConstraintView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Constraint\IConstraintPresenter.cs" />
-    <Compile Include="UI\Constraint\IConstraintView.cs" />
+    <Compile Include="UI\FormulaConstraint\IFormulaConstraintPresenter.cs" />
+    <Compile Include="UI\FormulaConstraint\IFormulaConstraintView.cs" />
     <Compile Include="UI\FormulaOperation\FormulaOperationPresenter.cs" />
     <Compile Include="UI\FormulaOperation\FormulaOperationView.cs">
       <SubType>UserControl</SubType>
@@ -518,11 +518,11 @@
     <EmbeddedResource Include="UI\Argument\ArgumentView.resx">
       <DependentUpon>ArgumentView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Argument\RestrictedAnswer\ArgumentValueView.resx">
+    <EmbeddedResource Include="UI\ArgumentValue\ArgumentValueView.resx">
       <DependentUpon>ArgumentValueView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Constraint\ConstraintView.resx">
-      <DependentUpon>ConstraintView.cs</DependentUpon>
+    <EmbeddedResource Include="UI\FormulaConstraint\FormulaConstraintView.resx">
+      <DependentUpon>FormulaConstraintView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FormulaOperation\FormulaOperationView.resx">
       <DependentUpon>FormulaOperationView.cs</DependentUpon>

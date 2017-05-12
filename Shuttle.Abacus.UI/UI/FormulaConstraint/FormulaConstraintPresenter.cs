@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
@@ -10,16 +9,16 @@ using Shuttle.Abacus.UI.Models;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.UI.Constraint
+namespace Shuttle.Abacus.UI.UI.FormulaConstraint
 {
-    public class ConstraintPresenter : Presenter<IConstraintView, ConstraintModel>, IConstraintPresenter
+    public class FormulaConstraintPresenter : Presenter<IFormulaConstraintView, FormulaConstraintModel>, IFormulaConstraintPresenter
     {
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IArgumentQuery _argumentQuery;
         private readonly IConstraintTypeQuery _constraintTypeQuery;
         private readonly IValueTypeValidatorProvider _valueTypeValidatorProvider;
 
-        public ConstraintPresenter(IConstraintView view, IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery, IConstraintTypeQuery constraintTypeQuery, IValueTypeValidatorProvider valueTypeValidatorProvider)
+        public FormulaConstraintPresenter(IFormulaConstraintView view, IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery, IConstraintTypeQuery constraintTypeQuery, IValueTypeValidatorProvider valueTypeValidatorProvider)
             : base(view)
         {
             Guard.AgainstNull(view, "view");

@@ -5,13 +5,14 @@ using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Core.Resources;
+using Shuttle.Abacus.UI.Messages.Argument;
 using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Abacus.UI.Messages.Explorer;
 using Shuttle.Abacus.UI.Messages.FactorAnswer;
 using Shuttle.Abacus.UI.Messages.Resources;
 using Shuttle.Abacus.UI.Models;
+using Shuttle.Abacus.UI.Navigation;
 using Shuttle.Abacus.UI.UI.Argument;
-using Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer;
 using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
@@ -24,6 +25,12 @@ namespace Shuttle.Abacus.UI.Coordinators
     {
         private readonly IArgumentQuery _argumentQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
+
+        private readonly INavigationItem _register =
+            new NavigationItem(new ResourceItem("Register", "Argument")).AssignMessage(new RegisterArgumentMessage());
+
+        private readonly INavigationItem _rename = new NavigationItem(new ResourceItem("Rename", "Argument"));
+        private readonly INavigationItem _remove = new NavigationItem(new ResourceItem("Remove", "Argument"));
 
         public ArgumentCoordinator(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery)
         {
@@ -55,34 +62,31 @@ namespace Shuttle.Abacus.UI.Coordinators
             switch (message.Item.Type)
             {
                 case Resource.ResourceType.Container:
-                {
-                    message.NavigationItems.Add(NavigationItemFactory.Create<NewArgumentMessage>());
+                    {
+                        message.NavigationItems.Add(_register);
 
-                    break;
-                }
+                        break;
+                    }
                 case Resource.ResourceType.Item:
-                {
-                    message.NavigationItems.Add(
-                        NavigationItemFactory.Create(new EditArgumentMessage(message.Item.Key)));
+                    {
+                        message.NavigationItems.Add(_rename.AssignMessage(new RenameArgumentMessage(message.Item.Key)));
 
-                    message.NavigationItems.Add(
-                        NavigationItemFactory.Create(new DeleteArgumentMessage(message.Item.Key, message.Item.Text,
-                            message.UpstreamItems[0])));
+                        message.NavigationItems.Add(_remove.AssignMessage(
+                                new RemoveArgumentMessage(message.Item.Text, message.Item.Key, message.UpstreamItems[0])));
 
-                    break;
-                }
+                        break;
+                    }
             }
         }
 
-        public void HandleMessage(NewArgumentMessage message)
+        public void HandleMessage(RegisterArgumentMessage message)
         {
             var item = WorkItemManager
                 .Create("New Argument")
                 .ControlledBy<IArgumentController>()
                 .ShowIn<IContextToolbarPresenter>()
                 .AddPresenter<IArgumentPresenter>().WithModel(new ArgumentModel())
-                .AddPresenter<IArgumentValuePresenter>()
-                .AddNavigationItem(NavigationItemFactory.Create(message).WithResourceItem(ResourceItems.Submit)).AsDefault()
+                .AddNavigationItem(_register).AsDefault()
                 .AssignInitiator(message);
 
             HostInWorkspace<ITabbedWorkspacePresenter>(item);
@@ -98,24 +102,32 @@ namespace Shuttle.Abacus.UI.Coordinators
             switch (message.Resource.Type)
             {
                 case Resource.ResourceType.Container:
-                {
-                    using (_databaseContextFactory.Create())
                     {
-                        foreach (var row in _argumentQuery.All())
+                        using (_databaseContextFactory.Create())
                         {
-                            message.Resources.Add(new Resource(ResourceKeys.Argument,
-                                ArgumentColumns.Id.MapFrom(row),
-                                ArgumentColumns.Name.MapFrom(row),
-                                ImageResources.Argument).AsLeaf());
+                            foreach (var row in _argumentQuery.All())
+                            {
+                                message.Resources.Add(new Resource(ResourceKeys.Argument,
+                                    ArgumentColumns.Id.MapFrom(row),
+                                    ArgumentColumns.Name.MapFrom(row),
+                                    ImageResources.Argument));
+                            }
                         }
-                    }
 
-                    break;
-                }
+                        break;
+                    }
+                case Resource.ResourceType.Item:
+                    {
+                        message.Resources.Add(
+                            new Resource(ResourceKeys.ArgumentValue, Guid.NewGuid(), "Values",
+                                ImageResources.ArgumentValue).AsContainer());
+
+                        break;
+                    }
             }
         }
 
-        public void HandleMessage(EditArgumentMessage message)
+        public void HandleMessage(RenameArgumentMessage message)
         {
             using (_databaseContextFactory.Create())
             {
@@ -125,10 +137,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .ShowIn<IContextToolbarPresenter>()
                     .AddPresenter<IArgumentPresenter>()
                     .WithModel(new ArgumentModel(_argumentQuery.Get(message.ArgumentId)))
-                    .AddPresenter<IArgumentValuePresenter>()
-                    .WithModel(_argumentQuery.GetValues(message.ArgumentId))
-                    .AddNavigationItem(NavigationItemFactory.Create(message).WithResourceItem(ResourceItems.Submit)).
-                    AsDefault()
+                    .AddNavigationItem(_rename).AsDefault()
                     .AssignInitiator(message);
 
                 HostInWorkspace<ITabbedWorkspacePresenter>(item);
@@ -149,7 +158,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             }
         }
 
-        public void HandleMessage(DeleteArgumentMessage message)
+        public void HandleMessage(RemoveArgumentMessage message)
         {
             if (!UIService.Confirm(string.Format("Are you sure that you want to delete argument '{0}'?", message.Text)))
             {
@@ -171,19 +180,19 @@ namespace Shuttle.Abacus.UI.Coordinators
                 switch (message.Item.Type)
                 {
                     case Resource.ResourceType.Container:
-                    {
-                        message.AddTable("Arguments", _argumentQuery.All());
+                        {
+                            message.AddTable("Arguments", _argumentQuery.All());
 
-                        break;
-                    }
+                            break;
+                        }
                     case Resource.ResourceType.Item:
-                    {
-                        message.AddRow(message.Item.Text, _argumentQuery.Get(message.Item.Key));
+                        {
+                            message.AddRow(message.Item.Text, _argumentQuery.Get(message.Item.Key));
 
-                        message.AddTable("Answer Catalog", _argumentQuery.GetValues(message.Item.Key));
+                            message.AddTable("Answer Values", _argumentQuery.GetValues(message.Item.Key));
 
-                        break;
-                    }
+                            break;
+                        }
                 }
             }
         }

@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 using Shuttle.Abacus.DataAccess;
-using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.UI.Core.Extensions;
 using Shuttle.Abacus.UI.Core.Formatters;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
 
-namespace Shuttle.Abacus.UI.UI.Constraint
+namespace Shuttle.Abacus.UI.UI.FormulaConstraint
 {
-    public partial class ConstraintView : GenericConstraintView, IConstraintView
+    public partial class FormulaConstraintView : GenericConstraintView, IFormulaConstraintView
     {
         private readonly ListViewExtender _listViewExtender ;
         private MoneyFormatter _valueFormatter;
         private IEnumerable<ConstraintTypeModel> _constraintTypes;
 
-        public ConstraintView()
+        public FormulaConstraintView()
         {
             InitializeComponent();
 
@@ -128,18 +127,18 @@ namespace Shuttle.Abacus.UI.UI.Constraint
             get { return Constraint.Text.Length > 0; }
         }
 
-        public List<FormulaConstraint> Constraints
+        public List<Domain.FormulaConstraint> Constraints
         {
             get
             {
-                var result = new List<FormulaConstraint>();
+                var result = new List<Domain.FormulaConstraint>();
                 var sequenceNumber = 1;
 
                 foreach (ListViewItem item in ConstraintsListView.Items)
                 {
                     var tag = (ItemTag) item.Tag;
 
-                    result.Add(new FormulaConstraint(
+                    result.Add(new Domain.FormulaConstraint(
                         sequenceNumber,
                         tag.ArgumentName,
                         tag.ConstraintName,
@@ -334,7 +333,7 @@ namespace Shuttle.Abacus.UI.UI.Constraint
 
     }
 
-    public class GenericConstraintView : View<IConstraintPresenter>
+    public class GenericConstraintView : View<IFormulaConstraintPresenter>
     {
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace Shuttle.Abacus.UI.UI.Constraint
+﻿namespace Shuttle.Abacus.UI.UI.FormulaConstraint
 {
-    partial class ConstraintView
+    partial class FormulaConstraintView
     {
         /// <summary> 
         /// Required designer variable.
@@ -243,7 +243,7 @@
             this.MoveUpButton.UseVisualStyleBackColor = true;
             this.MoveUpButton.Click += new System.EventHandler(this.MoveUpButton_Click);
             // 
-            // ConstraintView
+            // FormulaConstraintView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -255,7 +255,7 @@
             this.Controls.Add(this.RemoveButton);
             this.Controls.Add(this.ConstraintsListView);
             this.Controls.Add(this.label1);
-            this.Name = "ConstraintView";
+            this.Name = "FormulaConstraintView";
             this.Size = new System.Drawing.Size(587, 401);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

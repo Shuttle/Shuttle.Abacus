@@ -4,9 +4,9 @@ using Shuttle.Abacus.UI.Core.Messaging;
 
 namespace Shuttle.Abacus.UI.Messages.FactorAnswer
 {
-    public class EditArgumentMessage : Message
+    public class RenameArgumentMessage : Message
     {
-        public EditArgumentMessage(Guid argumentId)
+        public RenameArgumentMessage(Guid argumentId)
         {
             ArgumentId = argumentId;
         }

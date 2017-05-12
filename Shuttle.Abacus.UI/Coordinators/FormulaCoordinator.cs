@@ -24,6 +24,7 @@ namespace Shuttle.Abacus.UI.Coordinators
     {
         private readonly INavigationItem _register = new NavigationItem(new ResourceItem("Register", "Formula")).AssignMessage(new RegisterFormulaMessage());
         private readonly INavigationItem _rename = new NavigationItem(new ResourceItem("Rename", "Formula"));
+        private readonly INavigationItem _remove = new NavigationItem(new ResourceItem("Remove", "Formula"));
 
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IFormulaQuery _formulaQuery;
@@ -56,9 +57,8 @@ namespace Shuttle.Abacus.UI.Coordinators
                     {
                         message.NavigationItems.Add(_rename.AssignMessage(new RenameFormulaMessage(message.Item.Key)));
 
-                        message.NavigationItems.Add(
-                            NavigationItemFactory.Create(
-                                new DeleteFormulaMessage(message.Item.Text, message.Item.Key, message.UpstreamItems[0])));
+                        message.NavigationItems.Add(_remove.AssignMessage(
+                                new RemoveFormulaMessage(message.Item.Text, message.Item.Key, message.UpstreamItems[0])));
 
                         break;
                     }
@@ -164,7 +164,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             }
         }
 
-        public void HandleMessage(DeleteFormulaMessage message)
+        public void HandleMessage(RemoveFormulaMessage message)
         {
             if (!UIService.Confirm(string.Format("Are you sure that you want to delete formula '{0}'?", message.Text)))
             {

@@ -27,7 +27,7 @@ namespace Shuttle.Abacus.UI.Coordinators
         }
 
 
-        public void HandleMessage(DecimalTableReportMessage message)
+        public void HandleMessage(MatrixReportMessage message)
         {
             using (_databaseContextFactory.Create())
             {

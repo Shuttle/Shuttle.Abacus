@@ -65,7 +65,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             {
                 case Resource.ResourceType.Container:
                 {
-                    message.NavigationItems.Add(NavigationItemFactory.Create<NewDecimalTableMessage>());
+                    message.NavigationItems.Add(NavigationItemFactory.Create<NewMatrixMessage>());
 
                     break;
                 }
@@ -77,12 +77,12 @@ namespace Shuttle.Abacus.UI.Coordinators
 
                     message.NavigationItems.Add(
                         NavigationItemFactory.Create(
-                            new EditDecimalTableMessage(message.Item.Key,
+                            new EditMatrixMessage(message.Item.Key,
                                 message.Item.Text)));
 
                     message.NavigationItems.Add(
                         NavigationItemFactory.Create(
-                            new DecimalTableReportMessage(message.Item.Key,
+                            new MatrixReportMessage(message.Item.Key,
                                 message.Item.Text)));
 
                     break;
@@ -133,7 +133,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             }
         }
 
-        public void HandleMessage(NewDecimalTableMessage message)
+        public void HandleMessage(NewMatrixMessage message)
         {
             var item = WorkItemManager
                 .Create("New Decimal Table")
@@ -147,7 +147,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             HostInWorkspace<ITabbedWorkspacePresenter>(item);
         }
 
-        public void HandleMessage(EditDecimalTableMessage message)
+        public void HandleMessage(EditMatrixMessage message)
         {
             using (_databaseContextFactory.Create())
             {
@@ -176,7 +176,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .AddPresenter<IMatrixPresenter>()
                     .WithModel(new MatrixModel(_decimalTableQuery.Get(message.MatrixId)))
                     .AddNavigationItem(
-                        NavigationItemFactory.Create<NewDecimalTableMessage>()
+                        NavigationItemFactory.Create<NewMatrixMessage>()
                             .WithResourceItem(
                                 ResourceItems.Submit))
                     .AsDefault()

@@ -2,11 +2,11 @@ using System;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.UI.Core.Messaging;
 
-namespace Shuttle.Abacus.UI.Messages.Report
+namespace Shuttle.Abacus.UI.Messages.DecimalTable
 {
-    public class DecimalTableReportMessage : Message
+    public class EditMatrixMessage : Message
     {
-        public DecimalTableReportMessage(Guid decimalTableId, string decimalTableName)
+        public EditMatrixMessage(Guid decimalTableId, string decimalTableName)
         {
             MatrixId = decimalTableId;
             DecimalTableName = decimalTableName;

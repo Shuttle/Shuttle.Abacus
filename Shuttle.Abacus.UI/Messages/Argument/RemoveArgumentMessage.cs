@@ -3,11 +3,11 @@ using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.Resources;
 
-namespace Shuttle.Abacus.UI.Messages.FactorAnswer
+namespace Shuttle.Abacus.UI.Messages.Argument
 {
-    public class DeleteArgumentMessage : Message
+    public class RemoveArgumentMessage : Message
     {
-        public DeleteArgumentMessage(Guid argumentId, string text, Resource ownerResource)
+        public RemoveArgumentMessage(string text, Guid argumentId, Resource ownerResource)
         {
             ArgumentId = argumentId;
             Text = text;

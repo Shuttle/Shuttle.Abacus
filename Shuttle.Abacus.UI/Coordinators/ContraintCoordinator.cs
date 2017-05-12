@@ -7,7 +7,7 @@ using Shuttle.Abacus.UI.Core.Resources;
 using Shuttle.Abacus.UI.Messages.Formula;
 using Shuttle.Abacus.UI.Messages.Resources;
 using Shuttle.Abacus.UI.Models;
-using Shuttle.Abacus.UI.UI.Constraint;
+using Shuttle.Abacus.UI.UI.FormulaConstraint;
 using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
@@ -102,7 +102,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 .Create(string.Format("Formula constraints: {0}", message.FormulaName))
                 .ControlledBy<IFormulaController>()
                 .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<IConstraintPresenter>().WithModel(constraintModel)
+                .AddPresenter<IFormulaConstraintPresenter>().WithModel(constraintModel)
                 .AddNavigationItem(
                     NavigationItemFactory.Create(message).WithResourceItem(ResourceItems.Submit)).AsDefault()
                 .AssignInitiator(message);
@@ -110,11 +110,11 @@ namespace Shuttle.Abacus.UI.Coordinators
             HostInWorkspace<ITabbedWorkspacePresenter>(item);
         }
 
-        private ConstraintModel BuildConstraintModel(Guid calculationId)
+        private FormulaConstraintModel BuildConstraintModel(Guid calculationId)
         {
             using (_databaseContextFactory.Create())
             {
-                return new ConstraintModel
+                return new FormulaConstraintModel
                 {
                     ArgumentRows = _argumentQuery.All(),
                     ConstraintTypeRows = _constraintTypeQuery.All(),
