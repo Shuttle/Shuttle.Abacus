@@ -176,8 +176,6 @@
     <Compile Include="Core\Validation\ViewValidationManager.cs" />
     <Compile Include="Core\Validation\ViewValidator.cs" />
     <Compile Include="Core\Validation\ViewValidatorFactory.cs" />
-    <Compile Include="Core\WorkItem\CallbackRepository.cs" />
-    <Compile Include="Core\WorkItem\ICallbackRepository.cs" />
     <Compile Include="Core\WorkItem\INavigationItemConfiguration.cs" />
     <Compile Include="Core\WorkItem\IWorkItem.cs" />
     <Compile Include="Core\WorkItem\IWorkItemBuilder.cs" />

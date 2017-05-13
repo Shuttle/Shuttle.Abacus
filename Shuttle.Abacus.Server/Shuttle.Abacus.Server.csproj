@@ -90,7 +90,6 @@
     <Compile Include="EventHandlers\ArgumentHandler.cs" />
     <Compile Include="EventHandlers\FormulaHandler.cs" />
     <Compile Include="EventHandlers\SystemUserHandler.cs" />
-    <Compile Include="MessageSenderExtensions.cs" />
     <Compile Include="CommandHandlers\ArgumentHandler.cs" />
     <Compile Include="CommandHandlers\MatrixHandler.cs" />
     <Compile Include="CommandHandlers\FormulaHandler.cs" />

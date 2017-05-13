@@ -11,8 +11,8 @@ namespace Shuttle.Abacus.UI.UI.Test
 {
     public class TestManagerController : WorkItemController, ITestManagerController
     {
-        public TestManagerController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository) 
-            : base(serviceBus, messageBus, callbackRepository)
+        public TestManagerController(IServiceBus serviceBus, IMessageBus messageBus) 
+            : base(serviceBus, messageBus)
         {
         }
 
@@ -68,9 +68,7 @@ namespace Shuttle.Abacus.UI.UI.Test
                 command.MethodTestIds.Add(new Guid(item.Name));
             }
 
-            Send(command,
-                           () =>
-                           MessageBus.Publish(new TestRemovedMessage(WorkItem.Id, message.MethodId)));
+            Send(command);
         }
 
         public void HandleMessage(MarkAllMessage message)

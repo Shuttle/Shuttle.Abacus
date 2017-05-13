@@ -10,8 +10,8 @@ namespace Shuttle.Abacus.UI.UI.Argument
 {
     public class ArgumentController : WorkItemController, IArgumentController
     {
-        public ArgumentController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository) 
-            : base(serviceBus, messageBus, callbackRepository)
+        public ArgumentController(IServiceBus serviceBus, IMessageBus messageBus) 
+            : base(serviceBus, messageBus)
         {
         }
 
@@ -48,9 +48,7 @@ namespace Shuttle.Abacus.UI.UI.Argument
                               Name = view.ArgumentNameValue
                           };
 
-            Send(command, () =>
-                          MessageBus.Publish(
-                              new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
+            Send(command);
         }
 
         public void HandleMessage(RemoveArgumentMessage message)
@@ -58,8 +56,7 @@ namespace Shuttle.Abacus.UI.UI.Argument
             Send(new RemoveArgumentCommand
                  {
                      ArgumentId = message.ArgumentId
-                 },
-                 () => MessageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
+                 });
         }
     }
 }

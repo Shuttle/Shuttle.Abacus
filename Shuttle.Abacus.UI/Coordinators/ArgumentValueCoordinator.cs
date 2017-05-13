@@ -49,14 +49,14 @@ namespace Shuttle.Abacus.UI.Coordinators
             {
                 case Resource.ResourceType.Container:
                     {
-                        message.NavigationItems.Add(_register.AssignMessage(new RegisterArgumentValueMessage(message.Item.Key)));
+                        message.NavigationItems.Add(_register.AssignMessage(new RegisterArgumentValueMessage(message.UpstreamItems[ResourceKeys.Argument].Key)));
 
                         break;
                     }
                 case Resource.ResourceType.Item:
                     {
                         message.NavigationItems.Add(_remove.AssignMessage(
-                                new RemoveArgumentValueMessage(message.Item.Text, message.Item.Key, message.UpstreamItems[0])));
+                                new RemoveArgumentValueMessage(message.Item.Text, message.UpstreamItems[ResourceKeys.Argument].Key)));
 
                         break;
                     }
@@ -96,17 +96,9 @@ namespace Shuttle.Abacus.UI.Coordinators
                                 message.Resources.Add(new Resource(ResourceKeys.ArgumentValue,
                                     ArgumentColumns.ValueColumns.ArgumentId.MapFrom(row),
                                     ArgumentColumns.ValueColumns.Value.MapFrom(row),
-                                    ImageResources.ArgumentValue));
+                                    ImageResources.ArgumentValue).AsLeaf());
                             }
                         }
-
-                        break;
-                    }
-                case Resource.ResourceType.Item:
-                    {
-                        message.Resources.Add(
-                            new Resource(ResourceKeys.ArgumentValue, Guid.NewGuid(), "Values",
-                                ImageResources.ArgumentValue).AsContainer());
 
                         break;
                     }

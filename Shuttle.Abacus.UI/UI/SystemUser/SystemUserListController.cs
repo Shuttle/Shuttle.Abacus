@@ -11,8 +11,8 @@ namespace Shuttle.Abacus.UI.UI.SystemUser
         WorkItemController,
         ISystemUserListController
     {
-        public SystemUserListController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository) 
-            : base(serviceBus, messageBus, callbackRepository)
+        public SystemUserListController(IServiceBus serviceBus, IMessageBus messageBus) 
+            : base(serviceBus, messageBus)
         {
         }
 

@@ -106,20 +106,7 @@ where
 
         public IQuery SaveValue(Argument argument, string value)
         {
-            return RawQuery.Create(@"
-insert into ArgumentValue
-(
-    ArgumentId,
-    Value
-)
-values
-(
-    @ArgumentId,
-    @Value
-)
-")
-                .AddParameterValue(ArgumentColumns.ValueColumns.ArgumentId, argument.Id)
-                .AddParameterValue(ArgumentColumns.ValueColumns.Value, value);
+            throw new NotImplementedException();
         }
 
         public IQuery Get(string name)
@@ -168,6 +155,39 @@ where
 ")
                .AddParameterValue(ArgumentColumns.Name, renamed.Name)
                .AddParameterValue(ArgumentColumns.Id, primitiveEvent.Id);
+        }
+
+        public IQuery ValueAdded(PrimitiveEvent primitiveEvent, ValueAdded valueAdded)
+        {
+            return RawQuery.Create(@"
+insert into ArgumentValue
+(
+    ArgumentId,
+    Value
+)
+values
+(
+    @ArgumentId,
+    @Value
+)
+")
+                .AddParameterValue(ArgumentColumns.ValueColumns.ArgumentId, primitiveEvent.Id)
+                .AddParameterValue(ArgumentColumns.ValueColumns.Value, valueAdded.Value);
+        }
+
+        public IQuery ValueRemoved(PrimitiveEvent primitiveEvent, ValueRemoved valueRemoved)
+        {
+            return RawQuery.Create(@"
+delete 
+from 
+    ArgumentValue 
+where 
+    ArgumentId = @ArgumentId
+and
+    Value = @Value
+")
+                .AddParameterValue(ArgumentColumns.ValueColumns.ArgumentId, primitiveEvent.Id)
+                .AddParameterValue(ArgumentColumns.ValueColumns.Value, valueRemoved.Value);
         }
     }
 }

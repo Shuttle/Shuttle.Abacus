@@ -7,8 +7,8 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
 {
     public class ReportController : WorkItemController, IReportController
     {
-        public ReportController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository) 
-            : base(serviceBus, messageBus, callbackRepository)
+        public ReportController(IServiceBus serviceBus, IMessageBus messageBus) 
+            : base(serviceBus, messageBus)
         {
         }
     }

@@ -51,8 +51,6 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                 _eventStore.Save(stream);
                 _keyStore.Add(formula.Id, key);
             }
-
-            context.ReplyOK();
         }
 
         public void ProcessMessage(IHandlerContext<RemoveFormulaCommand> context)
@@ -82,8 +80,6 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                 _eventStore.Save(stream);
                 _keyStore.Remove(formula.Id);
             }
-
-            context.ReplyOK();
         }
 
         public void ProcessMessage(IHandlerContext<SetFormulaMaxmimumCommand> context)
@@ -132,8 +128,6 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                 _eventStore.Save(stream);
                 _keyStore.Add(formula.Id, key);
             }
-
-            context.ReplyOK();
         }
     }
 }

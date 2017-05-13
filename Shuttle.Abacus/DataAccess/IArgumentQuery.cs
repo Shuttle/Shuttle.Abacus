@@ -15,5 +15,7 @@ namespace Shuttle.Abacus.DataAccess
         void Registered(PrimitiveEvent primitiveEvent, Registered registered);
         void Removed(PrimitiveEvent primitiveEvent, Removed removed);
         void Renamed(PrimitiveEvent primitiveEvent, Renamed renamed);
+        void ValueAdded(PrimitiveEvent primitiveEvent, ValueAdded valueAdded);
+        void ValueRemoved(PrimitiveEvent primitiveEvent, ValueRemoved valueRemoved);
     }
 }

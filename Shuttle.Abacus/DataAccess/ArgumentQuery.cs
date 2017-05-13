@@ -57,5 +57,15 @@ namespace Shuttle.Abacus.DataAccess
         {
             _databaseGateway.ExecuteUsing(_argumentQueryFactory.Renamed(primitiveEvent, renamed));
         }
+
+        public void ValueAdded(PrimitiveEvent primitiveEvent, ValueAdded valueAdded)
+        {
+            _databaseGateway.ExecuteUsing(_argumentQueryFactory.ValueAdded(primitiveEvent, valueAdded));
+        }
+
+        public void ValueRemoved(PrimitiveEvent primitiveEvent, ValueRemoved valueRemoved)
+        {
+            _databaseGateway.ExecuteUsing(_argumentQueryFactory.ValueRemoved(primitiveEvent, valueRemoved));
+        }
     }
 }

@@ -10,9 +10,8 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
 {
     public class FormulaOperationController : WorkItemController, IFormulaOperationController
     {
-        public FormulaOperationController(IServiceBus serviceBus, IMessageBus messageBus,
-            ICallbackRepository callbackRepository)
-            : base(serviceBus, messageBus, callbackRepository)
+        public FormulaOperationController(IServiceBus serviceBus, IMessageBus messageBus)
+            : base(serviceBus, messageBus)
         {
         }
 

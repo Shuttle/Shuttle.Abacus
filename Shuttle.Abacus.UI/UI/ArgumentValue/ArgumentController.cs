@@ -9,8 +9,8 @@ namespace Shuttle.Abacus.UI.UI.ArgumentValue
 {
     public class ArgumentValueController : WorkItemController, IArgumentValueController
     {
-        public ArgumentValueController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository)
-            : base(serviceBus, messageBus, callbackRepository)
+        public ArgumentValueController(IServiceBus serviceBus, IMessageBus messageBus)
+            : base(serviceBus, messageBus)
         {
         }
 
@@ -36,10 +36,9 @@ namespace Shuttle.Abacus.UI.UI.ArgumentValue
         {
             Send(new RemoveArgumentValueCommand
             {
-                ArgumentId = message.OwnerResource.Key,
+                ArgumentId = message.ArgumentId,
                 Value = message.Value
-            },
-                 () => MessageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
+            });
         }
     }
 }

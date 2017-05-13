@@ -1,5 +1,6 @@
 using System;
 using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.UI.Messages.WorkItem;
 using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;
 
@@ -7,15 +8,10 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
 {
     public abstract class WorkItemController : IWorkItemController
     {
-        private readonly ICallbackRepository _callbackRepository;
-
-        protected WorkItemController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository)
+        protected WorkItemController(IServiceBus serviceBus, IMessageBus messageBus)
         {
             Guard.AgainstNull(serviceBus, "serviceBus");
             Guard.AgainstNull(messageBus, "messageBus");
-            Guard.AgainstNull(callbackRepository, "callbackRepository");
-
-            _callbackRepository = callbackRepository;
 
             ServiceBus = serviceBus;
             MessageBus = messageBus;
@@ -33,33 +29,17 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
             WorkItem = workItem;
         }
 
-        protected void SetWorkItemWaiting()
+        protected void Send(object command)
         {
+            ServiceBus.Send(command);
+
             if (WorkItem == null)
             {
                 return;
             }
 
-            WorkItem.Waiting();
-        }
-
-        protected void Send(object command)
-        {
-            Send(command, () => { });
-        }
-
-        protected void Send(object command, Action action)
-        {
-            Send(command, action, true);
-        }
-
-        protected void Send(object command, Action action, bool complete)
-        {
-            SetWorkItemWaiting();
-
-            var callback = _callbackRepository.Register(WorkItem, action, complete);
-
-            ServiceBus.Send(command, c => c.Headers.Add(new TransportHeader {Key = "__callback", Value = callback}));
+            MessageBus.Publish(new RefreshWorkItemDispatcherMessage(WorkItem));
+            MessageBus.Publish(new WorkItemCompletedMessage(WorkItem));
         }
     }
 }

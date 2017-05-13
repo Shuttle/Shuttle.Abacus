@@ -36,7 +36,6 @@ namespace Shuttle.Abacus.UI
             _container.Register(Component.For<IShell>().ImplementedBy<Shell>());
             _container.Register(Component.For<ISession>().ImplementedBy<Session>());
             _container.Register(Component.For<IClipboard>().ImplementedBy<Clipboard>());
-            _container.Register(Component.For<ICallbackRepository>().ImplementedBy<CallbackRepository>());
 
             _container.Register
                 (

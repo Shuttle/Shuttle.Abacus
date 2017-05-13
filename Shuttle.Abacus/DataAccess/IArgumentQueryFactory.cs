@@ -21,5 +21,7 @@ namespace Shuttle.Abacus.DataAccess
         IQuery Registered(PrimitiveEvent primitiveEvent, Registered registered);
         IQuery Removed(PrimitiveEvent primitiveEvent, Removed removed);
         IQuery Renamed(PrimitiveEvent primitiveEvent, Renamed renamed);
+        IQuery ValueAdded(PrimitiveEvent primitiveEvent, ValueAdded valueAdded);
+        IQuery ValueRemoved(PrimitiveEvent primitiveEvent, ValueRemoved valueRemoved);
     }
 }

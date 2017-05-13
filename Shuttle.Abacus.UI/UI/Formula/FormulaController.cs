@@ -10,8 +10,8 @@ namespace Shuttle.Abacus.UI.UI.Formula
 {
     public class FormulaController : WorkItemController, IFormulaController
     {
-        public FormulaController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository)
-            : base(serviceBus, messageBus, callbackRepository)
+        public FormulaController(IServiceBus serviceBus, IMessageBus messageBus)
+            : base(serviceBus, messageBus)
         {
         }
 
@@ -44,8 +44,7 @@ namespace Shuttle.Abacus.UI.UI.Formula
             {
                 FormulaId = message.FormulaId,
                 Name = formulaView.NameValue
-            }, () =>
-                MessageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
+            });
         }
 
         public void HandleMessage(RemoveFormulaMessage message)
@@ -53,8 +52,7 @@ namespace Shuttle.Abacus.UI.UI.Formula
             Send(new RemoveFormulaCommand
                 {
                     FormulaId = message.FormulaId
-                },
-                () => MessageBus.Publish(new ResourceRefreshItemMessage(message.OwnerResource)));
+                });
         }
     }
 }

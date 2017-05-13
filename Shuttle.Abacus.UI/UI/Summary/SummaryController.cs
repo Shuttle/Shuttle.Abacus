@@ -6,8 +6,8 @@ namespace Shuttle.Abacus.UI.UI.Summary
 {
     public class SummaryController : WorkItemController, ISummaryController
     {
-        public SummaryController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository) 
-            : base(serviceBus, messageBus, callbackRepository)
+        public SummaryController(IServiceBus serviceBus, IMessageBus messageBus) 
+            : base(serviceBus, messageBus)
         {
         }
     }

@@ -11,8 +11,8 @@ namespace Shuttle.Abacus.UI.UI.Test
 {
     public class TestController : WorkItemController, ITestController
     {
-        public TestController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository) 
-            : base(serviceBus, messageBus, callbackRepository)
+        public TestController(IServiceBus serviceBus, IMessageBus messageBus) 
+            : base(serviceBus, messageBus)
         {
         }
 
@@ -57,9 +57,7 @@ namespace Shuttle.Abacus.UI.UI.Test
                 return;
             }
 
-            Send(command,
-                 () =>
-                 MessageBus.Publish(new TestCreatedMessage(message.WorkItemId, message.MethodId)));
+            Send(command);
         }
 
         public void HandleMessage(ChangeTestMessage message)
@@ -90,9 +88,7 @@ namespace Shuttle.Abacus.UI.UI.Test
                 });
             }
 
-            Send(command,
-                 () =>
-                 MessageBus.Publish(new TestChangedMessage(message.WorkItemId, message.MethodId)));
+            Send(command);
         }
     }
 }

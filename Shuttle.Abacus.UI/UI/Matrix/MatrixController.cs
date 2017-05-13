@@ -9,9 +9,8 @@ namespace Shuttle.Abacus.UI.UI.Matrix
 {
     public class MatrixController : WorkItemController, IMatrixController
     {
-        public MatrixController(IServiceBus serviceBus, IMessageBus messageBus,
-            ICallbackRepository callbackRepository)
-            : base(serviceBus, messageBus, callbackRepository)
+        public MatrixController(IServiceBus serviceBus, IMessageBus messageBus)
+            : base(serviceBus, messageBus)
         {
         }
 
@@ -67,9 +66,7 @@ namespace Shuttle.Abacus.UI.UI.Matrix
                 Elements = view.DecimalValues()
             };
 
-            Send(command,
-                () =>
-                    MessageBus.Publish(new RefreshWorkItemDispatcherTextMessage(WorkItem.Initiator.WorkItemInitiatorId)));
+            Send(command);
         }
     }
 }

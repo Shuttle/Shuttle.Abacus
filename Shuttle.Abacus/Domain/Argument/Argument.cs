@@ -149,7 +149,7 @@ namespace Shuttle.Abacus.Domain
 
         public ValueRemoved RemoveValue(string value)
         {
-            if (ContainsValue(value))
+            if (!ContainsValue(value))
             {
                 throw new DomainException(string.Format("Cannot remove value '{0}' since it does not exist.", value));
             }

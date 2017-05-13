@@ -8,7 +8,9 @@ namespace Shuttle.Abacus.Server.EventHandlers
     public class ArgumentHandler :
         IEventHandler<Registered>,
         IEventHandler<Renamed>,
-        IEventHandler<Removed>
+        IEventHandler<Removed>,
+        IEventHandler<ValueAdded>,
+        IEventHandler<ValueRemoved>
     {
         private readonly IArgumentQuery _query;
 
@@ -32,6 +34,16 @@ namespace Shuttle.Abacus.Server.EventHandlers
         public void ProcessEvent(IEventHandlerContext<Renamed> context)
         {
             _query.Renamed(context.PrimitiveEvent, context.Event);
+        }
+
+        public void ProcessEvent(IEventHandlerContext<ValueAdded> context)
+        {
+            _query.ValueAdded(context.PrimitiveEvent, context.Event);
+        }
+
+        public void ProcessEvent(IEventHandlerContext<ValueRemoved> context)
+        {
+            _query.ValueRemoved(context.PrimitiveEvent, context.Event);
         }
     }
 }
