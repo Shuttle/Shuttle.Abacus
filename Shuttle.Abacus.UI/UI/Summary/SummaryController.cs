@@ -1,9 +1,8 @@
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
-using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
 using Shuttle.Esb;
 
-namespace Shuttle.Abacus.UI.WorkItemControllers
+namespace Shuttle.Abacus.UI.UI.Summary
 {
     public class SummaryController : WorkItemController, ISummaryController
     {

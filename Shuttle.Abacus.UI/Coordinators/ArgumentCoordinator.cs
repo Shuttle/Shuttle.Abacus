@@ -8,7 +8,6 @@ using Shuttle.Abacus.UI.Core.Resources;
 using Shuttle.Abacus.UI.Messages.Argument;
 using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Abacus.UI.Messages.Explorer;
-using Shuttle.Abacus.UI.Messages.FactorAnswer;
 using Shuttle.Abacus.UI.Messages.Resources;
 using Shuttle.Abacus.UI.Models;
 using Shuttle.Abacus.UI.Navigation;
@@ -189,7 +188,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                         {
                             message.AddRow(message.Item.Text, _argumentQuery.Get(message.Item.Key));
 
-                            message.AddTable("Answer Values", _argumentQuery.GetValues(message.Item.Key));
+                            message.AddTable("Value Values", _argumentQuery.GetValues(message.Item.Key));
 
                             break;
                         }

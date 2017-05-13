@@ -13,9 +13,6 @@ namespace Shuttle.Abacus.UI.Messages.DecimalTable
 
         public Guid MatrixId { get; private set; }
 
-        public override IPermission RequiredPermission
-        {
-            get { return Permissions.Matrix; }
-        }
+        public override IPermission RequiredPermission => Permissions.Matrix;
     }
 }

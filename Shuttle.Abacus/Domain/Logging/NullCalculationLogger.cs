@@ -2,10 +2,7 @@ namespace Shuttle.Abacus.Domain
 {
     public class NullCalculationLogger : DefaultCalculationLogger
     {
-        public override bool Enabled
-        {
-            get { return false; }
-        }
+        public override bool Enabled => false;
 
         public override string ToString()
         {

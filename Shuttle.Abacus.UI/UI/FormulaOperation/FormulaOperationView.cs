@@ -17,10 +17,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
             InitializeComponent();
         }
 
-        protected bool HasMoreThanOneItem
-        {
-            get { return OperationsListView.Items.Count > 1; }
-        }
+        protected bool HasMoreThanOneItem => OperationsListView.Items.Count > 1;
 
         public string OperationValue
         {
@@ -28,20 +25,11 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
             set { Operation.Text = value; }
         }
 
-        public bool HasOperation
-        {
-            get { return Operation.SelectedIndex > -1; }
-        }
+        public bool HasOperation => Operation.SelectedIndex > -1;
 
-        public OperationTypeModel OperationTypeModel
-        {
-            get { return Operation.SelectedItem as OperationTypeModel; }
-        }
+        public OperationTypeModel OperationTypeModel => Operation.SelectedItem as OperationTypeModel;
 
-        public bool HasSelectedItem
-        {
-            get { return OperationsListView.SelectedItems.Count > 0; }
-        }
+        public bool HasSelectedItem => OperationsListView.SelectedItems.Count > 0;
 
         public void ShowOperationTypeError()
         {
@@ -106,10 +94,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
             set { ValueSource.Text = value; }
         }
 
-        public ValueSourceTypeModel ValueSourceTypeModel
-        {
-            get { return ValueSource.SelectedItem as ValueSourceTypeModel; }
-        }
+        public ValueSourceTypeModel ValueSourceTypeModel => ValueSource.SelectedItem as ValueSourceTypeModel;
 
         public string ValueSelectionValue
         {
@@ -132,20 +117,11 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
             }
         }
 
-        public string ValueSelectionText
-        {
-            get { return ValueSelection.Text; }
-        }
+        public string ValueSelectionText => ValueSelection.Text;
 
-        public bool HasValueSource
-        {
-            get { return ValueSource.SelectedIndex > -1; }
-        }
+        public bool HasValueSource => ValueSource.SelectedIndex > -1;
 
-        public bool HasValueSelection
-        {
-            get { return ValueSelection.Text.Length > 0; }
-        }
+        public bool HasValueSelection => ValueSelection.Text.Length > 0;
 
         public void PopulateValueSources(IEnumerable<ValueSourceTypeModel> models)
         {

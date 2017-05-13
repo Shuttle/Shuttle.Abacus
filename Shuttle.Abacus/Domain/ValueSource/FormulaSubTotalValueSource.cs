@@ -17,10 +17,7 @@ namespace Shuttle.Abacus.Domain
             _formulaId = formula.Id;
         }
 
-        public string ValueSelection
-        {
-            get { return _formulaId.ToString("n"); }
-        }
+        public string ValueSelection => _formulaId.ToString("n");
 
         public void AssignCalculationId(Guid id)
         {
@@ -37,15 +34,9 @@ namespace Shuttle.Abacus.Domain
             return string.Format("{0} (from sub-total '{1}')", operand.ToString(Resources.FormatDecimal), _formula.Name);
         }
 
-        public string Name
-        {
-            get { return "CalculationSubTotal"; }
-        }
+        public string Name => "CalculationSubTotal";
 
-        public object Text
-        {
-            get { return _formula.Name; }
-        }
+        public object Text => _formula.Name;
 
         public IValueSource Copy()
         {

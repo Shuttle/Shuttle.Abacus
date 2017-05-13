@@ -1,7 +1,6 @@
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Abacus.UI.Messages.DecimalTable;
-using Shuttle.Abacus.UI.Messages.FactorAnswer;
 using Shuttle.Abacus.UI.Messages.Formula;
 using Shuttle.Abacus.UI.Messages.Report;
 using Shuttle.Abacus.UI.Messages.Section;
@@ -39,7 +38,7 @@ namespace Shuttle.Abacus.UI.Navigation
                 .RegisterResourceItem<RunTestMessage>(new ResourceItem("Run", "RefreshSmall"))
                 .RegisterResourceItem<PrintTestMessage>(new ResourceItem("Print", "Report"))
                 .RegisterResourceItem<RemoveFormulaMessage>()
-                .RegisterResourceItem<ManageFormulaConstraintsMessage>(new ResourceItem("Manage", "Constraint"))
+                .RegisterResourceItem<ManageFormulaConstraintsMessage>(new ResourceItem("Manage", "FormulaConstraint"))
                 .RegisterResourceItem<NewMatrixMessage>()
                 .RegisterResourceItem<EditMatrixMessage>()
                 .RegisterResourceItem<MatrixReportMessage>(new ResourceItem("ReportDecimalTable", "Report"))

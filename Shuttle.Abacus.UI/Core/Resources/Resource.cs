@@ -39,10 +39,7 @@ namespace Shuttle.Abacus.UI.Core.Resources
 
         public bool Populated { get; set; }
 
-        public bool HasImage
-        {
-            get { return ImageResource.Image != null; }
-        }
+        public bool HasImage => ImageResource.Image != null;
 
         public bool IsLeaf { get; private set; }
 

@@ -9,15 +9,9 @@ namespace Shuttle.Abacus.Domain
         {
         }
 
-        public override string Name
-        {
-            get { return "Equals"; }
-        }
+        public override string Name => "Equals";
 
-        public override string Text
-        {
-            get { return "Equals"; }
-        }
+        public override string Text => "Equals";
 
         public override bool IsSatisfiedBy(IMethodContext collectionMethodContext)
         {

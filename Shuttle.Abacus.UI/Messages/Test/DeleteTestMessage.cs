@@ -6,10 +6,7 @@ namespace Shuttle.Abacus.UI.Messages.TestCase
 {
     public class DeleteTestMessage : Message
     {
-        public override IPermission RequiredPermission
-        {
-            get { return Permissions.Test; }
-        }
+        public override IPermission RequiredPermission => Permissions.Test;
 
         public Guid MethodTestId { get; set; }
         public Guid MethodId { get; set; }

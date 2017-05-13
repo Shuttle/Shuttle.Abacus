@@ -66,17 +66,11 @@ namespace Shuttle.Abacus.UI.Core.Presentation
 
         public Message CancelMessage { get; private set; }
 
-        public bool HasCancelMessage
-        {
-            get { return CancelMessage != null; }
-        }
+        public bool HasCancelMessage => CancelMessage != null;
 
         public Message DefaultMessage { get; private set; }
 
-        public bool HasDefaultMessage
-        {
-            get { return DefaultMessage != null; }
-        }
+        public bool HasDefaultMessage => DefaultMessage != null;
 
         public IPresenter AsDefault()
         {
@@ -116,10 +110,7 @@ namespace Shuttle.Abacus.UI.Core.Presentation
             return result;
         }
 
-        public IEnumerable<INavigationItem> NavigationItems
-        {
-            get { return _navigationItems; }
-        }
+        public IEnumerable<INavigationItem> NavigationItems => _navigationItems;
 
         public IMessageBus MessageBus { get; set; }
 

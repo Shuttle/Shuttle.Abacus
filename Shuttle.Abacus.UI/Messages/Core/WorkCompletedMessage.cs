@@ -7,9 +7,6 @@ namespace Shuttle.Abacus.UI.Messages.Core
     {
         public static readonly WorkCompletedMessage Instance = new WorkCompletedMessage();
 
-        public override IPermission RequiredPermission
-        {
-            get { return Permissions.Null; }
-        }
+        public override IPermission RequiredPermission => Permissions.Null;
     }
 }

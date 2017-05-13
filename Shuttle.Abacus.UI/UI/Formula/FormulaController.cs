@@ -4,11 +4,9 @@ using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.Formula;
 using Shuttle.Abacus.UI.Messages.Resources;
 using Shuttle.Abacus.UI.Messages.WorkItem;
-using Shuttle.Abacus.UI.UI.Formula;
-using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
 using Shuttle.Esb;
 
-namespace Shuttle.Abacus.UI.WorkItemControllers
+namespace Shuttle.Abacus.UI.UI.Formula
 {
     public class FormulaController : WorkItemController, IFormulaController
     {

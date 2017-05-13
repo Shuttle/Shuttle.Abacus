@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Core;
-using Shuttle.Abacus.Messages.v1;
 using Shuttle.Abacus.Messages.v1.TransferObjects;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
 
-namespace Shuttle.Abacus.UI.UI.DecimalTable
+namespace Shuttle.Abacus.UI.UI.Matrix
 {
     public partial class MatrixView : GenericDecimalTableView, IMatrixView
     {
@@ -39,40 +36,19 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
         {
         }
 
-        protected bool OnFixedRow
-        {
-            get { return (ValueGridView.CurrentCell.RowIndex < 2); }
-        }
+        protected bool OnFixedRow => (ValueGridView.CurrentCell.RowIndex < 2);
 
-        protected bool OnLastRow
-        {
-            get { return (ValueGridView.CurrentCell.RowIndex == ValueGridView.RowCount - 1); }
-        }
+        protected bool OnLastRow => (ValueGridView.CurrentCell.RowIndex == ValueGridView.RowCount - 1);
 
-        protected bool OnLastColumn
-        {
-            get { return ValueGridView.ColumnCount == SelectedColumn().DisplayIndex + 1; }
-        }
+        protected bool OnLastColumn => ValueGridView.ColumnCount == SelectedColumn().DisplayIndex + 1;
 
-        private bool OnFixedColumn
-        {
-            get { return (SelectedColumn().DisplayIndex < 2); }
-        }
+        private bool OnFixedColumn => (SelectedColumn().DisplayIndex < 2);
 
-        protected bool CanAddColumn
-        {
-            get { return HasColumnArgument; }
-        }
+        protected bool CanAddColumn => HasColumnArgument;
 
-        protected bool OnFirstRow
-        {
-            get { return ValueGridView.CurrentCell.RowIndex == 2; }
-        }
+        protected bool OnFirstRow => ValueGridView.CurrentCell.RowIndex == 2;
 
-        protected bool OnFirstColumn
-        {
-            get { return SelectedColumn().DisplayIndex == 2; }
-        }
+        protected bool OnFirstColumn => SelectedColumn().DisplayIndex == 2;
 
         public string DecimalTableNameValue
         {
@@ -90,22 +66,13 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             set { ViewValidator.Control(RowArgument).ShouldSatisfy(value); }
         }
 
-        public ArgumentModel RowArgumentModel
-        {
-            get { return (ArgumentModel)RowArgument.SelectedItem; }
-        }
+        public ArgumentModel RowArgumentModel => (ArgumentModel)RowArgument.SelectedItem;
 
-        public ArgumentModel ColumnArgumentModel
-        {
-            get { return (ArgumentModel)ColumnArgument.SelectedItem; }
-        }
+        public ArgumentModel ColumnArgumentModel => (ArgumentModel)ColumnArgument.SelectedItem;
 
         public bool GridInitialized { get; private set; }
 
-        public bool HasColumnArgument
-        {
-            get { return ColumnArgument.SelectedIndex > 0; }
-        }
+        public bool HasColumnArgument => ColumnArgument.SelectedIndex > 0;
 
         public void PopulateArguments(IEnumerable<ArgumentModel> rows)
         {
@@ -214,7 +181,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             ValueGridView[0, 1].Value = RowArgumentValue;
             ValueGridView[0, 1].ReadOnly = true;
 
-            ValueGridView[1, 1].Value = "Answer";
+            ValueGridView[1, 1].Value = "Value";
             ValueGridView[1, 1].ReadOnly = true;
             ValueGridView[1, 0].ReadOnly = true;
 
@@ -316,7 +283,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
                         Value = decimal.Parse(Convert.ToString(cell.Value))
                     };
 
-                    decimalValue.Constraints.Add(new Abacus.Messages.v1.TransferObjects.Constraint
+                    decimalValue.Constraints.Add(new Abacus.Messages.v1.TransferObjects.FormulaConstraint
                     {
                         ArgumentName = RowArgumentModel.Name,
                         ComparisonType = RowComparisonType(row),
@@ -325,7 +292,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
 
                     if (HasColumnArgument)
                     {
-                        decimalValue.Constraints.Add(new Abacus.Messages.v1.TransferObjects.Constraint
+                        decimalValue.Constraints.Add(new Abacus.Messages.v1.TransferObjects.FormulaConstraint
                         {
                             ArgumentName = ColumnArgumentModel.Name,
                             ComparisonType = ColumnComparisonType(column),

@@ -87,13 +87,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Coordinators\ArgumentValueCoordinator.cs" />
     <Compile Include="Coordinators\ArgumentCoordinator.cs" />
-    <Compile Include="Coordinators\ContraintCoordinator.cs" />
+    <Compile Include="Coordinators\FormulaConstraintCoordinator.cs" />
+    <Compile Include="Coordinators\Interfaces\IArgumentValueCoordinator.cs" />
     <Compile Include="Coordinators\MatrixCoordinator.cs" />
     <Compile Include="Coordinators\DefaultCoordinator.cs" />
     <Compile Include="Coordinators\FormulaCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\IArgumentCoordinator.cs" />
-    <Compile Include="Coordinators\Interfaces\IConstraintCoordinator.cs" />
+    <Compile Include="Coordinators\Interfaces\IFormulaConstraintCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\IMatrixCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\IDefaultCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\IFormulaCoordinator.cs" />
@@ -196,6 +198,8 @@
     <Compile Include="Handlers\SystemUserHandler.cs" />
     <Compile Include="Handlers\UIHandler.cs" />
     <Compile Include="IUIService.cs" />
+    <Compile Include="Messages\ArgumentValue\RegisterArgumentValueMessage.cs" />
+    <Compile Include="Messages\ArgumentValue\RemoveArgumentValueMessage.cs" />
     <Compile Include="Messages\Core\ActivateShellMessage.cs" />
     <Compile Include="Messages\Core\ApplicationExitMessage.cs" />
     <Compile Include="Messages\Core\ConfigureShellMessage.cs" />
@@ -223,7 +227,6 @@
     <Compile Include="Messages\DecimalTable\NewDecimalTableFromExistingMessage.cs" />
     <Compile Include="Messages\DecimalTable\NewMatrixMessage.cs" />
     <Compile Include="Messages\Explorer\ExplorerInitializeMessage.cs" />
-    <Compile Include="Messages\Argument\ArgumentUpdatedMessage.cs" />
     <Compile Include="Messages\Argument\RemoveArgumentMessage.cs" />
     <Compile Include="Messages\Argument\RenameArgumentMessage.cs" />
     <Compile Include="Messages\Argument\RegisterArgumentMessage.cs" />
@@ -268,7 +271,8 @@
     <Compile Include="Messages\WorkItem\WorkItemReadyMessage.cs" />
     <Compile Include="Messages\WorkItem\WorkItemSitedMessage.cs" />
     <Compile Include="Messages\WorkItem\WorkItemTextChangedMessage.cs" />
-    <Compile Include="Models\ArgumentAnswerModel.cs" />
+    <Compile Include="Models\TestArgumentValueModel.cs" />
+    <Compile Include="Models\ArgumentValueModel.cs" />
     <Compile Include="Models\ArgumentDisplayModel.cs" />
     <Compile Include="Models\FormulaConstraintModel.cs" />
     <Compile Include="Models\ConstraintTypeModel.cs" />
@@ -308,6 +312,8 @@
       <DependentUpon>Splash.cs</DependentUpon>
     </Compile>
     <Compile Include="UIService.cs" />
+    <Compile Include="UI\ArgumentValue\ArgumentController.cs" />
+    <Compile Include="UI\ArgumentValue\IArgumentValueController.cs" />
     <Compile Include="UI\Argument\ArgumentPresenter.cs" />
     <Compile Include="UI\Argument\ArgumentView.cs">
       <SubType>UserControl</SubType>
@@ -480,26 +486,26 @@
     </Compile>
     <Compile Include="UI\WorkItem\ContextToolbar\IContextToolbarPresenter.cs" />
     <Compile Include="UI\WorkItem\ContextToolbar\IContextToolbarView.cs" />
-    <Compile Include="WorkItemControllers\ArgumentController.cs" />
-    <Compile Include="WorkItemControllers\FormulaOperationController.cs" />
-    <Compile Include="WorkItemControllers\Interfaces\IFormulaOperationController.cs" />
-    <Compile Include="WorkItemControllers\MatrixController.cs" />
-    <Compile Include="WorkItemControllers\FormulaController.cs" />
-    <Compile Include="WorkItemControllers\Interfaces\IArgumentController.cs" />
-    <Compile Include="WorkItemControllers\Interfaces\IMatrixController.cs" />
-    <Compile Include="WorkItemControllers\Interfaces\IFormulaController.cs" />
-    <Compile Include="WorkItemControllers\Interfaces\ITestController.cs" />
-    <Compile Include="WorkItemControllers\Interfaces\IMethodTestManagerController.cs" />
+    <Compile Include="UI\Argument\ArgumentController.cs" />
+    <Compile Include="UI\FormulaOperation\FormulaOperationController.cs" />
+    <Compile Include="UI\FormulaOperation\IFormulaOperationController.cs" />
+    <Compile Include="UI\Matrix\MatrixController.cs" />
+    <Compile Include="UI\Formula\FormulaController.cs" />
+    <Compile Include="UI\Argument\IArgumentController.cs" />
+    <Compile Include="UI\Matrix\IMatrixController.cs" />
+    <Compile Include="UI\Formula\IFormulaController.cs" />
+    <Compile Include="UI\Test\ITestController.cs" />
+    <Compile Include="UI\Test\ITestManagerController.cs" />
     <Compile Include="WorkItemControllers\Interfaces\IReportController.cs" />
-    <Compile Include="WorkItemControllers\Interfaces\ISummaryController.cs" />
-    <Compile Include="WorkItemControllers\Interfaces\ISystemUserController.cs" />
-    <Compile Include="WorkItemControllers\Interfaces\ISystemUserListController.cs" />
-    <Compile Include="WorkItemControllers\TestController.cs" />
-    <Compile Include="WorkItemControllers\MethodTestManagerController.cs" />
+    <Compile Include="UI\Summary\ISummaryController.cs" />
+    <Compile Include="UI\SystemUser\ISystemUserController.cs" />
+    <Compile Include="UI\SystemUser\ISystemUserListController.cs" />
+    <Compile Include="UI\Test\TestController.cs" />
+    <Compile Include="UI\Test\TestManagerController.cs" />
     <Compile Include="WorkItemControllers\ReportController.cs" />
-    <Compile Include="WorkItemControllers\SummaryController.cs" />
-    <Compile Include="WorkItemControllers\SystemUserController.cs" />
-    <Compile Include="WorkItemControllers\SystemUserListController.cs" />
+    <Compile Include="UI\Summary\SummaryController.cs" />
+    <Compile Include="UI\SystemUser\SystemUserController.cs" />
+    <Compile Include="UI\SystemUser\SystemUserListController.cs" />
     <EmbeddedResource Include="Core\Presentation\View.resx">
       <DependentUpon>View.cs</DependentUpon>
     </EmbeddedResource>

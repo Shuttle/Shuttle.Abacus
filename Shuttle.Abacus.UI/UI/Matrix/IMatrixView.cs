@@ -1,13 +1,10 @@
 using System.Collections.Generic;
-using System.Data;
-using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Invariants.Core;
-using Shuttle.Abacus.Messages.v1;
 using Shuttle.Abacus.Messages.v1.TransferObjects;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
 
-namespace Shuttle.Abacus.UI.UI.DecimalTable
+namespace Shuttle.Abacus.UI.UI.Matrix
 {
     public interface IMatrixView : IView
     {

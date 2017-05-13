@@ -19,10 +19,7 @@ namespace Shuttle.Abacus.Infrastructure
             Aborted = false;
         }
 
-        public bool OK
-        {
-            get { return FailureMessages.Count == 0; }
-        }
+        public bool OK => FailureMessages.Count == 0;
 
         public bool Aborted { get; private set; }
 
@@ -42,20 +39,11 @@ namespace Shuttle.Abacus.Infrastructure
             }
         }
 
-        public bool HasMessages
-        {
-            get { return HasFailureMessages || HasSuccessMessages; }
-        }
+        public bool HasMessages => HasFailureMessages || HasSuccessMessages;
 
-        public bool HasFailureMessages
-        {
-            get { return FailureMessages.Count > 0; }
-        }
+        public bool HasFailureMessages => FailureMessages.Count > 0;
 
-        public bool HasSuccessMessages
-        {
-            get { return SuccessMessages.Count > 0; }
-        }
+        public bool HasSuccessMessages => SuccessMessages.Count > 0;
 
         public override string ToString()
         {

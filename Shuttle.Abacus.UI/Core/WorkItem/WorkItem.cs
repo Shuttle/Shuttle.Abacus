@@ -61,40 +61,25 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
         public Message ActiveDefaultMessage { get; private set; }
         public Message DefaultMessage { get; private set; }
 
-        public bool HasDefaultMessage
-        {
-            get { return ActiveDefaultMessage != null; }
-        }
+        public bool HasDefaultMessage => ActiveDefaultMessage != null;
 
         public Message ActiveCancelMessage { get; private set; }
 
         public bool IsWaiting { get; private set; }
 
-        public string ToolTipText
-        {
-            get
-            {
-                return Initiator != null
-                    ? Initiator.ToolTipText
-                    : string.Empty;
-            }
-        }
+        public string ToolTipText => Initiator != null
+            ? Initiator.ToolTipText
+            : string.Empty;
 
         public Message CancelMessage { get; private set; }
 
-        public bool HasCancelMessage
-        {
-            get { return ActiveCancelMessage != null; }
-        }
+        public bool HasCancelMessage => ActiveCancelMessage != null;
 
         public State<IWorkItem> State { get; }
 
         public Image Image { get; set; }
 
-        public IEnumerable<INavigationItem> NavigationItems
-        {
-            get { return _navigationItems; }
-        }
+        public IEnumerable<INavigationItem> NavigationItems => _navigationItems;
 
         public string Text
         {
@@ -111,10 +96,7 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
 
         public Guid Id { get; }
 
-        public IEnumerable<IPresenter> Presenters
-        {
-            get { return new ReadOnlyCollection<IPresenter>(_presenters); }
-        }
+        public IEnumerable<IPresenter> Presenters => new ReadOnlyCollection<IPresenter>(_presenters);
 
         public IWorkItem AssignWorkItemImage(Image image)
         {
@@ -262,16 +244,10 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
             _workItemManager.Ready(this);
         }
 
-        public IEnumerable<object> Subscribers
+        public IEnumerable<object> Subscribers => new List<object>(_presenters)
         {
-            get
-            {
-                return new List<object>(_presenters)
-                {
-                    WorkItemController
-                };
-            }
-        }
+            WorkItemController
+        };
 
         public IWorkItem AsDefault()
         {

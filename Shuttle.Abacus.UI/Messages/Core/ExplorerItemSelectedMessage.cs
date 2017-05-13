@@ -19,10 +19,7 @@ namespace Shuttle.Abacus.UI.Messages.Core
         public Resource Item { get; private set; }
         public ResourceCollection RelatedItems { get; private set; }
 
-        public IEnumerable<NamedQueryResult> NamedQueryResults
-        {
-            get { return new ReadOnlyCollection<NamedQueryResult>(namedQueryResults); }
-        }
+        public IEnumerable<NamedQueryResult> NamedQueryResults => new ReadOnlyCollection<NamedQueryResult>(namedQueryResults);
 
         public void AddTable(string name, IEnumerable<DataRow> rows)
         {

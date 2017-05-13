@@ -34,11 +34,6 @@ namespace Shuttle.Abacus.UI.UI.Argument
             set { ViewValidator.Control(AnswerType).ShouldSatisfy(value); }
         }
 
-        public bool HasAnswerType
-        {
-            get { return AnswerType.Text.Length > 0; }
-        }
-
         private void AnswerType_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetError(AnswerType, string.Empty);

@@ -11,9 +11,6 @@ namespace Shuttle.Abacus.Infrastructure
             this.specifications = specifications;
         }
 
-        protected IEnumerable<Specification<T>> Specifications
-        {
-            get { return specifications; }
-        }
+        protected IEnumerable<Specification<T>> Specifications => specifications;
     }
 }

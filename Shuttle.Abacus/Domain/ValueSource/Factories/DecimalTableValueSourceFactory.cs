@@ -11,20 +11,11 @@ namespace Shuttle.Abacus.Domain
             _matrixRepository = matrixRepository;
         }
 
-        public string Name
-        {
-            get { return "Matrix"; }
-        }
+        public string Name => "Matrix";
 
-        public string Text
-        {
-            get { return "Decimal Table"; }
-        }
+        public string Text => "Decimal Table";
 
-        public string Type
-        {
-            get { return "Selection"; }
-        }
+        public string Type => "Selection";
 
         public IValueSource Create(string value)
         {

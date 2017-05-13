@@ -18,10 +18,7 @@ namespace Shuttle.Abacus.Infrastructure
             disposed = false;
         }
 
-        public object Container
-        {
-            get { return _container; }
-        }
+        public object Container => _container;
 
         public T Resolve<T>()
         {

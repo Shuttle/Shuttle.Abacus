@@ -11,25 +11,16 @@ namespace Shuttle.Abacus.Domain
             this.value = value;
         }
 
-        public string ValueSelection
-        {
-            get { return Convert.ToString(value); }
-        }
+        public string ValueSelection => Convert.ToString(value);
 
         public decimal Operand(IMethodContext methodContext, ICalculationContext calculationContext)
         {
             return value;
         }
 
-        public string Name
-        {
-            get { return "Decimal"; }
-        }
+        public string Name => "Decimal";
 
-        public object Text
-        {
-            get { return Convert.ToString(value); }
-        }
+        public object Text => Convert.ToString(value);
 
         public IValueSource Copy()
         {

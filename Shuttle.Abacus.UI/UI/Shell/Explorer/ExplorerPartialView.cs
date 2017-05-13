@@ -41,17 +41,11 @@ namespace Shuttle.Abacus.UI.UI.Shell.Explorer
             }
         }
 
-        public Resource SelectedItem
-        {
-            get
-            {
-                return explorer.SelectedNode != null
-                           ? explorer.SelectedNode.Tag != null
-                                 ? explorer.SelectedNode.Tag as Resource
-                                 : null
-                           : null;
-            }
-        }
+        public Resource SelectedItem => explorer.SelectedNode != null
+            ? explorer.SelectedNode.Tag != null
+                ? explorer.SelectedNode.Tag as Resource
+                : null
+            : null;
 
         public Resource OwnerItem(TreeNode node)
         {
@@ -62,10 +56,7 @@ namespace Shuttle.Abacus.UI.UI.Shell.Explorer
                               : node.Parent.Tag as Resource);
         }
 
-        public TreeNode SelectedNode
-        {
-            get { return explorer.SelectedNode; }
-        }
+        public TreeNode SelectedNode => explorer.SelectedNode;
 
         public TreeNode[] Find(Guid itemKey)
         {

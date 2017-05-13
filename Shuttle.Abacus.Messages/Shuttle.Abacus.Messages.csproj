@@ -57,6 +57,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="v1\RegisterArgumentValueCommand.cs" />
+    <Compile Include="v1\RemoveArgumentValueCommand.cs" />
     <Compile Include="v1\RenameArgumentCommand.cs" />
     <Compile Include="v1\ChangeLoginNameCommand.cs" />
     <Compile Include="v1\ChangeTestCommand.cs" />
@@ -79,7 +81,7 @@
     <Compile Include="v1\RunTestCommand.cs" />
     <Compile Include="v1\SetPermissionsCommand.cs" />
     <Compile Include="v1\TransferObjects\ArgumentAnswer.cs" />
-    <Compile Include="v1\TransferObjects\Constraint.cs" />
+    <Compile Include="v1\TransferObjects\FormulaConstraint.cs" />
     <Compile Include="v1\TransferObjects\MatrixElement.cs" />
     <Compile Include="v1\LoginCommand.cs" />
     <Compile Include="v1\LoginCompletedEvent.cs" />

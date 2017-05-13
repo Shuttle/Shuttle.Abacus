@@ -25,10 +25,7 @@ namespace Shuttle.Abacus.Domain
             Answer = value;
         }
 
-        public override string AnswerType
-        {
-            get { return "Decimal"; }
-        }
+        public override string AnswerType => "Decimal";
 
         public override int CompareTo(ArgumentAnswer other)
         {

@@ -18,10 +18,7 @@ namespace Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar
             InitializeComponent();
         }
 
-        public bool HasSelectedPresenter
-        {
-            get { return PresenterListView.SelectedItems.Count > 0; }
-        }
+        public bool HasSelectedPresenter => PresenterListView.SelectedItems.Count > 0;
 
         public void AddPresenter(IPresenter presenter)
         {
@@ -82,10 +79,7 @@ namespace Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar
         }
 
         public bool HasChanges { get; private set; }
-        public IPresenter SelectedPresenter
-        {
-            get { return ((ItemTag)PresenterListView.SelectedItems[0].Tag).Presenter; }
-        }
+        public IPresenter SelectedPresenter => ((ItemTag)PresenterListView.SelectedItems[0].Tag).Presenter;
 
         public void ResetChanges()
         {

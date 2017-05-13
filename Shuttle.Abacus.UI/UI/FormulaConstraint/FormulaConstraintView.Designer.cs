@@ -75,7 +75,7 @@
             this.FormattedTextBox.Size = new System.Drawing.Size(152, 20);
             this.FormattedTextBox.TabIndex = 6;
             // 
-            // Answer
+            // Value
             // 
             this.Answer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
@@ -94,7 +94,7 @@
             this.ValueSelectionLabel.Name = "ValueSelectionLabel";
             this.ValueSelectionLabel.Size = new System.Drawing.Size(42, 13);
             this.ValueSelectionLabel.TabIndex = 4;
-            this.ValueSelectionLabel.Text = "Answer";
+            this.ValueSelectionLabel.Text = "Value";
             // 
             // Argument
             // 
@@ -116,7 +116,7 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Argument";
             // 
-            // Constraint
+            // FormulaConstraint
             // 
             this.Constraint.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Constraint.FlatStyle = System.Windows.Forms.FlatStyle.System;
@@ -180,7 +180,7 @@
             // 
             // columnHeader6
             // 
-            this.columnHeader6.Text = "Answer";
+            this.columnHeader6.Text = "Value";
             this.columnHeader6.Width = 166;
             // 
             // label1

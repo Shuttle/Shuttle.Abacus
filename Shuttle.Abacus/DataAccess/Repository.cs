@@ -24,9 +24,6 @@ namespace Shuttle.Abacus.DataAccess
             return result;
         }
 
-        public string Name
-        {
-            get { return TypeName; }
-        }
+        public string Name => TypeName;
     }
 }

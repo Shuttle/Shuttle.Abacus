@@ -11,20 +11,11 @@ namespace Shuttle.Abacus.Domain
             _argumentRepository = argumentRepository;
         }
 
-        public string Name
-        {
-            get { return "ArgumentAnswer"; }
-        }
+        public string Name => "ArgumentAnswer";
 
-        public string Text
-        {
-            get { return "Argument Answer"; }
-        }
+        public string Text => "Argument Answer";
 
-        public string Type
-        {
-            get { return "Selection"; }
-        }
+        public string Type => "Selection";
 
         public IValueSource Create(string value)
         {

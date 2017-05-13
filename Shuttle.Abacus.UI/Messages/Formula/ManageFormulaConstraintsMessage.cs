@@ -15,9 +15,6 @@ namespace Shuttle.Abacus.UI.Messages.Formula
             FormulaId = formulaId;
         }
 
-        public override IPermission RequiredPermission
-        {
-            get { return Permissions.Formula; }
-        }
+        public override IPermission RequiredPermission => Permissions.Formula;
     }
 }

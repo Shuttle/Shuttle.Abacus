@@ -15,10 +15,7 @@ namespace Shuttle.Abacus.Domain
             this.argument = argument;
         }
 
-        public string ValueSelection
-        {
-            get { return argument.Id.ToString("n"); }
-        }
+        public string ValueSelection => argument.Id.ToString("n");
 
         public decimal Operand(IMethodContext methodContext, ICalculationContext calculationContext)
         {
@@ -30,15 +27,9 @@ namespace Shuttle.Abacus.Domain
             return string.Format("{0} (from input '{1}')", ContextValue(methodContext).Description(), argument.Name);
         }
 
-        public string Name
-        {
-            get { return "ArgumentAnswer"; }
-        }
+        public string Name => "ArgumentAnswer";
 
-        public object Text
-        {
-            get { return argument.Name; }
-        }
+        public object Text => argument.Name;
 
         public IValueSource Copy()
         {

@@ -17,10 +17,7 @@ namespace Shuttle.Abacus.Domain
 
         public abstract string AnswerType { get; }
 
-        public virtual bool IsNull
-        {
-            get { return false; }
-        }
+        public virtual bool IsNull => false;
 
         public abstract int CompareTo(ArgumentAnswer other);
 

@@ -9,15 +9,9 @@ namespace Shuttle.Abacus.Domain
         {
         }
 
-        public override string Symbol
-        {
-            get { return "%"; }
-        }
+        public override string Symbol => "%";
 
-        public override string Name
-        {
-            get { return "Percentage"; }
-        }
+        public override string Name => "Percentage";
 
         public override decimal Execute(decimal total, decimal operand)
         {

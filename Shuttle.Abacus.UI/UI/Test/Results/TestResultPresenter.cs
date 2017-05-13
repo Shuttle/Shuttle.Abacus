@@ -3,7 +3,7 @@ using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
 
-namespace Shuttle.Abacus.UI.UI.MethodTest.Results
+namespace Shuttle.Abacus.UI.UI.Test.Results
 {
     public class TestResultPresenter : Presenter<ITestResultView, TestResultModel>, ITestResultPresenter
     {

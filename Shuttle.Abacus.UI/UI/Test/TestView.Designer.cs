@@ -1,4 +1,4 @@
-﻿namespace Shuttle.Abacus.UI.UI.MethodTest
+﻿namespace Shuttle.Abacus.UI.UI.Test
 {
     partial class TestView
     {
@@ -103,7 +103,7 @@
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Answer";
+            this.columnHeader2.Text = "Value";
             this.columnHeader2.Width = 240;
             // 
             // label3
@@ -141,7 +141,7 @@
             this.FormattedControl.Size = new System.Drawing.Size(184, 20);
             this.FormattedControl.TabIndex = 7;
             // 
-            // Answer
+            // Value
             // 
             this.ValueSelectionControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
@@ -159,7 +159,7 @@
             this.ValueSelectionLabel.Name = "ValueSelectionLabel";
             this.ValueSelectionLabel.Size = new System.Drawing.Size(42, 13);
             this.ValueSelectionLabel.TabIndex = 2;
-            this.ValueSelectionLabel.Text = "Answer";
+            this.ValueSelectionLabel.Text = "Value";
             // 
             // Argument
             // 

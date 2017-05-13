@@ -9,10 +9,7 @@ namespace Shuttle.Abacus.Domain
 
         public Formula Formula { get; private set; }
 
-        public string Name
-        {
-            get { return Formula.Name; }
-        }
+        public string Name => Formula.Name;
 
         public decimal Value { get; protected set; }
 

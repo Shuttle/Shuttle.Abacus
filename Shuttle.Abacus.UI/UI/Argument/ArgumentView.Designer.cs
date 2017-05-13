@@ -75,7 +75,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 13);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Answer type";
+            this.label3.Text = "Value type";
             // 
             // ArgumentView
             // 
@@ -86,7 +86,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ArgumentName);
             this.Name = "ArgumentView";
-            this.Size = new System.Drawing.Size(261, 117);
+            this.Size = new System.Drawing.Size(263, 132);
             this.ResumeLayout(false);
             this.PerformLayout();
 

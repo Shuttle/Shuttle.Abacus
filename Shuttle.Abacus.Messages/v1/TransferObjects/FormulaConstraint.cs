@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace Shuttle.Abacus.Messages.v1.TransferObjects
+﻿namespace Shuttle.Abacus.Messages.v1.TransferObjects
 {
-    public class Constraint
+    public class FormulaConstraint
     {
         public string ArgumentName { get; set; }
         public string ComparisonType { get; set; }

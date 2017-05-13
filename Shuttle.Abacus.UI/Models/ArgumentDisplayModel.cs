@@ -17,10 +17,7 @@ namespace Shuttle.Abacus.UI.Models
 
         public DataTable GraphNodeArguments { get; set; }
 
-        public bool HasGraphNodeArguments
-        {
-            get { return GraphNodeArguments != null && GraphNodeArguments.Rows.Count > 0; }
-        }
+        public bool HasGraphNodeArguments => GraphNodeArguments != null && GraphNodeArguments.Rows.Count > 0;
 
         public DataRow GetArgumentRow(Guid argumentId)
         {

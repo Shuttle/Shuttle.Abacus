@@ -61,13 +61,7 @@ namespace Shuttle.Abacus.UI.UI.Grid
 
         }
 
-        public DataTable Items
-        {
-            get
-            {
-                return (DataTable)GridView.DataSource;
-            }
-        }
+        public DataTable Items => (DataTable)GridView.DataSource;
     }
 
     public class GenericSimpleGridView : View<ISimpleGridPresenter>

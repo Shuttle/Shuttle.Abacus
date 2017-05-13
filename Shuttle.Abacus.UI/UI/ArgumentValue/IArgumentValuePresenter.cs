@@ -1,9 +1,8 @@
 ﻿using Shuttle.Abacus.UI.Core.Presentation;
 
-namespace Shuttle.Abacus.UI.UI.Argument.RestrictedAnswer
+namespace Shuttle.Abacus.UI.UI.ArgumentValue
 {
     public interface IArgumentValuePresenter : IPresenter
     {
-        bool IsValueOK();
     }
 }

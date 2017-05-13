@@ -22,14 +22,8 @@ namespace Shuttle.Abacus.Domain
             return ValueSource.Operand(methodContext, calculationContext);
         }
 
-        public override string Symbol
-        {
-            get { return "round"; }
-        }
+        public override string Symbol => "round";
 
-        public override string Name
-        {
-            get { return "Rounding"; }
-        }
+        public override string Name => "Rounding";
     }
 }

@@ -1,19 +1,17 @@
 ﻿using System;
-using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Messages.v1;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Abacus.UI.Messages.TestCase;
 using Shuttle.Abacus.UI.UI.List;
-using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
 using Shuttle.Esb;
 
-namespace Shuttle.Abacus.UI.WorkItemControllers
+namespace Shuttle.Abacus.UI.UI.Test
 {
-    public class MethodTestManagerController : WorkItemController, IMethodTestManagerController
+    public class TestManagerController : WorkItemController, ITestManagerController
     {
-        public MethodTestManagerController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository) 
+        public TestManagerController(IServiceBus serviceBus, IMessageBus messageBus, ICallbackRepository callbackRepository) 
             : base(serviceBus, messageBus, callbackRepository)
         {
         }

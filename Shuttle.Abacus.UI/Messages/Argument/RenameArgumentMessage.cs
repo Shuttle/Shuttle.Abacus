@@ -2,7 +2,7 @@
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.UI.Core.Messaging;
 
-namespace Shuttle.Abacus.UI.Messages.FactorAnswer
+namespace Shuttle.Abacus.UI.Messages.Argument
 {
     public class RenameArgumentMessage : Message
     {
@@ -11,10 +11,7 @@ namespace Shuttle.Abacus.UI.Messages.FactorAnswer
             ArgumentId = argumentId;
         }
 
-        public override IPermission RequiredPermission
-        {
-            get { return Permissions.Argument; }
-        }
+        public override IPermission RequiredPermission => Permissions.Argument;
 
         public Guid ArgumentId { get; private set; }
     }

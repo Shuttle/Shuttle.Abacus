@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
 
-namespace Shuttle.Abacus.UI.UI.MethodTest.Results
+namespace Shuttle.Abacus.UI.UI.Test.Results
 {
     public partial class TestResultView : GenericMethodTestResultView, ITestResultView
     {
@@ -18,16 +17,10 @@ namespace Shuttle.Abacus.UI.UI.MethodTest.Results
             ImageList.Images.Add("Error", Resources.Image_Error);
         }
 
-        protected ListViewItem SelectedItem
-        {
-            get { return MethodTestListView.SelectedItems[0]; }
-        }
+        protected ListViewItem SelectedItem => MethodTestListView.SelectedItems[0];
 
 
-        public bool HasSelectedItem
-        {
-            get { return MethodTestListView.SelectedItems.Count > 0; }
-        }
+        public bool HasSelectedItem => MethodTestListView.SelectedItems.Count > 0;
 
         public void ShowCalculationLog()
         {
@@ -55,10 +48,7 @@ namespace Shuttle.Abacus.UI.UI.MethodTest.Results
             DisplayList.Items.Clear();
         }
 
-        public bool HasSelectedGraphNode
-        {
-            get { return DisplayTree.SelectedNode != null; }
-        }
+        public bool HasSelectedGraphNode => DisplayTree.SelectedNode != null;
 
         public List<GraphNodeDTO> SelectedGraphNodes()
         {

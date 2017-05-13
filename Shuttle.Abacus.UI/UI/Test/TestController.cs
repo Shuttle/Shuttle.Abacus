@@ -1,19 +1,13 @@
 using System;
-using System.Data;
-using System.Windows.Forms;
-using Shuttle.Abacus.Domain;
-using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Messages.v1;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Abacus.UI.Messages.TestCase;
-using Shuttle.Abacus.UI.UI.MethodTest;
-using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
 using Shuttle.Esb;
 
-namespace Shuttle.Abacus.UI.WorkItemControllers
+namespace Shuttle.Abacus.UI.UI.Test
 {
     public class TestController : WorkItemController, ITestController
     {
@@ -51,7 +45,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                 command.ArgumentAnswers.Add(new Abacus.Messages.v1.TransferObjects.ArgumentAnswer
                                           {
                                               ArgumentId = model.ArgumentId,
-                                              Answer = model.Answer
+                                              Answer = model.Value
                                           });
             }
 
@@ -92,7 +86,7 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
                 command.ArgumentAnswers.Add(new Shuttle.Abacus.Messages.v1.TransferObjects.ArgumentAnswer
                 {
                     ArgumentId = model.ArgumentId,
-                    Answer = model.Answer
+                    Answer = model.Value
                 });
             }
 

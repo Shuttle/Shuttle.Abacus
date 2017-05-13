@@ -18,10 +18,7 @@ namespace Shuttle.Abacus.Domain
             items = new List<IGraphNode>();
         }
 
-        public GraphNodeCollection Items
-        {
-            get { return new GraphNodeCollection(items); }
-        }
+        public GraphNodeCollection Items => new GraphNodeCollection(items);
 
         public IEnumerator<IGraphNode> GetEnumerator()
         {

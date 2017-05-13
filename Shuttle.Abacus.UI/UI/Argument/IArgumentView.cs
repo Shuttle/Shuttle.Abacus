@@ -9,6 +9,5 @@ namespace Shuttle.Abacus.UI.UI.Argument
         string AnswerTypeValue { get; set; }
         IRuleCollection<object> ArgumentNameRules { set; }
         IRuleCollection<object> AnswerTypeRules { set; }
-        bool HasAnswerType { get; }
     }
 }

@@ -20,9 +20,6 @@ namespace Shuttle.Abacus.UI.Models
         public string Text { get; set; }
         public string Type { get; set; }
 
-        public bool IsSelection
-        {
-            get { return Type.Equals("Selection", StringComparison.InvariantCultureIgnoreCase); }
-        }
+        public bool IsSelection => Type.Equals("Selection", StringComparison.InvariantCultureIgnoreCase);
     }
 }

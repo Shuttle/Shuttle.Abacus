@@ -16,10 +16,7 @@ namespace Shuttle.Abacus.UI.Messages.Section
             OwnerResource = ownerResource;
         }
 
-        public override IPermission RequiredPermission
-        {
-            get { return Permissions.Formula; }
-        }
+        public override IPermission RequiredPermission => Permissions.Formula;
 
         public string Text { get; private set; }
 

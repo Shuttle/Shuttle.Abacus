@@ -1,4 +1,4 @@
-﻿namespace Shuttle.Abacus.UI.UI.DecimalTable
+﻿namespace Shuttle.Abacus.UI.UI.Matrix
 {
     partial class MatrixView
     {

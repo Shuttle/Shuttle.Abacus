@@ -82,17 +82,11 @@ namespace Shuttle.Abacus.UI.UI.Shell
             StatusLabel.Text = message;
         }
 
-        public IExplorerPartialView ExplorerView
-        {
-            get { return explorerPartialView; }
-        }
+        public IExplorerPartialView ExplorerView => explorerPartialView;
 
         public IPresenter IPresenter { get; private set; }
 
-        public bool IsValid
-        {
-            get { return true; }
-        }
+        public bool IsValid => true;
 
         public void AttachPresenter(IPresenter presenter)
         {
@@ -122,14 +116,7 @@ namespace Shuttle.Abacus.UI.UI.Shell
         {
         }
 
-        public IViewValidationManager ViewValidationManager
-        {
-            get
-            {
-                // not used
-                return new ViewValidationManager(null);
-            }
-        }
+        public IViewValidationManager ViewValidationManager => new ViewValidationManager(null);
 
         private void AddMenuItem(INavigationItem item, ToolStripDropDownItem owner)
         {

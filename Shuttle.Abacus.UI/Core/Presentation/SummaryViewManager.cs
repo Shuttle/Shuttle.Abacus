@@ -27,10 +27,7 @@ namespace Shuttle.Abacus.UI.Core.Presentation
             messageBus.Publish(new ShowSummaryViewMessage());
         }
 
-        public bool ViewOpen
-        {
-            get { return workItemManager.Contains(DefaultCoordinator.SummaryViewWorkItemId); }
-        }
+        public bool ViewOpen => workItemManager.Contains(DefaultCoordinator.SummaryViewWorkItemId);
 
         public bool CanIgnore(SummaryViewRequestedMessage message, ResourceKey forKey)
         {

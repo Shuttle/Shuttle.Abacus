@@ -16,10 +16,7 @@ namespace Shuttle.Abacus.UI.Core.Binding
             Bind(keyColumnName, rows, to, new List<string>(), new List<string>());
         }
 
-        public Type ForType
-        {
-            get { return Fortype; }
-        }
+        public Type ForType => Fortype;
 
         public void Bind(string keyColumnName, IEnumerable<DataRow> rows, ListView to,
             IEnumerable<string> visibleColumns, IEnumerable<string> hiddenColumns)

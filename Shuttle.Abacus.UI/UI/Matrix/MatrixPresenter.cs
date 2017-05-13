@@ -12,7 +12,7 @@ using Shuttle.Abacus.UI.Models;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.UI.DecimalTable
+namespace Shuttle.Abacus.UI.UI.Matrix
 {
     public class MatrixPresenter : Presenter<IMatrixView, MatrixModel>, IMatrixPresenter
     {
@@ -207,10 +207,7 @@ namespace Shuttle.Abacus.UI.UI.DecimalTable
             return ArgumentAnswers(View.RowArgumentModel.Id);
         }
 
-        public IEnumerable<ConstraintTypeModel> ConstraintTypes
-        {
-            get { return _constraintTypes; }
-        }
+        public IEnumerable<ConstraintTypeModel> ConstraintTypes => _constraintTypes;
 
         private IEnumerable<string> ArgumentAnswers(Guid id)
         {

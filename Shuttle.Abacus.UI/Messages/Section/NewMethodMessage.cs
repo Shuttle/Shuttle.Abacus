@@ -5,9 +5,6 @@ namespace Shuttle.Abacus.UI.Messages.Section
 {
     public class NewMethodMessage : Message
     {
-        public override IPermission RequiredPermission
-        {
-            get { return Permissions.Formula; }
-        }
+        public override IPermission RequiredPermission => Permissions.Formula;
     }
 }

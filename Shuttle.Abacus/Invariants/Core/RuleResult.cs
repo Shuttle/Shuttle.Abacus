@@ -14,10 +14,7 @@ namespace Shuttle.Abacus.Invariants.Core
         {
         }
 
-        public bool OK
-        {
-            get { return RootMessage == null; }
-        }
+        public bool OK => RootMessage == null;
 
         public ResultMessage RootMessage { get; private set; }
         public IResult ToResult()

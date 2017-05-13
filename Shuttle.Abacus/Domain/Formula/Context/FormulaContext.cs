@@ -62,55 +62,25 @@ namespace Shuttle.Abacus.Domain
 
         }
 
-        public IEnumerable<ICalculationResult> Results
-        {
-            get { return register.Results; }
-        }
+        public IEnumerable<ICalculationResult> Results => register.Results;
 
-        public IEnumerable<ICalculationResult> SubTotals
-        {
-            get { return register.SubTotals; }
-        }
+        public IEnumerable<ICalculationResult> SubTotals => register.SubTotals;
 
-        public IEnumerable<ArgumentAnswer> ArgumentAnswers
-        {
-            get { return answers; }
-        }
+        public IEnumerable<ArgumentAnswer> ArgumentAnswers => answers;
 
-        public IEnumerable<string> ErrorMessages
-        {
-            get { return logger.ErrorMessages; }
-        }
+        public IEnumerable<string> ErrorMessages => logger.ErrorMessages;
 
-        public IEnumerable<string> WarningMessages
-        {
-            get { return logger.WarningMessages; }
-        }
+        public IEnumerable<string> WarningMessages => logger.WarningMessages;
 
-        public IEnumerable<string> InformationMessages
-        {
-            get { return logger.InformationMessages; }
-        }
+        public IEnumerable<string> InformationMessages => logger.InformationMessages;
 
-        public ICalculationResult Total
-        {
-            get { return register.Total; }
-        }
+        public ICalculationResult Total => register.Total;
 
-        public bool LoggerEnabled
-        {
-            get { return logger.Enabled; }
-        }
+        public bool LoggerEnabled => logger.Enabled;
 
-        public string LogText
-        {
-            get { return logger.ToString(); }
-        }
+        public string LogText => logger.ToString();
 
-        public bool OK
-        {
-            get { return !logger.HasErrorMessages; }
-        }
+        public bool OK => !logger.HasErrorMessages;
 
         public List<GraphNodeDTO> GraphNodes()
         {

@@ -4,10 +4,9 @@ using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Abacus.UI.Messages.Formula;
 using Shuttle.Abacus.UI.UI.List;
-using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
 using Shuttle.Esb;
 
-namespace Shuttle.Abacus.UI.WorkItemControllers
+namespace Shuttle.Abacus.UI.UI.FormulaOperation
 {
     public class FormulaOperationController : WorkItemController, IFormulaOperationController
     {
@@ -42,11 +41,11 @@ namespace Shuttle.Abacus.UI.WorkItemControllers
             //    ValueSource = item.ValueSource,
             //    Text = item.Text
             //}),
-            //Constraints = constraintView.Constraints.Map(item => new Constraint
+            //Constraints = constraintView.Constraints.Map(item => new FormulaConstraint
             //{
-            //    ArgumentId = item.ArgumentId,
+            //    ArgumentName = item.ArgumentName,
             //    Name = item.Name,
-            //    Answer = item.Answer
+            //    Value = item.Value
             //})        
         }
     }

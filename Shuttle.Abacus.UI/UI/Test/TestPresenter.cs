@@ -12,7 +12,7 @@ using Shuttle.Abacus.UI.Models;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.UI.MethodTest
+namespace Shuttle.Abacus.UI.UI.Test
 {
     public class TestPresenter : Presenter<ITestView, TestModel>, ITestPresenter
     {

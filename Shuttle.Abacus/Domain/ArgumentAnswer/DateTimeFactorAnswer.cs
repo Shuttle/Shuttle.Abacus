@@ -17,10 +17,7 @@ namespace Shuttle.Abacus.Domain
             Answer = value;
         }
 
-        public override string AnswerType
-        {
-            get { return "DateTime"; }
-        }
+        public override string AnswerType => "DateTime";
 
         public override int CompareTo(ArgumentAnswer other)
         {

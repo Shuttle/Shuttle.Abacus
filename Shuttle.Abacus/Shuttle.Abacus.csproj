@@ -64,7 +64,7 @@
     <Compile Include="ApplicationService\TaskFactory.cs" />
     <Compile Include="DataAccess\ArgumentQuery.cs" />
     <Compile Include="DataAccess\ArgumentRepository.cs" />
-    <Compile Include="DataAccess\ConstraintQuery.cs" />
+    <Compile Include="DataAccess\FormulaConstraintQuery.cs" />
     <Compile Include="DataAccess\ConstraintTypeQuery.cs" />
     <Compile Include="DataAccess\MatrixQuery.cs" />
     <Compile Include="DataAccess\MatrixRepository.cs" />
@@ -143,7 +143,7 @@
     <Compile Include="DataAccess\OperationTypeQuery.cs" />
     <Compile Include="DataAccess\BooleanArgumentDTOPipe.cs" />
     <Compile Include="DataAccess\IArgumentQuery.cs" />
-    <Compile Include="DataAccess\IConstraintQuery.cs" />
+    <Compile Include="DataAccess\IFormulaConstraintQuery.cs" />
     <Compile Include="DataAccess\IConstraintTypeQuery.cs" />
     <Compile Include="DataAccess\IMatrixQuery.cs" />
     <Compile Include="DataAccess\IFormulaQuery.cs" />
@@ -225,9 +225,12 @@
     <Compile Include="Events\Argument.v1\Removed.cs" />
     <Compile Include="Events\Argument.v1\Renamed.cs" />
     <Compile Include="Events\Argument.v1\AnswerTypeChanged.cs" />
+    <Compile Include="Events\Argument.v1\ValueRemoved.cs" />
+    <Compile Include="Events\Argument.v1\ValueAdded.cs" />
     <Compile Include="Events\Formula.v1\Renamed.cs" />
     <Compile Include="Events\Formula.v1\Registered.cs" />
     <Compile Include="Events\Formula.v1\Removed.cs" />
+    <Compile Include="Invariants\ArgumentValueRules.cs" />
     <Compile Include="Invariants\FormulaRules.cs" />
     <Compile Include="Invariants\ArgumentRules.cs" />
     <Compile Include="Invariants\Core\IRule.cs" />
@@ -245,6 +248,7 @@
     <Compile Include="Invariants\Core\Rules\IntegerRule.cs" />
     <Compile Include="Invariants\Core\Rules\MaximumLengthRule.cs" />
     <Compile Include="Invariants\Core\Rules\MinimumLengthRule.cs" />
+    <Compile Include="Invariants\Interfaces\IArgumentValueRules.cs" />
     <Compile Include="Invariants\Interfaces\IFormulaRules.cs" />
     <Compile Include="Invariants\MatrixRules.cs" />
     <Compile Include="Invariants\Interfaces\IArgumentRules.cs" />

@@ -10,10 +10,6 @@ namespace Shuttle.Abacus.UI.Core.Configuration
             new ConfigurationItem<string>(Convert.ToString(ConfigurationManager.AppSettings["ValidationErrorColor"]));
 
 
-        public string ValidationErrorColor
-        {
-            get { return validationErrorColor.GetValue(); }
-        }
-
+        public string ValidationErrorColor => validationErrorColor.GetValue();
     }
 }

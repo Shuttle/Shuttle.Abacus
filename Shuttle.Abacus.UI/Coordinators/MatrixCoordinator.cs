@@ -12,7 +12,7 @@ using Shuttle.Abacus.UI.Messages.Explorer;
 using Shuttle.Abacus.UI.Messages.Report;
 using Shuttle.Abacus.UI.Messages.Resources;
 using Shuttle.Abacus.UI.Models;
-using Shuttle.Abacus.UI.UI.DecimalTable;
+using Shuttle.Abacus.UI.UI.Matrix;
 using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
@@ -24,22 +24,22 @@ namespace Shuttle.Abacus.UI.Coordinators
     public class MatrixCoordinator : Coordinator, IMatrixCoordinator
     {
         private readonly IArgumentQuery _argumentQuery;
-        private readonly IConstraintQuery _constraintQuery;
+        private readonly IFormulaConstraintQuery _formulaConstraintQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IMatrixQuery _decimalTableQuery;
 
         public MatrixCoordinator(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
-            IMatrixQuery decimalTableQuery, IConstraintQuery constraintQuery)
+            IMatrixQuery decimalTableQuery, IFormulaConstraintQuery formulaConstraintQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(argumentQuery, "argumentQuery");
             Guard.AgainstNull(decimalTableQuery, "decimalTableQuery");
-            Guard.AgainstNull(constraintQuery, "constraintQuery");
+            Guard.AgainstNull(formulaConstraintQuery, "formulaConstraintQuery");
 
             _databaseContextFactory = databaseContextFactory;
             _argumentQuery = argumentQuery;
             _decimalTableQuery = decimalTableQuery;
-            _constraintQuery = constraintQuery;
+            _formulaConstraintQuery = formulaConstraintQuery;
         }
 
         public void HandleMessage(ExplorerInitializeMessage message)

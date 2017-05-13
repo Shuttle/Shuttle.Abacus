@@ -12,10 +12,7 @@ namespace Shuttle.Abacus.UI.Core.Messaging
     {
         private readonly IList<object> subscribers;
 
-        public IEnumerable<object> Subscribers
-        {
-            get { return new ReadOnlyCollection<object>(CopySubscribers()); }
-        }
+        public IEnumerable<object> Subscribers => new ReadOnlyCollection<object>(CopySubscribers());
 
         public IEnumerable<Type> MessageTypesHandledByObject(object o)
         {

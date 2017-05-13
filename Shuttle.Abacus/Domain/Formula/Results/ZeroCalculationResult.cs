@@ -11,10 +11,7 @@ namespace Shuttle.Abacus.Domain
 
         public string Name { get; private set; }
 
-        public decimal Value
-        {
-            get { return decimal.Zero; }
-        }
+        public decimal Value => decimal.Zero;
 
         public string Description()
         {

@@ -7,32 +7,32 @@ using Shuttle.Abacus.UI.Core.Resources;
 using Shuttle.Abacus.UI.Messages.Formula;
 using Shuttle.Abacus.UI.Messages.Resources;
 using Shuttle.Abacus.UI.Models;
+using Shuttle.Abacus.UI.UI.Formula;
 using Shuttle.Abacus.UI.UI.FormulaConstraint;
 using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
-using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.Coordinators
 {
-    public class ConstraintCoordinator : Coordinator, IConstraintCoordinator
+    public class FormulaConstraintCoordinator : Coordinator, IFormulaConstraintCoordinator
     {
         private readonly IArgumentQuery _argumentQuery;
         private readonly IConstraintTypeQuery _constraintTypeQuery;
-        private readonly IConstraintQuery _constraintQuery;
+        private readonly IFormulaConstraintQuery _formulaConstraintQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
 
-        public ConstraintCoordinator(IDatabaseContextFactory databaseContextFactory, IConstraintQuery constraintQuery,
+        public FormulaConstraintCoordinator(IDatabaseContextFactory databaseContextFactory, IFormulaConstraintQuery formulaConstraintQuery,
             IArgumentQuery argumentQuery, IConstraintTypeQuery constraintTypeQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
-            Guard.AgainstNull(constraintQuery, "constraintQuery");
+            Guard.AgainstNull(formulaConstraintQuery, "formulaConstraintQuery");
             Guard.AgainstNull(argumentQuery, "argumentQuery");
             Guard.AgainstNull(constraintTypeQuery, "constraintTypeQuery");
 
             _databaseContextFactory = databaseContextFactory;
-            _constraintQuery = constraintQuery;
+            _formulaConstraintQuery = formulaConstraintQuery;
             _argumentQuery = argumentQuery;
             _constraintTypeQuery = constraintTypeQuery;
         }
@@ -48,13 +48,11 @@ namespace Shuttle.Abacus.UI.Coordinators
             {
                 case Resource.ResourceType.Container:
                 {
-                    var ownerId = message.RelatedResources.Contains(ResourceKeys.Formula)
-                        ? message.RelatedResources[ResourceKeys.Formula].Key
-                        : message.RelatedResources[ResourceKeys.Formula].Key;
+                    var formulaId = message.RelatedResources[ResourceKeys.Formula].Key;
 
                     using (_databaseContextFactory.Create())
                     {
-                        foreach (var row in _constraintQuery.AllForOwner(ownerId))
+                        foreach (var row in _formulaConstraintQuery.AllForOwner(formulaId))
                         {
                             message.Resources.Add(
                                 new Resource(ResourceKeys.FormulaConstraint, Guid.Empty,
@@ -118,7 +116,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 {
                     ArgumentRows = _argumentQuery.All(),
                     ConstraintTypeRows = _constraintTypeQuery.All(),
-                    ConstraintRows = _constraintQuery.AllForOwner(calculationId)
+                    ConstraintRows = _formulaConstraintQuery.AllForOwner(calculationId)
                 };
             }
         }

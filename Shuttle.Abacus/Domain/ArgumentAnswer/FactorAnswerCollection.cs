@@ -7,10 +7,7 @@ namespace Shuttle.Abacus.Domain
     {
         private readonly Dictionary<string, ArgumentAnswer> answers = new Dictionary<string, ArgumentAnswer>();
 
-        public ArgumentAnswer this[string argumentName]
-        {
-            get { return answers[argumentName.ToLower()]; }
-        }
+        public ArgumentAnswer this[string argumentName] => answers[argumentName.ToLower()];
 
         public IEnumerator<ArgumentAnswer> GetEnumerator()
         {

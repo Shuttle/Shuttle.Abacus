@@ -5,9 +5,6 @@ namespace Shuttle.Abacus.UI.Messages.Core
 {
     public class DisplayHelpManualMessage : Message
     {
-        public override IPermission RequiredPermission
-        {
-            get { return Permissions.Null; }
-        }
+        public override IPermission RequiredPermission => Permissions.Null;
     }
 }

@@ -78,15 +78,9 @@ namespace Shuttle.Abacus.UI.Core.Presentation
             }
         }
 
-        public IViewValidationManager ViewValidationManager
-        {
-            get { return viewValidationManager; }
-        }
+        public IViewValidationManager ViewValidationManager => viewValidationManager;
 
-        public bool IsValid
-        {
-            get { return ViewValidator.IsValid; }
-        }
+        public bool IsValid => ViewValidator.IsValid;
 
         public void AttachPresenter(IPresenter presenter)
         {

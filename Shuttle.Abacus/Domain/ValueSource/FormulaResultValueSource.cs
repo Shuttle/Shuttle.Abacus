@@ -15,10 +15,7 @@ namespace Shuttle.Abacus.Domain
             calculationId = formula.Id;
         }
 
-        public string ValueSelection
-        {
-            get { return calculationId.ToString("n"); }
-        }
+        public string ValueSelection => calculationId.ToString("n");
 
         public void AssignCalculationId(Guid id)
         {
@@ -35,15 +32,9 @@ namespace Shuttle.Abacus.Domain
             return string.Format("{0} (from formula result {1})", operand.ToString(Resources.FormatDecimal), _formula.Name);
         }
 
-        public string Name
-        {
-            get { return "CalculationResult"; }
-        }
+        public string Name => "CalculationResult";
 
-        public object Text
-        {
-            get { return _formula.Name; }
-        }
+        public object Text => _formula.Name;
 
         public IValueSource Copy()
         {

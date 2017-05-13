@@ -6,15 +6,9 @@ namespace Shuttle.Abacus.Domain
         {
         }
 
-        public override string AnswerType
-        {
-            get { return "NULL"; }
-        }
+        public override string AnswerType => "NULL";
 
-        public override bool IsNull
-        {
-            get { return true; }
-        }
+        public override bool IsNull => true;
 
         public override int CompareTo(ArgumentAnswer other)
         {

@@ -12,9 +12,9 @@ using Shuttle.Abacus.UI.Messages.Resources;
 using Shuttle.Abacus.UI.Messages.TestCase;
 using Shuttle.Abacus.UI.Models;
 using Shuttle.Abacus.UI.UI.List;
-using Shuttle.Abacus.UI.UI.MethodTest;
-using Shuttle.Abacus.UI.UI.MethodTest.Results;
 using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
+using Shuttle.Abacus.UI.UI.Test;
+using Shuttle.Abacus.UI.UI.Test.Results;
 using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
 using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
 using Shuttle.Core.Data;
@@ -56,7 +56,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
             var item = WorkItemManager
                 .Create($"Tests: {message.MethodName}")
-                .ControlledBy<IMethodTestManagerController>()
+                .ControlledBy<ITestManagerController>()
                 .ShowIn<IContextToolbarPresenter>()
                 .AddPresenter(presenter)
                 .WithModel(new SimpleListModel("TestId", _testQuery.FetchForMethodId(message.MethodId)))

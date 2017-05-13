@@ -5,9 +5,6 @@ namespace Shuttle.Abacus.UI.Messages.SystemUser
 {
     public class ListSystemUserMessage : Message
     {
-        public override IPermission RequiredPermission
-        {
-            get { return Permissions.SystemUser; }
-        }
+        public override IPermission RequiredPermission => Permissions.SystemUser;
     }
 }

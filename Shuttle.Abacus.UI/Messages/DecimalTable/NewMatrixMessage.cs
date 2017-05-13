@@ -5,9 +5,6 @@ namespace Shuttle.Abacus.UI.Messages.DecimalTable
 {
     public class NewMatrixMessage : Message
     {
-        public override IPermission RequiredPermission
-        {
-            get { return Permissions.Matrix; }
-        }
+        public override IPermission RequiredPermission => Permissions.Matrix;
     }
 }

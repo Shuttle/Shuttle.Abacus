@@ -41,10 +41,7 @@ namespace Shuttle.Abacus.Domain
             Answer = value;
         }
 
-        public override string AnswerType
-        {
-            get { return "Boolean"; }
-        }
+        public override string AnswerType => "Boolean";
 
         public override int CompareTo(ArgumentAnswer other)
         {

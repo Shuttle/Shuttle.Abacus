@@ -10,10 +10,7 @@ namespace Shuttle.Abacus.Domain
             Answer = text;
         }
 
-        public override string AnswerType
-        {
-            get { return "Text"; }
-        }
+        public override string AnswerType => "Text";
 
         public override int CompareTo(ArgumentAnswer other)
         {

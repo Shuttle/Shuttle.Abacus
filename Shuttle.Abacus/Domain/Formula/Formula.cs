@@ -231,5 +231,10 @@ namespace Shuttle.Abacus.Domain
 
             return renamed;
         }
+
+        public static string Key(string name)
+        {
+            return string.Format("[formula]:name={0}", name);
+        }
     }
 }

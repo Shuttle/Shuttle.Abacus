@@ -16,10 +16,7 @@ namespace Shuttle.Abacus.Domain
 
         public string Name { get; private set; }
 
-        public IEnumerable<GraphNodeArgument> GraphNodeArguments
-        {
-            get { return new ReadOnlyCollection<GraphNodeArgument>(graphNodeArguments); }
-        }
+        public IEnumerable<GraphNodeArgument> GraphNodeArguments => new ReadOnlyCollection<GraphNodeArgument>(graphNodeArguments);
 
         public void Populate(decimal total, decimal subTotal)
         {
@@ -36,10 +33,7 @@ namespace Shuttle.Abacus.Domain
         public decimal SubTotal { get; private set; }
 
 
-        public GraphNodeCollection GraphNodes
-        {
-            get { return items; }
-        }
+        public GraphNodeCollection GraphNodes => items;
 
         public void AddGraphNode(IGraphNode item)
         {

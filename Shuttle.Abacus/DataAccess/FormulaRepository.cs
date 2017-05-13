@@ -8,20 +8,20 @@ namespace Shuttle.Abacus.DataAccess
 {
     public class FormulaRepository : Repository<Formula>, IFormulaRepository
     {
-        private readonly IConstraintQuery _constraintQuery;
+        private readonly IFormulaConstraintQuery _formulaConstraintQuery;
         private readonly IDatabaseGateway _databaseGateway;
         private readonly IFormulaQueryFactory _formulaQueryFactory;
 
         public FormulaRepository(IDatabaseGateway databaseGateway, IFormulaQueryFactory formulaQueryFactory,
-            IConstraintQuery constraintQuery)
+            IFormulaConstraintQuery formulaConstraintQuery)
         {
             Guard.AgainstNull(databaseGateway, "databaseGateway");
             Guard.AgainstNull(formulaQueryFactory, "formulaQueryFactory");
-            Guard.AgainstNull(constraintQuery, "constraintQuery");
+            Guard.AgainstNull(formulaConstraintQuery, "formulaConstraintQuery");
 
             _databaseGateway = databaseGateway;
             _formulaQueryFactory = formulaQueryFactory;
-            _constraintQuery = constraintQuery;
+            _formulaConstraintQuery = formulaConstraintQuery;
         }
 
         public override void Add(Formula formula)

@@ -24,10 +24,7 @@ namespace Shuttle.Abacus.Domain
 
         public string Name { get; private set; }
 
-        public IEnumerable<MatrixElement> Elements
-        {
-            get { return new ReadOnlyCollection<MatrixElement>(_values); }
-        }
+        public IEnumerable<MatrixElement> Elements => new ReadOnlyCollection<MatrixElement>(_values);
 
         public string RowArgumentName { get; private set; }
         public string ColumnArgumentName { get; private set; }

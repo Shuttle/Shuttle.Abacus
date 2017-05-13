@@ -16,15 +16,9 @@ namespace Shuttle.Abacus.Domain
             return string.Format("{0} (current running total)", operand.ToString(Resources.FormatDecimal));
         }
 
-        public string Name
-        {
-            get { return "CalculationTotal"; }
-        }
+        public string Name => "CalculationTotal";
 
-        public object Text
-        {
-            get { return string.Empty; }
-        }
+        public object Text => string.Empty;
 
         public IValueSource Copy()
         {

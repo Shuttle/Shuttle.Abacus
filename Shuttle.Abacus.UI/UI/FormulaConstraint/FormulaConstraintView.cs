@@ -51,15 +51,9 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
                 });
         }
 
-        public ArgumentModel ArgumentModel
-        {
-            get { return Argument.SelectedItem as ArgumentModel; }
-        }
+        public ArgumentModel ArgumentModel => Argument.SelectedItem as ArgumentModel;
 
-        public ConstraintTypeModel ConstraintTypeModel
-        {
-            get { return Constraint.SelectedItem as ConstraintTypeModel; }
-        }
+        public ConstraintTypeModel ConstraintTypeModel => Constraint.SelectedItem as ConstraintTypeModel;
 
         public void EnableAnswerSelection()
         {
@@ -107,25 +101,13 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
             set { Answer.Text = value; }
         }
 
-        public bool HasAnswer
-        {
-            get { return Answer.Text.Length > 0; }
-        }
+        public bool HasAnswer => Answer.Text.Length > 0;
 
-        public bool HasAnswers
-        {
-            get { return Answer.Items.Count > 0; }
-        }
+        public bool HasAnswers => Answer.Items.Count > 0;
 
-        public bool HasArgument
-        {
-            get { return Argument.Text.Length > 0; }
-        }
+        public bool HasArgument => Argument.Text.Length > 0;
 
-        public bool HasConstraint
-        {
-            get { return Constraint.Text.Length > 0; }
-        }
+        public bool HasConstraint => Constraint.Text.Length > 0;
 
         public List<Domain.FormulaConstraint> Constraints
         {
@@ -163,15 +145,9 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
             return "(not found)";
         }
 
-        public ComboBox ValueSelectionControl
-        {
-            get { return Answer; }
-        }
+        public ComboBox ValueSelectionControl => Answer;
 
-        public TextBox FormattedControl
-        {
-            get { return FormattedTextBox; }
-        }
+        public TextBox FormattedControl => FormattedTextBox;
 
         public void ShowAnswerError(string message)
         {

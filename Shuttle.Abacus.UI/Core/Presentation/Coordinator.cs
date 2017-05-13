@@ -21,16 +21,10 @@ namespace Shuttle.Abacus.UI.Core.Presentation
         public IWorkItemControllerFactory WorkItemControllerFactory { get; set; }
         public IUIService UIService { get; set; }
         public IShell Shell { get; set; }
-        public ICallbackRepository CallbackRepository { get; set; }
 
         public void Dispose()
         {
-            if (MessageBus == null)
-            {
-                return;
-            }
-
-            MessageBus.RemoveSubscriber(this);
+            MessageBus?.RemoveSubscriber(this);
         }
 
         protected void HostInWorkspace<T>(IWorkItem workItem) where T : IWorkspacePresenter
@@ -57,16 +51,16 @@ namespace Shuttle.Abacus.UI.Core.Presentation
                 return;
             }
 
-            var action = CallbackRepository.Find(header.Value);
+            //var action = CallbackRepository.Find(header.Value);
 
-            if (action == null)
-            {
-                return;
-            }
+            //if (action == null)
+            //{
+            //    return;
+            //}
 
-            action();
+            //action();
 
-            CallbackRepository.Remove(header.Value);
+            //CallbackRepository.Remove(header.Value);
         }
 
     }

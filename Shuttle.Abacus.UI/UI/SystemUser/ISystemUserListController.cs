@@ -3,7 +3,7 @@ using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Abacus.UI.Messages.SystemUser;
 
-namespace Shuttle.Abacus.UI.WorkItemControllers.Interfaces
+namespace Shuttle.Abacus.UI.UI.SystemUser
 {
     public interface ISystemUserListController : 
         IWorkItemController,

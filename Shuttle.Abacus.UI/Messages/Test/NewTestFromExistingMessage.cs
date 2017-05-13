@@ -15,9 +15,6 @@ namespace Shuttle.Abacus.UI.Messages.TestCase
         public Guid MethodTestId { get; set; }
         public Guid WorkItemId { get; set; }
 
-        public override IPermission RequiredPermission
-        {
-            get { return Permissions.Test; }
-        }
+        public override IPermission RequiredPermission => Permissions.Test;
     }
 }

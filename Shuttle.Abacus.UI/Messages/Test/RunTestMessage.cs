@@ -5,9 +5,6 @@ namespace Shuttle.Abacus.UI.Messages.TestCase
 {
     public class RunTestMessage : Message
     {
-        public override IPermission RequiredPermission
-        {
-            get { return Permissions.Test; }
-        }
+        public override IPermission RequiredPermission => Permissions.Test;
     }
 }

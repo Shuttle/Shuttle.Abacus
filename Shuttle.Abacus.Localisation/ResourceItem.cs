@@ -18,15 +18,9 @@ namespace Shuttle.Abacus.Localisation
             this.imageKey = imageKey;
         }
 
-        public string Text
-        {
-            get { return GetText(textKey); }
-        }
+        public string Text => GetText(textKey);
 
-        public Image Image
-        {
-            get { return GetImage(imageKey); }
-        }
+        public Image Image => GetImage(imageKey);
 
         public static string GetText(string key)
         {

@@ -25,10 +25,7 @@ namespace Shuttle.Abacus.Domain
             AnswerString = Convert.ToString(value);
         }
 
-        public override string AnswerType
-        {
-            get { return "Integer"; }
-        }
+        public override string AnswerType => "Integer";
 
         public override int CompareTo(ArgumentAnswer other)
         {

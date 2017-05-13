@@ -20,27 +20,15 @@ namespace Shuttle.Abacus.UI.Navigation
             Message = null;
         }
 
-        public string Text
-        {
-            get { return resourceItem.Text; }
-        }
+        public string Text => resourceItem.Text;
 
-        public Image Image
-        {
-            get { return resourceItem.Image; }
-        }
+        public Image Image => resourceItem.Image;
 
-        public IEnumerable<INavigationItem> Items
-        {
-            get { return items; }
-        }
+        public IEnumerable<INavigationItem> Items => items;
 
         public Message Message { get; private set; }
 
-        public bool HasMessage
-        {
-            get { return Message != null; }
-        }
+        public bool HasMessage => Message != null;
 
         public INavigationItem Add(INavigationItem navigationItem)
         {

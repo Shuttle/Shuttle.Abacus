@@ -12,7 +12,7 @@ namespace Shuttle.Abacus.UI.Core.Validation
             SetErrorColor(windowsApplicationConfiguration);
         }
 
-        public Color ErrorColor { get { return ErrorColorFlyWeight; } }
+        public Color ErrorColor => ErrorColorFlyWeight;
 
         private static void SetErrorColor(IWindowsApplicationConfiguration configuration)
         {

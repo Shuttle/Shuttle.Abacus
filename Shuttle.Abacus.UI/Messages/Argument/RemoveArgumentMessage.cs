@@ -18,9 +18,6 @@ namespace Shuttle.Abacus.UI.Messages.Argument
         public string Text { get; private set; }
         public Resource OwnerResource { get; set; }
 
-        public override IPermission RequiredPermission
-        {
-            get { return Permissions.Argument; }
-        }
+        public override IPermission RequiredPermission => Permissions.Argument;
     }
 }

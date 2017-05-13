@@ -4,20 +4,11 @@ namespace Shuttle.Abacus.Domain
 {
     public class DecimalValueSourceFactory : IValueSourceFactory
     {
-        public string Name
-        {
-            get { return "Decimal"; }
-        }
+        public string Name => "Decimal";
 
-        public string Text
-        {
-            get { return "Decimal"; }
-        }
+        public string Text => "Decimal";
 
-        public string Type
-        {
-            get { return "Fixed"; }
-        }
+        public string Type => "Fixed";
 
         public IValueSource Create(string value)
         {

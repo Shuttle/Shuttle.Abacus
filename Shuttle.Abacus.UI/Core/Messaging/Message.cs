@@ -16,10 +16,7 @@ namespace Shuttle.Abacus.UI.Core.Messaging
 
         public abstract IPermission RequiredPermission { get; }
 
-        public Guid WorkItemInitiatorId
-        {
-            get { return MessageId; }
-        }
+        public Guid WorkItemInitiatorId => MessageId;
 
         public bool RefreshOwner { get; protected set; }
 

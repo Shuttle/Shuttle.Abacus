@@ -44,25 +44,13 @@ namespace Shuttle.Abacus.Domain
             log.AppendLine();
         }
 
-        public IEnumerable<string> ErrorMessages
-        {
-            get { return new ReadOnlyCollection<string>(errorMessages); }
-        }
+        public IEnumerable<string> ErrorMessages => new ReadOnlyCollection<string>(errorMessages);
 
-        public IEnumerable<string> WarningMessages
-        {
-            get { return new ReadOnlyCollection<string>(warningMessages); }
-        }
+        public IEnumerable<string> WarningMessages => new ReadOnlyCollection<string>(warningMessages);
 
-        public IEnumerable<string> InformationMessages
-        {
-            get { return new ReadOnlyCollection<string>(informationMessages); }
-        }
+        public IEnumerable<string> InformationMessages => new ReadOnlyCollection<string>(informationMessages);
 
-        public bool HasErrorMessages
-        {
-            get { return errorMessages.Count > 0; }
-        }
+        public bool HasErrorMessages => errorMessages.Count > 0;
 
         public void AddErrorMessage(string message)
         {

@@ -3,9 +3,9 @@ using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Abacus.UI.Messages.TestCase;
 
-namespace Shuttle.Abacus.UI.WorkItemControllers.Interfaces
+namespace Shuttle.Abacus.UI.UI.Test
 {
-    public interface IMethodTestManagerController :
+    public interface ITestManagerController :
         IWorkItemController,
         IMessageHandler<NewTestMessage>,
         IMessageHandler<NewTestFromExistingMessage>,

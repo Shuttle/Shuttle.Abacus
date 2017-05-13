@@ -106,7 +106,7 @@ namespace Shuttle.Abacus.Domain
             });
         }
 
-        private AnswerTypeChanged On(AnswerTypeChanged answerTypeChanged)
+        public AnswerTypeChanged On(AnswerTypeChanged answerTypeChanged)
         {
             Guard.AgainstNull(answerTypeChanged, "answerTypeChanged");
 
@@ -115,14 +115,26 @@ namespace Shuttle.Abacus.Domain
             return answerTypeChanged;
         }
 
-        public Argument AddValue(string value)
+        public ValueAdded AddValue(string value)
         {
-            if (!_values.Contains(value))
+            if (ContainsValue(value))
             {
-                _values.Add(value);
+                throw new DomainException(string.Format("Value '{0}' has already been added.", value));
             }
 
-            return this;
+            return On(new ValueAdded
+            {
+                Value = value
+            });
+        }
+
+        public ValueAdded On(ValueAdded valueAdded)
+        {
+            Guard.AgainstNull(valueAdded, "valueAdded");
+
+            _values.Add(valueAdded.Value);
+
+            return valueAdded;
         }
 
         public bool ContainsValue(string value)
@@ -130,14 +142,31 @@ namespace Shuttle.Abacus.Domain
             return _values.Contains(value);
         }
 
-        public Argument AddValues(IEnumerable<string> values)
+        public static string Key(string name)
         {
-            foreach (var value in values)
+            return string.Format("[argument]:name={0}", name);
+        }
+
+        public ValueRemoved RemoveValue(string value)
+        {
+            if (ContainsValue(value))
             {
-                AddValue(value);
+                throw new DomainException(string.Format("Cannot remove value '{0}' since it does not exist.", value));
             }
 
-            return this;
+            return On(new ValueRemoved
+            {
+                Value = value
+            });
+        }
+
+        public ValueRemoved On(ValueRemoved valueRemoved)
+        {
+            Guard.AgainstNull(valueRemoved, "valueRemoved");
+
+            _values.Remove(valueRemoved.Value);
+
+            return valueRemoved;
         }
     }
 }

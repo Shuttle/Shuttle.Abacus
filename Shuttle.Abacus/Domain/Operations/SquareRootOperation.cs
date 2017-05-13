@@ -10,15 +10,9 @@ namespace Shuttle.Abacus.Domain
         {
         }
 
-        public override string Symbol
-        {
-            get { return "sqrt"; }
-        }
+        public override string Symbol => "sqrt";
 
-        public override string Name
-        {
-            get { return "SquareRoot"; }
-        }
+        public override string Name => "SquareRoot";
 
         public override decimal Execute(decimal total, decimal operand)
         {

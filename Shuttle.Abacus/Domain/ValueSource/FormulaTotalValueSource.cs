@@ -14,15 +14,9 @@ namespace Shuttle.Abacus.Domain
             return string.Format("{0} (formula total)", operand.ToString(Resources.FormatDecimal));
         }
 
-        public string Name
-        {
-            get { return "FormulaTotal"; }
-        }
+        public string Name => "FormulaTotal";
 
-        public object Text
-        {
-            get { return string.Empty; }
-        }
+        public object Text => string.Empty;
 
         public IValueSource Copy()
         {

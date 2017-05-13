@@ -5,7 +5,7 @@ using Shuttle.Abacus.Domain;
 
 namespace Shuttle.Abacus.DataAccess
 {
-    public interface IConstraintQuery
+    public interface IFormulaConstraintQuery
     {
         IEnumerable<DataRow> AllForOwner(Guid ownerId);
         //void GetOwned(IConstraintOwner owner);

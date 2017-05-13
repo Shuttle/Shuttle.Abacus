@@ -32,10 +32,7 @@ namespace Shuttle.Abacus.UI.UI.Summary
 
         protected int CurrentHeadingColumn { get; set; }
 
-        private int CurrentRow
-        {
-            get { return GridView.RowCount - 1; }
-        }
+        private int CurrentRow => GridView.RowCount - 1;
 
         public void Clear()
         {

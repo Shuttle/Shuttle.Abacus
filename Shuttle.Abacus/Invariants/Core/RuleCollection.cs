@@ -33,10 +33,7 @@ namespace Shuttle.Abacus.Invariants.Core
             rules.AssignTo(this.rules);
         }
 
-        public int Count
-        {
-            get { return rules.Count; }
-        }
+        public int Count => rules.Count;
 
         public IList<RuleMessage> Messages
         {
@@ -48,10 +45,7 @@ namespace Shuttle.Abacus.Invariants.Core
             }
         }
 
-        public bool IsEmpty
-        {
-            get { return (rules.Count == 0); }
-        }
+        public bool IsEmpty => (rules.Count == 0);
 
         public IRuleCollection<T> BrokenBy(T item)
         {

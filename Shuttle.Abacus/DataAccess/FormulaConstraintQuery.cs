@@ -8,13 +8,13 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.DataAccess
 {
-    public class ConstraintQuery : IConstraintQuery
+    public class FormulaConstraintQuery : IFormulaConstraintQuery
     {
         private readonly IDatabaseGateway _databaseGateway;
         private readonly IConstraintQueryFactory _constraintQueryFactory;
         private readonly IArgumentQuery _argumentQuery;
 
-        public ConstraintQuery(IDatabaseGateway databaseGateway, IConstraintQueryFactory constraintQueryFactory, IArgumentQuery argumentQuery)
+        public FormulaConstraintQuery(IDatabaseGateway databaseGateway, IConstraintQueryFactory constraintQueryFactory, IArgumentQuery argumentQuery)
         {
             _databaseGateway = databaseGateway;
             _constraintQueryFactory = constraintQueryFactory;

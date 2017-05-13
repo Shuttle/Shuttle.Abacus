@@ -18,10 +18,7 @@ namespace Shuttle.Abacus.UI.Core.Extensions
                        : lvw.SelectedItems[0];
         }
 
-        public bool HasSelectedItem
-        {
-            get { return lvw.SelectedItems.Count > 0; }
-        }
+        public bool HasSelectedItem => lvw.SelectedItems.Count > 0;
 
         public bool IsFirstItem(ListViewItem item)
         {
@@ -33,10 +30,7 @@ namespace Shuttle.Abacus.UI.Core.Extensions
             return lvw.Items.Count - 1 == item.Index;
         }
 
-        public bool HasMoreThanOneItem
-        {
-            get { return lvw.Items.Count > 1; }
-        }
+        public bool HasMoreThanOneItem => lvw.Items.Count > 1;
 
         public void MoveItemUp(ListViewItem item)
         {

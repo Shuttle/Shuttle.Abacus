@@ -5,10 +5,7 @@ namespace Shuttle.Abacus.Invariants.Values
 {
     public class IntegerValueTypeValidator : IValueTypeValidator
     {
-        public string Type
-        {
-            get { return "Integer"; }
-        }
+        public string Type => "Integer";
 
         public IResult Validate(string value)
         {

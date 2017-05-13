@@ -14,10 +14,7 @@ namespace Shuttle.Abacus.UI.Messages.Section
             MethodName = methodName;
         }
 
-        public override IPermission RequiredPermission
-        {
-            get { return Permissions.Formula; }
-        }
+        public override IPermission RequiredPermission => Permissions.Formula;
 
         public string MethodName { get; private set; }
     }

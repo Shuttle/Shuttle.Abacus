@@ -1,15 +1,11 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Windows.Forms;
-using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Invariants.Core;
 using Shuttle.Abacus.UI.Core.Formatters;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
 
-namespace Shuttle.Abacus.UI.UI.MethodTest
+namespace Shuttle.Abacus.UI.UI.Test
 {
     public interface ITestView : IView
     {
@@ -17,7 +13,7 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
 
         string ExpectedResultValue { get; set; }
 
-        IEnumerable<ArgumentAnswerModel> ArgumentAnswers { get; }
+        IEnumerable<ArgumentValueModel> ArgumentAnswers { get; }
 
         ArgumentModel ArgumentModel { get; }
         bool HasArgument { get; }

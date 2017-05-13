@@ -12,6 +12,7 @@ delete from FormulaConstraint
 --delete from SystemUser
 --delete from SystemUserPermission
 delete from TestArgumentValue
-delete from ProjectionPosition
 delete from Formula
 delete from Test
+
+delete from ProjectionPosition

@@ -19,9 +19,6 @@ namespace Shuttle.Abacus.UI.Messages.SystemUser
         public Guid SystemUserId { get; set; }
         public string LoginName { get; set; }
 
-        public override IPermission RequiredPermission
-        {
-            get { return Permissions.SystemUser; }
-        }
+        public override IPermission RequiredPermission => Permissions.SystemUser;
     }
 }

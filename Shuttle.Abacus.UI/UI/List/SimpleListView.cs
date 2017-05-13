@@ -22,30 +22,15 @@ namespace Shuttle.Abacus.UI.UI.List
                                                              model.HiddenColumns));
         }
 
-        public Guid SelectedId
-        {
-            get
-            {
-                return !HasSelectedItem
-                           ? Guid.Empty
-                           : new Guid(SelectedItem().Name);
-            }
-        }
+        public Guid SelectedId => !HasSelectedItem
+            ? Guid.Empty
+            : new Guid(SelectedItem().Name);
 
-        public string SelectedText
-        {
-            get
-            {
-                return !HasSelectedItem
-                           ? string.Empty
-                           : SelectedItem().Text;
-            }
-        }
+        public string SelectedText => !HasSelectedItem
+            ? string.Empty
+            : SelectedItem().Text;
 
-        public bool HasCheckedItems
-        {
-            get { return CheckedItems.Count() > 0; }
-        }
+        public bool HasCheckedItems => CheckedItems.Count() > 0;
 
         public IEnumerable<ListViewItem> CheckedItems
         {
@@ -90,10 +75,7 @@ namespace Shuttle.Abacus.UI.UI.List
             return ListView.SelectedItems[0];
         }
 
-        public bool HasSelectedItem
-        {
-            get { return ListView.SelectedItems.Count > 0; }
-        }
+        public bool HasSelectedItem => ListView.SelectedItems.Count > 0;
 
         public void ShowCheckboxes()
         {
@@ -168,10 +150,7 @@ namespace Shuttle.Abacus.UI.UI.List
             set { ListView.FullRowSelect = value; }
         }
 
-        public bool HasElectedItems
-        {
-            get { return HasCheckedItems || HasSelectedItem; }
-        }
+        public bool HasElectedItems => HasCheckedItems || HasSelectedItem;
 
         public IEnumerable<ListViewItem> ElectedItems
         {

@@ -39,9 +39,6 @@ namespace Shuttle.Abacus.UI.Core.Validation
             return validators.Find(validator => validator.HandlesType.Equals(type));
         }
 
-        public IEnumerable<IControlValidator> Validators
-        {
-            get { return new ReadOnlyCollection<IControlValidator>(validators); }
-        }
+        public IEnumerable<IControlValidator> Validators => new ReadOnlyCollection<IControlValidator>(validators);
     }
 }

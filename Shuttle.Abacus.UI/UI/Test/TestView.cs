@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
-using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Core;
 using Shuttle.Abacus.UI.Core.Formatters;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
 
-namespace Shuttle.Abacus.UI.UI.MethodTest
+namespace Shuttle.Abacus.UI.UI.Test
 {
     public partial class TestView : GenericMethodTestView, ITestView
     {
@@ -36,15 +34,15 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
             set { ExpectedResult.Text = value; }
         }
 
-        public IEnumerable<ArgumentAnswerModel> ArgumentAnswers
+        public IEnumerable<ArgumentValueModel> ArgumentAnswers
         {
             get
             {
-                var result = new List<ArgumentAnswerModel>();
+                var result = new List<ArgumentValueModel>();
 
                 foreach (ListViewItem item in ArgumentAnswersListView.Items)
                 {
-                    result.Add((ArgumentAnswerModel)item.Tag);
+                    result.Add((ArgumentValueModel)item.Tag);
                 }
 
                 return result;
@@ -76,20 +74,11 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
             return false;
         }
 
-        public ArgumentModel ArgumentModel
-        {
-            get { return Argument.SelectedItem as ArgumentModel; }
-        }
+        public ArgumentModel ArgumentModel => Argument.SelectedItem as ArgumentModel;
 
-        public bool HasArgument
-        {
-            get { return Argument.Text.Length > 0; }
-        }
+        public bool HasArgument => Argument.Text.Length > 0;
 
-        public bool HasAnswer
-        {
-            get { return ValueSelectionControl.Text.Length > 0; }
-        }
+        public bool HasAnswer => ValueSelectionControl.Text.Length > 0;
 
         public void EnableAnswerSelection()
         {
@@ -178,11 +167,10 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
             item.SubItems[1].Text = answer;
             item.Text = argument.Name;
 
-            item.Tag = new ArgumentAnswerModel
+            item.Tag = new ArgumentValueModel
             {
                 ArgumentId = argument.Id,
-                Argument = argument.Name,
-                Answer = answer
+                Value = answer
             };
 
             return item;
@@ -223,12 +211,12 @@ namespace Shuttle.Abacus.UI.UI.MethodTest
             //        continue;
             //    }
 
-            //    PopulateItem(item, argumentDTO, Answer.Text);
+            //    PopulateItem(item, argumentDTO, Value.Text);
 
             //    return;
             //}
 
-            //AddValue(argumentDTO.Id, Answer.Text);
+            //AddValue(argumentDTO.Id, Value.Text);
         }
 
         private void ArgumentName_SelectedIndexChanged(object sender, EventArgs e)

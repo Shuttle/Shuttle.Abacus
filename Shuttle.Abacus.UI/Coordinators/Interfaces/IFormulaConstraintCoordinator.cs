@@ -4,7 +4,7 @@ using Shuttle.Abacus.UI.Messages.Resources;
 
 namespace Shuttle.Abacus.UI.Coordinators.Interfaces
 {
-    public interface IConstraintCoordinator :
+    public interface IFormulaConstraintCoordinator :
         IMessageHandler<PopulateResourceMessage>,
         IMessageHandler<ResourceMenuRequestMessage>,
         IMessageHandler<ManageFormulaConstraintsMessage>

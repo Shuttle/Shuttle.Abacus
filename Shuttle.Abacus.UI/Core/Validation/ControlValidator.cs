@@ -14,10 +14,6 @@ namespace Shuttle.Abacus.UI.Core.Validation
             ValidationConfiguration = validationConfiguration;
         }
 
-        public Type HandlesType
-        {
-            get { return type; }
-        }
-
+        public Type HandlesType => type;
     }
 }

@@ -15,10 +15,7 @@ namespace Shuttle.Abacus.Invariants.Core
 
         public string Text { get; internal set; }
 
-        public IEnumerable<string> DetailMessages
-        {
-            get { return new ReadOnlyCollection<string>(detailMessages); }
-        }
+        public IEnumerable<string> DetailMessages => new ReadOnlyCollection<string>(detailMessages);
 
         public void AddDetailMessage(string message)
         {

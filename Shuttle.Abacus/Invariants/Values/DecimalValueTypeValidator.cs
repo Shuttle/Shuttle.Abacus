@@ -7,10 +7,7 @@ namespace Shuttle.Abacus.Invariants.Values
     {
         public static string TypeName = "Decimal";
 
-        public string Type
-        {
-            get { return TypeName; }
-        }
+        public string Type => TypeName;
 
         public IResult Validate(string value)
         {

@@ -20,10 +20,7 @@ namespace Shuttle.Abacus.Domain
             return matrix.IsSatisfiedBy(collectionMethodContext);
         }
 
-        public string ValueSelection
-        {
-            get { return matrix.Id.ToString("n"); }
-        }
+        public string ValueSelection => matrix.Id.ToString("n");
 
         public decimal Operand(IMethodContext methodContext, ICalculationContext calculationContext)
         {
@@ -42,15 +39,9 @@ namespace Shuttle.Abacus.Domain
             //           : string.Empty;
         }
 
-        public string Name
-        {
-            get { return "Matrix"; }
-        }
+        public string Name => "Matrix";
 
-        public object Text
-        {
-            get { return matrix.Name; }
-        }
+        public object Text => matrix.Name;
 
         public IValueSource Copy()
         {

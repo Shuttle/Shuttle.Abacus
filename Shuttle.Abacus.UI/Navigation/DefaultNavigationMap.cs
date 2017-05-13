@@ -19,10 +19,7 @@ namespace Shuttle.Abacus.UI.Navigation
 
         private static List<INavigationItem> items;
 
-        public IEnumerable<INavigationItem> Items
-        {
-            get { return items; }
-        }
+        public IEnumerable<INavigationItem> Items => items;
 
         public IEnumerable<INavigationItem> SecuredItems(IPermissionCollection permissions)
         {

@@ -9,13 +9,7 @@ namespace Shuttle.Abacus.Domain
 
         private readonly decimal amount;
 
-        public decimal Amount
-        {
-            get
-            {
-                return amount;
-            }
-        }
+        public decimal Amount => amount;
 
         public Money(decimal amount)
         {
@@ -57,15 +51,9 @@ namespace Shuttle.Abacus.Domain
             return Amount == other.Amount ? 0 : (Amount < other.Amount ? -1 : 1);
         }
 
-        public static Money Zero
-        {
-            get { return new Money(0); }
-        }
+        public static Money Zero => new Money(0);
 
-        public static Money MaxValue
-        {
-            get { return new Money(decimal.MaxValue); }
-        }
+        public static Money MaxValue => new Money(decimal.MaxValue);
 
         public static implicit operator Money(long amount)
         {

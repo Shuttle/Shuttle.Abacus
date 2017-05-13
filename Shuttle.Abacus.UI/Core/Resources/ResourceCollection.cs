@@ -9,15 +9,9 @@ namespace Shuttle.Abacus.UI.Core.Resources
             get { return Find(item => item.ResourceKey == key); }
         }
 
-        public Resource FirstItem
-        {
-            get
-            {
-                return Count > 0
-                           ? this[0]
-                           : null;
-            }
-        }
+        public Resource FirstItem => Count > 0
+            ? this[0]
+            : null;
 
         public bool Contains(ResourceKey key)
         {

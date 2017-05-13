@@ -14,20 +14,11 @@ namespace Shuttle.Abacus.Domain
             _formulaRepository = formulaRepository;
         }
 
-        public string Name
-        {
-            get { return "CalculationSubTotal"; }
-        }
+        public string Name => "CalculationSubTotal";
 
-        public string Text
-        {
-            get { return "Calculation Sub-Total"; }
-        }
+        public string Text => "Calculation Sub-Total";
 
-        public string Type
-        {
-            get { return "Selection"; }
-        }
+        public string Type => "Selection";
 
         public IValueSource Create(string value)
         {
