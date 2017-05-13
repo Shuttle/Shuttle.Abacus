@@ -14,7 +14,7 @@ namespace Shuttle.Abacus.Domain
             _formulaRepository = formulaRepository;
         }
 
-        public string Name => "CalculationResult";
+        public string Name => "RunningTotal";
 
         public string Text => "Calculation Result";
 

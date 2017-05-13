@@ -2,7 +2,7 @@
 
 namespace Shuttle.Abacus.UI.Models
 {
-    public class FormulaOperationPresenterModel
+    public class ManageFormulaOperationsModel
     {
         public IEnumerable<string> OperationTypes { get; set; }
         public IEnumerable<ValueSourceTypeModel> ValueSourceTypes { get; set; }

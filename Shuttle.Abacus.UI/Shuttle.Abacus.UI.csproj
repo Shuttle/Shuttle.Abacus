@@ -89,8 +89,10 @@
   <ItemGroup>
     <Compile Include="Coordinators\ArgumentValueCoordinator.cs" />
     <Compile Include="Coordinators\ArgumentCoordinator.cs" />
+    <Compile Include="Coordinators\FormulaOperationCoordinator.cs" />
     <Compile Include="Coordinators\FormulaConstraintCoordinator.cs" />
     <Compile Include="Coordinators\Interfaces\IArgumentValueCoordinator.cs" />
+    <Compile Include="Coordinators\Interfaces\IFormulaOperationCoordinator.cs" />
     <Compile Include="Coordinators\MatrixCoordinator.cs" />
     <Compile Include="Coordinators\DefaultCoordinator.cs" />
     <Compile Include="Coordinators\FormulaCoordinator.cs" />
@@ -272,10 +274,10 @@
     <Compile Include="Models\TestArgumentValueModel.cs" />
     <Compile Include="Models\ArgumentValueModel.cs" />
     <Compile Include="Models\ArgumentDisplayModel.cs" />
-    <Compile Include="Models\FormulaConstraintModel.cs" />
+    <Compile Include="Models\ManageFormulaConstraintsModel.cs" />
     <Compile Include="Models\ConstraintTypeModel.cs" />
     <Compile Include="Models\FormulaViewModel.cs" />
-    <Compile Include="Models\FormulaOperationPresenterModel.cs" />
+    <Compile Include="Models\ManageFormulaOperationsModel.cs" />
     <Compile Include="Models\MatrixModel.cs" />
     <Compile Include="Models\MatrixElementModel.cs" />
     <Compile Include="Models\FormulaModel.cs" />

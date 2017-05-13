@@ -32,12 +32,10 @@ namespace Shuttle.Abacus.Infrastructure
         {
             ArgumentAnswer = 0,
             Decimal = 1,
-            CalculationResult = 2,
-            CalculationSubTotal = 3,
-            CalculationTotal = 4,
+            RunningTotal = 2,
             FormulaTotal = 5,
-            DecimalTable = 6,
-            MethodResult = 7
+            Matrix = 6,
+            FormulaResult = 7
         }
 
         public static TEnumeration Cast<TEnumeration>(int? value)

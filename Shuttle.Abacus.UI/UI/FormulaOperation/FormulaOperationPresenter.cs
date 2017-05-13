@@ -8,7 +8,7 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.UI.FormulaOperation
 {
-    public class FormulaOperationPresenter : Presenter<IFormulaOperationView, FormulaOperationPresenterModel>, IFormulaOperationPresenter
+    public class FormulaOperationPresenter : Presenter<IFormulaOperationView, ManageFormulaOperationsModel>, IFormulaOperationPresenter
     {
         private readonly IValueTypeValidatorProvider valueTypeValidatorProvider;
 
@@ -16,7 +16,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
             : base(view)
         {
             this.valueTypeValidatorProvider = valueTypeValidatorProvider;
-            Text = "FormulaOperation Details";
+            Text = "Operation Details";
             Image = Resources.Image_FormulaOperation;
         }
 
@@ -118,8 +118,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
 
                         break;
                     }
-                case Enumeration.ValueSourceType.CalculationResult:
-                case Enumeration.ValueSourceType.CalculationSubTotal:
+                case Enumeration.ValueSourceType.RunningTotal:
                     {
                         throw new NotImplementedException();
                         View.EnableValueSelection("Calculation");
@@ -127,7 +126,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
 
                         break;
                     }
-                case Enumeration.ValueSourceType.DecimalTable:
+                case Enumeration.ValueSourceType.Matrix:
                     {
                         throw new NotImplementedException();
                         View.EnableValueSelection("Decimal Table");
@@ -135,18 +134,11 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
 
                         break;
                     }
-                case Enumeration.ValueSourceType.MethodResult:
+                case Enumeration.ValueSourceType.FormulaResult:
                     {
                         throw new NotImplementedException();
                         View.EnableValueSelection("FormulaOperation");
                         //View.PopulateFormulaOperations(Model.Methods);
-
-                        break;
-                    }
-                case Enumeration.ValueSourceType.CalculationTotal:
-                //case Enumeration.ValueSourceType.FormulaOperationTotal:
-                    {
-                        View.DisableValues();
 
                         break;
                     }

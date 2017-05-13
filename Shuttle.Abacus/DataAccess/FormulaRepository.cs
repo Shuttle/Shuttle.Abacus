@@ -48,11 +48,11 @@ namespace Shuttle.Abacus.DataAccess
             foreach (var row in _databaseGateway.GetRowsUsing(_formulaQueryFactory.GetOperations(id)))
             {
                 result.AddOperation(new FormulaOperation(
-                    FormulaOperationColumns.SequenceNumber.MapFrom(row),
-                    FormulaOperationColumns.Operation.MapFrom(row),
-                    FormulaOperationColumns.ValueSource.MapFrom(row),
-                    FormulaOperationColumns.ValueSelection.MapFrom(row),
-                    FormulaOperationColumns.Text.MapFrom(row)));
+                    FormulaColumns.OperationColumns.SequenceNumber.MapFrom(row),
+                    FormulaColumns.OperationColumns.Operation.MapFrom(row),
+                    FormulaColumns.OperationColumns.ValueSource.MapFrom(row),
+                    FormulaColumns.OperationColumns.ValueSelection.MapFrom(row),
+                    FormulaColumns.OperationColumns.Text.MapFrom(row)));
             }
 
             foreach (var row in _databaseGateway.GetRowsUsing(_formulaQueryFactory.GetConstraints(id)))

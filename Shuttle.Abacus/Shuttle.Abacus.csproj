@@ -80,7 +80,6 @@
     <Compile Include="DataAccess\Definitions\ElementColumns.cs" />
     <Compile Include="DataAccess\MatrixElementQueryFactory.cs" />
     <Compile Include="DataAccess\Definitions\FormulaColumns.cs" />
-    <Compile Include="DataAccess\Definitions\FormulaOperationColumns.cs" />
     <Compile Include="DataAccess\FormulaQueryFactory.cs" />
     <Compile Include="DataAccess\Definitions\GraphNodeArgumentColumns.cs" />
     <Compile Include="DataAccess\GraphNodeArgumentQueryFactory.cs" />
@@ -316,7 +315,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Events\FormulaOperation.v1\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

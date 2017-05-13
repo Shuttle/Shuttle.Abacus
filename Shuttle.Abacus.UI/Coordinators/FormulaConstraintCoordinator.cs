@@ -108,11 +108,11 @@ namespace Shuttle.Abacus.UI.Coordinators
             HostInWorkspace<ITabbedWorkspacePresenter>(item);
         }
 
-        private FormulaConstraintModel BuildConstraintModel(Guid calculationId)
+        private ManageFormulaConstraintsModel BuildConstraintModel(Guid calculationId)
         {
             using (_databaseContextFactory.Create())
             {
-                return new FormulaConstraintModel
+                return new ManageFormulaConstraintsModel
                 {
                     ArgumentRows = _argumentQuery.All(),
                     ConstraintTypeRows = _constraintTypeQuery.All(),

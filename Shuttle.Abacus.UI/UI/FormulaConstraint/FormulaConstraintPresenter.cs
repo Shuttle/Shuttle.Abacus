@@ -11,7 +11,7 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.UI.FormulaConstraint
 {
-    public class FormulaConstraintPresenter : Presenter<IFormulaConstraintView, FormulaConstraintModel>, IFormulaConstraintPresenter
+    public class FormulaConstraintPresenter : Presenter<IFormulaConstraintView, ManageFormulaConstraintsModel>, IFormulaConstraintPresenter
     {
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IArgumentQuery _argumentQuery;

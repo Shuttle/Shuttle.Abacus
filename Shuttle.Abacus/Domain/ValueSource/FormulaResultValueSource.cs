@@ -32,7 +32,7 @@ namespace Shuttle.Abacus.Domain
             return string.Format("{0} (from formula result {1})", operand.ToString(Resources.FormatDecimal), _formula.Name);
         }
 
-        public string Name => "CalculationResult";
+        public string Name => "RunningTotal";
 
         public object Text => _formula.Name;
 

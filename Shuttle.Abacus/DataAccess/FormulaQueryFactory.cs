@@ -34,7 +34,7 @@ select
 from
     FormulaOperation
 ")
-                .AddParameterValue(FormulaOperationColumns.FormulaId, id);
+                .AddParameterValue(FormulaColumns.Id, id);
         }
 
         public IQuery Get(Guid id)
@@ -81,7 +81,7 @@ select
 from
     FormulaConstraint
 ")
-                .AddParameterValue(FormulaOperationColumns.FormulaId, id);
+                .AddParameterValue(FormulaColumns.Id, id);
         }
 
         public IQuery Registered(PrimitiveEvent primitiveEvent, Registered registered)
@@ -144,12 +144,12 @@ values
     @Text
 )
 ")
-                .AddParameterValue(FormulaOperationColumns.FormulaId, formula.Id)
-                .AddParameterValue(FormulaOperationColumns.Operation, operation)
-                .AddParameterValue(FormulaOperationColumns.ValueSource, operation.ValueSource)
-                .AddParameterValue(FormulaOperationColumns.ValueSelection, operation.ValueSelection)
-                .AddParameterValue(FormulaOperationColumns.Text, operation.ValueSource)
-                .AddParameterValue(FormulaOperationColumns.SequenceNumber, sequenceNumber);
+                .AddParameterValue(FormulaColumns.Id, formula.Id)
+                .AddParameterValue(FormulaColumns.OperationColumns.Operation, operation)
+                .AddParameterValue(FormulaColumns.OperationColumns.ValueSource, operation.ValueSource)
+                .AddParameterValue(FormulaColumns.OperationColumns.ValueSelection, operation.ValueSelection)
+                .AddParameterValue(FormulaColumns.OperationColumns.Text, operation.ValueSource)
+                .AddParameterValue(FormulaColumns.OperationColumns.SequenceNumber, sequenceNumber);
         }
 
         public IQuery Save(Formula item)
