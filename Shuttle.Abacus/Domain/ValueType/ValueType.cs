@@ -2,11 +2,11 @@ using System;
 
 namespace Shuttle.Abacus.Domain
 {
-    public abstract class ArgumentAnswer : IComparable<ArgumentAnswer>
+    public abstract class ValueType : IComparable<ValueType>
     {
-        public static ArgumentAnswer Null = new NullArgumentAnswer();
+        public static ValueType Null = new NullValueType();
 
-        protected ArgumentAnswer(string argumentName)
+        protected ValueType(string argumentName)
         {
             ArgumentName = argumentName;
         }
@@ -19,7 +19,7 @@ namespace Shuttle.Abacus.Domain
 
         public virtual bool IsNull => false;
 
-        public abstract int CompareTo(ArgumentAnswer other);
+        public abstract int CompareTo(ValueType other);
 
         public abstract string DisplayString();
 

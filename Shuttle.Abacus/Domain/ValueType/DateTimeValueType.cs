@@ -4,11 +4,11 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class DateTimeArgumentAnswer : ArgumentAnswer
+    public class DateTimeValueType : ValueType
     {
         private readonly DateTime value;
 
-        public DateTimeArgumentAnswer(string argumentName, string text) : base(argumentName)
+        public DateTimeValueType(string argumentName, string text) : base(argumentName)
         {
             AnswerString = text;
 
@@ -19,7 +19,7 @@ namespace Shuttle.Abacus.Domain
 
         public override string AnswerType => "DateTime";
 
-        public override int CompareTo(ArgumentAnswer other)
+        public override int CompareTo(ValueType other)
         {
             Guard.AgainstNull(other, "other");
 

@@ -4,11 +4,11 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class IntegerArgumentAnswer : ArgumentAnswer
+    public class IntegerValueType : ValueType
     {
         private readonly int value;
 
-        public IntegerArgumentAnswer(string argumentName, string text) : base(argumentName)
+        public IntegerValueType(string argumentName, string text) : base(argumentName)
         {
             AnswerString = text;
 
@@ -17,7 +17,7 @@ namespace Shuttle.Abacus.Domain
             Answer = value;
         }
 
-        public IntegerArgumentAnswer(string argumentName, int value) : base(argumentName)
+        public IntegerValueType(string argumentName, int value) : base(argumentName)
         {
             this.value = value;
 
@@ -27,7 +27,7 @@ namespace Shuttle.Abacus.Domain
 
         public override string AnswerType => "Integer";
 
-        public override int CompareTo(ArgumentAnswer other)
+        public override int CompareTo(ValueType other)
         {
             Guard.AgainstNull(other, "other");
 

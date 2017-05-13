@@ -7,7 +7,7 @@ namespace Shuttle.Abacus.DataAccess
     public static class ArgumentColumns
     {
         public static readonly MappedColumn<string>
-            AnswerType = new MappedColumn<string>("AnswerType", DbType.AnsiString);
+            AnswerType = new MappedColumn<string>("ValueType", DbType.AnsiString);
 
         public static readonly MappedColumn<Guid> Id =
             new MappedColumn<Guid>("ArgumentId", DbType.Guid);

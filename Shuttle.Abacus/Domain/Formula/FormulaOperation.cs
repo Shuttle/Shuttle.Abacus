@@ -1,5 +1,15 @@
 namespace Shuttle.Abacus.Domain
 {
+    public enum ValueSourceType
+    {
+        ArgumentAnswer = 0,
+        Decimal = 1,
+        RunningTotal = 2,
+        FormulaTotal = 5,
+        Matrix = 6,
+        FormulaResult = 7
+    }
+
     public class FormulaOperation
     {
         public FormulaOperation(int sequenceNumber, string operation, string valueSource, string valueSelection,

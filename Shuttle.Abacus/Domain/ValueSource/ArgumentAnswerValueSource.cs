@@ -27,7 +27,7 @@ namespace Shuttle.Abacus.Domain
             return string.Format("{0} (from input '{1}')", ContextValue(methodContext).Description(), argument.Name);
         }
 
-        public string Name => "ArgumentAnswer";
+        public string Name => "ValueType";
 
         public object Text => argument.Name;
 
@@ -36,7 +36,7 @@ namespace Shuttle.Abacus.Domain
             return new ArgumentAnswerValueSource(argument);
         }
 
-        public ArgumentAnswer ContextValue(IMethodContext collectionContext)
+        public ValueType ContextValue(IMethodContext collectionContext)
         {
             return collectionContext.GetArgumentAnswer(argument.Name);
         }

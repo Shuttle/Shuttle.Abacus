@@ -1,4 +1,5 @@
 using System;
+using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Values;
 using Shuttle.Abacus.Localisation;
@@ -36,20 +37,9 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
                 return false;
             }
 
-            switch (View.ValueSourceTypeModel.Type.ToLower())
+            switch (View.ValueSourceValue.ToLower())
             {
-                case "selection":
-                    {
-                        if (!View.HasValueSelection)
-                        {
-                            View.ShowValueSelectionError("Please make a selection.");
-
-                            return false;
-                        }
-
-                        break;
-                    }
-                case "fixed":
+                case "decimal":
                     {
                         if (!View.HasValueSelection)
                         {
@@ -65,6 +55,17 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
                         if (!result.OK)
                         {
                             View.ShowValueSelectionError(result.ToString());
+
+                            return false;
+                        }
+
+                        break;
+                    }
+                default:
+                    {
+                        if (!View.HasValueSelection)
+                        {
+                            View.ShowValueSelectionError("Please make a selection.");
 
                             return false;
                         }
@@ -101,24 +102,29 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
 
         public void ValueSourceChanged()
         {
-            var type = Enumeration.Cast<Enumeration.ValueSourceType>(View.ValueSourceTypeModel.Name);
+            ValueSourceType type;
+
+            if (!Enum.TryParse(View.ValueSourceValue, out type))
+            {
+                return;
+            }
 
             switch (type)
             {
-                case Enumeration.ValueSourceType.ArgumentAnswer:
+                case ValueSourceType.ArgumentAnswer:
                     {
                         View.EnableValueSelection("Argument");
                         View.PopulateArguments(Model.Arguments);
 
                         break;
                     }
-                case Enumeration.ValueSourceType.Decimal:
+                case ValueSourceType.Decimal:
                     {
                         View.EnableValueEntry("Value");
 
                         break;
                     }
-                case Enumeration.ValueSourceType.RunningTotal:
+                case ValueSourceType.RunningTotal:
                     {
                         throw new NotImplementedException();
                         View.EnableValueSelection("Calculation");
@@ -126,7 +132,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
 
                         break;
                     }
-                case Enumeration.ValueSourceType.Matrix:
+                case ValueSourceType.Matrix:
                     {
                         throw new NotImplementedException();
                         View.EnableValueSelection("Decimal Table");
@@ -134,13 +140,17 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
 
                         break;
                     }
-                case Enumeration.ValueSourceType.FormulaResult:
+                case ValueSourceType.FormulaResult:
                     {
                         throw new NotImplementedException();
                         View.EnableValueSelection("FormulaOperation");
                         //View.PopulateFormulaOperations(Model.Methods);
 
                         break;
+                    }
+                default:
+                    {
+                        throw new InvalidOperationException();
                     }
             }
         }

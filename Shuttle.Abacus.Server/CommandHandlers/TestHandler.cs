@@ -15,7 +15,6 @@ namespace Shuttle.Abacus.Server.CommandHandlers
         IMessageHandler<RunTestCommand>,
         IMessageHandler<PrintTestCommand>
     {
-        private readonly IArgumentAnswerFactory _argumentValueFactoryProvider;
         private readonly IArgumentRepository _argumentRepository;
         private readonly ICalculationLoggerFactory _calculationLoggerFactory;
         private readonly IDatabaseContextFactory _databaseContextFactory;
@@ -23,20 +22,17 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 
         public TestHandler(IDatabaseContextFactory databaseContextFactory,
             ITestRepository testRepository, ICalculationLoggerFactory calculationLoggerFactory,
-            IArgumentAnswerFactory argumentValueFactoryProvider,
             IArgumentRepository argumentRepository)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(testRepository, "testRepository");
             Guard.AgainstNull(calculationLoggerFactory, "calculationLoggerFactory");
-            Guard.AgainstNull(argumentValueFactoryProvider, "argumentValueFactoryProvider");
             Guard.AgainstNull(argumentRepository, "argumentRepository");
 
             _databaseContextFactory = databaseContextFactory;
             _testRepository = testRepository;
             _argumentRepository = argumentRepository;
             _calculationLoggerFactory = calculationLoggerFactory;
-            _argumentValueFactoryProvider = argumentValueFactoryProvider;
         }
 
         public void ProcessMessage(IHandlerContext<ChangeTestCommand> context)
@@ -184,7 +180,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
             //        //else
             //        //{
             //        //    context.AddValue(
-            //        //        _argumentValueFactoryProvider.Get(answer.AnswerType).Create(
+            //        //        _argumentValueFactoryProvider.Get(answer.ValueType).Create(
             //        //            argument.Name,
             //        //            answer.Answer));
             //        //}

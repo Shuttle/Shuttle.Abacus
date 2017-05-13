@@ -6,6 +6,17 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
+    public enum InputType
+    {
+        Boolean = 0,
+        Date = 1,
+        Decimal = 2,
+        Integer = 3,
+        List = 4,
+        Money = 5,
+        Text = 6
+    }
+
     public class Argument
     {
         private readonly List<string> _values = new List<string>();
@@ -16,7 +27,7 @@ namespace Shuttle.Abacus.Domain
         }
 
         public string Name { get; private set; }
-        public string AnswerType { get; private set; }
+        public string ValueType { get; private set; }
         public bool Removed { get; private set; }
 
         public IEnumerable<string> Values => new ReadOnlyCollection<string>(_values);
@@ -41,7 +52,7 @@ namespace Shuttle.Abacus.Domain
             Guard.AgainstNull(registered, "registered");
 
             Name = registered.Name;
-            AnswerType = registered.AnswerType;
+            ValueType = registered.AnswerType;
 
             return registered;
         }
@@ -110,7 +121,7 @@ namespace Shuttle.Abacus.Domain
         {
             Guard.AgainstNull(answerTypeChanged, "answerTypeChanged");
 
-            AnswerType = answerTypeChanged.AnswerType;
+            ValueType = answerTypeChanged.AnswerType;
 
             return answerTypeChanged;
         }
@@ -167,6 +178,37 @@ namespace Shuttle.Abacus.Domain
             _values.Remove(valueRemoved.Value);
 
             return valueRemoved;
+        }
+
+        public ValueType Create(string type, string name, string answer)
+        {
+            switch (type.ToLowerInvariant())
+            {
+                case "boolean":
+                    {
+                        return new BooleanValueType(name, answer);
+                    }
+                case "datetime":
+                    {
+                        return new DateTimeValueType(name, answer);
+                    }
+                case "decimal":
+                    {
+                        return new DecimalValueType(name, answer);
+                    }
+                case "integer":
+                    {
+                        return new IntegerValueType(name, answer);
+                    }
+                case "text":
+                    {
+                        return new TextValueType(name, answer);
+                    }
+                default:
+                    {
+                        throw new InvalidOperationException();
+                    }
+            }
         }
     }
 }

@@ -4,15 +4,15 @@ namespace Shuttle.Abacus.Domain
 {
     public abstract class Constraint : IConstraint
     {
-        protected Constraint(Guid argumentId, ArgumentAnswer argumentAnswer)
+        protected Constraint(Guid argumentId, ValueType valueType)
         {
             ArgumentId = argumentId;
-            ArgumentAnswer = argumentAnswer;
+            ValueType = valueType;
         }
 
         public Guid ArgumentId { get; private set; }
 
-        public ArgumentAnswer ArgumentAnswer { get; private set; }
+        public ValueType ValueType { get; private set; }
 
         public abstract bool IsSatisfiedBy(IMethodContext collectionMethodContext);
 

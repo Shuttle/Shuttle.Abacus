@@ -9,7 +9,7 @@ namespace Shuttle.Abacus.Domain
                                        IDisposable
     {
         IEnumerable<ICalculationResult> Results { get; }
-        IEnumerable<ArgumentAnswer> ArgumentAnswers { get; }
+        IEnumerable<ValueType> ArgumentAnswers { get; }
         IEnumerable<string> ErrorMessages { get; }
         IEnumerable<string> WarningMessages { get; }
         IEnumerable<string> InformationMessages { get; }
@@ -26,8 +26,8 @@ namespace Shuttle.Abacus.Domain
         SubTotalCalculationResult GetSubTotal(string name);
         bool HasResult(string name);
         bool HasArgumentAnswer(string argumentName);
-        IMethodContext AddArgumentAnswer(ArgumentAnswer argumentAnswer);
-        ArgumentAnswer GetArgumentAnswer(string argumentName);
+        IMethodContext AddArgumentAnswer(ValueType valueType);
+        ValueType GetArgumentAnswer(string argumentName);
         void Log();
         void Log(string text, params string[] args);
         void IncreaseIndent();

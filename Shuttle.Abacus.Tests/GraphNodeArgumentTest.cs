@@ -19,7 +19,7 @@ namespace Shuttle.Abacus.Tests
         //                     Name = name
         //                 };
 
-        //    var answer = new DecimalArgumentAnswer(name, value);
+        //    var answer = new DecimalValueType(name, value);
 
         //    var context = new FormulaContext().AddValue(answer);
 

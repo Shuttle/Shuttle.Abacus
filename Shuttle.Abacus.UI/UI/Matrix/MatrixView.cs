@@ -83,7 +83,7 @@ namespace Shuttle.Abacus.UI.UI.Matrix
             //ColumnArgument.Items.Add(new DataRow
             //                       {
             //                           Name = "(none)",
-            //                           AnswerType = string.Empty
+            //                           ValueType = string.Empty
             //                       });
 
             rows.ForEach(row =>

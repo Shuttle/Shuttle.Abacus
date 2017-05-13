@@ -29,9 +29,9 @@
             this.MoveUpButton = new System.Windows.Forms.Button();
             this.MoveDownButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.OperationsListView = new System.Windows.Forms.ListView();
             this.RemoveButton = new System.Windows.Forms.Button();
             this.AddButton = new System.Windows.Forms.Button();
@@ -98,9 +98,9 @@
             // 
             // OperationsListView
             // 
-            this.OperationsListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.OperationsListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.OperationsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
@@ -155,6 +155,12 @@
             this.Operation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Operation.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.Operation.FormattingEnabled = true;
+            this.Operation.Items.AddRange(new object[] {
+            "Addition",
+            "Division",
+            "Multiplication",
+            "Rounding",
+            "Subtraction"});
             this.Operation.Location = new System.Drawing.Point(12, 40);
             this.Operation.Name = "Operation";
             this.Operation.Size = new System.Drawing.Size(112, 21);
@@ -175,6 +181,12 @@
             this.ValueSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ValueSource.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.ValueSource.FormattingEnabled = true;
+            this.ValueSource.Items.AddRange(new object[] {
+            "Argument",
+            "Decimal",
+            "Matrix",
+            "RunningTotal",
+            "FormulaResult"});
             this.ValueSource.Location = new System.Drawing.Point(144, 40);
             this.ValueSource.Name = "ValueSource";
             this.ValueSource.Size = new System.Drawing.Size(128, 21);
@@ -191,8 +203,8 @@
             // 
             // ValueSelection
             // 
-            this.ValueSelection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ValueSelection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ValueSelection.DisplayMember = "Text";
             this.ValueSelection.Enabled = false;
             this.ValueSelection.FormattingEnabled = true;
@@ -204,8 +216,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.ValueSelection);
             this.groupBox1.Controls.Add(this.ValueSelectionLabel);
             this.groupBox1.Controls.Add(this.ValueSource);

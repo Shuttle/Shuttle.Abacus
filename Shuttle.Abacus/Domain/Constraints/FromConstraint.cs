@@ -4,8 +4,8 @@ namespace Shuttle.Abacus.Domain
 {
     public class FromConstraint : Constraint
     {
-        public FromConstraint(Guid argumentId, ArgumentAnswer argumentAnswer)
-            : base(argumentId, argumentAnswer)
+        public FromConstraint(Guid argumentId, ValueType valueType)
+            : base(argumentId, valueType)
         {
         }
 
@@ -15,21 +15,21 @@ namespace Shuttle.Abacus.Domain
 
         public override bool IsSatisfiedBy(IMethodContext collectionMethodContext)
         {
-            var answer = collectionMethodContext.GetArgumentAnswer(ArgumentAnswer.ArgumentName);
+            var answer = collectionMethodContext.GetArgumentAnswer(ValueType.ArgumentName);
 
             return !answer.IsNull
-                       ? answer.CompareTo(ArgumentAnswer) >= 0
+                       ? answer.CompareTo(ValueType) >= 0
                        : false;
         }
 
         public override string Description()
         {
-            return string.Format("'{0}' from '{1}'", ArgumentAnswer.ArgumentName, ArgumentAnswer.Description());
+            return string.Format("'{0}' from '{1}'", ValueType.ArgumentName, ValueType.Description());
         }
 
         public override IConstraint Copy()
         {
-            return new FromConstraint(ArgumentId, ArgumentAnswer);
+            return new FromConstraint(ArgumentId, ValueType);
         }
     }
 }

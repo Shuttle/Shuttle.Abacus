@@ -4,18 +4,18 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class BooleanArgumentAnswer : ArgumentAnswer
+    public class BooleanValueType : ValueType
     {
         private readonly bool value;
 
-        public BooleanArgumentAnswer(string argumentName, bool value)
+        public BooleanValueType(string argumentName, bool value)
             : base(argumentName)
         {
             Answer = value;
             AnswerString = Convert.ToString(value);
         }
 
-        public BooleanArgumentAnswer(string argumentName, string text)
+        public BooleanValueType(string argumentName, string text)
             : base(argumentName)
         {
             AnswerString = text;
@@ -43,7 +43,7 @@ namespace Shuttle.Abacus.Domain
 
         public override string AnswerType => "Boolean";
 
-        public override int CompareTo(ArgumentAnswer other)
+        public override int CompareTo(ValueType other)
         {
             Guard.AgainstNull(other, "other");
 

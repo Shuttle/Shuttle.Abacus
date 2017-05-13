@@ -11,7 +11,7 @@ namespace Shuttle.Abacus.Domain
             _argumentRepository = argumentRepository;
         }
 
-        public string Name => "ArgumentAnswer";
+        public string Name => "ValueType";
 
         public string Text => "Argument Answer";
 

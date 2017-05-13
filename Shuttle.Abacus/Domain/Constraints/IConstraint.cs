@@ -7,7 +7,7 @@ namespace Shuttle.Abacus.Domain
     {
         string Name { get; }
         string Text { get; }
-        ArgumentAnswer ArgumentAnswer { get; }
+        ValueType ValueType { get; }
         Guid ArgumentId { get; }
         string Description();
         IConstraint Copy();

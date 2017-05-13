@@ -10,7 +10,7 @@ namespace Shuttle.Abacus.DataContracts
             ArgumentAnswers = new List<NameValue>();
         }
 
-        [XmlArrayItem("ArgumentAnswer")]
+        [XmlArrayItem("ValueType")]
         public List<NameValue> ArgumentAnswers { get; set; }
     }
 }

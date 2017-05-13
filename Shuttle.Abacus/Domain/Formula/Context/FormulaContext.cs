@@ -9,7 +9,7 @@ namespace Shuttle.Abacus.Domain
 {
     public class FormulaContext : IMethodContext
     {
-        private readonly ArgumentAnswerCollection answers;
+        private readonly ValueCollection answers;
         private readonly ICalculationLogger logger;
         private readonly IFormulaContextRegister register;
 
@@ -17,24 +17,24 @@ namespace Shuttle.Abacus.Domain
 
         public FormulaContext()
             : this(
-                string.Empty, new NullCalculationLogger(), new ArgumentAnswerCollection(),
+                string.Empty, new NullCalculationLogger(), new ValueCollection(),
                 new FormulaContextRegister("register", new NullCalculationLogger()))
         {
         }
 
         public FormulaContext(string name)
             : this(
-                name, new NullCalculationLogger(), new ArgumentAnswerCollection(),
+                name, new NullCalculationLogger(), new ValueCollection(),
                 new FormulaContextRegister(name, new NullCalculationLogger()))
         {
         }
 
         public FormulaContext(string name, ICalculationLogger logger)
-            : this(name, logger, new ArgumentAnswerCollection(), new FormulaContextRegister(name, logger))
+            : this(name, logger, new ValueCollection(), new FormulaContextRegister(name, logger))
         {
         }
 
-        private FormulaContext(string name, ICalculationLogger logger, ArgumentAnswerCollection answers,
+        private FormulaContext(string name, ICalculationLogger logger, ValueCollection answers,
                                IFormulaContextRegister register)
         {
             Name = name;
@@ -66,7 +66,7 @@ namespace Shuttle.Abacus.Domain
 
         public IEnumerable<ICalculationResult> SubTotals => register.SubTotals;
 
-        public IEnumerable<ArgumentAnswer> ArgumentAnswers => answers;
+        public IEnumerable<ValueType> ArgumentAnswers => answers;
 
         public IEnumerable<string> ErrorMessages => logger.ErrorMessages;
 
@@ -159,26 +159,26 @@ namespace Shuttle.Abacus.Domain
             logger.DecreaseIndent();
         }
 
-        public IMethodContext AddArgumentAnswer(ArgumentAnswer argumentAnswer)
+        public IMethodContext AddArgumentAnswer(ValueType valueType)
         {
-            if (answers.Contains(argumentAnswer.ArgumentName))
+            if (answers.Contains(valueType.ArgumentName))
             {
                 throw new DuplicateEntryException(
                     string.Format("There is already an argument answer with argument name '{0}' registered.",
-                                  argumentAnswer.ArgumentName));
+                                  valueType.ArgumentName));
             }
 
-            answers.Add(argumentAnswer);
+            answers.Add(valueType);
 
             if (LoggerEnabled)
             {
-                Log("Argument answer: {0} = {1}", argumentAnswer.ArgumentName, Convert.ToString(argumentAnswer.Answer));
+                Log("Argument answer: {0} = {1}", valueType.ArgumentName, Convert.ToString(valueType.Answer));
             }
 
             return this;
         }
 
-        public ArgumentAnswer GetArgumentAnswer(string argumentName)
+        public ValueType GetArgumentAnswer(string argumentName)
         {
             if (!HasArgumentAnswer(argumentName))
             {
@@ -186,7 +186,7 @@ namespace Shuttle.Abacus.Domain
                     string.Format("Could not find requested answer for argument with name '{0}'.  Using null answer.",
                                   argumentName));
 
-                return ArgumentAnswer.Null;
+                return ValueType.Null;
             }
 
             return answers[argumentName];

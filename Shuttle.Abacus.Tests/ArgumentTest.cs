@@ -15,7 +15,7 @@ namespace Shuttle.Abacus.Tests
         //    var command = new CreateArgumentCommand
         //                  {
         //                      Name = "One", 
-        //                      AnswerType = "Boolean",
+        //                      ValueType = "Boolean",
         //                      ArgumentValues = new List<ArgumentRestrictedAnswerDTO>()
         //                  };
 
@@ -32,7 +32,7 @@ namespace Shuttle.Abacus.Tests
         //    var command = new CreateArgumentCommand
         //                  {
         //                      Name = "One", 
-        //                      AnswerType = "Boolean",
+        //                      ValueType = "Boolean",
         //                      ArgumentValues = new List<ArgumentRestrictedAnswerDTO>()
         //                  };
 

@@ -8,16 +8,13 @@ namespace Shuttle.Abacus.Domain
 {
     public class ArgumentService : IArgumentService
     {
-        private readonly IArgumentAnswerFactory argumentAnswerFactory;
         private readonly IPipeline pipeline;
         private readonly IArgumentRepository argumentRepository;
 
         public ArgumentService(IArgumentRepository argumentRepository,
-                             IArgumentAnswerFactory argumentAnswerFactory,
                              IPipeline pipeline)
         {
             this.argumentRepository = argumentRepository;
-            this.argumentAnswerFactory = argumentAnswerFactory;
             this.pipeline = pipeline;
         }
 
@@ -48,7 +45,7 @@ namespace Shuttle.Abacus.Domain
             //                result.AddWarningMessage(string.Format("Answer '{0}' is not valid for argument '{1}'.", answer, argument.Name));
             //            }
 
-            //            result.AddArgumentAnswer(argumentAnswerFactory.Create(argument.AnswerType, argument.Name, answer));
+            //            result.AddArgumentAnswer(argumentAnswerFactory.Create(argument.ValueType, argument.Name, answer));
             //        }
             //    }
             //    else

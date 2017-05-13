@@ -7,7 +7,7 @@ namespace Shuttle.Abacus.DataAccess
     //{
     //    public void Handle(DataRow item)
     //    {
-    //        if (item.AnswerType.ToLower() != "boolean")
+    //        if (item.ValueType.ToLower() != "boolean")
     //        {
     //            return;
     //        }

@@ -41,7 +41,7 @@ select
     TestId,
     ArgumentName,
     Answer,
-    AnswerType,
+    ValueType,
     ArgumentName
 from
     TestArgumentValue
@@ -116,7 +116,7 @@ insert into TestArgumentValue
     TestId,
     ArgumentName,
     Answer,
-    AnswerType,
+    ValueType,
     ArgumentName
 )
 values
@@ -124,7 +124,7 @@ values
     @TestId,
     @ArgumentName,
     @Answer,
-    @AnswerType,
+    @ValueType,
     @ArgumentName
 )")
                 .AddParameterValue(TestColumns.ArgumentValueColumns.TestId, test.Id)
@@ -142,7 +142,7 @@ values
         //                ExpectedResult,
         //                ArgumentName,
         //                ArgumentName,
-        //                AnswerType,
+        //                ValueType,
         //                Answer
         //            from
         //                Test mt

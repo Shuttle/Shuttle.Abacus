@@ -4,11 +4,11 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class DecimalArgumentAnswer : ArgumentAnswer
+    public class DecimalValueType : ValueType
     {
         private readonly decimal value;
 
-        public DecimalArgumentAnswer(string argumentName, decimal value) : base(argumentName)
+        public DecimalValueType(string argumentName, decimal value) : base(argumentName)
         {
             this.value = value;
 
@@ -16,7 +16,7 @@ namespace Shuttle.Abacus.Domain
             Answer = value;
         }
 
-        public DecimalArgumentAnswer(string argumentName, string text) : base(argumentName)
+        public DecimalValueType(string argumentName, string text) : base(argumentName)
         {
             AnswerString = text;
 
@@ -27,7 +27,7 @@ namespace Shuttle.Abacus.Domain
 
         public override string AnswerType => "Decimal";
 
-        public override int CompareTo(ArgumentAnswer other)
+        public override int CompareTo(ValueType other)
         {
             Guard.AgainstNull(other, "other");
 

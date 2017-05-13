@@ -67,7 +67,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
 
                 foreach (ListViewItem item in OperationsListView.Items)
                 {
-                    var tag = (ItemTag) item.Tag;
+                    var tag = (ItemTag)item.Tag;
 
                     //TODO
                     //result.Add(new FormulaOperation(
@@ -94,26 +94,16 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
             set { ValueSource.Text = value; }
         }
 
-        public ValueSourceTypeModel ValueSourceTypeModel => ValueSource.SelectedItem as ValueSourceTypeModel;
-
         public string ValueSelectionValue
         {
             get
             {
-                return ValueSourceTypeModel.IsSelection
-                           ? ((SelectionItem) ValueSelection.SelectedItem).Id.ToString("n")
-                           : ValueSelection.Text;
+                return ValueSelection.Text;
             }
             set
             {
-                if (ValueSourceTypeModel.IsSelection)
-                {
-                    ValueSelection.SelectedItem = FindSelection(new Guid(value));
-                }
-                else
-                {
-                    ValueSelection.Text = value;
-                }
+                ValueSelection.SelectedItem = value;
+                ValueSelection.Text = value;
             }
         }
 
@@ -203,7 +193,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
         {
             foreach (var model in list)
             {
-                ValueSelection.Items.Add(new SelectionItem(model.Id, model.Name));
+                ValueSelection.Items.Add(model.Name);
             }
         }
 
@@ -213,19 +203,6 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
             {
                 //ValueSelection.Items.Add(new SelectionItem(model.Id, model.Name));
             }
-        }
-
-        private object FindSelection(Guid id)
-        {
-            foreach (SelectionItem item in ValueSelection.Items)
-            {
-                if (item.Id.Equals(id))
-                {
-                    return item;
-                }
-            }
-
-            return null;
         }
 
         private static ListViewItem PopulateItem(ListViewItem item, string operationType,
@@ -252,7 +229,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
         {
             if (Presenter.CanAddOperation())
             {
-                AddOperation(OperationTypeModel.Name, ValueSourceTypeModel.Name, ValueSelectionValue, ValueSelectionText);
+                AddOperation(OperationTypeModel.Name, ValueSourceValue, ValueSelectionValue, ValueSelectionText);
             }
         }
 
@@ -349,7 +326,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
                 return;
             }
 
-            PopulateItem(SelectedItem(), OperationTypeModel.Name, ValueSourceTypeModel.Name, ValueSelectionValue, ValueSelectionText);
+            PopulateItem(SelectedItem(), OperationTypeModel.Name, ValueSourceValue, ValueSelectionValue, ValueSelectionText);
         }
 
         private void ValueSource_SelectedIndexChanged(object sender, EventArgs e)
@@ -388,18 +365,6 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
             public string OperationType { get; private set; }
             public string ValueSourceType { get; private set; }
             public string ValueSelection { get; private set; }
-            public string Text { get; private set; }
-        }
-
-        private class SelectionItem
-        {
-            public SelectionItem(Guid id, string text)
-            {
-                Id = id;
-                Text = text;
-            }
-
-            public Guid Id { get; private set; }
             public string Text { get; private set; }
         }
     }

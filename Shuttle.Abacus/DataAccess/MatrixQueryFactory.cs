@@ -43,7 +43,7 @@ from
                     dv.MatrixElement,
                     c.Name,
                     c.ArgumentName,
-                    c.AnswerType,
+                    c.ValueType,
                     c.Answer
                 from
                     [MatrixElement] dv

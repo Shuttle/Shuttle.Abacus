@@ -4,25 +4,25 @@ namespace Shuttle.Abacus.Domain
 {
     public class ConstraintFactory : IConstraintFactory
     {
-        public IConstraint Create(string name, Guid argumentId, ArgumentAnswer argumentAnswer)
+        public IConstraint Create(string name, Guid argumentId, ValueType valueType)
         {
             switch (name.ToLowerInvariant())
             {
                 case "equals":
                 {
-                    return new EqualsConstraint(argumentId, argumentAnswer);
+                    return new EqualsConstraint(argumentId, valueType);
                 }
                 case "from":
                 {
-                    return new FromConstraint(argumentId, argumentAnswer);
+                    return new FromConstraint(argumentId, valueType);
                 }
                 case "notequalto":
                 {
-                    return new NotEqualToConstraint(argumentId, argumentAnswer);
+                    return new NotEqualToConstraint(argumentId, valueType);
                 }
                 case "to":
                 {
-                    return new ToConstraint(argumentId, argumentAnswer);
+                    return new ToConstraint(argumentId, valueType);
                 }
                 default:
                 {

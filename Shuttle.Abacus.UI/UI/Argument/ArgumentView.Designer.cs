@@ -49,7 +49,7 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Argument name";
             // 
-            // AnswerType
+            // ValueType
             // 
             this.AnswerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.AnswerType.FormattingEnabled = true;

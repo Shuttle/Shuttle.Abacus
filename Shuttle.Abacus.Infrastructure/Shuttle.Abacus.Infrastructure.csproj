@@ -61,7 +61,6 @@
     <Compile Include="DependencyResolver\DependencyResolver.cs" />
     <Compile Include="DependencyResolver\IDependencyResolver.cs" />
     <Compile Include="DependencyResolver\WindsorResolver.cs" />
-    <Compile Include="Enumeration.cs" />
     <Compile Include="Exceptions\CircularReferenceException.cs" />
     <Compile Include="Exceptions\ConventionException.cs" />
     <Compile Include="Exceptions\InvalidCalculationOrderException.cs" />

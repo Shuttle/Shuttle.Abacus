@@ -1,8 +1,8 @@
 namespace Shuttle.Abacus.Domain
 {
-    public class NullArgumentAnswer : ArgumentAnswer
+    public class NullValueType : ValueType
     {
-        public NullArgumentAnswer() : base("NULL")
+        public NullValueType() : base("NULL")
         {
         }
 
@@ -10,7 +10,7 @@ namespace Shuttle.Abacus.Domain
 
         public override bool IsNull => true;
 
-        public override int CompareTo(ArgumentAnswer other)
+        public override int CompareTo(ValueType other)
         {
             return 0;
         }

@@ -2,9 +2,9 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class TextArgumentAnswer : ArgumentAnswer
+    public class TextValueType : ValueType
     {
-        public TextArgumentAnswer(string argumentName, string text) : base(argumentName)
+        public TextValueType(string argumentName, string text) : base(argumentName)
         {
             AnswerString = text;
             Answer = text;
@@ -12,7 +12,7 @@ namespace Shuttle.Abacus.Domain
 
         public override string AnswerType => "Text";
 
-        public override int CompareTo(ArgumentAnswer other)
+        public override int CompareTo(ValueType other)
         {
             Guard.AgainstNull(other, "other");
 

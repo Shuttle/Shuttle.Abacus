@@ -7,7 +7,6 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
     public interface IFormulaOperationView : IView
     {
         string ValueSourceValue { get; set; }
-        ValueSourceTypeModel ValueSourceTypeModel { get; }
         string ValueSelectionValue { get; set; }
         string ValueSelectionText { get; }
         bool HasValueSource { get; }

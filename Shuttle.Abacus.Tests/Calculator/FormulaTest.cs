@@ -53,8 +53,8 @@ namespace Shuttle.Abacus.Tests
 
         //    var context =
         //        new FormulaContext("test")
-        //            .AddValue(new DecimalArgumentAnswer("VoluntaryExcess", 1000))
-        //            .AddValue(new DecimalArgumentAnswer("SumInsured", 980000));
+        //            .AddValue(new DecimalValueType("VoluntaryExcess", 1000))
+        //            .AddValue(new DecimalValueType("SumInsured", 980000));
 
         //    var result = new CalculationCollectionResult(new CalculationCollection("TOTAL"), 636.99m);
 
