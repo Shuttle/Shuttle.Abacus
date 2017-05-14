@@ -13,7 +13,8 @@ namespace Shuttle.Abacus.Server.CommandHandlers
         IMessageHandler<RenameFormulaCommand>,
         IMessageHandler<SetFormulaMaxmimumCommand>,
         IMessageHandler<SetFormulaMinimumCommand>,
-        IMessageHandler<RemoveFormulaCommand>
+        IMessageHandler<RemoveFormulaCommand>,
+        IMessageHandler<SetFormulaOperationsCommand>
     {
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IEventStore _eventStore;
@@ -127,6 +128,43 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 
                 _eventStore.Save(stream);
                 _keyStore.Add(formula.Id, key);
+            }
+        }
+
+        public void ProcessMessage(IHandlerContext<SetFormulaOperationsCommand> context)
+        {
+            var message = context.Message;
+
+            using (_databaseContextFactory.Create())
+            {
+                var stream = _eventStore.Get(message.FormulaId);
+
+                if (stream.IsEmpty)
+                {
+                    return;
+                }
+
+                var formula = new Formula(message.FormulaId);
+
+                stream.Apply(formula);
+
+                if (formula.Removed)
+                {
+                    return;
+                }
+
+                stream.AddEvent(formula.RemoveOperations());
+
+                foreach (var operation in message.Operations)
+                {
+                    stream.AddEvent(formula.AddOperation(
+                        operation.SequenceNumber,
+                        operation.Operation,
+                        operation.ValueSource,
+                        operation.ValueSelection));
+                }
+
+                _eventStore.Save(stream);
             }
         }
     }

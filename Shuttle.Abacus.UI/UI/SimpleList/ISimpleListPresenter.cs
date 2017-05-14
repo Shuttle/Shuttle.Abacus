@@ -1,6 +1,6 @@
 using Shuttle.Abacus.UI.Core.Presentation;
 
-namespace Shuttle.Abacus.UI.UI.List
+namespace Shuttle.Abacus.UI.UI.SimpleList
 {
     public interface ISimpleListPresenter : 
         IPresenter

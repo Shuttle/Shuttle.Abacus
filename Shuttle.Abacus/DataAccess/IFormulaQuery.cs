@@ -12,8 +12,10 @@ namespace Shuttle.Abacus.DataAccess
         DataRow Get(Guid id);
         IEnumerable<DataRow> All();
 
-        void Registered(PrimitiveEvent primitiveEvent, Registered registered);
-        void Removed(PrimitiveEvent primitiveEvent, Removed removed);
-        void Renamed(PrimitiveEvent primitiveEvent, Renamed renamed);
+        void Registered(Guid formulaId, string name);
+        void Remove(Guid formulaId);
+        void Rename(Guid formulaId, string name);
+        void RemoveOperations(Guid formulaId);
+        void AddOperation(Guid formulaId, int sequenceNumber, string operation, string valueSource, string valueSelection);
     }
 }

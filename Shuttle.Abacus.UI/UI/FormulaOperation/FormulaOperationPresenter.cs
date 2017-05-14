@@ -96,7 +96,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
 
             foreach (var formulaOperation in Model.FormulaOperations)
             {
-                View.AddOperation(formulaOperation.OperationType, formulaOperation.ValueSourceType, formulaOperation.ValueSelection, formulaOperation.Text);
+                View.AddOperation(formulaOperation.Operation, formulaOperation.ValueSource, formulaOperation.ValueSelection);
             }
         }
 

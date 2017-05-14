@@ -26,11 +26,10 @@ from
             return RawQuery.Create(@"
 select
     FormulaId,
+    SequenceNumber,
     Operation,
     ValueSource,
-    ValueSelection,
-    SequenceNumber,
-    Text
+    ValueSelection
 from
     FormulaOperation
 ")
@@ -50,16 +49,11 @@ where
             throw new NotImplementedException();
         }
 
-        public IQuery Remove(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQuery RemoveOperations(Formula formula)
+        public IQuery RemoveOperations(Guid formulaId)
         {
             return
                 RawQuery.Create("delete from FormulaOperation where FormulaId = @FormulaId")
-                    .AddParameterValue(FormulaColumns.Id, formula.Id);
+                    .AddParameterValue(FormulaColumns.Id, formulaId);
         }
 
         public IQuery RemoveConstraints(Formula formula)
@@ -84,7 +78,7 @@ from
                 .AddParameterValue(FormulaColumns.Id, id);
         }
 
-        public IQuery Registered(PrimitiveEvent primitiveEvent, Registered registered)
+        public IQuery Registered(Guid formulaId, string name)
         {
             return RawQuery.Create(@"
 insert into Formula
@@ -97,18 +91,18 @@ values
     @FormulaId,
     @Name
 )")
-                .AddParameterValue(FormulaColumns.Id, primitiveEvent.Id)
-                .AddParameterValue(FormulaColumns.Name, registered.Name);
+                .AddParameterValue(FormulaColumns.Id, formulaId)
+                .AddParameterValue(FormulaColumns.Name, name);
         }
 
-        public IQuery Removed(PrimitiveEvent primitiveEvent, Removed removed)
+        public IQuery Remove(Guid formulaId)
         {
             return
                 RawQuery.Create("delete from Formula where FormulaId = @FormulaId")
-                    .AddParameterValue(FormulaColumns.Id, primitiveEvent.Id);
+                    .AddParameterValue(FormulaColumns.Id, formulaId);
         }
 
-        public IQuery Renamed(PrimitiveEvent primitiveEvent, Renamed renamed)
+        public IQuery Renamed(Guid formulaId, string name)
         {
             return RawQuery.Create(@"
 update 
@@ -118,37 +112,34 @@ set
 where
     FormulaId = @FormulaId
 ")
-                .AddParameterValue(FormulaColumns.Id, primitiveEvent.Id)
-                .AddParameterValue(FormulaColumns.Name, renamed.Name);
+                .AddParameterValue(FormulaColumns.Id, formulaId)
+                .AddParameterValue(FormulaColumns.Name, name);
         }
 
-        public IQuery AddOperation(Formula formula, FormulaOperation operation, int sequenceNumber)
+        public IQuery AddOperation(Guid formulaId, int sequenceNumber, string operation, string valueSource, string valueSelection)
         {
             return RawQuery.Create(@"
 insert into FormulaOperation
 (
     FormulaId,
+    SequenceNumber,
     Operation,
     ValueSource,
-    ValueSelection,
-    SequenceNumber,
-    Text
+    ValueSelection
 )
 values
 (
     @FormulaId,
+    @SequenceNumber,
     @Operation,
     @ValueSource,
-    @ValueSelection,
-    @SequenceNumber,
-    @Text
+    @ValueSelection
 )
 ")
-                .AddParameterValue(FormulaColumns.Id, formula.Id)
+                .AddParameterValue(FormulaColumns.Id, formulaId)
                 .AddParameterValue(FormulaColumns.OperationColumns.Operation, operation)
-                .AddParameterValue(FormulaColumns.OperationColumns.ValueSource, operation.ValueSource)
-                .AddParameterValue(FormulaColumns.OperationColumns.ValueSelection, operation.ValueSelection)
-                .AddParameterValue(FormulaColumns.OperationColumns.Text, operation.ValueSource)
+                .AddParameterValue(FormulaColumns.OperationColumns.ValueSource, valueSource)
+                .AddParameterValue(FormulaColumns.OperationColumns.ValueSelection, valueSelection)
                 .AddParameterValue(FormulaColumns.OperationColumns.SequenceNumber, sequenceNumber);
         }
 

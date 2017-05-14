@@ -114,7 +114,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
                 var item = WorkItemManager
                     .Create(string.Format("Formula operations: {0}", message.FormulaName))
-                    .ControlledBy<IFormulaController>()
+                    .ControlledBy<IFormulaOperationController>()
                     .ShowIn<IContextToolbarPresenter>()
                     .AddPresenter<IFormulaOperationPresenter>().WithModel(model)
                     .AddNavigationItem(new NavigationItem(new ResourceItem("Submit")).AssignMessage(message)).AsDefault()

@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
 
-namespace Shuttle.Abacus.UI.UI.List
+namespace Shuttle.Abacus.UI.UI.SimpleList
 {
     public partial class SimpleListView : GenericSimpleListView, ISimpleListView
     {

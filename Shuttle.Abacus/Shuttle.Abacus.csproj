@@ -224,6 +224,8 @@
     <Compile Include="Events\Argument.v1\AnswerTypeChanged.cs" />
     <Compile Include="Events\Argument.v1\ValueRemoved.cs" />
     <Compile Include="Events\Argument.v1\ValueAdded.cs" />
+    <Compile Include="Events\Formula.v1\OperationAdded.cs" />
+    <Compile Include="Events\Formula.v1\OperationsRemoved.cs" />
     <Compile Include="Events\Formula.v1\Renamed.cs" />
     <Compile Include="Events\Formula.v1\Registered.cs" />
     <Compile Include="Events\Formula.v1\Removed.cs" />
@@ -313,9 +315,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Events\FormulaOperation.v1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

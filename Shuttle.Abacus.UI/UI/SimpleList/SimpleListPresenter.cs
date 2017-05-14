@@ -8,7 +8,7 @@ using Shuttle.Abacus.UI.Models;
 using Shuttle.Abacus.UI.Navigation;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.UI.List
+namespace Shuttle.Abacus.UI.UI.SimpleList
 {
     public class SimpleListPresenter : Presenter<ISimpleListView, SimpleListModel>, ISimpleListPresenter
     {

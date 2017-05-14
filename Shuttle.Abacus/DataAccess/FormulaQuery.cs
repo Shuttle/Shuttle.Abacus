@@ -37,19 +37,29 @@ namespace Shuttle.Abacus.DataAccess
             return _databaseGateway.GetRowsUsing(_formulaQueryFactory.All());
         }
 
-        public void Registered(PrimitiveEvent primitiveEvent, Registered registered)
+        public void Registered(Guid formulaId, string name)
         {
-            _databaseGateway.ExecuteUsing(_formulaQueryFactory.Registered(primitiveEvent, registered));
+            _databaseGateway.ExecuteUsing(_formulaQueryFactory.Registered(formulaId, name));
         }
 
-        public void Removed(PrimitiveEvent primitiveEvent, Removed removed)
+        public void Remove(Guid formulaId)
         {
-            _databaseGateway.ExecuteUsing(_formulaQueryFactory.Removed(primitiveEvent, removed));
+            _databaseGateway.ExecuteUsing(_formulaQueryFactory.Remove(formulaId));
         }
 
-        public void Renamed(PrimitiveEvent primitiveEvent, Renamed renamed)
+        public void Rename(Guid formulaId, string name)
         {
-            _databaseGateway.ExecuteUsing(_formulaQueryFactory.Renamed(primitiveEvent, renamed));
+            _databaseGateway.ExecuteUsing(_formulaQueryFactory.Renamed(formulaId, name));
+        }
+
+        public void RemoveOperations(Guid formulaId)
+        {
+            _databaseGateway.ExecuteUsing(_formulaQueryFactory.RemoveOperations(formulaId));
+        }
+
+        public void AddOperation(Guid formulaId, int sequenceNumber, string operation, string valueSource, string valueSelection)
+        {
+            _databaseGateway.ExecuteUsing(_formulaQueryFactory.AddOperation(formulaId, sequenceNumber, operation, valueSource, valueSelection));
         }
     }
 }

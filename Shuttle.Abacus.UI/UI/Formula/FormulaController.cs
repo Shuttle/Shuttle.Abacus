@@ -2,8 +2,6 @@ using Shuttle.Abacus.Messages.v1;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.Formula;
-using Shuttle.Abacus.UI.Messages.Resources;
-using Shuttle.Abacus.UI.Messages.WorkItem;
 using Shuttle.Esb;
 
 namespace Shuttle.Abacus.UI.UI.Formula
@@ -50,9 +48,9 @@ namespace Shuttle.Abacus.UI.UI.Formula
         public void HandleMessage(RemoveFormulaMessage message)
         {
             Send(new RemoveFormulaCommand
-                {
-                    FormulaId = message.FormulaId
-                });
+            {
+                FormulaId = message.FormulaId
+            });
         }
     }
 }

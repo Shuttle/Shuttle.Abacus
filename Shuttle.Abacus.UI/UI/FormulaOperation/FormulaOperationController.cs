@@ -1,9 +1,10 @@
-using System;
+using System.Collections.Generic;
+using Shuttle.Abacus.Messages.v1;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Abacus.UI.Messages.Formula;
-using Shuttle.Abacus.UI.UI.List;
+using Shuttle.Abacus.UI.UI.SimpleList;
 using Shuttle.Esb;
 
 namespace Shuttle.Abacus.UI.UI.FormulaOperation
@@ -31,21 +32,33 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
 
         public void HandleMessage(ManageFormulaOperationsMessage message)
         {
-            throw new NotImplementedException();
-            //Operations = formulaView.FormulaOperations.Map(item => new FormulaOperation
-            //{
-            //    SequenceNumber = item.SequenceNumber,
-            //    ValueSelection = item.ValueSelection,
-            //    Operation = item.Operation,
-            //    ValueSource = item.ValueSource,
-            //    Text = item.Text
-            //}),
-            //Constraints = constraintView.Constraints.Map(item => new FormulaConstraint
-            //{
-            //    ArgumentName = item.ArgumentName,
-            //    Name = item.Name,
-            //    Value = item.Value
-            //})        
+            if (!WorkItem.PresentationValid())
+            {
+                return;
+            }
+
+            var view = WorkItem.GetView<IFormulaOperationView>();
+
+            var operations = new List<Abacus.Messages.v1.TransferObjects.FormulaOperation>();
+
+            var sequenceNumber = 1;
+
+            foreach (var model in view.FormulaOperations)
+            {
+                operations.Add(new Abacus.Messages.v1.TransferObjects.FormulaOperation
+                {
+                    SequenceNumber = sequenceNumber++,
+                    Operation = model.Operation,
+                    ValueSelection = model.ValueSelection,
+                    ValueSource = model.ValueSource
+                });
+            }
+
+            Send(new SetFormulaOperationsCommand
+            {
+                FormulaId = message.FormulaId,
+                Operations = operations
+            });
         }
     }
 }

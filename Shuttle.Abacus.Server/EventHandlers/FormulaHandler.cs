@@ -8,7 +8,9 @@ namespace Shuttle.Abacus.Server.EventHandlers
     public class FormulaHandler :
         IEventHandler<Registered>,
         IEventHandler<Renamed>,
-        IEventHandler<Removed>
+        IEventHandler<Removed>,
+        IEventHandler<OperationsRemoved>,
+        IEventHandler<OperationAdded>
     {
         private readonly IFormulaQuery _query;
 
@@ -21,17 +23,29 @@ namespace Shuttle.Abacus.Server.EventHandlers
 
         public void ProcessEvent(IEventHandlerContext<Registered> context)
         {
-            _query.Registered(context.PrimitiveEvent, context.Event);
+            _query.Registered(context.PrimitiveEvent.Id, context.Event.Name);
         }
 
         public void ProcessEvent(IEventHandlerContext<Removed> context)
         {
-            _query.Removed(context.PrimitiveEvent, context.Event);
+            _query.Remove(context.PrimitiveEvent.Id);
         }
 
         public void ProcessEvent(IEventHandlerContext<Renamed> context)
         {
-            _query.Renamed(context.PrimitiveEvent, context.Event);
+            _query.Rename(context.PrimitiveEvent.Id, context.Event.Name);
+        }
+
+        public void ProcessEvent(IEventHandlerContext<OperationsRemoved> context)
+        {
+            _query.RemoveOperations(context.PrimitiveEvent.Id);
+        }
+
+        public void ProcessEvent(IEventHandlerContext<OperationAdded> context)
+        {
+            var operationAdded = context.Event;
+
+            _query.AddOperation(context.PrimitiveEvent.Id, operationAdded.SequenceNumber, operationAdded.Operation, operationAdded.ValueSource, operationAdded.ValueSelection);
         }
     }
 }

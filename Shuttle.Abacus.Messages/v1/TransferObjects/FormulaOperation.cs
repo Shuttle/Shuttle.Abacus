@@ -6,6 +6,5 @@
         public string Operation { get; set; }
         public string ValueSource { get; set; }
         public string ValueSelection { get; set; }
-        public string Text { get; set; }
     }
 }

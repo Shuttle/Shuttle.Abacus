@@ -283,7 +283,6 @@
     <Compile Include="Models\FormulaModel.cs" />
     <Compile Include="Models\FormulaOperationModel.cs" />
     <Compile Include="Models\LimitModel.cs" />
-    <Compile Include="Models\OperationModel.cs" />
     <Compile Include="Models\TestModel.cs" />
     <Compile Include="Models\TestResultModel.cs" />
     <Compile Include="Models\OperationTypeModel.cs" />
@@ -378,13 +377,13 @@
     <Compile Include="UI\Grid\SimpleGridView.Designer.cs">
       <DependentUpon>SimpleGridView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\List\ISimpleListPresenter.cs" />
-    <Compile Include="UI\List\ISimpleListView.cs" />
-    <Compile Include="UI\List\SimpleListPresenter.cs" />
-    <Compile Include="UI\List\SimpleListView.cs">
+    <Compile Include="UI\SimpleList\ISimpleListPresenter.cs" />
+    <Compile Include="UI\SimpleList\ISimpleListView.cs" />
+    <Compile Include="UI\SimpleList\SimpleListPresenter.cs" />
+    <Compile Include="UI\SimpleList\SimpleListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\List\SimpleListView.Designer.cs">
+    <Compile Include="UI\SimpleList\SimpleListView.Designer.cs">
       <DependentUpon>SimpleListView.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Test\ITestPresenter.cs" />
@@ -542,7 +541,7 @@
     <EmbeddedResource Include="UI\Grid\SimpleGridView.resx">
       <DependentUpon>SimpleGridView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\List\SimpleListView.resx">
+    <EmbeddedResource Include="UI\SimpleList\SimpleListView.resx">
       <DependentUpon>SimpleListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Test\TestView.resx">

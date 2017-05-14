@@ -94,11 +94,27 @@ namespace Shuttle.Abacus.Domain
         //    return result;
         //}
 
-        public Formula AddOperation(FormulaOperation operation)
+        public OperationAdded AddOperation(int sequenceNumber, string operation, string valueSource, string valueSelection)
         {
-            _operations.Add(operation);
+            return On(new OperationAdded {
+                SequenceNumber= sequenceNumber,
+                Operation= operation,
+                ValueSource= valueSource,
+                ValueSelection = valueSelection});
+        }
 
-            return this;
+        private OperationAdded On(OperationAdded operationAdded)
+        {
+            Guard.AgainstNull(operationAdded, "operationAdded");
+
+            _operations.Add(
+                new FormulaOperation(
+                    operationAdded.SequenceNumber,
+                    operationAdded.Operation,
+                    operationAdded.ValueSource,
+                    operationAdded.ValueSelection));
+
+            return operationAdded;
         }
 
         //public decimal Execute(IMethodContext methodContext, IFormulaCalculationContext calculationContext)
@@ -235,6 +251,20 @@ namespace Shuttle.Abacus.Domain
         public static string Key(string name)
         {
             return string.Format("[formula]:name={0}", name);
+        }
+
+        public OperationsRemoved RemoveOperations()
+        {
+            return On(new OperationsRemoved());
+        }
+
+        public OperationsRemoved On(OperationsRemoved operationsRemoved)
+        {
+            Guard.AgainstNull(operationsRemoved, "operationsRemoved");
+
+            _operations.Clear();
+
+            return operationsRemoved;
         }
     }
 }

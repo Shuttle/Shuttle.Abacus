@@ -43,6 +43,11 @@
             this.ValueSelection = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ApplyButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,7 +56,7 @@
             this.MoveUpButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.MoveUpButton.Enabled = false;
             this.MoveUpButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.MoveUpButton.Location = new System.Drawing.Point(8, 216);
+            this.MoveUpButton.Location = new System.Drawing.Point(9, 214);
             this.MoveUpButton.Name = "MoveUpButton";
             this.MoveUpButton.Size = new System.Drawing.Size(72, 24);
             this.MoveUpButton.TabIndex = 2;
@@ -64,7 +69,7 @@
             this.MoveDownButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.MoveDownButton.Enabled = false;
             this.MoveDownButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.MoveDownButton.Location = new System.Drawing.Point(88, 216);
+            this.MoveDownButton.Location = new System.Drawing.Point(89, 214);
             this.MoveDownButton.Name = "MoveDownButton";
             this.MoveDownButton.Size = new System.Drawing.Size(72, 24);
             this.MoveDownButton.TabIndex = 3;
@@ -121,7 +126,7 @@
             this.RemoveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.RemoveButton.Enabled = false;
             this.RemoveButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.RemoveButton.Location = new System.Drawing.Point(384, 216);
+            this.RemoveButton.Location = new System.Drawing.Point(385, 214);
             this.RemoveButton.Name = "RemoveButton";
             this.RemoveButton.Size = new System.Drawing.Size(72, 24);
             this.RemoveButton.TabIndex = 4;
@@ -133,7 +138,7 @@
             // 
             this.AddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.AddButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.AddButton.Location = new System.Drawing.Point(304, 344);
+            this.AddButton.Location = new System.Drawing.Point(305, 365);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(72, 24);
             this.AddButton.TabIndex = 6;
@@ -144,7 +149,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 24);
+            this.label2.Location = new System.Drawing.Point(9, 24);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 0;
@@ -160,7 +165,8 @@
             "Division",
             "Multiplication",
             "Rounding",
-            "Subtraction"});
+            "Subtraction",
+            "Set"});
             this.Operation.Location = new System.Drawing.Point(12, 40);
             this.Operation.Name = "Operation";
             this.Operation.Size = new System.Drawing.Size(112, 21);
@@ -170,7 +176,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(144, 24);
+            this.label3.Location = new System.Drawing.Point(141, 24);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 13);
             this.label3.TabIndex = 2;
@@ -217,15 +223,20 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.comboBox2);
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.ValueSelection);
             this.groupBox1.Controls.Add(this.ValueSelectionLabel);
             this.groupBox1.Controls.Add(this.ValueSource);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.Operation);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(8, 260);
+            this.groupBox1.Location = new System.Drawing.Point(9, 244);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(449, 76);
+            this.groupBox1.Size = new System.Drawing.Size(449, 115);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Operation details";
@@ -235,13 +246,62 @@
             this.ApplyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ApplyButton.Enabled = false;
             this.ApplyButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.ApplyButton.Location = new System.Drawing.Point(384, 344);
+            this.ApplyButton.Location = new System.Drawing.Point(385, 365);
             this.ApplyButton.Name = "ApplyButton";
             this.ApplyButton.Size = new System.Drawing.Size(72, 24);
             this.ApplyButton.TabIndex = 7;
             this.ApplyButton.Text = "A&pply";
             this.ApplyButton.UseVisualStyleBackColor = true;
             this.ApplyButton.Click += new System.EventHandler(this.ApplyButton_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(289, 24);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(34, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Value";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(141, 64);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(89, 13);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Value source into";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(289, 64);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(54, 13);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Value into";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox1.DisplayMember = "Text";
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(144, 80);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(128, 21);
+            this.comboBox1.TabIndex = 9;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox2.DisplayMember = "Text";
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(292, 80);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(144, 21);
+            this.comboBox2.TabIndex = 10;
             // 
             // FormulaOperationView
             // 
@@ -256,7 +316,7 @@
             this.Controls.Add(this.OperationsListView);
             this.Controls.Add(this.label1);
             this.Name = "FormulaOperationView";
-            this.Size = new System.Drawing.Size(471, 381);
+            this.Size = new System.Drawing.Size(471, 403);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -281,5 +341,10 @@
         private System.Windows.Forms.ComboBox ValueSelection;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button ApplyButton;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
     }
 }

@@ -11,16 +11,15 @@ namespace Shuttle.Abacus.DataAccess
         IQuery GetOperations(Guid id);
         IQuery Get(Guid id);
         IQuery Add(Formula formula);
-        IQuery Remove(Guid id);
-        IQuery RemoveOperations(Formula formula);
-        IQuery AddOperation(Formula formula, FormulaOperation operation, int sequenceNumber);
+        IQuery RemoveOperations(Guid formulaId);
+        IQuery AddOperation(Guid formulaId, int sequenceNumber, string operation, string valueSource, string valueSelection);
         IQuery Save(Formula item);
         IQuery All();
         IQuery AddConstraint(Formula formula, FormulaConstraint constraint);
         IQuery RemoveConstraints(Formula formula);
         IQuery GetConstraints(Guid id);
-        IQuery Registered(PrimitiveEvent primitiveEvent, Registered registered);
-        IQuery Removed(PrimitiveEvent primitiveEvent, Removed removed);
-        IQuery Renamed(PrimitiveEvent primitiveEvent, Renamed renamed);
+        IQuery Registered(Guid formulaId, string name);
+        IQuery Remove(Guid formulaId);
+        IQuery Renamed(Guid formulaId, string name);
     }
 }

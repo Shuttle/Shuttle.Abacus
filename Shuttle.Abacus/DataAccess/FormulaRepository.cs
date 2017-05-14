@@ -39,33 +39,33 @@ namespace Shuttle.Abacus.DataAccess
 
         public override Formula Get(Guid id)
         {
-            var formulaRow = _databaseGateway.GetSingleRowUsing(_formulaQueryFactory.Get(id));
+            throw new NotImplementedException();
+            //var formulaRow = _databaseGateway.GetSingleRowUsing(_formulaQueryFactory.Get(id));
 
-            Guarded.Entity<Formula>(formulaRow, id);
+            //Guarded.Entity<Formula>(formulaRow, id);
 
-            var result = new Formula(id);
+            //var result = new Formula(id);
 
-            foreach (var row in _databaseGateway.GetRowsUsing(_formulaQueryFactory.GetOperations(id)))
-            {
-                result.AddOperation(new FormulaOperation(
-                    FormulaColumns.OperationColumns.SequenceNumber.MapFrom(row),
-                    FormulaColumns.OperationColumns.Operation.MapFrom(row),
-                    FormulaColumns.OperationColumns.ValueSource.MapFrom(row),
-                    FormulaColumns.OperationColumns.ValueSelection.MapFrom(row),
-                    FormulaColumns.OperationColumns.Text.MapFrom(row)));
-            }
+            //foreach (var row in _databaseGateway.GetRowsUsing(_formulaQueryFactory.GetOperations(id)))
+            //{
+            //    result.AddOperation(new FormulaOperation(
+            //        FormulaColumns.OperationColumns.SequenceNumber.MapFrom(row),
+            //        FormulaColumns.OperationColumns.Operation.MapFrom(row),
+            //        FormulaColumns.OperationColumns.ValueSource.MapFrom(row),
+            //        FormulaColumns.OperationColumns.ValueSelection.MapFrom(row)));
+            //}
 
-            foreach (var row in _databaseGateway.GetRowsUsing(_formulaQueryFactory.GetConstraints(id)))
-            {
-            }
+            //foreach (var row in _databaseGateway.GetRowsUsing(_formulaQueryFactory.GetConstraints(id)))
+            //{
+            //}
 
-            return result;
+            //return result;
         }
 
         public void Save(Formula formula)
         {
             _databaseGateway.ExecuteUsing(_formulaQueryFactory.Save(formula));
-            _databaseGateway.ExecuteUsing(_formulaQueryFactory.RemoveOperations(formula));
+            _databaseGateway.ExecuteUsing(_formulaQueryFactory.RemoveOperations(formula.Id));
             _databaseGateway.ExecuteUsing(_formulaQueryFactory.RemoveConstraints(formula));
 
             AddOperations(formula);
@@ -82,14 +82,15 @@ namespace Shuttle.Abacus.DataAccess
 
         private void AddOperations(Formula formula)
         {
-            var sequence = 1;
+            throw new NotImplementedException();
+            //var sequence = 1;
 
-            formula.Operations.ForEach(operation =>
-            {
-                _databaseGateway.ExecuteUsing(_formulaQueryFactory.AddOperation(formula, operation, sequence));
+            //formula.Operations.ForEach(operation =>
+            //{
+            //    _databaseGateway.ExecuteUsing(_formulaQueryFactory.AddOperation(formula, sequence, TODO, TODO, TODO));
 
-                sequence++;
-            });
+            //    sequence++;
+            //});
         }
     }
 }
