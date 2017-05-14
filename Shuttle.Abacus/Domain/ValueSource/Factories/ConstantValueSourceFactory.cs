@@ -2,12 +2,10 @@ using System;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class DecimalValueSourceFactory : IValueSourceFactory
+    public class ConstantValueSourceFactory : IValueSourceFactory
     {
-        public string Name => "Decimal";
-
-        public string Text => "Decimal";
-
+        public string Name => "Constant";
+        public string Text => "Constant";
         public string Type => "Fixed";
 
         public IValueSource Create(string value)
@@ -19,7 +17,7 @@ namespace Shuttle.Abacus.Domain
                 throw new ArgumentException();
             }
 
-            return new DecimalValueSource(dec);
+            return new ConstantValueSource(dec);
         }
     }
 }

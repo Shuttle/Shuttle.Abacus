@@ -25,22 +25,25 @@ namespace Shuttle.Abacus.UI.Coordinators
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IFormulaQuery _formulaQuery;
         private readonly IValueSourceTypeQuery _valueSourceTypeQuery;
+        private readonly IMatrixQuery _matrixQuery;
 
         public FormulaOperationCoordinator(IDatabaseContextFactory databaseContextFactory, IFormulaQuery formulaQuery,
-            IArgumentQuery argumentQuery, IOperationTypeQuery constraintTypeQuery,
-            IValueSourceTypeQuery valueSourceTypeQuery)
+            IArgumentQuery argumentQuery, IOperationTypeQuery constraintTypeQuery, IValueSourceTypeQuery valueSourceTypeQuery,
+            IMatrixQuery matrixQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(formulaQuery, "formulaQuery");
             Guard.AgainstNull(argumentQuery, "argumentQuery");
             Guard.AgainstNull(constraintTypeQuery, "constraintTypeQuery");
             Guard.AgainstNull(valueSourceTypeQuery, "valueSourceTypeQuery");
+            Guard.AgainstNull(matrixQuery, "matrixQuery");
 
             _databaseContextFactory = databaseContextFactory;
             _formulaQuery = formulaQuery;
             _argumentQuery = argumentQuery;
             _constraintTypeQuery = constraintTypeQuery;
             _valueSourceTypeQuery = valueSourceTypeQuery;
+            _matrixQuery = matrixQuery;
         }
 
         public void HandleMessage(PopulateResourceMessage message)
@@ -53,23 +56,23 @@ namespace Shuttle.Abacus.UI.Coordinators
             switch (message.Resource.Type)
             {
                 case Resource.ResourceType.Container:
-                {
-                    var formulaId = message.RelatedResources[ResourceKeys.Formula].Key;
-
-                    using (_databaseContextFactory.Create())
                     {
-                        foreach (var row in _formulaQuery.Operations(formulaId))
-                        {
-                            message.Resources.Add(
-                                new Resource(ResourceKeys.FormulaOperation, Guid.Empty,
-                                        FormulaColumns.OperationColumns.ValueSource.MapFrom(row),
-                                        ImageResources.FormulaOperation)
-                                    .AsLeaf());
-                        }
-                    }
+                        var formulaId = message.RelatedResources[ResourceKeys.Formula].Key;
 
-                    break;
-                }
+                        using (_databaseContextFactory.Create())
+                        {
+                            foreach (var row in _formulaQuery.Operations(formulaId))
+                            {
+                                message.Resources.Add(
+                                    new Resource(ResourceKeys.FormulaOperation, Guid.Empty,
+                                            FormulaColumns.OperationColumns.ValueSource.MapFrom(row),
+                                            ImageResources.FormulaOperation)
+                                        .AsLeaf());
+                            }
+                        }
+
+                        break;
+                    }
             }
         }
 
@@ -83,14 +86,14 @@ namespace Shuttle.Abacus.UI.Coordinators
             switch (message.Item.Type)
             {
                 case Resource.ResourceType.Container:
-                {
-                    message.NavigationItems.Add(
-                        new NavigationItem(new ResourceItem("Manage", "FormulaOperation")).AssignMessage(
-                            new ManageFormulaOperationsMessage(message.RelatedItems[ResourceKeys.Formula].Text,
-                                message.RelatedItems[ResourceKeys.Formula].Key)));
+                    {
+                        message.NavigationItems.Add(
+                            new NavigationItem(new ResourceItem("Manage", "FormulaOperation")).AssignMessage(
+                                new ManageFormulaOperationsMessage(message.RelatedItems[ResourceKeys.Formula].Text,
+                                    message.RelatedItems[ResourceKeys.Formula].Key)));
 
-                    break;
-                }
+                        break;
+                    }
             }
         }
 
@@ -104,11 +107,13 @@ namespace Shuttle.Abacus.UI.Coordinators
                     Arguments = _argumentQuery.All().Map(row => new ArgumentModel(row)),
                     FormulaOperations =
                         _formulaQuery.Operations(message.FormulaId).Map(row => new FormulaOperationModel(row)),
-                    ValueSourceTypes = _valueSourceTypeQuery.All().Map(row => new ValueSourceTypeModel(row))
+                    ValueSourceTypes = _valueSourceTypeQuery.All().Map(row => new ValueSourceTypeModel(row)),
+                    Matrixes = _matrixQuery.All().Map(row => new MatrixModel(row)),
+                    Formulas = _formulaQuery.All().Map(row => new FormulaModel(row))
                 };
 
                 var item = WorkItemManager
-                    .Create(string.Format("Formula constraints: {0}", message.FormulaName))
+                    .Create(string.Format("Formula operations: {0}", message.FormulaName))
                     .ControlledBy<IFormulaController>()
                     .ShowIn<IContextToolbarPresenter>()
                     .AddPresenter<IFormulaOperationPresenter>().WithModel(model)

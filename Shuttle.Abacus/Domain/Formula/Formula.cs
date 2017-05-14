@@ -136,7 +136,7 @@ namespace Shuttle.Abacus.Domain
         //    //            operation.ValueSource.Description(operand, methodContext));
         //    //    }
 
-        //    //    calculationContext.SetFormulaTotal(operation.Execute(calculationContext.FormulaTotal, operand));
+        //    //    calculationContext.SetFormulaTotal(operation.Execute(calculationContext.RunningTotal, operand));
 
         //    //    if (!methodContext.OK)
         //    //    {
@@ -149,7 +149,7 @@ namespace Shuttle.Abacus.Domain
         //    //    methodContext.Log();
         //    //}
 
-        //    //return calculationContext.FormulaTotal;
+        //    //return calculationContext.RunningTotal;
         //}
 
         public Formula Copy()

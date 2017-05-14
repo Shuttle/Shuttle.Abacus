@@ -194,7 +194,7 @@ namespace Shuttle.Abacus.Domain
                     }
                 case "decimal":
                     {
-                        return new DecimalValueType(name, answer);
+                        return new ConstantValueType(name, answer);
                     }
                 case "integer":
                     {

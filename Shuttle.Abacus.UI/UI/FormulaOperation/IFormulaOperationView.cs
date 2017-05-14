@@ -19,8 +19,6 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
         string NameValue { get; set; }
         void PopulateValueSources(IEnumerable<ValueSourceTypeModel> models);
         void PopulateArguments(IEnumerable<ArgumentModel> arguments);
-        void EnableValueSelection(string text);
-        void EnableValueEntry(string text);
         void ShowValueSourceError();
         void ShowValueSelectionError(string message);
 
@@ -28,9 +26,11 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
         void RemoveSelectedItem();
         void DisableValues();
 
-        void AddOperation(string operationType, string valueSourceType, string valueSelection, string text);
+        void AddOperation(string operation, string valueSource, string valueSelection, string text);
         void PopulateOperations(IEnumerable<string> enumerable);
-        void PopulateValues(IEnumerable<string> enumerable);
-        void PopulateDecimalTables(IEnumerable<MatrixModel> list);
+        void PopulateValues(IEnumerable<string> values);
+        void PopulateMatrixes(IEnumerable<MatrixModel> matrixes);
+        void ClearValueSelection();
+        void PopulateFormulas(IEnumerable<FormulaModel> formulas);
     }
 }

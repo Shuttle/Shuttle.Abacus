@@ -2,11 +2,11 @@ using System;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class DecimalValueSource : IValueSource, IValueSelectionHolder
+    public class ConstantValueSource : IValueSource, IValueSelectionHolder
     {
         private readonly decimal value;
 
-        public DecimalValueSource(decimal value)
+        public ConstantValueSource(decimal value)
         {
             this.value = value;
         }
@@ -18,13 +18,13 @@ namespace Shuttle.Abacus.Domain
             return value;
         }
 
-        public string Name => "Decimal";
+        public string Name => "Constant";
 
         public object Text => Convert.ToString(value);
 
         public IValueSource Copy()
         {
-            return new DecimalValueSource(value);
+            return new ConstantValueSource(value);
         }
 
         public string Description(decimal operand, IMethodContext methodContext)

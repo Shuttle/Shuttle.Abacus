@@ -183,10 +183,10 @@
             this.ValueSource.FormattingEnabled = true;
             this.ValueSource.Items.AddRange(new object[] {
             "Argument",
-            "Decimal",
+            "Constant",
             "Matrix",
-            "RunningTotal",
-            "FormulaResult"});
+            "Formula",
+            "RunningTotal"});
             this.ValueSource.Location = new System.Drawing.Point(144, 40);
             this.ValueSource.Name = "ValueSource";
             this.ValueSource.Size = new System.Drawing.Size(128, 21);
@@ -206,7 +206,6 @@
             this.ValueSelection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ValueSelection.DisplayMember = "Text";
-            this.ValueSelection.Enabled = false;
             this.ValueSelection.FormattingEnabled = true;
             this.ValueSelection.Location = new System.Drawing.Point(292, 40);
             this.ValueSelection.Name = "ValueSelection";

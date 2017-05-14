@@ -9,7 +9,7 @@ namespace Shuttle.Abacus.Tests
         //[Test]
         //public void Should_be_able_to_create_a_formula_with_an_initial_value()
         //{
-        //    var formula = new Formula(new DecimalValueSource(250));
+        //    var formula = new Formula(new ConstantValueSource(250));
 
         //    var methodContext = new FormulaContext();
 
@@ -21,10 +21,10 @@ namespace Shuttle.Abacus.Tests
         //{
         //    var formula = new Formula();
 
-        //    formula.AddOperation(new AdditionOperation(new DecimalValueSource(10)));
-        //    formula.AddOperation(new SubtractionOperation(new DecimalValueSource(2)));
-        //    formula.AddOperation(new MultiplicationOperation(new DecimalValueSource(5)));
-        //    formula.AddOperation(new DivisionOperation(new DecimalValueSource(2)));
+        //    formula.AddOperation(new AdditionOperation(new ConstantValueSource(10)));
+        //    formula.AddOperation(new SubtractionOperation(new ConstantValueSource(2)));
+        //    formula.AddOperation(new MultiplicationOperation(new ConstantValueSource(5)));
+        //    formula.AddOperation(new DivisionOperation(new ConstantValueSource(2)));
 
         //    var methodContext = new FormulaContext();
 
@@ -44,17 +44,17 @@ namespace Shuttle.Abacus.Tests
         //                                                                           {
         //                                                                               Name = "SumInsured"
         //                                                                           })));
-        //    formula.AddOperation(new SquareRootOperation(new FormulaTotalValueSource()));
-        //    formula.AddOperation(new MultiplicationOperation(new DecimalValueSource(-150)));
-        //    formula.AddOperation(new RoundingOperation(new DecimalValueSource(2)));
+        //    formula.AddOperation(new SquareRootOperation(new RunningTotalValueSource()));
+        //    formula.AddOperation(new MultiplicationOperation(new ConstantValueSource(-150)));
+        //    formula.AddOperation(new RoundingOperation(new ConstantValueSource(2)));
         //    formula.AddOperation(
         //        new MultiplicationOperation(new FormulaSubTotalValueSource(new FormulaCalculation("TOTAL", true))));
-        //    formula.AddOperation(new DivisionOperation(new DecimalValueSource(100)));
+        //    formula.AddOperation(new DivisionOperation(new ConstantValueSource(100)));
 
         //    var context =
         //        new FormulaContext("test")
-        //            .AddValue(new DecimalValueType("VoluntaryExcess", 1000))
-        //            .AddValue(new DecimalValueType("SumInsured", 980000));
+        //            .AddValue(new ConstantValueType("VoluntaryExcess", 1000))
+        //            .AddValue(new ConstantValueType("SumInsured", 980000));
 
         //    var result = new CalculationCollectionResult(new CalculationCollection("TOTAL"), 636.99m);
 

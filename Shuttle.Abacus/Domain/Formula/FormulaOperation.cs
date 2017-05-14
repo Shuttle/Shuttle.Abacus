@@ -2,12 +2,11 @@ namespace Shuttle.Abacus.Domain
 {
     public enum ValueSourceType
     {
-        ArgumentAnswer = 0,
-        Decimal = 1,
-        RunningTotal = 2,
-        FormulaTotal = 5,
-        Matrix = 6,
-        FormulaResult = 7
+        Argument = 1,
+        Constant = 2,
+        Matrix = 3,
+        Formula = 4,
+        RunningTotal = 5
     }
 
     public class FormulaOperation

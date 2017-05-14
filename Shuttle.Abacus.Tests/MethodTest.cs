@@ -19,7 +19,7 @@ namespace Shuttle.Abacus.Tests
         //        new Formula()
         //            .AddOperation(
         //            new AdditionOperation(
-        //                new DecimalValueSource(100))));
+        //                new ConstantValueSource(100))));
 
         //    method.AddCalculation(formula);
 
@@ -34,7 +34,7 @@ namespace Shuttle.Abacus.Tests
         //    limit.AddFormula(new Formula()
         //                         .AddOperation(
         //                         new AdditionOperation(
-        //                             new DecimalValueSource(200))));
+        //                             new ConstantValueSource(200))));
 
         //    method.AddLimit(limit);
 
@@ -64,7 +64,7 @@ namespace Shuttle.Abacus.Tests
 
         //    var formula = new Formula();
 
-        //    formula.AddOperation(new AdditionOperation(new DecimalValueSource(100)));
+        //    formula.AddOperation(new AdditionOperation(new ConstantValueSource(100)));
 
         //    formula1.AddFormula(formula);
 

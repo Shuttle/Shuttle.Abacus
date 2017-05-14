@@ -109,42 +109,30 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
                 return;
             }
 
+            View.ClearValueSelection();
+
             switch (type)
             {
-                case ValueSourceType.ArgumentAnswer:
+                case ValueSourceType.Argument:
                     {
-                        View.EnableValueSelection("Argument");
                         View.PopulateArguments(Model.Arguments);
 
                         break;
                     }
-                case ValueSourceType.Decimal:
+                case ValueSourceType.Constant:
                     {
-                        View.EnableValueEntry("Value");
-
-                        break;
-                    }
-                case ValueSourceType.RunningTotal:
-                    {
-                        throw new NotImplementedException();
-                        View.EnableValueSelection("Calculation");
-                        //View.PopulatePrecedingCalculations(Model.PrecedingCalculations);
-
                         break;
                     }
                 case ValueSourceType.Matrix:
                     {
-                        throw new NotImplementedException();
-                        View.EnableValueSelection("Decimal Table");
-                        //View.PopulateDecimalTables(Model.DecimalTables);
+                        View.PopulateMatrixes(Model.Matrixes);
 
                         break;
                     }
-                case ValueSourceType.FormulaResult:
+                case ValueSourceType.Formula:
+                case ValueSourceType.RunningTotal:
                     {
-                        throw new NotImplementedException();
-                        View.EnableValueSelection("FormulaOperation");
-                        //View.PopulateFormulaOperations(Model.Methods);
+                        View.PopulateFormulas(Model.Formulas);
 
                         break;
                     }

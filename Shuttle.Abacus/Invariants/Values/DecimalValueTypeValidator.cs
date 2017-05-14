@@ -5,7 +5,7 @@ namespace Shuttle.Abacus.Invariants.Values
 {
     public class DecimalValueTypeValidator : IValueTypeValidator
     {
-        public static string TypeName = "Decimal";
+        public static string TypeName = "Constant";
 
         public string Type => TypeName;
 

@@ -2,7 +2,7 @@ using Shuttle.Abacus.Localisation;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class FormulaTotalValueSource : IValueSource
+    public class RunningTotalValueSource : IValueSource
     {
         public decimal Operand(IMethodContext methodContext, ICalculationContext calculationContext)
         {
@@ -14,13 +14,13 @@ namespace Shuttle.Abacus.Domain
             return string.Format("{0} (formula total)", operand.ToString(Resources.FormatDecimal));
         }
 
-        public string Name => "FormulaTotal";
+        public string Name => "RunningTotal";
 
         public object Text => string.Empty;
 
         public IValueSource Copy()
         {
-            return new FormulaTotalValueSource();
+            return new RunningTotalValueSource();
         }
     }
 }

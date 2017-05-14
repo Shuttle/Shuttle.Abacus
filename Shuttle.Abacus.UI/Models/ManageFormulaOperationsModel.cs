@@ -8,5 +8,7 @@ namespace Shuttle.Abacus.UI.Models
         public IEnumerable<ValueSourceTypeModel> ValueSourceTypes { get; set; }
         public IEnumerable<FormulaOperationModel> FormulaOperations { get; set; }
         public IEnumerable<ArgumentModel> Arguments { get; set; }
+        public IEnumerable<MatrixModel> Matrixes { get; set; }
+        public IEnumerable<FormulaModel> Formulas { get; set; }
     }
 }
