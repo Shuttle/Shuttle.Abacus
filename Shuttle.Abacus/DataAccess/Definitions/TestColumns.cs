@@ -15,8 +15,8 @@ namespace Shuttle.Abacus.DataAccess
         public static readonly MappedColumn<string> ExpectedResultType =
             new MappedColumn<string>("ExpectedResultType", DbType.AnsiString);
 
-        public static readonly MappedColumn<string> ComparisonType =
-            new MappedColumn<string>("ExpectedResultType", DbType.AnsiString);
+        public static readonly MappedColumn<string> Comparison =
+            new MappedColumn<string>("Comparison", DbType.AnsiString);
 
         public static readonly MappedColumn<Guid> Id =
             new MappedColumn<Guid>("TestId", DbType.Guid);

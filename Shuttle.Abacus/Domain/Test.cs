@@ -10,13 +10,13 @@ namespace Shuttle.Abacus.Domain
         private readonly List<TestArgumentValue> _values = new List<TestArgumentValue>();
 
         public Test(Guid formulaId, string description, string expectedResult, string expectedResultType,
-            string comparisonType)
-            : this(Guid.NewGuid(), formulaId, description, expectedResult, expectedResultType, comparisonType)
+            string comparison)
+            : this(Guid.NewGuid(), formulaId, description, expectedResult, expectedResultType, comparison)
         {
         }
 
         public Test(Guid id, Guid formulaId, string description, string expectedResult, string expectedResultType,
-            string comparisonType)
+            string comparison)
         {
             Guard.AgainstNullOrEmptyString(description, "description");
 
@@ -25,7 +25,7 @@ namespace Shuttle.Abacus.Domain
             Description = description;
             ExpectedResult = expectedResult;
             ExpectedResultType = expectedResultType;
-            ComparisonType = comparisonType;
+            Comparison = comparison;
         }
 
         public Guid Id { get; }
@@ -33,7 +33,7 @@ namespace Shuttle.Abacus.Domain
         public string Description { get; }
         public string ExpectedResult { get; }
         public string ExpectedResultType { get; }
-        public string ComparisonType { get; }
+        public string Comparison { get; }
 
         public IEnumerable<TestArgumentValue> ArgumentValues => new ReadOnlyCollection<TestArgumentValue>(_values);
 

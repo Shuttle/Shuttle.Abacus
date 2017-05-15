@@ -14,7 +14,8 @@ namespace Shuttle.Abacus.Server.CommandHandlers
         IMessageHandler<SetFormulaMaxmimumCommand>,
         IMessageHandler<SetFormulaMinimumCommand>,
         IMessageHandler<RemoveFormulaCommand>,
-        IMessageHandler<SetFormulaOperationsCommand>
+        IMessageHandler<SetFormulaOperationsCommand>,
+        IMessageHandler<SetFormulaConstraintsCommand>
     {
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IEventStore _eventStore;
@@ -162,6 +163,43 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                         operation.Operation,
                         operation.ValueSource,
                         operation.ValueSelection));
+                }
+
+                _eventStore.Save(stream);
+            }
+        }
+
+        public void ProcessMessage(IHandlerContext<SetFormulaConstraintsCommand> context)
+        {
+            var message = context.Message;
+
+            using (_databaseContextFactory.Create())
+            {
+                var stream = _eventStore.Get(message.FormulaId);
+
+                if (stream.IsEmpty)
+                {
+                    return;
+                }
+
+                var formula = new Formula(message.FormulaId);
+
+                stream.Apply(formula);
+
+                if (formula.Removed)
+                {
+                    return;
+                }
+
+                stream.AddEvent(formula.RemoveConstraints());
+
+                foreach (var operation in message.Constraints)
+                {
+                    stream.AddEvent(formula.AddConstraint(
+                        operation.SequenceNumber,
+                        operation.ArgumentName,
+                        operation.Comparison,
+                        operation.Value));
                 }
 
                 _eventStore.Save(stream);

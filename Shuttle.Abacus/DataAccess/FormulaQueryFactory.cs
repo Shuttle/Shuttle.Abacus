@@ -27,6 +27,8 @@ select
     ValueSelection
 from
     FormulaOperation
+where
+    FormulaId = @FormulaId
 ")
                 .AddParameterValue(FormulaColumns.Id, id);
         }
@@ -51,11 +53,11 @@ where
                     .AddParameterValue(FormulaColumns.Id, formulaId);
         }
 
-        public IQuery RemoveConstraints(Formula formula)
+        public IQuery RemoveConstraints(Guid formulaId)
         {
             return
                 RawQuery.Create("delete from FormulaConstraint where FormulaId = @FormulaId")
-                    .AddParameterValue(FormulaColumns.Id, formula.Id);
+                    .AddParameterValue(FormulaColumns.Id, formulaId);
         }
 
         public IQuery Constraints(Guid id)
@@ -65,10 +67,12 @@ select
     FormulaId,
     SequenceNumber,
     ArgumentName,
-    ComparisonType,
+    Comparison,
     Value
 from
     FormulaConstraint
+where
+    FormulaId = @FormulaId
 ")
                 .AddParameterValue(FormulaColumns.Id, id);
         }
@@ -158,30 +162,30 @@ where
             return RawQuery.Create(SelectClause);
         }
 
-        public IQuery AddConstraint(Formula formula, FormulaConstraint constraint)
+        public IQuery AddConstraint(Guid formulaId, int sequenceNumber, string argumentName, string comparison, string value)
         {
             return RawQuery.Create(@"
-insert into Constraint
+insert into FormulaConstraint
 (
     FormulaId,
-    SequenceNumber
+    SequenceNumber,
     ArgumentName,
-    ComparisonType,
+    Comparison,
     Value
 )
 values
 (
     @FormulaId,
-    @SequenceNumber
+    @SequenceNumber,
     @ArgumentName,
-    @ComparisonType,
+    @Comparison,
     @Value
 )")
-                .AddParameterValue(FormulaColumns.Id, formula.Id)
-                .AddParameterValue(FormulaColumns.ConstraintColumns.SequenceNumber, constraint.SequenceNumber)
-                .AddParameterValue(FormulaColumns.ConstraintColumns.ArgumentName, constraint.ArgumentName)
-                .AddParameterValue(FormulaColumns.ConstraintColumns.ComparisonType, constraint.ComparisonType)
-                .AddParameterValue(FormulaColumns.ConstraintColumns.Value, constraint.Value);
+                .AddParameterValue(FormulaColumns.Id, formulaId)
+                .AddParameterValue(FormulaColumns.ConstraintColumns.SequenceNumber, sequenceNumber)
+                .AddParameterValue(FormulaColumns.ConstraintColumns.ArgumentName, argumentName)
+                .AddParameterValue(FormulaColumns.ConstraintColumns.Comparison, comparison)
+                .AddParameterValue(FormulaColumns.ConstraintColumns.Value, value);
         }
     }
 }

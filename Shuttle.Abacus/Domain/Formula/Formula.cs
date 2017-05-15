@@ -29,13 +29,6 @@ namespace Shuttle.Abacus.Domain
         public bool HasOperations => _operations.Count > 0;
         public bool Removed { get; private set; }
 
-        public void AddConstraint(FormulaConstraint item)
-        {
-            Guard.AgainstNull(item, "item");
-
-            _constraints.Add(item);
-        }
-
         //public bool IsSatisfiedBy(IMethodContext collectionMethodContext)
         //{
         //    return
@@ -115,6 +108,29 @@ namespace Shuttle.Abacus.Domain
                     operationAdded.ValueSelection));
 
             return operationAdded;
+        }
+
+        public ConstraintAdded AddConstraint(int sequenceNumber, string argumentName, string comparison, string value)
+        {
+            return On(new ConstraintAdded {
+                SequenceNumber= sequenceNumber,
+                ArgumentName = argumentName,
+                Comparison= comparison,
+                Value = value});
+        }
+
+        public ConstraintAdded On(ConstraintAdded constraintAdded)
+        {
+            Guard.AgainstNull(constraintAdded, "constraintAdded");
+
+            _constraints.Add(
+                new FormulaConstraint(
+                    constraintAdded.SequenceNumber,
+                    constraintAdded.ArgumentName,
+                    constraintAdded.Comparison,
+                    constraintAdded.Value));
+
+            return constraintAdded;
         }
 
         //public decimal Execute(IMethodContext methodContext, IFormulaCalculationContext calculationContext)
@@ -265,6 +281,20 @@ namespace Shuttle.Abacus.Domain
             _operations.Clear();
 
             return operationsRemoved;
+        }
+
+        public ConstraintsRemoved RemoveConstraints()
+        {
+            return On(new ConstraintsRemoved());
+        }
+
+        public ConstraintsRemoved On(ConstraintsRemoved constraintsRemoved)
+        {
+            Guard.AgainstNull(constraintsRemoved, "constraintsRemoved");
+
+            _constraints.Clear();
+
+            return constraintsRemoved;
         }
     }
 }

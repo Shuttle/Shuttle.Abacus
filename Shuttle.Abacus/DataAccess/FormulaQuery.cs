@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Shuttle.Abacus.Events.Formula.v1;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
-using Shuttle.Recall;
 
 namespace Shuttle.Abacus.DataAccess
 {
@@ -57,9 +55,22 @@ namespace Shuttle.Abacus.DataAccess
             _databaseGateway.ExecuteUsing(_queryFactory.RemoveOperations(formulaId));
         }
 
-        public void AddOperation(Guid formulaId, int sequenceNumber, string operation, string valueSource, string valueSelection)
+        public void AddOperation(Guid formulaId, int sequenceNumber, string operation, string valueSource,
+            string valueSelection)
         {
-            _databaseGateway.ExecuteUsing(_queryFactory.AddOperation(formulaId, sequenceNumber, operation, valueSource, valueSelection));
+            _databaseGateway.ExecuteUsing(_queryFactory.AddOperation(formulaId, sequenceNumber, operation, valueSource,
+                valueSelection));
+        }
+
+        public void RemoveConstraints(Guid formulaId)
+        {
+            _databaseGateway.ExecuteUsing(_queryFactory.RemoveConstraints(formulaId));
+        }
+
+        public void AddConstraint(Guid formulaId, int sequenceNumber, string argumentName, string comparison,
+            string value)
+        {
+            _databaseGateway.ExecuteUsing(_queryFactory.AddConstraint(formulaId, sequenceNumber, argumentName, comparison, value));
         }
 
         public IEnumerable<DataRow> Constraints(Guid formulaId)

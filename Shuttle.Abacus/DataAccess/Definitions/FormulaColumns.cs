@@ -24,7 +24,7 @@ namespace Shuttle.Abacus.DataAccess
         {
             public static readonly MappedColumn<int> SequenceNumber = new MappedColumn<int>("SequenceNumber", DbType.Int32);
             public static readonly MappedColumn<string> ArgumentName = new MappedColumn<string>("ArgumentName", DbType.AnsiString);
-            public static readonly MappedColumn<string> ComparisonType = new MappedColumn<string>("ComparisonType", DbType.AnsiString);
+            public static readonly MappedColumn<string> Comparison = new MappedColumn<string>("Comparison", DbType.AnsiString);
             public static readonly MappedColumn<string> Value = new MappedColumn<string>("Value", DbType.AnsiString);
         }
     }

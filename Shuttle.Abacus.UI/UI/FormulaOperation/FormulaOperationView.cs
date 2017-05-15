@@ -98,10 +98,6 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
 
         public void PopulateArguments(IEnumerable<ArgumentModel> arguments)
         {
-            // includes input *and* output arguments and special %running
-
-            ValueSelection.Items.Add("%running-total");
-
             arguments.ForEach(model => { ValueSelection.Items.Add(model.Name); });
         }
 

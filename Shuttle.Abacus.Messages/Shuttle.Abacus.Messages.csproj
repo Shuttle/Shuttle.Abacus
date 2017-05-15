@@ -79,6 +79,7 @@
     <Compile Include="v1\PrintTestCommand.cs" />
     <Compile Include="v1\RegisterFormulaCommand.cs" />
     <Compile Include="v1\RunTestCommand.cs" />
+    <Compile Include="v1\SetFormulaConstraintsCommand.cs" />
     <Compile Include="v1\SetFormulaOperationsCommand.cs" />
     <Compile Include="v1\SetPermissionsCommand.cs" />
     <Compile Include="v1\TransferObjects\ArgumentAnswer.cs" />

@@ -3,6 +3,7 @@ using Shuttle.Abacus.Messages.v1;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.Formula;
+using Shuttle.Abacus.UI.UI.FormulaConstraint;
 using Shuttle.Abacus.UI.UI.FormulaOperation;
 using Shuttle.Esb;
 
@@ -88,7 +89,33 @@ namespace Shuttle.Abacus.UI.UI.Formula
 
         public void HandleMessage(ManageFormulaConstraintsMessage message)
         {
-            throw new System.NotImplementedException();
+            if (!WorkItem.PresentationValid())
+            {
+                return;
+            }
+
+            var view = WorkItem.GetView<IFormulaConstraintView>();
+
+            var constraints = new List<Abacus.Messages.v1.TransferObjects.FormulaConstraint>();
+
+            var sequenceNumber = 1;
+
+            foreach (var model in view.FormulaConstraints)
+            {
+                constraints.Add(new Abacus.Messages.v1.TransferObjects.FormulaConstraint
+                {
+                    SequenceNumber = sequenceNumber++,
+                    ArgumentName = model.ArgumentName,
+                    Comparison = model.Comparison,
+                    Value = model.Value
+                });
+            }
+
+            Send(new SetFormulaConstraintsCommand
+            {
+                FormulaId = message.FormulaId,
+                Constraints = constraints
+            });
         }
     }
 }

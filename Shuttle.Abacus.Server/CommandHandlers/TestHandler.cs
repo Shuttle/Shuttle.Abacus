@@ -41,7 +41,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 
             using (_databaseContextFactory.Create())
             {
-                var test = new Test(message.MethodTestId, message.MethodId, message.Description, message.ExpectedResult, message.ExpectedResultType, message.ComparisonType);
+                var test = new Test(message.MethodTestId, message.MethodId, message.Description, message.ExpectedResult, message.ExpectedResultType, message.Comparison);
 
                 foreach (var answer in message.ArgumentAnswers)
                 {
@@ -58,7 +58,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 
             using (_databaseContextFactory.Create())
             {
-                var test = new Test(message.MethodTestId, message.MethodId, message.Description, message.ExpectedResult, message.ExpectedResultType, message.ComparisonType);
+                var test = new Test(message.MethodTestId, message.MethodId, message.Description, message.ExpectedResult, message.ExpectedResultType, message.Comparison);
 
                 foreach (var answer in message.ArgumentAnswers)
                 {

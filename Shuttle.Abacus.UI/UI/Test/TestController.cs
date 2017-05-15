@@ -25,13 +25,6 @@ namespace Shuttle.Abacus.UI.UI.Test
 
             var view = WorkItem.GetView<ITestView>();
 
-            if (view.HasInvalidArgumentAnswers())
-            {
-                WorkItem.GetPresenter<ITestPresenter>().ShowInvalidArgumentAnswersMessage();
-
-                return;
-            } 
-            
             var command = new CreateTestCommand
                           {
                               MethodTestId = Guid.NewGuid(),
@@ -64,13 +57,6 @@ namespace Shuttle.Abacus.UI.UI.Test
         {
             var view = WorkItem.GetView<ITestView>();
 
-            if (view.HasInvalidArgumentAnswers())
-            {
-                WorkItem.GetPresenter<ITestPresenter>().ShowInvalidArgumentAnswersMessage();
-
-                return;
-            }
-            
             var command = new ChangeTestCommand
                           {
                               MethodTestId = message.MethodTestId,

@@ -4,7 +4,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
 {
     public interface IFormulaConstraintPresenter : IPresenter
     {
-        void ArgumentChanged();
+        void PopulateArgumentValues();
         bool ConstraintOK();
     }
 }

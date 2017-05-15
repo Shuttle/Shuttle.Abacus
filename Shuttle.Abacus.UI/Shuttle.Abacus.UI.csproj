@@ -119,7 +119,6 @@
     <Compile Include="Core\EventArgs\PresenterImageChangedArgs.cs" />
     <Compile Include="Core\EventArgs\PresenterTextChangedArgs.cs" />
     <Compile Include="Core\Extensions\ListViewExtender.cs" />
-    <Compile Include="Core\Formatters\MoneyFormatter.cs" />
     <Compile Include="Core\Messaging\IHaveCancelMessage.cs" />
     <Compile Include="Core\Messaging\IHaveDefaultMessage.cs" />
     <Compile Include="Core\Messaging\IMessageBus.cs" />

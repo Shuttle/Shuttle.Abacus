@@ -1,6 +1,6 @@
-﻿namespace Shuttle.Abacus.Messages.v1.TransferObjects
+﻿namespace Shuttle.Abacus.Events.Formula.v1
 {
-    public class FormulaConstraint
+    public class ConstraintAdded
     {
         public int SequenceNumber { get; set; }
         public string ArgumentName { get; set; }

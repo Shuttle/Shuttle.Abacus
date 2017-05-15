@@ -117,7 +117,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             }
 
             model.MethodTestRow = row;
-            model.ArgumentAnswers = _testQuery.GetArgumentAnswers(message.TestId).CopyToDataTable();
+            model.ArgumentValues = _testQuery.GetArgumentAnswers(message.TestId).CopyToDataTable();
 
             message.FormulaId = new Guid(row["FormulaId"].ToString());
             message.Description = TestColumns.Description.MapFrom(row);
@@ -189,7 +189,7 @@ namespace Shuttle.Abacus.UI.Coordinators
             }
 
             model.MethodTestRow = row;
-            model.ArgumentAnswers = _testQuery.GetArgumentAnswers(message.MethodTestId).CopyToDataTable();
+            model.ArgumentValues = _testQuery.GetArgumentAnswers(message.MethodTestId).CopyToDataTable();
 
             var item = WorkItemManager
                 .Create(string.Format("New test case from '{0}'", TestColumns.Description.MapFrom(row)))

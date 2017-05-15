@@ -12,7 +12,7 @@ select
     FormulaId,
     SequenceNumber,
     ArgumentName,
-    ComparisonType,
+    Comparison,
     Value
 from
     FormulaConstraint

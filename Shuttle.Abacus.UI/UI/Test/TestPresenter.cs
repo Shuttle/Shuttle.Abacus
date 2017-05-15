@@ -5,9 +5,7 @@ using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Interfaces;
 using Shuttle.Abacus.Invariants.Values;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Core.Formatters;
 using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Abacus.UI.Models;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
@@ -44,26 +42,19 @@ namespace Shuttle.Abacus.UI.UI.Test
         {
             var model = View.ArgumentModel;
 
-            View.DetachValueFormatter();
-
             using (_databaseContextFactory.Create())
             {
                 var answers = _argumentQuery.GetValues(model.Id).ToList();
 
                 if (answers.Any())
                 {
-                    View.EnableAnswerSelection();
-
-                    View.PopulateAnswers(answers.Map(row=>ArgumentColumns.ValueColumns.Value.MapFrom(row)));
+                    View.PopulateArgumentValues(answers.Map(row=>ArgumentColumns.ValueColumns.Value.MapFrom(row)));
                 }
                 else
                 {
                     if (model.IsMoney())
                     {
-                        View.AttachValueFormatter(new MoneyFormatter(View.ValueSelectionControl, View.FormattedControl));
                     }
-
-                    View.EnableAnswerEntry();
                 }
             }
         }
@@ -101,12 +92,6 @@ namespace Shuttle.Abacus.UI.UI.Test
             return true;
         }
 
-        public void ShowInvalidArgumentAnswersMessage()
-        {
-            MessageBus.Publish(
-                new ResultNotificationMessage(Result.Create().AddFailureMessage("Not all argument answers are valid.")));
-        }
-
         public override void OnInitialize()
         {
             base.OnInitialize();
@@ -127,9 +112,9 @@ namespace Shuttle.Abacus.UI.UI.Test
             View.DescriptionValue = TestColumns.Description.MapFrom(Model.MethodTestRow);
             View.ExpectedResultValue = TestColumns.ExpectedResult.MapFrom(Model.MethodTestRow);
 
-            foreach (DataRow row in Model.ArgumentAnswers.Rows)
+            foreach (DataRow row in Model.ArgumentValues.Rows)
             {
-                View.AddArgumentAnswer(Model.GetArgument(TestColumns.ArgumentValueColumns.ArgumentName.MapFrom(row)), TestColumns.ArgumentValueColumns.Value.MapFrom(row));
+                View.AddArgumentValue(Model.GetArgument(TestColumns.ArgumentValueColumns.ArgumentName.MapFrom(row)), TestColumns.ArgumentValueColumns.Value.MapFrom(row));
             }
         }
     }

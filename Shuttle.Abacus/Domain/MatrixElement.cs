@@ -4,13 +4,13 @@ namespace Shuttle.Abacus.Domain
 {
     public class MatrixElement
     {
-        public MatrixElement(Guid id, int column, int row, decimal value, string rowComparisonType, string rowValue)
+        public MatrixElement(Guid id, int column, int row, decimal value, string rowComparison, string rowValue)
         {
             Id = id;
             Row = row;
             Column = column;
             Value = value;
-            RowComparisonType = rowComparisonType;
+            RowComparison = rowComparison;
             RowValue = rowValue;
         }
 
@@ -18,7 +18,7 @@ namespace Shuttle.Abacus.Domain
         public int Row { get; }
         public int Column { get; }
         public decimal Value { get; }
-        public string RowComparisonType { get; }
+        public string RowComparison { get; }
         public string RowValue { get; }
 
         //                          ? "where "

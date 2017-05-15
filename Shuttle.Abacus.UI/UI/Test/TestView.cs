@@ -4,7 +4,6 @@ using System.Data;
 using System.Windows.Forms;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Core;
-using Shuttle.Abacus.UI.Core.Formatters;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
 
@@ -12,8 +11,6 @@ namespace Shuttle.Abacus.UI.UI.Test
 {
     public partial class TestView : GenericMethodTestView, ITestView
     {
-        private MoneyFormatter valueFormatter;
-
         public TestView()
         {
             InitializeComponent();
@@ -59,42 +56,13 @@ namespace Shuttle.Abacus.UI.UI.Test
             set { ViewValidator.Control(ExpectedResult).ShouldSatisfy(value); }
         }
 
-        public bool HasInvalidArgumentAnswers()
-        {
-            throw new NotImplementedException();
-
-            foreach (ListViewItem item in ArgumentAnswersListView.Items)
-            {
-                //if (Guid.Empty.Equals(((DataRow)item.Tag).Id))
-                //{
-                //    return true;
-                //}
-            }
-
-            return false;
-        }
-
         public ArgumentModel ArgumentModel => Argument.SelectedItem as ArgumentModel;
 
         public bool HasArgument => Argument.Text.Length > 0;
 
         public bool HasAnswer => ValueSelectionControl.Text.Length > 0;
 
-        public void EnableAnswerSelection()
-        {
-            ValueSelectionLabel.Text = "Selection";
-            ValueSelectionControl.DropDownStyle = ComboBoxStyle.DropDownList;
-        }
-
-        public void EnableAnswerEntry()
-        {
-            ValueSelectionLabel.Text = "Value";
-            ValueSelectionControl.DropDownStyle = ComboBoxStyle.DropDown;
-            ValueSelectionControl.Text = string.Empty;
-            ValueSelectionControl.Items.Clear();
-        }
-
-        public void PopulateAnswers(IEnumerable<string> answers)
+        public void PopulateArgumentValues(IEnumerable<string> answers)
         {
             ValueSelectionControl.Items.Clear();
 
@@ -119,7 +87,7 @@ namespace Shuttle.Abacus.UI.UI.Test
             SetError(ValueSelectionControl, message);
         }
 
-        public void AddArgumentAnswer(ArgumentModel argument, string answer)
+        public void AddArgumentValue(ArgumentModel argument, string answer)
         {
             var item = new ListViewItem();
 
@@ -142,25 +110,6 @@ namespace Shuttle.Abacus.UI.UI.Test
         public ComboBox ValueSelectionControl { get; private set; }
 
         public TextBox FormattedControl { get; private set; }
-
-        public void AttachValueFormatter(MoneyFormatter formatter)
-        {
-            valueFormatter = formatter;
-        }
-
-        public void DetachValueFormatter()
-        {
-            FormattedControl.Text = string.Empty;
-
-            if (valueFormatter == null)
-            {
-                return;
-            }
-
-            valueFormatter.Dispose();
-
-            valueFormatter = null;
-        }
 
         private ListViewItem PopulateItem(ListViewItem item, ArgumentModel argument, string answer)
         {

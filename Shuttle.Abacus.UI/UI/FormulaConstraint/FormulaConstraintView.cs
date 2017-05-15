@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.UI.Core.Extensions;
-using Shuttle.Abacus.UI.Core.Formatters;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
 
@@ -14,8 +13,6 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
     public partial class FormulaConstraintView : GenericConstraintView, IFormulaConstraintView
     {
         private readonly ListViewExtender _listViewExtender;
-        private IEnumerable<string> _constraintTypes;
-        private MoneyFormatter _valueFormatter;
 
         public FormulaConstraintView()
         {
@@ -28,35 +25,15 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
         {
             ValueSelectionControl.Items.Clear();
 
-            Argument.DisplayMember = "ConstraintName";
             items.ForEach(item => Argument.Items.Add(item));
-        }
-
-        public void PopulateContraintTypes(IEnumerable<string> constraintTypes)
-        {
-            _constraintTypes = constraintTypes;
         }
 
         public ArgumentModel ArgumentModel => Argument.SelectedItem as ArgumentModel;
 
-        public ConstraintTypeModel ConstraintTypeModel => Constraint.SelectedItem as ConstraintTypeModel;
+        public string ComparisonValue => (string) Constraint.SelectedItem;
 
-        public void EnableAnswerSelection()
+        public void PopulateArgumentValues(IEnumerable<DataRow> rows)
         {
-            ValueSelectionControl.DropDownStyle = ComboBoxStyle.DropDownList;
-        }
-
-        public void EnableAnswerEntry()
-        {
-            ValueSelectionControl.DropDownStyle = ComboBoxStyle.DropDown;
-            ValueSelectionControl.Text = string.Empty;
-            ValueSelectionControl.Items.Clear();
-        }
-
-        public void PopulateAnswers(IEnumerable<DataRow> rows)
-        {
-            ValueSelectionControl.Items.Clear();
-
             rows.ForEach(row =>
             {
                 var answer = ArgumentColumns.ValueColumns.Value.MapFrom(row);
@@ -76,45 +53,25 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
 
         public bool HasAnswer => ValueSelectionControl.Text.Length > 0;
 
-        public bool HasAnswers => ValueSelectionControl.Items.Count > 0;
-
         public bool HasArgument => Argument.Text.Length > 0;
 
         public bool HasConstraint => Constraint.Text.Length > 0;
 
-        public List<FormulaConstraintModel> Constraints
+        public IEnumerable<FormulaConstraintModel> FormulaConstraints
         {
             get
             {
-                var result = new List<FormulaConstraintModel>();
-                var sequenceNumber = 1;
-
                 foreach (ListViewItem item in ConstraintsListView.Items)
                 {
-                    var tag = (ItemTag) item.Tag;
-
-                    result.Add(new FormulaConstraintModel
-                        {
-                            SequenceNumber = sequenceNumber,
-                            ArgumentName = tag.ArgumentName,
-                            ComparisonType = tag.ConstraintName,
-                            Value = tag.ValueSelection
-                        }
-                    );
+                    yield return (FormulaConstraintModel)item.Tag;
                 }
-
-                return result;
             }
             set
             {
-                value.ForEach(constraint => AddConstraint(constraint.ArgumentName, constraint.ComparisonType,
+                value.ForEach(constraint => AddConstraint(constraint.ArgumentName, constraint.Comparison,
                     constraint.Value));
             }
         }
-
-        public ComboBox ValueSelectionControl { get; private set; }
-
-        public TextBox FormattedControl { get; private set; }
 
         public void ShowAnswerError(string message)
         {
@@ -131,52 +88,21 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
             SetError(Constraint, "Please select the constraint to use.");
         }
 
-        public void AddConstraint(string argumentName, string comparisonType, string value)
+        public void AddConstraint(string argumentName, string comparison, string value)
         {
             var item = new ListViewItem();
 
             item.SubItems.Add(string.Empty);
             item.SubItems.Add(string.Empty);
 
-            ConstraintsListView.Items.Add(PopulateItem(item, argumentName, comparisonType, value));
+            ConstraintsListView.Items.Add(PopulateItem(item, argumentName, comparison, value));
         }
 
         public void ShowAllConstraints()
         {
-            PopulateConstraintTypes(false);
         }
 
-        public void ShowAnswerCatalogConstraints()
-        {
-            PopulateConstraintTypes(true);
-        }
-
-        public void AttachValueFormatter(MoneyFormatter formatter)
-        {
-            _valueFormatter = formatter;
-        }
-
-        public void DetachValueFormatter()
-        {
-            FormattedControl.Text = string.Empty;
-
-            if (_valueFormatter == null)
-            {
-                return;
-            }
-
-            _valueFormatter.Dispose();
-
-            _valueFormatter = null;
-        }
-
-        public void PopulateConstraintTypes(bool restricted)
-        {
-            Constraint.Items.Clear();
-            Constraint.DisplayMember = "Text";
-
-            _constraintTypes.ForEach(item => { Constraint.Items.Add(item); });
-        }
+        public ComboBox ValueSelectionControl { get; private set; }
 
         private bool ContainsAnswerName(string name)
         {
@@ -191,24 +117,13 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
             return false;
         }
 
-        private string GetArgumentName(Guid argumentId)
-        {
-            foreach (DataRow row in ValueSelectionControl.Items)
-            {
-                if (ArgumentColumns.Id.MapFrom(row).Equals(argumentId))
-                {
-                    return ArgumentColumns.Name.MapFrom(row);
-                }
-            }
-
-            return "(not found)";
-        }
-
         private void ArgumentName_SelectedIndexChanged(object sender, EventArgs e)
         {
             ClearError(Argument);
 
-            Presenter.ArgumentChanged();
+            ValueSelectionControl.Items.Clear();
+
+            Presenter.PopulateArgumentValues();
         }
 
         private void Constraint_SelectedIndexChanged(object sender, EventArgs e)
@@ -225,18 +140,23 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
         {
             if (Presenter.ConstraintOK())
             {
-                AddConstraint(ArgumentModel.Name, ConstraintTypeModel.Name, AnswerValue);
+                AddConstraint(ArgumentModel.Name, ComparisonValue, AnswerValue);
             }
         }
 
-        private static ListViewItem PopulateItem(ListViewItem item, string argumentName, string comparisonType,
+        private static ListViewItem PopulateItem(ListViewItem item, string argumentName, string comparison,
             string value)
         {
             item.Text = argumentName;
-            item.SubItems[1].Text = comparisonType;
+            item.SubItems[1].Text = comparison;
             item.SubItems[2].Text = value;
 
-            item.Tag = new ItemTag(argumentName, comparisonType, value);
+            item.Tag = new FormulaConstraintModel
+            {
+                ArgumentName = argumentName,
+                Comparison = comparison,
+                Value = value
+            };
 
             return item;
         }
@@ -277,7 +197,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
                 return;
             }
 
-            PopulateItem(_listViewExtender.SelectedItem(), ArgumentModel.Name, ConstraintTypeModel.Name, AnswerValue);
+            PopulateItem(_listViewExtender.SelectedItem(), ArgumentModel.Name, ComparisonValue, AnswerValue);
         }
 
         private void MoveUpButton_Click(object sender, EventArgs e)
@@ -292,20 +212,6 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
 
         private void Answer_SelectedIndexChanged(object sender, EventArgs e)
         {
-        }
-
-        private class ItemTag
-        {
-            public ItemTag(string argumentName, string comparisonType, string value)
-            {
-                ArgumentName = argumentName;
-                ConstraintName = comparisonType;
-                ValueSelection = value;
-            }
-
-            public string ArgumentName { get; }
-            public string ConstraintName { get; }
-            public string ValueSelection { get; }
         }
     }
 

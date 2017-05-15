@@ -286,7 +286,7 @@ namespace Shuttle.Abacus.UI.UI.Matrix
                     decimalValue.Constraints.Add(new Abacus.Messages.v1.TransferObjects.FormulaConstraint
                     {
                         ArgumentName = RowArgumentModel.Name,
-                        ComparisonType = RowComparisonType(row),
+                        Comparison = RowComparison(row),
                         Value = RowConstraintValue(row)
                     });
 
@@ -295,7 +295,7 @@ namespace Shuttle.Abacus.UI.UI.Matrix
                         decimalValue.Constraints.Add(new Abacus.Messages.v1.TransferObjects.FormulaConstraint
                         {
                             ArgumentName = ColumnArgumentModel.Name,
-                            ComparisonType = ColumnComparisonType(column),
+                            Comparison = ColumnComparison(column),
                             Value = ColumnConstraintValue(column)
                         });
                     }
@@ -393,12 +393,12 @@ namespace Shuttle.Abacus.UI.UI.Matrix
             set { ColumnArgument.Text = value; }
         }
 
-        private string RowComparisonType(int row)
+        private string RowComparison(int row)
         {
             return (string)ValueGridView[0, row].Value;
         }
 
-        private string ColumnComparisonType(int column)
+        private string ColumnComparison(int column)
         {
             return (string)ValueGridView[column, 0].Value;
         }

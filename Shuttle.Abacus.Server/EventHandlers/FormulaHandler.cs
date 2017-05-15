@@ -10,7 +10,9 @@ namespace Shuttle.Abacus.Server.EventHandlers
         IEventHandler<Renamed>,
         IEventHandler<Removed>,
         IEventHandler<OperationsRemoved>,
-        IEventHandler<OperationAdded>
+        IEventHandler<OperationAdded>,
+        IEventHandler<ConstraintsRemoved>,
+        IEventHandler<ConstraintAdded>
     {
         private readonly IFormulaQuery _query;
 
@@ -46,6 +48,18 @@ namespace Shuttle.Abacus.Server.EventHandlers
             var operationAdded = context.Event;
 
             _query.AddOperation(context.PrimitiveEvent.Id, operationAdded.SequenceNumber, operationAdded.Operation, operationAdded.ValueSource, operationAdded.ValueSelection);
+        }
+
+        public void ProcessEvent(IEventHandlerContext<ConstraintsRemoved> context)
+        {
+            _query.RemoveConstraints(context.PrimitiveEvent.Id);
+        }
+
+        public void ProcessEvent(IEventHandlerContext<ConstraintAdded> context)
+        {
+            var constraintAdded = context.Event;
+
+            _query.AddConstraint(context.PrimitiveEvent.Id, constraintAdded.SequenceNumber, constraintAdded.ArgumentName, constraintAdded.Comparison, constraintAdded.Value);
         }
     }
 }

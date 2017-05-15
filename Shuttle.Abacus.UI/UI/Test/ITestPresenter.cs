@@ -6,6 +6,5 @@ namespace Shuttle.Abacus.UI.UI.Test
     {
         void ArgumentChanged();
         bool ArgumentAnswerOK();
-        void ShowInvalidArgumentAnswersMessage();
     }
 }

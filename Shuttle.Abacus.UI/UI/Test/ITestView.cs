@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Shuttle.Abacus.Invariants.Core;
-using Shuttle.Abacus.UI.Core.Formatters;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
 
@@ -25,17 +24,11 @@ namespace Shuttle.Abacus.UI.UI.Test
 
         ComboBox ValueSelectionControl { get; }
         TextBox FormattedControl { get; }
-        void EnableAnswerSelection();
-        void EnableAnswerEntry();
-        void PopulateAnswers(IEnumerable<string> answers);
+        void PopulateArgumentValues(IEnumerable<string> answers);
         void PopulateArguments(IEnumerable<ArgumentModel> arguments);
         void ShowArgumentError();
         void ShowAnswerError(string message);
-        void AddArgumentAnswer(ArgumentModel argument, string answer);
+        void AddArgumentValue(ArgumentModel argument, string answer);
         void AddArgument(ArgumentModel model);
-        bool HasInvalidArgumentAnswers();
-
-        void AttachValueFormatter(MoneyFormatter formatter);
-        void DetachValueFormatter();
     }
 }

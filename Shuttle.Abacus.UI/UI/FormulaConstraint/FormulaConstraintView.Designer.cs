@@ -27,7 +27,6 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.FormattedControl = new System.Windows.Forms.TextBox();
             this.ValueSelectionControl = new System.Windows.Forms.ComboBox();
             this.ValueSelectionLabel = new System.Windows.Forms.Label();
             this.Argument = new System.Windows.Forms.ComboBox();
@@ -36,9 +35,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.RemoveButton = new System.Windows.Forms.Button();
             this.ConstraintsListView = new System.Windows.Forms.ListView();
-            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
             this.ApplyButton = new System.Windows.Forms.Button();
             this.AddButton = new System.Windows.Forms.Button();
@@ -49,36 +48,25 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.FormattedControl);
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.ValueSelectionControl);
             this.groupBox1.Controls.Add(this.ValueSelectionLabel);
             this.groupBox1.Controls.Add(this.Argument);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.Constraint);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(8, 256);
+            this.groupBox1.Location = new System.Drawing.Point(8, 273);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(570, 100);
+            this.groupBox1.Size = new System.Drawing.Size(570, 79);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Constraint details";
             // 
-            // FormattedTextBox
+            // ValueSelection
             // 
-            this.FormattedControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.FormattedControl.Location = new System.Drawing.Point(396, 68);
-            this.FormattedControl.Name = "FormattedControl";
-            this.FormattedControl.ReadOnly = true;
-            this.FormattedControl.Size = new System.Drawing.Size(152, 20);
-            this.FormattedControl.TabIndex = 6;
-            // 
-            // Value
-            // 
-            this.ValueSelectionControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ValueSelectionControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ValueSelectionControl.FormattingEnabled = true;
             this.ValueSelectionControl.Location = new System.Drawing.Point(396, 40);
             this.ValueSelectionControl.Name = "ValueSelectionControl";
@@ -92,12 +80,13 @@
             this.ValueSelectionLabel.AutoSize = true;
             this.ValueSelectionLabel.Location = new System.Drawing.Point(396, 24);
             this.ValueSelectionLabel.Name = "ValueSelectionLabel";
-            this.ValueSelectionLabel.Size = new System.Drawing.Size(42, 13);
+            this.ValueSelectionLabel.Size = new System.Drawing.Size(34, 13);
             this.ValueSelectionLabel.TabIndex = 4;
             this.ValueSelectionLabel.Text = "Value";
             // 
             // Argument
             // 
+            this.Argument.DisplayMember = "Name";
             this.Argument.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Argument.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.Argument.FormattingEnabled = true;
@@ -105,6 +94,7 @@
             this.Argument.Name = "Argument";
             this.Argument.Size = new System.Drawing.Size(212, 21);
             this.Argument.TabIndex = 1;
+            this.Argument.ValueMember = "Id";
             this.Argument.SelectedIndexChanged += new System.EventHandler(this.ArgumentName_SelectedIndexChanged);
             // 
             // label3
@@ -112,15 +102,21 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 24);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 13);
+            this.label3.Size = new System.Drawing.Size(52, 13);
             this.label3.TabIndex = 0;
             this.label3.Text = "Argument";
             // 
-            // FormulaConstraint
+            // Constraint
             // 
             this.Constraint.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Constraint.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.Constraint.FormattingEnabled = true;
+            this.Constraint.Items.AddRange(new object[] {
+            "==",
+            ">=",
+            "<",
+            "!=",
+            "in"});
             this.Constraint.Location = new System.Drawing.Point(248, 40);
             this.Constraint.Name = "Constraint";
             this.Constraint.Size = new System.Drawing.Size(128, 21);
@@ -132,16 +128,16 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(248, 24);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 13);
+            this.label2.Size = new System.Drawing.Size(62, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Constraint";
+            this.label2.Text = "Comparison";
             // 
             // RemoveButton
             // 
             this.RemoveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.RemoveButton.Enabled = false;
             this.RemoveButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.RemoveButton.Location = new System.Drawing.Point(502, 216);
+            this.RemoveButton.Location = new System.Drawing.Point(501, 244);
             this.RemoveButton.Name = "RemoveButton";
             this.RemoveButton.Size = new System.Drawing.Size(75, 23);
             this.RemoveButton.TabIndex = 4;
@@ -151,9 +147,9 @@
             // 
             // ConstraintsListView
             // 
-            this.ConstraintsListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ConstraintsListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ConstraintsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader4,
             this.columnHeader5,
@@ -162,7 +158,7 @@
             this.ConstraintsListView.HideSelection = false;
             this.ConstraintsListView.Location = new System.Drawing.Point(8, 24);
             this.ConstraintsListView.Name = "ConstraintsListView";
-            this.ConstraintsListView.Size = new System.Drawing.Size(570, 184);
+            this.ConstraintsListView.Size = new System.Drawing.Size(570, 214);
             this.ConstraintsListView.TabIndex = 1;
             this.ConstraintsListView.UseCompatibleStateImageBehavior = false;
             this.ConstraintsListView.View = System.Windows.Forms.View.Details;
@@ -197,7 +193,7 @@
             this.ApplyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ApplyButton.Enabled = false;
             this.ApplyButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.ApplyButton.Location = new System.Drawing.Point(502, 364);
+            this.ApplyButton.Location = new System.Drawing.Point(502, 358);
             this.ApplyButton.Name = "ApplyButton";
             this.ApplyButton.Size = new System.Drawing.Size(75, 23);
             this.ApplyButton.TabIndex = 7;
@@ -209,7 +205,7 @@
             // 
             this.AddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.AddButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.AddButton.Location = new System.Drawing.Point(418, 364);
+            this.AddButton.Location = new System.Drawing.Point(418, 358);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(75, 23);
             this.AddButton.TabIndex = 6;
@@ -222,7 +218,7 @@
             this.MoveDownButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.MoveDownButton.Enabled = false;
             this.MoveDownButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.MoveDownButton.Location = new System.Drawing.Point(92, 216);
+            this.MoveDownButton.Location = new System.Drawing.Point(91, 244);
             this.MoveDownButton.Name = "MoveDownButton";
             this.MoveDownButton.Size = new System.Drawing.Size(75, 23);
             this.MoveDownButton.TabIndex = 3;
@@ -235,7 +231,7 @@
             this.MoveUpButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.MoveUpButton.Enabled = false;
             this.MoveUpButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.MoveUpButton.Location = new System.Drawing.Point(8, 216);
+            this.MoveUpButton.Location = new System.Drawing.Point(7, 244);
             this.MoveUpButton.Name = "MoveUpButton";
             this.MoveUpButton.Size = new System.Drawing.Size(75, 23);
             this.MoveUpButton.TabIndex = 2;
@@ -256,7 +252,7 @@
             this.Controls.Add(this.ConstraintsListView);
             this.Controls.Add(this.label1);
             this.Name = "FormulaConstraintView";
-            this.Size = new System.Drawing.Size(587, 401);
+            this.Size = new System.Drawing.Size(587, 395);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

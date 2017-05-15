@@ -1,9 +1,9 @@
+using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using Shuttle.Abacus.DataAccess;
-using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Values;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Core.Formatters;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
 using Shuttle.Core.Data;
@@ -11,62 +11,54 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.UI.UI.FormulaConstraint
 {
-    public class FormulaConstraintPresenter : Presenter<IFormulaConstraintView, ManageFormulaConstraintsModel>, IFormulaConstraintPresenter
+    public class FormulaConstraintPresenter : Presenter<IFormulaConstraintView, ManageFormulaConstraintsModel>,
+        IFormulaConstraintPresenter
     {
-        private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IArgumentQuery _argumentQuery;
-        private readonly IConstraintTypeQuery _constraintTypeQuery;
+        private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IValueTypeValidatorProvider _valueTypeValidatorProvider;
 
-        public FormulaConstraintPresenter(IFormulaConstraintView view, IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery, IConstraintTypeQuery constraintTypeQuery, IValueTypeValidatorProvider valueTypeValidatorProvider)
+        public FormulaConstraintPresenter(IFormulaConstraintView view, IDatabaseContextFactory databaseContextFactory,
+            IArgumentQuery argumentQuery,
+            IValueTypeValidatorProvider valueTypeValidatorProvider)
             : base(view)
         {
             Guard.AgainstNull(view, "view");
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(argumentQuery, "argumentQuery");
-            Guard.AgainstNull(constraintTypeQuery, "constraintTypeQuery");
             Guard.AgainstNull(valueTypeValidatorProvider, "valueTypeValidatorProvider");
 
             _databaseContextFactory = databaseContextFactory;
             _argumentQuery = argumentQuery;
-            _constraintTypeQuery = constraintTypeQuery;
             _valueTypeValidatorProvider = valueTypeValidatorProvider;
 
             Text = "Constraint Details";
             Image = Resources.Image_FormulaConstraint;
         }
 
-        public void ArgumentChanged()
+        public void PopulateArgumentValues()
         {
             var model = View.ArgumentModel;
 
-            View.DetachValueFormatter();
+            List<DataRow> rows;
 
-            var answerRows = _argumentQuery.GetValues(model.Id).ToList();
-
-            if (answerRows.Any() || model.IsText())
+            using (_databaseContextFactory.Create())
             {
-                if (answerRows.Any())
-                {
-                    View.EnableAnswerSelection();
+                rows = _argumentQuery.GetValues(model.Id).ToList();
+            }
 
-                    View.PopulateAnswers(answerRows);
-                }
-                else
+            if (rows.Any() || model.IsText())
+            {
+                if (rows.Any())
                 {
-                    View.EnableAnswerEntry();
+                    View.PopulateArgumentValues(rows);
                 }
-
-                View.ShowAnswerCatalogConstraints();
             }
             else
             {
                 if (model.IsMoney())
                 {
-                    View.AttachValueFormatter(new MoneyFormatter(View.ValueSelectionControl, View.FormattedControl));
                 }
-
-                View.EnableAnswerEntry();
 
                 View.ShowAllConstraints();
             }
@@ -88,42 +80,30 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
                 return false;
             }
 
-            if (View.HasAnswers)
+            if (!View.HasAnswer)
             {
-                if (!View.HasAnswer)
-                {
-                    View.ShowAnswerError("Please make a selection.");
+                View.ShowAnswerError("Please enter a value.");
 
-                    return false;
-                }
+                return false;
             }
-            else
+
+            if (View.HasArgument)
             {
-                if (!View.HasAnswer)
+                var answerType = View.ArgumentModel.AnswerType;
+
+                var validator = _valueTypeValidatorProvider.Has(answerType)
+                    ? _valueTypeValidatorProvider.Get(answerType)
+                    : null;
+
+                if (validator != null)
                 {
-                    View.ShowAnswerError("Please enter a value.");
+                    var result = validator.Validate(View.AnswerValue);
 
-                    return false;
-                }
-
-                if (View.HasArgument)
-                {
-                    var answerType = View.ArgumentModel.AnswerType;
-
-                    var validator = _valueTypeValidatorProvider.Has(answerType)
-                                        ? _valueTypeValidatorProvider.Get(answerType)
-                                        : null;
-
-                    if (validator != null)
+                    if (!result.OK)
                     {
-                        var result = validator.Validate(View.AnswerValue);
+                        View.ShowAnswerError(result.ToString());
 
-                        if (!result.OK)
-                        {
-                            View.ShowAnswerError(result.ToString());
-
-                            return false;
-                        }
+                        return false;
                     }
                 }
             }
@@ -141,8 +121,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
             }
 
             View.PopulateArguments(Model.Arguments);
-            View.PopulateContraintTypes(Model.ConstraintTypes);
-            View.Constraints = Model.Constraints;
+            View.FormulaConstraints = Model.Constraints;
         }
     }
 }

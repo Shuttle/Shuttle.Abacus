@@ -17,6 +17,6 @@ namespace Shuttle.Abacus.Messages.v1
         public string ExpectedResult { get; set; }
         public List<ArgumentAnswer> ArgumentAnswers { get; private set; }
         public string ExpectedResultType { get; set; }
-        public string ComparisonType { get; set; }
+        public string Comparison { get; set; }
     }
 }

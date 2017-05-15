@@ -12,7 +12,7 @@ select
     FormulaId,
     ExpectedResult,
     ExpectedResultType,
-    ComparisonType,
+    Comparison,
     Description
 from
     Test

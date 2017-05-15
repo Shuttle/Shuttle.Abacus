@@ -8,7 +8,7 @@ namespace Shuttle.Abacus.UI.Models
     {
         public IEnumerable<DataRow> ArgumentRows { get; set; }
         public DataRow MethodTestRow { get; set; }
-        public DataTable ArgumentAnswers { get; set; }
+        public DataTable ArgumentValues { get; set; }
 
         public ArgumentModel GetArgument(Guid id)
         {
