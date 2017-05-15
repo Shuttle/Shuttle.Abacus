@@ -24,22 +24,19 @@ namespace Shuttle.Abacus.UI.Coordinators
     public class MatrixCoordinator : Coordinator, IMatrixCoordinator
     {
         private readonly IArgumentQuery _argumentQuery;
-        private readonly IFormulaConstraintQuery _formulaConstraintQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
-        private readonly IMatrixQuery _decimalTableQuery;
+        private readonly IMatrixQuery _matrixQuery;
 
         public MatrixCoordinator(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
-            IMatrixQuery decimalTableQuery, IFormulaConstraintQuery formulaConstraintQuery)
+            IMatrixQuery matrixQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(argumentQuery, "argumentQuery");
-            Guard.AgainstNull(decimalTableQuery, "decimalTableQuery");
-            Guard.AgainstNull(formulaConstraintQuery, "formulaConstraintQuery");
+            Guard.AgainstNull(matrixQuery, "matrixQuery");
 
             _databaseContextFactory = databaseContextFactory;
             _argumentQuery = argumentQuery;
-            _decimalTableQuery = decimalTableQuery;
-            _formulaConstraintQuery = formulaConstraintQuery;
+            _matrixQuery = matrixQuery;
         }
 
         public void HandleMessage(ExplorerInitializeMessage message)
@@ -105,7 +102,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                     {
                         foreach (
                             var row in
-                            _decimalTableQuery.All())
+                            _matrixQuery.All())
                         {
                             message.Resources.Add(new Resource(ResourceKeys.Matrix,
                                 MatrixColumns.Id.MapFrom(row),
@@ -129,7 +126,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
             using (_databaseContextFactory.Create())
             {
-                message.Item.AssignText(MatrixColumns.Name.MapFrom(_decimalTableQuery.Get(message.Item.Key)));
+                message.Item.AssignText(MatrixColumns.Name.MapFrom(_matrixQuery.Get(message.Item.Key)));
             }
         }
 
@@ -156,7 +153,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .ControlledBy<IMatrixController>()
                     .ShowIn<IContextToolbarPresenter>()
                     .AddPresenter<IMatrixPresenter>()
-                    .WithModel(new MatrixModel(_decimalTableQuery.Get(message.MatrixId)))
+                    .WithModel(new MatrixModel(_matrixQuery.Get(message.MatrixId)))
                     .AddNavigationItem(NavigationItemFactory.Create(message).WithResourceItem(ResourceItems.Submit))
                     .AsDefault()
                     .AssignInitiator(message);
@@ -174,7 +171,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .ControlledBy<IMatrixController>()
                     .ShowIn<IContextToolbarPresenter>()
                     .AddPresenter<IMatrixPresenter>()
-                    .WithModel(new MatrixModel(_decimalTableQuery.Get(message.MatrixId)))
+                    .WithModel(new MatrixModel(_matrixQuery.Get(message.MatrixId)))
                     .AddNavigationItem(
                         NavigationItemFactory.Create<NewMatrixMessage>()
                             .WithResourceItem(
@@ -199,7 +196,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 {
                     case Resource.ResourceType.Container:
                     {
-                        message.AddTable("DecimalTables", _decimalTableQuery.All());
+                        message.AddTable("DecimalTables", _matrixQuery.All());
 
                         break;
                     }

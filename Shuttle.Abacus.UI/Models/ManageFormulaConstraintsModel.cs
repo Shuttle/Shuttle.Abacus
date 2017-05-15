@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using System.Data;
 
 namespace Shuttle.Abacus.UI.Models
 {
     public class ManageFormulaConstraintsModel
     {
-        public IEnumerable<DataRow> ConstraintTypeRows { get; set; }
-        public IEnumerable<DataRow> ArgumentRows { get; set; }
-        public IEnumerable<DataRow> ConstraintRows { get; set; }
+        public List<string> ConstraintTypes { get; set; }
+        public List<ArgumentModel> Arguments { get; set; }
+        public List<FormulaConstraintModel> Constraints { get; set; }
     }
 }

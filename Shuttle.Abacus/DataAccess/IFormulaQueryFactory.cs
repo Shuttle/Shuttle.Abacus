@@ -8,7 +8,7 @@ namespace Shuttle.Abacus.DataAccess
 {
     public interface IFormulaQueryFactory
     {
-        IQuery GetOperations(Guid id);
+        IQuery Operations(Guid id);
         IQuery Get(Guid id);
         IQuery Add(Formula formula);
         IQuery RemoveOperations(Guid formulaId);
@@ -17,7 +17,7 @@ namespace Shuttle.Abacus.DataAccess
         IQuery All();
         IQuery AddConstraint(Formula formula, FormulaConstraint constraint);
         IQuery RemoveConstraints(Formula formula);
-        IQuery GetConstraints(Guid id);
+        IQuery Constraints(Guid id);
         IQuery Registered(Guid formulaId, string name);
         IQuery Remove(Guid formulaId);
         IQuery Renamed(Guid formulaId, string name);

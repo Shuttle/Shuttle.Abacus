@@ -1,5 +1,6 @@
 using System;
 using Shuttle.Abacus.DataAccess;
+using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
 using Shuttle.Abacus.UI.Core.Presentation;
@@ -7,6 +8,7 @@ using Shuttle.Abacus.UI.Core.Resources;
 using Shuttle.Abacus.UI.Messages.Formula;
 using Shuttle.Abacus.UI.Messages.Resources;
 using Shuttle.Abacus.UI.Models;
+using Shuttle.Abacus.UI.Navigation;
 using Shuttle.Abacus.UI.UI.Formula;
 using Shuttle.Abacus.UI.UI.FormulaConstraint;
 using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
@@ -20,21 +22,21 @@ namespace Shuttle.Abacus.UI.Coordinators
     {
         private readonly IArgumentQuery _argumentQuery;
         private readonly IConstraintTypeQuery _constraintTypeQuery;
-        private readonly IFormulaConstraintQuery _formulaConstraintQuery;
+        private readonly IFormulaQuery _formulaQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
 
-        public FormulaConstraintCoordinator(IDatabaseContextFactory databaseContextFactory, IFormulaConstraintQuery formulaConstraintQuery,
-            IArgumentQuery argumentQuery, IConstraintTypeQuery constraintTypeQuery)
+        public FormulaConstraintCoordinator(IDatabaseContextFactory databaseContextFactory,
+            IArgumentQuery argumentQuery, IConstraintTypeQuery constraintTypeQuery, IFormulaQuery formulaQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
-            Guard.AgainstNull(formulaConstraintQuery, "formulaConstraintQuery");
             Guard.AgainstNull(argumentQuery, "argumentQuery");
             Guard.AgainstNull(constraintTypeQuery, "constraintTypeQuery");
+            Guard.AgainstNull(formulaQuery, "formulaQuery");
 
             _databaseContextFactory = databaseContextFactory;
-            _formulaConstraintQuery = formulaConstraintQuery;
             _argumentQuery = argumentQuery;
             _constraintTypeQuery = constraintTypeQuery;
+            _formulaQuery = formulaQuery;
         }
 
         public void HandleMessage(PopulateResourceMessage message)
@@ -52,7 +54,7 @@ namespace Shuttle.Abacus.UI.Coordinators
 
                     using (_databaseContextFactory.Create())
                     {
-                        foreach (var row in _formulaConstraintQuery.AllForOwner(formulaId))
+                        foreach (var row in _formulaQuery.Constraints(formulaId))
                         {
                             message.Resources.Add(
                                 new Resource(ResourceKeys.FormulaConstraint, Guid.Empty,
@@ -78,7 +80,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 case Resource.ResourceType.Container:
                 {
                     message.NavigationItems.Add(
-                        NavigationItemFactory.Create(
+                        new NavigationItem(new ResourceItem("Manage", "FormulaConstraint")).AssignMessage(
                             new ManageFormulaConstraintsMessage(message.RelatedItems[ResourceKeys.Formula].Text,
                                 message.RelatedItems[ResourceKeys.Formula].Key)));
 
@@ -89,35 +91,26 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(ManageFormulaConstraintsMessage message)
         {
-            var constraintModel = BuildConstraintModel(message.FormulaId);
-
-            if (constraintModel == null)
-            {
-                return;
-            }
-
-            var item = WorkItemManager
-                .Create(string.Format("Formula constraints: {0}", message.FormulaName))
-                .ControlledBy<IFormulaController>()
-                .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<IFormulaConstraintPresenter>().WithModel(constraintModel)
-                .AddNavigationItem(
-                    NavigationItemFactory.Create(message).WithResourceItem(ResourceItems.Submit)).AsDefault()
-                .AssignInitiator(message);
-
-            HostInWorkspace<ITabbedWorkspacePresenter>(item);
-        }
-
-        private ManageFormulaConstraintsModel BuildConstraintModel(Guid calculationId)
-        {
             using (_databaseContextFactory.Create())
             {
-                return new ManageFormulaConstraintsModel
+                var model = new ManageFormulaConstraintsModel
                 {
-                    ArgumentRows = _argumentQuery.All(),
-                    ConstraintTypeRows = _constraintTypeQuery.All(),
-                    ConstraintRows = _formulaConstraintQuery.AllForOwner(calculationId)
+                    ConstraintTypes = _constraintTypeQuery.All().Map(row => ConstraintTypeColumns.Name.MapFrom(row)),
+                    Arguments = _argumentQuery.All().Map(row => new ArgumentModel(row)),
+                    Constraints = _formulaQuery.Constraints(message.FormulaId).Map(row => new FormulaConstraintModel(row))
                 };
+
+                var item = WorkItemManager
+                    .Create(string.Format("Formula constraints: {0}", message.FormulaName))
+                    .ControlledBy<IFormulaController>()
+                    .ShowIn<IContextToolbarPresenter>()
+                    .AddPresenter<IFormulaConstraintPresenter>()
+                    .WithModel(model)
+                    .AddNavigationItem(new NavigationItem(new ResourceItem("Submit")).AssignMessage(message))
+                    .AsDefault()
+                    .AssignInitiator(message);
+
+                HostInWorkspace<ITabbedWorkspacePresenter>(item);
             }
         }
     }

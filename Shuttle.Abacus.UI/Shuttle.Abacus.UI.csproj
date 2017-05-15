@@ -271,6 +271,7 @@
     <Compile Include="Messages\WorkItem\WorkItemReadyMessage.cs" />
     <Compile Include="Messages\WorkItem\WorkItemSitedMessage.cs" />
     <Compile Include="Messages\WorkItem\WorkItemTextChangedMessage.cs" />
+    <Compile Include="Models\FormulaConstraintModel.cs" />
     <Compile Include="Models\TestArgumentValueModel.cs" />
     <Compile Include="Models\ArgumentValueModel.cs" />
     <Compile Include="Models\ArgumentDisplayModel.cs" />
@@ -486,8 +487,6 @@
     <Compile Include="UI\WorkItem\ContextToolbar\IContextToolbarPresenter.cs" />
     <Compile Include="UI\WorkItem\ContextToolbar\IContextToolbarView.cs" />
     <Compile Include="UI\Argument\ArgumentController.cs" />
-    <Compile Include="UI\FormulaOperation\FormulaOperationController.cs" />
-    <Compile Include="UI\FormulaOperation\IFormulaOperationController.cs" />
     <Compile Include="UI\Matrix\MatrixController.cs" />
     <Compile Include="UI\Formula\FormulaController.cs" />
     <Compile Include="UI\Argument\IArgumentController.cs" />

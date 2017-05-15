@@ -1,15 +1,11 @@
 using System;
 using Shuttle.Abacus.Domain;
-using Shuttle.Abacus.Events.Formula.v1;
 using Shuttle.Core.Data;
-using Shuttle.Recall;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public class FormulaQueryFactory : IFormulaQueryFactory
     {
-        public const string OperationTableName = "FormulaOperation";
-
         private readonly string SelectClause = @"
 select 
     FormulaId,
@@ -20,8 +16,7 @@ from
     Formula
 ";
 
-
-        public IQuery GetOperations(Guid id)
+        public IQuery Operations(Guid id)
         {
             return RawQuery.Create(@"
 select
@@ -63,7 +58,7 @@ where
                     .AddParameterValue(FormulaColumns.Id, formula.Id);
         }
 
-        public IQuery GetConstraints(Guid id)
+        public IQuery Constraints(Guid id)
         {
             return RawQuery.Create(@"
 select
@@ -116,7 +111,8 @@ where
                 .AddParameterValue(FormulaColumns.Name, name);
         }
 
-        public IQuery AddOperation(Guid formulaId, int sequenceNumber, string operation, string valueSource, string valueSelection)
+        public IQuery AddOperation(Guid formulaId, int sequenceNumber, string operation, string valueSource,
+            string valueSelection)
         {
             return RawQuery.Create(@"
 insert into FormulaOperation

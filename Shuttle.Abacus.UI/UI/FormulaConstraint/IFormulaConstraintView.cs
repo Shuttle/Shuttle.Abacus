@@ -10,7 +10,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
     public interface IFormulaConstraintView : IView
     {
         void PopulateArguments(IEnumerable<ArgumentModel> items);
-        void SetContraintTypes(IEnumerable<ConstraintTypeModel> list);
+        void PopulateContraintTypes(IEnumerable<string> constraintTypes);
         ArgumentModel ArgumentModel { get; }
         ConstraintTypeModel ConstraintTypeModel { get; }
         void EnableAnswerSelection();
@@ -21,7 +21,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
         bool HasAnswers { get; }
         bool HasArgument { get; }
         bool HasConstraint { get; }
-        List<Domain.FormulaConstraint> Constraints { get; set; }
+        List<FormulaConstraintModel> Constraints { get; set; }
         
         ComboBox ValueSelectionControl { get; }
         TextBox FormattedControl { get; }

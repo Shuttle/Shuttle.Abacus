@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Windows.Forms;
-using Shuttle.Abacus.Domain;
-using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
@@ -64,13 +61,10 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
             {
                 foreach (ListViewItem item in OperationsListView.Items)
                 {
-                    yield return (FormulaOperationModel)item.Tag;
+                    yield return (FormulaOperationModel) item.Tag;
                 }
             }
-            set
-            {
-                value.ForEach(model => AddOperation(model.Operation, model.ValueSource, model.ValueSelection));
-            }
+            set { value.ForEach(model => AddOperation(model.Operation, model.ValueSource, model.ValueSelection)); }
         }
 
         public string ValueSourceValue
@@ -81,10 +75,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
 
         public string ValueSelectionValue
         {
-            get
-            {
-                return ValueSelection.Text;
-            }
+            get { return ValueSelection.Text; }
             set
             {
                 ValueSelection.SelectedItem = value;
@@ -111,10 +102,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
 
             ValueSelection.Items.Add("%running-total");
 
-            arguments.ForEach(model =>
-            {
-                ValueSelection.Items.Add(model.Name);
-            });
+            arguments.ForEach(model => { ValueSelection.Items.Add(model.Name); });
         }
 
         public void ShowValueSourceError()
@@ -165,7 +153,18 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
             ValueSelection.Items.Clear();
         }
 
-        private static ListViewItem PopulateItem(ListViewItem item, string operation, string valueSource, string valueSelection)
+        public string NameValue { get; set; }
+
+        public void PopulateFormulas(IEnumerable<FormulaModel> formulas)
+        {
+            foreach (var model in formulas)
+            {
+                ValueSelection.Items.Add(model.Name);
+            }
+        }
+
+        private static ListViewItem PopulateItem(ListViewItem item, string operation, string valueSource,
+            string valueSelection)
         {
             item.Text = operation;
 
@@ -185,8 +184,8 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
         private ListViewItem SelectedItem()
         {
             return !HasSelectedItem
-                       ? null
-                       : OperationsListView.SelectedItems[0];
+                ? null
+                : OperationsListView.SelectedItems[0];
         }
 
         private void AddButton_Click(object sender, EventArgs e)
@@ -274,7 +273,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
             {
                 OperationValue = item.Text;
                 ValueSourceValue = item.SubItems[1].Text;
-                ValueSelectionValue = ((FormulaOperationModel)item.Tag).ValueSelection;
+                ValueSelectionValue = ((FormulaOperationModel) item.Tag).ValueSelection;
             }
 
             MoveDownButton.Enabled = b;
@@ -298,16 +297,6 @@ namespace Shuttle.Abacus.UI.UI.FormulaOperation
             SetError(ValueSource, string.Empty);
 
             Presenter.ValueSourceChanged();
-        }
-
-        public string NameValue { get; set; }
-
-        public void PopulateFormulas(IEnumerable<FormulaModel> formulas)
-        {
-            foreach (var model in formulas)
-            {
-                ValueSelection.Items.Add(model.Name);
-            }
         }
     }
 

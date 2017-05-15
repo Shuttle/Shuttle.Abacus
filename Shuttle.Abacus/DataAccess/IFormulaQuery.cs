@@ -17,5 +17,6 @@ namespace Shuttle.Abacus.DataAccess
         void Rename(Guid formulaId, string name);
         void RemoveOperations(Guid formulaId);
         void AddOperation(Guid formulaId, int sequenceNumber, string operation, string valueSource, string valueSelection);
+        IEnumerable<DataRow> Constraints(Guid formulaId);
     }
 }

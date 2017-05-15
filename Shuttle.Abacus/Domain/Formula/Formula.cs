@@ -103,7 +103,7 @@ namespace Shuttle.Abacus.Domain
                 ValueSelection = valueSelection});
         }
 
-        private OperationAdded On(OperationAdded operationAdded)
+        public OperationAdded On(OperationAdded operationAdded)
         {
             Guard.AgainstNull(operationAdded, "operationAdded");
 

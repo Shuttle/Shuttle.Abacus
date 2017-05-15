@@ -140,22 +140,9 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
                 throw new NullDependencyException("Model");
             }
 
-            using (_databaseContextFactory.Create())
-            {
-                View.PopulateArguments(_argumentQuery.All().Map(row => new ArgumentModel(row)));
-                View.SetContraintTypes(_constraintTypeQuery.All().Map(row=> new ConstraintTypeModel(row)));
-            }
-
-            if (Model.ConstraintRows == null)
-            {
-                return;
-            }
-
-            foreach (var constraint in Model.ConstraintRows)
-            {
-                //TODO
-                //View.AddConstraint(constraint.DataRow, constraint.ConstraintTypeDTO, constraint.Value);
-            }
+            View.PopulateArguments(Model.Arguments);
+            View.PopulateContraintTypes(Model.ConstraintTypes);
+            View.Constraints = Model.Constraints;
         }
     }
 }

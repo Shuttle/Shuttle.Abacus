@@ -38,8 +38,8 @@
       <HintPath>..\packages\Shuttle.Core.Infrastructure.8.0.2\lib\net452-full\Shuttle.Core.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Shuttle.Recall, Version=8.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Recall.8.0.1\lib\net452-full\Shuttle.Recall.dll</HintPath>
+    <Reference Include="Shuttle.Recall, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Recall.8.0.0\lib\net452-full\Shuttle.Recall.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -53,9 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationService\ChangeFormulaTask.cs" />
     <Compile Include="ApplicationService\ChangeLoginNameTask.cs" />
-    <Compile Include="ApplicationService\IChangeFormulaTask.cs" />
     <Compile Include="ApplicationService\IChangeLoginNameTask.cs" />
     <Compile Include="ApplicationService\ISetPermissionsTask.cs" />
     <Compile Include="ApplicationService\ITask.cs" />
@@ -64,7 +62,6 @@
     <Compile Include="ApplicationService\TaskFactory.cs" />
     <Compile Include="DataAccess\ArgumentQuery.cs" />
     <Compile Include="DataAccess\ArgumentRepository.cs" />
-    <Compile Include="DataAccess\FormulaConstraintQuery.cs" />
     <Compile Include="DataAccess\ConstraintTypeQuery.cs" />
     <Compile Include="DataAccess\MatrixQuery.cs" />
     <Compile Include="DataAccess\MatrixRepository.cs" />
@@ -130,7 +127,6 @@
     <Compile Include="DataAccess\Definitions\ValueSourceTypeColumns.cs" />
     <Compile Include="DataAccess\ValueSourceTypeQueryFactory.cs" />
     <Compile Include="DataAccess\FormulaQuery.cs" />
-    <Compile Include="DataAccess\FormulaRepository.cs" />
     <Compile Include="DataAccess\IConstraintTypeQueryFactory.cs" />
     <Compile Include="DataAccess\Infrastructure\DataTableRepository.cs" />
     <Compile Include="DataAccess\Infrastructure\IDataTableMapper.cs" />
@@ -141,7 +137,6 @@
     <Compile Include="DataAccess\OperationTypeQuery.cs" />
     <Compile Include="DataAccess\BooleanArgumentDTOPipe.cs" />
     <Compile Include="DataAccess\IArgumentQuery.cs" />
-    <Compile Include="DataAccess\IFormulaConstraintQuery.cs" />
     <Compile Include="DataAccess\IConstraintTypeQuery.cs" />
     <Compile Include="DataAccess\IMatrixQuery.cs" />
     <Compile Include="DataAccess\IFormulaQuery.cs" />
@@ -272,7 +267,6 @@
     <Compile Include="Domain\Repositories\IArgumentRepository.cs" />
     <Compile Include="Domain\Repositories\IMatrixRepository.cs" />
     <Compile Include="Domain\Repositories\IMatrixElementRepository.cs" />
-    <Compile Include="Domain\Repositories\IFormulaRepository.cs" />
     <Compile Include="Domain\Repositories\ITestRepository.cs" />
     <Compile Include="Domain\Repositories\ISystemUserRepository.cs" />
     <Compile Include="Domain\Services\ArgumentService.cs" />
@@ -285,7 +279,6 @@
     <Compile Include="Domain\ValueSource\DecimalTableValueSource.cs" />
     <Compile Include="Domain\ValueSource\ConstantValueSource.cs" />
     <Compile Include="Domain\ValueSource\Factories\FormulaResultValueSourceFactory.cs" />
-    <Compile Include="Domain\ValueSource\Factories\FormulaSubTotalValueSourceFactory.cs" />
     <Compile Include="Domain\ValueSource\Factories\CalculationTotalValueSourceFactory.cs" />
     <Compile Include="Domain\ValueSource\Factories\DecimalTableValueSourceFactory.cs" />
     <Compile Include="Domain\ValueSource\Factories\ConstantValueSourceFactory.cs" />
