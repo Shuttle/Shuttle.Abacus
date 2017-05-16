@@ -41,10 +41,5 @@ namespace Shuttle.Abacus.UI.Models
         {
             return AnswerType.Equals("Text", StringComparison.OrdinalIgnoreCase);
         }
-
-        public bool IsMoney()
-        {
-            return AnswerType.Equals("Money", StringComparison.OrdinalIgnoreCase);
-        }
     }
 }

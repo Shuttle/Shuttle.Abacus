@@ -44,18 +44,7 @@ namespace Shuttle.Abacus.UI.UI.Test
 
             using (_databaseContextFactory.Create())
             {
-                var answers = _argumentQuery.GetValues(model.Id).ToList();
-
-                if (answers.Any())
-                {
-                    View.PopulateArgumentValues(answers.Map(row=>ArgumentColumns.ValueColumns.Value.MapFrom(row)));
-                }
-                else
-                {
-                    if (model.IsMoney())
-                    {
-                    }
-                }
+                View.PopulateArgumentValues(_argumentQuery.GetValues(model.Id).Map(row => ArgumentColumns.ValueColumns.Value.MapFrom(row)));
             }
         }
 

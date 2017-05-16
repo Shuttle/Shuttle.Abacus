@@ -40,27 +40,9 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
         {
             var model = View.ArgumentModel;
 
-            List<DataRow> rows;
-
             using (_databaseContextFactory.Create())
             {
-                rows = _argumentQuery.GetValues(model.Id).ToList();
-            }
-
-            if (rows.Any() || model.IsText())
-            {
-                if (rows.Any())
-                {
-                    View.PopulateArgumentValues(rows);
-                }
-            }
-            else
-            {
-                if (model.IsMoney())
-                {
-                }
-
-                View.ShowAllConstraints();
+                View.PopulateArgumentValues(_argumentQuery.GetValues(model.Id));
             }
         }
 

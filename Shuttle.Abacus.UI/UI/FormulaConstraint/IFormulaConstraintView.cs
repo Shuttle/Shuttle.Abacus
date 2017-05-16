@@ -24,6 +24,5 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
         void ShowArgumentError();
         void ShowConstraintError();
         void AddConstraint(string argumentName, string comparison, string value);
-        void ShowAllConstraints();
     }
 }

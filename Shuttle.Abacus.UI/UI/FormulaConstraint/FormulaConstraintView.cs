@@ -98,10 +98,6 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
             ConstraintsListView.Items.Add(PopulateItem(item, argumentName, comparison, value));
         }
 
-        public void ShowAllConstraints()
-        {
-        }
-
         public ComboBox ValueSelectionControl { get; private set; }
 
         private bool ContainsAnswerName(string name)
