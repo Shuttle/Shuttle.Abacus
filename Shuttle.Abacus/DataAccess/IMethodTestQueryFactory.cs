@@ -7,9 +7,7 @@ namespace Shuttle.Abacus.DataAccess
     public interface ITestQueryFactory
     {
         IQuery All();
-        IQuery AllForMethod(Guid id);
-        IQuery GetArgumentAnswers(Guid id);
-        IQuery AllUsingArgument(Guid argumentId);
+        IQuery ArgumentValues(Guid id);
         IQuery Get(Guid id);
         IQuery Remove(Guid id);
         IQuery Add(Test item);

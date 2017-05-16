@@ -9,7 +9,7 @@ using Shuttle.Esb;
 namespace Shuttle.Abacus.Server.CommandHandlers
 {
     public class TestHandler :
-        IMessageHandler<CreateTestCommand>,
+        IMessageHandler<RegisterTestCommand>,
         IMessageHandler<DeleteTestCommand>,
         IMessageHandler<ChangeTestCommand>,
         IMessageHandler<RunTestCommand>,
@@ -18,141 +18,142 @@ namespace Shuttle.Abacus.Server.CommandHandlers
         private readonly IArgumentRepository _argumentRepository;
         private readonly ICalculationLoggerFactory _calculationLoggerFactory;
         private readonly IDatabaseContextFactory _databaseContextFactory;
-        private readonly ITestRepository _testRepository;
 
-        public TestHandler(IDatabaseContextFactory databaseContextFactory,
-            ITestRepository testRepository, ICalculationLoggerFactory calculationLoggerFactory,
+        public TestHandler(IDatabaseContextFactory databaseContextFactory, ICalculationLoggerFactory calculationLoggerFactory,
             IArgumentRepository argumentRepository)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
-            Guard.AgainstNull(testRepository, "testRepository");
             Guard.AgainstNull(calculationLoggerFactory, "calculationLoggerFactory");
             Guard.AgainstNull(argumentRepository, "argumentRepository");
 
             _databaseContextFactory = databaseContextFactory;
-            _testRepository = testRepository;
             _argumentRepository = argumentRepository;
             _calculationLoggerFactory = calculationLoggerFactory;
         }
 
         public void ProcessMessage(IHandlerContext<ChangeTestCommand> context)
         {
-            var message = context.Message;
+            throw new NotImplementedException();
+            //var message = context.Message;
 
-            using (_databaseContextFactory.Create())
-            {
-                var test = new Test(message.MethodTestId, message.MethodId, message.Description, message.ExpectedResult, message.ExpectedResultType, message.Comparison);
+            //using (_databaseContextFactory.Create())
+            //{
+            //    var test = new Test(message.MethodTestId, message.MethodId, message.Description, message.ExpectedResult, message.ExpectedResultType, message.Comparison);
 
-                foreach (var answer in message.ArgumentAnswers)
-                {
-                    test.AddArgumentAnswer(new TestArgumentValue(answer.ArgumentId, answer.Answer));
-                }
+            //    foreach (var answer in message.ArgumentAnswers)
+            //    {
+            //        test.AddArgumentAnswer(new TestArgumentValue(answer.ArgumentId, answer.Answer));
+            //    }
 
-                _testRepository.Save(test);
-            }
+            //    _testRepository.Save(test);
+            //}
         }
 
-        public void ProcessMessage(IHandlerContext<CreateTestCommand> context)
+        public void ProcessMessage(IHandlerContext<RegisterTestCommand> context)
         {
-            var message = context.Message;
+            throw new NotImplementedException();
+            //var message = context.Message;
 
-            using (_databaseContextFactory.Create())
-            {
-                var test = new Test(message.MethodTestId, message.MethodId, message.Description, message.ExpectedResult, message.ExpectedResultType, message.Comparison);
+            //using (_databaseContextFactory.Create())
+            //{
+            //    var test = new Test(message.MethodTestId, message.MethodId, message.Name, message.ExpectedResult, message.ExpectedResultType, message.Comparison);
 
-                foreach (var answer in message.ArgumentAnswers)
-                {
-                    test.AddArgumentAnswer(new TestArgumentValue(answer.ArgumentId, answer.Answer));
-                }
+            //    foreach (var answer in message.ArgumentAnswers)
+            //    {
+            //        test.AddArgumentAnswer(new TestArgumentValue(answer.ArgumentId, answer.Answer));
+            //    }
 
-                _testRepository.Add(test);
-            }
+            //    _testRepository.Add(test);
+            //}
         }
 
         public void ProcessMessage(IHandlerContext<DeleteTestCommand> context)
         {
-            using (_databaseContextFactory.Create())
-            {
-                foreach (var id in context.Message.MethodTestIds)
-                {
-                    _testRepository.Remove(id);
-                }
-            }
+            throw new NotImplementedException();
+            //using (_databaseContextFactory.Create())
+            //{
+            //    foreach (var id in context.Message.MethodTestIds)
+            //    {
+            //        _testRepository.Remove(id);
+            //    }
+            //}
         }
 
         public void ProcessMessage(IHandlerContext<PrintTestCommand> context)
         {
-            var message = context.Message;
+            throw new NotImplementedException();
+            //var message = context.Message;
 
-            using (_databaseContextFactory.Create())
-            {
-                var testResults = new MethodTestPrintEvent();
+            //using (_databaseContextFactory.Create())
+            //{
+            //    var testResults = new MethodTestPrintEvent();
 
-                foreach (var id in message.MethodTestIds)
-                {
-                    var sw = new Stopwatch();
+            //    foreach (var id in message.MethodTestIds)
+            //    {
+            //        var sw = new Stopwatch();
 
-                    sw.Start();
+            //        sw.Start();
 
-                    var test = _testRepository.Get(id);
+            //        var test = _testRepository.Get(id);
 
-                    var methodContext = GetContext(test);
+            //        var methodContext = GetContext(test);
 
-                    sw.Stop();
+            //        sw.Stop();
 
-                    methodContext.Log();
-                    methodContext.Log("test case completed in {0} ms",
-                        sw.ElapsedMilliseconds.ToString("#,##0"));
+            //        methodContext.Log();
+            //        methodContext.Log("test case completed in {0} ms",
+            //            sw.ElapsedMilliseconds.ToString("#,##0"));
 
-                    testResults.RunEvents.Add(new TestRunEvent
-                        {
-                            WorkItemId = message.WorkItemId,
-                            MethodTestId = id,
-                            MethodTestDescription = test.Description,
-                            ExpectedResult = test.ExpectedResult,
-                            //TODO
-                            //FormulaContext = methodContext.DTO()
-                        }
-                    );
-                }
+            //        testResults.RunEvents.Add(new TestRunEvent
+            //            {
+            //                WorkItemId = message.WorkItemId,
+            //                MethodTestId = id,
+            //                //MethodTestDescription = test.Description,
+            //                ExpectedResult = test.ExpectedResult,
+            //                //TODO
+            //                //FormulaContext = methodContext.DTO()
+            //            }
+            //        );
+            //    }
 
-                context.Send(testResults, c => c.Reply());
-            }
+            //    context.Send(testResults, c => c.Reply());
+            //}
         }
 
         public void ProcessMessage(IHandlerContext<RunTestCommand> context)
         {
-            var message = context.Message;
+            throw new NotImplementedException();
+            //var message = context.Message;
 
-            using (_databaseContextFactory.Create())
-            {
-                foreach (var id in message.MethodTestIds)
-                {
-                    var sw = new Stopwatch();
+            //using (_databaseContextFactory.Create())
+            //{
+            //    foreach (var id in message.MethodTestIds)
+            //    {
+            //        var sw = new Stopwatch();
 
-                    sw.Start();
+            //        sw.Start();
 
-                    var test = _testRepository.Get(id);
+            //        var test = _testRepository.Get(id);
 
-                    var methodContext = GetContext(test);
+            //        var methodContext = GetContext(test);
 
-                    sw.Stop();
+            //        sw.Stop();
 
-                    methodContext.Log();
-                    methodContext.Log("test case completed in {0} ms",
-                        sw.ElapsedMilliseconds.ToString("#,##0"));
+            //        methodContext.Log();
+            //        methodContext.Log("test case completed in {0} ms",
+            //            sw.ElapsedMilliseconds.ToString("#,##0"));
 
-                    context.Send(new TestRunEvent
-                    {
-                        WorkItemId = message.WorkItemId,
-                        MethodTestId = id,
-                        MethodTestDescription = test.Description,
-                        ExpectedResult = test.ExpectedResult,
-                        //TODO
-                        //FormulaContext = methodContext.DTO()
-                    }, c => c.Reply());
-                }
-            }
+            //        context.Send(new TestRunEvent
+            //        {
+            //            WorkItemId = message.WorkItemId,
+            //            MethodTestId = id,
+            //            //MethodTestDescription = test.Description,
+            //            ExpectedResult = test.ExpectedResult,
+            //            //TODO
+            //            //FormulaContext = methodContext.DTO()
+            //        }, c => c.Reply());
+            //    }
+            //}
         }
 
         private FormulaContext GetContext(Test test)

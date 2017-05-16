@@ -28,7 +28,7 @@
         {
             this.ArgumentName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.AnswerType = new System.Windows.Forms.ComboBox();
+            this.ValueType = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -51,9 +51,9 @@
             // 
             // ValueType
             // 
-            this.AnswerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.AnswerType.FormattingEnabled = true;
-            this.AnswerType.Items.AddRange(new object[] {
+            this.ValueType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ValueType.FormattingEnabled = true;
+            this.ValueType.Items.AddRange(new object[] {
             "Boolean",
             "Date",
             "Decimal",
@@ -61,19 +61,19 @@
             "Mapping",
             "Money",
             "Text"});
-            this.AnswerType.Location = new System.Drawing.Point(8, 72);
-            this.AnswerType.Name = "AnswerType";
-            this.AnswerType.Size = new System.Drawing.Size(214, 21);
-            this.AnswerType.Sorted = true;
-            this.AnswerType.TabIndex = 5;
-            this.AnswerType.SelectedIndexChanged += new System.EventHandler(this.AnswerType_SelectedIndexChanged);
+            this.ValueType.Location = new System.Drawing.Point(8, 72);
+            this.ValueType.Name = "ValueType";
+            this.ValueType.Size = new System.Drawing.Size(214, 21);
+            this.ValueType.Sorted = true;
+            this.ValueType.TabIndex = 5;
+            this.ValueType.SelectedIndexChanged += new System.EventHandler(this.AnswerType_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(8, 56);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 13);
+            this.label3.Size = new System.Drawing.Size(57, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Value type";
             // 
@@ -82,7 +82,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.AnswerType);
+            this.Controls.Add(this.ValueType);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ArgumentName);
             this.Name = "ArgumentView";
@@ -92,7 +92,7 @@
 
         }
 
-        private System.Windows.Forms.ComboBox AnswerType;
+        private System.Windows.Forms.ComboBox ValueType;
         private System.Windows.Forms.TextBox ArgumentName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;

@@ -133,7 +133,6 @@
     <Compile Include="DataAccess\Infrastructure\IDataTableRepository.cs" />
     <Compile Include="DataAccess\Mapping\SystemUserDataReaderMapper.cs" />
     <Compile Include="DataAccess\TestQuery.cs" />
-    <Compile Include="DataAccess\TestRepository.cs" />
     <Compile Include="DataAccess\OperationTypeQuery.cs" />
     <Compile Include="DataAccess\BooleanArgumentDTOPipe.cs" />
     <Compile Include="DataAccess\IArgumentQuery.cs" />
@@ -216,7 +215,7 @@
     <Compile Include="Events\Argument.v1\Registered.cs" />
     <Compile Include="Events\Argument.v1\Removed.cs" />
     <Compile Include="Events\Argument.v1\Renamed.cs" />
-    <Compile Include="Events\Argument.v1\AnswerTypeChanged.cs" />
+    <Compile Include="Events\Argument.v1\ValueTypeChanged.cs" />
     <Compile Include="Events\Argument.v1\ValueRemoved.cs" />
     <Compile Include="Events\Argument.v1\ValueAdded.cs" />
     <Compile Include="Events\Formula.v1\ConstraintAdded.cs" />
@@ -226,6 +225,11 @@
     <Compile Include="Events\Formula.v1\Renamed.cs" />
     <Compile Include="Events\Formula.v1\Registered.cs" />
     <Compile Include="Events\Formula.v1\Removed.cs" />
+    <Compile Include="Events\Test.v1\Registered.cs" />
+    <Compile Include="Events\Test.v1\Removed.cs" />
+    <Compile Include="Events\Test.v1\Renamed.cs" />
+    <Compile Include="Events\Test.v1\ValueAdded.cs" />
+    <Compile Include="Events\Test.v1\ValueRemoved.cs" />
     <Compile Include="Invariants\ArgumentValueRules.cs" />
     <Compile Include="Invariants\FormulaRules.cs" />
     <Compile Include="Invariants\ArgumentRules.cs" />
@@ -269,7 +273,6 @@
     <Compile Include="Domain\Repositories\IArgumentRepository.cs" />
     <Compile Include="Domain\Repositories\IMatrixRepository.cs" />
     <Compile Include="Domain\Repositories\IMatrixElementRepository.cs" />
-    <Compile Include="Domain\Repositories\ITestRepository.cs" />
     <Compile Include="Domain\Repositories\ISystemUserRepository.cs" />
     <Compile Include="Domain\Services\ArgumentService.cs" />
     <Compile Include="Domain\Services\IArgumentService.cs" />

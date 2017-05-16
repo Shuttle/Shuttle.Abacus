@@ -4,7 +4,7 @@ using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.UI.Coordinators.Interfaces;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Messages.Report;
-using Shuttle.Abacus.UI.Messages.TestCase;
+using Shuttle.Abacus.UI.Messages.Test;
 using Shuttle.Abacus.UI.Models;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;

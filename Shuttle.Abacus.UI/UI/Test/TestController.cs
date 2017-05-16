@@ -4,7 +4,7 @@ using Shuttle.Abacus.Messages.v1;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.Core;
-using Shuttle.Abacus.UI.Messages.TestCase;
+using Shuttle.Abacus.UI.Messages.Test;
 using Shuttle.Esb;
 
 namespace Shuttle.Abacus.UI.UI.Test
@@ -16,7 +16,7 @@ namespace Shuttle.Abacus.UI.UI.Test
         {
         }
 
-        public void HandleMessage(NewTestMessage message)
+        public void HandleMessage(RegisterTestMessage message)
         {
             if (!WorkItem.PresentationValid())
             {
@@ -25,30 +25,13 @@ namespace Shuttle.Abacus.UI.UI.Test
 
             var view = WorkItem.GetView<ITestView>();
 
-            var command = new CreateTestCommand
+            var command = new RegisterTestCommand
                           {
-                              MethodTestId = Guid.NewGuid(),
-                              MethodId = message.MethodId,
-                              Description = view.DescriptionValue,
-                              ExpectedResult = view.ExpectedResultValue
+                              Name = view.NameValue,
+                              ExpectedResult = view.ExpectedResultValue,
+                              ExpectedResultType = view.ExpectedResultTypeValue,
+                              Comparison = view.ComparisonValue
                           };
-
-            foreach (var model in view.ArgumentAnswers)
-            {
-                command.ArgumentAnswers.Add(new Abacus.Messages.v1.TransferObjects.ArgumentAnswer
-                                          {
-                                              ArgumentId = model.ArgumentId,
-                                              Answer = model.Value
-                                          });
-            }
-
-            if (command.ArgumentAnswers.Count == 0)
-            {
-                MessageBus.Publish(
-                    new ResultNotificationMessage(Result.Create().AddFailureMessage("Please add at least one input.")));
-
-                return;
-            }
 
             Send(command);
         }
@@ -61,18 +44,9 @@ namespace Shuttle.Abacus.UI.UI.Test
                           {
                               MethodTestId = message.MethodTestId,
                               MethodId = message.MethodId,
-                              Description = view.DescriptionValue,
+                              Description = view.NameValue,
                               ExpectedResult = view.ExpectedResultValue
                           };
-
-            foreach (var model in view.ArgumentAnswers)
-            {
-                command.ArgumentAnswers.Add(new Shuttle.Abacus.Messages.v1.TransferObjects.ArgumentAnswer
-                {
-                    ArgumentId = model.ArgumentId,
-                    Answer = model.Value
-                });
-            }
 
             Send(command);
         }

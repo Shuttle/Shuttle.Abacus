@@ -23,26 +23,14 @@ from
             return RawQuery.Create(string.Concat(SelectClause, "order by Description"));
         }
 
-        public IQuery AllForMethod(Guid id)
-        {
-            return RawQuery.Create(string.Concat(SelectClause, @"
-where
-    FormulaId = @FormulaId
-order by 
-    Description
-"))
-                .AddParameterValue(TestColumns.FormulaId, id);
-        }
-
-        public IQuery GetArgumentAnswers(Guid id)
+        public IQuery ArgumentValues(Guid id)
         {
             return RawQuery.Create(@"
 select
     TestId,
     ArgumentName,
     Answer,
-    ValueType,
-    ArgumentName
+    ValueType
 from
     TestArgumentValue
 where
@@ -50,23 +38,7 @@ where
 order by
     ArgumentName
 ")
-                .AddParameterValue(TestColumns.ArgumentValueColumns.TestId, id);
-        }
-
-        public IQuery AllUsingArgument(Guid argumentId)
-        {
-            return RawQuery.Create(@"
-select
-    Description
-from
-    Test mt
-inner join
-    TestArgumentValue mtaa on
-        (mtaa.TestId = mt.TestId)
-where
-    mtaa.ArgumentName = @ArgumentName
-")
-                .AddParameterValue(TestColumns.ArgumentValueColumns.ArgumentName, argumentId);
+                .AddParameterValue(TestColumns.Id, id);
         }
 
         public IQuery Get(Guid id)
@@ -91,21 +63,24 @@ where
 insert into Test
 (
     TestId,
-    FormulaId,
+    Name,
     ExpectedResult,
-    Description
+    ExpectedResultType,
+    Comparison
 )
 values
 (
     @TestId,
-    @FormulaId,
+    @Name,
     @ExpectedResult,
-    @Description
+    @ExpectedResultType,
+    @Comparison
 )")
                 .AddParameterValue(TestColumns.Id, item.Id)
-                .AddParameterValue(TestColumns.FormulaId, item.FormulaId)
-                .AddParameterValue(TestColumns.Description, item.Description)
-                .AddParameterValue(TestColumns.ExpectedResult, item.ExpectedResult);
+                .AddParameterValue(TestColumns.Name, item.Name)
+                .AddParameterValue(TestColumns.ExpectedResult, item.ExpectedResult)
+                .AddParameterValue(TestColumns.ExpectedResultType, item.ExpectedResultType)
+                .AddParameterValue(TestColumns.Comparison, item.Comparison);
         }
 
         public IQuery AddArgumentAnswer(Test test, TestArgumentValue argumentValue)
@@ -127,7 +102,7 @@ values
     @ValueType,
     @ArgumentName
 )")
-                .AddParameterValue(TestColumns.ArgumentValueColumns.TestId, test.Id)
+                .AddParameterValue(TestColumns.Id, test.Id)
                 .AddParameterValue(TestColumns.ArgumentValueColumns.ArgumentName, argumentValue.ArgumentId)
                 .AddParameterValue(TestColumns.ArgumentValueColumns.Value, argumentValue.Answer);
         }

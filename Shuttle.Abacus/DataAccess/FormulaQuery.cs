@@ -43,6 +43,8 @@ namespace Shuttle.Abacus.DataAccess
         public void Remove(Guid formulaId)
         {
             _databaseGateway.ExecuteUsing(_queryFactory.Remove(formulaId));
+            _databaseGateway.ExecuteUsing(_queryFactory.RemoveOperations(formulaId));
+            _databaseGateway.ExecuteUsing(_queryFactory.RemoveConstraints(formulaId));
         }
 
         public void Rename(Guid formulaId, string name)

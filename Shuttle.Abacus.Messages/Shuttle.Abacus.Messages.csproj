@@ -65,7 +65,7 @@
     <Compile Include="v1\RegisterArgumentCommand.cs" />
     <Compile Include="v1\CreateMatrixCommand.cs" />
     <Compile Include="v1\FormulaCommand.cs" />
-    <Compile Include="v1\CreateTestCommand.cs" />
+    <Compile Include="v1\RegisterTestCommand.cs" />
     <Compile Include="v1\CreateSystemUserCommand.cs" />
     <Compile Include="v1\MatrixCommand.cs" />
     <Compile Include="v1\RemoveArgumentCommand.cs" />

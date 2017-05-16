@@ -29,5 +29,36 @@ namespace Shuttle.Abacus.Domain
                        ? AnswerString
                        : string.Format("{0} ({1})", AnswerString, Convert.ToString(Answer));
         }
+
+        public static ValueType Create(string type, string name, string answer)
+        {
+            switch (type.ToLowerInvariant())
+            {
+                case "boolean":
+                    {
+                        return new BooleanValueType(name, answer);
+                    }
+                case "datetime":
+                    {
+                        return new DateTimeValueType(name, answer);
+                    }
+                case "decimal":
+                    {
+                        return new ConstantValueType(name, answer);
+                    }
+                case "integer":
+                    {
+                        return new IntegerValueType(name, answer);
+                    }
+                case "text":
+                    {
+                        return new TextValueType(name, answer);
+                    }
+                default:
+                    {
+                        throw new InvalidOperationException();
+                    }
+            }
+        }
     }
 }

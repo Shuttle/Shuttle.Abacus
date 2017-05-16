@@ -5,7 +5,7 @@ using Shuttle.Abacus.UI.Messages.Formula;
 using Shuttle.Abacus.UI.Messages.Report;
 using Shuttle.Abacus.UI.Messages.Section;
 using Shuttle.Abacus.UI.Messages.SystemUser;
-using Shuttle.Abacus.UI.Messages.TestCase;
+using Shuttle.Abacus.UI.Messages.Test;
 
 namespace Shuttle.Abacus.UI.Navigation
 {
@@ -30,8 +30,6 @@ namespace Shuttle.Abacus.UI.Navigation
                 .RegisterResourceItem<EditMethodMessage>()
                 .RegisterResourceItem<DeleteMethodMessage>()
                 .RegisterResourceItem<ManageTestsMessage>(new ResourceItem("Manage", "Test"))
-                .RegisterResourceItem<NewTestMessage>()
-                .RegisterResourceItem<NewTestFromExistingMessage>(new ResourceItem("NewFromSelected", "Copy"))
                 .RegisterResourceItem<EditTestMessage>()
                 .RegisterResourceItem<ChangeTestMessage>(ResourceItems.Submit)
                 .RegisterResourceItem<RemoveTestMessage>()

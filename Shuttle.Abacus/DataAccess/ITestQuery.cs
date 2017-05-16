@@ -8,8 +8,6 @@ namespace Shuttle.Abacus.DataAccess
     {
         IEnumerable<DataRow> All();
         DataRow Get(Guid id);
-        IEnumerable<DataRow> FetchForMethodId(Guid methodId);
-        IEnumerable<DataRow> GetArgumentAnswers(Guid id);
-        IEnumerable<DataRow> AllUsingArgument(Guid argumentId);
+        IEnumerable<DataRow> ArgumentValues(Guid id);
     }
 }

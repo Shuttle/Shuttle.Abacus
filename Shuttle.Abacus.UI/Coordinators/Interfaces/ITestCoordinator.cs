@@ -3,7 +3,7 @@ using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Abacus.UI.Messages.Explorer;
 using Shuttle.Abacus.UI.Messages.Resources;
-using Shuttle.Abacus.UI.Messages.TestCase;
+using Shuttle.Abacus.UI.Messages.Test;
 
 namespace Shuttle.Abacus.UI.Coordinators.Interfaces
 {
@@ -12,8 +12,7 @@ namespace Shuttle.Abacus.UI.Coordinators.Interfaces
         IMessageHandler<ExplorerInitializeMessage>,
         IMessageHandler<ResourceMenuRequestMessage>,
         IMessageHandler<ManageTestsMessage>,
-        IMessageHandler<NewTestMessage>,
-        IMessageHandler<NewTestFromExistingMessage>,
+        IMessageHandler<RegisterTestMessage>,
         IMessageHandler<EditTestMessage>,
         IMessageHandler<TestCreatedMessage>,
         IMessageHandler<TestChangedMessage>,
@@ -21,6 +20,5 @@ namespace Shuttle.Abacus.UI.Coordinators.Interfaces
         IMessageHandler<TestRunMessage>,
         IMessageHandler<SummaryViewRequestedMessage>
     {
-
     }
 }

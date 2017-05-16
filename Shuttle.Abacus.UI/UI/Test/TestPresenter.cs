@@ -1,7 +1,4 @@
-using System.Data;
-using System.Linq;
 using Shuttle.Abacus.DataAccess;
-using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Interfaces;
 using Shuttle.Abacus.Invariants.Values;
 using Shuttle.Abacus.Localisation;
@@ -38,73 +35,17 @@ namespace Shuttle.Abacus.UI.UI.Test
             Image = Resources.Image_Test;
         }
 
-        public void ArgumentChanged()
-        {
-            var model = View.ArgumentModel;
-
-            using (_databaseContextFactory.Create())
-            {
-                View.PopulateArgumentValues(_argumentQuery.GetValues(model.Id).Map(row => ArgumentColumns.ValueColumns.Value.MapFrom(row)));
-            }
-        }
-
-        public bool ArgumentAnswerOK()
-        {
-            if (!View.HasArgument)
-            {
-                View.ShowArgumentError();
-
-                return false;
-            }
-
-            if (!View.HasAnswer)
-            {
-                View.ShowAnswerError("Please enter a value.");
-
-                return false;
-            }
-
-            if (View.ArgumentModel.IsNumber())
-            {
-                var result =
-                    _valueTypeValidatorProvider.Get(View.ArgumentModel.AnswerType)
-                        .Validate(View.AnswerValue);
-
-                if (!result.OK)
-                {
-                    View.ShowAnswerError(result.ToString());
-
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
         public override void OnInitialize()
         {
             base.OnInitialize();
 
-            View.DescriptionRules = _rules.DescriptionRules();
+            View.NameRules = _rules.DescriptionRules();
             View.ExpectedResultRules = _rules.ExpectedResultRules();
 
-            foreach (var row in Model.ArgumentRows)
-            {
-                View.AddArgument(new ArgumentModel(row));
-            }
-
-            if (Model.MethodTestRow == null)
-            {
-                return;
-            }
-
-            View.DescriptionValue = TestColumns.Description.MapFrom(Model.MethodTestRow);
-            View.ExpectedResultValue = TestColumns.ExpectedResult.MapFrom(Model.MethodTestRow);
-
-            foreach (DataRow row in Model.ArgumentValues.Rows)
-            {
-                View.AddArgumentValue(Model.GetArgument(TestColumns.ArgumentValueColumns.ArgumentName.MapFrom(row)), TestColumns.ArgumentValueColumns.Value.MapFrom(row));
-            }
+            View.NameValue = Model.Name;
+            View.ExpectedResultValue = Model.ExpectedResult;
+            View.ExpectedResultTypeValue = Model.ExpectedResultType;
+            View.ComparisonValue = Model.Comparison;
         }
     }
 }

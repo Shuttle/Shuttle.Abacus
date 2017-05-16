@@ -1,6 +1,6 @@
 ﻿namespace Shuttle.Abacus.UI.UI.Test
 {
-    partial class TestView
+    partial class TestArgumentView
     {
         /// <summary> 
         /// Required designer variable.
@@ -97,6 +97,7 @@
             this.ValueSelectionControl.Name = "ValueSelectionControl";
             this.ValueSelectionControl.Size = new System.Drawing.Size(183, 21);
             this.ValueSelectionControl.TabIndex = 3;
+            this.ValueSelectionControl.SelectedIndexChanged += new System.EventHandler(this.ValueSelection_SelectedIndexChanged);
             // 
             // ValueSelectionLabel
             // 
@@ -117,6 +118,7 @@
             this.Argument.Name = "Argument";
             this.Argument.Size = new System.Drawing.Size(212, 21);
             this.Argument.TabIndex = 1;
+            this.Argument.SelectedIndexChanged += new System.EventHandler(this.ArgumentName_SelectedIndexChanged);
             // 
             // label5
             // 

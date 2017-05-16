@@ -8,15 +8,16 @@ using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Core.Resources;
 using Shuttle.Abacus.UI.Messages.Core;
 using Shuttle.Abacus.UI.Messages.Explorer;
+using Shuttle.Abacus.UI.Messages.Formula;
 using Shuttle.Abacus.UI.Messages.Resources;
-using Shuttle.Abacus.UI.Messages.TestCase;
+using Shuttle.Abacus.UI.Messages.Test;
 using Shuttle.Abacus.UI.Models;
+using Shuttle.Abacus.UI.Navigation;
 using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.UI.UI.SimpleList;
 using Shuttle.Abacus.UI.UI.Test;
 using Shuttle.Abacus.UI.UI.Test.Results;
 using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
-using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 
@@ -26,6 +27,12 @@ namespace Shuttle.Abacus.UI.Coordinators
         Coordinator,
         ITestCoordinator
     {
+        private readonly INavigationItem _register =
+            new NavigationItem(new ResourceItem("Register", "Test")).AssignMessage(new RegisterTestMessage());
+
+        private readonly INavigationItem _remove = new NavigationItem(new ResourceItem("Remove", "Test"));
+        private readonly INavigationItem _rename = new NavigationItem(new ResourceItem("Rename", "Test"));
+
         private readonly IArgumentQuery _argumentQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly ITestQuery _testQuery;
@@ -44,26 +51,28 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(ManageTestsMessage message)
         {
-            var presenter = WorkItemManager.BuildPresenter<ISimpleListPresenter>()
-                .AddNavigationItem(NavigationItemFactory.Create<PrintTestMessage>())
-                .AddNavigationItem(NavigationItemFactory.Create<RunTestMessage>())
-                .AddNavigationItem(NavigationItemFactory.Create(new RemoveTestMessage(message.MethodId)))
-                .AddNavigationItem(NavigationItemFactory.Create<EditTestMessage>())
-                .AddNavigationItem(NavigationItemFactory.Create(new NewTestMessage(message.MethodId)))
-                .AddNavigationItem(NavigationItemFactory.Create(new NewTestFromExistingMessage(message.MethodId)))
-                .AddNavigationItem(NavigationItemFactory.Create<MarkAllMessage>())
-                .AddNavigationItem(NavigationItemFactory.Create<InvertMarksMessage>());
+            using (_databaseContextFactory.Create())
+            {
+                var presenter = WorkItemManager.BuildPresenter<ISimpleListPresenter>()
+                    .AddNavigationItem(NavigationItemFactory.Create<PrintTestMessage>())
+                    .AddNavigationItem(NavigationItemFactory.Create<RunTestMessage>())
+                    //.AddNavigationItem(NavigationItemFactory.Create(new RemoveTestMessage(message.)))
+                    .AddNavigationItem(NavigationItemFactory.Create<EditTestMessage>())
+                    .AddNavigationItem(NavigationItemFactory.Create(new RegisterTestMessage()))
+                    .AddNavigationItem(NavigationItemFactory.Create<MarkAllMessage>())
+                    .AddNavigationItem(NavigationItemFactory.Create<InvertMarksMessage>());
 
-            var item = WorkItemManager
-                .Create($"Tests: {message.MethodName}")
-                .ControlledBy<ITestManagerController>()
-                .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter(presenter)
-                .WithModel(new SimpleListModel("TestId", _testQuery.FetchForMethodId(message.MethodId)))
-                .AddPresenter<ITestResultPresenter>()
-                .AssignInitiator(message);
+                var item = WorkItemManager
+                    .Create($"Tests: {message.MethodName}")
+                    .ControlledBy<ITestManagerController>()
+                    .ShowIn<IContextToolbarPresenter>()
+                    .AddPresenter(presenter)
+                    //.WithModel(new SimpleListModel("TestId", _testQuery.FetchForMethodId(message.TestId)))
+                    .AddPresenter<ITestResultPresenter>()
+                    .AssignInitiator(message);
 
-            HostInWorkspace<ITabbedWorkspacePresenter>(item);
+                HostInWorkspace<ITabbedWorkspacePresenter>(item);
+            }
         }
 
         public void HandleMessage(ResourceMenuRequestMessage message)
@@ -76,21 +85,40 @@ namespace Shuttle.Abacus.UI.Coordinators
             switch (message.Item.Type)
             {
                 case Resource.ResourceType.Container:
-                {
-                    message.NavigationItems.Add(
-                        NavigationItemFactory.Create(
-                            new ManageTestsMessage(message.Item.Key, message.Item.Text)));
+                    {
+                        message.NavigationItems.Add(_register);
 
-                    break;
-                }
+                        break;
+                    }
                 case Resource.ResourceType.Item:
-                {
-                    break;
-                }
+                    {
+                        message.NavigationItems.Add(_rename.AssignMessage(new RenameFormulaMessage(message.Item.Key)));
+
+                        message.NavigationItems.Add(_remove.AssignMessage(
+                            new RemoveFormulaMessage(message.Item.Text, message.Item.Key, message.UpstreamItems[0])));
+
+                        break;
+                    }
             }
+
+            //switch (message.Item.Type)
+            //{
+            //    case Resource.ResourceType.Container:
+            //    {
+            //        message.NavigationItems.Add(
+            //            NavigationItemFactory.Create(
+            //                new ManageTestsMessage(message.Item.Key, message.Item.Text)));
+
+            //        break;
+            //    }
+            //    case Resource.ResourceType.Item:
+            //    {
+            //        break;
+            //    }
+            //}
         }
 
-        public void HandleMessage(NewTestMessage message)
+        public void HandleMessage(RegisterTestMessage message)
         {
             var item = WorkItemManager
                 .Create("New test case")
@@ -116,15 +144,15 @@ namespace Shuttle.Abacus.UI.Coordinators
                 row = _testQuery.Get(message.TestId);
             }
 
-            model.MethodTestRow = row;
-            model.ArgumentValues = _testQuery.GetArgumentAnswers(message.TestId).CopyToDataTable();
+            //model.MethodTestRow = row;
+            //model.ArgumentValues = _testQuery.ArgumentValues(message.TestId).CopyToDataTable();
 
             message.FormulaId = new Guid(row["FormulaId"].ToString());
-            message.Description = TestColumns.Description.MapFrom(row);
+            message.Description = TestColumns.Name.MapFrom(row);
             message.ExpectedResult = TestColumns.ExpectedResult.MapFrom(row);
 
             var item = WorkItemManager
-                .Create("Test: " + TestColumns.Description.MapFrom(row))
+                .Create("Test: " + TestColumns.Name.MapFrom(row))
                 .ControlledBy<ITestController>()
                 .ShowIn<IContextToolbarPresenter>()
                 .AddPresenter<ITestPresenter>()
@@ -177,35 +205,6 @@ namespace Shuttle.Abacus.UI.Coordinators
             view.ShowView();
         }
 
-        public void HandleMessage(NewTestFromExistingMessage message)
-        {
-            var model = BuildModel();
-
-            DataRow row;
-
-            using (_databaseContextFactory.Create())
-            {
-                row = _testQuery.Get(message.MethodTestId);
-            }
-
-            model.MethodTestRow = row;
-            model.ArgumentValues = _testQuery.GetArgumentAnswers(message.MethodTestId).CopyToDataTable();
-
-            var item = WorkItemManager
-                .Create(string.Format("New test case from '{0}'", TestColumns.Description.MapFrom(row)))
-                .ControlledBy<ITestController>()
-                .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<ITestPresenter>()
-                .WithModel(model)
-                .AddNavigationItem(
-                    NavigationItemFactory.Create(new NewTestMessage(message))
-                        .WithResourceItem(ResourceItems.Submit))
-                .AsDefault()
-                .AssignInitiator(message);
-
-            HostInWorkspace<ITabbedWorkspacePresenter>(item);
-        }
-
         public void HandleMessage(SummaryViewRequestedMessage message)
         {
             if (SummaryViewManager.CanIgnore(message, ResourceKeys.Test))
@@ -233,11 +232,13 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         private TestModel BuildModel()
         {
+            throw new NotImplementedException();
+
             using (_databaseContextFactory.Create())
             {
                 return new TestModel
                 {
-                    ArgumentRows = _argumentQuery.All()
+                    //ArgumentRows = _argumentQuery.All()
                 };
             }
         }
@@ -262,7 +263,9 @@ namespace Shuttle.Abacus.UI.Coordinators
                     throw new InvalidOperationException();
                 }
 
-                modelPresenter.AssignModel(new SimpleListModel("TestId", _testQuery.FetchForMethodId(methodId)));
+                throw new NotImplementedException();
+
+                //modelPresenter.AssignModel(new SimpleListModel("TestId", _testQuery.FetchForMethodId(methodId)));
             }
 
             presenter.Refresh();

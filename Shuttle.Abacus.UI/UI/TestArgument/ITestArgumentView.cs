@@ -1,26 +1,18 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
 
-namespace Shuttle.Abacus.UI.UI.FormulaConstraint
+namespace Shuttle.Abacus.UI.UI.Test
 {
-    public interface IFormulaConstraintView : IView
+    public interface ITestArgumentView : IView
     {
         ArgumentModel ArgumentModel { get; }
-        string ComparisonValue { get; }
         string ArgumentValue { get; set; }
         bool HasArgumentValue { get; }
         bool HasArgument { get; }
-
-        bool HasConstraint { get; }
-
-        IEnumerable<FormulaConstraintModel> FormulaConstraints { get; set; }
         void PopulateArguments(IEnumerable<ArgumentModel> items);
         void PopulateArgumentValues(IEnumerable<string> values);
         void ShowArgumentValueError(string message);
         void ShowArgumentError();
-
-        void ShowConstraintError();
-        void AddConstraint(string argumentName, string comparison, string value);
     }
 }

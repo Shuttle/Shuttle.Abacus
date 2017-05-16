@@ -26,14 +26,14 @@ namespace Shuttle.Abacus.Domain
             Id = id;
         }
 
+        public Guid Id { get; private set; }
+
         public string Name { get; private set; }
         public string ValueType { get; private set; }
         public bool Removed { get; private set; }
 
         public IEnumerable<string> Values => new ReadOnlyCollection<string>(_values);
         public bool HasValues => _values.Count > 0;
-
-        public Guid Id { get; private set; }
 
         public Registered Register(string name, string answerType)
         {
@@ -107,23 +107,23 @@ namespace Shuttle.Abacus.Domain
             return renamed;
         }
 
-        public AnswerTypeChanged ChangeAnswerType(string answerType)
+        public ValueTypeChanged ChangeAnswerType(string answerType)
         {
             Guard.AgainstNullOrEmptyString(answerType, "answerType");
 
-            return On(new AnswerTypeChanged
+            return On(new ValueTypeChanged
             {
-                AnswerType = answerType
+                ValueType = answerType
             });
         }
 
-        public AnswerTypeChanged On(AnswerTypeChanged answerTypeChanged)
+        public ValueTypeChanged On(ValueTypeChanged valueTypeChanged)
         {
-            Guard.AgainstNull(answerTypeChanged, "answerTypeChanged");
+            Guard.AgainstNull(valueTypeChanged, "valueTypeChanged");
 
-            ValueType = answerTypeChanged.AnswerType;
+            ValueType = valueTypeChanged.ValueType;
 
-            return answerTypeChanged;
+            return valueTypeChanged;
         }
 
         public ValueAdded AddValue(string value)
@@ -178,37 +178,6 @@ namespace Shuttle.Abacus.Domain
             _values.Remove(valueRemoved.Value);
 
             return valueRemoved;
-        }
-
-        public ValueType Create(string type, string name, string answer)
-        {
-            switch (type.ToLowerInvariant())
-            {
-                case "boolean":
-                    {
-                        return new BooleanValueType(name, answer);
-                    }
-                case "datetime":
-                    {
-                        return new DateTimeValueType(name, answer);
-                    }
-                case "decimal":
-                    {
-                        return new ConstantValueType(name, answer);
-                    }
-                case "integer":
-                    {
-                        return new IntegerValueType(name, answer);
-                    }
-                case "text":
-                    {
-                        return new TextValueType(name, answer);
-                    }
-                default:
-                    {
-                        throw new InvalidOperationException();
-                    }
-            }
         }
     }
 }

@@ -3,7 +3,7 @@ using Shuttle.Abacus.Messages.v1;
 using Shuttle.Abacus.UI.Core.Messaging;
 using Shuttle.Abacus.UI.Core.WorkItem;
 using Shuttle.Abacus.UI.Messages.Core;
-using Shuttle.Abacus.UI.Messages.TestCase;
+using Shuttle.Abacus.UI.Messages.Test;
 using Shuttle.Abacus.UI.UI.SimpleList;
 using Shuttle.Esb;
 
@@ -21,9 +21,9 @@ namespace Shuttle.Abacus.UI.UI.Test
             WorkItem.GetView<ISimpleListView>().ShowCheckboxes();
         }
 
-        public void HandleMessage(NewTestMessage message)
+        public void HandleMessage(RegisterTestMessage message)
         {
-            message.WorkItemId = WorkItem.Id;
+            //message.WorkItemId = WorkItem.Id;
 
             MessageBus.Publish(message);
         }
@@ -98,23 +98,6 @@ namespace Shuttle.Abacus.UI.UI.Test
             }
 
             Send(command);
-        }
-
-        public void HandleMessage(NewTestFromExistingMessage message)
-        {
-            var view = WorkItem.GetView<ISimpleListView>();
-
-            if (!view.HasSelectedItem)
-            {
-                return;
-            }
-
-            var item = view.SelectedItem();
-
-            message.MethodTestId = new Guid(item.Name);
-            message.WorkItemId = WorkItem.Id;
-
-            MessageBus.Publish(message);
         }
 
         public void HandleMessage(PrintTestMessage message)

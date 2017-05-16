@@ -2,7 +2,7 @@ using System;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.UI.Messages.Core;
 
-namespace Shuttle.Abacus.UI.Messages.TestCase
+namespace Shuttle.Abacus.UI.Messages.Test
 {
     public class TestRunMessage : NullPermissionMessage
     {

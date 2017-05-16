@@ -1,5 +1,5 @@
 using Shuttle.Abacus.Domain;
-using Shuttle.Abacus.UI.Messages.TestCase;
+using Shuttle.Abacus.UI.Messages.Test;
 using Shuttle.Esb;
 
 namespace Shuttle.Abacus.UI.Handlers

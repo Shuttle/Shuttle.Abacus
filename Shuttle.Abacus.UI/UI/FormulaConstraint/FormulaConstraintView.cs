@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Windows.Forms;
-using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.UI.Core.Extensions;
 using Shuttle.Abacus.UI.Core.Presentation;
@@ -32,26 +30,24 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
 
         public string ComparisonValue => (string) Constraint.SelectedItem;
 
-        public void PopulateArgumentValues(IEnumerable<DataRow> rows)
+        public void PopulateArgumentValues(IEnumerable<string> values)
         {
-            rows.ForEach(row =>
+            values.ForEach(value =>
             {
-                var answer = ArgumentColumns.ValueColumns.Value.MapFrom(row);
-
-                if (!ContainsAnswerName(answer))
+                if (!ContainsAnswerName(value))
                 {
-                    ValueSelectionControl.Items.Add(answer);
+                    ValueSelectionControl.Items.Add(value);
                 }
             });
         }
 
-        public string AnswerValue
+        public string ArgumentValue
         {
             get { return ValueSelectionControl.Text; }
             set { ValueSelectionControl.Text = value; }
         }
 
-        public bool HasAnswer => ValueSelectionControl.Text.Length > 0;
+        public bool HasArgumentValue => ValueSelectionControl.Text.Length > 0;
 
         public bool HasArgument => Argument.Text.Length > 0;
 
@@ -73,7 +69,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
             }
         }
 
-        public void ShowAnswerError(string message)
+        public void ShowArgumentValueError(string message)
         {
             SetError(ValueSelectionControl, message);
         }
@@ -98,7 +94,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
             ConstraintsListView.Items.Add(PopulateItem(item, argumentName, comparison, value));
         }
 
-        public ComboBox ValueSelectionControl { get; private set; }
+        public ComboBox ValueSelectionControl => ValueSelection;
 
         private bool ContainsAnswerName(string name)
         {
@@ -136,7 +132,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
         {
             if (Presenter.ConstraintOK())
             {
-                AddConstraint(ArgumentModel.Name, ComparisonValue, AnswerValue);
+                AddConstraint(ArgumentModel.Name, ComparisonValue, ArgumentValue);
             }
         }
 
@@ -167,7 +163,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
             {
                 Argument.Text = item.Text;
                 Constraint.Text = item.SubItems[1].Text;
-                AnswerValue = item.SubItems[2].Text;
+                ArgumentValue = item.SubItems[2].Text;
             }
 
             MoveDownButton.Enabled = b;
@@ -193,7 +189,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
                 return;
             }
 
-            PopulateItem(_listViewExtender.SelectedItem(), ArgumentModel.Name, ComparisonValue, AnswerValue);
+            PopulateItem(_listViewExtender.SelectedItem(), ArgumentModel.Name, ComparisonValue, ArgumentValue);
         }
 
         private void MoveUpButton_Click(object sender, EventArgs e)

@@ -1,5 +1,6 @@
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
+using Shuttle.Abacus.Invariants.Interfaces;
 using Shuttle.Abacus.Invariants.Values;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
@@ -7,56 +8,50 @@ using Shuttle.Abacus.UI.Models;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.UI.FormulaConstraint
+namespace Shuttle.Abacus.UI.UI.Test
 {
-    public class FormulaConstraintPresenter : Presenter<IFormulaConstraintView, ManageFormulaConstraintsModel>,
-        IFormulaConstraintPresenter
+    public class TestArgumentPresenter : Presenter<ITestArgumentView, TestArgumentModel>, ITestArgumentPresenter
     {
         private readonly IArgumentQuery _argumentQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
+        private readonly IMethodTestRules _rules;
         private readonly IValueTypeValidatorProvider _valueTypeValidatorProvider;
 
-        public FormulaConstraintPresenter(IFormulaConstraintView view, IDatabaseContextFactory databaseContextFactory,
-            IArgumentQuery argumentQuery,
-            IValueTypeValidatorProvider valueTypeValidatorProvider)
+        public TestArgumentPresenter(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
+            ITestArgumentView view, IMethodTestRules rules, IValueTypeValidatorProvider valueTypeValidatorProvider)
             : base(view)
         {
-            Guard.AgainstNull(view, "view");
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(argumentQuery, "argumentQuery");
+            Guard.AgainstNull(rules, "rules");
             Guard.AgainstNull(valueTypeValidatorProvider, "valueTypeValidatorProvider");
 
             _databaseContextFactory = databaseContextFactory;
             _argumentQuery = argumentQuery;
+            _rules = rules;
             _valueTypeValidatorProvider = valueTypeValidatorProvider;
 
-            Text = "Constraint Details";
-            Image = Resources.Image_FormulaConstraint;
+            Text = "Test Details";
+
+            Image = Resources.Image_Test;
         }
 
-        public void PopulateArgumentValues()
+        public void ArgumentChanged()
         {
             var model = View.ArgumentModel;
 
             using (_databaseContextFactory.Create())
             {
                 View.PopulateArgumentValues(
-                    _argumentQuery.GetValues(model.Id).Map(row => ArgumentColumns.Name.MapFrom(row)));
+                    _argumentQuery.GetValues(model.Id).Map(row => ArgumentColumns.ValueColumns.Value.MapFrom(row)));
             }
         }
 
-        public bool ConstraintOK()
+        public bool ArgumentAnswerOK()
         {
             if (!View.HasArgument)
             {
                 View.ShowArgumentError();
-
-                return false;
-            }
-
-            if (!View.HasConstraint)
-            {
-                View.ShowConstraintError();
 
                 return false;
             }
@@ -68,24 +63,17 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
                 return false;
             }
 
-            if (View.HasArgument)
+            if (View.ArgumentModel.IsNumber())
             {
-                var answerType = View.ArgumentModel.AnswerType;
+                var result =
+                    _valueTypeValidatorProvider.Get(View.ArgumentModel.AnswerType)
+                        .Validate(View.ArgumentValue);
 
-                var validator = _valueTypeValidatorProvider.Has(answerType)
-                    ? _valueTypeValidatorProvider.Get(answerType)
-                    : null;
-
-                if (validator != null)
+                if (!result.OK)
                 {
-                    var result = validator.Validate(View.ArgumentValue);
+                    View.ShowArgumentValueError(result.ToString());
 
-                    if (!result.OK)
-                    {
-                        View.ShowArgumentValueError(result.ToString());
-
-                        return false;
-                    }
+                    return false;
                 }
             }
 
@@ -96,13 +84,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
         {
             base.OnInitialize();
 
-            if (Model == null)
-            {
-                throw new NullDependencyException("Model");
-            }
-
             View.PopulateArguments(Model.Arguments);
-            View.FormulaConstraints = Model.Constraints;
         }
     }
 }

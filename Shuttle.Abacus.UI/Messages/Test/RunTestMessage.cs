@@ -1,7 +1,7 @@
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.UI.Core.Messaging;
 
-namespace Shuttle.Abacus.UI.Messages.TestCase
+namespace Shuttle.Abacus.UI.Messages.Test
 {
     public class RunTestMessage : Message
     {

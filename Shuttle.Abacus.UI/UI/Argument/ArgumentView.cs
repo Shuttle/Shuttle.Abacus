@@ -20,8 +20,8 @@ namespace Shuttle.Abacus.UI.UI.Argument
 
         public string AnswerTypeValue
         {
-            get { return AnswerType.Text; }
-            set { AnswerType.Text = value; }
+            get { return ValueType.Text; }
+            set { ValueType.Text = value; }
         }
 
         public IRuleCollection<object> ArgumentNameRules
@@ -31,12 +31,12 @@ namespace Shuttle.Abacus.UI.UI.Argument
 
         public IRuleCollection<object> AnswerTypeRules
         {
-            set { ViewValidator.Control(AnswerType).ShouldSatisfy(value); }
+            set { ViewValidator.Control(ValueType).ShouldSatisfy(value); }
         }
 
         private void AnswerType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SetError(AnswerType, string.Empty);
+            SetError(ValueType, string.Empty);
         }
 
         private void ArgumentName_Leave(object sender, EventArgs e)

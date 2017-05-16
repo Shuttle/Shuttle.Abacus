@@ -2,18 +2,18 @@ using System;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.UI.Core.Messaging;
 
-namespace Shuttle.Abacus.UI.Messages.TestCase
+namespace Shuttle.Abacus.UI.Messages.Test
 {
     public class RemoveTestMessage : Message
     {
-        public RemoveTestMessage(Guid methodId)
+        public RemoveTestMessage(Guid testId)
         {
-            MethodId = methodId;
+            TestId = testId;
         }
 
         public override IPermission RequiredPermission => Permissions.Test;
 
         public Guid WorkItemId { get; set; }
-        public Guid MethodId { get; private set; }
+        public Guid TestId { get; private set; }
     }
 }
