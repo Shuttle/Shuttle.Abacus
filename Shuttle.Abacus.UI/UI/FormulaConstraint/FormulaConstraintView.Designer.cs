@@ -27,7 +27,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.ValueSelectionControl = new System.Windows.Forms.ComboBox();
+            this.ValueSelection = new System.Windows.Forms.ComboBox();
             this.ValueSelectionLabel = new System.Windows.Forms.Label();
             this.Argument = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -50,7 +50,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.ValueSelectionControl);
+            this.groupBox1.Controls.Add(this.ValueSelection);
             this.groupBox1.Controls.Add(this.ValueSelectionLabel);
             this.groupBox1.Controls.Add(this.Argument);
             this.groupBox1.Controls.Add(this.label3);
@@ -65,15 +65,15 @@
             // 
             // ValueSelection
             // 
-            this.ValueSelectionControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.ValueSelection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ValueSelectionControl.FormattingEnabled = true;
-            this.ValueSelectionControl.Location = new System.Drawing.Point(396, 40);
-            this.ValueSelectionControl.Name = "ValueSelectionControl";
-            this.ValueSelectionControl.Size = new System.Drawing.Size(152, 21);
-            this.ValueSelectionControl.TabIndex = 5;
-            this.ValueSelectionControl.SelectedIndexChanged += new System.EventHandler(this.Answer_SelectedIndexChanged);
-            this.ValueSelectionControl.TextChanged += new System.EventHandler(this.ValueSelection_TextChanged);
+            this.ValueSelection.FormattingEnabled = true;
+            this.ValueSelection.Location = new System.Drawing.Point(396, 40);
+            this.ValueSelection.Name = "ValueSelection";
+            this.ValueSelection.Size = new System.Drawing.Size(152, 21);
+            this.ValueSelection.TabIndex = 5;
+            this.ValueSelection.SelectedIndexChanged += new System.EventHandler(this.Answer_SelectedIndexChanged);
+            this.ValueSelection.TextChanged += new System.EventHandler(this.ValueSelection_TextChanged);
             // 
             // ValueSelectionLabel
             // 
@@ -262,6 +262,7 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label ValueSelectionLabel;
+        private System.Windows.Forms.ComboBox ValueSelection;
         private System.Windows.Forms.ComboBox Constraint;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button RemoveButton;
