@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Core.Infrastructure;
 
@@ -45,7 +44,7 @@ namespace Shuttle.Abacus.Invariants.Core
             }
         }
 
-        public bool IsEmpty => (rules.Count == 0);
+        public bool IsEmpty => rules.Count == 0;
 
         public IRuleCollection<T> BrokenBy(T item)
         {
@@ -112,7 +111,12 @@ namespace Shuttle.Abacus.Invariants.Core
 
         public RuleCollection(IEnumerable<IRule<object>> rules)
         {
-            base.rules = new List<IRule<object>>(rules);
+            this.rules = new List<IRule<object>>(rules);
+        }
+
+        public static IRuleCollection<object> Required()
+        {
+            return Rule.With().Required().Create();
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
 
         public ArgumentModel ArgumentModel => Argument.SelectedItem as ArgumentModel;
 
-        public string ComparisonValue => (string) Constraint.SelectedItem;
+        public string ComparisonValue => (string) Comparison.SelectedItem;
 
         public void PopulateArgumentValues(IEnumerable<string> values)
         {
@@ -48,10 +48,8 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
         }
 
         public bool HasArgumentValue => ValueSelectionControl.Text.Length > 0;
-
         public bool HasArgument => Argument.Text.Length > 0;
-
-        public bool HasConstraint => Constraint.Text.Length > 0;
+        public bool HasComparison => Comparison.Text.Length > 0;
 
         public IEnumerable<FormulaConstraintModel> FormulaConstraints
         {
@@ -79,9 +77,9 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
             SetError(Argument, "Please select the argument to use.");
         }
 
-        public void ShowConstraintError()
+        public void ShowComparisonError()
         {
-            SetError(Constraint, "Please select the constraint to use.");
+            SetError(Comparison, "Please select the constraint to use.");
         }
 
         public void AddConstraint(string argumentName, string comparison, string value)
@@ -120,7 +118,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
 
         private void Constraint_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SetError(Constraint, string.Empty);
+            SetError(Comparison, string.Empty);
         }
 
         private void ValueSelection_TextChanged(object sender, EventArgs e)
@@ -162,7 +160,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
             if (b)
             {
                 Argument.Text = item.Text;
-                Constraint.Text = item.SubItems[1].Text;
+                Comparison.Text = item.SubItems[1].Text;
                 ArgumentValue = item.SubItems[2].Text;
             }
 

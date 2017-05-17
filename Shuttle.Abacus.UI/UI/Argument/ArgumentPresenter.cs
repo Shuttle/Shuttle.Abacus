@@ -36,7 +36,7 @@ namespace Shuttle.Abacus.UI.UI.Argument
             View.AnswerTypeRules = _argumentRules.ValueTypeRules();
 
             View.ArgumentNameValue = Model.Name;
-            View.AnswerTypeValue = Model.AnswerType;
+            View.AnswerTypeValue = Model.ValueType;
         }
     }
 }

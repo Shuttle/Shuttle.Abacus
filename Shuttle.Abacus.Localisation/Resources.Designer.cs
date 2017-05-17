@@ -61,6 +61,15 @@ namespace Shuttle.Abacus.Localisation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Must be a boolean value..
+        /// </summary>
+        public static string BooleanRule {
+            get {
+                return ResourceManager.GetString("BooleanRule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Calculation &apos;{0}&apos; depends on calculation &apos;{1}&apos; but this will cause a circular dependency.  Current dependency chain is: &apos;{2}&apos;..
         /// </summary>
         public static string CalculationCircularDependencyException {

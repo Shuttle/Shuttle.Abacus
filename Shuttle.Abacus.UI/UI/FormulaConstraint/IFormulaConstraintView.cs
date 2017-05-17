@@ -12,7 +12,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
         bool HasArgumentValue { get; }
         bool HasArgument { get; }
 
-        bool HasConstraint { get; }
+        bool HasComparison { get; }
 
         IEnumerable<FormulaConstraintModel> FormulaConstraints { get; set; }
         void PopulateArguments(IEnumerable<ArgumentModel> items);
@@ -20,7 +20,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
         void ShowArgumentValueError(string message);
         void ShowArgumentError();
 
-        void ShowConstraintError();
+        void ShowComparisonError();
         void AddConstraint(string argumentName, string comparison, string value);
     }
 }

@@ -184,6 +184,8 @@ namespace Shuttle.Abacus.UI.Core.Presentation
 
         public void Initialize()
         {
+            (View as IViewReady)?.OnReady();
+
             OnInitialize();
         }
 

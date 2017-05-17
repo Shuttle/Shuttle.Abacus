@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Abacus.Domain;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Shuttle.Abacus.ApplicationService;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Values;

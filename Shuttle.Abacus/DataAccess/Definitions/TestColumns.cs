@@ -21,6 +21,9 @@ namespace Shuttle.Abacus.DataAccess
         public static readonly MappedColumn<Guid> Id =
             new MappedColumn<Guid>("TestId", DbType.Guid);
 
+        public static readonly MappedColumn<string> FormulaName =
+            new MappedColumn<string>("FormulaName", DbType.Guid);
+
         public static class ArgumentValueColumns
         {
             public static readonly MappedColumn<string>

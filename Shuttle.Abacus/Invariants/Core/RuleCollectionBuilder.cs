@@ -48,5 +48,10 @@ namespace Shuttle.Abacus.Invariants.Core
 
             return this;
         }
+
+        public IRuleCollectionBuilder Boolean()
+        {
+            return Add(new BooleanRule());
+        }
     }
 }

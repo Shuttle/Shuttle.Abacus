@@ -53,13 +53,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationService\ChangeLoginNameTask.cs" />
-    <Compile Include="ApplicationService\IChangeLoginNameTask.cs" />
-    <Compile Include="ApplicationService\ISetPermissionsTask.cs" />
-    <Compile Include="ApplicationService\ITask.cs" />
-    <Compile Include="ApplicationService\ITaskFactory.cs" />
-    <Compile Include="ApplicationService\SetPermissionsTask.cs" />
-    <Compile Include="ApplicationService\TaskFactory.cs" />
     <Compile Include="DataAccess\ArgumentQuery.cs" />
     <Compile Include="DataAccess\ArgumentRepository.cs" />
     <Compile Include="DataAccess\ConstraintTypeQuery.cs" />
@@ -231,6 +224,7 @@
     <Compile Include="Events\Test.v1\ValueAdded.cs" />
     <Compile Include="Events\Test.v1\ValueRemoved.cs" />
     <Compile Include="Invariants\ArgumentValueRules.cs" />
+    <Compile Include="Invariants\Core\Rules\BooleanRule.cs" />
     <Compile Include="Invariants\FormulaRules.cs" />
     <Compile Include="Invariants\ArgumentRules.cs" />
     <Compile Include="Invariants\Core\IRule.cs" />
@@ -250,14 +244,16 @@
     <Compile Include="Invariants\Core\Rules\MinimumLengthRule.cs" />
     <Compile Include="Invariants\Interfaces\IArgumentValueRules.cs" />
     <Compile Include="Invariants\Interfaces\IFormulaRules.cs" />
+    <Compile Include="Invariants\Interfaces\IValueTypeRules.cs" />
     <Compile Include="Invariants\MatrixRules.cs" />
     <Compile Include="Invariants\Interfaces\IArgumentRules.cs" />
     <Compile Include="Invariants\Interfaces\IMatrixRules.cs" />
     <Compile Include="Invariants\Interfaces\ILimitRules.cs" />
-    <Compile Include="Invariants\Interfaces\IMethodTestRules.cs" />
+    <Compile Include="Invariants\Interfaces\ITestRules.cs" />
     <Compile Include="Invariants\Interfaces\ISystemUserRules.cs" />
     <Compile Include="Invariants\LimitRules.cs" />
-    <Compile Include="Invariants\MethodTestRules.cs" />
+    <Compile Include="Invariants\ValueTypeRules.cs" />
+    <Compile Include="Invariants\TestRules.cs" />
     <Compile Include="Invariants\SystemUserRules.cs" />
     <Compile Include="Invariants\Values\DecimalValueTypeValidator.cs" />
     <Compile Include="Invariants\Values\IntegerValueTypeValidator.cs" />
@@ -265,10 +261,6 @@
     <Compile Include="Invariants\Values\IValueTypeValidatorProvider.cs" />
     <Compile Include="Invariants\Values\MoneyValueTypeValidator.cs" />
     <Compile Include="Invariants\Values\ValueTypeValidatorProvider.cs" />
-    <Compile Include="Policy\FormulaPolicy.cs" />
-    <Compile Include="Policy\IFormulaPolicy.cs" />
-    <Compile Include="Policy\ISystemUserPolicy.cs" />
-    <Compile Include="Policy\SystemUserPolicy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\Repositories\IArgumentRepository.cs" />
     <Compile Include="Domain\Repositories\IMatrixRepository.cs" />

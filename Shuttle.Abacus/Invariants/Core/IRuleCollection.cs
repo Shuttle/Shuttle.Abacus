@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
 
 namespace Shuttle.Abacus.Invariants.Core
@@ -11,9 +10,9 @@ namespace Shuttle.Abacus.Invariants.Core
         IList<RuleMessage> Messages { get; }
         bool IsEmpty { get; }
         IRuleCollection<T> BrokenBy(T item);
-        
+
         IResult ToResult();
-        
+
         void AssignTo(IList<IRule<T>> list);
         void Enforce(T item);
     }

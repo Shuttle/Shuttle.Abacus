@@ -25,21 +25,21 @@ namespace Shuttle.Abacus.UI.Models
 
             Id = ArgumentColumns.Id.MapFrom(row);
             Name = ArgumentColumns.Name.MapFrom(row);
-            AnswerType = ArgumentColumns.AnswerType.MapFrom(row);
+            ValueType = ArgumentColumns.AnswerType.MapFrom(row);
         }
 
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public string AnswerType { get; set; }
+        public string ValueType { get; set; }
 
         public bool IsNumber()
         {
-            return !string.IsNullOrEmpty(AnswerType) && Numbers.Contains(AnswerType.ToLower());
+            return !string.IsNullOrEmpty(ValueType) && Numbers.Contains(ValueType.ToLower());
         }
 
         public bool IsText()
         {
-            return AnswerType.Equals("Text", StringComparison.OrdinalIgnoreCase);
+            return ValueType.Equals("Text", StringComparison.OrdinalIgnoreCase);
         }
     }
 }

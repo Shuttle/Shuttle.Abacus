@@ -14,11 +14,11 @@ namespace Shuttle.Abacus.UI.UI.Test
     {
         private readonly IArgumentQuery _argumentQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
-        private readonly IMethodTestRules _rules;
+        private readonly ITestRules _rules;
         private readonly IValueTypeValidatorProvider _valueTypeValidatorProvider;
 
         public TestArgumentPresenter(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
-            ITestArgumentView view, IMethodTestRules rules, IValueTypeValidatorProvider valueTypeValidatorProvider)
+            ITestArgumentView view, ITestRules rules, IValueTypeValidatorProvider valueTypeValidatorProvider)
             : base(view)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
@@ -66,7 +66,7 @@ namespace Shuttle.Abacus.UI.UI.Test
             if (View.ArgumentModel.IsNumber())
             {
                 var result =
-                    _valueTypeValidatorProvider.Get(View.ArgumentModel.AnswerType)
+                    _valueTypeValidatorProvider.Get(View.ArgumentModel.ValueType)
                         .Validate(View.ArgumentValue);
 
                 if (!result.OK)

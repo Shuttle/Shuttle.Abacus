@@ -31,7 +31,7 @@
             this.ValueSelectionLabel = new System.Windows.Forms.Label();
             this.Argument = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.Constraint = new System.Windows.Forms.ComboBox();
+            this.Comparison = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.RemoveButton = new System.Windows.Forms.Button();
             this.ConstraintsListView = new System.Windows.Forms.ListView();
@@ -54,7 +54,7 @@
             this.groupBox1.Controls.Add(this.ValueSelectionLabel);
             this.groupBox1.Controls.Add(this.Argument);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.Constraint);
+            this.groupBox1.Controls.Add(this.Comparison);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(8, 273);
             this.groupBox1.Name = "groupBox1";
@@ -106,22 +106,24 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Argument";
             // 
-            // Constraint
+            // Comparison
             // 
-            this.Constraint.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Constraint.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.Constraint.FormattingEnabled = true;
-            this.Constraint.Items.AddRange(new object[] {
+            this.Comparison.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Comparison.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.Comparison.FormattingEnabled = true;
+            this.Comparison.Items.AddRange(new object[] {
             "==",
-            ">=",
-            "<",
             "!=",
+            ">=",
+            ">",
+            "<=",
+            "<",
             "in"});
-            this.Constraint.Location = new System.Drawing.Point(248, 40);
-            this.Constraint.Name = "Constraint";
-            this.Constraint.Size = new System.Drawing.Size(128, 21);
-            this.Constraint.TabIndex = 3;
-            this.Constraint.SelectedIndexChanged += new System.EventHandler(this.Constraint_SelectedIndexChanged);
+            this.Comparison.Location = new System.Drawing.Point(248, 40);
+            this.Comparison.Name = "Comparison";
+            this.Comparison.Size = new System.Drawing.Size(128, 21);
+            this.Comparison.TabIndex = 3;
+            this.Comparison.SelectedIndexChanged += new System.EventHandler(this.Constraint_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -263,7 +265,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label ValueSelectionLabel;
         private System.Windows.Forms.ComboBox ValueSelection;
-        private System.Windows.Forms.ComboBox Constraint;
+        private System.Windows.Forms.ComboBox Comparison;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button RemoveButton;
         private System.Windows.Forms.ListView ConstraintsListView;

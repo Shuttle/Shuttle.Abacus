@@ -170,7 +170,7 @@ namespace Shuttle.Abacus.UI.UI.Matrix
 
         public bool IsValidAnswer(ArgumentModel model, object value)
         {
-            if (string.IsNullOrEmpty(model.AnswerType))
+            if (string.IsNullOrEmpty(model.ValueType))
             {
                 return true;
             }
@@ -186,7 +186,7 @@ namespace Shuttle.Abacus.UI.UI.Matrix
             }
 
             return
-                _valueTypeValidatorProvider.Get(model.AnswerType)
+                _valueTypeValidatorProvider.Get(model.ValueType)
                     .Validate(Convert.ToString(value))
                     .OK;
         }

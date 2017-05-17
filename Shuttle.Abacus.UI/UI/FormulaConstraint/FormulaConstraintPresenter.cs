@@ -1,6 +1,6 @@
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
-using Shuttle.Abacus.Invariants.Values;
+using Shuttle.Abacus.Invariants.Interfaces;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.UI.Core.Presentation;
 using Shuttle.Abacus.UI.Models;
@@ -13,22 +13,20 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
         IFormulaConstraintPresenter
     {
         private readonly IArgumentQuery _argumentQuery;
+        private readonly IValueTypeRules _valueTypeRules;
         private readonly IDatabaseContextFactory _databaseContextFactory;
-        private readonly IValueTypeValidatorProvider _valueTypeValidatorProvider;
 
-        public FormulaConstraintPresenter(IFormulaConstraintView view, IDatabaseContextFactory databaseContextFactory,
-            IArgumentQuery argumentQuery,
-            IValueTypeValidatorProvider valueTypeValidatorProvider)
+        public FormulaConstraintPresenter(IFormulaConstraintView view, IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery, IValueTypeRules valueTypeRules)
             : base(view)
         {
             Guard.AgainstNull(view, "view");
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(argumentQuery, "argumentQuery");
-            Guard.AgainstNull(valueTypeValidatorProvider, "valueTypeValidatorProvider");
+            Guard.AgainstNull(valueTypeRules, "valueTypeRules");
 
             _databaseContextFactory = databaseContextFactory;
             _argumentQuery = argumentQuery;
-            _valueTypeValidatorProvider = valueTypeValidatorProvider;
+            _valueTypeRules = valueTypeRules;
 
             Text = "Constraint Details";
             Image = Resources.Image_FormulaConstraint;
@@ -41,7 +39,7 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
             using (_databaseContextFactory.Create())
             {
                 View.PopulateArgumentValues(
-                    _argumentQuery.GetValues(model.Id).Map(row => ArgumentColumns.Name.MapFrom(row)));
+                    _argumentQuery.GetValues(model.Id).Map(row => ArgumentColumns.ValueColumns.Value.MapFrom(row)));
             }
         }
 
@@ -54,9 +52,9 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
                 return false;
             }
 
-            if (!View.HasConstraint)
+            if (!View.HasComparison)
             {
-                View.ShowConstraintError();
+                View.ShowComparisonError();
 
                 return false;
             }
@@ -70,19 +68,15 @@ namespace Shuttle.Abacus.UI.UI.FormulaConstraint
 
             if (View.HasArgument)
             {
-                var answerType = View.ArgumentModel.AnswerType;
+                var rules = _valueTypeRules.For(View.ArgumentModel.ValueType);
 
-                var validator = _valueTypeValidatorProvider.Has(answerType)
-                    ? _valueTypeValidatorProvider.Get(answerType)
-                    : null;
-
-                if (validator != null)
+                if (rules != null)
                 {
-                    var result = validator.Validate(View.ArgumentValue);
+                    var result = rules.BrokenBy(View.ArgumentValue);
 
-                    if (!result.OK)
+                    if (!result.IsEmpty)
                     {
-                        View.ShowArgumentValueError(result.ToString());
+                        View.ShowArgumentValueError(result.Messages[0].Text);
 
                         return false;
                     }

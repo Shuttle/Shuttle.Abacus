@@ -9,18 +9,18 @@ namespace Shuttle.Abacus.DataAccess
         private const string SelectClause = @"
 select
     TestId,
-    FormulaId,
+    Name,
+    FormulaName,
     ExpectedResult,
     ExpectedResultType,
-    Comparison,
-    Description
+    Comparison
 from
     Test
 ";
 
         public IQuery All()
         {
-            return RawQuery.Create(string.Concat(SelectClause, "order by Description"));
+            return RawQuery.Create(string.Concat(SelectClause, "order by Name"));
         }
 
         public IQuery ArgumentValues(Guid id)
@@ -29,8 +29,7 @@ from
 select
     TestId,
     ArgumentName,
-    Answer,
-    ValueType
+    Value
 from
     TestArgumentValue
 where
@@ -64,6 +63,7 @@ insert into Test
 (
     TestId,
     Name,
+    FormulaName,
     ExpectedResult,
     ExpectedResultType,
     Comparison
@@ -72,12 +72,14 @@ values
 (
     @TestId,
     @Name,
+    @FormulaName,
     @ExpectedResult,
     @ExpectedResultType,
     @Comparison
 )")
                 .AddParameterValue(TestColumns.Id, item.Id)
                 .AddParameterValue(TestColumns.Name, item.Name)
+                .AddParameterValue(TestColumns.FormulaName, item.FormulaName)
                 .AddParameterValue(TestColumns.ExpectedResult, item.ExpectedResult)
                 .AddParameterValue(TestColumns.ExpectedResultType, item.ExpectedResultType)
                 .AddParameterValue(TestColumns.Comparison, item.Comparison);

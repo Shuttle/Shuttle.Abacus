@@ -111,7 +111,7 @@ namespace Shuttle.Abacus.UI.Core.Presentation
             Presenter.Show();
         }
 
-        protected override sealed void OnLoad(System.EventArgs e)
+        protected sealed override void OnLoad(System.EventArgs e)
         {
             base.OnLoad(e);
 

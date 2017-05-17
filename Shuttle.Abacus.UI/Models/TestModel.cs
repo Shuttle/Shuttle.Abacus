@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using Shuttle.Abacus.DataAccess;
@@ -15,19 +16,19 @@ namespace Shuttle.Abacus.UI.Models
         {
             Guard.AgainstNull(row, "row");
 
+            FormulaName = TestColumns.FormulaName.MapFrom(row);
             Name = TestColumns.Name.MapFrom(row);
             Comparison = TestColumns.Comparison.MapFrom(row);
             ExpectedResult = TestColumns.ExpectedResult.MapFrom(row);
             ExpectedResultType = TestColumns.ExpectedResultType.MapFrom(row);
         }
 
-        public IEnumerable<ArgumentModel> Arguments { get; set; }
+        public IEnumerable<string> Formulas { get; set; }
 
         public string Name { get; set; }
         public string Comparison { get; set; }
-
         public string ExpectedResultType { get; set; }
-
         public string ExpectedResult { get; set; }
+        public string FormulaName { get; set; }
     }
 }

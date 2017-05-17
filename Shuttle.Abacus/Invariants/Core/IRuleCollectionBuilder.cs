@@ -5,6 +5,7 @@ namespace Shuttle.Abacus.Invariants.Core
         IRuleCollectionBuilder MinimumLength(int minimumLength);
         IRuleCollectionBuilder MaximumLength(int maximumLength);
         IRuleCollectionBuilder Required();
+        IRuleCollectionBuilder Boolean();
         IRuleCollectionBuilder Decimal();
         IRuleCollectionBuilder DateTime();
         IRuleCollectionBuilder Integer();

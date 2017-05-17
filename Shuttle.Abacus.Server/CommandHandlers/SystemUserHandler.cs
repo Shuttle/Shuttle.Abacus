@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Shuttle.Abacus.ApplicationService;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Messages.v1;
 using Shuttle.Abacus.Messages.v1.TransferObjects;
@@ -18,18 +17,15 @@ namespace Shuttle.Abacus.Server.CommandHandlers
     {
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly ISystemUserRepository _systemUserRepository;
-        private readonly ITaskFactory _taskFactory;
 
         public SystemUserHandler(IDatabaseContextFactory databaseContextFactory,
-            ISystemUserRepository systemUserRepository, ITaskFactory taskFactory)
+            ISystemUserRepository systemUserRepository)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(systemUserRepository, "systemUserRepository");
-            Guard.AgainstNull(taskFactory, "taskFactory");
 
             _databaseContextFactory = databaseContextFactory;
             _systemUserRepository = systemUserRepository;
-            _taskFactory = taskFactory;
         }
 
         public void ProcessMessage(IHandlerContext<ChangeLoginNameCommand> context)

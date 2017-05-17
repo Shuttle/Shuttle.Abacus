@@ -41,11 +41,6 @@ where
                 .AddParameterValue(FormulaColumns.Id, id);
         }
 
-        public IQuery Add(Formula formula)
-        {
-            throw new NotImplementedException();
-        }
-
         public IQuery RemoveOperations(Guid formulaId)
         {
             return
@@ -159,7 +154,7 @@ where
 
         public IQuery All()
         {
-            return RawQuery.Create(SelectClause);
+            return RawQuery.Create(string.Concat(SelectClause, "order by Name"));
         }
 
         public IQuery AddConstraint(Guid formulaId, int sequenceNumber, string argumentName, string comparison, string value)

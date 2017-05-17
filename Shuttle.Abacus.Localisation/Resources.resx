@@ -566,4 +566,7 @@
   <data name="Text_Register" xml:space="preserve">
     <value>&amp;Register</value>
   </data>
+  <data name="BooleanRule" xml:space="preserve">
+    <value>Must be a boolean value.</value>
+  </data>
 </root>

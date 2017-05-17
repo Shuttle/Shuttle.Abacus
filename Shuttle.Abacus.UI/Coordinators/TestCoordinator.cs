@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Localisation;
@@ -33,19 +32,18 @@ namespace Shuttle.Abacus.UI.Coordinators
         private readonly INavigationItem _remove = new NavigationItem(new ResourceItem("Remove", "Test"));
         private readonly INavigationItem _rename = new NavigationItem(new ResourceItem("Rename", "Test"));
 
-        private readonly IArgumentQuery _argumentQuery;
+        private readonly IFormulaQuery _formulaQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly ITestQuery _testQuery;
 
-        public TestCoordinator(IDatabaseContextFactory databaseContextFactory, ITestQuery testQuery,
-            IArgumentQuery argumentQuery)
+        public TestCoordinator(IDatabaseContextFactory databaseContextFactory, ITestQuery testQuery, IFormulaQuery formulaQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(testQuery, "testQuery");
-            Guard.AgainstNull(argumentQuery, "argumentQuery");
+            Guard.AgainstNull(formulaQuery, "formulaQuery");
 
             _databaseContextFactory = databaseContextFactory;
-            _argumentQuery = argumentQuery;
+            _formulaQuery = formulaQuery;
             _testQuery = testQuery;
         }
 
@@ -120,48 +118,47 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(RegisterTestMessage message)
         {
-            var item = WorkItemManager
-                .Create("New test case")
-                .ControlledBy<ITestController>()
-                .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<ITestPresenter>()
-                .WithModel(BuildModel())
-                .AddNavigationItem(NavigationItemFactory.Create(message).WithResourceItem(ResourceItems.Submit))
-                .AsDefault()
-                .AssignInitiator(message);
+            using (_databaseContextFactory.Create())
+            {
+                var model = new TestModel
+                {
+                    Formulas = _formulaQuery.All().Map(row => FormulaColumns.Name.MapFrom(row))
+                };
 
-            HostInWorkspace<ITabbedWorkspacePresenter>(item);
+                var item = WorkItemManager
+                    .Create("New test")
+                    .ControlledBy<ITestController>()
+                    .ShowIn<IContextToolbarPresenter>()
+                    .AddPresenter<ITestPresenter>().WithModel(model)
+                    .AddNavigationItem(_register).AsDefault()
+                    .AssignInitiator(message);
+
+                HostInWorkspace<ITabbedWorkspacePresenter>(item);
+            }
         }
 
         public void HandleMessage(EditTestMessage message)
         {
-            var model = BuildModel();
+            throw new NotImplementedException();
 
-            DataRow row;
+            //using (_databaseContextFactory.Create())
+            //{
+            //    message.FormulaId = new Guid(row["FormulaId"].ToString());
+            //    message.Description = TestColumns.Name.MapFrom(row);
+            //    message.ExpectedResult = TestColumns.ExpectedResult.MapFrom(row);
 
-            using (_databaseContextFactory.Create())
-            {
-                row = _testQuery.Get(message.TestId);
-            }
+            //    var item = WorkItemManager
+            //        .Create("Test: " + TestColumns.Name.MapFrom(row))
+            //        .ControlledBy<ITestController>()
+            //        .ShowIn<IContextToolbarPresenter>()
+            //        .AddPresenter<ITestPresenter>()
+            //        .WithModel(model)
+            //        .AddNavigationItem(NavigationItemFactory.Create(new ChangeTestMessage(message)))
+            //        .AsDefault()
+            //        .AssignInitiator(message);
 
-            //model.MethodTestRow = row;
-            //model.ArgumentValues = _testQuery.ArgumentValues(message.TestId).CopyToDataTable();
-
-            message.FormulaId = new Guid(row["FormulaId"].ToString());
-            message.Description = TestColumns.Name.MapFrom(row);
-            message.ExpectedResult = TestColumns.ExpectedResult.MapFrom(row);
-
-            var item = WorkItemManager
-                .Create("Test: " + TestColumns.Name.MapFrom(row))
-                .ControlledBy<ITestController>()
-                .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<ITestPresenter>()
-                .WithModel(model)
-                .AddNavigationItem(NavigationItemFactory.Create(new ChangeTestMessage(message)))
-                .AsDefault()
-                .AssignInitiator(message);
-
-            HostInWorkspace<ITabbedWorkspacePresenter>(item);
+            //    HostInWorkspace<ITabbedWorkspacePresenter>(item);
+            //}
         }
 
         public void HandleMessage(TestCreatedMessage message)
@@ -218,7 +215,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                 {
                     case Resource.ResourceType.Container:
                     {
-                        message.AddTable("Test Cases", _testQuery.All());
+                        message.AddTable("Tests", _testQuery.All());
 
                         break;
                     }
@@ -227,19 +224,6 @@ namespace Shuttle.Abacus.UI.Coordinators
                         break;
                     }
                 }
-            }
-        }
-
-        private TestModel BuildModel()
-        {
-            throw new NotImplementedException();
-
-            using (_databaseContextFactory.Create())
-            {
-                return new TestModel
-                {
-                    //ArgumentRows = _argumentQuery.All()
-                };
             }
         }
 

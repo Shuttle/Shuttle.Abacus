@@ -24,11 +24,13 @@ namespace Shuttle.Abacus.Domain
 
         public IEnumerable<string> Values => new ReadOnlyCollection<string>(_values);
         public bool HasValues => _values.Count > 0;
+        public string FormulaName { get; private set; }
 
 
-        public Registered Register(string name, string expectedResult, string expectedResultType, string comparison)
+        public Registered Register(string name, string formulaName, string expectedResult, string expectedResultType, string comparison)
         {
             Guard.AgainstNullOrEmptyString(name, "name");
+            Guard.AgainstNullOrEmptyString(formulaName, "formulaName");
             Guard.AgainstNullOrEmptyString(expectedResult, "expectedResult");
             Guard.AgainstNullOrEmptyString(expectedResultType, "expectedResultType");
             Guard.AgainstNullOrEmptyString(comparison, "compaprison");
