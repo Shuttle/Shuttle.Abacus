@@ -15,7 +15,6 @@ using Shuttle.Abacus.UI.Navigation;
 using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.UI.UI.SimpleList;
 using Shuttle.Abacus.UI.UI.Test;
-using Shuttle.Abacus.UI.UI.Test.Results;
 using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
@@ -66,7 +65,7 @@ namespace Shuttle.Abacus.UI.Coordinators
                     .ShowIn<IContextToolbarPresenter>()
                     .AddPresenter(presenter)
                     //.WithModel(new SimpleListModel("TestId", _testQuery.FetchForMethodId(message.TestId)))
-                    .AddPresenter<ITestResultPresenter>()
+                    //.AddPresenter<ITestResultPresenter>()
                     .AssignInitiator(message);
 
                 HostInWorkspace<ITabbedWorkspacePresenter>(item);
@@ -178,28 +177,29 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(TestRunMessage message)
         {
-            var workItem = WorkItemManager.Get(message.WorkItemId);
+            throw new NotImplementedException();
+            //var workItem = WorkItemManager.Get(message.WorkItemId);
 
-            if (workItem == null)
-            {
-                return;
-            }
+            //if (workItem == null)
+            //{
+            //    return;
+            //}
 
-            var list = workItem.GetView<ISimpleListView>();
+            //var list = workItem.GetView<ISimpleListView>();
 
-            if (!list.Contains(message.Event.MethodTestId))
-            {
-                return;
-            }
+            //if (!list.Contains(message.Event.MethodTestId))
+            //{
+            //    return;
+            //}
 
-            var view = workItem.GetView<ITestResultView>();
+            //var view = workItem.GetView<ITestResultView>();
 
-            view.AddRun(
-                message.Event.MethodTestId,
-                message.Event.MethodTestDescription,
-                message.Event.ExpectedResult);
+            //view.AddRun(
+            //    message.Event.MethodTestId,
+            //    message.Event.MethodTestDescription,
+            //    message.Event.ExpectedResult);
 
-            view.ShowView();
+            //view.ShowView();
         }
 
         public void HandleMessage(SummaryViewRequestedMessage message)

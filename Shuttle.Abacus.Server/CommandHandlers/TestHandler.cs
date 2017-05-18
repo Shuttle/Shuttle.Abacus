@@ -5,6 +5,7 @@ using Shuttle.Abacus.Messages.v1;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;
+using Shuttle.Recall;
 
 namespace Shuttle.Abacus.Server.CommandHandlers
 {
@@ -15,20 +16,19 @@ namespace Shuttle.Abacus.Server.CommandHandlers
         IMessageHandler<RunTestCommand>,
         IMessageHandler<PrintTestCommand>
     {
-        private readonly IArgumentRepository _argumentRepository;
-        private readonly ICalculationLoggerFactory _calculationLoggerFactory;
         private readonly IDatabaseContextFactory _databaseContextFactory;
+        private readonly IEventStore _eventStore;
+        private readonly IKeyStore _keyStore;
 
-        public TestHandler(IDatabaseContextFactory databaseContextFactory, ICalculationLoggerFactory calculationLoggerFactory,
-            IArgumentRepository argumentRepository)
+        public TestHandler(IDatabaseContextFactory databaseContextFactory, IEventStore eventStore, IKeyStore keyStore)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
-            Guard.AgainstNull(calculationLoggerFactory, "calculationLoggerFactory");
-            Guard.AgainstNull(argumentRepository, "argumentRepository");
+            Guard.AgainstNull(eventStore, "eventStore");
+            Guard.AgainstNull(keyStore, "keyStore");
 
             _databaseContextFactory = databaseContextFactory;
-            _argumentRepository = argumentRepository;
-            _calculationLoggerFactory = calculationLoggerFactory;
+            _eventStore = eventStore;
+            _keyStore = keyStore;
         }
 
         public void ProcessMessage(IHandlerContext<ChangeTestCommand> context)

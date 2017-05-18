@@ -11,6 +11,7 @@ namespace Shuttle.Abacus.UI.UI.Test
 
         string ExpectedResultTypeValue { get; set; }
         string ComparisonValue { get; set; }
+        string FormulaNameValue { get; set; }
         void PopulateFormulas(IEnumerable<string> formulas);
     }
 }

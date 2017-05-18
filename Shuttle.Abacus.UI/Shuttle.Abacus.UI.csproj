@@ -404,15 +404,6 @@
     <Compile Include="UI\Test\TestView.Designer.cs">
       <DependentUpon>TestView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\TestResults\ITestResultPresenter.cs" />
-    <Compile Include="UI\TestResults\ITestResultView.cs" />
-    <Compile Include="UI\TestResults\TestResultPresenter.cs" />
-    <Compile Include="UI\TestResults\TestResultView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\TestResults\TestResultView.Designer.cs">
-      <DependentUpon>TestResultView.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Shell\Explorer\ExplorerPartialPresenter.cs" />
     <Compile Include="UI\Shell\Explorer\ExplorerPartialView.cs" />
     <Compile Include="UI\Shell\Explorer\ExplorerRootItemOrderProvider.cs" />
@@ -556,9 +547,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Test\TestView.resx">
       <DependentUpon>TestView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\TestResults\TestResultView.resx">
-      <DependentUpon>TestResultView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Shell\ModalWorkspace\ModalWorkspaceForm.resx">
       <DependentUpon>ModalWorkspaceForm.cs</DependentUpon>
