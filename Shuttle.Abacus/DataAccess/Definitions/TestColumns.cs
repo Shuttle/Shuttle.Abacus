@@ -29,7 +29,7 @@ namespace Shuttle.Abacus.DataAccess
             public static readonly MappedColumn<string>
                 Value = new MappedColumn<string>("Value", DbType.AnsiString);
 
-            public static readonly MappedColumn<Guid> ArgumentName = new MappedColumn<Guid>("ArgumentName", DbType.Guid);
+            public static readonly MappedColumn<string> ArgumentName = new MappedColumn<string>("ArgumentName", DbType.AnsiString);
         }
     }
 }

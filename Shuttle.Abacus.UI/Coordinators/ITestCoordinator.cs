@@ -5,7 +5,7 @@ using Shuttle.Abacus.Shell.Messages.Explorer;
 using Shuttle.Abacus.Shell.Messages.Resources;
 using Shuttle.Abacus.Shell.Messages.Test;
 
-namespace Shuttle.Abacus.Shell.Coordinators.Interfaces
+namespace Shuttle.Abacus.Shell.Coordinators
 {
     public interface ITestCoordinator :
         ICoordinator,

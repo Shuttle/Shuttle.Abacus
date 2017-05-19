@@ -2,7 +2,7 @@ using Shuttle.Abacus.Shell.Core.Presentation;
 
 namespace Shuttle.Abacus.Shell.UI.TestArgument
 {
-    public interface ITestArgumentPresenter : IPresenter
+    public interface ITestArgumentValuePresenter : IPresenter
     {
         void ArgumentChanged();
     }

@@ -4,7 +4,7 @@ using Shuttle.Abacus.Shell.Messages.Core;
 using Shuttle.Abacus.Shell.Messages.Explorer;
 using Shuttle.Abacus.Shell.Messages.Resources;
 
-namespace Shuttle.Abacus.Shell.Coordinators.Interfaces
+namespace Shuttle.Abacus.Shell.Coordinators
 {
     public interface IArgumentCoordinator :
         IMessageHandler<ExplorerInitializeMessage>,

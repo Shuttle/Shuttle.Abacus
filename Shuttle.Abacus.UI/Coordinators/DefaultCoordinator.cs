@@ -1,6 +1,5 @@
 using System;
 using System.Windows.Forms;
-using Shuttle.Abacus.Shell.Coordinators.Interfaces;
 using Shuttle.Abacus.Shell.Core.Presentation;
 using Shuttle.Abacus.Shell.Messages.Core;
 using Shuttle.Abacus.Shell.UI.Shell;

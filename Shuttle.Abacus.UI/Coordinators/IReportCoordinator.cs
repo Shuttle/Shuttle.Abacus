@@ -3,7 +3,7 @@ using Shuttle.Abacus.Shell.Core.Presentation;
 using Shuttle.Abacus.Shell.Messages.Report;
 using Shuttle.Abacus.Shell.Messages.Test;
 
-namespace Shuttle.Abacus.Shell.Coordinators.Interfaces
+namespace Shuttle.Abacus.Shell.Coordinators
 {
     public interface IReportCoordinator :
         ICoordinator,

@@ -4,7 +4,7 @@ using Shuttle.Abacus.Shell.Messages.Explorer;
 using Shuttle.Abacus.Shell.Messages.Formula;
 using Shuttle.Abacus.Shell.Messages.Resources;
 
-namespace Shuttle.Abacus.Shell.Coordinators.Interfaces
+namespace Shuttle.Abacus.Shell.Coordinators
 {
     public interface IFormulaCoordinator :
         IMessageHandler<ExplorerInitializeMessage>,

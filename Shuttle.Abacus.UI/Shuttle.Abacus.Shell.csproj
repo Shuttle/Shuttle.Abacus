@@ -91,19 +91,21 @@
     <Compile Include="Coordinators\ArgumentCoordinator.cs" />
     <Compile Include="Coordinators\FormulaOperationCoordinator.cs" />
     <Compile Include="Coordinators\FormulaConstraintCoordinator.cs" />
-    <Compile Include="Coordinators\Interfaces\IArgumentValueCoordinator.cs" />
-    <Compile Include="Coordinators\Interfaces\IFormulaOperationCoordinator.cs" />
+    <Compile Include="Coordinators\IArgumentValueCoordinator.cs" />
+    <Compile Include="Coordinators\IFormulaOperationCoordinator.cs" />
+    <Compile Include="Coordinators\ITestArgumentValueCoordinator.cs" />
     <Compile Include="Coordinators\MatrixCoordinator.cs" />
     <Compile Include="Coordinators\DefaultCoordinator.cs" />
     <Compile Include="Coordinators\FormulaCoordinator.cs" />
-    <Compile Include="Coordinators\Interfaces\IArgumentCoordinator.cs" />
-    <Compile Include="Coordinators\Interfaces\IFormulaConstraintCoordinator.cs" />
-    <Compile Include="Coordinators\Interfaces\IMatrixCoordinator.cs" />
-    <Compile Include="Coordinators\Interfaces\IDefaultCoordinator.cs" />
-    <Compile Include="Coordinators\Interfaces\IFormulaCoordinator.cs" />
-    <Compile Include="Coordinators\Interfaces\ITestCoordinator.cs" />
-    <Compile Include="Coordinators\Interfaces\IReportCoordinator.cs" />
-    <Compile Include="Coordinators\Interfaces\ISystemUserCoordinator.cs" />
+    <Compile Include="Coordinators\IArgumentCoordinator.cs" />
+    <Compile Include="Coordinators\IFormulaConstraintCoordinator.cs" />
+    <Compile Include="Coordinators\IMatrixCoordinator.cs" />
+    <Compile Include="Coordinators\IDefaultCoordinator.cs" />
+    <Compile Include="Coordinators\IFormulaCoordinator.cs" />
+    <Compile Include="Coordinators\ITestCoordinator.cs" />
+    <Compile Include="Coordinators\IReportCoordinator.cs" />
+    <Compile Include="Coordinators\ISystemUserCoordinator.cs" />
+    <Compile Include="Coordinators\TestArgumentValueCoordinator.cs" />
     <Compile Include="Coordinators\TestCoordinator.cs" />
     <Compile Include="Coordinators\ReportCoordinator.cs" />
     <Compile Include="Coordinators\SystemUserCoordinator.cs" />
@@ -248,6 +250,7 @@
     <Compile Include="Messages\SystemUser\EditPermissionsMessage.cs" />
     <Compile Include="Messages\SystemUser\ListSystemUserMessage.cs" />
     <Compile Include="Messages\SystemUser\NewSystemUserMessage.cs" />
+    <Compile Include="Messages\Test\RegisterTestArgumentValueMessage.cs" />
     <Compile Include="Messages\Test\RegisterTestMessage.cs" />
     <Compile Include="Messages\Test\ChangeTestMessage.cs" />
     <Compile Include="Messages\Test\DeleteTestMessage.cs" />
@@ -270,7 +273,6 @@
     <Compile Include="Messages\WorkItem\WorkItemSitedMessage.cs" />
     <Compile Include="Messages\WorkItem\WorkItemTextChangedMessage.cs" />
     <Compile Include="Models\FormulaConstraintModel.cs" />
-    <Compile Include="Models\TestArgumentModel.cs" />
     <Compile Include="Models\TestArgumentValueModel.cs" />
     <Compile Include="Models\ArgumentValueModel.cs" />
     <Compile Include="Models\ArgumentDisplayModel.cs" />
@@ -387,14 +389,14 @@
       <DependentUpon>SimpleListView.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\TestArgument\ITestArgumentView.cs" />
-    <Compile Include="UI\TestArgument\ITestArgumentPresenter.cs" />
+    <Compile Include="UI\TestArgument\ITestArgumentValuePresenter.cs" />
     <Compile Include="UI\TestArgument\TestArgumentView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\TestArgument\TestArgumentView.Designer.cs">
       <DependentUpon>TestArgumentView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\TestArgument\TestArgumentPresenter.cs" />
+    <Compile Include="UI\TestArgument\TestArgumentValuePresenter.cs" />
     <Compile Include="UI\Test\ITestPresenter.cs" />
     <Compile Include="UI\Test\ITestView.cs" />
     <Compile Include="UI\Test\TestPresenter.cs" />

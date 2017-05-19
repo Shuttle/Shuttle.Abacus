@@ -92,7 +92,7 @@ namespace Shuttle.Abacus.Shell.UI.TestArgument
         }
     }
 
-    public class GenericTestArgumentView : View<ITestArgumentPresenter>
+    public class GenericTestArgumentView : View<ITestArgumentValuePresenter>
     {
     }
 }

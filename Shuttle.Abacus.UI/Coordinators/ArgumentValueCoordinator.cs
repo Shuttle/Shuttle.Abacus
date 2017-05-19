@@ -1,7 +1,6 @@
 ﻿using System;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.Shell.Coordinators.Interfaces;
 using Shuttle.Abacus.Shell.Core.Presentation;
 using Shuttle.Abacus.Shell.Core.Resources;
 using Shuttle.Abacus.Shell.Messages.ArgumentValue;

@@ -3,7 +3,7 @@ using Shuttle.Abacus.Shell.Messages.ArgumentValue;
 using Shuttle.Abacus.Shell.Messages.Core;
 using Shuttle.Abacus.Shell.Messages.Resources;
 
-namespace Shuttle.Abacus.Shell.Coordinators.Interfaces
+namespace Shuttle.Abacus.Shell.Coordinators
 {
     public interface IArgumentValueCoordinator :
         IMessageHandler<ResourceMenuRequestMessage>,
