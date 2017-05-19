@@ -80,7 +80,8 @@ values
                 .AddParameterValue(TestColumns.ArgumentValueColumns.Value, argumentValue.Answer);
         }
 
-        public IQuery Register(Guid id, string name, string formulaName, string expectedResult, string expectedResultType,
+        public IQuery Register(Guid id, string name, string formulaName, string expectedResult,
+            string expectedResultType,
             string comparison)
         {
             return RawQuery.Create(@"
@@ -129,6 +130,35 @@ where
     TestId = @TestId
 ")
                     .AddParameterValue(TestColumns.Id, id);
+        }
+
+        public IQuery RemoveArgumentValue(Guid id, string argumentName)
+        {
+            return RawQuery.Create(
+                    "delete from TestArgumentValue where TestId = @TestId and ArgumentName = @ArgumentName")
+                .AddParameterValue(TestColumns.Id, id)
+                .AddParameterValue(TestColumns.ArgumentValueColumns.ArgumentName, argumentName);
+        }
+
+        public IQuery AddArgumentValue(Guid id, string argumentName, string value)
+        {
+            return RawQuery.Create(@"
+insert into TestArgumentValue 
+(
+    TestId,
+    ArgumentName,
+    Value
+)
+values
+(
+    @TestId,
+    @ArgumentName,
+    @Value
+)
+")
+                .AddParameterValue(TestColumns.Id, id)
+                .AddParameterValue(TestColumns.ArgumentValueColumns.ArgumentName, argumentName)
+                .AddParameterValue(TestColumns.ArgumentValueColumns.Value, value);
         }
     }
 }

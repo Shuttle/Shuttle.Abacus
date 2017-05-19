@@ -57,11 +57,9 @@ namespace Shuttle.Abacus.Shell.Coordinators
             {
                 case Resource.ResourceType.Container:
                 {
-                    var formulaId = message.RelatedResources[ResourceKeys.Formula].Key;
-
                     using (_databaseContextFactory.Create())
                     {
-                        foreach (var row in _formulaQuery.Operations(formulaId))
+                        foreach (var row in _formulaQuery.Operations(message.RelatedResources[ResourceKeys.Formula].Key))
                         {
                             message.Resources.Add(
                                 new Resource(ResourceKeys.FormulaOperation, Guid.Empty,

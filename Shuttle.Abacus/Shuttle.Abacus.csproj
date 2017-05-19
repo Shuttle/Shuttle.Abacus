@@ -218,11 +218,12 @@
     <Compile Include="Events\Formula.v1\Renamed.cs" />
     <Compile Include="Events\Formula.v1\Registered.cs" />
     <Compile Include="Events\Formula.v1\Removed.cs" />
+    <Compile Include="Events\Test.v1\ArgumentValueSet.cs" />
     <Compile Include="Events\Test.v1\Registered.cs" />
     <Compile Include="Events\Test.v1\Removed.cs" />
     <Compile Include="Events\Test.v1\Renamed.cs" />
     <Compile Include="Events\Test.v1\ValueAdded.cs" />
-    <Compile Include="Events\Test.v1\ValueRemoved.cs" />
+    <Compile Include="Events\Test.v1\ArgumentValueRemoved.cs" />
     <Compile Include="Invariants\ArgumentValueRules.cs" />
     <Compile Include="Invariants\Core\Rules\BooleanRule.cs" />
     <Compile Include="Invariants\FormulaRules.cs" />

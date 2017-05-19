@@ -43,32 +43,6 @@ namespace Shuttle.Abacus.Shell.Coordinators
             _testQuery = testQuery;
         }
 
-        public void HandleMessage(ManageTestsMessage message)
-        {
-            using (_databaseContextFactory.Create())
-            {
-                var presenter = WorkItemManager.BuildPresenter<ISimpleListPresenter>()
-                    .AddNavigationItem(NavigationItemFactory.Create<PrintTestMessage>())
-                    .AddNavigationItem(NavigationItemFactory.Create<RunTestMessage>())
-                    //.AddNavigationItem(NavigationItemFactory.Create(new RemoveTestMessage(message.)))
-                    .AddNavigationItem(NavigationItemFactory.Create<EditTestMessage>())
-                    .AddNavigationItem(NavigationItemFactory.Create(new RegisterTestMessage()))
-                    .AddNavigationItem(NavigationItemFactory.Create<MarkAllMessage>())
-                    .AddNavigationItem(NavigationItemFactory.Create<InvertMarksMessage>());
-
-                var item = WorkItemManager
-                    .Create($"Tests: {message.MethodName}")
-                    .ControlledBy<ITestManagerController>()
-                    .ShowIn<IContextToolbarPresenter>()
-                    .AddPresenter(presenter)
-                    //.WithModel(new SimpleListModel("TestId", _testQuery.FetchForMethodId(message.TestId)))
-                    //.AddPresenter<ITestResultPresenter>()
-                    .AssignInitiator(message);
-
-                HostInWorkspace<ITabbedWorkspacePresenter>(item);
-            }
-        }
-
         public void HandleMessage(ResourceMenuRequestMessage message)
         {
             if (!message.Item.ResourceKey.Equals(ResourceKeys.Test))
@@ -95,21 +69,6 @@ namespace Shuttle.Abacus.Shell.Coordinators
                     }
             }
 
-            //switch (message.Item.Type)
-            //{
-            //    case Resource.ResourceType.Container:
-            //    {
-            //        message.NavigationItems.Add(
-            //            NavigationItemFactory.Create(
-            //                new ManageTestsMessage(message.Item.Key, message.Item.Text)));
-
-            //        break;
-            //    }
-            //    case Resource.ResourceType.Item:
-            //    {
-            //        break;
-            //    }
-            //}
         }
 
         public void HandleMessage(RegisterTestMessage message)
@@ -131,45 +90,6 @@ namespace Shuttle.Abacus.Shell.Coordinators
 
                 HostInWorkspace<ITabbedWorkspacePresenter>(item);
             }
-        }
-
-        public void HandleMessage(EditTestMessage message)
-        {
-            throw new NotImplementedException();
-
-            //using (_databaseContextFactory.Create())
-            //{
-            //    message.FormulaId = new Guid(row["FormulaId"].ToString());
-            //    message.Description = TestColumns.Name.MapFrom(row);
-            //    message.ExpectedResult = TestColumns.ExpectedResult.MapFrom(row);
-
-            //    var item = WorkItemManager
-            //        .Create("Test: " + TestColumns.Name.MapFrom(row))
-            //        .ControlledBy<ITestController>()
-            //        .ShowIn<IContextToolbarPresenter>()
-            //        .AddPresenter<ITestPresenter>()
-            //        .WithModel(model)
-            //        .AddNavigationItem(NavigationItemFactory.Create(new ChangeTestMessage(message)))
-            //        .AsDefault()
-            //        .AssignInitiator(message);
-
-            //    HostInWorkspace<ITabbedWorkspacePresenter>(item);
-            //}
-        }
-
-        public void HandleMessage(TestCreatedMessage message)
-        {
-            RefreshList(message.WorkItemId, message.MethodId);
-        }
-
-        public void HandleMessage(TestChangedMessage message)
-        {
-            RefreshList(message.WorkItemId, message.MethodId);
-        }
-
-        public void HandleMessage(TestRemovedMessage message)
-        {
-            RefreshList(message.WorkItemId, message.MethodId);
         }
 
         public void HandleMessage(TestRunMessage message)
@@ -224,34 +144,6 @@ namespace Shuttle.Abacus.Shell.Coordinators
             }
         }
 
-        private void RefreshList(Guid workItemId, Guid methodId)
-        {
-            var workItem = WorkItemManager.Get(workItemId);
-
-            if (workItem == null)
-            {
-                return;
-            }
-
-            var presenter = workItem.GetPresenter<ISimpleListPresenter>();
-
-            using (_databaseContextFactory.Create())
-            {
-                var modelPresenter = presenter as IPresenter<SimpleListModel>;
-
-                if (modelPresenter == null)
-                {
-                    throw new InvalidOperationException();
-                }
-
-                throw new NotImplementedException();
-
-                //modelPresenter.AssignModel(new SimpleListModel("TestId", _testQuery.FetchForMethodId(methodId)));
-            }
-
-            presenter.Refresh();
-        }
-
         public void HandleMessage(ExplorerInitializeMessage message)
         {
             if (!Permissions.Test.IsSatisfiedBy(Session.Permissions))
@@ -291,7 +183,7 @@ namespace Shuttle.Abacus.Shell.Coordinators
                 {
                     message.Resources.Add(
                         new Resource(ResourceKeys.TestArgumentValue, Guid.NewGuid(), "Argument values",
-                            ImageResources.TestArgumentValue).AsContainer());
+                            ImageResources.ArgumentValue).AsContainer());
 
                     break;
                 }

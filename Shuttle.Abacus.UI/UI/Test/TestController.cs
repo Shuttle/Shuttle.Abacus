@@ -2,6 +2,7 @@ using Shuttle.Abacus.Messages.v1;
 using Shuttle.Abacus.Shell.Core.Messaging;
 using Shuttle.Abacus.Shell.Core.WorkItem;
 using Shuttle.Abacus.Shell.Messages.Test;
+using Shuttle.Abacus.Shell.UI.TestArgument;
 using Shuttle.Esb;
 
 namespace Shuttle.Abacus.Shell.UI.Test
@@ -34,16 +35,20 @@ namespace Shuttle.Abacus.Shell.UI.Test
             Send(command);
         }
 
-        public void HandleMessage(ChangeTestMessage message)
+        public void HandleMessage(RegisterTestArgumentValueMessage message)
         {
-            var view = WorkItem.GetView<ITestView>();
-
-            var command = new ChangeTestCommand
+            if (!WorkItem.PresentationValid())
             {
-                MethodTestId = message.MethodTestId,
-                MethodId = message.MethodId,
-                Description = view.NameValue,
-                ExpectedResult = view.ExpectedResultValue
+                return;
+            }
+
+            var view = WorkItem.GetView<ITestArgumentValueView>();
+
+            var command = new RegisterTestArgumentValueCommand
+            {
+                TestId = message.TestId,
+                ArgumentName = view.ArgumentName,
+                Value = view.ValueValue
             };
 
             Send(command);

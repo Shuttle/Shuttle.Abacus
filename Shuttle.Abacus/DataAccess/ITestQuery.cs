@@ -12,5 +12,6 @@ namespace Shuttle.Abacus.DataAccess
         void Register(Guid id, string name, string formulaName, string expectedResult, string expectedResultType, string comparison);
         void Remove(Guid id);
         void Rename(Guid id, string name);
+        void SetArgumentValue(Guid id, string argumentName, string value);
     }
 }

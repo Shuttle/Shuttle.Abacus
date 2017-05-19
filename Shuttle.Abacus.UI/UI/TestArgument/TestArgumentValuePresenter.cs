@@ -1,6 +1,5 @@
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
-using Shuttle.Abacus.Invariants.Interfaces;
 using Shuttle.Abacus.Invariants.Values;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.Shell.Core.Presentation;
@@ -10,25 +9,22 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Shell.UI.TestArgument
 {
-    public class TestArgumentValuePresenter : Presenter<ITestArgumentView, TestArgumentValueModel>, ITestArgumentValuePresenter
+    public class TestArgumentValuePresenter : Presenter<ITestArgumentValueView, TestArgumentValueModel>, ITestArgumentValuePresenter
     {
         private readonly IArgumentQuery _argumentQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
-        private readonly ITestRules _rules;
         private readonly IValueTypeValidatorProvider _valueTypeValidatorProvider;
 
         public TestArgumentValuePresenter(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
-            ITestArgumentView view, ITestRules rules, IValueTypeValidatorProvider valueTypeValidatorProvider)
-            : base(view)
+            ITestArgumentValueView valueView, IValueTypeValidatorProvider valueTypeValidatorProvider)
+            : base(valueView)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(argumentQuery, "argumentQuery");
-            Guard.AgainstNull(rules, "rules");
             Guard.AgainstNull(valueTypeValidatorProvider, "valueTypeValidatorProvider");
 
             _databaseContextFactory = databaseContextFactory;
             _argumentQuery = argumentQuery;
-            _rules = rules;
             _valueTypeValidatorProvider = valueTypeValidatorProvider;
 
             Text = "Test Details";
@@ -67,7 +63,7 @@ namespace Shuttle.Abacus.Shell.UI.TestArgument
             {
                 var result =
                     _valueTypeValidatorProvider.Get(View.ArgumentModel.ValueType)
-                        .Validate(View.ArgumentValue);
+                        .Validate(View.ArgumentName);
 
                 if (!result.OK)
                 {

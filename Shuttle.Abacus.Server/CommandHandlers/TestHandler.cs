@@ -14,7 +14,8 @@ namespace Shuttle.Abacus.Server.CommandHandlers
         IMessageHandler<DeleteTestCommand>,
         IMessageHandler<ChangeTestCommand>,
         IMessageHandler<RunTestCommand>,
-        IMessageHandler<PrintTestCommand>
+        IMessageHandler<PrintTestCommand>,
+        IMessageHandler<RegisterTestArgumentValueCommand>
     {
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IEventStore _eventStore;
@@ -201,6 +202,29 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 
             //    return context;
             //}
+        }
+
+        public void ProcessMessage(IHandlerContext<RegisterTestArgumentValueCommand> context)
+        {
+            var message = context.Message;
+
+            using (_databaseContextFactory.Create())
+            {
+                var stream = _eventStore.Get(message.TestId);
+
+                if (stream.IsEmpty)
+                {
+                    return;
+                }
+
+                var test = new Test(message.TestId);
+
+                stream.Apply(test);
+
+                stream.AddEvent(test.SetArgumentValue(message.ArgumentName, message.Value));
+
+                _eventStore.Save(stream);
+            }
         }
     }
 }

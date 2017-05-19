@@ -7,43 +7,33 @@ using Shuttle.Abacus.Shell.Models;
 
 namespace Shuttle.Abacus.Shell.UI.TestArgument
 {
-    public partial class TestArgumentView : GenericTestArgumentView, ITestArgumentView
+    public partial class TestArgumentValueView : GenericTestArgumentView, ITestArgumentValueView
     {
-        public TestArgumentView()
+        public TestArgumentValueView()
         {
             InitializeComponent();
         }
 
-        public IRuleCollection<object> DescriptionRules
-        {
-            set { ViewValidator.Control(Description).ShouldSatisfy(value); }
-        }
+        public bool HasAnswer => ValueControl.Text.Length > 0;
 
-        public IRuleCollection<object> ExpectedResultRules
+        public string ValueValue
         {
-            set { ViewValidator.Control(ExpectedResult).ShouldSatisfy(value); }
-        }
-
-        public bool HasAnswer => ValueSelectionControl.Text.Length > 0;
-
-        public string AnswerValue
-        {
-            get { return ValueSelectionControl.Text; }
-            set { ValueSelectionControl.Text = value; }
+            get { return ValueControl.Text; }
+            set { ValueControl.Text = value; }
         }
 
         public bool HasArgument => Argument.Text.Length > 0;
 
         public void PopulateArgumentValues(IEnumerable<string> answers)
         {
-            ValueSelectionControl.Items.Clear();
+            ValueControl.Items.Clear();
 
-            answers.ForEach(answer => ValueSelectionControl.Items.Add(answer));
+            answers.ForEach(answer => ValueControl.Items.Add(answer));
         }
 
         public void PopulateArguments(IEnumerable<ArgumentModel> arguments)
         {
-            ValueSelectionControl.Items.Clear();
+            ValueControl.Items.Clear();
 
             Argument.DisplayMember = "Name";
             arguments.ForEach(item => Argument.Items.Add(item));
@@ -51,17 +41,34 @@ namespace Shuttle.Abacus.Shell.UI.TestArgument
 
         public ArgumentModel ArgumentModel => Argument.SelectedItem as ArgumentModel;
 
-        public string ArgumentValue
+        public string ArgumentName
         {
-            get { return ValueSelectionControl.Text; }
-            set { ValueSelectionControl.Text = value; }
+            get { return ArgumentModel.Name; }
+            set { ValueControl.SelectedIndex = FindArgumentNameIndex(value); }
         }
 
-        public bool HasArgumentValue => ValueSelectionControl.Text.Length > 0;
+        private int FindArgumentNameIndex(string argumentName)
+        {
+            var index = 0;
+
+            foreach (ArgumentModel model in Argument.Items)
+            {
+                if (model.Name.Equals(argumentName))
+                {
+                    return index;
+                }
+
+                index++;
+            }
+
+            return -1;
+        }
+
+        public bool HasArgumentValue => ValueControl.Text.Length > 0;
 
         public void ShowArgumentValueError(string message)
         {
-            SetError(ValueSelectionControl, message);
+            SetError(ValueControl, message);
         }
 
         public void ShowArgumentError()
@@ -71,7 +78,7 @@ namespace Shuttle.Abacus.Shell.UI.TestArgument
 
         public void ShowAnswerError(string message)
         {
-            SetError(ValueSelectionControl, message);
+            SetError(ValueControl, message);
         }
 
         public void AddArgument(ArgumentModel model)
@@ -88,7 +95,13 @@ namespace Shuttle.Abacus.Shell.UI.TestArgument
 
         private void ValueSelection_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SetError(ValueSelectionControl, string.Empty);
+            SetError(ValueControl, string.Empty);
+        }
+
+        public void OnReady()
+        {
+            ViewValidator.Control(Argument).ShouldSatisfy(RuleCollection.Required());
+            ViewValidator.Control(ValueControl).ShouldSatisfy(RuleCollection.Required());
         }
     }
 
