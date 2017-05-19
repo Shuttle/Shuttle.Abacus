@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 
-namespace Shuttle.Abacus.UI.Models
+namespace Shuttle.Abacus.Shell.Models
 {
     public class SimpleListModel
     {

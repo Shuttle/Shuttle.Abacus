@@ -1,11 +1,11 @@
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Core.WorkItem;
-using Shuttle.Abacus.UI.Messages.Core;
-using Shuttle.Abacus.UI.Messages.SystemUser;
-using Shuttle.Abacus.UI.UI.SimpleList;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.WorkItem;
+using Shuttle.Abacus.Shell.Messages.Core;
+using Shuttle.Abacus.Shell.Messages.SystemUser;
+using Shuttle.Abacus.Shell.UI.SimpleList;
 using Shuttle.Esb;
 
-namespace Shuttle.Abacus.UI.UI.SystemUser
+namespace Shuttle.Abacus.Shell.UI.SystemUser
 {
     public class SystemUserListController :
         WorkItemController,

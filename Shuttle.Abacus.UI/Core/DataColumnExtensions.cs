@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Threading;
 
-namespace Shuttle.Abacus.UI.Core
+namespace Shuttle.Abacus.Shell.Core
 {
     public static class DataColumnExtensions
     {

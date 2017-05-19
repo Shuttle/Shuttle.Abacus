@@ -1,6 +1,6 @@
-using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.Shell.Core.WorkItem;
 
-namespace Shuttle.Abacus.UI.Messages.WorkItem
+namespace Shuttle.Abacus.Shell.Messages.WorkItem
 {
     public class WorkItemReadyMessage : WorkItemMessage
     {

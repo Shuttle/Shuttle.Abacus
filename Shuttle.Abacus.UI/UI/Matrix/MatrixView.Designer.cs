@@ -1,4 +1,4 @@
-﻿namespace Shuttle.Abacus.UI.UI.Matrix
+﻿namespace Shuttle.Abacus.Shell.UI.Matrix
 {
     partial class MatrixView
     {

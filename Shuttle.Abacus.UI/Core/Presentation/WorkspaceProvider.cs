@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Shuttle.Abacus.Infrastructure;
 
-namespace Shuttle.Abacus.UI.Core.Presentation
+namespace Shuttle.Abacus.Shell.Core.Presentation
 {
     public class WorkspaceProvider : IWorkspaceProvider
     {

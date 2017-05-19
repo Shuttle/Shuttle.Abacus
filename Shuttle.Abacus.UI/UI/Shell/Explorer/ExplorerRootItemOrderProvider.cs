@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Shuttle.Abacus.UI.Core.Resources;
+using Shuttle.Abacus.Shell.Core.Resources;
 
-namespace Shuttle.Abacus.UI.UI.Shell.Explorer
+namespace Shuttle.Abacus.Shell.UI.Shell.Explorer
 {
     public class ExplorerRootItemOrderProvider : IExplorerRootItemOrderProvider
     {

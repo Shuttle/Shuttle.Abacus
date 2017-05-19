@@ -1,13 +1,13 @@
 using System;
 using Shuttle.Abacus.Infrastructure;
-using Shuttle.Abacus.UI.Core.Clipboard;
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Core.WorkItem;
-using Shuttle.Abacus.UI.Messages.WorkItem;
-using Shuttle.Abacus.UI.Navigation;
+using Shuttle.Abacus.Shell.Core.Clipboard;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.WorkItem;
+using Shuttle.Abacus.Shell.Messages.WorkItem;
+using Shuttle.Abacus.Shell.Navigation;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.Core.Presentation
+namespace Shuttle.Abacus.Shell.Core.Presentation
 {
     public abstract class Coordinator : ICoordinator, IDisposable
     {
@@ -20,7 +20,7 @@ namespace Shuttle.Abacus.UI.Core.Presentation
         public IWorkspaceProvider WorkspaceProvider { get; set; }
         public IWorkItemControllerFactory WorkItemControllerFactory { get; set; }
         public IUIService UIService { get; set; }
-        public IShell Shell { get; set; }
+        public IApplicationShell ApplicationShell { get; set; }
 
         public void Dispose()
         {
@@ -29,7 +29,7 @@ namespace Shuttle.Abacus.UI.Core.Presentation
 
         protected void HostInWorkspace<T>(IWorkItem workItem) where T : IWorkspacePresenter
         {
-            Shell.Invoke(() =>
+            ApplicationShell.Invoke(() =>
                 {
                     Guard.AgainstNull(workItem, "workItem");
 

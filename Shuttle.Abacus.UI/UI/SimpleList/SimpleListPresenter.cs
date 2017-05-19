@@ -2,13 +2,13 @@ using System;
 using System.Linq;
 using System.Windows.Forms;
 using Shuttle.Abacus.Infrastructure;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Messages.Core;
-using Shuttle.Abacus.UI.Models;
-using Shuttle.Abacus.UI.Navigation;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Messages.Core;
+using Shuttle.Abacus.Shell.Models;
+using Shuttle.Abacus.Shell.Navigation;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.UI.SimpleList
+namespace Shuttle.Abacus.Shell.UI.SimpleList
 {
     public class SimpleListPresenter : Presenter<ISimpleListView, SimpleListModel>, ISimpleListPresenter
     {

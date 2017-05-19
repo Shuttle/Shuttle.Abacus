@@ -1,8 +1,8 @@
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Messages.SystemUser;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Messages.SystemUser;
 
-namespace Shuttle.Abacus.UI.Coordinators.Interfaces
+namespace Shuttle.Abacus.Shell.Coordinators.Interfaces
 {
     public interface ISystemUserCoordinator :
         ICoordinator,

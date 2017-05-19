@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using Shuttle.Abacus.Messages.v1;
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Core.WorkItem;
-using Shuttle.Abacus.UI.Messages.Formula;
-using Shuttle.Abacus.UI.UI.FormulaConstraint;
-using Shuttle.Abacus.UI.UI.FormulaOperation;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.WorkItem;
+using Shuttle.Abacus.Shell.Messages.Formula;
+using Shuttle.Abacus.Shell.UI.FormulaConstraint;
+using Shuttle.Abacus.Shell.UI.FormulaOperation;
 using Shuttle.Esb;
 
-namespace Shuttle.Abacus.UI.UI.Formula
+namespace Shuttle.Abacus.Shell.UI.Formula
 {
     public class FormulaController : WorkItemController, IFormulaController
     {

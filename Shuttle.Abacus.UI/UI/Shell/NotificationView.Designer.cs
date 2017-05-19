@@ -1,4 +1,4 @@
-﻿namespace Shuttle.Abacus.UI.UI.Shell
+﻿namespace Shuttle.Abacus.Shell.UI.Shell
 {
     partial class NotificationView
     {

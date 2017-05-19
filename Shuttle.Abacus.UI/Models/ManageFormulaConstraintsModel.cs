@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Shuttle.Abacus.UI.Models
+namespace Shuttle.Abacus.Shell.Models
 {
     public class ManageFormulaConstraintsModel
     {

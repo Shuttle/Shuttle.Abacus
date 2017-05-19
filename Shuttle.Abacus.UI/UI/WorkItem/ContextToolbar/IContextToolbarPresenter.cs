@@ -1,7 +1,7 @@
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.Presentation;
 
-namespace Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar
+namespace Shuttle.Abacus.Shell.UI.WorkItem.ContextToolbar
 {
     public interface IContextToolbarPresenter : IWorkItemPresenter
     {

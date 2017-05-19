@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Shuttle.Abacus.UI.Core.Binding
+namespace Shuttle.Abacus.Shell.Core.Binding
 {
     public class ListViewBinder : IBinder<ListView>
     {

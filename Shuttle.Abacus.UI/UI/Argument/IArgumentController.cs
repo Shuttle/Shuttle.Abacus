@@ -1,8 +1,8 @@
-﻿using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Core.WorkItem;
-using Shuttle.Abacus.UI.Messages.Argument;
+﻿using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.WorkItem;
+using Shuttle.Abacus.Shell.Messages.Argument;
 
-namespace Shuttle.Abacus.UI.UI.Argument
+namespace Shuttle.Abacus.Shell.UI.Argument
 {
     public interface IArgumentController : 
         IWorkItemController, 

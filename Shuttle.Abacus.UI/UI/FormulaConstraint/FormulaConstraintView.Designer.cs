@@ -1,4 +1,4 @@
-﻿namespace Shuttle.Abacus.UI.UI.FormulaConstraint
+﻿namespace Shuttle.Abacus.Shell.UI.FormulaConstraint
 {
     partial class FormulaConstraintView
     {

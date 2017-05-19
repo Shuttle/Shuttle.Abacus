@@ -1,6 +1,6 @@
 using System.Windows.Forms;
 
-namespace Shuttle.Abacus.UI
+namespace Shuttle.Abacus.Shell
 {
     public class UIService : IUIService
     {

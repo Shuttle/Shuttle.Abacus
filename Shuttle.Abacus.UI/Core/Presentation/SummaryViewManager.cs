@@ -1,13 +1,13 @@
 using System;
-using Shuttle.Abacus.UI.Coordinators;
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Core.Resources;
-using Shuttle.Abacus.UI.Core.WorkItem;
-using Shuttle.Abacus.UI.Messages.Core;
-using Shuttle.Abacus.UI.Messages.Resources;
-using Shuttle.Abacus.UI.UI.Summary;
+using Shuttle.Abacus.Shell.Coordinators;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.Resources;
+using Shuttle.Abacus.Shell.Core.WorkItem;
+using Shuttle.Abacus.Shell.Messages.Core;
+using Shuttle.Abacus.Shell.Messages.Resources;
+using Shuttle.Abacus.Shell.UI.Summary;
 
-namespace Shuttle.Abacus.UI.Core.Presentation
+namespace Shuttle.Abacus.Shell.Core.Presentation
 {
     public class SummaryViewManager : ISummaryViewManager, IDisposable
     {

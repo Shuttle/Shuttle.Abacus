@@ -6,5 +6,6 @@
         public string ExpectedResult { get; set; }
         public string ExpectedResultType { get; set; }
         public string Comparison { get; set; }
+        public string FormulaName { get; set; }
     }
 }

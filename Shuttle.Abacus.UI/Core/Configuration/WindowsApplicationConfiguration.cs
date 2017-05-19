@@ -2,7 +2,7 @@ using System;
 using System.Configuration;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.Core.Configuration
+namespace Shuttle.Abacus.Shell.Core.Configuration
 {
     public class WindowsApplicationConfiguration : IWindowsApplicationConfiguration
     {

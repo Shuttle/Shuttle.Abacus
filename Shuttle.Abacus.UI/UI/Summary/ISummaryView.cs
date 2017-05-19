@@ -1,6 +1,6 @@
-using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.Shell.Core.Presentation;
 
-namespace Shuttle.Abacus.UI.UI.Summary
+namespace Shuttle.Abacus.Shell.UI.Summary
 {
     public interface ISummaryView : IView
     {

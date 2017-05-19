@@ -1,8 +1,8 @@
 ﻿using System;
 using Shuttle.Abacus.Infrastructure;
-using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.Messaging;
 
-namespace Shuttle.Abacus.UI.Messages.Argument
+namespace Shuttle.Abacus.Shell.Messages.Argument
 {
     public class RenameArgumentMessage : Message
     {

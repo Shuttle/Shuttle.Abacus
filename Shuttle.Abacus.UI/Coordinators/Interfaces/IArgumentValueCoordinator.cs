@@ -1,9 +1,9 @@
-﻿using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Messages.ArgumentValue;
-using Shuttle.Abacus.UI.Messages.Core;
-using Shuttle.Abacus.UI.Messages.Resources;
+﻿using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Messages.ArgumentValue;
+using Shuttle.Abacus.Shell.Messages.Core;
+using Shuttle.Abacus.Shell.Messages.Resources;
 
-namespace Shuttle.Abacus.UI.Coordinators.Interfaces
+namespace Shuttle.Abacus.Shell.Coordinators.Interfaces
 {
     public interface IArgumentValueCoordinator :
         IMessageHandler<ResourceMenuRequestMessage>,

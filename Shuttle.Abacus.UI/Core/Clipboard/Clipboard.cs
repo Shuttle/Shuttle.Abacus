@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Shuttle.Abacus.UI.Core.Resources;
+using Shuttle.Abacus.Shell.Core.Resources;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.Core.Clipboard
+namespace Shuttle.Abacus.Shell.Core.Clipboard
 {
     public class Clipboard : IClipboard
     {

@@ -1,9 +1,9 @@
 using System;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Core.State;
+using Shuttle.Abacus.Shell.Core.State;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.Core.Resources
+namespace Shuttle.Abacus.Shell.Core.Resources
 {
     public class Resource
     {

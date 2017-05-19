@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Messages.Core;
 
-namespace Shuttle.Abacus.UI.UI.Shell
+namespace Shuttle.Abacus.Shell.UI.Shell
 {
     public partial class NotificationView : 
         Form,

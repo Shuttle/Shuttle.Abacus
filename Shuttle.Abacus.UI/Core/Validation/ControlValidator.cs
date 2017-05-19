@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Shuttle.Abacus.UI.Core.Validation
+namespace Shuttle.Abacus.Shell.Core.Validation
 {
     public abstract class ControlValidator<T> where T : Control
     {

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using Shuttle.Abacus.Invariants.Core;
 using Shuttle.Abacus.Messages.v1.TransferObjects;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Models;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Models;
 
-namespace Shuttle.Abacus.UI.UI.Matrix
+namespace Shuttle.Abacus.Shell.UI.Matrix
 {
     public interface IMatrixView : IView
     {

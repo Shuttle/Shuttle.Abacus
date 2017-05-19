@@ -1,11 +1,8 @@
-using Shuttle.Abacus.Invariants.Core;
-using Shuttle.Abacus.Invariants.Interfaces;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Models;
-using Shuttle.Core.Infrastructure;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Models;
 
-namespace Shuttle.Abacus.UI.UI.Test
+namespace Shuttle.Abacus.Shell.UI.Test
 {
     public class TestPresenter : Presenter<ITestView, TestModel>, ITestPresenter
     {

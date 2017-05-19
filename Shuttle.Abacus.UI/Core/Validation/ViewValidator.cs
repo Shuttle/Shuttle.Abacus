@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Shuttle.Abacus.Invariants.Core;
 
-namespace Shuttle.Abacus.UI.Core.Validation
+namespace Shuttle.Abacus.Shell.Core.Validation
 {
     public class ViewValidator : IViewValidator, IControlValidatorBuild
     {

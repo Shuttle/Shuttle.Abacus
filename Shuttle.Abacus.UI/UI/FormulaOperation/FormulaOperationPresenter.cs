@@ -1,13 +1,12 @@
 using System;
 using Shuttle.Abacus.Domain;
-using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Values;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Models;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Models;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.UI.FormulaOperation
+namespace Shuttle.Abacus.Shell.UI.FormulaOperation
 {
     public class FormulaOperationPresenter : Presenter<IFormulaOperationView, ManageFormulaOperationsModel>, IFormulaOperationPresenter
     {

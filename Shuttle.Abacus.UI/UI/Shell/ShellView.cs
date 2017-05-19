@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Core.Validation;
-using Shuttle.Abacus.UI.Navigation;
-using Shuttle.Abacus.UI.UI.Shell.Explorer;
-using Message = Shuttle.Abacus.UI.Core.Messaging.Message;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Core.Validation;
+using Shuttle.Abacus.Shell.Navigation;
+using Shuttle.Abacus.Shell.UI.Shell.Explorer;
+using Message = Shuttle.Abacus.Shell.Core.Messaging.Message;
 
-namespace Shuttle.Abacus.UI.UI.Shell
+namespace Shuttle.Abacus.Shell.UI.Shell
 {
     public partial class ShellView : Form, IShellView
     {
@@ -16,13 +16,13 @@ namespace Shuttle.Abacus.UI.UI.Shell
 
         private readonly IExplorerPartialView explorerPartialView;
 
-        public ShellView(IShell shell)
+        public ShellView(IApplicationShell applicationShell)
         {
             InitializeComponent();
 
             explorerPartialView = new ExplorerPartialView(Explorer);
 
-            shell.AssignShell(this);
+            applicationShell.AssignShell(this);
         }
 
         protected override void OnLoad(EventArgs e)

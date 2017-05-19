@@ -1,4 +1,4 @@
-namespace Shuttle.Abacus.UI.Core.Presentation
+namespace Shuttle.Abacus.Shell.Core.Presentation
 {
     public interface IWorkspaceProvider
     {

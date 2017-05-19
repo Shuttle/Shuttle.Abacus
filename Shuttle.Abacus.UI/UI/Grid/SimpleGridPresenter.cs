@@ -1,8 +1,8 @@
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Models;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Models;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.UI.Grid
+namespace Shuttle.Abacus.Shell.UI.Grid
 {
     public class SimpleGridPresenter : Presenter<ISimpleGridView, SimpleGridModel>, ISimpleGridPresenter
     {

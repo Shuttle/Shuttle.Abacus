@@ -1,4 +1,4 @@
-﻿namespace Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace
+﻿namespace Shuttle.Abacus.Shell.UI.Shell.TabbedWorkspace
 {
     partial class TabbedWorkspaceView
     {

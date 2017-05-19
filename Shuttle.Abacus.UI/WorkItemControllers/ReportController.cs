@@ -1,9 +1,9 @@
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Core.WorkItem;
-using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.WorkItem;
+using Shuttle.Abacus.Shell.WorkItemControllers.Interfaces;
 using Shuttle.Esb;
 
-namespace Shuttle.Abacus.UI.WorkItemControllers
+namespace Shuttle.Abacus.Shell.WorkItemControllers
 {
     public class ReportController : WorkItemController, IReportController
     {

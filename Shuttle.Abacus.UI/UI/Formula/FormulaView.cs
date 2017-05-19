@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Shuttle.Abacus.Invariants.Core;
-using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.Shell.Core.Presentation;
 
-namespace Shuttle.Abacus.UI.UI.Formula
+namespace Shuttle.Abacus.Shell.UI.Formula
 {
     public partial class FormulaView : GenericFormulaView, IFormulaView
     {

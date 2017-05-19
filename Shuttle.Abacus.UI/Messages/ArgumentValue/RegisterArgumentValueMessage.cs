@@ -1,8 +1,8 @@
 ﻿using System;
 using Shuttle.Abacus.Infrastructure;
-using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.Messaging;
 
-namespace Shuttle.Abacus.UI.Messages.ArgumentValue
+namespace Shuttle.Abacus.Shell.Messages.ArgumentValue
 {
     public class RegisterArgumentValueMessage : Message
     {

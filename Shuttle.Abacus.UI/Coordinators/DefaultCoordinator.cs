@@ -1,21 +1,20 @@
 using System;
 using System.Windows.Forms;
-using Shuttle.Abacus.UI.Coordinators.Interfaces;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Messages.Core;
-using Shuttle.Abacus.UI.UI.Shell;
-using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
-using Shuttle.Abacus.UI.UI.Summary;
-using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
-using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Abacus.Shell.Coordinators.Interfaces;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Messages.Core;
+using Shuttle.Abacus.Shell.UI.Shell;
+using Shuttle.Abacus.Shell.UI.Shell.TabbedWorkspace;
+using Shuttle.Abacus.Shell.UI.Summary;
+using Shuttle.Abacus.Shell.UI.WorkItem.ContextToolbar;
 
-namespace Shuttle.Abacus.UI.Coordinators
+namespace Shuttle.Abacus.Shell.Coordinators
 {
     public class DefaultCoordinator : Coordinator, IDefaultCoordinator
     {
         public static readonly Guid SummaryViewWorkItemId = new Guid("03F030CA-7618-4845-B671-4724042129D2");
 
-        private Form shellForm;
+        private Form _shellForm;
 
         public IShellPresenter ShellPresenter { get; set; }
 
@@ -23,9 +22,9 @@ namespace Shuttle.Abacus.UI.Coordinators
         {
             ShellPresenter.HandleMessage(message);
 
-            shellForm = ((Form) ShellPresenter.IView);
+            _shellForm = (Form) ShellPresenter.IView;
 
-            shellForm.Show();
+            _shellForm.Show();
         }
 
         public void HandleMessage(ResultNotificationMessage message)
@@ -39,9 +38,9 @@ namespace Shuttle.Abacus.UI.Coordinators
 
             view.HandleMessage(message);
 
-            if (shellForm.InvokeRequired)
+            if (_shellForm.InvokeRequired)
             {
-                shellForm.Invoke(new MethodInvoker(() => view.ShowDialog()));
+                _shellForm.Invoke(new MethodInvoker(() => view.ShowDialog()));
             }
             else
             {
@@ -56,8 +55,8 @@ namespace Shuttle.Abacus.UI.Coordinators
 
         public void HandleMessage(ActivateShellMessage message)
         {
-            shellForm.Invoke(new MethodInvoker(() => {
-                shellForm.BringToFront();
+            _shellForm.Invoke(new MethodInvoker(() => {
+                _shellForm.BringToFront();
                 SummaryViewManager.ShowView();
             }));
         }

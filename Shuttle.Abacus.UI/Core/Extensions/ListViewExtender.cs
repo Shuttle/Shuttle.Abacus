@@ -1,6 +1,6 @@
 using System.Windows.Forms;
 
-namespace Shuttle.Abacus.UI.Core.Extensions
+namespace Shuttle.Abacus.Shell.Core.Extensions
 {
     public class ListViewExtender
     {

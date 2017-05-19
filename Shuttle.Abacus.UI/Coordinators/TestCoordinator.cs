@@ -2,28 +2,26 @@
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Coordinators.Interfaces;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Core.Resources;
-using Shuttle.Abacus.UI.Messages.Core;
-using Shuttle.Abacus.UI.Messages.Explorer;
-using Shuttle.Abacus.UI.Messages.Formula;
-using Shuttle.Abacus.UI.Messages.Resources;
-using Shuttle.Abacus.UI.Messages.Test;
-using Shuttle.Abacus.UI.Models;
-using Shuttle.Abacus.UI.Navigation;
-using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
-using Shuttle.Abacus.UI.UI.SimpleList;
-using Shuttle.Abacus.UI.UI.Test;
-using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
+using Shuttle.Abacus.Shell.Coordinators.Interfaces;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Core.Resources;
+using Shuttle.Abacus.Shell.Messages.Core;
+using Shuttle.Abacus.Shell.Messages.Explorer;
+using Shuttle.Abacus.Shell.Messages.Formula;
+using Shuttle.Abacus.Shell.Messages.Resources;
+using Shuttle.Abacus.Shell.Messages.Test;
+using Shuttle.Abacus.Shell.Models;
+using Shuttle.Abacus.Shell.Navigation;
+using Shuttle.Abacus.Shell.UI.Shell.TabbedWorkspace;
+using Shuttle.Abacus.Shell.UI.SimpleList;
+using Shuttle.Abacus.Shell.UI.Test;
+using Shuttle.Abacus.Shell.UI.WorkItem.ContextToolbar;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.Coordinators
+namespace Shuttle.Abacus.Shell.Coordinators
 {
-    public class TestCoordinator :
-        Coordinator,
-        ITestCoordinator
+    public class TestCoordinator : Coordinator, ITestCoordinator
     {
         private readonly INavigationItem _register =
             new NavigationItem(new ResourceItem("Register", "Test")).AssignMessage(new RegisterTestMessage());
@@ -265,6 +263,40 @@ namespace Shuttle.Abacus.UI.Coordinators
             message.Items.Add(
                 new Resource(ResourceKeys.Test, Guid.NewGuid(), "Tests", ImageResources.Test)
                     .AsContainer());
+        }
+
+        public void HandleMessage(PopulateResourceMessage message)
+        {
+            if (!message.Resource.ResourceKey.Equals(ResourceKeys.Test))
+            {
+                return;
+            }
+
+            switch (message.Resource.Type)
+            {
+                case Resource.ResourceType.Container:
+                {
+                    using (_databaseContextFactory.Create())
+                    {
+                        foreach (var row in _formulaQuery.All())
+                        {
+                            message.Resources.Add(
+                                new Resource(ResourceKeys.Test, TestColumns.Id.MapFrom(row),
+                                    TestColumns.Name.MapFrom(row), ImageResources.Test));
+                        }
+                    }
+
+                    break;
+                }
+                case Resource.ResourceType.Item:
+                {
+                    message.Resources.Add(
+                        new Resource(ResourceKeys.TestArgumentValue, Guid.NewGuid(), "Argument values",
+                            ImageResources.TestArgumentValue).AsContainer());
+
+                    break;
+                }
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-namespace Shuttle.Abacus.UI
+namespace Shuttle.Abacus.Shell
 {
     public interface IUIService
     {

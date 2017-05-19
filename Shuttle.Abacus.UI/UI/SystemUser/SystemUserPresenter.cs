@@ -2,11 +2,11 @@ using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Invariants.Interfaces;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Messages.SystemUser;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Messages.SystemUser;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.UI.SystemUser
+namespace Shuttle.Abacus.Shell.UI.SystemUser
 {
     public class SystemUserPresenter :
         Presenter<ISystemUserView, DataRow>,

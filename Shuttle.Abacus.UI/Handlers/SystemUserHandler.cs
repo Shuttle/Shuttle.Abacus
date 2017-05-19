@@ -1,14 +1,13 @@
 using System.Windows.Forms;
 using Shuttle.Abacus.Infrastructure;
-using Shuttle.Abacus.Messages;
 using Shuttle.Abacus.Messages.v1;
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Messages.Core;
 using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;
 using Permission = Shuttle.Abacus.Infrastructure.Permission;
 
-namespace Shuttle.Abacus.UI.Handlers
+namespace Shuttle.Abacus.Shell.Handlers
 {
     public class SystemUserHandler : 
         Esb.IMessageHandler<LoginCompletedEvent>,

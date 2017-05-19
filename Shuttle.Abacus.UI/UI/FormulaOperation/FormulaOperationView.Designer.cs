@@ -1,4 +1,4 @@
-﻿namespace Shuttle.Abacus.UI.UI.FormulaOperation
+﻿namespace Shuttle.Abacus.Shell.UI.FormulaOperation
 {
     partial class FormulaOperationView
     {

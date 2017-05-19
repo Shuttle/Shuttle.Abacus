@@ -1,9 +1,9 @@
 using System;
 using Shuttle.Abacus.Infrastructure;
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Core.Resources;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.Resources;
 
-namespace Shuttle.Abacus.UI.Messages.Section
+namespace Shuttle.Abacus.Shell.Messages.Section
 {
     public class DeleteMethodMessage : Message
     {

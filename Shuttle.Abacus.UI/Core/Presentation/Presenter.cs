@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Drawing;
 using Shuttle.Abacus.Infrastructure;
-using Shuttle.Abacus.UI.Core.EventArgs;
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Core.Validation;
-using Shuttle.Abacus.UI.Core.WorkItem;
-using Shuttle.Abacus.UI.Messages.Core;
-using Shuttle.Abacus.UI.Navigation;
+using Shuttle.Abacus.Shell.Core.EventArgs;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.Validation;
+using Shuttle.Abacus.Shell.Core.WorkItem;
+using Shuttle.Abacus.Shell.Messages.Core;
+using Shuttle.Abacus.Shell.Navigation;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.Core.Presentation
+namespace Shuttle.Abacus.Shell.Core.Presentation
 {
     public abstract class Presenter<TView> :
         IPresenter,

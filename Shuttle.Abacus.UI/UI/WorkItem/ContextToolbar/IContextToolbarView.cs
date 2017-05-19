@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Navigation;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Navigation;
 
-namespace Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar
+namespace Shuttle.Abacus.Shell.UI.WorkItem.ContextToolbar
 {
     public interface IContextToolbarView : IView
     {

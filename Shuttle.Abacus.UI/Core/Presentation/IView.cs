@@ -1,6 +1,6 @@
-using Shuttle.Abacus.UI.Core.Validation;
+using Shuttle.Abacus.Shell.Core.Validation;
 
-namespace Shuttle.Abacus.UI.Core.Presentation
+namespace Shuttle.Abacus.Shell.Core.Presentation
 {
     public interface IViewReady
     {

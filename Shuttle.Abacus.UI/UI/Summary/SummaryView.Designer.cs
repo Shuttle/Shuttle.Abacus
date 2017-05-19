@@ -1,4 +1,4 @@
-﻿namespace Shuttle.Abacus.UI.UI.Summary
+﻿namespace Shuttle.Abacus.Shell.UI.Summary
 {
     partial class SummaryView
     {

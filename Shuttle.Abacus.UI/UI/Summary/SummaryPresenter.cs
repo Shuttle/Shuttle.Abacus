@@ -3,10 +3,10 @@ using System.Data;
 using System.Linq;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Core;
-using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.Shell.Core;
+using Shuttle.Abacus.Shell.Core.Presentation;
 
-namespace Shuttle.Abacus.UI.UI.Summary
+namespace Shuttle.Abacus.Shell.UI.Summary
 {
     public class SummaryPresenter : Presenter<ISummaryView, IEnumerable<DataRow>>, ISummaryPresenter
     {

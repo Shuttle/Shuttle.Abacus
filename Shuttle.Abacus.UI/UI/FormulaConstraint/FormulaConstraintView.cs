@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Shuttle.Abacus.Infrastructure;
-using Shuttle.Abacus.UI.Core.Extensions;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Models;
+using Shuttle.Abacus.Shell.Core.Extensions;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Models;
 
-namespace Shuttle.Abacus.UI.UI.FormulaConstraint
+namespace Shuttle.Abacus.Shell.UI.FormulaConstraint
 {
     public partial class FormulaConstraintView : GenericConstraintView, IFormulaConstraintView
     {

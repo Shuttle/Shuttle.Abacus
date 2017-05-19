@@ -1,11 +1,10 @@
 ﻿using Shuttle.Abacus.Messages.v1;
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Core.WorkItem;
-using Shuttle.Abacus.UI.Messages.ArgumentValue;
-using Shuttle.Abacus.UI.Messages.Resources;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.WorkItem;
+using Shuttle.Abacus.Shell.Messages.ArgumentValue;
 using Shuttle.Esb;
 
-namespace Shuttle.Abacus.UI.UI.ArgumentValue
+namespace Shuttle.Abacus.Shell.UI.ArgumentValue
 {
     public class ArgumentValueController : WorkItemController, IArgumentValueController
     {

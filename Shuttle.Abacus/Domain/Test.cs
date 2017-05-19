@@ -38,6 +38,7 @@ namespace Shuttle.Abacus.Domain
             return On(new Registered
             {
                 Name = name,
+                FormulaName = formulaName,
                 ExpectedResult = expectedResult,
                 ExpectedResultType = expectedResultType,
                 Comparison = comparison

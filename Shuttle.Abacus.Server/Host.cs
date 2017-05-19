@@ -66,11 +66,13 @@ namespace Shuttle.Abacus.Server
             container.Register<ArgumentHandler>();
             container.Register<FormulaHandler>();
             container.Register<SystemUserHandler>();
+            container.Register<TestHandler>();
 
             _eventProcessor = container.Resolve<IEventProcessor>();
 
             _eventProcessor.AddProjection(new Projection("Argument").AddEventHandler(container.Resolve<ArgumentHandler>()));
             _eventProcessor.AddProjection(new Projection("Formula").AddEventHandler(container.Resolve<FormulaHandler>()));
+            _eventProcessor.AddProjection(new Projection("Test").AddEventHandler(container.Resolve<TestHandler>()));
             //_eventProcessor.AddProjection(new Projection("SystemUser").AddEventHandler(container.Resolve<SystemUserHandler>()));
 
             _eventProcessor.Start();

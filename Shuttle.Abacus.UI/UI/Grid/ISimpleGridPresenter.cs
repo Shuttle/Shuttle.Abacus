@@ -1,6 +1,6 @@
-using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.Shell.Core.Presentation;
 
-namespace Shuttle.Abacus.UI.UI.Grid
+namespace Shuttle.Abacus.Shell.UI.Grid
 {
     public interface ISimpleGridPresenter :
         IPresenter

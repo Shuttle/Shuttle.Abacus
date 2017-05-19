@@ -1,8 +1,8 @@
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Core.WorkItem;
-using Shuttle.Abacus.UI.Messages.Test;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.WorkItem;
+using Shuttle.Abacus.Shell.Messages.Test;
 
-namespace Shuttle.Abacus.UI.UI.Test
+namespace Shuttle.Abacus.Shell.UI.Test
 {
     public interface ITestController :
         IWorkItemController,

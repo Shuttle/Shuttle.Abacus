@@ -1,4 +1,4 @@
-namespace Shuttle.Abacus.UI.Core.EventArgs
+namespace Shuttle.Abacus.Shell.Core.EventArgs
 {
     public class PresenterTextChangedArgs : System.EventArgs
     {

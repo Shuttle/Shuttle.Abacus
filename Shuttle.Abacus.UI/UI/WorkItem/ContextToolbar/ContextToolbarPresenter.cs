@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Messages.Core;
-using Shuttle.Abacus.UI.Messages.WorkItem;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Messages.Core;
+using Shuttle.Abacus.Shell.Messages.WorkItem;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar
+namespace Shuttle.Abacus.Shell.UI.WorkItem.ContextToolbar
 {
     public class ContextToolbarPresenter :
         Presenter<IContextToolbarView>,

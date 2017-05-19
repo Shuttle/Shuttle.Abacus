@@ -7,8 +7,8 @@
     <ProjectGuid>{BD0F8D24-6577-466A-9440-F4ADE9C5433F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Shuttle.Abacus.UI</RootNamespace>
-    <AssemblyName>Shuttle.Abacus.UI</AssemblyName>
+    <RootNamespace>Shuttle.Abacus.Shell</RootNamespace>
+    <AssemblyName>Shuttle.Abacus.Shell</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -134,7 +134,7 @@
     <Compile Include="Core\Presentation\ICoordinator.cs" />
     <Compile Include="Core\Presentation\IPresenter.cs" />
     <Compile Include="Core\Presentation\IPresenterFactory.cs" />
-    <Compile Include="Core\Presentation\IShell.cs" />
+    <Compile Include="Core\Presentation\IApplicationShell.cs" />
     <Compile Include="Core\Presentation\ISummaryViewManager.cs" />
     <Compile Include="Core\Presentation\IView.cs" />
     <Compile Include="Core\Presentation\IWorkItemPresenter.cs" />
@@ -145,7 +145,7 @@
     <Compile Include="Core\Presentation\NamedQueryResult.cs" />
     <Compile Include="Core\Presentation\Presenter.cs" />
     <Compile Include="Core\Presentation\PresenterFactory.cs" />
-    <Compile Include="Core\Presentation\Shell.cs" />
+    <Compile Include="Core\Presentation\ApplicationShell.cs" />
     <Compile Include="Core\Presentation\SummaryViewManager.cs" />
     <Compile Include="Core\Presentation\View.cs">
       <SubType>UserControl</SubType>
@@ -514,6 +514,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Splash.resx">
       <DependentUpon>Splash.cs</DependentUpon>

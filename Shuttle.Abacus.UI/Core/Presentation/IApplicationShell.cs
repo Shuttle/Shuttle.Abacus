@@ -1,9 +1,9 @@
 using System;
 using System.Windows.Forms;
 
-namespace Shuttle.Abacus.UI.Core.Presentation
+namespace Shuttle.Abacus.Shell.Core.Presentation
 {
-    public interface IShell
+    public interface IApplicationShell
     {
         void AssignShell(Control control);
         void Invoke(Action action);

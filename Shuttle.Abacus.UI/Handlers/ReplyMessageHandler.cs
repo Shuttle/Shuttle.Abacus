@@ -1,8 +1,8 @@
 ﻿using Shuttle.Abacus.Infrastructure;
-using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.Messaging;
 using Shuttle.Esb;
 
-namespace Shuttle.Abacus.UI.Handlers
+namespace Shuttle.Abacus.Shell.Handlers
 {
     public class ReplyMessageHandler : Esb.IMessageHandler<Abacus.Messages.v1.ReplyMessage>
     {

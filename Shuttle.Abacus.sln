@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuttle.Abacus", "Shuttle.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuttle.Abacus.Tests", "Shuttle.Abacus.Tests\Shuttle.Abacus.Tests.csproj", "{ABA24AFB-8E81-4E6A-A43F-F6E2234E6608}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuttle.Abacus.UI", "Shuttle.Abacus.UI\Shuttle.Abacus.UI.csproj", "{BD0F8D24-6577-466A-9440-F4ADE9C5433F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuttle.Abacus.Shell", "Shuttle.Abacus.UI\Shuttle.Abacus.Shell.csproj", "{BD0F8D24-6577-466A-9440-F4ADE9C5433F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuttle.Abacus.Server", "Shuttle.Abacus.Server\Shuttle.Abacus.Server.csproj", "{9A441793-6466-484F-A086-C1EC1198B46D}"
 EndProject

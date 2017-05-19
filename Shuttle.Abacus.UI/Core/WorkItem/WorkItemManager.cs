@@ -1,18 +1,18 @@
 using System;
 using System.Collections.Generic;
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Messages.WorkItem;
-using Shuttle.Abacus.UI.Navigation;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Messages.WorkItem;
+using Shuttle.Abacus.Shell.Navigation;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.Core.WorkItem
+namespace Shuttle.Abacus.Shell.Core.WorkItem
 {
     public class WorkItemManager : IWorkItemManager
     {
         private readonly IMessageBus _messageBus;
         private readonly IPresenterFactory _presenterFactory;
-        private readonly IShell _shell;
+        private readonly IApplicationShell _applicationShell;
 
         private readonly IWorkItemControllerFactory _workItemControllerFactory;
         private readonly IWorkItemPresenterFactory _workItemPresenterFactory;
@@ -20,7 +20,7 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
 
         public WorkItemManager(IWorkItemControllerFactory workItemControllerFactory,
             IWorkItemPresenterFactory workItemPresenterFactory, IPresenterFactory presenterFactory,
-            IMessageBus messageBus, IShell shell)
+            IMessageBus messageBus, IApplicationShell applicationShell)
         {
             Guard.AgainstNull(workItemControllerFactory, "workItemControllerFactory");
             Guard.AgainstNull(workItemPresenterFactory, "workItemPresenterFactory");
@@ -31,7 +31,7 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
             _workItemPresenterFactory = workItemPresenterFactory;
             _presenterFactory = presenterFactory;
             _messageBus = messageBus;
-            _shell = shell;
+            _applicationShell = applicationShell;
 
             messageBus.AddSubscriber(this);
         }
@@ -88,7 +88,7 @@ namespace Shuttle.Abacus.UI.Core.WorkItem
 
         public void Invoke(Action action)
         {
-            _shell.Invoke(action);
+            _applicationShell.Invoke(action);
         }
 
         public void HandleMessage(WorkItemCompletedMessage message)

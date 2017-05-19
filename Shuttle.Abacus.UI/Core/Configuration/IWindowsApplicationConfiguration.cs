@@ -1,4 +1,4 @@
-namespace Shuttle.Abacus.UI.Core.Configuration
+namespace Shuttle.Abacus.Shell.Core.Configuration
 {
     public interface IWindowsApplicationConfiguration
     {

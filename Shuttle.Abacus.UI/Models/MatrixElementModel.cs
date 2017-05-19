@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using Shuttle.Abacus.DataAccess;
 
-namespace Shuttle.Abacus.UI.Models
+namespace Shuttle.Abacus.Shell.Models
 {
     public class MatrixElementModel
     {

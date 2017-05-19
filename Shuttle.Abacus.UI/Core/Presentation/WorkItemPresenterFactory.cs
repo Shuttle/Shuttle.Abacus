@@ -1,21 +1,21 @@
 using Shuttle.Abacus.Infrastructure;
 
-namespace Shuttle.Abacus.UI.Core.Presentation
+namespace Shuttle.Abacus.Shell.Core.Presentation
 {
     public class WorkItemPresenterFactory : IWorkItemPresenterFactory
     {
-        private readonly IShell shell;
+        private readonly IApplicationShell applicationShell;
 
-        public WorkItemPresenterFactory(IShell shell)
+        public WorkItemPresenterFactory(IApplicationShell applicationShell)
         {
-            this.shell = shell;
+            this.applicationShell = applicationShell;
         }
 
         public IWorkItemPresenter Create<TWorkItemPresenter>() where TWorkItemPresenter : IWorkItemPresenter
         {
             IWorkItemPresenter result = null;
 
-            shell.Invoke(() => result = DependencyResolver.Resolve<TWorkItemPresenter>());
+            applicationShell.Invoke(() => result = DependencyResolver.Resolve<TWorkItemPresenter>());
 
             return result;
         }

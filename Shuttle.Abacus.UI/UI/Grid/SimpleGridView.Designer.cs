@@ -1,4 +1,4 @@
-﻿namespace Shuttle.Abacus.UI.UI.Grid
+﻿namespace Shuttle.Abacus.Shell.UI.Grid
 {
     partial class SimpleGridView
     {

@@ -3,7 +3,7 @@ using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.Models
+namespace Shuttle.Abacus.Shell.Models
 {
     public class TestArgumentValueModel
     {

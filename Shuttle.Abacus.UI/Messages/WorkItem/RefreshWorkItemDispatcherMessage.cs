@@ -1,7 +1,7 @@
-using Shuttle.Abacus.UI.Core.WorkItem;
-using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.Shell.Core.WorkItem;
+using Shuttle.Abacus.Shell.Messages.Core;
 
-namespace Shuttle.Abacus.UI.Messages.WorkItem
+namespace Shuttle.Abacus.Shell.Messages.WorkItem
 {
     public class RefreshWorkItemDispatcherMessage : NullPermissionMessage
     {

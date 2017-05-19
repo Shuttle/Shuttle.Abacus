@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Core.State;
-using Shuttle.Abacus.UI.Navigation;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Core.State;
+using Shuttle.Abacus.Shell.Navigation;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.Core.WorkItem
+namespace Shuttle.Abacus.Shell.Core.WorkItem
 {
     public class WorkItem : IWorkItemBuilderPresenter
     {

@@ -1,7 +1,7 @@
-using Shuttle.Abacus.UI.Core.Resources;
-using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.Shell.Core.Resources;
+using Shuttle.Abacus.Shell.Messages.Core;
 
-namespace Shuttle.Abacus.UI.Messages.Explorer
+namespace Shuttle.Abacus.Shell.Messages.Explorer
 {
     public class ExplorerInitializeMessage : NullPermissionMessage
     {

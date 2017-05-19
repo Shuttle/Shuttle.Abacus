@@ -1,4 +1,4 @@
-﻿namespace Shuttle.Abacus.UI.UI.Test
+﻿namespace Shuttle.Abacus.Shell.UI.Test
 {
     partial class TestView
     {

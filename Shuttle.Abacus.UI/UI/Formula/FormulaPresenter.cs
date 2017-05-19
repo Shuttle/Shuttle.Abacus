@@ -1,10 +1,10 @@
 using Shuttle.Abacus.Invariants;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Models;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Models;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.UI.Formula
+namespace Shuttle.Abacus.Shell.UI.Formula
 {
     public class FormulaPresenter : Presenter<IFormulaView, FormulaModel>, IFormulaPresenter
     {

@@ -4,17 +4,16 @@ using System.Threading;
 using System.Windows.Forms;
 using Castle.Windsor;
 using Shuttle.Abacus.Infrastructure;
-using Shuttle.Abacus.Messages;
 using Shuttle.Abacus.Messages.v1;
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Messages.Core;
 using Shuttle.Core.Castle;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;
 
-namespace Shuttle.Abacus.UI
+namespace Shuttle.Abacus.Shell
 {
     internal static class Program
     {
@@ -53,19 +52,19 @@ namespace Shuttle.Abacus.UI
 
             container.Resolve<IDatabaseContextFactory>().ConfigureWith("Abacus");
 
+            _messageBus = DependencyResolver.Resolve<IMessageBus>();
+
             using (container.Resolve<IDatabaseContextFactory>().Create())
             {
-                DependencyResolver.Resolve<IMessageBus>()
-                    .AddSubscribers
+                _messageBus.AddSubscribers
+                (
+                    new List<object>
                     (
-                        new List<object>
-                        (
-                            DependencyResolver.Resolver.ResolveAssignable<ICoordinator>()
-                        )
-                    );
+                        DependencyResolver.Resolver.ResolveAssignable<ICoordinator>()
+                    )
+                );
             }
 
-            _messageBus = DependencyResolver.Resolve<IMessageBus>();
 
             _messageBus.Publish(new StartShellMessage());
 

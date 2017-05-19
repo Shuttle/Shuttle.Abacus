@@ -1,4 +1,4 @@
-namespace Shuttle.Abacus.UI.Core.Binding
+namespace Shuttle.Abacus.Shell.Core.Binding
 {
     public interface IBinderProvider
     {

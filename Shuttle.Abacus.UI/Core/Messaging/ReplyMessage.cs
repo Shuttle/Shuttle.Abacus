@@ -1,8 +1,8 @@
 ﻿using Shuttle.Abacus.Infrastructure;
-using Shuttle.Abacus.UI.Messages.Core;
+using Shuttle.Abacus.Shell.Messages.Core;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.Core.Messaging
+namespace Shuttle.Abacus.Shell.Core.Messaging
 {
     public class ReplyMessage : NullPermissionMessage
     {

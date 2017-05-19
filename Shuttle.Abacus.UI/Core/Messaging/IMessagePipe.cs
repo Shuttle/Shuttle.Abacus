@@ -1,4 +1,4 @@
-namespace Shuttle.Abacus.UI.Core.Messaging
+namespace Shuttle.Abacus.Shell.Core.Messaging
 {
     public interface IMessagePipe<T> where T : Message
     {

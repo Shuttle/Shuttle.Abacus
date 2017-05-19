@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Navigation;
-using Shuttle.Abacus.UI.UI.Shell.Explorer;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Navigation;
+using Shuttle.Abacus.Shell.UI.Shell.Explorer;
 
-namespace Shuttle.Abacus.UI.UI.Shell
+namespace Shuttle.Abacus.Shell.UI.Shell
 {
     public interface IShellView : IView
     {

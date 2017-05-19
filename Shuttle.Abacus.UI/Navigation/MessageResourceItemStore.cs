@@ -1,13 +1,13 @@
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Messages.Core;
-using Shuttle.Abacus.UI.Messages.DecimalTable;
-using Shuttle.Abacus.UI.Messages.Formula;
-using Shuttle.Abacus.UI.Messages.Report;
-using Shuttle.Abacus.UI.Messages.Section;
-using Shuttle.Abacus.UI.Messages.SystemUser;
-using Shuttle.Abacus.UI.Messages.Test;
+using Shuttle.Abacus.Shell.Messages.Core;
+using Shuttle.Abacus.Shell.Messages.DecimalTable;
+using Shuttle.Abacus.Shell.Messages.Formula;
+using Shuttle.Abacus.Shell.Messages.Report;
+using Shuttle.Abacus.Shell.Messages.Section;
+using Shuttle.Abacus.Shell.Messages.SystemUser;
+using Shuttle.Abacus.Shell.Messages.Test;
 
-namespace Shuttle.Abacus.UI.Navigation
+namespace Shuttle.Abacus.Shell.Navigation
 {
     public class MessageResourceItemStore : IMessageResourceItemStore
     {

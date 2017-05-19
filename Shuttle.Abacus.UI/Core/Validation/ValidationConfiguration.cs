@@ -1,7 +1,7 @@
 using System.Drawing;
-using Shuttle.Abacus.UI.Core.Configuration;
+using Shuttle.Abacus.Shell.Core.Configuration;
 
-namespace Shuttle.Abacus.UI.Core.Validation
+namespace Shuttle.Abacus.Shell.Core.Validation
 {
     public class ValidationConfiguration : IValidationConfiguration
     {

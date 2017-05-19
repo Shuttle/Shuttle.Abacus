@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Core.EventArgs;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Navigation;
+using Shuttle.Abacus.Shell.Core.EventArgs;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Navigation;
 
-namespace Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar
+namespace Shuttle.Abacus.Shell.UI.WorkItem.ContextToolbar
 {
     public partial class ContextToolbarView : GenericContextToolbarView, IContextToolbarView
     {

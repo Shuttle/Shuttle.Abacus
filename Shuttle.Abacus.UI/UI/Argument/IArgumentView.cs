@@ -1,7 +1,7 @@
 ﻿using Shuttle.Abacus.Invariants.Core;
-using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.Shell.Core.Presentation;
 
-namespace Shuttle.Abacus.UI.UI.Argument
+namespace Shuttle.Abacus.Shell.UI.Argument
 {
     public interface IArgumentView : IView
     {

@@ -1,4 +1,4 @@
-namespace Shuttle.Abacus.UI.Navigation
+namespace Shuttle.Abacus.Shell.Navigation
 {
     public interface IMessageResourceItemStore
     {

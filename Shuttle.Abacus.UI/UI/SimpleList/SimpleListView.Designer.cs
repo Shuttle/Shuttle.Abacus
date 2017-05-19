@@ -1,4 +1,4 @@
-﻿namespace Shuttle.Abacus.UI.UI.SimpleList
+﻿namespace Shuttle.Abacus.Shell.UI.SimpleList
 {
     partial class SimpleListView
     {

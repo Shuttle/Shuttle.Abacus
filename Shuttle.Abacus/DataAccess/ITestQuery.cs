@@ -9,5 +9,8 @@ namespace Shuttle.Abacus.DataAccess
         IEnumerable<DataRow> All();
         DataRow Get(Guid id);
         IEnumerable<DataRow> ArgumentValues(Guid id);
+        void Register(Guid id, string name, string formulaName, string expectedResult, string expectedResultType, string comparison);
+        void Remove(Guid id);
+        void Rename(Guid id, string name);
     }
 }

@@ -51,20 +51,25 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 
         public void ProcessMessage(IHandlerContext<RegisterTestCommand> context)
         {
-            throw new NotImplementedException();
-            //var message = context.Message;
+            var message = context.Message;
 
-            //using (_databaseContextFactory.Create())
-            //{
-            //    var test = new Test(message.MethodTestId, message.MethodId, message.Name, message.ExpectedResult, message.ExpectedResultType, message.Comparison);
+            using (_databaseContextFactory.Create())
+            {
+                var key = Test.Key(message.Name);
 
-            //    foreach (var answer in message.ArgumentAnswers)
-            //    {
-            //        test.AddArgumentAnswer(new TestArgumentValue(answer.ArgumentId, answer.Answer));
-            //    }
+                if (_keyStore.Contains(key))
+                {
+                    return;
+                }
 
-            //    _testRepository.Add(test);
-            //}
+                var test = new Test(Guid.NewGuid());
+                var stream = new EventStream(test.Id);
+
+                stream.AddEvent(test.Register(message.Name, message.FormulaName, message.ExpectedResult, message.ExpectedResultType, message.Comparison));
+
+                _eventStore.Save(stream);
+                _keyStore.Add(test.Id, key);
+            }
         }
 
         public void ProcessMessage(IHandlerContext<DeleteTestCommand> context)

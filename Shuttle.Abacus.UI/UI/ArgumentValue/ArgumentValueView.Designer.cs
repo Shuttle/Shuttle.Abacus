@@ -1,4 +1,4 @@
-﻿namespace Shuttle.Abacus.UI.UI.ArgumentValue
+﻿namespace Shuttle.Abacus.Shell.UI.ArgumentValue
 {
     partial class ArgumentValueView
     {

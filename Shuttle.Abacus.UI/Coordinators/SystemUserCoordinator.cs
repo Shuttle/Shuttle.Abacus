@@ -1,19 +1,18 @@
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Coordinators.Interfaces;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Core.State;
-using Shuttle.Abacus.UI.Messages.SystemUser;
-using Shuttle.Abacus.UI.Models;
-using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
-using Shuttle.Abacus.UI.UI.SimpleList;
-using Shuttle.Abacus.UI.UI.SystemUser;
-using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
-using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Abacus.Shell.Coordinators.Interfaces;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Core.State;
+using Shuttle.Abacus.Shell.Messages.SystemUser;
+using Shuttle.Abacus.Shell.Models;
+using Shuttle.Abacus.Shell.UI.Shell.TabbedWorkspace;
+using Shuttle.Abacus.Shell.UI.SimpleList;
+using Shuttle.Abacus.Shell.UI.SystemUser;
+using Shuttle.Abacus.Shell.UI.WorkItem.ContextToolbar;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.Coordinators
+namespace Shuttle.Abacus.Shell.Coordinators
 {
     public class SystemUserCoordinator : Coordinator, ISystemUserCoordinator
     {

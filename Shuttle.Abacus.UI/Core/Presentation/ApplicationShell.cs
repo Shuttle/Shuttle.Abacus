@@ -2,24 +2,24 @@ using System;
 using System.Windows.Forms;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.Core.Presentation
+namespace Shuttle.Abacus.Shell.Core.Presentation
 {
-    public class Shell : IShell
+    public class ApplicationShell : IApplicationShell
     {
-        private Control shell;
+        private Control _shell;
 
         public void AssignShell(Control control)
         {
-            shell = control;
+            _shell = control;
         }
 
         public void Invoke(Action action)
         {
-            Guard.AgainstNull(shell, "shell");
+            Guard.AgainstNull(_shell, "shell");
 
-            if (shell.InvokeRequired)
+            if (_shell.InvokeRequired)
             {
-                shell.Invoke(new MethodInvoker(action));
+                _shell.Invoke(new MethodInvoker(action));
             }
             else
             {

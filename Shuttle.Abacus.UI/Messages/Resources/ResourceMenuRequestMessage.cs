@@ -1,8 +1,8 @@
-using Shuttle.Abacus.UI.Core.Resources;
-using Shuttle.Abacus.UI.Messages.Core;
-using Shuttle.Abacus.UI.Navigation;
+using Shuttle.Abacus.Shell.Core.Resources;
+using Shuttle.Abacus.Shell.Messages.Core;
+using Shuttle.Abacus.Shell.Navigation;
 
-namespace Shuttle.Abacus.UI.Messages.Resources
+namespace Shuttle.Abacus.Shell.Messages.Resources
 {
     public class ResourceMenuRequestMessage : NullPermissionMessage
     {

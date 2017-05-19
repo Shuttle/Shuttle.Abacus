@@ -22,7 +22,7 @@ namespace Shuttle.Abacus.DataAccess
             new MappedColumn<Guid>("TestId", DbType.Guid);
 
         public static readonly MappedColumn<string> FormulaName =
-            new MappedColumn<string>("FormulaName", DbType.Guid);
+            new MappedColumn<string>("FormulaName", DbType.AnsiString);
 
         public static class ArgumentValueColumns
         {

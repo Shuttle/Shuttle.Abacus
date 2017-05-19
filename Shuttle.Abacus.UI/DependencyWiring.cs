@@ -6,19 +6,19 @@ using Castle.Windsor;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Values;
-using Shuttle.Abacus.UI.Core.Binding;
-using Shuttle.Abacus.UI.Core.Clipboard;
-using Shuttle.Abacus.UI.Core.Configuration;
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Core.Validation;
-using Shuttle.Abacus.UI.Core.WorkItem;
-using Shuttle.Abacus.UI.Navigation;
-using Shuttle.Abacus.UI.UI.Shell.Explorer;
+using Shuttle.Abacus.Shell.Core.Binding;
+using Shuttle.Abacus.Shell.Core.Clipboard;
+using Shuttle.Abacus.Shell.Core.Configuration;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Core.Validation;
+using Shuttle.Abacus.Shell.Core.WorkItem;
+using Shuttle.Abacus.Shell.Navigation;
+using Shuttle.Abacus.Shell.UI.Shell.Explorer;
 using Shuttle.Core.Data;
-using Clipboard=Shuttle.Abacus.UI.Core.Clipboard.Clipboard;
+using Clipboard=Shuttle.Abacus.Shell.Core.Clipboard.Clipboard;
 
-namespace Shuttle.Abacus.UI
+namespace Shuttle.Abacus.Shell
 {
     public class DependencyWiring : IDependencyWiringOptional
     {
@@ -31,7 +31,7 @@ namespace Shuttle.Abacus.UI
 
         public IDependencyWiringOptional AddWindowsComponents()
         {
-            _container.Register(Component.For<IShell>().ImplementedBy<Shell>());
+            _container.Register(Component.For<IApplicationShell>().ImplementedBy<ApplicationShell>());
             _container.Register(Component.For<ISession>().ImplementedBy<Session>());
             _container.Register(Component.For<IClipboard>().ImplementedBy<Clipboard>());
 
@@ -50,7 +50,7 @@ namespace Shuttle.Abacus.UI
                 Component.For<IControlValidatorProvider>().ImplementedBy<ControlValidatorProvider>(),
                 Component.For<IViewValidatorFactory>().ImplementedBy<ViewValidatorFactory>(),
                 Classes
-                    .FromAssemblyNamed("Shuttle.Abacus.UI")
+                    .FromAssemblyNamed("Shuttle.Abacus.Shell")
                     .Pick()
                     .If(
                     type =>
@@ -78,21 +78,21 @@ namespace Shuttle.Abacus.UI
 
             _container.Register(
                 Classes
-                    .FromAssemblyNamed("Shuttle.Abacus.UI")
+                    .FromAssemblyNamed("Shuttle.Abacus.Shell")
                     .Pick()
                     .If(type => !type.IsInterface && type.Name.EndsWith("Service"))
                     .WithService.FirstInterface());
 
             _container.Register(
                 Classes
-                    .FromAssemblyNamed("Shuttle.Abacus.UI")
+                    .FromAssemblyNamed("Shuttle.Abacus.Shell")
                     .Pick()
                     .If(type => !type.IsInterface && type.Name.EndsWith("Mapper"))
                     .WithService.FirstInterface());
 
             _container.Register(
                 Classes
-                    .FromAssemblyNamed("Shuttle.Abacus.UI")
+                    .FromAssemblyNamed("Shuttle.Abacus.Shell")
                     .Pick()
                     .If(
                     type =>
@@ -103,7 +103,7 @@ namespace Shuttle.Abacus.UI
 
             _container.Register(
                 Classes
-                    .FromAssemblyNamed("Shuttle.Abacus.UI")
+                    .FromAssemblyNamed("Shuttle.Abacus.Shell")
                     .Pick()
                     .If(
                     type =>
@@ -114,14 +114,14 @@ namespace Shuttle.Abacus.UI
 
             _container.Register(
                 Classes
-                    .FromAssemblyNamed("Shuttle.Abacus.UI")
+                    .FromAssemblyNamed("Shuttle.Abacus.Shell")
                     .Pick()
                     .If(type => !type.IsInterface && type.Name != "Coordinator" && type.Name.EndsWith("Coordinator"))
                     .WithServiceAllInterfaces());
 
             _container.Register(
                 Classes
-                    .FromAssemblyNamed("Shuttle.Abacus.UI")
+                    .FromAssemblyNamed("Shuttle.Abacus.Shell")
                     .Pick()
                     .If(
                     type => !type.IsInterface && type.Name != "WorkItemController" && type.Name.EndsWith("Controller"))
@@ -132,7 +132,7 @@ namespace Shuttle.Abacus.UI
 
             _container.Register(
                 Classes
-                    .FromAssemblyNamed("Shuttle.Abacus.UI")
+                    .FromAssemblyNamed("Shuttle.Abacus.Shell")
                     .Pick()
                     .If(type => !type.IsInterface && type.Name != "Coordinator" && type.Name.EndsWith("Coordinator"))
                     .WithService.Select((type, basetype) => FindInterface("Coordinator", type)));

@@ -3,9 +3,9 @@ using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.Shell.Core.Presentation;
 
-namespace Shuttle.Abacus.UI.UI.SystemUser
+namespace Shuttle.Abacus.Shell.UI.SystemUser
 {
     public class PermissionsPresenter : Presenter<IPermissionsView, IEnumerable<DataRow>>, IPermissionsPresenter
     {

@@ -1,13 +1,13 @@
 ﻿using System;
 using Shuttle.Abacus.Messages.v1;
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Core.WorkItem;
-using Shuttle.Abacus.UI.Messages.Core;
-using Shuttle.Abacus.UI.Messages.Test;
-using Shuttle.Abacus.UI.UI.SimpleList;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.WorkItem;
+using Shuttle.Abacus.Shell.Messages.Core;
+using Shuttle.Abacus.Shell.Messages.Test;
+using Shuttle.Abacus.Shell.UI.SimpleList;
 using Shuttle.Esb;
 
-namespace Shuttle.Abacus.UI.UI.Test
+namespace Shuttle.Abacus.Shell.UI.Test
 {
     public class TestManagerController : WorkItemController, ITestManagerController
     {

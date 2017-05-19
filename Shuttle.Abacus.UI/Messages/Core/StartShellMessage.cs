@@ -1,7 +1,7 @@
 using Shuttle.Abacus.Infrastructure;
-using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.Messaging;
 
-namespace Shuttle.Abacus.UI.Messages.Core
+namespace Shuttle.Abacus.Shell.Messages.Core
 {
     public class StartShellMessage : Message
     {

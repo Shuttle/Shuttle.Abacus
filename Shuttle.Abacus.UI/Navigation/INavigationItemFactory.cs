@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.Messaging;
 
-namespace Shuttle.Abacus.UI.Navigation
+namespace Shuttle.Abacus.Shell.Navigation
 {
     public interface INavigationItemFactory
     {

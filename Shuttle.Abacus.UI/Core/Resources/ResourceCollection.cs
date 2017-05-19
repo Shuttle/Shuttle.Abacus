@@ -1,6 +1,6 @@
 using Shuttle.Abacus.Infrastructure;
 
-namespace Shuttle.Abacus.UI.Core.Resources
+namespace Shuttle.Abacus.Shell.Core.Resources
 {
     public class ResourceCollection : RichList<Resource>
     {

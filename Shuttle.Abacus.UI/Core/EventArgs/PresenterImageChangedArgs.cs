@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace Shuttle.Abacus.UI.Core.EventArgs
+namespace Shuttle.Abacus.Shell.Core.EventArgs
 {
     public class PresenterImageChangedArgs : System.EventArgs
     {

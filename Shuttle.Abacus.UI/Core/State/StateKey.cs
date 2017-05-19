@@ -1,4 +1,4 @@
-namespace Shuttle.Abacus.UI.Core.State
+namespace Shuttle.Abacus.Shell.Core.State
 {
     public class StateKey
     {

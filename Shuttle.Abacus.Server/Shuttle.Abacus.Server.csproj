@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventHandlers\ArgumentHandler.cs" />
+    <Compile Include="EventHandlers\TestHandler.cs" />
     <Compile Include="EventHandlers\FormulaHandler.cs" />
     <Compile Include="EventHandlers\SystemUserHandler.cs" />
     <Compile Include="CommandHandlers\ArgumentHandler.cs" />

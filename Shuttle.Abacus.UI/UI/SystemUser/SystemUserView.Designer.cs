@@ -1,4 +1,4 @@
-﻿namespace Shuttle.Abacus.UI.UI.SystemUser
+﻿namespace Shuttle.Abacus.Shell.UI.SystemUser
 {
     partial class SystemUserView
     {

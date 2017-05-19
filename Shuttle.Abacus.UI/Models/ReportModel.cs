@@ -1,6 +1,6 @@
 using System.Data;
 
-namespace Shuttle.Abacus.UI.Models
+namespace Shuttle.Abacus.Shell.Models
 {
     public class ReportModel
     {

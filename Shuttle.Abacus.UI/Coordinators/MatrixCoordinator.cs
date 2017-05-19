@@ -1,25 +1,23 @@
 using System;
-using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Coordinators.Interfaces;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Core.Resources;
-using Shuttle.Abacus.UI.Messages.Core;
-using Shuttle.Abacus.UI.Messages.DecimalTable;
-using Shuttle.Abacus.UI.Messages.Explorer;
-using Shuttle.Abacus.UI.Messages.Report;
-using Shuttle.Abacus.UI.Messages.Resources;
-using Shuttle.Abacus.UI.Models;
-using Shuttle.Abacus.UI.UI.Matrix;
-using Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace;
-using Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar;
-using Shuttle.Abacus.UI.WorkItemControllers.Interfaces;
+using Shuttle.Abacus.Shell.Coordinators.Interfaces;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Core.Resources;
+using Shuttle.Abacus.Shell.Messages.Core;
+using Shuttle.Abacus.Shell.Messages.DecimalTable;
+using Shuttle.Abacus.Shell.Messages.Explorer;
+using Shuttle.Abacus.Shell.Messages.Report;
+using Shuttle.Abacus.Shell.Messages.Resources;
+using Shuttle.Abacus.Shell.Models;
+using Shuttle.Abacus.Shell.UI.Matrix;
+using Shuttle.Abacus.Shell.UI.Shell.TabbedWorkspace;
+using Shuttle.Abacus.Shell.UI.WorkItem.ContextToolbar;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.Coordinators
+namespace Shuttle.Abacus.Shell.Coordinators
 {
     public class MatrixCoordinator : Coordinator, IMatrixCoordinator
     {

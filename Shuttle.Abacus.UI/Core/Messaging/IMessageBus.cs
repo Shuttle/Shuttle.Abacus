@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Shuttle.Abacus.Infrastructure;
 
-namespace Shuttle.Abacus.UI.Core.Messaging
+namespace Shuttle.Abacus.Shell.Core.Messaging
 {
     public interface IMessageBus : ISubscriberProvider
     {

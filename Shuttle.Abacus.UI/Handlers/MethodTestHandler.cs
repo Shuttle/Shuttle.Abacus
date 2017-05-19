@@ -1,8 +1,8 @@
 using Shuttle.Abacus.Domain;
-using Shuttle.Abacus.UI.Messages.Test;
+using Shuttle.Abacus.Shell.Messages.Test;
 using Shuttle.Esb;
 
-namespace Shuttle.Abacus.UI.Handlers
+namespace Shuttle.Abacus.Shell.Handlers
 {
     public class MethodTestHandler : UIHandler,
         IMessageHandler<TestRunEvent>,

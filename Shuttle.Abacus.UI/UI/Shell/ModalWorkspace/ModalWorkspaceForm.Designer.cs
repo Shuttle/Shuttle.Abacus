@@ -1,4 +1,4 @@
-﻿namespace Shuttle.Abacus.UI.UI.Shell.ModalWorkspace
+﻿namespace Shuttle.Abacus.Shell.UI.Shell.ModalWorkspace
 {
     partial class ModalWorkspaceForm
     {

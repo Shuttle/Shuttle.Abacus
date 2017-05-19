@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Shuttle.Abacus.UI.Properties {
+namespace Shuttle.Abacus.Shell.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

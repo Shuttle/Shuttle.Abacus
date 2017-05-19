@@ -7,12 +7,12 @@ using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Interfaces;
 using Shuttle.Abacus.Invariants.Values;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Models;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Models;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.UI.Matrix
+namespace Shuttle.Abacus.Shell.UI.Matrix
 {
     public class MatrixPresenter : Presenter<IMatrixView, MatrixModel>, IMatrixPresenter
     {

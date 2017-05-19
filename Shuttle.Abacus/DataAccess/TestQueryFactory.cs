@@ -56,35 +56,6 @@ where
                     .AddParameterValue(TestColumns.Id, id);
         }
 
-        public IQuery Add(Test item)
-        {
-            return RawQuery.Create(@"
-insert into Test
-(
-    TestId,
-    Name,
-    FormulaName,
-    ExpectedResult,
-    ExpectedResultType,
-    Comparison
-)
-values
-(
-    @TestId,
-    @Name,
-    @FormulaName,
-    @ExpectedResult,
-    @ExpectedResultType,
-    @Comparison
-)")
-                .AddParameterValue(TestColumns.Id, item.Id)
-                .AddParameterValue(TestColumns.Name, item.Name)
-                .AddParameterValue(TestColumns.FormulaName, item.FormulaName)
-                .AddParameterValue(TestColumns.ExpectedResult, item.ExpectedResult)
-                .AddParameterValue(TestColumns.ExpectedResultType, item.ExpectedResultType)
-                .AddParameterValue(TestColumns.Comparison, item.Comparison);
-        }
-
         public IQuery AddArgumentAnswer(Test test, TestArgumentValue argumentValue)
         {
             return RawQuery.Create(@"
@@ -109,30 +80,55 @@ values
                 .AddParameterValue(TestColumns.ArgumentValueColumns.Value, argumentValue.Answer);
         }
 
-        //public  IQuery Get(Guid id)
-        //{
-        //    var query = SelectQuery.CreateSelectFrom(@"
-        //            select
-        //                mt.TestId,
-        //                FormulaId,
-        //                Description,
-        //                ExpectedResult,
-        //                ArgumentName,
-        //                ArgumentName,
-        //                ValueType,
-        //                Answer
-        //            from
-        //                Test mt
-        //                    inner join
-        //                TestArgumentValue mtaa
-        //                    on (mtaa.TestId = mt.TestId)
-        //            where
-        //                mt.TestId = @TestId
-        //            ");
+        public IQuery Register(Guid id, string name, string formulaName, string expectedResult, string expectedResultType,
+            string comparison)
+        {
+            return RawQuery.Create(@"
+insert into Test
+(
+    TestId,
+    Name,
+    FormulaName,
+    ExpectedResult,
+    ExpectedResultType,
+    Comparison
+)
+values
+(
+    @TestId,
+    @Name,
+    @FormulaName,
+    @ExpectedResult,
+    @ExpectedResultType,
+    @Comparison
+)")
+                .AddParameterValue(TestColumns.Id, id)
+                .AddParameterValue(TestColumns.Name, name)
+                .AddParameterValue(TestColumns.FormulaName, formulaName)
+                .AddParameterValue(TestColumns.ExpectedResult, expectedResult)
+                .AddParameterValue(TestColumns.ExpectedResultType, expectedResultType)
+                .AddParameterValue(TestColumns.Comparison, comparison);
+        }
 
-        //    query.AddParameterValue(TestColumns.Id, id);
+        public IQuery RemoveArgumentValues(Guid id)
+        {
+            return
+                RawQuery.Create("delete from TestArgumentValue where TestId = @TestId")
+                    .AddParameterValue(TestColumns.Id, id);
+        }
 
-        //    return query;
-        //}
+        public IQuery Rename(Guid id, string name)
+        {
+            return
+                RawQuery.Create(@"
+update
+    Test
+set
+    Name = @Name
+where 
+    TestId = @TestId
+")
+                    .AddParameterValue(TestColumns.Id, id);
+        }
     }
 }

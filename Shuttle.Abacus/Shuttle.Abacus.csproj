@@ -78,7 +78,7 @@
     <Compile Include="DataAccess\IConstraintQueryFactory.cs" />
     <Compile Include="DataAccess\IMatrixQueryFactory.cs" />
     <Compile Include="DataAccess\IFormulaQueryFactory.cs" />
-    <Compile Include="DataAccess\IMethodTestQueryFactory.cs" />
+    <Compile Include="DataAccess\ITestQueryFactory.cs" />
     <Compile Include="DataAccess\Infrastructure\DataRowExtensions.cs" />
     <Compile Include="DataAccess\Infrastructure\IDataReaderMapper.cs" />
     <Compile Include="DataAccess\Infrastructure\RepositoryProvider.cs" />

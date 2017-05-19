@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Core.Resources;
-using Shuttle.Abacus.UI.Messages.Core;
-using Shuttle.Abacus.UI.Messages.Resources;
-using Shuttle.Abacus.UI.Messages.WorkItem;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.Resources;
+using Shuttle.Abacus.Shell.Messages.Core;
+using Shuttle.Abacus.Shell.Messages.Resources;
+using Shuttle.Abacus.Shell.Messages.WorkItem;
 
-namespace Shuttle.Abacus.UI.UI.Shell.Explorer
+namespace Shuttle.Abacus.Shell.UI.Shell.Explorer
 {
     public interface IExplorerPartialPresenter :
         IMessageHandler<ResourceRefreshItemMessage>,

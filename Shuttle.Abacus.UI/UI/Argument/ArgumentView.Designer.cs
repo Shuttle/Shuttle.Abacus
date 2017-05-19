@@ -1,4 +1,4 @@
-﻿namespace Shuttle.Abacus.UI.UI.Argument
+﻿namespace Shuttle.Abacus.Shell.UI.Argument
 {
     partial class ArgumentView
     {

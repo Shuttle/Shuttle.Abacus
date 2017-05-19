@@ -1,8 +1,8 @@
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Messages.Core;
-using Shuttle.Abacus.UI.UI.Shell;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Messages.Core;
+using Shuttle.Abacus.Shell.UI.Shell;
 
-namespace Shuttle.Abacus.UI.Coordinators.Interfaces
+namespace Shuttle.Abacus.Shell.Coordinators.Interfaces
 {
     public interface IDefaultCoordinator :
         IMessageHandler<StartShellMessage>,

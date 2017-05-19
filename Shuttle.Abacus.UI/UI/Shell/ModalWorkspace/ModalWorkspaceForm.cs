@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Shuttle.Abacus.UI.UI.Shell.ModalWorkspace
+namespace Shuttle.Abacus.Shell.UI.Shell.ModalWorkspace
 {
     public partial class ModalWorkspaceForm : Form
     {

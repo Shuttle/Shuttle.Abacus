@@ -1,11 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using Shuttle.Abacus.UI.Core.Binding;
-using Shuttle.Abacus.UI.Core.Validation;
+using Shuttle.Abacus.Shell.Core.Binding;
+using Shuttle.Abacus.Shell.Core.Validation;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.Core.Presentation
+namespace Shuttle.Abacus.Shell.Core.Presentation
 {
     public class View<TPresenter> : UserControl, IView where TPresenter : class, IPresenter
     {

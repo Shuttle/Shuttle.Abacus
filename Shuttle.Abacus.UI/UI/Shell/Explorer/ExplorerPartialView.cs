@@ -3,10 +3,10 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Core.Resources;
+using Shuttle.Abacus.Shell.Core.Resources;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.UI.Shell.Explorer
+namespace Shuttle.Abacus.Shell.UI.Shell.Explorer
 {
     public class ExplorerPartialView : IExplorerPartialView
     {

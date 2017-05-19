@@ -1,4 +1,4 @@
-namespace Shuttle.Abacus.UI.Core.WorkItem
+namespace Shuttle.Abacus.Shell.Core.WorkItem
 {
     public interface INavigationItemConfiguration<T> 
         where T : class 

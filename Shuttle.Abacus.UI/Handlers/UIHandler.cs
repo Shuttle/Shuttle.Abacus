@@ -1,6 +1,6 @@
-using Shuttle.Abacus.UI.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.Messaging;
 
-namespace Shuttle.Abacus.UI.Handlers
+namespace Shuttle.Abacus.Shell.Handlers
 {
     public class UIHandler
     {

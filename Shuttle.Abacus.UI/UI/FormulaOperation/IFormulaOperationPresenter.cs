@@ -1,6 +1,6 @@
-using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.Shell.Core.Presentation;
 
-namespace Shuttle.Abacus.UI.UI.FormulaOperation
+namespace Shuttle.Abacus.Shell.UI.FormulaOperation
 {
     public interface IFormulaOperationPresenter : IPresenter
     {

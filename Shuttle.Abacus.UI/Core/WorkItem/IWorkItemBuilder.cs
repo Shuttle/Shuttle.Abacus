@@ -1,6 +1,6 @@
-using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.Shell.Core.Presentation;
 
-namespace Shuttle.Abacus.UI.Core.WorkItem
+namespace Shuttle.Abacus.Shell.Core.WorkItem
 {
     public interface IWorkItemBuilderController
     {

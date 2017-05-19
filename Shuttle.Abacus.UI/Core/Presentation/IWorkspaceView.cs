@@ -1,6 +1,6 @@
-using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.Shell.Core.WorkItem;
 
-namespace Shuttle.Abacus.UI.Core.Presentation
+namespace Shuttle.Abacus.Shell.Core.Presentation
 {
     public interface IWorkspaceView : IView
     {

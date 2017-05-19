@@ -1,6 +1,6 @@
-using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.Shell.Core.WorkItem;
 
-namespace Shuttle.Abacus.UI.WorkItemControllers.Interfaces
+namespace Shuttle.Abacus.Shell.WorkItemControllers.Interfaces
 {
     public interface IReportController :
         IWorkItemController

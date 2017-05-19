@@ -1,6 +1,6 @@
-using Shuttle.Abacus.UI.Core.Presentation;
+using Shuttle.Abacus.Shell.Core.Presentation;
 
-namespace Shuttle.Abacus.UI.UI.Test
+namespace Shuttle.Abacus.Shell.UI.TestArgument
 {
     public interface ITestArgumentPresenter : IPresenter
     {

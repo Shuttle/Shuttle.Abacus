@@ -1,4 +1,4 @@
-﻿namespace Shuttle.Abacus.UI.UI.WorkItem.ContextToolbar
+﻿namespace Shuttle.Abacus.Shell.UI.WorkItem.ContextToolbar
 {
     partial class ContextToolbarView
     {

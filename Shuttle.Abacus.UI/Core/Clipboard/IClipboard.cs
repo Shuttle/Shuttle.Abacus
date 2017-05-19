@@ -1,6 +1,6 @@
-using Shuttle.Abacus.UI.Core.Resources;
+using Shuttle.Abacus.Shell.Core.Resources;
 
-namespace Shuttle.Abacus.UI.Core.Clipboard
+namespace Shuttle.Abacus.Shell.Core.Clipboard
 {
     public interface IClipboard
     {

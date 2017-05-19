@@ -3,10 +3,10 @@ using System.Drawing;
 using System.Windows.Forms;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Core.WorkItem;
 
-namespace Shuttle.Abacus.UI.UI.Shell.ModalWorkspace
+namespace Shuttle.Abacus.Shell.UI.Shell.ModalWorkspace
 {
     public partial class ModalWorkspaceView : GenericModalWorkspaceView, IModalWorkspaceView
     {

@@ -1,9 +1,9 @@
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Core.WorkItem;
-using Shuttle.Abacus.UI.Messages.Core;
-using Shuttle.Abacus.UI.Messages.WorkItem;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Core.WorkItem;
+using Shuttle.Abacus.Shell.Messages.Core;
+using Shuttle.Abacus.Shell.Messages.WorkItem;
 
-namespace Shuttle.Abacus.UI.UI.Shell.TabbedWorkspace
+namespace Shuttle.Abacus.Shell.UI.Shell.TabbedWorkspace
 {
     public class TabbedWorkspacePresenter :
         Presenter<ITabbedWorkspaceView>,

@@ -4,18 +4,18 @@ using System.Drawing;
 using System.Windows.Forms;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Core.Clipboard;
-using Shuttle.Abacus.UI.Core.Messaging;
-using Shuttle.Abacus.UI.Core.Resources;
-using Shuttle.Abacus.UI.Messages.Core;
-using Shuttle.Abacus.UI.Messages.Explorer;
-using Shuttle.Abacus.UI.Messages.Resources;
-using Shuttle.Abacus.UI.Messages.WorkItem;
-using Shuttle.Abacus.UI.Navigation;
+using Shuttle.Abacus.Shell.Core.Clipboard;
+using Shuttle.Abacus.Shell.Core.Messaging;
+using Shuttle.Abacus.Shell.Core.Resources;
+using Shuttle.Abacus.Shell.Messages.Core;
+using Shuttle.Abacus.Shell.Messages.Explorer;
+using Shuttle.Abacus.Shell.Messages.Resources;
+using Shuttle.Abacus.Shell.Messages.WorkItem;
+using Shuttle.Abacus.Shell.Navigation;
 using Shuttle.Core.Infrastructure;
-using Message = Shuttle.Abacus.UI.Core.Messaging.Message;
+using Message = Shuttle.Abacus.Shell.Core.Messaging.Message;
 
-namespace Shuttle.Abacus.UI.UI.Shell.Explorer
+namespace Shuttle.Abacus.Shell.UI.Shell.Explorer
 {
     public class ExplorerPartialPresenter : IExplorerPartialPresenter
     {

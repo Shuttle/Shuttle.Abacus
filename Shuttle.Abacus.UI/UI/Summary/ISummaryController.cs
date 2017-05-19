@@ -1,6 +1,6 @@
-using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.Shell.Core.WorkItem;
 
-namespace Shuttle.Abacus.UI.UI.Summary
+namespace Shuttle.Abacus.Shell.UI.Summary
 {
     public interface ISummaryController : IWorkItemController
     {

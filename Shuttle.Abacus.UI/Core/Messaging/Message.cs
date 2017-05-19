@@ -1,8 +1,8 @@
 using System;
 using Shuttle.Abacus.Infrastructure;
-using Shuttle.Abacus.UI.Core.WorkItem;
+using Shuttle.Abacus.Shell.Core.WorkItem;
 
-namespace Shuttle.Abacus.UI.Core.Messaging
+namespace Shuttle.Abacus.Shell.Core.Messaging
 {
     public abstract class Message : IWorkItemInitiator
     {

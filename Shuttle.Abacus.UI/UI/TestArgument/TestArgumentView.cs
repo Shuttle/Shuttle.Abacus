@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Core;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Models;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Models;
 
-namespace Shuttle.Abacus.UI.UI.Test
+namespace Shuttle.Abacus.Shell.UI.TestArgument
 {
     public partial class TestArgumentView : GenericTestArgumentView, ITestArgumentView
     {

@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using Shuttle.Abacus.Invariants.Interfaces;
+﻿using Shuttle.Abacus.Invariants.Interfaces;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Models;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Models;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.UI.ArgumentValue
+namespace Shuttle.Abacus.Shell.UI.ArgumentValue
 {
     public class ArgumentValuePresenter : Presenter<IArgumentValueView, ArgumentValueModel>,
                                                 IArgumentValuePresenter

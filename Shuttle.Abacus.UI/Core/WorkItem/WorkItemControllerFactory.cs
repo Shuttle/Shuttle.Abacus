@@ -1,6 +1,6 @@
 using Shuttle.Abacus.Infrastructure;
 
-namespace Shuttle.Abacus.UI.Core.WorkItem
+namespace Shuttle.Abacus.Shell.Core.WorkItem
 {
     public class WorkItemControllerFactory : IWorkItemControllerFactory
     {

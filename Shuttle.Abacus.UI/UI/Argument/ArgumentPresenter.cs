@@ -1,10 +1,10 @@
 ﻿using Shuttle.Abacus.Invariants.Interfaces;
 using Shuttle.Abacus.Localisation;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Models;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Models;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.UI.Argument
+namespace Shuttle.Abacus.Shell.UI.Argument
 {
     public class ArgumentPresenter : Presenter<IArgumentView, ArgumentModel>, IArgumentPresenter
     {

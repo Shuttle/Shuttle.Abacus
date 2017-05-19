@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Models;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Models;
 
-namespace Shuttle.Abacus.UI.UI.SimpleList
+namespace Shuttle.Abacus.Shell.UI.SimpleList
 {
     public interface ISimpleListView : IView
     {

@@ -1,4 +1,4 @@
-namespace Shuttle.Abacus.UI.Core.Resources
+namespace Shuttle.Abacus.Shell.Core.Resources
 {
     public interface IResourceHolder
     {

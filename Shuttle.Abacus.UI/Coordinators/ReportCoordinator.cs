@@ -1,15 +1,14 @@
 using System;
-using System.Data;
 using Shuttle.Abacus.DataAccess;
-using Shuttle.Abacus.UI.Coordinators.Interfaces;
-using Shuttle.Abacus.UI.Core.Presentation;
-using Shuttle.Abacus.UI.Messages.Report;
-using Shuttle.Abacus.UI.Messages.Test;
-using Shuttle.Abacus.UI.Models;
+using Shuttle.Abacus.Shell.Coordinators.Interfaces;
+using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Messages.Report;
+using Shuttle.Abacus.Shell.Messages.Test;
+using Shuttle.Abacus.Shell.Models;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.UI.Coordinators
+namespace Shuttle.Abacus.Shell.Coordinators
 {
     public class ReportCoordinator : Coordinator, IReportCoordinator
     {

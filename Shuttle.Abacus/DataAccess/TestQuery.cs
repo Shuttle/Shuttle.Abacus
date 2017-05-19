@@ -34,5 +34,23 @@ namespace Shuttle.Abacus.DataAccess
         {
             return _databaseGateway.GetRowsUsing(_queryFactory.ArgumentValues(id));
         }
+
+        public void Register(Guid id, string name, string formulaName, string expectedResult, string expectedResultType,
+            string comparison)
+        {
+            _databaseGateway.ExecuteUsing(_queryFactory.Register(id, name, formulaName, expectedResult,
+                expectedResultType, comparison));
+        }
+
+        public void Remove(Guid id)
+        {
+            _databaseGateway.ExecuteUsing(_queryFactory.RemoveArgumentValues(id));
+            _databaseGateway.ExecuteUsing(_queryFactory.Remove(id));
+        }
+
+        public void Rename(Guid id, string name)
+        {
+            _databaseGateway.ExecuteUsing(_queryFactory.Rename(id, name));
+        }
     }
 }
