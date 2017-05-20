@@ -9,7 +9,7 @@ using Shuttle.Abacus.Shell.Messages.Resources;
 using Shuttle.Abacus.Shell.Models;
 using Shuttle.Abacus.Shell.Navigation;
 using Shuttle.Abacus.Shell.UI.Formula;
-using Shuttle.Abacus.Shell.UI.FormulaConstraint;
+using Shuttle.Abacus.Shell.UI.Formula.FormulaConstraint;
 using Shuttle.Abacus.Shell.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.Shell.UI.WorkItem.ContextToolbar;
 using Shuttle.Core.Data;

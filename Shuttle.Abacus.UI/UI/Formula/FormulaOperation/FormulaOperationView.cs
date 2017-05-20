@@ -5,7 +5,7 @@ using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Shell.Core.Presentation;
 using Shuttle.Abacus.Shell.Models;
 
-namespace Shuttle.Abacus.Shell.UI.FormulaOperation
+namespace Shuttle.Abacus.Shell.UI.Formula.FormulaOperation
 {
     public partial class FormulaOperationView : GenericFormulaOperationView, IFormulaOperationView
     {

@@ -193,7 +193,6 @@
     <Compile Include="Core\WorkItem\WorkItemControllerFactory.cs" />
     <Compile Include="Core\WorkItem\WorkItemManager.cs" />
     <Compile Include="DependencyWiring.cs" />
-    <Compile Include="Handlers\MethodTestHandler.cs" />
     <Compile Include="Handlers\NotificationHandler.cs" />
     <Compile Include="Handlers\ReplyMessageHandler.cs" />
     <Compile Include="Handlers\SystemUserHandler.cs" />
@@ -255,7 +254,6 @@
     <Compile Include="Messages\Test\RegisterTestMessage.cs" />
     <Compile Include="Messages\Test\DeleteTestMessage.cs" />
     <Compile Include="Messages\Test\TestPrintMessage.cs" />
-    <Compile Include="Messages\Test\TestRunMessage.cs" />
     <Compile Include="Messages\Test\PrintTestMessage.cs" />
     <Compile Include="Messages\Test\RemoveTestMessage.cs" />
     <Compile Include="Messages\Test\RunTestMessage.cs" />
@@ -268,6 +266,7 @@
     <Compile Include="Messages\WorkItem\WorkItemSitedMessage.cs" />
     <Compile Include="Messages\WorkItem\WorkItemTextChangedMessage.cs" />
     <Compile Include="Models\FormulaConstraintModel.cs" />
+    <Compile Include="Models\RunTestModel.cs" />
     <Compile Include="Models\TestArgumentModel.cs" />
     <Compile Include="Models\ArgumentValueModel.cs" />
     <Compile Include="Models\ArgumentDisplayModel.cs" />
@@ -329,24 +328,24 @@
     </Compile>
     <Compile Include="UI\ArgumentValue\IArgumentValuePresenter.cs" />
     <Compile Include="UI\ArgumentValue\IArgumentValueView.cs" />
-    <Compile Include="UI\FormulaConstraint\FormulaConstraintPresenter.cs" />
-    <Compile Include="UI\FormulaConstraint\FormulaConstraintView.cs">
+    <Compile Include="UI\Formula\FormulaConstraint\FormulaConstraintPresenter.cs" />
+    <Compile Include="UI\Formula\FormulaConstraint\FormulaConstraintView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\FormulaConstraint\FormulaConstraintView.Designer.cs">
+    <Compile Include="UI\Formula\FormulaConstraint\FormulaConstraintView.Designer.cs">
       <DependentUpon>FormulaConstraintView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\FormulaConstraint\IFormulaConstraintPresenter.cs" />
-    <Compile Include="UI\FormulaConstraint\IFormulaConstraintView.cs" />
-    <Compile Include="UI\FormulaOperation\FormulaOperationPresenter.cs" />
-    <Compile Include="UI\FormulaOperation\FormulaOperationView.cs">
+    <Compile Include="UI\Formula\FormulaConstraint\IFormulaConstraintPresenter.cs" />
+    <Compile Include="UI\Formula\FormulaConstraint\IFormulaConstraintView.cs" />
+    <Compile Include="UI\Formula\FormulaOperation\FormulaOperationPresenter.cs" />
+    <Compile Include="UI\Formula\FormulaOperation\FormulaOperationView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\FormulaOperation\FormulaOperationView.Designer.cs">
+    <Compile Include="UI\Formula\FormulaOperation\FormulaOperationView.Designer.cs">
       <DependentUpon>FormulaOperationView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\FormulaOperation\IFormulaOperationPresenter.cs" />
-    <Compile Include="UI\FormulaOperation\IFormulaOperationView.cs" />
+    <Compile Include="UI\Formula\FormulaOperation\IFormulaOperationPresenter.cs" />
+    <Compile Include="UI\Formula\FormulaOperation\IFormulaOperationView.cs" />
     <Compile Include="UI\Matrix\MatrixPresenter.cs" />
     <Compile Include="UI\Matrix\MatrixView.cs">
       <SubType>UserControl</SubType>
@@ -374,6 +373,15 @@
     <Compile Include="UI\Grid\SimpleGridView.Designer.cs">
       <DependentUpon>SimpleGridView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Test\RunTest\IRunTestPresenter.cs" />
+    <Compile Include="UI\Test\RunTest\IRunTestView.cs" />
+    <Compile Include="UI\Test\RunTest\RunTestView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Test\RunTest\RunTestView.Designer.cs">
+      <DependentUpon>RunTestView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Test\RunTest\TestPresenter.cs" />
     <Compile Include="UI\SimpleList\ISimpleListPresenter.cs" />
     <Compile Include="UI\SimpleList\ISimpleListView.cs" />
     <Compile Include="UI\SimpleList\SimpleListPresenter.cs" />
@@ -383,15 +391,15 @@
     <Compile Include="UI\SimpleList\SimpleListView.Designer.cs">
       <DependentUpon>SimpleListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\TestArgument\ITestArgumentView.cs" />
-    <Compile Include="UI\TestArgument\ITestArgumentPresenter.cs" />
-    <Compile Include="UI\TestArgument\TestArgumentView.cs">
+    <Compile Include="UI\Test\TestArgument\ITestArgumentView.cs" />
+    <Compile Include="UI\Test\TestArgument\ITestArgumentPresenter.cs" />
+    <Compile Include="UI\Test\TestArgument\TestArgumentView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\TestArgument\TestArgumentView.Designer.cs">
+    <Compile Include="UI\Test\TestArgument\TestArgumentView.Designer.cs">
       <DependentUpon>TestArgumentView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\TestArgument\TestArgumentPresenter.cs" />
+    <Compile Include="UI\Test\TestArgument\TestArgumentPresenter.cs" />
     <Compile Include="UI\Test\ITestPresenter.cs" />
     <Compile Include="UI\Test\ITestView.cs" />
     <Compile Include="UI\Test\TestPresenter.cs" />
@@ -520,10 +528,10 @@
     <EmbeddedResource Include="UI\ArgumentValue\ArgumentValueView.resx">
       <DependentUpon>ArgumentValueView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\FormulaConstraint\FormulaConstraintView.resx">
+    <EmbeddedResource Include="UI\Formula\FormulaConstraint\FormulaConstraintView.resx">
       <DependentUpon>FormulaConstraintView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\FormulaOperation\FormulaOperationView.resx">
+    <EmbeddedResource Include="UI\Formula\FormulaOperation\FormulaOperationView.resx">
       <DependentUpon>FormulaOperationView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Matrix\MatrixView.resx">
@@ -535,10 +543,13 @@
     <EmbeddedResource Include="UI\Grid\SimpleGridView.resx">
       <DependentUpon>SimpleGridView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Test\RunTest\RunTestView.resx">
+      <DependentUpon>RunTestView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\SimpleList\SimpleListView.resx">
       <DependentUpon>SimpleListView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\TestArgument\TestArgumentView.resx">
+    <EmbeddedResource Include="UI\Test\TestArgument\TestArgumentView.resx">
       <DependentUpon>TestArgumentView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Test\TestView.resx">

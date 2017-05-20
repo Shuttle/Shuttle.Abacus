@@ -3,8 +3,8 @@ using Shuttle.Abacus.Messages.v1;
 using Shuttle.Abacus.Shell.Core.Messaging;
 using Shuttle.Abacus.Shell.Core.WorkItem;
 using Shuttle.Abacus.Shell.Messages.Formula;
-using Shuttle.Abacus.Shell.UI.FormulaConstraint;
-using Shuttle.Abacus.Shell.UI.FormulaOperation;
+using Shuttle.Abacus.Shell.UI.Formula.FormulaConstraint;
+using Shuttle.Abacus.Shell.UI.Formula.FormulaOperation;
 using Shuttle.Esb;
 
 namespace Shuttle.Abacus.Shell.UI.Formula

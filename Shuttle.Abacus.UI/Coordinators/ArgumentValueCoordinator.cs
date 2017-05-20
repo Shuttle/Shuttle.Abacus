@@ -113,7 +113,7 @@ namespace Shuttle.Abacus.Shell.Coordinators
             using (_databaseContextFactory.Create())
             {
                 throw new NotImplementedException();
-                //message.Item.AssignText(TestColumns.ArgumentValueColumns.Name.MapFrom(_argumentQuery.Get(message.Item.Key)));
+                //message.Item.AssignText(TestColumns.ArgumentColumns.Name.MapFrom(_argumentQuery.Get(message.Item.Key)));
             }
         }
 

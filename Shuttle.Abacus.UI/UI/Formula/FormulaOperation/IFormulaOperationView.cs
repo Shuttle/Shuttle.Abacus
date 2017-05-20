@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Shuttle.Abacus.Shell.Core.Presentation;
 using Shuttle.Abacus.Shell.Models;
 
-namespace Shuttle.Abacus.Shell.UI.FormulaOperation
+namespace Shuttle.Abacus.Shell.UI.Formula.FormulaOperation
 {
     public interface IFormulaOperationView : IView
     {

@@ -7,7 +7,7 @@ using Shuttle.Abacus.Shell.Models;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.Shell.UI.FormulaConstraint
+namespace Shuttle.Abacus.Shell.UI.Formula.FormulaConstraint
 {
     public class FormulaConstraintPresenter : Presenter<IFormulaConstraintView, ManageFormulaConstraintsModel>,
         IFormulaConstraintPresenter

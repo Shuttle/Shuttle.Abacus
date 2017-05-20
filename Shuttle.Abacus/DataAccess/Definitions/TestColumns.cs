@@ -24,7 +24,7 @@ namespace Shuttle.Abacus.DataAccess
         public static readonly MappedColumn<string> FormulaName =
             new MappedColumn<string>("FormulaName", DbType.AnsiString);
 
-        public static class ArgumentValueColumns
+        public static class ArgumentColumns
         {
             public static readonly MappedColumn<string>
                 Value = new MappedColumn<string>("Value", DbType.AnsiString);

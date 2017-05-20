@@ -5,7 +5,7 @@ using Shuttle.Abacus.Invariants.Core;
 using Shuttle.Abacus.Shell.Core.Presentation;
 using Shuttle.Abacus.Shell.Models;
 
-namespace Shuttle.Abacus.Shell.UI.TestArgument
+namespace Shuttle.Abacus.Shell.UI.Test.TestArgument
 {
     public partial class TestArgumentView : GenericTestArgumentView, ITestArgumentView
     {

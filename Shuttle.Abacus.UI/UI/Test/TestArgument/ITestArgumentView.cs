@@ -2,7 +2,7 @@
 using Shuttle.Abacus.Shell.Core.Presentation;
 using Shuttle.Abacus.Shell.Models;
 
-namespace Shuttle.Abacus.Shell.UI.TestArgument
+namespace Shuttle.Abacus.Shell.UI.Test.TestArgument
 {
     public interface ITestArgumentView : IView, IViewReady
     {

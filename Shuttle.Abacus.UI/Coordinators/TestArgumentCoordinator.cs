@@ -5,14 +5,13 @@ using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.Shell.Core.Presentation;
 using Shuttle.Abacus.Shell.Core.Resources;
 using Shuttle.Abacus.Shell.Messages.Core;
-using Shuttle.Abacus.Shell.Messages.Formula;
 using Shuttle.Abacus.Shell.Messages.Resources;
 using Shuttle.Abacus.Shell.Messages.Test;
 using Shuttle.Abacus.Shell.Models;
 using Shuttle.Abacus.Shell.Navigation;
 using Shuttle.Abacus.Shell.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.Shell.UI.Test;
-using Shuttle.Abacus.Shell.UI.TestArgument;
+using Shuttle.Abacus.Shell.UI.Test.TestArgument;
 using Shuttle.Abacus.Shell.UI.WorkItem.ContextToolbar;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
@@ -109,8 +108,8 @@ namespace Shuttle.Abacus.Shell.Coordinators
                         {
                             message.Resources.Add(
                                 new Resource(ResourceKeys.TestArgument, Guid.Empty,
-                                    TestColumns.ArgumentValueColumns.ArgumentName.MapFrom(row),
-                                    ImageResources.ArgumentValue));
+                                    TestColumns.ArgumentColumns.ArgumentName.MapFrom(row),
+                                    ImageResources.ArgumentValue).AsLeaf());
                         }
                     }
 

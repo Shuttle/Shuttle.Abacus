@@ -8,7 +8,8 @@ namespace Shuttle.Abacus.Shell.UI.Test
         IWorkItemController,
         IMessageHandler<RegisterTestMessage>,
         IMessageHandler<RegisterTestArgumentMessage>,
-        IMessageHandler<RemoveTestArgumentMessage>
+        IMessageHandler<RemoveTestArgumentMessage>,
+        IMessageHandler<RunTestMessage>
     {
     }
 }

@@ -1,6 +1,6 @@
 using Shuttle.Abacus.Shell.Core.Presentation;
 
-namespace Shuttle.Abacus.Shell.UI.FormulaConstraint
+namespace Shuttle.Abacus.Shell.UI.Formula.FormulaConstraint
 {
     public interface IFormulaConstraintPresenter : IPresenter
     {

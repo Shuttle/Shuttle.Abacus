@@ -2,7 +2,7 @@ using Shuttle.Abacus.Messages.v1;
 using Shuttle.Abacus.Shell.Core.Messaging;
 using Shuttle.Abacus.Shell.Core.WorkItem;
 using Shuttle.Abacus.Shell.Messages.Test;
-using Shuttle.Abacus.Shell.UI.TestArgument;
+using Shuttle.Abacus.Shell.UI.Test.TestArgument;
 using Shuttle.Esb;
 
 namespace Shuttle.Abacus.Shell.UI.Test
@@ -59,6 +59,11 @@ namespace Shuttle.Abacus.Shell.UI.Test
                 TestId = message.TestId,
                 ArgumentName = message.ArgumentName
             });
+        }
+
+        public void HandleMessage(RunTestMessage message)
+        {
+            var s = "asdasd";
         }
     }
 }

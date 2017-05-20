@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Specialized;
+using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Localisation;
@@ -12,7 +14,9 @@ using Shuttle.Abacus.Shell.Messages.Test;
 using Shuttle.Abacus.Shell.Models;
 using Shuttle.Abacus.Shell.Navigation;
 using Shuttle.Abacus.Shell.UI.Shell.TabbedWorkspace;
+using Shuttle.Abacus.Shell.UI.SimpleList;
 using Shuttle.Abacus.Shell.UI.Test;
+using Shuttle.Abacus.Shell.UI.Test.RunTest;
 using Shuttle.Abacus.Shell.UI.WorkItem.ContextToolbar;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
@@ -25,9 +29,9 @@ namespace Shuttle.Abacus.Shell.Coordinators
 
         private readonly IFormulaQuery _formulaQuery;
 
-        private readonly INavigationItem _register =
-            new NavigationItem(new ResourceItem("Register", "Test")).AssignMessage(new RegisterTestMessage());
-
+        private readonly INavigationItem _register = new NavigationItem(new ResourceItem("Register", "Test"))
+            .AssignMessage(new RegisterTestMessage());
+        private readonly INavigationItem _run = new NavigationItem(new ResourceItem("Run", "Run"));
         private readonly INavigationItem _remove = new NavigationItem(new ResourceItem("Remove", "Test"));
         private readonly INavigationItem _rename = new NavigationItem(new ResourceItem("Rename", "Test"));
         private readonly ITestQuery _testQuery;
@@ -61,8 +65,8 @@ namespace Shuttle.Abacus.Shell.Coordinators
                 }
                 case Resource.ResourceType.Item:
                 {
+                    message.NavigationItems.Add(_run.AssignMessage(new RunTestMessage(message.Item.Key)));
                     message.NavigationItems.Add(_rename.AssignMessage(new RenameFormulaMessage(message.Item.Key)));
-
                     message.NavigationItems.Add(_remove.AssignMessage(
                         new RemoveFormulaMessage(message.Item.Text, message.Item.Key, message.UpstreamItems[0])));
 
@@ -92,33 +96,6 @@ namespace Shuttle.Abacus.Shell.Coordinators
 
                 HostInWorkspace<ITabbedWorkspacePresenter>(item);
             }
-        }
-
-        public void HandleMessage(TestRunMessage message)
-        {
-            throw new NotImplementedException();
-            //var workItem = WorkItemManager.Get(message.WorkItemId);
-
-            //if (workItem == null)
-            //{
-            //    return;
-            //}
-
-            //var list = workItem.GetView<ISimpleListView>();
-
-            //if (!list.Contains(message.Event.MethodTestId))
-            //{
-            //    return;
-            //}
-
-            //var view = workItem.GetView<ITestResultView>();
-
-            //view.AddRun(
-            //    message.Event.MethodTestId,
-            //    message.Event.MethodTestDescription,
-            //    message.Event.ExpectedResult);
-
-            //view.ShowView();
         }
 
         public void HandleMessage(SummaryViewRequestedMessage message)
@@ -189,6 +166,30 @@ namespace Shuttle.Abacus.Shell.Coordinators
 
                     break;
                 }
+            }
+        }
+
+        public void HandleMessage(RunTestMessage message)
+        {
+            using (_databaseContextFactory.Create())
+            {
+                var arguments = new NameValueCollection();
+                var formulaRow = _testQuery.Get(message.TestId);
+
+                foreach (var argumentRow in _testQuery.ArgumentValues(message.TestId))
+                {
+                    arguments.Add(TestColumns.ArgumentColumns.ArgumentName.MapFrom(argumentRow),TestColumns.ArgumentColumns.Value.MapFrom(argumentRow));
+                }
+
+                var runTestModel = new RunTestModel(message.TestId, FormulaColumns.Name.MapFrom(formulaRow), arguments);
+
+                var item = WorkItemManager
+                    .Create("Run test")
+                    .ControlledBy<ITestController>()
+                    .ShowIn<IContextToolbarPresenter>()
+                    .AddPresenter<IRunTestPresenter>().WithModel(runTestModel);
+
+                HostInWorkspace<ITabbedWorkspacePresenter>(item);
             }
         }
     }

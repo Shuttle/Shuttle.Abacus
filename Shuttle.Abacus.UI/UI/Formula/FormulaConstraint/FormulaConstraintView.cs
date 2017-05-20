@@ -6,7 +6,7 @@ using Shuttle.Abacus.Shell.Core.Extensions;
 using Shuttle.Abacus.Shell.Core.Presentation;
 using Shuttle.Abacus.Shell.Models;
 
-namespace Shuttle.Abacus.Shell.UI.FormulaConstraint
+namespace Shuttle.Abacus.Shell.UI.Formula.FormulaConstraint
 {
     public partial class FormulaConstraintView : GenericConstraintView, IFormulaConstraintView
     {

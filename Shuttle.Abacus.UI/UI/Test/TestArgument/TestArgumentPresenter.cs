@@ -7,7 +7,7 @@ using Shuttle.Abacus.Shell.Models;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 
-namespace Shuttle.Abacus.Shell.UI.TestArgument
+namespace Shuttle.Abacus.Shell.UI.Test.TestArgument
 {
     public class TestArgumentPresenter : Presenter<ITestArgumentView, TestArgumentModel>, ITestArgumentPresenter
     {
