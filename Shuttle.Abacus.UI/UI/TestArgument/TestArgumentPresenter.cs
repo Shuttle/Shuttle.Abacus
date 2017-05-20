@@ -9,15 +9,15 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Shell.UI.TestArgument
 {
-    public class TestArgumentValuePresenter : Presenter<ITestArgumentValueView, TestArgumentValueModel>, ITestArgumentValuePresenter
+    public class TestArgumentPresenter : Presenter<ITestArgumentView, TestArgumentModel>, ITestArgumentPresenter
     {
         private readonly IArgumentQuery _argumentQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IValueTypeValidatorProvider _valueTypeValidatorProvider;
 
-        public TestArgumentValuePresenter(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
-            ITestArgumentValueView valueView, IValueTypeValidatorProvider valueTypeValidatorProvider)
-            : base(valueView)
+        public TestArgumentPresenter(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
+            ITestArgumentView view, IValueTypeValidatorProvider valueTypeValidatorProvider)
+            : base(view)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(argumentQuery, "argumentQuery");

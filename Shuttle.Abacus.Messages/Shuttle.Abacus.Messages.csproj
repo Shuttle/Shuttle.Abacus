@@ -58,7 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="v1\RegisterArgumentValueCommand.cs" />
-    <Compile Include="v1\RegisterTestArgumentValueCommand.cs" />
+    <Compile Include="v1\RemoveTestArgumentCommand.cs" />
+    <Compile Include="v1\SetTestArgumentCommand.cs" />
     <Compile Include="v1\RemoveArgumentValueCommand.cs" />
     <Compile Include="v1\RenameArgumentCommand.cs" />
     <Compile Include="v1\ChangeLoginNameCommand.cs" />

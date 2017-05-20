@@ -74,7 +74,7 @@
     <Build Include="dbo\Tables\GraphNodeArgument.sql" />
     <Build Include="dbo\Tables\SystemUserPermission.sql" />
     <Build Include="dbo\Tables\SubscriberMessageType.sql" />
-    <Build Include="dbo\Tables\TestArgumentValue.sql" />
+    <Build Include="dbo\Tables\TestArgument.sql" />
     <Build Include="dbo\Tables\Test.sql" />
     <Build Include="dbo\Tables\MatrixElement.sql" />
     <Build Include="dbo\Tables\Matrix.sql" />

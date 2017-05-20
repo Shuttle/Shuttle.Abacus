@@ -35,23 +35,30 @@ namespace Shuttle.Abacus.Shell.UI.Test
             Send(command);
         }
 
-        public void HandleMessage(RegisterTestArgumentValueMessage message)
+        public void HandleMessage(RegisterTestArgumentMessage message)
         {
             if (!WorkItem.PresentationValid())
             {
                 return;
             }
 
-            var view = WorkItem.GetView<ITestArgumentValueView>();
+            var view = WorkItem.GetView<ITestArgumentView>();
 
-            var command = new RegisterTestArgumentValueCommand
+            Send(new SetTestArgumentCommand
             {
                 TestId = message.TestId,
                 ArgumentName = view.ArgumentName,
                 Value = view.ValueValue
-            };
+            });
+        }
 
-            Send(command);
+        public void HandleMessage(RemoveTestArgumentMessage message)
+        {
+            Send(new RemoveTestArgumentCommand
+            {
+                TestId = message.TestId,
+                ArgumentName = message.ArgumentName
+            });
         }
     }
 }

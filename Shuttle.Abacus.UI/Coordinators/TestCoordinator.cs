@@ -12,7 +12,6 @@ using Shuttle.Abacus.Shell.Messages.Test;
 using Shuttle.Abacus.Shell.Models;
 using Shuttle.Abacus.Shell.Navigation;
 using Shuttle.Abacus.Shell.UI.Shell.TabbedWorkspace;
-using Shuttle.Abacus.Shell.UI.SimpleList;
 using Shuttle.Abacus.Shell.UI.Test;
 using Shuttle.Abacus.Shell.UI.WorkItem.ContextToolbar;
 using Shuttle.Core.Data;
@@ -22,17 +21,19 @@ namespace Shuttle.Abacus.Shell.Coordinators
 {
     public class TestCoordinator : Coordinator, ITestCoordinator
     {
+        private readonly IDatabaseContextFactory _databaseContextFactory;
+
+        private readonly IFormulaQuery _formulaQuery;
+
         private readonly INavigationItem _register =
             new NavigationItem(new ResourceItem("Register", "Test")).AssignMessage(new RegisterTestMessage());
 
         private readonly INavigationItem _remove = new NavigationItem(new ResourceItem("Remove", "Test"));
         private readonly INavigationItem _rename = new NavigationItem(new ResourceItem("Rename", "Test"));
-
-        private readonly IFormulaQuery _formulaQuery;
-        private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly ITestQuery _testQuery;
 
-        public TestCoordinator(IDatabaseContextFactory databaseContextFactory, ITestQuery testQuery, IFormulaQuery formulaQuery)
+        public TestCoordinator(IDatabaseContextFactory databaseContextFactory, ITestQuery testQuery,
+            IFormulaQuery formulaQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(testQuery, "testQuery");
@@ -53,22 +54,21 @@ namespace Shuttle.Abacus.Shell.Coordinators
             switch (message.Item.Type)
             {
                 case Resource.ResourceType.Container:
-                    {
-                        message.NavigationItems.Add(_register);
+                {
+                    message.NavigationItems.Add(_register);
 
-                        break;
-                    }
+                    break;
+                }
                 case Resource.ResourceType.Item:
-                    {
-                        message.NavigationItems.Add(_rename.AssignMessage(new RenameFormulaMessage(message.Item.Key)));
+                {
+                    message.NavigationItems.Add(_rename.AssignMessage(new RenameFormulaMessage(message.Item.Key)));
 
-                        message.NavigationItems.Add(_remove.AssignMessage(
-                            new RemoveFormulaMessage(message.Item.Text, message.Item.Key, message.UpstreamItems[0])));
+                    message.NavigationItems.Add(_remove.AssignMessage(
+                        new RemoveFormulaMessage(message.Item.Text, message.Item.Key, message.UpstreamItems[0])));
 
-                        break;
-                    }
+                    break;
+                }
             }
-
         }
 
         public void HandleMessage(RegisterTestMessage message)
@@ -84,8 +84,10 @@ namespace Shuttle.Abacus.Shell.Coordinators
                     .Create("New test")
                     .ControlledBy<ITestController>()
                     .ShowIn<IContextToolbarPresenter>()
-                    .AddPresenter<ITestPresenter>().WithModel(model)
-                    .AddNavigationItem(_register).AsDefault()
+                    .AddPresenter<ITestPresenter>()
+                    .WithModel(model)
+                    .AddNavigationItem(_register)
+                    .AsDefault()
                     .AssignInitiator(message);
 
                 HostInWorkspace<ITabbedWorkspacePresenter>(item);
@@ -169,7 +171,7 @@ namespace Shuttle.Abacus.Shell.Coordinators
                 {
                     using (_databaseContextFactory.Create())
                     {
-                        foreach (var row in _formulaQuery.All())
+                        foreach (var row in _testQuery.All())
                         {
                             message.Resources.Add(
                                 new Resource(ResourceKeys.Test, TestColumns.Id.MapFrom(row),
@@ -182,7 +184,7 @@ namespace Shuttle.Abacus.Shell.Coordinators
                 case Resource.ResourceType.Item:
                 {
                     message.Resources.Add(
-                        new Resource(ResourceKeys.TestArgumentValue, Guid.NewGuid(), "Argument values",
+                        new Resource(ResourceKeys.TestArgument, Guid.NewGuid(), "Argument values",
                             ImageResources.ArgumentValue).AsContainer());
 
                     break;

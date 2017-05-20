@@ -1,5 +1,4 @@
 ﻿using System;
-using Shuttle.Abacus.Domain;
 using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
@@ -54,30 +53,6 @@ where
             return
                 RawQuery.Create("delete from Test where TestId = @TestId")
                     .AddParameterValue(TestColumns.Id, id);
-        }
-
-        public IQuery AddArgumentAnswer(Test test, TestArgumentValue argumentValue)
-        {
-            return RawQuery.Create(@"
-insert into TestArgumentValue
-(
-    TestId,
-    ArgumentName,
-    Answer,
-    ValueType,
-    ArgumentName
-)
-values
-(
-    @TestId,
-    @ArgumentName,
-    @Answer,
-    @ValueType,
-    @ArgumentName
-)")
-                .AddParameterValue(TestColumns.Id, test.Id)
-                .AddParameterValue(TestColumns.ArgumentValueColumns.ArgumentName, argumentValue.ArgumentId)
-                .AddParameterValue(TestColumns.ArgumentValueColumns.Value, argumentValue.Answer);
         }
 
         public IQuery Register(Guid id, string name, string formulaName, string expectedResult,

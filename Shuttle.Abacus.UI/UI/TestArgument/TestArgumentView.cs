@@ -7,9 +7,9 @@ using Shuttle.Abacus.Shell.Models;
 
 namespace Shuttle.Abacus.Shell.UI.TestArgument
 {
-    public partial class TestArgumentValueView : GenericTestArgumentView, ITestArgumentValueView
+    public partial class TestArgumentView : GenericTestArgumentView, ITestArgumentView
     {
-        public TestArgumentValueView()
+        public TestArgumentView()
         {
             InitializeComponent();
         }
@@ -105,7 +105,7 @@ namespace Shuttle.Abacus.Shell.UI.TestArgument
         }
     }
 
-    public class GenericTestArgumentView : View<ITestArgumentValuePresenter>
+    public class GenericTestArgumentView : View<ITestArgumentPresenter>
     {
     }
 }

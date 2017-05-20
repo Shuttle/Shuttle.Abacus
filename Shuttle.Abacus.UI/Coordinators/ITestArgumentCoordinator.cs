@@ -6,12 +6,12 @@ using Shuttle.Abacus.Shell.Messages.Test;
 
 namespace Shuttle.Abacus.Shell.Coordinators
 {
-    public interface ITestArgumentValueCoordinator :
+    public interface ITestArgumentCoordinator :
         ICoordinator,
         IMessageHandler<ResourceMenuRequestMessage>,
         IMessageHandler<PopulateResourceMessage>,
         IMessageHandler<SummaryViewRequestedMessage>,
-        IMessageHandler<RegisterTestArgumentValueMessage>
+        IMessageHandler<RegisterTestArgumentMessage>
     {
     }
 }

@@ -4,11 +4,11 @@ using Shuttle.Abacus.Shell.Core.Messaging;
 
 namespace Shuttle.Abacus.Shell.Messages.Test
 {
-    public class RegisterTestArgumentValueMessage : Message
+    public class RegisterTestArgumentMessage : Message
     {
         public Guid TestId { get; }
 
-        public RegisterTestArgumentValueMessage(Guid testId)
+        public RegisterTestArgumentMessage(Guid testId)
         {
             TestId = testId;
         }

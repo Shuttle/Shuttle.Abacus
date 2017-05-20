@@ -190,7 +190,6 @@
     <Compile Include="Domain\Logging\NullCalculationLogger.cs" />
     <Compile Include="Domain\Logging\DefaultCalculationLogger.cs" />
     <Compile Include="Domain\Test.cs" />
-    <Compile Include="Domain\TestArgumentValue.cs" />
     <Compile Include="Domain\TestItem.cs" />
     <Compile Include="Domain\Money.cs" />
     <Compile Include="Domain\Operations\AdditionOperation.cs" />
@@ -218,12 +217,12 @@
     <Compile Include="Events\Formula.v1\Renamed.cs" />
     <Compile Include="Events\Formula.v1\Registered.cs" />
     <Compile Include="Events\Formula.v1\Removed.cs" />
-    <Compile Include="Events\Test.v1\ArgumentValueSet.cs" />
+    <Compile Include="Events\Test.v1\ArgumentSet.cs" />
     <Compile Include="Events\Test.v1\Registered.cs" />
     <Compile Include="Events\Test.v1\Removed.cs" />
     <Compile Include="Events\Test.v1\Renamed.cs" />
     <Compile Include="Events\Test.v1\ValueAdded.cs" />
-    <Compile Include="Events\Test.v1\ArgumentValueRemoved.cs" />
+    <Compile Include="Events\Test.v1\ArgumentRemoved.cs" />
     <Compile Include="Invariants\ArgumentValueRules.cs" />
     <Compile Include="Invariants\Core\Rules\BooleanRule.cs" />
     <Compile Include="Invariants\FormulaRules.cs" />

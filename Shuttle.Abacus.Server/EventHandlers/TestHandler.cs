@@ -7,7 +7,7 @@ namespace Shuttle.Abacus.Server.EventHandlers
 {
     public class TestHandler :
         IEventHandler<Registered>,
-        IEventHandler<ArgumentValueSet>,
+        IEventHandler<ArgumentSet>,
         IEventHandler<Renamed>,
         IEventHandler<Removed>
     {
@@ -37,7 +37,7 @@ namespace Shuttle.Abacus.Server.EventHandlers
             _query.Rename(context.PrimitiveEvent.Id, context.Event.Name);
         }
 
-        public void ProcessEvent(IEventHandlerContext<ArgumentValueSet> context)
+        public void ProcessEvent(IEventHandlerContext<ArgumentSet> context)
         {
             _query.SetArgumentValue(context.PrimitiveEvent.Id, context.Event.ArgumentName, context.Event.Value);
         }

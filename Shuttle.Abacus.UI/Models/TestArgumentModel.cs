@@ -6,12 +6,12 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Shell.Models
 {
-    public class TestArgumentValueModel
+    public class TestArgumentModel
     {
         public string ArgumentName { get; set; }
         public string Value { get; set; }
 
-        public TestArgumentValueModel(DataRow row)
+        public TestArgumentModel(DataRow row)
         {
             Guard.AgainstNull(row, "row");
 
@@ -19,7 +19,7 @@ namespace Shuttle.Abacus.Shell.Models
             Value = TestColumns.ArgumentValueColumns.Value.MapFrom(row);
         }
 
-        public TestArgumentValueModel()
+        public TestArgumentModel()
         {
         }
 

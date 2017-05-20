@@ -1,6 +1,6 @@
 ﻿namespace Shuttle.Abacus.Shell.UI.TestArgument
 {
-    partial class TestArgumentValueView
+    partial class TestArgumentView
     {
         /// <summary> 
         /// Required designer variable.
@@ -79,7 +79,7 @@
             this.Controls.Add(this.ValueSelectionLabel);
             this.Controls.Add(this.Argument);
             this.Controls.Add(this.label5);
-            this.Name = "TestArgumentValueView";
+            this.Name = "TestArgumentView";
             this.Size = new System.Drawing.Size(295, 113);
             this.ResumeLayout(false);
             this.PerformLayout();

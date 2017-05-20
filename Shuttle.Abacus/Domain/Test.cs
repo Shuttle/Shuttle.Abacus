@@ -109,49 +109,45 @@ namespace Shuttle.Abacus.Domain
             return string.Format("[argument]:name={0}", name);
         }
 
-        public ArgumentValueRemoved RemoveArgumentName(string argumentName)
-        {
-            if (!_argumentValues.ContainsKey(argumentName))
-            {
-                throw new DomainException(string.Format("Cannot remove argument name '{0}' since it does not exist.",
-                    argumentName));
-            }
-
-            return On(new ArgumentValueRemoved
-            {
-                ArgumentName = argumentName
-            });
-        }
-
-        public ArgumentValueRemoved On(ArgumentValueRemoved argumentValueRemoved)
-        {
-            Guard.AgainstNull(argumentValueRemoved, "argumentValueRemoved");
-
-            _argumentValues.Remove(argumentValueRemoved.ArgumentName);
-
-            return argumentValueRemoved;
-        }
-
-        public ArgumentValueSet SetArgumentValue(string argumentName, string value)
+        public ArgumentSet SetArgument(string argumentName, string value)
         {
             Guard.AgainstNullOrEmptyString(argumentName, "argumentName");
             Guard.AgainstNullOrEmptyString(value, "value");
 
-            return On(new ArgumentValueSet
+            return On(new ArgumentSet
             {
                 ArgumentName = argumentName,
                 Value = value
             });
         }
 
-        public ArgumentValueSet On(ArgumentValueSet argumentValueSet)
+        public ArgumentSet On(ArgumentSet argumentSet)
         {
-            Guard.AgainstNull(argumentValueSet, "argumentValueSet");
+            Guard.AgainstNull(argumentSet, "argumentValueSet");
 
-            _argumentValues.Remove(argumentValueSet.ArgumentName);
-            _argumentValues.Add(argumentValueSet.ArgumentName, argumentValueSet.Value);
+            _argumentValues.Remove(argumentSet.ArgumentName);
+            _argumentValues.Add(argumentSet.ArgumentName, argumentSet.Value);
 
-            return argumentValueSet;
+            return argumentSet;
+        }
+
+        public ArgumentRemoved RemoveArgument(string argumentName)
+        {
+            Guard.AgainstNullOrEmptyString(argumentName, "argumentName");
+
+            return On(new ArgumentRemoved
+            {
+                ArgumentName = argumentName
+            });
+        }
+
+        public ArgumentRemoved On(ArgumentRemoved argumentRemoved)
+        {
+            Guard.AgainstNull(argumentRemoved, "argumentRemoved");
+
+            _argumentValues.Remove(argumentRemoved.ArgumentName);
+
+            return argumentRemoved;
         }
     }
 }

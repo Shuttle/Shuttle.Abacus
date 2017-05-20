@@ -4,7 +4,7 @@ using Shuttle.Abacus.Shell.Models;
 
 namespace Shuttle.Abacus.Shell.UI.TestArgument
 {
-    public interface ITestArgumentValueView : IView, IViewReady
+    public interface ITestArgumentView : IView, IViewReady
     {
         ArgumentModel ArgumentModel { get; }
         string ArgumentName { get; set; }

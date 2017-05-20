@@ -93,7 +93,7 @@
     <Compile Include="Coordinators\FormulaConstraintCoordinator.cs" />
     <Compile Include="Coordinators\IArgumentValueCoordinator.cs" />
     <Compile Include="Coordinators\IFormulaOperationCoordinator.cs" />
-    <Compile Include="Coordinators\ITestArgumentValueCoordinator.cs" />
+    <Compile Include="Coordinators\ITestArgumentCoordinator.cs" />
     <Compile Include="Coordinators\MatrixCoordinator.cs" />
     <Compile Include="Coordinators\DefaultCoordinator.cs" />
     <Compile Include="Coordinators\FormulaCoordinator.cs" />
@@ -105,7 +105,7 @@
     <Compile Include="Coordinators\ITestCoordinator.cs" />
     <Compile Include="Coordinators\IReportCoordinator.cs" />
     <Compile Include="Coordinators\ISystemUserCoordinator.cs" />
-    <Compile Include="Coordinators\TestArgumentValueCoordinator.cs" />
+    <Compile Include="Coordinators\TestArgumentCoordinator.cs" />
     <Compile Include="Coordinators\TestCoordinator.cs" />
     <Compile Include="Coordinators\ReportCoordinator.cs" />
     <Compile Include="Coordinators\SystemUserCoordinator.cs" />
@@ -250,7 +250,8 @@
     <Compile Include="Messages\SystemUser\EditPermissionsMessage.cs" />
     <Compile Include="Messages\SystemUser\ListSystemUserMessage.cs" />
     <Compile Include="Messages\SystemUser\NewSystemUserMessage.cs" />
-    <Compile Include="Messages\Test\RegisterTestArgumentValueMessage.cs" />
+    <Compile Include="Messages\Test\RemoveTestArgumentMessage.cs" />
+    <Compile Include="Messages\Test\RegisterTestArgumentMessage.cs" />
     <Compile Include="Messages\Test\RegisterTestMessage.cs" />
     <Compile Include="Messages\Test\DeleteTestMessage.cs" />
     <Compile Include="Messages\Test\TestPrintMessage.cs" />
@@ -267,7 +268,7 @@
     <Compile Include="Messages\WorkItem\WorkItemSitedMessage.cs" />
     <Compile Include="Messages\WorkItem\WorkItemTextChangedMessage.cs" />
     <Compile Include="Models\FormulaConstraintModel.cs" />
-    <Compile Include="Models\TestArgumentValueModel.cs" />
+    <Compile Include="Models\TestArgumentModel.cs" />
     <Compile Include="Models\ArgumentValueModel.cs" />
     <Compile Include="Models\ArgumentDisplayModel.cs" />
     <Compile Include="Models\ManageFormulaConstraintsModel.cs" />
@@ -382,15 +383,15 @@
     <Compile Include="UI\SimpleList\SimpleListView.Designer.cs">
       <DependentUpon>SimpleListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\TestArgument\ITestArgumentValueView.cs" />
-    <Compile Include="UI\TestArgument\ITestArgumentValuePresenter.cs" />
-    <Compile Include="UI\TestArgument\TestArgumentValueView.cs">
+    <Compile Include="UI\TestArgument\ITestArgumentView.cs" />
+    <Compile Include="UI\TestArgument\ITestArgumentPresenter.cs" />
+    <Compile Include="UI\TestArgument\TestArgumentView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\TestArgument\TestArgumentValueView.Designer.cs">
-      <DependentUpon>TestArgumentValueView.cs</DependentUpon>
+    <Compile Include="UI\TestArgument\TestArgumentView.Designer.cs">
+      <DependentUpon>TestArgumentView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\TestArgument\TestArgumentValuePresenter.cs" />
+    <Compile Include="UI\TestArgument\TestArgumentPresenter.cs" />
     <Compile Include="UI\Test\ITestPresenter.cs" />
     <Compile Include="UI\Test\ITestView.cs" />
     <Compile Include="UI\Test\TestPresenter.cs" />
@@ -537,8 +538,8 @@
     <EmbeddedResource Include="UI\SimpleList\SimpleListView.resx">
       <DependentUpon>SimpleListView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\TestArgument\TestArgumentValueView.resx">
-      <DependentUpon>TestArgumentValueView.cs</DependentUpon>
+    <EmbeddedResource Include="UI\TestArgument\TestArgumentView.resx">
+      <DependentUpon>TestArgumentView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Test\TestView.resx">
       <DependentUpon>TestView.cs</DependentUpon>

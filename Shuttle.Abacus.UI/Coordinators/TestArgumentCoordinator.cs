@@ -19,18 +19,17 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Shell.Coordinators
 {
-    public class TestArgumentValueCoordinator : Coordinator, ITestArgumentValueCoordinator
+    public class TestArgumentCoordinator : Coordinator, ITestArgumentCoordinator
     {
         private readonly IArgumentQuery _argumentQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
 
         private readonly INavigationItem _register = new NavigationItem(new ResourceItem("Register", "ArgumentValue"));
         private readonly INavigationItem _remove = new NavigationItem(new ResourceItem("Remove", "ArgumentValue"));
-        private readonly INavigationItem _rename = new NavigationItem(new ResourceItem("Rename", "ArgumentValue"));
 
         private readonly ITestQuery _testQuery;
 
-        public TestArgumentValueCoordinator(IDatabaseContextFactory databaseContextFactory, ITestQuery testQuery,
+        public TestArgumentCoordinator(IDatabaseContextFactory databaseContextFactory, ITestQuery testQuery,
             IArgumentQuery argumentQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
@@ -44,7 +43,7 @@ namespace Shuttle.Abacus.Shell.Coordinators
 
         public void HandleMessage(ResourceMenuRequestMessage message)
         {
-            if (!message.Item.ResourceKey.Equals(ResourceKeys.TestArgumentValue))
+            if (!message.Item.ResourceKey.Equals(ResourceKeys.TestArgument))
             {
                 return;
             }
@@ -54,16 +53,14 @@ namespace Shuttle.Abacus.Shell.Coordinators
                 case Resource.ResourceType.Container:
                 {
                     message.NavigationItems.Add(_register.AssignMessage(
-                        new RegisterTestArgumentValueMessage(message.RelatedItems[ResourceKeys.Test].Key)));
+                        new RegisterTestArgumentMessage(message.RelatedItems[ResourceKeys.Test].Key)));
 
                     break;
                 }
                 case Resource.ResourceType.Item:
                 {
-                    message.NavigationItems.Add(_rename.AssignMessage(new RenameFormulaMessage(message.Item.Key)));
-
                     message.NavigationItems.Add(_remove.AssignMessage(
-                        new RemoveFormulaMessage(message.Item.Text, message.Item.Key, message.UpstreamItems[0])));
+                        new RemoveTestArgumentMessage(message.RelatedItems[ResourceKeys.Test].Key, message.Item.Text)));
 
                     break;
                 }
@@ -72,7 +69,7 @@ namespace Shuttle.Abacus.Shell.Coordinators
 
         public void HandleMessage(SummaryViewRequestedMessage message)
         {
-            if (SummaryViewManager.CanIgnore(message, ResourceKeys.TestArgumentValue))
+            if (SummaryViewManager.CanIgnore(message, ResourceKeys.TestArgument))
             {
                 return;
             }
@@ -97,7 +94,7 @@ namespace Shuttle.Abacus.Shell.Coordinators
 
         public void HandleMessage(PopulateResourceMessage message)
         {
-            if (!message.Resource.ResourceKey.Equals(ResourceKeys.TestArgumentValue))
+            if (!message.Resource.ResourceKey.Equals(ResourceKeys.TestArgument))
             {
                 return;
             }
@@ -111,7 +108,7 @@ namespace Shuttle.Abacus.Shell.Coordinators
                         foreach (var row in _testQuery.ArgumentValues(message.RelatedResources[ResourceKeys.Test].Key))
                         {
                             message.Resources.Add(
-                                new Resource(ResourceKeys.TestArgumentValue, Guid.Empty,
+                                new Resource(ResourceKeys.TestArgument, Guid.Empty,
                                     TestColumns.ArgumentValueColumns.ArgumentName.MapFrom(row),
                                     ImageResources.ArgumentValue));
                         }
@@ -122,11 +119,11 @@ namespace Shuttle.Abacus.Shell.Coordinators
             }
         }
 
-        public void HandleMessage(RegisterTestArgumentValueMessage message)
+        public void HandleMessage(RegisterTestArgumentMessage message)
         {
             using (_databaseContextFactory.Create())
             {
-                var model = new TestArgumentValueModel
+                var model = new TestArgumentModel
                 {
                     Arguments = _argumentQuery.All().Map(row => new ArgumentModel(row))
                 };
@@ -135,7 +132,7 @@ namespace Shuttle.Abacus.Shell.Coordinators
                     .Create("New test argument value")
                     .ControlledBy<ITestController>()
                     .ShowIn<IContextToolbarPresenter>()
-                    .AddPresenter<ITestArgumentValuePresenter>().WithModel(model)
+                    .AddPresenter<ITestArgumentPresenter>().WithModel(model)
                     .AddNavigationItem(_register).AsDefault()
                     .AssignInitiator(message);
 
