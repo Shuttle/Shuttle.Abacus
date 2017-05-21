@@ -12,6 +12,7 @@ using Shuttle.Core.Castle;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;
+using Shuttle.Recall;
 
 namespace Shuttle.Abacus.Shell
 {
@@ -42,15 +43,16 @@ namespace Shuttle.Abacus.Shell
 
             _splashThread.Start();
 
-            DependencyWiring.Start(Container).AddWindowsComponents().AddCaching();
-
             var container = new WindsorComponentContainer(Container);
 
+            EventStore.Register(container);
             ServiceBus.Register(container);
 
             _bus = ServiceBus.Create(container).Start();
 
             container.Resolve<IDatabaseContextFactory>().ConfigureWith("Abacus");
+
+            DependencyWiring.Start(Container).AddWindowsComponents();
 
             _messageBus = DependencyResolver.Resolve<IMessageBus>();
 
