@@ -13,6 +13,7 @@ namespace Shuttle.Abacus.Shell.Coordinators
         IMessageHandler<ResourceMenuRequestMessage>,
         IMessageHandler<PopulateResourceMessage>,
         IMessageHandler<RegisterTestMessage>,
+        IMessageHandler<RemoveTestMessage>,
         IMessageHandler<RunTestMessage>,
         IMessageHandler<SummaryViewRequestedMessage>
     {

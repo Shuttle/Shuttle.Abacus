@@ -73,6 +73,14 @@
       <HintPath>..\packages\Shuttle.Esb.RabbitMQ.8.0.1\lib\net452-full\Shuttle.Esb.RabbitMQ.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Shuttle.Recall, Version=8.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Recall.8.0.1\lib\net452-full\Shuttle.Recall.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Shuttle.Recall.Sql, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Recall.Sql.8.0.0\lib\net452-full\Shuttle.Recall.Sql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -125,12 +133,9 @@
     <Compile Include="Core\Messaging\IHaveDefaultMessage.cs" />
     <Compile Include="Core\Messaging\IMessageBus.cs" />
     <Compile Include="Core\Messaging\IMessageHandler.cs" />
-    <Compile Include="Core\Messaging\IMessagePipe.cs" />
-    <Compile Include="Core\Messaging\IMessagePipeProvider.cs" />
     <Compile Include="Core\Messaging\ISubscriberProvider.cs" />
     <Compile Include="Core\Messaging\Message.cs" />
     <Compile Include="Core\Messaging\MessageBus.cs" />
-    <Compile Include="Core\Messaging\MessagePipeProvider.cs" />
     <Compile Include="Core\Messaging\ReplyMessage.cs" />
     <Compile Include="Core\Presentation\Coordinator.cs" />
     <Compile Include="Core\Presentation\ICoordinator.cs" />
@@ -252,7 +257,7 @@
     <Compile Include="Messages\Test\RemoveTestArgumentMessage.cs" />
     <Compile Include="Messages\Test\RegisterTestArgumentMessage.cs" />
     <Compile Include="Messages\Test\RegisterTestMessage.cs" />
-    <Compile Include="Messages\Test\DeleteTestMessage.cs" />
+    <Compile Include="Messages\Test\RenameTestMessage.cs" />
     <Compile Include="Messages\Test\TestPrintMessage.cs" />
     <Compile Include="Messages\Test\PrintTestMessage.cs" />
     <Compile Include="Messages\Test\RemoveTestMessage.cs" />

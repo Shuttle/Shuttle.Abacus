@@ -7,16 +7,16 @@ namespace Shuttle.Abacus.Shell.UI.Test.RunTest
 {
     public class RunTestPresenter : Presenter<IRunTestView, RunTestModel>, IRunTestPresenter
     {
-        private readonly ICalculationService _calculationService;
+        private readonly IExecutionTask _executionTask;
 
-        public RunTestPresenter(IRunTestView view, ICalculationService calculationService) : base(view)
+        public RunTestPresenter(IRunTestView view, IExecutionTask executionTask) : base(view)
         {
             Guard.AgainstNull(view, "view");
-            Guard.AgainstNull(calculationService, "calculationService");
+            Guard.AgainstNull(executionTask, "executionTask");
 
             Text = "Run Test Details";
 
-            _calculationService = calculationService;
+            _executionTask = executionTask;
 
             Image = Resources.Image_Test;
         }
@@ -25,7 +25,8 @@ namespace Shuttle.Abacus.Shell.UI.Test.RunTest
         {
             base.OnInitialize();
 
-            _calculationService.Execute(Model.FormulaName, Model.Arguments);
+            _executionTask.Execute(Model.FormulaName, Model.Arguments);
+            _executionTask.Flush();
         }
     }
 }

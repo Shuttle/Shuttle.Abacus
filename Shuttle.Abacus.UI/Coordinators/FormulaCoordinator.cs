@@ -193,7 +193,6 @@ namespace Shuttle.Abacus.Shell.Coordinators
                     }
                     case Resource.ResourceType.Item:
                     {
-                        //var result = _formulaQuery.OperationsSummary(message.Item.Key);
                         var result = _formulaQuery.Get(message.Item.Key);
 
                         message.AddRow("Formula Operations", result);

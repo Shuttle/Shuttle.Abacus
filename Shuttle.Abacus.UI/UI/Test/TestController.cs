@@ -65,5 +65,13 @@ namespace Shuttle.Abacus.Shell.UI.Test
         {
             var s = "asdasd";
         }
+
+        public void HandleMessage(RemoveTestMessage message)
+        {
+            Send(new RemoveTestCommand
+            {
+                TestId = message.TestId
+            });
+        }
     }
 }

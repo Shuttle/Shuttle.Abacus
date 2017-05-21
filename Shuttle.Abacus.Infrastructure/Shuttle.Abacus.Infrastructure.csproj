@@ -45,6 +45,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,9 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Caching\DefaultCache.cs" />
-    <Compile Include="Caching\ICache.cs" />
-    <Compile Include="Caching\NullCache.cs" />
+    <Compile Include="Caching\Cache.cs" />
     <Compile Include="Collection\IRichList.cs" />
     <Compile Include="Collection\RichList.cs" />
     <Compile Include="DependencyResolver\DependencyResolver.cs" />
@@ -84,9 +83,6 @@
     <Compile Include="Pattern\IMapper.cs" />
     <Compile Include="Pattern\IValueReturningVisitor.cs" />
     <Compile Include="Pattern\IVisitor.cs" />
-    <Compile Include="Pipes\IPipe.cs" />
-    <Compile Include="Pipes\IPipeline.cs" />
-    <Compile Include="Pipes\Pipeline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\IReflectionService.cs" />
     <Compile Include="Reflection\ReflectionService.cs" />

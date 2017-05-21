@@ -84,7 +84,6 @@ namespace Shuttle.Abacus.Server
 
             _container.Register
             (
-                Component.For<ICache>().ImplementedBy<DefaultCache>(),
                 Component.For(typeof(IDataRepository<>)).ImplementedBy(typeof(DataRepository<>)),
                 Component.For(typeof(IDataTableRepository<>)).ImplementedBy(typeof(DataTableRepository<>))
             );
@@ -95,13 +94,6 @@ namespace Shuttle.Abacus.Server
                     .Pick()
                     .If(type => type.Name.EndsWith("Query"))
                     .WithService.Select((type, basetype) => FindInterface("Query", type)));
-
-            _container.Register(
-                Classes
-                    .FromAssemblyNamed("Shuttle.Abacus")
-                    .Pick()
-                    .If(type => !type.IsInterface && type.Name.EndsWith("Pipe"))
-                    .WithService.Select((type, basetype) => FindGenericInterface(typeof(IPipe<>), type)));
 
             _container.Register(
                 Classes
@@ -190,22 +182,6 @@ namespace Shuttle.Abacus.Server
 
             DependencyResolver.InitializeWith(new WindsorResolver(_container));
             DomainEvents.Container = DependencyResolver.Resolver;
-        }
-
-        private static IEnumerable<Type> FindGenericInterface(Type generic, Type type)
-        {
-            foreach (var i in type.GetInterfaces())
-            {
-                if (i.Name.Equals(generic.Name, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    return new List<Type>
-                    {
-                        i
-                    };
-                }
-            }
-
-            return null;
         }
 
         private static IEnumerable<Type> FindInterface(string suffix, Type type)

@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="v1\RegisterArgumentValueCommand.cs" />
+    <Compile Include="v1\RemoveTestCommand.cs" />
     <Compile Include="v1\RemoveTestArgumentCommand.cs" />
     <Compile Include="v1\SetTestArgumentCommand.cs" />
     <Compile Include="v1\RemoveArgumentValueCommand.cs" />
@@ -76,7 +77,6 @@
     <Compile Include="v1\SetFormulaMaxmimumCommand.cs" />
     <Compile Include="v1\RemoveFormulaCommand.cs" />
     <Compile Include="v1\DeleteLimitCommand.cs" />
-    <Compile Include="v1\DeleteTestCommand.cs" />
     <Compile Include="v1\GrabCalculationsCommand.cs" />
     <Compile Include="v1\PrintTestCommand.cs" />
     <Compile Include="v1\RegisterFormulaCommand.cs" />

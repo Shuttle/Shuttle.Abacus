@@ -154,26 +154,6 @@ namespace Shuttle.Abacus.Shell
             return this;
         }
 
-        public IDependencyWiringOptional AddCaching()
-        {
-            _container.Register
-                (
-                Component.For<ICache>().ImplementedBy<DefaultCache>()
-                );
-
-            return this;
-        }
-
-        public IDependencyWiringOptional AddNullCaching()
-        {
-            _container.Register
-                (
-                Component.For<ICache>().ImplementedBy<NullCache>()
-                );
-
-            return this;
-        }
-
         public static IDependencyWiringOptional Start(IWindsorContainer container)
         {
             return new DependencyWiring(container).AddCore();
@@ -216,13 +196,6 @@ namespace Shuttle.Abacus.Shell
                 Classes
                     .FromAssemblyNamed("Shuttle.Abacus")
                     .Pick()
-                    .If(type => !type.IsInterface && type.Name.EndsWith("Pipe"))
-                    .WithService.Select((type, basetype) => FindGenericInterface(typeof(IPipe<>), type)));
-
-            _container.Register(
-                Classes
-                    .FromAssemblyNamed("Shuttle.Abacus")
-                    .Pick()
                     .If(type => !type.IsInterface && type.Name.EndsWith("Rules"))
                     .WithService.Select((type, basetype) => FindInterface("Rules", type)));
 
@@ -237,7 +210,7 @@ namespace Shuttle.Abacus.Shell
                 (
                 Component.For(typeof (IFactoryProvider<>)).ImplementedBy(typeof (FactoryProvider<>)),
                 Component.For<IValueTypeValidatorProvider>().ImplementedBy<ValueTypeValidatorProvider>(),
-                Component.For<IPipeline>().ImplementedBy<Pipeline>()
+                Component.For<IExecutionTask>().ImplementedBy<ExecutionTask>()
                 );
 
 
@@ -290,7 +263,5 @@ namespace Shuttle.Abacus.Shell
     {
         IDependencyWiringOptional AddWindowsComponents();
         IDependencyWiringOptional AddWebComponents();
-        IDependencyWiringOptional AddCaching();
-        IDependencyWiringOptional AddNullCaching();
     }
 }

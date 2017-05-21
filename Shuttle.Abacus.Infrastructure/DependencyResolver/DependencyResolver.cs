@@ -18,9 +18,9 @@ namespace Shuttle.Abacus.Infrastructure
             {
                 return Resolver.Resolve<TInterface>();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw new InterfaceResolutionException(e, typeof (TInterface));
+                throw new InterfaceResolutionException(ex, typeof (TInterface));
             }
         }
 

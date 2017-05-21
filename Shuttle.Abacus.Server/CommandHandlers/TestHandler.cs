@@ -11,7 +11,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 {
     public class TestHandler :
         IMessageHandler<RegisterTestCommand>,
-        IMessageHandler<DeleteTestCommand>,
+        IMessageHandler<RemoveTestCommand>,
         IMessageHandler<ChangeTestCommand>,
         IMessageHandler<RunTestCommand>,
         IMessageHandler<PrintTestCommand>,
@@ -72,18 +72,6 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                 _eventStore.Save(stream);
                 _keyStore.Add(test.Id, key);
             }
-        }
-
-        public void ProcessMessage(IHandlerContext<DeleteTestCommand> context)
-        {
-            throw new NotImplementedException();
-            //using (_databaseContextFactory.Create())
-            //{
-            //    foreach (var id in context.Message.MethodTestIds)
-            //    {
-            //        _testRepository.Remove(id);
-            //    }
-            //}
         }
 
         public void ProcessMessage(IHandlerContext<PrintTestCommand> context)
@@ -248,6 +236,35 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                 stream.AddEvent(test.RemoveArgument(message.ArgumentName));
 
                 _eventStore.Save(stream);
+            }
+        }
+
+        public void ProcessMessage(IHandlerContext<RemoveTestCommand> context)
+        {
+            var message = context.Message;
+
+            using (_databaseContextFactory.Create())
+            {
+                var stream = _eventStore.Get(message.TestId);
+
+                if (stream.IsEmpty)
+                {
+                    return;
+                }
+
+                var test = new Test(message.TestId);
+
+                stream.Apply(test);
+
+                if (test.Removed)
+                {
+                    return;
+                }
+
+                stream.AddEvent(test.Remove());
+
+                _eventStore.Save(stream);
+                _keyStore.Remove(test.Id);
             }
         }
     }

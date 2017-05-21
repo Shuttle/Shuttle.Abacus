@@ -38,13 +38,14 @@
       <HintPath>..\packages\Shuttle.Core.Infrastructure.8.0.2\lib\net452-full\Shuttle.Core.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Shuttle.Recall, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Recall.8.0.0\lib\net452-full\Shuttle.Recall.dll</HintPath>
+    <Reference Include="Shuttle.Recall, Version=8.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shuttle.Recall.8.0.1\lib\net452-full\Shuttle.Recall.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExecutionResult.cs" />
-    <Compile Include="ExecutionService.cs" />
+    <Compile Include="ExecutionTask.cs" />
     <Compile Include="DataAccess\ArgumentQuery.cs" />
     <Compile Include="DataAccess\ArgumentRepository.cs" />
     <Compile Include="DataAccess\ConstraintTypeQuery.cs" />
@@ -129,7 +130,6 @@
     <Compile Include="DataAccess\Mapping\SystemUserDataReaderMapper.cs" />
     <Compile Include="DataAccess\TestQuery.cs" />
     <Compile Include="DataAccess\OperationTypeQuery.cs" />
-    <Compile Include="DataAccess\BooleanArgumentDTOPipe.cs" />
     <Compile Include="DataAccess\IArgumentQuery.cs" />
     <Compile Include="DataAccess\IConstraintTypeQuery.cs" />
     <Compile Include="DataAccess\IMatrixQuery.cs" />
@@ -225,7 +225,7 @@
     <Compile Include="Events\Test.v1\Renamed.cs" />
     <Compile Include="Events\Test.v1\ValueAdded.cs" />
     <Compile Include="Events\Test.v1\ArgumentRemoved.cs" />
-    <Compile Include="ICalculationService.cs" />
+    <Compile Include="IExecutionTask.cs" />
     <Compile Include="Invariants\ArgumentValueRules.cs" />
     <Compile Include="Invariants\Core\Rules\BooleanRule.cs" />
     <Compile Include="Invariants\FormulaRules.cs" />
@@ -269,8 +269,6 @@
     <Compile Include="Domain\Repositories\IMatrixRepository.cs" />
     <Compile Include="Domain\Repositories\IMatrixElementRepository.cs" />
     <Compile Include="Domain\Repositories\ISystemUserRepository.cs" />
-    <Compile Include="Domain\Services\ArgumentService.cs" />
-    <Compile Include="Domain\Services\IArgumentService.cs" />
     <Compile Include="Domain\SystemUser.cs" />
     <Compile Include="Domain\ValueSource\ArgumentAnswerValueSource.cs" />
     <Compile Include="Domain\ValueSource\FormulaResultValueSource.cs" />

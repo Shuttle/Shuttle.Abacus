@@ -19,8 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuttle.Abacus.Infrastructu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuttle.Abacus.DTO", "Shuttle.Abacus.DTO\Shuttle.Abacus.DTO.csproj", "{5CD61A6D-ABCB-4400-A113-4EF4DA4C439C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuttle.Abacus.WebApi", "Shuttle.Abacus.WebApi\Shuttle.Abacus.WebApi.csproj", "{A059C678-F803-4BCC-9E81-B935A0B0B84F}"
-EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Shuttle.Abacus.Database", "Shuttle.Abacus.Database\Shuttle.Abacus.Database.sqlproj", "{8ED7605D-BDD2-4E07-B36C-555EA036FD43}"
 EndProject
 Global
@@ -61,10 +59,6 @@ Global
 		{5CD61A6D-ABCB-4400-A113-4EF4DA4C439C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CD61A6D-ABCB-4400-A113-4EF4DA4C439C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CD61A6D-ABCB-4400-A113-4EF4DA4C439C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A059C678-F803-4BCC-9E81-B935A0B0B84F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A059C678-F803-4BCC-9E81-B935A0B0B84F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A059C678-F803-4BCC-9E81-B935A0B0B84F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A059C678-F803-4BCC-9E81-B935A0B0B84F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8ED7605D-BDD2-4E07-B36C-555EA036FD43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8ED7605D-BDD2-4E07-B36C-555EA036FD43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8ED7605D-BDD2-4E07-B36C-555EA036FD43}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
