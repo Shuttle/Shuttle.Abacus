@@ -30,7 +30,7 @@ select
     ArgumentName,
     Value
 from
-    TestArgumentValue
+    TestArgument
 where
     TestId = @TestId
 order by
@@ -89,7 +89,7 @@ values
         public IQuery RemoveArgumentValues(Guid id)
         {
             return
-                RawQuery.Create("delete from TestArgumentValue where TestId = @TestId")
+                RawQuery.Create("delete from TestArgument where TestId = @TestId")
                     .AddParameterValue(TestColumns.Id, id);
         }
 
@@ -110,7 +110,7 @@ where
         public IQuery RemoveArgumentValue(Guid id, string argumentName)
         {
             return RawQuery.Create(
-                    "delete from TestArgumentValue where TestId = @TestId and ArgumentName = @ArgumentName")
+                    "delete from TestArgument where TestId = @TestId and ArgumentName = @ArgumentName")
                 .AddParameterValue(TestColumns.Id, id)
                 .AddParameterValue(TestColumns.ArgumentColumns.ArgumentName, argumentName);
         }
@@ -118,7 +118,7 @@ where
         public IQuery AddArgumentValue(Guid id, string argumentName, string value)
         {
             return RawQuery.Create(@"
-insert into TestArgumentValue 
+insert into TestArgument 
 (
     TestId,
     ArgumentName,

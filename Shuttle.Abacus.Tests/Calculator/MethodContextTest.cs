@@ -10,7 +10,7 @@ namespace Shuttle.Abacus.Tests
         //[Test]
         //public void Should_be_able_to_add_and_find_argument_answers()
         //{
-        //    var context = new FormulaContext(string.Empty);
+        //    var context = new FormulaContextOLD(string.Empty);
 
         //    context.AddValue(new ConstantValueType("SumInsured", 300000));
 
@@ -21,7 +21,7 @@ namespace Shuttle.Abacus.Tests
         //[Test]
         //public void Should_be_able_to_add_and_retrieve_a_named_calculation_result()
         //{
-        //    var methodContext = new FormulaContext(string.Empty);
+        //    var methodContext = new FormulaContextOLD(string.Empty);
 
         //    var result1 = new CalculationCollectionResult(new CalculationCollection("result1"), 123.45m);
 
@@ -42,7 +42,7 @@ namespace Shuttle.Abacus.Tests
         //[Test]
         //public void Should_be_able_to_create_a_read_only_copy()
         //{
-        //    var methodContext = new FormulaContext(string.Empty);
+        //    var methodContext = new FormulaContextOLD(string.Empty);
 
         //    methodContext.AddValue(new IntegerValueType("input", 10));
 

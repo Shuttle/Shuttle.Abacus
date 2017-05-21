@@ -1,6 +1,8 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Runtime.Caching;
+using System.Threading;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Domain;
 using Shuttle.Core.Data;
@@ -17,22 +19,26 @@ namespace Shuttle.Abacus
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IEventStore _eventStore;
         private readonly IFormulaQuery _formulaQuery;
+        private readonly IArgumentQuery _argumentQuery;
 
         private readonly CacheItemPolicy _policy = new CacheItemPolicy { AbsoluteExpiration = DateTimeOffset.MaxValue };
         private MemoryCache _cache;
 
-        public ExecutionTask(IDatabaseContextFactory databaseContextFactory, IEventStore eventStore, IFormulaQuery formulaQuery)
+        public ExecutionTask(IDatabaseContextFactory databaseContextFactory, IEventStore eventStore, 
+            IFormulaQuery formulaQuery, IArgumentQuery argumentQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(eventStore, "eventStore");
             Guard.AgainstNull(formulaQuery, "formulaQuery");
+            Guard.AgainstNull(argumentQuery, "argumentQuery");
 
             _databaseContextFactory = databaseContextFactory;
             _eventStore = eventStore;
             _formulaQuery = formulaQuery;
+            _argumentQuery = argumentQuery;
         }
 
-        public ExecutionResult Execute(string formulaName, NameValueCollection arguments)
+        public ExecutionResult Execute(string formulaName, IEnumerable<ArgumentValue> values)
         {
             if (!_cached)
             {
@@ -46,7 +52,10 @@ namespace Shuttle.Abacus
                 return ExecutionResult.Empty();
             }
 
-            
+            var executionContext = new ExecutionContext(formulaName, values);
+
+
+
             return ExecutionResult.Empty();
         }
 
@@ -74,7 +83,7 @@ namespace Shuttle.Abacus
                 throw new ApplicationException();
             }
 
-            return (T) result;
+            return (T)result;
         }
 
         private void Cache()
@@ -96,6 +105,14 @@ namespace Shuttle.Abacus
                     }
                 }
 
+                using (_databaseContextFactory.Create())
+                {
+                    foreach (var row in _argumentQuery.All())
+                    {
+                        Cache<Argument>(ArgumentColumns.Id.MapFrom(row), argument => argument.Name);
+                    }
+                }
+
                 _cached = true;
             }
         }
@@ -109,7 +126,7 @@ namespace Shuttle.Abacus
             var stream = _eventStore.Get(id);
             stream.Apply(instance);
 
-            _cache.Add(new CacheItem(string.Format("[{0}]:{1}", type.Name, keyCallback.Invoke((T) instance)), instance), _policy);
+            _cache.Add(new CacheItem(string.Format("[{0}]:{1}", type.Name, keyCallback.Invoke((T)instance)), instance), _policy);
         }
     }
 }

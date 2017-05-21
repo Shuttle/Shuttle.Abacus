@@ -21,13 +21,13 @@ namespace Shuttle.Abacus.Tests
 
         //    table.AddDecimalValue(value);
 
-        //    var contextTrue = new FormulaContext();
+        //    var contextTrue = new FormulaContextOLD();
 
         //    contextTrue.AddValue(answer);
 
         //    Assert.IsTrue(table.IsSatisfiedBy(contextTrue));
 
-        //    var contextFalse = new FormulaContext();
+        //    var contextFalse = new FormulaContextOLD();
 
         //    contextFalse.AddValue(new TextValueType("argument", "two"));
 

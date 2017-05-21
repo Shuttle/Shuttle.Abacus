@@ -15,13 +15,13 @@ namespace Shuttle.Abacus.Tests
 
         //    formula.AddConstraint(new FromConstraint(Guid.NewGuid(), new IntegerValueType("Version", 6)));
 
-        //    var context1 = new FormulaContext(string.Empty);
+        //    var context1 = new FormulaContextOLD(string.Empty);
 
         //    context1.AddValue(new IntegerValueType("Version", 1));
 
         //    Assert.IsFalse(formula.IsSatisfiedBy(context1));
 
-        //    var context2 = new FormulaContext(string.Empty);
+        //    var context2 = new FormulaContextOLD(string.Empty);
 
         //    context2.AddValue(new IntegerValueType("Version", 6));
 
@@ -35,13 +35,13 @@ namespace Shuttle.Abacus.Tests
 
         //    formula.AddConstraint(new FromConstraint(Guid.NewGuid(), new IntegerValueType("Version", 5)));
 
-        //    var context1 = new FormulaContext(string.Empty);
+        //    var context1 = new FormulaContextOLD(string.Empty);
 
         //    context1.AddValue(new IntegerValueType("Version", 1));
 
         //    Assert.IsFalse(formula.IsSatisfiedBy(context1));
 
-        //    var context2 = new FormulaContext(string.Empty);
+        //    var context2 = new FormulaContextOLD(string.Empty);
 
         //    context2.AddValue(new IntegerValueType("Version", 6));
 
@@ -55,13 +55,13 @@ namespace Shuttle.Abacus.Tests
 
         //    formula.AddConstraint(new ToConstraint(Guid.NewGuid(), new IntegerValueType("Version", 5)));
 
-        //    var context1 = new FormulaContext(string.Empty);
+        //    var context1 = new FormulaContextOLD(string.Empty);
 
         //    context1.AddValue(new IntegerValueType("Version", 1));
 
         //    Assert.IsTrue(formula.IsSatisfiedBy(context1));
 
-        //    var context2 = new FormulaContext(string.Empty);
+        //    var context2 = new FormulaContextOLD(string.Empty);
 
         //    context2.AddValue(new IntegerValueType("Version", 6));
 

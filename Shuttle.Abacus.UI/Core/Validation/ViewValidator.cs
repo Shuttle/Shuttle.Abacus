@@ -64,6 +64,7 @@ namespace Shuttle.Abacus.Shell.Core.Validation
         {
             var validator = GetValidator();
 
+            validations.Remove(validations.Find(item => item.Control.Equals(builderControl)));
             validations.Add(new ControlValidation(manager, validator, builderControl, rules));
 
             return this;

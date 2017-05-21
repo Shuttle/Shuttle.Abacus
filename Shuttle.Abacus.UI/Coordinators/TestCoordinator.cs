@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Specialized;
+using System.Collections.Generic;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Localisation;
@@ -7,7 +7,6 @@ using Shuttle.Abacus.Shell.Core.Presentation;
 using Shuttle.Abacus.Shell.Core.Resources;
 using Shuttle.Abacus.Shell.Messages.Core;
 using Shuttle.Abacus.Shell.Messages.Explorer;
-using Shuttle.Abacus.Shell.Messages.Formula;
 using Shuttle.Abacus.Shell.Messages.Resources;
 using Shuttle.Abacus.Shell.Messages.Test;
 using Shuttle.Abacus.Shell.Models;
@@ -171,13 +170,17 @@ namespace Shuttle.Abacus.Shell.Coordinators
         {
             using (_databaseContextFactory.Create())
             {
-                var arguments = new NameValueCollection();
+                var arguments = new List<ArgumentValue>();
                 var row = _testQuery.Get(message.TestId);
 
                 foreach (var argumentRow in _testQuery.ArgumentValues(message.TestId))
                 {
-                    arguments.Add(TestColumns.ArgumentColumns.ArgumentName.MapFrom(argumentRow),
-                        TestColumns.ArgumentColumns.Value.MapFrom(argumentRow));
+                    arguments.Add(new ArgumentValue
+                        {
+                            Name = TestColumns.ArgumentColumns.ArgumentName.MapFrom(argumentRow),
+                            Value = TestColumns.ArgumentColumns.Value.MapFrom(argumentRow)
+                        }
+                    );
                 }
 
                 var runTestModel = new RunTestModel(message.TestId, TestColumns.FormulaName.MapFrom(row),

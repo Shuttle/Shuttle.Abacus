@@ -23,7 +23,7 @@ namespace Shuttle.Abacus.Tests
 
         //    method.AddCalculation(formula);
 
-        //    var context = new FormulaContext();
+        //    var context = new FormulaContextOLD();
 
         //    method.Calculate(context);
 
@@ -38,7 +38,7 @@ namespace Shuttle.Abacus.Tests
 
         //    method.AddLimit(limit);
 
-        //    context = new FormulaContext();
+        //    context = new FormulaContextOLD();
 
         //    method.Calculate(context);
 
@@ -72,7 +72,7 @@ namespace Shuttle.Abacus.Tests
 
         //    method.AddCalculation(level1);
 
-        //    var context = new FormulaContext();
+        //    var context = new FormulaContextOLD();
 
         //    method.Calculate(context);
 

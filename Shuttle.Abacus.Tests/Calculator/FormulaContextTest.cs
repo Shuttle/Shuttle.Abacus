@@ -11,7 +11,7 @@ namespace Shuttle.Abacus.Tests
         //[Test]
         //public void Should_be_able_to_determine_the_value_of_the_of_the_result_just_added()
         //{
-        //    var methodContext = new FormulaContext(string.Empty);
+        //    var methodContext = new FormulaContextOLD(string.Empty);
 
         //    Assert.AreEqual(100, methodContext.AddResult(new FormulaCalculationResult(new FormulaCalculation("first"), 100)).GetResult("first").Value);
         //    Assert.AreEqual(235, methodContext.AddResult(new FormulaCalculationResult(new FormulaCalculation("second"), 235)).GetResult("second").Value);
@@ -23,7 +23,7 @@ namespace Shuttle.Abacus.Tests
         //{
         //    ICalculationLogger logger = new DefaultCalculationLogger();
 
-        //    var context = new FormulaContext((string) "context");
+        //    var context = new FormulaContextOLD((string) "context");
 
         //    context.AddValue(new IntegerValueType("SomeInput", 10));
 
@@ -37,7 +37,7 @@ namespace Shuttle.Abacus.Tests
         //[Test]
         //public void Should_keep_sub_totals()
         //{
-        //    var methodContext = new FormulaContext();
+        //    var methodContext = new FormulaContextOLD();
 
         //    var result1 = new CalculationCollectionResult(new CalculationCollection("first"), 100);
 

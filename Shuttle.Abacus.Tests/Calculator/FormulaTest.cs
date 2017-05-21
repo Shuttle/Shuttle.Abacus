@@ -11,7 +11,7 @@ namespace Shuttle.Abacus.Tests
         //{
         //    var formula = new Formula(new ConstantValueSource(250));
 
-        //    var methodContext = new FormulaContext();
+        //    var methodContext = new FormulaContextOLD();
 
         //    Assert.AreEqual(250, formula.Execute(methodContext, new FormulaCalculationContext(methodContext)));
         //}
@@ -26,7 +26,7 @@ namespace Shuttle.Abacus.Tests
         //    formula.AddOperation(new MultiplicationOperation(new ConstantValueSource(5)));
         //    formula.AddOperation(new DivisionOperation(new ConstantValueSource(2)));
 
-        //    var methodContext = new FormulaContext();
+        //    var methodContext = new FormulaContextOLD();
 
         //    Assert.AreEqual(20, formula.Execute(methodContext, new FormulaCalculationContext(methodContext)));
         //}
@@ -52,7 +52,7 @@ namespace Shuttle.Abacus.Tests
         //    formula.AddOperation(new DivisionOperation(new ConstantValueSource(100)));
 
         //    var context =
-        //        new FormulaContext("test")
+        //        new FormulaContextOLD("test")
         //            .AddValue(new ConstantValueType("VoluntaryExcess", 1000))
         //            .AddValue(new ConstantValueType("SumInsured", 980000));
 

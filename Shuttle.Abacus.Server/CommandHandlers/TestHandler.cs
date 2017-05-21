@@ -106,7 +106,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
             //                //MethodTestDescription = test.Description,
             //                ExpectedResult = test.ExpectedResult,
             //                //TODO
-            //                //FormulaContext = methodContext.DTO()
+            //                //FormulaContextOLD = methodContext.DTO()
             //            }
             //        );
             //    }
@@ -145,51 +145,9 @@ namespace Shuttle.Abacus.Server.CommandHandlers
             //            //MethodTestDescription = test.Description,
             //            ExpectedResult = test.ExpectedResult,
             //            //TODO
-            //            //FormulaContext = methodContext.DTO()
+            //            //FormulaContextOLD = methodContext.DTO()
             //        }, c => c.Reply());
             //    }
-            //}
-        }
-
-        private FormulaContext GetContext(Test test)
-        {
-            throw new InvalidOperationException();
-            //using (_databaseContextFactory.Create())
-            //{
-            //    var method = _testRepository.Get<Formula>(test.FormulaId);
-
-            //    var arguments = _argumentRepository.All();
-
-            //    var context = new FormulaContext((string) method.MethodName);
-
-            //    foreach (var answer in test.ArgumentValues)
-            //    {
-            //        var argument = arguments.Find(answer.ArgumentName);
-
-            //        //TODO
-            //        //if (argument == null)
-            //        //{
-            //        //    context.Log(
-            //        //        "Could not find argument '{0}' in the master list.  The answer will be ignored.",
-            //        //        answer.ArgumentName);
-            //        //}
-            //        //else
-            //        //{
-            //        //    context.AddValue(
-            //        //        _argumentValueFactoryProvider.Get(answer.ValueType).Create(
-            //        //            argument.Name,
-            //        //            answer.Answer));
-            //        //}
-            //    }
-
-            //    if (context.LoggerEnabled)
-            //    {
-            //        context.Log();
-            //    }
-
-            //    method.Calculate(context);
-
-            //    return context;
             //}
         }
 

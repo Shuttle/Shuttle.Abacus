@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArgumentTest.cs" />
     <Compile Include="Calculator\CalculationCollectionTest.cs" />
     <Compile Include="Calculator\FormulaContextTest.cs" />
     <Compile Include="Calculator\CalculationTest.cs" />
@@ -57,7 +56,6 @@
     <Compile Include="Calculator\FormulaTest.cs" />
     <Compile Include="Calculator\LimitsTest.cs" />
     <Compile Include="Calculator\MethodContextTest.cs" />
-    <Compile Include="Calculator\Operations\FormulaOperationTest.cs" />
     <Compile Include="DecimalTableTest.cs" />
     <Compile Include="MatrixElementTest.cs" />
     <Compile Include="GraphNodeArgumentTest.cs" />

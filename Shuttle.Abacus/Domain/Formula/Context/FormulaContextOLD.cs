@@ -7,7 +7,7 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class FormulaContext : IMethodContext
+    public class FormulaContextOLD : IMethodContext
     {
         private readonly ValueCollection answers;
         private readonly ICalculationLogger logger;
@@ -15,26 +15,26 @@ namespace Shuttle.Abacus.Domain
 
         public IGraphNode GraphNode { get; private set; }
 
-        public FormulaContext()
+        public FormulaContextOLD()
             : this(
                 string.Empty, new NullCalculationLogger(), new ValueCollection(),
                 new FormulaContextRegister("register", new NullCalculationLogger()))
         {
         }
 
-        public FormulaContext(string name)
+        public FormulaContextOLD(string name)
             : this(
                 name, new NullCalculationLogger(), new ValueCollection(),
                 new FormulaContextRegister(name, new NullCalculationLogger()))
         {
         }
 
-        public FormulaContext(string name, ICalculationLogger logger)
+        public FormulaContextOLD(string name, ICalculationLogger logger)
             : this(name, logger, new ValueCollection(), new FormulaContextRegister(name, logger))
         {
         }
 
-        private FormulaContext(string name, ICalculationLogger logger, ValueCollection answers,
+        private FormulaContextOLD(string name, ICalculationLogger logger, ValueCollection answers,
                                IFormulaContextRegister register)
         {
             Name = name;
@@ -230,7 +230,7 @@ namespace Shuttle.Abacus.Domain
         {
             IncreaseIndent();
 
-            return new FormulaContext(title, logger, answers, new FormulaContextRegister(title, logger));
+            return new FormulaContextOLD(title, logger, answers, new FormulaContextRegister(title, logger));
         }
 
         public void Dispose()
@@ -240,7 +240,7 @@ namespace Shuttle.Abacus.Domain
 
         public IMethodContext Copy()
         {
-            return new FormulaContext(Name, logger, answers, register);
+            return new FormulaContextOLD(Name, logger, answers, register);
         }
 
         public void LogResults()

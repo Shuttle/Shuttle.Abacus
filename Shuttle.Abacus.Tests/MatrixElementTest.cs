@@ -12,19 +12,19 @@ namespace Shuttle.Abacus.Tests
         //{
         //    var rate = new MatrixElement(10);
 
-        //    Assert.IsTrue(rate.IsSatisfiedBy(new FormulaContext()));
+        //    Assert.IsTrue(rate.IsSatisfiedBy(new FormulaContextOLD()));
 
         //    var answer = new TextValueType("argument", "one");
 
         //    rate.AddConstraint(new EqualsConstraint(Guid.NewGuid(), answer));
 
-        //    var contextTrue = new FormulaContext();
+        //    var contextTrue = new FormulaContextOLD();
 
         //    contextTrue.AddArgumentAnswer(answer);
 
         //    Assert.IsTrue(rate.IsSatisfiedBy(contextTrue));
 
-        //    var contextFalse = new FormulaContext();
+        //    var contextFalse = new FormulaContextOLD();
 
         //    contextFalse.AddArgumentAnswer(new TextValueType("argument", "two"));
 

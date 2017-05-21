@@ -6,7 +6,7 @@ namespace Shuttle.Abacus.Domain
     public class TestRunEvent 
     {
         //TODO
-        //public MethodContextDTO FormulaContext { get; set; }
+        //public MethodContextDTO FormulaContextOLD { get; set; }
         public Guid WorkItemId { get; set; }
         public Guid MethodTestId { get; set; }
         public string MethodTestDescription { get; set; }
