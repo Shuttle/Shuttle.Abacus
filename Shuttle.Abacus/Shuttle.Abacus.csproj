@@ -54,8 +54,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\ValueSource\IValueSource.cs" />
+    <Compile Include="Domain\ValueSource\ValueSource.cs" />
     <Compile Include="Execution\ArgumentValue.cs" />
     <Compile Include="Execution\ExecutionContext.cs" />
+    <Compile Include="Execution\ExecutionEngine.cs" />
     <Compile Include="Execution\ExecutionResult.cs" />
     <Compile Include="Execution\ExecutionTask.cs" />
     <Compile Include="DataAccess\ArgumentQuery.cs" />
