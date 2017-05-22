@@ -38,9 +38,9 @@
       <HintPath>..\packages\Shuttle.Core.Infrastructure.8.0.2\lib\net452-full\Shuttle.Core.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Shuttle.Recall, Version=8.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Recall.8.0.1\lib\net452-full\Shuttle.Recall.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Shuttle.Recall, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Shuttle.Recall.8.0.0\lib\net452-full\Shuttle.Recall.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

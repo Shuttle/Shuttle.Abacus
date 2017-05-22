@@ -8,7 +8,7 @@ namespace Shuttle.Abacus.Tests
     [TestFixture]
     public class MaximumLengthRuleTest 
     {
-        private const string value = "blah-blah";
+        private const string value = "long-long";
 
         [Test]
         public void Should_fail_for_a_string_that_is_too_long()

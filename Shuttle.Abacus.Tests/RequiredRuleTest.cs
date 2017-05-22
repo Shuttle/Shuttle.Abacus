@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Invariants.Core;
 using Shuttle.Abacus.Localisation;
 
@@ -21,7 +20,7 @@ namespace Shuttle.Abacus.Tests
         [Test]
         public void Should_pass_when_a_value_is_specified()
         {
-            Assert.IsFalse(new RequiredRule().IsBrokenBy("blah"));
+            Assert.IsFalse(new RequiredRule().IsBrokenBy("not-empty"));
         }
     }
 }

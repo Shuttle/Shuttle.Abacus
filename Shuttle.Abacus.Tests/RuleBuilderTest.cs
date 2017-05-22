@@ -12,7 +12,7 @@ namespace Shuttle.Abacus.Tests
         {
             var set = Rule.With().MinimumLength(5).Create();
 
-            Assert.IsFalse(set.BrokenBy("blah").IsEmpty);
+            Assert.IsFalse(set.BrokenBy("oops").IsEmpty);
             Assert.IsTrue(set.BrokenBy("long enough").IsEmpty);
         }
     }

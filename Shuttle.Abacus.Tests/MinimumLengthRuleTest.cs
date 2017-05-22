@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Invariants.Core.Rules;
 using Shuttle.Abacus.Localisation;
 
@@ -8,7 +7,7 @@ namespace Shuttle.Abacus.Tests
     [TestFixture]
     public class MinimumLengthRuleTest
     {
-        private const string value = "blah";
+        private const string value = "test";
 
         [Test]
         public void Should_fail_for_a_string_that_is_too_short()
