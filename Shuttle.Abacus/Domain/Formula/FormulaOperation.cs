@@ -26,7 +26,7 @@ namespace Shuttle.Abacus.Domain
         public string ValueSource { get; private set; }
         public string ValueSelection { get; private set; }
 
-        public void Perform(FormulaContext context, string value)
+        public void Perform(FormulaContext context, object value)
         {
             switch (Operation.ToLower())
             {

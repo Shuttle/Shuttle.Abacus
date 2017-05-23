@@ -4,7 +4,7 @@ namespace Shuttle.Abacus
 {
     public interface IExecutionTask
     {
-        ExecutionResult Execute(string formulaName, IEnumerable<ArgumentValue> values);
+        ExecutionContext Execute(string formulaName, IEnumerable<ArgumentValue> values);
         void Flush();
     }
 }

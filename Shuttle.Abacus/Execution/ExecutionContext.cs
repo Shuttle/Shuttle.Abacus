@@ -5,17 +5,20 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus
 {
-    public class ExecutionResult
+    public class ExecutionContext
     {
+        private readonly Dictionary<string, Argument> _arguments = new Dictionary<string, Argument>();
         private readonly Dictionary<string, string> _values = new Dictionary<string, string>();
 
-        public ExecutionResult()
+        public ExecutionContext(IEnumerable<Argument> arguments, IEnumerable<ArgumentValue> values)
         {
-        }
-
-        public ExecutionResult(IEnumerable<ArgumentValue> values)
-        {
+            Guard.AgainstNull(arguments, "arguments");
             Guard.AgainstNull(values, "values");
+
+            foreach (var argument in arguments)
+            {
+                _arguments.Add(argument.Name, argument);
+            }
 
             foreach (var argumentValue in values)
             {
@@ -23,9 +26,14 @@ namespace Shuttle.Abacus
             }
         }
 
-        public static ExecutionResult Empty()
+        private Argument GetArgument(string name)
         {
-            return new ExecutionResult();
+            if (!_arguments.ContainsKey(name))
+            {
+                throw new InvalidOperationException(string.Format("There is no argument with name '{0}'.", name));
+            }
+
+            return _arguments[name];
         }
 
         public string GetArgumentValue(string name)

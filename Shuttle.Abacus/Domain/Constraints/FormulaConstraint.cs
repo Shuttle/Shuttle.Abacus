@@ -1,4 +1,5 @@
 ﻿using System;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
@@ -16,5 +17,14 @@ namespace Shuttle.Abacus.Domain
         public string ArgumentName { get; }
         public string Comparison { get; }
         public string Value { get; }
+
+        public bool IsSatisfiedBy(ExecutionContext executionContext)
+        {
+            Guard.AgainstNull(executionContext, "executionContext");
+
+            var value = executionContext.GetArgumentValue(ArgumentName);
+
+
+        }
     }
 }

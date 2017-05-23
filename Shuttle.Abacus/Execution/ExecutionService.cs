@@ -6,11 +6,11 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus
 {
-    public class ExecutionEngine
+    public class ExecutionService
     {
         private readonly Dictionary<string, Formula> _formulas = new Dictionary<string, Formula>();
 
-        public ExecutionEngine(IEnumerable<Formula> formulas)
+        public ExecutionService(IExecConteFac IEnumerable<Formula> formulas)
         {
             Guard.AgainstNull(formulas, "formulas");
 
@@ -30,42 +30,51 @@ namespace Shuttle.Abacus
         //{
         //}
 
-        public ExecutionResult Execute(string formulaName, IEnumerable<ArgumentValue> values)
+        public ExecutionContext Execute(string formulaName, IEnumerable<ArgumentValue> values)
         {
             Guard.AgainstNullOrEmptyString(formulaName, "formulaName");
             Guard.AgainstNull(values, "values");
 
-            var result = new ExecutionResult(values);
+            var context = new ExecutionContext(values);
 
-            Execute(formulaName, result, result.FormulaContext());
+            Execute(formulaName, context, context.FormulaContext());
 
-            return result;
+            return context;
         }
 
-        private void Execute(string formulaName, ExecutionResult result, FormulaContext formulaContext)
+        private decimal Execute(string formulaName, ExecutionContext executionContext, FormulaContext formulaContext)
         {
             var formula = GetFormula(formulaName);
 
+            if (!formula.IsSatisfiedBy(executionContext))
+            {
+                return 0;
+            }
+
             foreach (var operation in formula.Operations)
             {
-                var value = string.Empty;
+                object value = null;
 
                 switch (operation.ValueSource.ToLower())
                 {
                     case "argument":
                     {
-                        value = result.GetArgumentValue(operation.ValueSelection);
+                        value = executionContext.GetArgumentValue(operation.ValueSelection);
 
                         break;
                     }
                     case "formula":
                     {
+                        value = Execute(operation.ValueSelection, executionContext, executionContext.FormulaContext());
+
                         break;
                     }
                 }
 
                 operation.Perform(formulaContext, value);
             }
+
+            return formulaContext.Result;
         }
 
         private Formula GetFormula(string formulaName)

@@ -38,7 +38,7 @@ namespace Shuttle.Abacus
             _argumentQuery = argumentQuery;
         }
 
-        public ExecutionResult Execute(string formulaName, IEnumerable<ArgumentValue> values)
+        public ExecutionContext Execute(string formulaName, IEnumerable<ArgumentValue> values)
         {
             if (!_cached)
             {
@@ -49,10 +49,10 @@ namespace Shuttle.Abacus
 
             if (formula == null)
             {
-                return ExecutionResult.Empty();
+                return ExecutionContext.Empty();
             }
 
-            return ExecutionResult.Empty();
+            return ExecutionContext.Empty();
         }
 
         public void Flush()

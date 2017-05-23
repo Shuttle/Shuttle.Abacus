@@ -296,5 +296,20 @@ namespace Shuttle.Abacus.Domain
 
             return constraintsRemoved;
         }
+
+        public bool IsSatisfiedBy(ExecutionContext executionContext)
+        {
+            Guard.AgainstNull(executionContext, "executionContext");
+
+            foreach (var constraint in _constraints)
+            {
+                if (!constraint.IsSatisfiedBy(executionContext))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
