@@ -54,12 +54,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CachedArgumentProvider.cs" />
+    <Compile Include="DataAccess\FormulaRepository.cs" />
+    <Compile Include="DataAccess\ArgumentRepository.cs" />
+    <Compile Include="DataAccess\IFormulaRepository.cs" />
     <Compile Include="Domain\ValueSource\IValueSource.cs" />
     <Compile Include="Domain\ValueSource\ValueSource.cs" />
     <Compile Include="Execution\ArgumentValue.cs" />
     <Compile Include="Execution\ArgumentValueSource.cs" />
-    <Compile Include="Execution\ExecutionContextFactory.cs" />
+    <Compile Include="Execution\ExecutionServiceFactory.cs" />
     <Compile Include="Execution\ExecutionService.cs" />
     <Compile Include="Execution\ExecutionContext.cs" />
     <Compile Include="Execution\ExecutionTask.cs" />
@@ -192,11 +194,8 @@
     <Compile Include="Domain\IVersionedEntity.cs" />
     <Compile Include="Domain\Limits\MaximumLimitResultBuilder.cs" />
     <Compile Include="Domain\Limits\MinimumLimitResultBuilder.cs" />
-    <Compile Include="Domain\Logging\CalculationLoggerFactory.cs" />
-    <Compile Include="Domain\Logging\ICalculationLoggerFactory.cs" />
-    <Compile Include="Domain\Logging\ICalculationLogger.cs" />
-    <Compile Include="Domain\Logging\NullCalculationLogger.cs" />
-    <Compile Include="Domain\Logging\DefaultCalculationLogger.cs" />
+    <Compile Include="Domain\Logging\IExecutionContextLogger.cs" />
+    <Compile Include="Domain\Logging\ExecutionContextLogger.cs" />
     <Compile Include="Domain\Test.cs" />
     <Compile Include="Domain\TestItem.cs" />
     <Compile Include="Domain\Money.cs" />
@@ -223,7 +222,7 @@
     <Compile Include="Events\Test.v1\ArgumentRemoved.cs" />
     <Compile Include="Execution\FormulaContext.cs" />
     <Compile Include="Execution\IExecutionTask.cs" />
-    <Compile Include="ICachedArgumentProvider.cs" />
+    <Compile Include="DataAccess\IArgumentRepository.cs" />
     <Compile Include="Invariants\ArgumentValueRules.cs" />
     <Compile Include="Invariants\Core\Rules\BooleanRule.cs" />
     <Compile Include="Invariants\FormulaRules.cs" />

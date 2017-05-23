@@ -6,8 +6,8 @@ namespace Shuttle.Abacus.Domain
     {
         public TextValueType(string argumentName, string text) : base(argumentName)
         {
-            AnswerString = text;
-            Answer = text;
+            ValueString = text;
+            Value = text;
         }
 
         public override string AnswerType => "Text";
@@ -16,12 +16,12 @@ namespace Shuttle.Abacus.Domain
         {
             Guard.AgainstNull(other, "other");
 
-            return AnswerString.CompareTo(other.AnswerString);
+            return ValueString.CompareTo(other.ValueString);
         }
 
         public override string DisplayString()
         {
-            return AnswerString;
+            return ValueString;
         }
     }
 }

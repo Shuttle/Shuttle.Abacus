@@ -10,19 +10,19 @@ namespace Shuttle.Abacus.Domain
 
         public IntegerValueType(string argumentName, string text) : base(argumentName)
         {
-            AnswerString = text;
+            ValueString = text;
 
             value = int.Parse(text);
 
-            Answer = value;
+            Value = value;
         }
 
         public IntegerValueType(string argumentName, int value) : base(argumentName)
         {
             this.value = value;
 
-            Answer = value;
-            AnswerString = Convert.ToString(value);
+            Value = value;
+            ValueString = Convert.ToString(value);
         }
 
         public override string AnswerType => "Integer";
@@ -33,7 +33,7 @@ namespace Shuttle.Abacus.Domain
 
             int otherValue;
 
-            if (!int.TryParse(other.AnswerString, out otherValue))
+            if (!int.TryParse(other.ValueString, out otherValue))
             {
                 throw new InvalidCastException(string.Format(Resources.IncompatibleCalculationValues, GetType().Name,
                                                              other.GetType().Name));

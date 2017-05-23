@@ -4,24 +4,25 @@ using System.Text;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class DefaultCalculationLogger : ICalculationLogger
+    public class ExecutionContextLogger : IExecutionContextLogger
     {
         private readonly string[] argsEmpty = { };
 
-        private readonly List<string> errorMessages;
-        private readonly List<string> informationMessages;
-        private readonly StringBuilder log = new StringBuilder();
-        private readonly List<string> warningMessages;
+        private readonly StringBuilder _log = new StringBuilder();
+
+        private readonly List<string> _errorMessages;
+        private readonly List<string> _informationMessages;
+        private readonly List<string> _warningMessages;
 
         private int indent;
 
-        public DefaultCalculationLogger()
+        public ExecutionContextLogger()
         {
             Enabled = true;
 
-            errorMessages = new List<string>();
-            warningMessages = new List<string>();
-            informationMessages = new List<string>();
+            _errorMessages = new List<string>();
+            _warningMessages = new List<string>();
+            _informationMessages = new List<string>();
 
             indent = 0;
         }
@@ -35,31 +36,31 @@ namespace Shuttle.Abacus.Domain
 
         public virtual void AppendLine(string text, params string[] args)
         {
-            log.AppendFormat(new string('\t', indent) + text, args);
-            log.AppendLine();
+            _log.AppendFormat(new string('\t', indent) + text, args);
+            _log.AppendLine();
         }
 
         public virtual void AppendLine()
         {
-            log.AppendLine();
+            _log.AppendLine();
         }
 
-        public IEnumerable<string> ErrorMessages => new ReadOnlyCollection<string>(errorMessages);
+        public IEnumerable<string> ErrorMessages => new ReadOnlyCollection<string>(_errorMessages);
 
-        public IEnumerable<string> WarningMessages => new ReadOnlyCollection<string>(warningMessages);
+        public IEnumerable<string> WarningMessages => new ReadOnlyCollection<string>(_warningMessages);
 
-        public IEnumerable<string> InformationMessages => new ReadOnlyCollection<string>(informationMessages);
+        public IEnumerable<string> InformationMessages => new ReadOnlyCollection<string>(_informationMessages);
 
-        public bool HasErrorMessages => errorMessages.Count > 0;
+        public bool HasErrorMessages => _errorMessages.Count > 0;
 
         public void AddErrorMessage(string message)
         {
-            if (errorMessages.Contains(message))
+            if (_errorMessages.Contains(message))
             {
                 return;
             }
 
-            errorMessages.Add(message);
+            _errorMessages.Add(message);
 
             if (Enabled)
             {
@@ -69,12 +70,12 @@ namespace Shuttle.Abacus.Domain
 
         public void AddWarningMessage(string message)
         {
-            if (warningMessages.Contains(message))
+            if (_warningMessages.Contains(message))
             {
                 return;
             }
 
-            warningMessages.Add(message);
+            _warningMessages.Add(message);
 
             if (Enabled)
             {
@@ -84,12 +85,12 @@ namespace Shuttle.Abacus.Domain
 
         public void AddInformationMessage(string message)
         {
-            if (informationMessages.Contains(message))
+            if (_informationMessages.Contains(message))
             {
                 return;
             }
 
-            informationMessages.Add(message);
+            _informationMessages.Add(message);
 
             if (Enabled)
             {
@@ -114,7 +115,7 @@ namespace Shuttle.Abacus.Domain
 
         public override string ToString()
         {
-            return log.ToString();
+            return _log.ToString();
         }
     }
 }

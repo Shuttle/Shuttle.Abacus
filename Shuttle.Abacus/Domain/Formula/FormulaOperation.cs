@@ -21,18 +21,18 @@ namespace Shuttle.Abacus.Domain
             ValueSelection = valueSelection;
         }
 
-        public int SequenceNumber { get; private set; }
-        public string Operation { get; private set; }
-        public string ValueSource { get; private set; }
-        public string ValueSelection { get; private set; }
+        public int SequenceNumber { get; }
+        public string Operation { get; }
+        public string ValueSource { get; }
+        public string ValueSelection { get; }
 
-        public void Perform(FormulaContext context, object value)
+        public void Perform(FormulaContext context, decimal value)
         {
             switch (Operation.ToLower())
             {
                 case "addition":
                 {
-                    context.Result += Convert.ToDecimal(value);
+                    context.Result += value;
 
                     return;
                 }

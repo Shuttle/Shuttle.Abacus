@@ -11,14 +11,14 @@ namespace Shuttle.Abacus.Domain
         public BooleanValueType(string argumentName, bool value)
             : base(argumentName)
         {
-            Answer = value;
-            AnswerString = Convert.ToString(value);
+            Value = value;
+            ValueString = Convert.ToString(value);
         }
 
         public BooleanValueType(string argumentName, string text)
             : base(argumentName)
         {
-            AnswerString = text;
+            ValueString = text;
 
             switch (text.ToLower())
             {
@@ -38,7 +38,7 @@ namespace Shuttle.Abacus.Domain
                     }
             }
 
-            Answer = value;
+            Value = value;
         }
 
         public override string AnswerType => "Boolean";
@@ -49,7 +49,7 @@ namespace Shuttle.Abacus.Domain
 
             bool otherValue;
 
-            if (!bool.TryParse(other.AnswerString, out otherValue))
+            if (!bool.TryParse(other.ValueString, out otherValue))
             {
                 throw new InvalidCastException(string.Format(Resources.IncompatibleCalculationValues, GetType().Name,
                                                              other.GetType().Name));

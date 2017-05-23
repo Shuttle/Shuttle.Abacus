@@ -10,11 +10,11 @@ namespace Shuttle.Abacus.Domain
 
         public DateTimeValueType(string argumentName, string text) : base(argumentName)
         {
-            AnswerString = text;
+            ValueString = text;
 
             value = DateTime.Parse(text);
 
-            Answer = value;
+            Value = value;
         }
 
         public override string AnswerType => "DateTime";
@@ -25,7 +25,7 @@ namespace Shuttle.Abacus.Domain
 
             DateTime otherValue;
 
-            if (!DateTime.TryParse(other.AnswerString, out otherValue))
+            if (!DateTime.TryParse(other.ValueString, out otherValue))
             {
                 throw new InvalidCastException(string.Format(Resources.IncompatibleCalculationValues, GetType().Name,
                                                              other.GetType().Name));

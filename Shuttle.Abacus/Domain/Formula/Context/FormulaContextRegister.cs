@@ -8,16 +8,16 @@ namespace Shuttle.Abacus.Domain
 {
     public class FormulaContextRegister : IFormulaContextRegister
     {
-        private readonly ICalculationLogger logger;
+        private readonly IExecutionContextLogger logger;
         private readonly Dictionary<string, ICalculationResult> results;
         private readonly Dictionary<string, SubTotalCalculationResult> subtotals;
 
-        public FormulaContextRegister(string name, ICalculationLogger logger)
+        public FormulaContextRegister(string name, IExecutionContextLogger logger)
             : this(name, logger, new Dictionary<string, ICalculationResult>(), new Dictionary<string, SubTotalCalculationResult>())
         {
         }
 
-        private FormulaContextRegister(string name, ICalculationLogger logger, Dictionary<string, ICalculationResult> results,
+        private FormulaContextRegister(string name, IExecutionContextLogger logger, Dictionary<string, ICalculationResult> results,
                                        Dictionary<string, SubTotalCalculationResult> subtotals)
         {
             this.logger = logger;

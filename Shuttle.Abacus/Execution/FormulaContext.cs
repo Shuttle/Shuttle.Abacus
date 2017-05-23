@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace Shuttle.Abacus
+﻿namespace Shuttle.Abacus
 {
     public class FormulaContext
     {
-        public Decimal Result { get; set; }
+        public decimal Result { get; set; }
     }
 }

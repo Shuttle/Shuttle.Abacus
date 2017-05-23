@@ -40,19 +40,13 @@ namespace Shuttle.Abacus
 
         public ExecutionContext Execute(string formulaName, IEnumerable<ArgumentValue> values)
         {
-            if (!_cached)
-            {
-                Cache();
-            }
+            throw new NotImplementedException();
+            //if (!_cached)
+            //{
+            //    Cache();
+            //}
 
-            var formula = Get<Formula>(formulaName);
-
-            if (formula == null)
-            {
-                return ExecutionContext.Empty();
-            }
-
-            return ExecutionContext.Empty();
+            //var formula = Get<Formula>(formulaName);
         }
 
         public void Flush()

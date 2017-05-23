@@ -10,31 +10,17 @@ namespace Shuttle.Abacus.Domain
     public class FormulaContextOLD : IMethodContext
     {
         private readonly ValueCollection answers;
-        private readonly ICalculationLogger logger;
+        private readonly IExecutionContextLogger logger;
         private readonly IFormulaContextRegister register;
 
         public IGraphNode GraphNode { get; private set; }
 
-        public FormulaContextOLD()
-            : this(
-                string.Empty, new NullCalculationLogger(), new ValueCollection(),
-                new FormulaContextRegister("register", new NullCalculationLogger()))
-        {
-        }
-
-        public FormulaContextOLD(string name)
-            : this(
-                name, new NullCalculationLogger(), new ValueCollection(),
-                new FormulaContextRegister(name, new NullCalculationLogger()))
-        {
-        }
-
-        public FormulaContextOLD(string name, ICalculationLogger logger)
+        public FormulaContextOLD(string name, IExecutionContextLogger logger)
             : this(name, logger, new ValueCollection(), new FormulaContextRegister(name, logger))
         {
         }
 
-        private FormulaContextOLD(string name, ICalculationLogger logger, ValueCollection answers,
+        private FormulaContextOLD(string name, IExecutionContextLogger logger, ValueCollection answers,
                                IFormulaContextRegister register)
         {
             Name = name;
@@ -172,7 +158,7 @@ namespace Shuttle.Abacus.Domain
 
             if (LoggerEnabled)
             {
-                Log("Argument answer: {0} = {1}", valueType.ArgumentName, Convert.ToString(valueType.Answer));
+                Log("Argument answer: {0} = {1}", valueType.ArgumentName, Convert.ToString(valueType.Value));
             }
 
             return this;

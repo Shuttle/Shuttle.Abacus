@@ -5,6 +5,8 @@ namespace Shuttle.Abacus.Domain
 {
     public class FormulaConstraint
     {
+        private static readonly char[] separator = {','};
+
         public FormulaConstraint(int sequenceNumber, string argumentName, string comparison, string value)
         {
             SequenceNumber = sequenceNumber;
@@ -22,9 +24,19 @@ namespace Shuttle.Abacus.Domain
         {
             Guard.AgainstNull(executionContext, "executionContext");
 
-            var value = executionContext.GetArgumentValue(ArgumentName);
+            var argument = executionContext.GetArgument(ArgumentName);
 
+            foreach (var argumentValue in executionContext.GetArgumentValue(ArgumentName).Split(separator, StringSplitOptions.RemoveEmptyEntries))
+            {
+                var argumentValueType = argument.CreateValueType(argumentValue);
 
+                foreach (var comparisonValue in Value.Split(separator, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    var comparisonValueType = argument.CreateValueType(comparisonValue);
+                }
+            }
+
+            return false;
         }
     }
 }

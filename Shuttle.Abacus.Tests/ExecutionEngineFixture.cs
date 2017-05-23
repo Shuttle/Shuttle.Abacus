@@ -22,7 +22,11 @@ namespace Shuttle.Abacus.Tests
 
             formulas.Add(formula);
 
-            var context = new ExecutionService(formulas);
+            var arguments = new List<Argument>();
+
+
+
+            var context = new ExecutionService(formulas, arguments);
 
             context.Execute("Test", new List<ArgumentValue>
             {

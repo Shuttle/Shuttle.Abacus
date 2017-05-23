@@ -26,16 +26,6 @@ namespace Shuttle.Abacus
             }
         }
 
-        private Argument GetArgument(string name)
-        {
-            if (!_arguments.ContainsKey(name))
-            {
-                throw new InvalidOperationException(string.Format("There is no argument with name '{0}'.", name));
-            }
-
-            return _arguments[name];
-        }
-
         public string GetArgumentValue(string name)
         {
             if (!_values.ContainsKey(name))
@@ -49,6 +39,16 @@ namespace Shuttle.Abacus
         public FormulaContext FormulaContext()
         {
             return new FormulaContext();
+        }
+
+        public void Exception(Exception exception)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Argument GetArgument(string name)
+        {
+            return _arguments[name];
         }
     }
 }

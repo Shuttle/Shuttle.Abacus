@@ -12,17 +12,17 @@ namespace Shuttle.Abacus.Domain
         {
             this.value = value;
 
-            AnswerString = Convert.ToString(value);
-            Answer = value;
+            ValueString = Convert.ToString(value);
+            Value = value;
         }
 
         public ConstantValueType(string argumentName, string text) : base(argumentName)
         {
-            AnswerString = text;
+            ValueString = text;
 
             value = decimal.Parse(text);
 
-            Answer = value;
+            Value = value;
         }
 
         public override string AnswerType => "Constant";
@@ -33,7 +33,7 @@ namespace Shuttle.Abacus.Domain
 
             decimal otherValue;
 
-            if (!decimal.TryParse(other.AnswerString, out otherValue))
+            if (!decimal.TryParse(other.ValueString, out otherValue))
             {
                 throw new InvalidCastException(string.Format(Resources.IncompatibleCalculationValues, GetType().Name,
                                                              other.GetType().Name));

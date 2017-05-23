@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Shuttle.Abacus.Domain
 {
-    public interface ICalculationLogger
+    public interface IExecutionContextLogger
     {
         bool Enabled { get; }
 

@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using Shuttle.Abacus.Domain;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus.DataAccess
 {
-    public interface ICachedArgumentProvider
+    public interface IArgumentRepository
     {
         IEnumerable<Argument> All();
-        void Flush();
     }
 }

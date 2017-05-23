@@ -179,5 +179,10 @@ namespace Shuttle.Abacus.Domain
 
             return valueRemoved;
         }
+
+        public ValueType CreateValueType(string value)
+        {
+            return Domain.ValueType.Create(ValueType, Name, value);
+        }
     }
 }

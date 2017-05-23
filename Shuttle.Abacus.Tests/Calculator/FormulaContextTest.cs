@@ -21,7 +21,7 @@ namespace Shuttle.Abacus.Tests
         //[Test]
         //public void Should_be_able_to_use_a_logger()
         //{
-        //    ICalculationLogger logger = new DefaultCalculationLogger();
+        //    IExecutionContextLogger logger = new ExecutionContextLogger();
 
         //    var context = new FormulaContextOLD((string) "context");
 
