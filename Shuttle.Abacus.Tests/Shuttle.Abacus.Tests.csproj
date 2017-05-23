@@ -73,7 +73,7 @@
     <Compile Include="Calculator\LimitsTest.cs" />
     <Compile Include="Calculator\MethodContextTest.cs" />
     <Compile Include="DecimalTableTest.cs" />
-    <Compile Include="ExecutionTaskFixture.cs" />
+    <Compile Include="ExecutionEngineFixture.cs" />
     <Compile Include="MatrixElementTest.cs" />
     <Compile Include="GraphNodeArgumentTest.cs" />
     <Compile Include="MaximumLengthRuleTest.cs" />

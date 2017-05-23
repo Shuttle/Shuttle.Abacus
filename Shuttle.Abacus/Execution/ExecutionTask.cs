@@ -52,10 +52,6 @@ namespace Shuttle.Abacus
                 return ExecutionResult.Empty();
             }
 
-            var executionContext = new ExecutionContext(formulaName, values);
-
-
-
             return ExecutionResult.Empty();
         }
 

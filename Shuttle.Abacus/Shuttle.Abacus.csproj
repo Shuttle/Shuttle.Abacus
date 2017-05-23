@@ -57,7 +57,7 @@
     <Compile Include="Domain\ValueSource\IValueSource.cs" />
     <Compile Include="Domain\ValueSource\ValueSource.cs" />
     <Compile Include="Execution\ArgumentValue.cs" />
-    <Compile Include="Execution\ExecutionContext.cs" />
+    <Compile Include="Execution\ArgumentValueSource.cs" />
     <Compile Include="Execution\ExecutionEngine.cs" />
     <Compile Include="Execution\ExecutionResult.cs" />
     <Compile Include="Execution\ExecutionTask.cs" />
@@ -220,7 +220,6 @@
     <Compile Include="Events\Test.v1\ValueAdded.cs" />
     <Compile Include="Events\Test.v1\ArgumentRemoved.cs" />
     <Compile Include="Execution\FormulaContext.cs" />
-    <Compile Include="Execution\IContext.cs" />
     <Compile Include="Execution\IExecutionTask.cs" />
     <Compile Include="Invariants\ArgumentValueRules.cs" />
     <Compile Include="Invariants\Core\Rules\BooleanRule.cs" />

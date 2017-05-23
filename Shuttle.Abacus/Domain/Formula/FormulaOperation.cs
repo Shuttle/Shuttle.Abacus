@@ -1,3 +1,5 @@
+using System;
+
 namespace Shuttle.Abacus.Domain
 {
     public enum ValueSourceType
@@ -23,5 +25,18 @@ namespace Shuttle.Abacus.Domain
         public string Operation { get; private set; }
         public string ValueSource { get; private set; }
         public string ValueSelection { get; private set; }
+
+        public void Perform(FormulaContext context, string value)
+        {
+            switch (Operation.ToLower())
+            {
+                case "addition":
+                {
+                    context.Result += Convert.ToDecimal(value);
+
+                    return;
+                }
+            }
+        }
     }
 }

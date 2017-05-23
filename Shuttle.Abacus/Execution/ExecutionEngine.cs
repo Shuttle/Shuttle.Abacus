@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Invariants;
 using Shuttle.Core.Infrastructure;
@@ -8,14 +9,10 @@ namespace Shuttle.Abacus
     public class ExecutionEngine
     {
         private readonly Dictionary<string, Formula> _formulas = new Dictionary<string, Formula>();
-        private readonly Dictionary<string, Argument> _arguments = new Dictionary<string, Argument>();
-        private readonly Dictionary<string, Matrix> _matrixes = new Dictionary<string, Matrix>();
 
-        public ExecutionEngine(IEnumerable<Formula> formulas, IEnumerable<Argument> arguments, IEnumerable<Matrix> matrixes)
+        public ExecutionEngine(IEnumerable<Formula> formulas)
         {
             Guard.AgainstNull(formulas, "formulas");
-            Guard.AgainstNull(arguments, "arguments");
-            Guard.AgainstNull(matrixes, "matrixes");
 
             foreach (var formula in formulas)
             {
@@ -26,29 +23,9 @@ namespace Shuttle.Abacus
 
                 _formulas.Add(formula.Name, formula);
             }
-
-            foreach (var argument in arguments)
-            {
-                if (_arguments.ContainsKey(argument.Name))
-                {
-                    throw new DuplicateEntryException(string.Format("There is already an argument with name '{0}' registered.", argument.Name));
-                }
-
-                _arguments.Add(argument.Name, argument);
-            }
-
-            foreach (var matrix in matrixes)
-            {
-                if (_matrixes.ContainsKey(matrix.Name))
-                {
-                    throw new DuplicateEntryException(string.Format("There is already a matrix with name '{0}' registered.", matrix.Name));
-                }
-
-                _matrixes.Add(matrix.Name, matrix);
-            }
         }
 
-        // rather something like this
+        // perhaps something like this
         //public ExecutionEngine AddValueSource(IValueSource valueSource)
         //{
         //}
@@ -58,16 +35,47 @@ namespace Shuttle.Abacus
             Guard.AgainstNullOrEmptyString(formulaName, "formulaName");
             Guard.AgainstNull(values, "values");
 
-            var result = new ExecutionResult();
+            var result = new ExecutionResult(values);
 
-            var formula = _formulas[formulaName];
+            Execute(formulaName, result, result.FormulaContext());
+
+            return result;
+        }
+
+        private void Execute(string formulaName, ExecutionResult result, FormulaContext formulaContext)
+        {
+            var formula = GetFormula(formulaName);
 
             foreach (var operation in formula.Operations)
             {
-                operation.
+                var value = string.Empty;
+
+                switch (operation.ValueSource.ToLower())
+                {
+                    case "argument":
+                    {
+                        value = result.GetArgumentValue(operation.ValueSelection);
+
+                        break;
+                    }
+                    case "formula":
+                    {
+                        break;
+                    }
+                }
+
+                operation.Perform(formulaContext, value);
+            }
+        }
+
+        private Formula GetFormula(string formulaName)
+        {
+            if (!_formulas.ContainsKey(formulaName))
+            {
+                throw new InvalidOperationException(string.Format("There is not formula with name '{0}'.", formulaName));
             }
 
-            return result;
+            return _formulas[formulaName];
         }
     }
 }
