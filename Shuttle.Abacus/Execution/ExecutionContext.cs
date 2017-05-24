@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Shuttle.Abacus.Domain;
 using Shuttle.Core.Infrastructure;
 
@@ -11,6 +12,7 @@ namespace Shuttle.Abacus
 
         private readonly Dictionary<string, Argument> _arguments = new Dictionary<string, Argument>();
         private readonly Dictionary<string, string> _values = new Dictionary<string, string>();
+        private readonly List<ExecutionResult> _results = new List<ExecutionResult>();
 
         public ExecutionContext(IEnumerable<Argument> arguments, IEnumerable<ArgumentValue> values)
         {
@@ -58,6 +60,16 @@ namespace Shuttle.Abacus
         public void FormulaContextCompleted()
         {
             _depth -= 1;
+        }
+
+        public void AddResult(string formulaName, decimal result)
+        {
+            _results.Add(new ExecutionResult(formulaName, result, _depth));
+        }
+
+        public ExecutionResult RootResult()
+        {
+            return _results.FirstOrDefault();
         }
     }
 }
