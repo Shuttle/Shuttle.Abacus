@@ -5,8 +5,7 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class Matrix :
-        ISpecification<IMethodContext>
+    public class Matrix 
     {
         //private static readonly MatrixElement ZeroMatrixElement = new MatrixElement(0);
 
@@ -29,20 +28,6 @@ namespace Shuttle.Abacus.Domain
         public string RowArgumentName { get; private set; }
         public string ColumnArgumentName { get; private set; }
 
-        public bool IsSatisfiedBy(IMethodContext item)
-        {
-            throw new NotImplementedException();
-            //foreach (var value in Elements)
-            //{
-            //    if (value.IsSatisfiedBy(item))
-            //    {
-            //        return true;
-            //    }
-            //}
-
-            //return false;
-        }
-
         public void AddDecimalValue(MatrixElement matrixElement)
         {
             Guard.AgainstNull(matrixElement, "matrixElement");
@@ -63,12 +48,6 @@ namespace Shuttle.Abacus.Domain
 
         //    return ZeroMatrixElement;
         //}
-
-        public MatrixElement Find(IMethodContext collectionContext)
-        {
-            throw new NotImplementedException();
-            //return _values.Find(value => value.IsSatisfiedBy(collectionContext));
-        }
 
         public Matrix Copy()
         {

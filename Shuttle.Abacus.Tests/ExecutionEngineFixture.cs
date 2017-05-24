@@ -22,11 +22,17 @@ namespace Shuttle.Abacus.Tests
 
             formulas.Add(formula);
 
-            var arguments = new List<Argument>();
+            var operand1 = new Argument(Guid.NewGuid());
 
+            operand1.Register("Operand1", "Integer");
 
+            var operand2 = new Argument(Guid.NewGuid());
 
-            var context = new ExecutionService(formulas, arguments);
+            operand2.Register("Operand2", "Decimal");
+
+            var arguments = new List<Argument> {operand1, operand2};
+
+            var context = new ExecutionService(new ConstraintComparison(new ValueTypeFactory()),  formulas, arguments);
 
             context.Execute("Test", new List<ArgumentValue>
             {

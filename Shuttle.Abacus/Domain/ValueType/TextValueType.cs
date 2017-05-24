@@ -4,7 +4,7 @@ namespace Shuttle.Abacus.Domain
 {
     public class TextValueType : ValueType
     {
-        public TextValueType(string argumentName, string text) : base(argumentName)
+        public TextValueType(string text) 
         {
             ValueString = text;
             Value = text;

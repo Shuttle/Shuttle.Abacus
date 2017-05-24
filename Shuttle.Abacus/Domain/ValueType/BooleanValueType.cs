@@ -8,15 +8,13 @@ namespace Shuttle.Abacus.Domain
     {
         private readonly bool value;
 
-        public BooleanValueType(string argumentName, bool value)
-            : base(argumentName)
+        public BooleanValueType(bool value)
         {
             Value = value;
             ValueString = Convert.ToString(value);
         }
 
-        public BooleanValueType(string argumentName, string text)
-            : base(argumentName)
+        public BooleanValueType(string text)
         {
             ValueString = text;
 

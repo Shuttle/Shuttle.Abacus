@@ -6,20 +6,20 @@ namespace Shuttle.Abacus.Domain
 {
     public class IntegerValueType : ValueType
     {
-        private readonly int value;
+        private readonly int _value;
 
-        public IntegerValueType(string argumentName, string text) : base(argumentName)
+        public IntegerValueType(string text)
         {
             ValueString = text;
 
-            value = int.Parse(text);
+            _value = int.Parse(text);
 
-            Value = value;
+            Value = _value;
         }
 
-        public IntegerValueType(string argumentName, int value) : base(argumentName)
+        public IntegerValueType(int value)
         {
-            this.value = value;
+            _value = value;
 
             Value = value;
             ValueString = Convert.ToString(value);
@@ -36,15 +36,15 @@ namespace Shuttle.Abacus.Domain
             if (!int.TryParse(other.ValueString, out otherValue))
             {
                 throw new InvalidCastException(string.Format(Resources.IncompatibleCalculationValues, GetType().Name,
-                                                             other.GetType().Name));
+                    other.GetType().Name));
             }
 
-            return value.CompareTo(otherValue);
+            return _value.CompareTo(otherValue);
         }
 
         public override string DisplayString()
         {
-            return value.ToString("#,##0");
+            return _value.ToString("#,##0");
         }
     }
 }

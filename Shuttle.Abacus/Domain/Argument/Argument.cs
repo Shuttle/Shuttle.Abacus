@@ -35,15 +35,15 @@ namespace Shuttle.Abacus.Domain
         public IEnumerable<string> Values => new ReadOnlyCollection<string>(_values);
         public bool HasValues => _values.Count > 0;
 
-        public Registered Register(string name, string answerType)
+        public Registered Register(string name, string valueType)
         {
             Guard.AgainstNullOrEmptyString(name, "name");
-            Guard.AgainstNullOrEmptyString(answerType, "answerType");
+            Guard.AgainstNullOrEmptyString(valueType, "answerType");
 
             return On(new Registered
             {
                 Name = name,
-                AnswerType = answerType
+                ValueType = valueType
             });
         }
 
@@ -52,7 +52,7 @@ namespace Shuttle.Abacus.Domain
             Guard.AgainstNull(registered, "registered");
 
             Name = registered.Name;
-            ValueType = registered.AnswerType;
+            ValueType = registered.ValueType;
 
             return registered;
         }
@@ -178,11 +178,6 @@ namespace Shuttle.Abacus.Domain
             _values.Remove(valueRemoved.Value);
 
             return valueRemoved;
-        }
-
-        public ValueType CreateValueType(string value)
-        {
-            return Domain.ValueType.Create(ValueType, Name, value);
         }
     }
 }

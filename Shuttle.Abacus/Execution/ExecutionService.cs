@@ -8,13 +8,17 @@ namespace Shuttle.Abacus
 {
     public class ExecutionService
     {
+        private readonly IConstraintComparison _constraintComparison;
         private readonly Dictionary<string, Formula> _formulas = new Dictionary<string, Formula>();
         private readonly Dictionary<string, Argument> _arguments = new Dictionary<string, Argument>();
 
-        public ExecutionService(IEnumerable<Formula> formulas, IEnumerable<Argument> arguments)
+        public ExecutionService(IConstraintComparison constraintComparison, IEnumerable<Formula> formulas, IEnumerable<Argument> arguments)
         {
+            Guard.AgainstNull(constraintComparison, "comparer");
             Guard.AgainstNull(formulas, "formulas");
             Guard.AgainstNull(arguments, "arguments");
+
+            _constraintComparison = constraintComparison;
 
             foreach (var formula in formulas)
             {
@@ -65,10 +69,18 @@ namespace Shuttle.Abacus
         {
             var formula = GetFormula(formulaName);
 
-            if (!formula.IsSatisfiedBy(executionContext))
+            foreach (var constraint in formula.Constraints)
             {
-                return 0;
+                var argument = GetArgument(constraint.ArgumentName);
+                var argumentValue = executionContext.GetArgumentValue(constraint.ArgumentName);
+
+                //if (!_constraintComparison.IsSatisfiedBy(argument.ValueType, ))
             }
+
+            //if (!formula.IsSatisfiedBy(executionContext))
+            //{
+            //    return 0;
+            //}
 
             foreach (var operation in formula.Operations)
             {

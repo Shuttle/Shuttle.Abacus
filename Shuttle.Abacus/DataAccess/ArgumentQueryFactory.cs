@@ -133,7 +133,7 @@ values
 )")
                 .AddParameterValue(ArgumentColumns.Id, primitiveEvent.Id)
                 .AddParameterValue(ArgumentColumns.Name, registered.Name)
-                .AddParameterValue(ArgumentColumns.AnswerType, registered.AnswerType);
+                .AddParameterValue(ArgumentColumns.AnswerType, registered.ValueType);
         }
 
         public IQuery Removed(PrimitiveEvent primitiveEvent, Removed removed)

@@ -6,15 +6,15 @@ namespace Shuttle.Abacus.Domain
 {
     public class DateTimeValueType : ValueType
     {
-        private readonly DateTime value;
+        private readonly DateTime _value;
 
-        public DateTimeValueType(string argumentName, string text) : base(argumentName)
+        public DateTimeValueType(string text) 
         {
             ValueString = text;
 
-            value = DateTime.Parse(text);
+            _value = DateTime.Parse(text);
 
-            Value = value;
+            Value = _value;
         }
 
         public override string AnswerType => "DateTime";
@@ -31,12 +31,12 @@ namespace Shuttle.Abacus.Domain
                                                              other.GetType().Name));
             }
 
-            return value.CompareTo(otherValue);
+            return _value.CompareTo(otherValue);
         }
 
         public override string DisplayString()
         {
-            return value.ToString("dd MMM yyyy HH:mm:ss");
+            return _value.ToString("dd MMM yyyy HH:mm:ss");
         }
     }
 }

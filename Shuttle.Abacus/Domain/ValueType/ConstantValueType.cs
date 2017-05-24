@@ -6,23 +6,23 @@ namespace Shuttle.Abacus.Domain
 {
     public class ConstantValueType : ValueType
     {
-        private readonly decimal value;
+        private readonly decimal _value;
 
-        public ConstantValueType(string argumentName, decimal value) : base(argumentName)
+        public ConstantValueType(decimal value) 
         {
-            this.value = value;
+            this._value = value;
 
             ValueString = Convert.ToString(value);
             Value = value;
         }
 
-        public ConstantValueType(string argumentName, string text) : base(argumentName)
+        public ConstantValueType(string text) 
         {
             ValueString = text;
 
-            value = decimal.Parse(text);
+            _value = decimal.Parse(text);
 
-            Value = value;
+            Value = _value;
         }
 
         public override string AnswerType => "Constant";
@@ -39,12 +39,12 @@ namespace Shuttle.Abacus.Domain
                                                              other.GetType().Name));
             }
 
-            return value.CompareTo(otherValue);
+            return _value.CompareTo(otherValue);
         }
 
         public override string DisplayString()
         {
-            return value.ToString("N");
+            return _value.ToString("N");
         }
     }
 }
