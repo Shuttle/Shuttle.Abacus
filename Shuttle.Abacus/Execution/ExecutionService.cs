@@ -126,7 +126,7 @@ namespace Shuttle.Abacus
         {
             if (!_formulas.ContainsKey(formulaName))
             {
-                throw new InvalidOperationException(string.Format("There is not formula with name '{0}'.", formulaName));
+                throw new InvalidOperationException(string.Format("There is no formula with name '{0}'.", formulaName));
             }
 
             return _formulas[formulaName];
