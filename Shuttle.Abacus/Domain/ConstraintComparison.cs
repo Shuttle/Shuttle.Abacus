@@ -18,19 +18,77 @@ namespace Shuttle.Abacus.Domain
 
         public bool IsSatisfiedBy(string type, string argumentValue, string comparison, string constraintValue)
         {
+            var result = true;
+
             foreach (var argumentValueItem in argumentValue.Split(Separator, StringSplitOptions.RemoveEmptyEntries))
             {
-                //var argumentValueType = _valueTypeFactory.Create(argumentValueItem);
+                var argumentValueType = _valueTypeFactory.Create(type, argumentValueItem);
 
-                //foreach (var comparisonValue in Value.Split(Separator, StringSplitOptions.RemoveEmptyEntries))
-                //{
-                //    var comparisonValueType = argument.CreateValueType(comparisonValue);
-                //}
+                foreach (var constraintValueItem in constraintValue.Split(Separator,
+                    StringSplitOptions.RemoveEmptyEntries))
+                {
+                    var comparisonValueType = _valueTypeFactory.Create(type, constraintValueItem);
 
+                    var comparisionResult = argumentValueType.CompareTo(comparisonValueType);
 
+                    switch (comparison.ToLowerInvariant())
+                    {
+                        case "==":
+                            {
+                                result = comparisionResult == 0;
+
+                                break;
+                            }
+                        case "!=":
+                            {
+                                result = comparisionResult != 0;
+
+                                break;
+                            }
+                        case ">=":
+                            {
+                                result = comparisionResult == 0 || comparisionResult == 1;
+
+                                break;
+                            }
+                        case ">":
+                            {
+                                result = comparisionResult == 1;
+
+                                break;
+                            }
+                        case "<=":
+                            {
+                                result = comparisionResult == -1 || comparisionResult == 0;
+
+                                break;
+                            }
+                        case "<":
+                            {
+                                result = comparisionResult == -1;
+
+                                break;
+                            }
+                        case "in":
+                            {
+                                throw new NotImplementedException();
+                                break;
+                            }
+                    }
+
+                    if (!result)
+                    {
+                        break;
+                    }
+                }
+
+                if (!result)
+                {
+                    break;
+                }
             }
 
-            throw new System.NotImplementedException();
+            return result;
         }
     }
 }

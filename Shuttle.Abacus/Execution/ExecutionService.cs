@@ -55,7 +55,7 @@ namespace Shuttle.Abacus
 
             try
             {
-                Execute(formulaName, context, context.FormulaContext());
+                Execute(context, formulaName);
             }
             catch (Exception ex)
             {
@@ -65,53 +65,61 @@ namespace Shuttle.Abacus
             return context;
         }
 
-        private decimal Execute(string formulaName, ExecutionContext executionContext, FormulaContext formulaContext)
+        private decimal Execute(ExecutionContext executionContext, string formulaName)
         {
-            var formula = GetFormula(formulaName);
-
-            foreach (var constraint in formula.Constraints)
+            using (var formulaContext = executionContext.FormulaContext(formulaName))
             {
-                var argument = GetArgument(constraint.ArgumentName);
-                var argumentValue = executionContext.GetArgumentValue(constraint.ArgumentName);
+                var formula = GetFormula(formulaName);
 
-                //if (!_constraintComparison.IsSatisfiedBy(argument.ValueType, ))
-            }
-
-            //if (!formula.IsSatisfiedBy(executionContext))
-            //{
-            //    return 0;
-            //}
-
-            foreach (var operation in formula.Operations)
-            {
-                decimal value = 0;
-
-                switch (operation.ValueSource.ToLower())
+                foreach (var constraint in formula.Constraints)
                 {
-                    case "constant":
+                    var argument = GetArgument(constraint.ArgumentName);
+                    var argumentValue = executionContext.GetArgumentValue(constraint.ArgumentName);
+
+                    if (!_constraintComparison.IsSatisfiedBy(argument.ValueType, argumentValue, constraint.Comparison,
+                        constraint.Value))
+                    {
+                        //TODO: log exclusion
+                        return 0;
+                    }
+                }
+
+                //if (!formula.IsSatisfiedBy(executionContext))
+                //{
+                //    return 0;
+                //}
+
+                foreach (var operation in formula.Operations)
+                {
+                    decimal value = 0;
+
+                    switch (operation.ValueSource.ToLower())
+                    {
+                        case "constant":
                         {
                             value = Convert.ToDecimal(operation.ValueSelection);
 
                             break;
                         }
-                    case "argument":
+                        case "argument":
                         {
                             value = Convert.ToDecimal(executionContext.GetArgumentValue(operation.ValueSelection));
 
                             break;
                         }
-                    case "formula":
+                        case "formula":
                         {
-                            value = Execute(operation.ValueSelection, executionContext, executionContext.FormulaContext());
+                            value = Execute(executionContext, operation.ValueSelection);
 
                             break;
                         }
+                    }
+
+                    operation.Perform(formulaContext, value);
                 }
 
-                operation.Perform(formulaContext, value);
+                return formulaContext.Result;
             }
-
-            return formulaContext.Result;
         }
 
         private Formula GetFormula(string formulaName)

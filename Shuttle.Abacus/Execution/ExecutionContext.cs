@@ -7,6 +7,8 @@ namespace Shuttle.Abacus
 {
     public class ExecutionContext
     {
+        private int _depth = -1;
+
         private readonly Dictionary<string, Argument> _arguments = new Dictionary<string, Argument>();
         private readonly Dictionary<string, string> _values = new Dictionary<string, string>();
 
@@ -36,9 +38,11 @@ namespace Shuttle.Abacus
             return _values[name];
         }
 
-        public FormulaContext FormulaContext()
+        public FormulaContext FormulaContext(string formulaName)
         {
-            return new FormulaContext();
+            _depth += 1;
+
+            return new FormulaContext(this, formulaName);
         }
 
         public void Exception(Exception exception)
@@ -49,6 +53,11 @@ namespace Shuttle.Abacus
         public Argument GetArgument(string name)
         {
             return _arguments[name];
+        }
+
+        public void FormulaContextCompleted()
+        {
+            _depth -= 1;
         }
     }
 }
