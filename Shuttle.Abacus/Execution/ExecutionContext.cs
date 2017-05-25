@@ -9,12 +9,11 @@ namespace Shuttle.Abacus
 {
     public class ExecutionContext
     {
-        private Stack<FormulaContext> _stack = new Stack<FormulaContext>();
+        private readonly Stack<FormulaContext> _stack = new Stack<FormulaContext>();
 
         private readonly Dictionary<string, Argument> _arguments = new Dictionary<string, Argument>();
         private readonly Dictionary<string, string> _values = new Dictionary<string, string>();
         private readonly List<ExecutionResult> _results = new List<ExecutionResult>();
-
 
         public ExecutionContext(IEnumerable<Argument> arguments, IEnumerable<ArgumentValue> values)
         {
