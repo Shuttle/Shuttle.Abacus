@@ -75,7 +75,67 @@ namespace Shuttle.Abacus.Tests
                 new ArgumentValue {Name = "Operand2", Value = "3"}
             });
 
-            Assert.AreEqual(5, context.RootResult().Value);
+            Assert.AreEqual(0, context.RootResult().Value);
+        }
+
+        [Test]
+        public void Should_be_able_to_use_formula_from_operation()
+        {
+            var formula1 = new Formula(Guid.NewGuid());
+
+            formula1.Register("Formula1");
+            formula1.AddOperation(1, "Addition", "Formula", "Formula2");
+
+            var formula2 = new Formula(Guid.NewGuid());
+
+            formula2.Register("Formula2");
+            formula2.AddOperation(1, "Addition", "Constant", "100");
+
+            var formulas = new List<Formula> { formula1, formula2 };
+
+            var service = new ExecutionService(new ConstraintComparison(new ValueTypeFactory()), formulas, new List<Argument>());
+
+            var context = service.Execute("Formula1", new List<ArgumentValue>());
+
+            Assert.AreEqual(100, context.Result());
+        }
+
+        [Test]
+        public void Should_fail_on_cyclic_formulas()
+        {
+            var formula1 = new Formula(Guid.NewGuid());
+
+            formula1.Register("Formula1");
+            formula1.AddOperation(1, "Addition", "Formula", "Formula2");
+
+            var formula2 = new Formula(Guid.NewGuid());
+            formula2.AddOperation(1, "Addition", "Formula", "Formula3");
+
+            formula2.Register("Formula2");
+
+            var formula3 = new Formula(Guid.NewGuid());
+
+            formula3.Register("Formula3");
+            formula3.AddOperation(1, "Addition", "Formula", "Formula4");
+
+            var formula4 = new Formula(Guid.NewGuid());
+
+            formula4.Register("Formula4");
+            formula4.AddOperation(1, "Addition", "Formula", "Formula5");
+
+            var formula5 = new Formula(Guid.NewGuid());
+            formula5.AddOperation(1, "Addition", "Formula", "Formula1");
+
+            formula5.Register("Formula5");
+
+            var formulas = new List<Formula> {formula1, formula2, formula3, formula4, formula5};
+
+            var service = new ExecutionService(new ConstraintComparison(new ValueTypeFactory()), formulas, new List<Argument>());
+
+            var context = service.Execute("Formula1", new List<ArgumentValue>());
+
+            Assert.IsTrue(context.HasException);
+            Assert.IsTrue(context.Exception.Message.Contains("Cyclic"));
         }
     }
 }

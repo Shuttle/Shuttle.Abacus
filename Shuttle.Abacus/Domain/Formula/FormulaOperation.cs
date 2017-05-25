@@ -32,7 +32,7 @@ namespace Shuttle.Abacus.Domain
             {
                 case "addition":
                 {
-                    context.Result += value;
+                    context.SetResult(context.Result + value);
 
                     return;
                 }

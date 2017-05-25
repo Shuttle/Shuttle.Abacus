@@ -59,14 +59,16 @@ namespace Shuttle.Abacus
             }
             catch (Exception ex)
             {
-                context.Exception(ex);
+                context.WithException(ex);
             }
 
             return context;
         }
 
-        private decimal Execute(ExecutionContext executionContext, string formulaName)
+        private FormulaContext Execute(ExecutionContext executionContext, string formulaName)
         {
+            executionContext.CyclicInvariant(formulaName);
+
             using (var formulaContext = executionContext.FormulaContext(formulaName))
             {
                 var formula = GetFormula(formulaName);
@@ -79,15 +81,9 @@ namespace Shuttle.Abacus
                     if (!_constraintComparison.IsSatisfiedBy(argument.ValueType, argumentValue, constraint.Comparison,
                         constraint.Value))
                     {
-                        //TODO: log exclusion
-                        return 0;
+                        return formulaContext.Disqualified(constraint.ArgumentName, argumentValue, constraint.Comparison, constraint.Value);
                     }
                 }
-
-                //if (!formula.IsSatisfiedBy(executionContext))
-                //{
-                //    return 0;
-                //}
 
                 foreach (var operation in formula.Operations)
                 {
@@ -109,7 +105,7 @@ namespace Shuttle.Abacus
                         }
                         case "formula":
                         {
-                            value = Execute(executionContext, operation.ValueSelection);
+                            value = Execute(executionContext, operation.ValueSelection).Result;
 
                             break;
                         }
@@ -118,7 +114,7 @@ namespace Shuttle.Abacus
                     operation.Perform(formulaContext, value);
                 }
 
-                return formulaContext.Result;
+                return formulaContext;
             }
         }
 

@@ -66,6 +66,7 @@
     <Compile Include="Domain\ValueType\ValueTypeFactory.cs" />
     <Compile Include="Execution\ArgumentValue.cs" />
     <Compile Include="Execution\ArgumentValueSource.cs" />
+    <Compile Include="Execution\ConstraintViolation.cs" />
     <Compile Include="Execution\ExecutionResult.cs" />
     <Compile Include="Execution\ExecutionServiceFactory.cs" />
     <Compile Include="Execution\ExecutionService.cs" />
