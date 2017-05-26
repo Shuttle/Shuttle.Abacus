@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Shuttle.Abacus.Domain
 {
-    public interface IMatrixElementRepository : IRepository<MatrixElement>
+    public interface IMatrixElementRepository 
     {
         void Add(Matrix matrix, MatrixElement matrixElement);
         IEnumerable<MatrixElement> AllForDecimalTable(Matrix matrix);

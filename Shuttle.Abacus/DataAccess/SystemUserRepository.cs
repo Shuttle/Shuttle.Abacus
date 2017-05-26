@@ -3,11 +3,10 @@ using System.Data;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Invariants.Interfaces;
 using Shuttle.Core.Data;
-using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.DataAccess
 {
-    public class SystemUserRepository : Repository<SystemUser>, ISystemUserRepository
+    public class SystemUserRepository : ISystemUserRepository
     {
         private readonly IDatabaseGateway _databaseGateway;
         private readonly ISystemUserRules _rules;
@@ -58,7 +57,7 @@ namespace Shuttle.Abacus.DataAccess
             _databaseGateway.ExecuteUsing(_systemUserQueryFactory.Save(user));
         }
 
-        public override void Add(SystemUser user)
+        public void Add(SystemUser user)
         {
             ApplyInvariants(user);
 
@@ -67,12 +66,12 @@ namespace Shuttle.Abacus.DataAccess
             AddPermissions(user);
         }
 
-        public override void Remove(Guid id)
+        public void Remove(Guid id)
         {
             _databaseGateway.ExecuteUsing(_systemUserQueryFactory.Remove(id));
         }
 
-        public override SystemUser Get(Guid id)
+        public SystemUser Get(Guid id)
         {
             var row = _databaseGateway.GetSingleRowUsing(_systemUserQueryFactory.Get(id));
 

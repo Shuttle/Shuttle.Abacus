@@ -84,8 +84,7 @@ namespace Shuttle.Abacus.Server
 
             _container.Register
             (
-                Component.For(typeof(IDataRepository<>)).ImplementedBy(typeof(DataRepository<>)),
-                Component.For(typeof(IDataTableRepository<>)).ImplementedBy(typeof(DataTableRepository<>))
+                Component.For(typeof(IDataRepository<>)).ImplementedBy(typeof(DataRepository<>))
             );
 
             _container.Register(
@@ -130,8 +129,6 @@ namespace Shuttle.Abacus.Server
                     .If(type => type.Name.EndsWith("Repository"))
                     .Configure(configurer => configurer.Named(configurer.Implementation.Name.ToLower()))
                     .WithService.Select((type, basetype) => FindInterface("Repository", type)));
-
-            _container.Register(Component.For<IRepositoryProvider>().ImplementedBy<RepositoryProvider>());
 
             // Domain
             _container.Register(
@@ -181,7 +178,6 @@ namespace Shuttle.Abacus.Server
                     .LifestyleTransient());
 
             DependencyResolver.InitializeWith(new WindsorResolver(_container));
-            DomainEvents.Container = DependencyResolver.Resolver;
         }
 
         private static IEnumerable<Type> FindInterface(string suffix, Type type)

@@ -5,7 +5,7 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.DataAccess
 {
-    public class MatrixRepository : Repository<Matrix>, IMatrixRepository
+    public class MatrixRepository : IMatrixRepository
     {
         private readonly IDatabaseGateway _databaseGateway;
         private readonly IMatrixQueryFactory _matrixQueryFactory;
@@ -19,17 +19,17 @@ namespace Shuttle.Abacus.DataAccess
             _matrixQueryFactory = matrixQueryFactory;
         }
 
-        public override void Add(Matrix item)
+        public void Add(Matrix item)
         {
             _databaseGateway.ExecuteUsing(_matrixQueryFactory.Add(item));
         }
 
-        public override void Remove(Guid id)
+        public void Remove(Guid id)
         {
             _databaseGateway.ExecuteUsing(_matrixQueryFactory.Remove(id));
         }
 
-        public override Matrix Get(Guid id)
+        public Matrix Get(Guid id)
         {
             var matrixRow = _databaseGateway.GetSingleRowUsing(_matrixQueryFactory.Get(id));
 

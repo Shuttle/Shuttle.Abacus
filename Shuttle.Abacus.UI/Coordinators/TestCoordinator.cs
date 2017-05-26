@@ -172,9 +172,9 @@ namespace Shuttle.Abacus.Shell.Coordinators
         {
             using (_databaseContextFactory.Create())
             {
-                var model = new TestExecutionModel(TODO);
-                
-                rows = executionMessage.TestId.Equals(Guid.Empty) ? _testQuery.All() : new List<DataRow> { _testQuery.Get(executionMessage.TestId) };
+                var rows = executionMessage.TestId.Equals(Guid.Empty) ? _testQuery.All() : new List<DataRow> { _testQuery.Get(executionMessage.TestId) };
+
+                var model = new TestExecutionModel(rows.Map(row => new TestExecutionItemModel(row)));
 
                 var item = WorkItemManager
                     .Create("Test execution")

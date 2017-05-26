@@ -5,7 +5,7 @@ using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
 {
-    public class MatrixElementRepository : Repository<MatrixElement>, IMatrixElementRepository
+    public class MatrixElementRepository : IMatrixElementRepository
     {
         private readonly IDatabaseGateway gateway;
         private readonly IDataRepository<MatrixElement> repository;
@@ -14,21 +14,6 @@ namespace Shuttle.Abacus.DataAccess
         {
             this.repository = repository;
             this.gateway = gateway;
-        }
-
-        public override void Add(MatrixElement item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Remove(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override MatrixElement Get(Guid id)
-        {
-            throw new NotImplementedException();
         }
 
         public void Add(Matrix matrix, MatrixElement matrixElement)
