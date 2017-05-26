@@ -9,7 +9,7 @@ namespace Shuttle.Abacus.Shell.Core.WorkItem
     public interface IWorkItemManager : IMessageHandler<WorkItemCompletedMessage>
     {
         void Add(IWorkItem workItem);
-        IWorkItem Get(Guid id);
+        IWorkItem Find(Guid id);
 
         IWorkItemBuilderController Create(string text);
         IWorkItemBuilderController Create(Guid workItemId, string text);

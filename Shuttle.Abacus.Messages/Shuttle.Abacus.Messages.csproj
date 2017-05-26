@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="v1\ExecuteTestCommand.cs" />
     <Compile Include="v1\RegisterArgumentValueCommand.cs" />
     <Compile Include="v1\RemoveTestCommand.cs" />
     <Compile Include="v1\RemoveTestArgumentCommand.cs" />

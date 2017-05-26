@@ -23,6 +23,8 @@ namespace Shuttle.Abacus.Shell.Coordinators
 {
     public class TestCoordinator : Coordinator, ITestCoordinator
     {
+        public static readonly Guid TestExecutionWorkItemId = Guid.NewGuid();
+
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly INavigationItem _execute = new NavigationItem(new ResourceItem("Execute", "Test"));
 
@@ -176,14 +178,18 @@ namespace Shuttle.Abacus.Shell.Coordinators
 
                 var model = new TestExecutionModel(rows.Map(row => new TestExecutionItemModel(row)));
 
-                var item = WorkItemManager
-                    .Create("Test execution")
-                    .ControlledBy<ITestController>()
-                    .ShowIn<IContextToolbarPresenter>()
-                    .AddPresenter<ITestExecutionPresenter>()
-                    .WithModel(model);
+                if (WorkItemManager.Find(TestExecutionWorkItemId) == null)
+                {
+                    var item = WorkItemManager
+                        .Create(TestExecutionWorkItemId, "Test execution")
+                        .ControlledBy<ITestController>()
+                        .ShowIn<IContextToolbarPresenter>()
+                        .AddPresenter<ITestExecutionPresenter>();
 
-                HostInWorkspace<ITabbedWorkspacePresenter>(item);
+                    HostInWorkspace<ITabbedWorkspacePresenter>(item);
+                }
+
+                WorkItemManager.Find(TestExecutionWorkItemId).GetPresenter<ITestExecutionPresenter>().ProcessModel(model);
             }
         }
 

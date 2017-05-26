@@ -11,7 +11,7 @@ namespace Shuttle.Abacus.Shell.Coordinators
 {
     public class DefaultCoordinator : Coordinator, IDefaultCoordinator
     {
-        public static readonly Guid SummaryViewWorkItemId = new Guid("03F030CA-7618-4845-B671-4724042129D2");
+        public static readonly Guid SummaryViewWorkItemId = Guid.NewGuid();
 
         private Form _shellForm;
 
@@ -64,7 +64,7 @@ namespace Shuttle.Abacus.Shell.Coordinators
         {
             if (WorkItemManager.Contains(SummaryViewWorkItemId))
             {
-                WorkItemManager.Get(SummaryViewWorkItemId).GetPresenter<ISummaryPresenter>().Show();
+                WorkItemManager.Find(SummaryViewWorkItemId).GetPresenter<ISummaryPresenter>().Show();
 
                 return;
             }

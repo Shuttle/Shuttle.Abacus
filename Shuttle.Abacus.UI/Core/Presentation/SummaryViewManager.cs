@@ -40,7 +40,7 @@ namespace Shuttle.Abacus.Shell.Core.Presentation
 
             messageBus.Publish(populateSummaryViewMessage);
 
-            var workItem = workItemManager.Get(DefaultCoordinator.SummaryViewWorkItemId);
+            var workItem = workItemManager.Find(DefaultCoordinator.SummaryViewWorkItemId);
 
             if (workItem == null)
             {

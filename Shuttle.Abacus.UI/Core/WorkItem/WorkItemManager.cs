@@ -41,7 +41,7 @@ namespace Shuttle.Abacus.Shell.Core.WorkItem
             store.Add(workItem.Id, workItem);
         }
 
-        public IWorkItem Get(Guid id)
+        public IWorkItem Find(Guid id)
         {
             return store.ContainsKey(id) ? store[id] : null;
         }
