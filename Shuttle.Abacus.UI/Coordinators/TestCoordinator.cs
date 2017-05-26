@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Localisation;
@@ -171,20 +172,9 @@ namespace Shuttle.Abacus.Shell.Coordinators
         {
             using (_databaseContextFactory.Create())
             {
-                var arguments = new List<ArgumentValue>();
-                var row = _testQuery.Get(executionMessage.TestId);
-
-                foreach (var argumentRow in _testQuery.ArgumentValues(executionMessage.TestId))
-                {
-                    arguments.Add(new ArgumentValue
-                        {
-                            Name = TestColumns.ArgumentColumns.ArgumentName.MapFrom(argumentRow),
-                            Value = TestColumns.ArgumentColumns.Value.MapFrom(argumentRow)
-                        }
-                    );
-                }
-
-                var model = new TestExecutionModel(executionMessage.TestId);
+                var model = new TestExecutionModel(TODO);
+                
+                rows = executionMessage.TestId.Equals(Guid.Empty) ? _testQuery.All() : new List<DataRow> { _testQuery.Get(executionMessage.TestId) };
 
                 var item = WorkItemManager
                     .Create("Test execution")

@@ -1,14 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Shell.Models
 {
     public class TestExecutionModel
     {
-        public TestExecutionModel(Guid testId)
-        {
-            TestId = testId;
-        }
+        public IEnumerable<TestExecutionItemModel> Items { get; }
 
-        public Guid TestId { get; }
+        public TestExecutionModel(IEnumerable<TestExecutionItemModel> items)
+        {
+            Guard.AgainstNull(items, "items");
+
+            Items = items;
+        }
     }
 }

@@ -383,7 +383,7 @@
     <Compile Include="UI\Test\Execution\TestExecutionView.Designer.cs">
       <DependentUpon>TestExecutionView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Test\Execution\TestPresenter.cs" />
+    <Compile Include="UI\Test\Execution\TestExecutionPresenter.cs" />
     <Compile Include="UI\SimpleList\ISimpleListPresenter.cs" />
     <Compile Include="UI\SimpleList\ISimpleListView.cs" />
     <Compile Include="UI\SimpleList\SimpleListPresenter.cs" />
