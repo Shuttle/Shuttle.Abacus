@@ -13,7 +13,7 @@ using Shuttle.Abacus.Shell.Models;
 using Shuttle.Abacus.Shell.Navigation;
 using Shuttle.Abacus.Shell.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.Shell.UI.Test;
-using Shuttle.Abacus.Shell.UI.Test.RunTest;
+using Shuttle.Abacus.Shell.UI.Test.Execution;
 using Shuttle.Abacus.Shell.UI.WorkItem.ContextToolbar;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
@@ -23,6 +23,7 @@ namespace Shuttle.Abacus.Shell.Coordinators
     public class TestCoordinator : Coordinator, ITestCoordinator
     {
         private readonly IDatabaseContextFactory _databaseContextFactory;
+        private readonly INavigationItem _execute = new NavigationItem(new ResourceItem("Execute", "Test"));
 
         private readonly IFormulaQuery _formulaQuery;
 
@@ -31,7 +32,6 @@ namespace Shuttle.Abacus.Shell.Coordinators
 
         private readonly INavigationItem _remove = new NavigationItem(new ResourceItem("Remove", "Test"));
         private readonly INavigationItem _rename = new NavigationItem(new ResourceItem("Rename", "Test"));
-        private readonly INavigationItem _run = new NavigationItem(new ResourceItem("Run", "Run"));
         private readonly ITestQuery _testQuery;
 
         public TestCoordinator(IDatabaseContextFactory databaseContextFactory, ITestQuery testQuery,
@@ -58,12 +58,13 @@ namespace Shuttle.Abacus.Shell.Coordinators
                 case Resource.ResourceType.Container:
                 {
                     message.NavigationItems.Add(_register);
+                    message.NavigationItems.Add(_execute.AssignMessage(new TestExecutionMessage(Guid.Empty)));
 
                     break;
                 }
                 case Resource.ResourceType.Item:
                 {
-                    message.NavigationItems.Add(_run.AssignMessage(new RunTestMessage(message.Item.Key)));
+                    message.NavigationItems.Add(_execute.AssignMessage(new TestExecutionMessage(message.Item.Key)));
                     message.NavigationItems.Add(_rename.AssignMessage(new RenameTestMessage(message.Item.Key)));
                     message.NavigationItems.Add(_remove.AssignMessage(new RemoveTestMessage(message.Item.Key)));
 
@@ -166,14 +167,14 @@ namespace Shuttle.Abacus.Shell.Coordinators
             }
         }
 
-        public void HandleMessage(RunTestMessage message)
+        public void HandleMessage(TestExecutionMessage executionMessage)
         {
             using (_databaseContextFactory.Create())
             {
                 var arguments = new List<ArgumentValue>();
-                var row = _testQuery.Get(message.TestId);
+                var row = _testQuery.Get(executionMessage.TestId);
 
-                foreach (var argumentRow in _testQuery.ArgumentValues(message.TestId))
+                foreach (var argumentRow in _testQuery.ArgumentValues(executionMessage.TestId))
                 {
                     arguments.Add(new ArgumentValue
                         {
@@ -183,14 +184,14 @@ namespace Shuttle.Abacus.Shell.Coordinators
                     );
                 }
 
-                var runTestModel = new RunTestModel(message.TestId, TestColumns.FormulaName.MapFrom(row),
-                    arguments);
+                var model = new TestExecutionModel(executionMessage.TestId);
 
                 var item = WorkItemManager
-                    .Create("Run test")
+                    .Create("Test execution")
                     .ControlledBy<ITestController>()
                     .ShowIn<IContextToolbarPresenter>()
-                    .AddPresenter<IRunTestPresenter>().WithModel(runTestModel);
+                    .AddPresenter<ITestExecutionPresenter>()
+                    .WithModel(model);
 
                 HostInWorkspace<ITabbedWorkspacePresenter>(item);
             }

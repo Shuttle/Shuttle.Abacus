@@ -161,9 +161,6 @@
     <Compile Include="Domain\MatrixElement.cs" />
     <Compile Include="Domain\DomainEvents.cs" />
     <Compile Include="Domain\Entity.cs" />
-    <Compile Include="Domain\Events\FormulaRemoved.cs" />
-    <Compile Include="Domain\Events\MethodTestPrintEvent.cs" />
-    <Compile Include="Domain\Events\TestRunEvent.cs" />
     <Compile Include="Domain\Extensions\NumberExtensions.cs" />
     <Compile Include="Domain\ICanBeReadOnly.cs" />
     <Compile Include="Domain\IEntity.cs" />

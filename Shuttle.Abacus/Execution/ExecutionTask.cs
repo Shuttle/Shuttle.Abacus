@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Runtime.Caching;
-using System.Threading;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Domain;
 using Shuttle.Core.Data;
@@ -13,18 +11,18 @@ namespace Shuttle.Abacus
 {
     public class ExecutionTask : IExecutionTask
     {
-        private readonly object _lock = new object();
-        private bool _cached;
+        private readonly IArgumentQuery _argumentQuery;
 
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IEventStore _eventStore;
         private readonly IFormulaQuery _formulaQuery;
-        private readonly IArgumentQuery _argumentQuery;
+        private readonly object _lock = new object();
 
-        private readonly CacheItemPolicy _policy = new CacheItemPolicy { AbsoluteExpiration = DateTimeOffset.MaxValue };
+        private readonly CacheItemPolicy _policy = new CacheItemPolicy {AbsoluteExpiration = DateTimeOffset.MaxValue};
         private MemoryCache _cache;
+        private bool _cached;
 
-        public ExecutionTask(IDatabaseContextFactory databaseContextFactory, IEventStore eventStore, 
+        public ExecutionTask(IDatabaseContextFactory databaseContextFactory, IEventStore eventStore,
             IFormulaQuery formulaQuery, IArgumentQuery argumentQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
@@ -73,7 +71,7 @@ namespace Shuttle.Abacus
                 throw new ApplicationException();
             }
 
-            return (T)result;
+            return (T) result;
         }
 
         private void Cache()
@@ -116,7 +114,8 @@ namespace Shuttle.Abacus
             var stream = _eventStore.Get(id);
             stream.Apply(instance);
 
-            _cache.Add(new CacheItem(string.Format("[{0}]:{1}", type.Name, keyCallback.Invoke((T)instance)), instance), _policy);
+            _cache.Add(new CacheItem(string.Format("[{0}]:{1}", type.Name, keyCallback.Invoke((T) instance)), instance),
+                _policy);
         }
     }
 }

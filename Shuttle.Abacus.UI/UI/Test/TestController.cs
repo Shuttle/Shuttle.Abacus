@@ -61,7 +61,7 @@ namespace Shuttle.Abacus.Shell.UI.Test
             });
         }
 
-        public void HandleMessage(RunTestMessage message)
+        public void HandleMessage(TestExecutionMessage executionMessage)
         {
             var s = "asdasd";
         }

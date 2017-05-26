@@ -30,7 +30,7 @@ namespace Shuttle.Abacus.Shell.Navigation
                 .RegisterResourceItem<EditMethodMessage>()
                 .RegisterResourceItem<DeleteMethodMessage>()
                 .RegisterResourceItem<RemoveTestMessage>()
-                .RegisterResourceItem<RunTestMessage>(new ResourceItem("Run", "RefreshSmall"))
+                .RegisterResourceItem<TestExecutionMessage>(new ResourceItem("Run", "RefreshSmall"))
                 .RegisterResourceItem<PrintTestMessage>(new ResourceItem("Print", "Report"))
                 .RegisterResourceItem<RemoveFormulaMessage>()
                 .RegisterResourceItem<ManageFormulaConstraintsMessage>(new ResourceItem("Manage", "FormulaConstraint"))

@@ -29,64 +29,6 @@ namespace Shuttle.Abacus.Domain
         public bool HasOperations => _operations.Count > 0;
         public bool Removed { get; private set; }
 
-        //public bool IsSatisfiedBy(IMethodContext collectionMethodContext)
-        //{
-        //    return
-        //        OperationsSatisfied(collectionMethodContext)
-        //        &&
-        //        ConstraintSatisfied(collectionMethodContext);
-        //}
-
-        //public IEnumerable<Guid> RequiredCalculationIds()
-        //{
-        //    var result = new List<Guid>();
-
-        //    _operations.ForEach(operation =>
-        //    {
-        //        var source = operation.ValueSource as ICalculationValueSource;
-
-        //        if (source != null)
-        //        {
-        //            var id = new Guid(source.ValueSelection);
-
-        //            if (!result.Contains(id))
-        //            {
-        //                result.Add(id);
-        //            }
-        //        }
-        //    });
-
-        //    return result;
-        //}
-
-        //private bool ConstraintSatisfied(IMethodContext collectionContext)
-        //{
-        //    foreach (var constraint in constraints)
-        //    {
-        //        if (!constraint.IsSatisfiedBy(collectionContext))
-        //        {
-        //            return false;
-        //        }
-        //    }
-
-        //    return true;
-        //}
-
-        //private bool OperationsSatisfied(IMethodContext collectionContext)
-        //{
-        //    var result = true;
-
-        //    //foreach (var operation in _operations)
-        //    //{
-        //    //    if (!operation.IsSatisfiedBy(collectionContext))
-        //    //    {
-        //    //        result = false;
-        //    //    }
-        //    //}
-
-        //    return result;
-        //}
-
         public OperationAdded AddOperation(int sequenceNumber, string operation, string valueSource, string valueSelection)
         {
             return On(new OperationAdded {
@@ -133,67 +75,6 @@ namespace Shuttle.Abacus.Domain
             return constraintAdded;
         }
 
-        //public decimal Execute(IMethodContext methodContext, IFormulaCalculationContext calculationContext)
-        //{
-        //    Guard.AgainstNull(calculationContext, "context");
-
-        //    throw new NotImplementedException();
-
-        //    //if (methodContext.LoggerEnabled)
-        //    //{
-        //    //    methodContext.Log("Executing formula:");
-
-        //    //    if (constraints.Count > 0)
-        //    //    {
-        //    //        constraints.ForEach(
-        //    //            constraint => methodContext.Log("\t{0}", constraint.Description()));
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        methodContext.Log("\t(no contraints)");
-        //    //    }
-
-        //    //    methodContext.Log();
-        //    //}
-
-        //    //calculationContext.ZeroFormulaTotal();
-
-        //    //foreach (var operation in _operations)
-        //    //{
-        //    //    var operand = operation.Operand(methodContext, calculationContext);
-
-        //    //    if (methodContext.LoggerEnabled)
-        //    //    {
-        //    //        methodContext.Log("{0}\t{1}", operation.Symbol,
-        //    //            operation.ValueSource.Description(operand, methodContext));
-        //    //    }
-
-        //    //    calculationContext.SetFormulaTotal(operation.Execute(calculationContext.RunningTotal, operand));
-
-        //    //    if (!methodContext.OK)
-        //    //    {
-        //    //        return 0;
-        //    //    }
-        //    //}
-
-        //    //if (methodContext.LoggerEnabled)
-        //    //{
-        //    //    methodContext.Log();
-        //    //}
-
-        //    //return calculationContext.RunningTotal;
-        //}
-
-        public Formula Copy()
-        {
-            throw new NotImplementedException();
-            //var result = new Formula();
-
-            //_constraints.ForEach(constraint => result.AddConstraint(constraint));
-            //_operations.ForEach(operation => result.AddOperation(operation));
-
-            //return result;
-        }
 
         public Registered Register(string name)
         {

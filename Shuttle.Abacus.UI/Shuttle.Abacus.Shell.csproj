@@ -111,11 +111,9 @@
     <Compile Include="Coordinators\IDefaultCoordinator.cs" />
     <Compile Include="Coordinators\IFormulaCoordinator.cs" />
     <Compile Include="Coordinators\ITestCoordinator.cs" />
-    <Compile Include="Coordinators\IReportCoordinator.cs" />
     <Compile Include="Coordinators\ISystemUserCoordinator.cs" />
     <Compile Include="Coordinators\TestArgumentCoordinator.cs" />
     <Compile Include="Coordinators\TestCoordinator.cs" />
-    <Compile Include="Coordinators\ReportCoordinator.cs" />
     <Compile Include="Coordinators\SystemUserCoordinator.cs" />
     <Compile Include="Core\Binding\BinderProvider.cs" />
     <Compile Include="Core\Binding\IBinder.cs" />
@@ -258,10 +256,9 @@
     <Compile Include="Messages\Test\RegisterTestArgumentMessage.cs" />
     <Compile Include="Messages\Test\RegisterTestMessage.cs" />
     <Compile Include="Messages\Test\RenameTestMessage.cs" />
-    <Compile Include="Messages\Test\TestPrintMessage.cs" />
     <Compile Include="Messages\Test\PrintTestMessage.cs" />
     <Compile Include="Messages\Test\RemoveTestMessage.cs" />
-    <Compile Include="Messages\Test\RunTestMessage.cs" />
+    <Compile Include="Messages\Test\TestExecutionMessage.cs" />
     <Compile Include="Messages\WorkItem\RefreshWorkItemDispatcherMessage.cs" />
     <Compile Include="Messages\WorkItem\RefreshWorkItemDispatcherTextMessage.cs" />
     <Compile Include="Messages\WorkItem\WorkItemBusyMessage.cs" />
@@ -271,7 +268,7 @@
     <Compile Include="Messages\WorkItem\WorkItemSitedMessage.cs" />
     <Compile Include="Messages\WorkItem\WorkItemTextChangedMessage.cs" />
     <Compile Include="Models\FormulaConstraintModel.cs" />
-    <Compile Include="Models\RunTestModel.cs" />
+    <Compile Include="Models\TestExecutionModel.cs" />
     <Compile Include="Models\TestArgumentModel.cs" />
     <Compile Include="Models\ArgumentValueModel.cs" />
     <Compile Include="Models\ArgumentDisplayModel.cs" />
@@ -378,15 +375,15 @@
     <Compile Include="UI\Grid\SimpleGridView.Designer.cs">
       <DependentUpon>SimpleGridView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Test\RunTest\IRunTestPresenter.cs" />
-    <Compile Include="UI\Test\RunTest\IRunTestView.cs" />
-    <Compile Include="UI\Test\RunTest\RunTestView.cs">
+    <Compile Include="UI\Test\Execution\ITestExecutionPresenter.cs" />
+    <Compile Include="UI\Test\Execution\ITestExecutionView.cs" />
+    <Compile Include="UI\Test\Execution\TestExecutionView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Test\RunTest\RunTestView.Designer.cs">
-      <DependentUpon>RunTestView.cs</DependentUpon>
+    <Compile Include="UI\Test\Execution\TestExecutionView.Designer.cs">
+      <DependentUpon>TestExecutionView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Test\RunTest\TestPresenter.cs" />
+    <Compile Include="UI\Test\Execution\TestPresenter.cs" />
     <Compile Include="UI\SimpleList\ISimpleListPresenter.cs" />
     <Compile Include="UI\SimpleList\ISimpleListView.cs" />
     <Compile Include="UI\SimpleList\SimpleListPresenter.cs" />
@@ -548,8 +545,8 @@
     <EmbeddedResource Include="UI\Grid\SimpleGridView.resx">
       <DependentUpon>SimpleGridView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Test\RunTest\RunTestView.resx">
-      <DependentUpon>RunTestView.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Test\Execution\TestExecutionView.resx">
+      <DependentUpon>TestExecutionView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\SimpleList\SimpleListView.resx">
       <DependentUpon>SimpleListView.cs</DependentUpon>
