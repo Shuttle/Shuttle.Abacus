@@ -36,8 +36,8 @@ namespace Shuttle.Abacus.Tests
 
             var context = service.Execute("Test", new List<ArgumentValue>
             {
-                new ArgumentValue {Name = "Operand1", Value = "2"},
-                new ArgumentValue {Name = "Operand2", Value = "3"}
+                new ArgumentValue ("Operand1", "2"),
+                new ArgumentValue ("Operand2", "3")
             });
 
             Assert.AreEqual(5, context.RootResult().Value);
@@ -71,8 +71,8 @@ namespace Shuttle.Abacus.Tests
 
             var context = service.Execute("Test", new List<ArgumentValue>
             {
-                new ArgumentValue {Name = "Operand1", Value = "2"},
-                new ArgumentValue {Name = "Operand2", Value = "3"}
+                new ArgumentValue ("Operand1", "2"),
+                new ArgumentValue ("Operand2", "3")
             });
 
             Assert.AreEqual(0, context.RootResult().Value);

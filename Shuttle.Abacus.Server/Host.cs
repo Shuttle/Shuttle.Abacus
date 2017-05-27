@@ -5,6 +5,7 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using log4net;
 using Shuttle.Abacus.DataAccess;
+using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Values;
 using Shuttle.Abacus.Server.EventHandlers;
@@ -80,11 +81,11 @@ namespace Shuttle.Abacus.Server
 
         private void Wire()
         {
-            _container.Register(Component.For<IImageService>().ImplementedBy<ImageService>());
-
             _container.Register
             (
-                Component.For(typeof(IDataRepository<>)).ImplementedBy(typeof(DataRepository<>))
+                Component.For(typeof(IDataRepository<>)).ImplementedBy(typeof(DataRepository<>)),
+                Component.For<IImageService>().ImplementedBy<ImageService>(),
+                Component.For<IConstraintComparison>().ImplementedBy<ConstraintComparison>()
             );
 
             _container.Register(

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Shuttle.Abacus.Events.Test.v1;
 using Shuttle.Core.Infrastructure;
 
@@ -7,7 +8,7 @@ namespace Shuttle.Abacus.Domain
 {
     public class Test
     {
-        private readonly Dictionary<string, string> _argumentValues = new Dictionary<string, string>();
+        private readonly List<ArgumentValue> _values = new List<ArgumentValue>();
 
         public Test(Guid id)
         {
@@ -125,10 +126,15 @@ namespace Shuttle.Abacus.Domain
         {
             Guard.AgainstNull(argumentSet, "argumentValueSet");
 
-            _argumentValues.Remove(argumentSet.ArgumentName);
-            _argumentValues.Add(argumentSet.ArgumentName, argumentSet.Value);
+            _values.Remove(FindValue(argumentSet.ArgumentName));
+            _values.Add(new ArgumentValue(argumentSet.ArgumentName, argumentSet.Value));
 
             return argumentSet;
+        }
+
+        private ArgumentValue FindValue(string argumentName)
+        {
+            return _values.Find(argumentValue => argumentValue.Name.Equals(argumentName, StringComparison.InvariantCultureIgnoreCase));
         }
 
         public ArgumentRemoved RemoveArgument(string argumentName)
@@ -145,9 +151,14 @@ namespace Shuttle.Abacus.Domain
         {
             Guard.AgainstNull(argumentRemoved, "argumentRemoved");
 
-            _argumentValues.Remove(argumentRemoved.ArgumentName);
+            _values.Remove(FindValue(argumentRemoved.ArgumentName));
 
             return argumentRemoved;
+        }
+
+        public IEnumerable<ArgumentValue> ArgumentValues()
+        {
+            return new ReadOnlyCollection<ArgumentValue>(_values);
         }
     }
 }

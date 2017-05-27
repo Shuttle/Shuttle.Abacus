@@ -57,14 +57,16 @@
     <Compile Include="DataAccess\FormulaRepository.cs" />
     <Compile Include="DataAccess\ArgumentRepository.cs" />
     <Compile Include="DataAccess\IFormulaRepository.cs" />
+    <Compile Include="DataAccess\TestRepository.cs" />
     <Compile Include="Domain\ConstraintComparison.cs" />
     <Compile Include="Domain\Formula\FormulaConstraint.cs" />
     <Compile Include="Domain\IConstraintComparison.cs" />
+    <Compile Include="Domain\ITestRepository.cs" />
     <Compile Include="Domain\ValueType\IValueTypeFactory.cs" />
     <Compile Include="Domain\ValueSource\IValueSource.cs" />
     <Compile Include="Domain\ValueSource\ValueSource.cs" />
     <Compile Include="Domain\ValueType\ValueTypeFactory.cs" />
-    <Compile Include="Execution\ArgumentValue.cs" />
+    <Compile Include="Domain\ArgumentValue.cs" />
     <Compile Include="Execution\ArgumentValueSource.cs" />
     <Compile Include="Execution\ConstraintViolation.cs" />
     <Compile Include="Execution\ExecutionResult.cs" />
@@ -173,6 +175,7 @@
     <Compile Include="Events\Test.v1\ValueAdded.cs" />
     <Compile Include="Events\Test.v1\ArgumentRemoved.cs" />
     <Compile Include="Execution\FormulaContext.cs" />
+    <Compile Include="Execution\IExecutionServiceFactory.cs" />
     <Compile Include="Execution\IExecutionTask.cs" />
     <Compile Include="DataAccess\IArgumentRepository.cs" />
     <Compile Include="Invariants\ArgumentValueRules.cs" />

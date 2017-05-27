@@ -4,7 +4,7 @@ using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus
 {
-    public class ExecutionServiceFactory
+    public class ExecutionServiceFactory : IExecutionServiceFactory
     {
         private readonly IConstraintComparison _constraintComparison;
         private readonly IFormulaRepository _formulaRepository;

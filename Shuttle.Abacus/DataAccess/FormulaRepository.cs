@@ -8,15 +8,15 @@ namespace Shuttle.Abacus.DataAccess
     public class FormulaRepository : IFormulaRepository
     {
         private readonly IFormulaQuery _query;
-        private readonly IEventStore _store;
+        private readonly IEventStore _eventStore;
 
-        public FormulaRepository(IFormulaQuery query, IEventStore store)
+        public FormulaRepository(IFormulaQuery query, IEventStore eventStore)
         {
             Guard.AgainstNull(query, "query");
-            Guard.AgainstNull(store, "store");
+            Guard.AgainstNull(eventStore, "eventStore");
 
             _query = query;
-            _store = store;
+            _eventStore = eventStore;
         }
 
         public IEnumerable<Formula> All()
@@ -27,12 +27,12 @@ namespace Shuttle.Abacus.DataAccess
             {
                 var id = FormulaColumns.Id.MapFrom(row);
 
-                var argument = new Formula(id);
-                var stream = _store.Get(id);
+                var formula = new Formula(id);
+                var stream = _eventStore.Get(id);
 
-                stream.Apply(argument);
+                stream.Apply(formula);
 
-                result.Add(argument);
+                result.Add(formula);
             }
 
             return result;
