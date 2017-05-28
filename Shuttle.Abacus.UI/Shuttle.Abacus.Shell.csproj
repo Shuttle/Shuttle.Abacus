@@ -196,6 +196,7 @@
     <Compile Include="Core\WorkItem\WorkItemControllerFactory.cs" />
     <Compile Include="Core\WorkItem\WorkItemManager.cs" />
     <Compile Include="DependencyWiring.cs" />
+    <Compile Include="Handlers\TestExecutedHandler.cs" />
     <Compile Include="Handlers\NotificationHandler.cs" />
     <Compile Include="Handlers\ReplyMessageHandler.cs" />
     <Compile Include="Handlers\SystemUserHandler.cs" />
@@ -258,6 +259,7 @@
     <Compile Include="Messages\Test\RenameTestMessage.cs" />
     <Compile Include="Messages\Test\PrintTestMessage.cs" />
     <Compile Include="Messages\Test\RemoveTestMessage.cs" />
+    <Compile Include="Messages\Test\TestExecutedMessage.cs" />
     <Compile Include="Messages\Test\TestExecutionMessage.cs" />
     <Compile Include="Messages\WorkItem\RefreshWorkItemDispatcherMessage.cs" />
     <Compile Include="Messages\WorkItem\RefreshWorkItemDispatcherTextMessage.cs" />

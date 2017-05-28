@@ -1,4 +1,5 @@
-﻿using Shuttle.Abacus.Domain;
+﻿using log4net.Util;
+using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Messages.v1;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
@@ -25,11 +26,23 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 
         public void ProcessMessage(IHandlerContext<ExecuteTestCommand> context)
         {
+            if (string.IsNullOrEmpty(context.TransportMessage.SenderInboxWorkQueueUri))
+            {
+                return;
+            }
+
             using (_databaseContextFactory.Create())
             {
                 var test = _testRepository.Get(context.Message.Id);
 
                 var executionContext = _executionServiceFactory.Create().Execute(test.FormulaName, test.ArgumentValues());
+
+                context.Send(new TestExecutedEvent
+                {
+                    Id = test.Id,
+                    FormulaName = test.FormulaName,
+                    Result = executionContext.Result()
+                }, c=> c.Reply());
             }
         }
     }

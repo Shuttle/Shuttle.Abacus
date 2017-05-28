@@ -15,6 +15,7 @@ namespace Shuttle.Abacus.Shell.Coordinators
         IMessageHandler<RegisterTestMessage>,
         IMessageHandler<RemoveTestMessage>,
         IMessageHandler<TestExecutionMessage>,
+        IMessageHandler<TestExecutedMessage>,
         IMessageHandler<SummaryViewRequestedMessage>
     {
     }

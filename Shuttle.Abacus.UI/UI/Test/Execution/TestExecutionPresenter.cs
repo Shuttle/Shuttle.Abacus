@@ -2,6 +2,7 @@ using System;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.Messages.v1;
 using Shuttle.Abacus.Shell.Core.Presentation;
+using Shuttle.Abacus.Shell.Messages.Test;
 using Shuttle.Abacus.Shell.Models;
 using Shuttle.Core.Infrastructure;
 using Shuttle.Esb;
@@ -40,6 +41,11 @@ namespace Shuttle.Abacus.Shell.UI.Test.Execution
             {
                 Id = item.Id
             });
+        }
+
+        public void TestExecuted(TestExecutedMessage message)
+        {
+            View.TestExecuted(message);
         }
     }
 }

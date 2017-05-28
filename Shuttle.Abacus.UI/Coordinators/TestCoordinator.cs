@@ -202,5 +202,17 @@ namespace Shuttle.Abacus.Shell.Coordinators
 
             WorkItemControllerFactory.Create<ITestController>().HandleMessage(message);
         }
+
+        public void HandleMessage(TestExecutedMessage message)
+        {
+            var workItem = WorkItemManager.Find(TestExecutionWorkItemId);
+
+            if (workItem == null)
+            {
+                return;
+            }
+
+            workItem.GetPresenter<ITestExecutionPresenter>().TestExecuted(message);
+        }
     }
 }

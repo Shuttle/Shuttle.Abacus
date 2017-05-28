@@ -26,6 +26,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Tabs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.CalculationLog = new System.Windows.Forms.TextBox();
@@ -41,6 +42,7 @@
             this.NameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.StatusColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ExpectedResultColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ImageList = new System.Windows.Forms.ImageList(this.components);
             this.Tabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -167,7 +169,7 @@
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainer2.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer2.Name = "splitContainer2";
             this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -196,6 +198,7 @@
             this.TestListView.MultiSelect = false;
             this.TestListView.Name = "TestListView";
             this.TestListView.Size = new System.Drawing.Size(467, 109);
+            this.TestListView.SmallImageList = this.ImageList;
             this.TestListView.TabIndex = 2;
             this.TestListView.UseCompatibleStateImageBehavior = false;
             this.TestListView.View = System.Windows.Forms.View.Details;
@@ -215,12 +218,18 @@
             this.ExpectedResultColumnHeader.Text = "Expected Result";
             this.ExpectedResultColumnHeader.Width = 180;
             // 
+            // ImageList
+            // 
+            this.ImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.ImageList.ImageSize = new System.Drawing.Size(16, 16);
+            this.ImageList.TransparentColor = System.Drawing.Color.Transparent;
+            // 
             // TestExecutionExecutionView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainer2);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "TestExecutionExecutionView";
             this.Size = new System.Drawing.Size(467, 318);
             this.Tabs.ResumeLayout(false);
@@ -254,5 +263,6 @@
         private System.Windows.Forms.ColumnHeader NameColumnHeader;
         private System.Windows.Forms.ColumnHeader StatusColumnHeader;
         private System.Windows.Forms.ColumnHeader ExpectedResultColumnHeader;
+        private System.Windows.Forms.ImageList ImageList;
     }
 }

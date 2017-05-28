@@ -85,6 +85,7 @@
     <Compile Include="v1\SetFormulaConstraintsCommand.cs" />
     <Compile Include="v1\SetFormulaOperationsCommand.cs" />
     <Compile Include="v1\SetPermissionsCommand.cs" />
+    <Compile Include="v1\TestExecutedEvent.cs" />
     <Compile Include="v1\TransferObjects\ArgumentAnswer.cs" />
     <Compile Include="v1\TransferObjects\FormulaConstraint.cs" />
     <Compile Include="v1\TransferObjects\MatrixElement.cs" />
