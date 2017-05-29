@@ -7,7 +7,6 @@ using Shuttle.Abacus.Shell.Core.Resources;
 using Shuttle.Abacus.Shell.Messages.Core;
 using Shuttle.Abacus.Shell.Messages.DecimalTable;
 using Shuttle.Abacus.Shell.Messages.Explorer;
-using Shuttle.Abacus.Shell.Messages.Report;
 using Shuttle.Abacus.Shell.Messages.Resources;
 using Shuttle.Abacus.Shell.Models;
 using Shuttle.Abacus.Shell.UI.Matrix;
@@ -67,16 +66,7 @@ namespace Shuttle.Abacus.Shell.Coordinators
                 {
                     message.NavigationItems.Add(
                         NavigationItemFactory.Create(
-                            new NewDecimalTableFromExistingMessage(message.Item.Key)));
-
-                    message.NavigationItems.Add(
-                        NavigationItemFactory.Create(
                             new EditMatrixMessage(message.Item.Key,
-                                message.Item.Text)));
-
-                    message.NavigationItems.Add(
-                        NavigationItemFactory.Create(
-                            new MatrixReportMessage(message.Item.Key,
                                 message.Item.Text)));
 
                     break;
@@ -154,27 +144,6 @@ namespace Shuttle.Abacus.Shell.Coordinators
                     .AddNavigationItem(NavigationItemFactory.Create(message).WithResourceItem(ResourceItems.Submit))
                     .AsDefault()
                     .AssignInitiator(message);
-
-                HostInWorkspace<ITabbedWorkspacePresenter>(item);
-            }
-        }
-
-        public void HandleMessage(NewDecimalTableFromExistingMessage message)
-        {
-            using (_databaseContextFactory.Create())
-            {
-                var item = WorkItemManager
-                    .Create("New Decimal Table")
-                    .ControlledBy<IMatrixController>()
-                    .ShowIn<IContextToolbarPresenter>()
-                    .AddPresenter<IMatrixPresenter>()
-                    .WithModel(new MatrixModel(_matrixQuery.Get(message.MatrixId)))
-                    .AddNavigationItem(
-                        NavigationItemFactory.Create<NewMatrixMessage>()
-                            .WithResourceItem(
-                                ResourceItems.Submit))
-                    .AsDefault()
-                    .AssignInitiator(message.WithRefreshOwner());
 
                 HostInWorkspace<ITabbedWorkspacePresenter>(item);
             }

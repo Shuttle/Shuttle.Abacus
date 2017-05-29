@@ -13,7 +13,6 @@ namespace Shuttle.Abacus.Shell.Coordinators
         IMessageHandler<ResourceRefreshItemTextMessage>,
         IMessageHandler<NewMatrixMessage>,
         IMessageHandler<EditMatrixMessage>,
-        IMessageHandler<NewDecimalTableFromExistingMessage>,
         IMessageHandler<SummaryViewRequestedMessage>
     {
         

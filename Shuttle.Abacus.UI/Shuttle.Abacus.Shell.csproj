@@ -207,7 +207,6 @@
     <Compile Include="Messages\Core\ActivateShellMessage.cs" />
     <Compile Include="Messages\Core\ApplicationExitMessage.cs" />
     <Compile Include="Messages\Core\ConfigureShellMessage.cs" />
-    <Compile Include="Messages\Core\CopyFormulaMessage.cs" />
     <Compile Include="Messages\Core\DisplayHelpManualMessage.cs" />
     <Compile Include="Messages\Core\DoubleClickMessage.cs" />
     <Compile Include="Messages\Core\ExplorerItemSelectedMessage.cs" />
@@ -228,7 +227,6 @@
     <Compile Include="Messages\Core\WorkCompletedMessage.cs" />
     <Compile Include="Messages\Core\WorkStartedMessage.cs" />
     <Compile Include="Messages\DecimalTable\EditMatrixMessage.cs" />
-    <Compile Include="Messages\DecimalTable\NewDecimalTableFromExistingMessage.cs" />
     <Compile Include="Messages\DecimalTable\NewMatrixMessage.cs" />
     <Compile Include="Messages\Explorer\ExplorerInitializeMessage.cs" />
     <Compile Include="Messages\Argument\RemoveArgumentMessage.cs" />
@@ -239,15 +237,11 @@
     <Compile Include="Messages\Formula\ManageFormulaConstraintsMessage.cs" />
     <Compile Include="Messages\Formula\RenameFormulaMessage.cs" />
     <Compile Include="Messages\Formula\RegisterFormulaMessage.cs" />
-    <Compile Include="Messages\Report\MatrixReportMessage.cs" />
     <Compile Include="Messages\Resources\PopulateResourceMessage.cs" />
     <Compile Include="Messages\Resources\ResourceMenuRequestMessage.cs" />
     <Compile Include="Messages\Resources\ResourceRefreshItemMessage.cs" />
     <Compile Include="Messages\Resources\ResourceRefreshItemTextMessage.cs" />
     <Compile Include="Messages\Resources\ResourceSelectedMessage.cs" />
-    <Compile Include="Messages\Section\DeleteMethodMessage.cs" />
-    <Compile Include="Messages\Section\EditMethodMessage.cs" />
-    <Compile Include="Messages\Section\NewMethodFromExistingMessage.cs" />
     <Compile Include="Messages\Section\NewMethodMessage.cs" />
     <Compile Include="Messages\SystemUser\EditLoginNameMessage.cs" />
     <Compile Include="Messages\SystemUser\EditPermissionsMessage.cs" />
@@ -257,7 +251,6 @@
     <Compile Include="Messages\Test\RegisterTestArgumentMessage.cs" />
     <Compile Include="Messages\Test\RegisterTestMessage.cs" />
     <Compile Include="Messages\Test\RenameTestMessage.cs" />
-    <Compile Include="Messages\Test\PrintTestMessage.cs" />
     <Compile Include="Messages\Test\RemoveTestMessage.cs" />
     <Compile Include="Messages\Test\TestExecutedMessage.cs" />
     <Compile Include="Messages\Test\TestExecutionMessage.cs" />
@@ -605,7 +598,9 @@
     <Content Include="Abacus.ico" />
     <Content Include="UI\Shell\Abacus.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Messages\Report\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shuttle.Abacus.DTO\Shuttle.Abacus.DTO.csproj">
       <Project>{5CD61A6D-ABCB-4400-A113-4EF4DA4C439C}</Project>
