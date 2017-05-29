@@ -31,7 +31,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
             var command = new CreateMatrixCommand
             {
-                DecimalTableName = view.DecimalTableNameValue,
+                DecimalTableName = view.MatrixNameValue,
                 RowArgumentName = view.RowArgumentModel.Name,
                 ColumnArgumentName = view.ColumnArgumentModel.Name,
                 Elements = view.DecimalValues()
@@ -59,7 +59,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             var command = new UpdateMatrixCommand
             {
                 MatrixId = message.MatrixId,
-                DecimalTableName = view.DecimalTableNameValue,
+                DecimalTableName = view.MatrixNameValue,
                 RowArgumentName = view.RowArgumentModel.Name,
                 ColumnArgumentName = view.ColumnArgumentModel.Name,
                 Elements = view.DecimalValues()

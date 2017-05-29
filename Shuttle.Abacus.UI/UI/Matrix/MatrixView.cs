@@ -50,15 +50,15 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
         protected bool OnFirstColumn => SelectedColumn().DisplayIndex == 2;
 
-        public string DecimalTableNameValue
+        public string MatrixNameValue
         {
-            get { return DecimalTableName.Text; }
-            set { DecimalTableName.Text = value; }
+            get { return MatrixName.Text; }
+            set { MatrixName.Text = value; }
         }
 
         public IRuleCollection<object> DecimalTableNameRules
         {
-            set { ViewValidator.Control(DecimalTableName).ShouldSatisfy(value); }
+            set { ViewValidator.Control(MatrixName).ShouldSatisfy(value); }
         }
 
         public IRuleCollection<object> RowArgumentRules
@@ -606,6 +606,20 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
             ValueGridView[column, row] = cell;
             ValueGridView[column, row].ReadOnly = false;
+
+            PopulateComparison(cell);
+        }
+
+        private void PopulateComparison(DataGridViewComboBoxCell combo)
+        {
+            combo.Items.Clear();
+            combo.Items.Add("==");
+            combo.Items.Add("!=");
+            combo.Items.Add(">=");
+            combo.Items.Add(">");
+            combo.Items.Add("<=");
+            combo.Items.Add("<");
+            combo.Items.Add("in");
         }
 
         private void AddRow()
@@ -626,7 +640,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             }
         }
 
-        private void DecimalTableName_Leave(object sender, EventArgs e)
+        private void MatrixName_Leave(object sender, EventArgs e)
         {
             Presenter.MatrixNameExited();
         }

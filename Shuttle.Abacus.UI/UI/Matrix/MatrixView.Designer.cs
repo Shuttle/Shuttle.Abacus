@@ -28,7 +28,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.DecimalTableName = new System.Windows.Forms.TextBox();
+            this.MatrixName = new System.Windows.Forms.TextBox();
             this.ValueGridView = new System.Windows.Forms.DataGridView();
             this.GridViewMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.AddRowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,17 +55,17 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 13);
+            this.label1.Size = new System.Drawing.Size(64, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Decimal table name";
+            this.label1.Text = "Matrix name";
             // 
-            // DecimalTableName
+            // MatrixName
             // 
-            this.DecimalTableName.Location = new System.Drawing.Point(12, 28);
-            this.DecimalTableName.Name = "DecimalTableName";
-            this.DecimalTableName.Size = new System.Drawing.Size(424, 20);
-            this.DecimalTableName.TabIndex = 3;
-            this.DecimalTableName.Leave += new System.EventHandler(this.DecimalTableName_Leave);
+            this.MatrixName.Location = new System.Drawing.Point(12, 28);
+            this.MatrixName.Name = "MatrixName";
+            this.MatrixName.Size = new System.Drawing.Size(424, 20);
+            this.MatrixName.TabIndex = 3;
+            this.MatrixName.Leave += new System.EventHandler(this.MatrixName_Leave);
             // 
             // ValueGridView
             // 
@@ -73,9 +73,9 @@
             this.ValueGridView.AllowUserToDeleteRows = false;
             this.ValueGridView.AllowUserToResizeColumns = false;
             this.ValueGridView.AllowUserToResizeRows = false;
-            this.ValueGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ValueGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ValueGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.ValueGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ValueGridView.ColumnHeadersVisible = false;
@@ -232,7 +232,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ValueGridView);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.DecimalTableName);
+            this.Controls.Add(this.MatrixName);
             this.Name = "MatrixView";
             this.Size = new System.Drawing.Size(477, 396);
             ((System.ComponentModel.ISupportInitialize)(this.ValueGridView)).EndInit();
@@ -243,7 +243,7 @@
         }
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox DecimalTableName;
+        private System.Windows.Forms.TextBox MatrixName;
         private System.Windows.Forms.DataGridView ValueGridView;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox RowArgument;

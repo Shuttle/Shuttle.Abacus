@@ -44,8 +44,8 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
         public void MatrixNameExited()
         {
             WorkItem.Text = string.Format("Matrix{0}",
-                View.DecimalTableNameValue.Length > 0
-                    ? " : " + View.DecimalTableNameValue
+                View.MatrixNameValue.Length > 0
+                    ? " : " + View.MatrixNameValue
                     : string.Empty);
         }
 
@@ -172,7 +172,12 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             {
                 View.PopulateArguments(_argumentQuery.All().Map(row => new ArgumentModel(row)));
 
-                View.DecimalTableNameValue = Model.Name;
+                View.MatrixNameValue = Model.Name;
+
+                if (string.IsNullOrEmpty(Model.RowArgumentName))
+                {
+                    return;
+                }
 
                 var rowArgumentRow = _argumentQuery.Get(Model.RowArgumentName);
 
@@ -182,6 +187,11 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
                 }
 
                 View.RowArgumentValue = ArgumentColumns.Name.MapFrom(rowArgumentRow);
+
+                if (string.IsNullOrEmpty(Model.ColumnArgumentName))
+                {
+                    return;
+                }
 
                 var columnArumentRow = _argumentQuery.Get(Model.ColumnArgumentName);
 

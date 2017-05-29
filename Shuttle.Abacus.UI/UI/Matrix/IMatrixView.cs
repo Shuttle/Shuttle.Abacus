@@ -8,7 +8,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 {
     public interface IMatrixView : IView
     {
-        string DecimalTableNameValue { get; set; }
+        string MatrixNameValue { get; set; }
         IRuleCollection<object> DecimalTableNameRules { set; }
         IRuleCollection<object> RowArgumentRules { set; }
         ArgumentModel RowArgumentModel { get; }
