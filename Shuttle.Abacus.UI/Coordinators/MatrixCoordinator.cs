@@ -119,16 +119,20 @@ namespace Shuttle.Abacus.Shell.Coordinators
 
         public void HandleMessage(NewMatrixMessage message)
         {
-            var item = WorkItemManager
-                .Create("New Decimal Table")
-                .ControlledBy<IMatrixController>()
-                .ShowIn<IContextToolbarPresenter>()
-                .AddPresenter<IMatrixPresenter>()
-                .AddNavigationItem(NavigationItemFactory.Create(message).WithResourceItem(ResourceItems.Submit)).
-                AsDefault()
-                .AssignInitiator(message);
+            using (_databaseContextFactory.Create())
+            {
+                var model = new MatrixModel();
 
-            HostInWorkspace<ITabbedWorkspacePresenter>(item);
+                var item = WorkItemManager
+                    .Create("New Decimal Table")
+                    .ControlledBy<IMatrixController>()
+                    .ShowIn<IContextToolbarPresenter>()
+                    .AddPresenter<IMatrixPresenter>().WithModel(model)
+                    .AddNavigationItem(NavigationItemFactory.Create(message).WithResourceItem(ResourceItems.Submit)).AsDefault()
+                    .AssignInitiator(message);
+
+                HostInWorkspace<ITabbedWorkspacePresenter>(item);
+            }
         }
 
         public void HandleMessage(EditMatrixMessage message)

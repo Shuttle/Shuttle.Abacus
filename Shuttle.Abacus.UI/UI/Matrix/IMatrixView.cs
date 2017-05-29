@@ -19,16 +19,8 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
         ArgumentModel ColumnArgumentModel { get; }
         void PopulateArguments(IEnumerable<ArgumentModel> rows);
         void EnableColumnArgument();
-        void ShowRowAnswerCatalogConstraints();
-        void ShowRowAllConstraints();
-        void EnableRowAnswerSelection(IEnumerable<string> answers);
-        void EnableRowAnswerEntry();
-        void ShowColumnAnswerCatalogConstraints();
-        void ShowColumnAllConstraints();
-        void EnableColumnAnswerSelection(IEnumerable<string> answers);
-        void EnableColumnAnswerEntry();
         void InitializeGrid();
-        void RowFactorsOnly();
+        void RowValuesOnly();
         void ApplyColumnArgument();
         bool HasInvalidDecimalTable();
         List<MatrixElement> DecimalValues();

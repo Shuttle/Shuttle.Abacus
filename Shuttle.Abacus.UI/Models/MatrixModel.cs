@@ -11,14 +11,19 @@ namespace Shuttle.Abacus.Shell.Models
         {
             Guard.AgainstNull(row, "row");
 
-            _row = row;
+            Id = MatrixColumns.Id.MapFrom(row);
+            Name = MatrixColumns.Name.MapFrom(row);
+            RowArgumentName = MatrixColumns.RowArgumentName.MapFrom(row);
+            ColumnArgumentName = MatrixColumns.RowArgumentName.MapFrom(row);
         }
 
-        private readonly DataRow _row;
+        public MatrixModel()
+        {
+        }
 
-        public Guid Id => MatrixColumns.Id.MapFrom(_row);
-        public string Name => MatrixColumns.Name.MapFrom(_row);
-        public string RowArgumentName => MatrixColumns.RowArgumentName.MapFrom(_row);
-        public string ColumnArgumentName => MatrixColumns.RowArgumentName.MapFrom(_row);
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string RowArgumentName { get; set; }
+        public string ColumnArgumentName { get; set; }
     }
 }

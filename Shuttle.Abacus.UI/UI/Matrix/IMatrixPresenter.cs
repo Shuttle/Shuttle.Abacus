@@ -6,8 +6,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 {
     public interface IMatrixPresenter : IPresenter
     {
-        IEnumerable<ConstraintTypeModel> ConstraintTypes { get; }
-        void DecimalTableNameExited();
+        void MatrixNameExited();
         void RowArgumentChanged();
         void ColumnArgumentChanged();
         bool IsDecimal(string value);

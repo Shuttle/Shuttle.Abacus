@@ -16,44 +16,34 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 {
     public class MatrixPresenter : Presenter<IMatrixView, MatrixModel>, IMatrixPresenter
     {
-        private readonly IArgumentQuery _argumentQuery;
-        private readonly IConstraintTypeQuery _constraintTypeQuery;
-
-        private readonly IDatabaseContextFactory _databaseContextFactory;
-        private readonly IMatrixQuery _matrixQuery;
         private readonly IMatrixRules _matrixRules;
         private readonly IValueTypeValidatorProvider _valueTypeValidatorProvider;
-        private IEnumerable<ConstraintTypeModel> _constraintTypes = new List<ConstraintTypeModel>();
+        private readonly IDatabaseContextFactory _databaseContextFactory;
+        private readonly IArgumentQuery _argumentQuery;
         private bool _previousColumnArgumentWasText;
         private bool _previousRowArgumentWasText;
 
-        public MatrixPresenter(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
-            IMatrixQuery matrixQuery, IConstraintTypeQuery constraintTypeQuery, IMatrixView view,
-            IMatrixRules matrixRules,
-            IValueTypeValidatorProvider valueTypeValidatorProvider)
+        public MatrixPresenter(IMatrixView view, IMatrixRules matrixRules, IValueTypeValidatorProvider valueTypeValidatorProvider,
+            IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery)
             : base(view)
         {
-            Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
-            Guard.AgainstNull(argumentQuery, "argumentQuery");
-            Guard.AgainstNull(matrixQuery, "matrixQuery");
-            Guard.AgainstNull(constraintTypeQuery, "constraintTypeQuery");
             Guard.AgainstNull(matrixRules, "matrixRules");
             Guard.AgainstNull(valueTypeValidatorProvider, "valueTypeValidatorProvider");
+            Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
+            Guard.AgainstNull(argumentQuery, "argumentQuery");
 
-            _databaseContextFactory = databaseContextFactory;
-            _argumentQuery = argumentQuery;
-            _matrixQuery = matrixQuery;
-            _constraintTypeQuery = constraintTypeQuery;
             _matrixRules = matrixRules;
             _valueTypeValidatorProvider = valueTypeValidatorProvider;
+            _databaseContextFactory = databaseContextFactory;
+            _argumentQuery = argumentQuery;
 
             Text = "Matrix";
             Image = Resources.Image_Matrix;
         }
 
-        public void DecimalTableNameExited()
+        public void MatrixNameExited()
         {
-            WorkItem.Text = string.Format("Decimal Table{0}",
+            WorkItem.Text = string.Format("Matrix{0}",
                 View.DecimalTableNameValue.Length > 0
                     ? " : " + View.DecimalTableNameValue
                     : string.Empty);
@@ -79,38 +69,6 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
                         .Map(row => ArgumentColumns.ValueColumns.Value.MapFrom(row))
                         .ToList();
             }
-
-            if (argumentModel.IsText())
-            {
-                if (argumentModel.IsText() || answers.Any())
-                {
-                    View.EnableRowAnswerSelection(answers);
-
-                    _previousRowArgumentWasText = false;
-                }
-                else
-                {
-                    if (!_previousRowArgumentWasText)
-                    {
-                        View.EnableRowAnswerEntry();
-                    }
-
-                    _previousRowArgumentWasText = true;
-                }
-
-                View.ShowRowAnswerCatalogConstraints();
-            }
-            else
-            {
-                if (!_previousRowArgumentWasText)
-                {
-                    View.EnableRowAnswerEntry();
-
-                    _previousRowArgumentWasText = true;
-                }
-
-                View.ShowRowAllConstraints();
-            }
         }
 
         public void ColumnArgumentChanged()
@@ -118,46 +76,10 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             if (View.HasColumnArgument)
             {
                 View.ApplyColumnArgument();
-
-                var argumentModel = View.ColumnArgumentModel;
-
-                var answers = ColumnAnswers().ToList();
-
-                if (argumentModel.IsText() || answers.Any())
-                {
-                    if (answers.Any())
-                    {
-                        View.EnableColumnAnswerSelection(answers);
-
-                        _previousColumnArgumentWasText = false;
-                    }
-                    else
-                    {
-                        if (!_previousColumnArgumentWasText)
-                        {
-                            View.EnableColumnAnswerEntry();
-                        }
-
-                        _previousColumnArgumentWasText = true;
-                    }
-
-                    View.ShowColumnAnswerCatalogConstraints();
-                }
-                else
-                {
-                    if (!_previousColumnArgumentWasText)
-                    {
-                        View.EnableColumnAnswerEntry();
-
-                        _previousColumnArgumentWasText = true;
-                    }
-
-                    View.ShowColumnAllConstraints();
-                }
             }
             else
             {
-                View.RowFactorsOnly();
+                View.RowValuesOnly();
             }
         }
 
@@ -207,8 +129,6 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             return ArgumentAnswers(View.RowArgumentModel.Id);
         }
 
-        public IEnumerable<ConstraintTypeModel> ConstraintTypes => _constraintTypes;
-
         private IEnumerable<string> ArgumentAnswers(Guid id)
         {
             using (_databaseContextFactory.Create())
@@ -250,8 +170,6 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
             using (_databaseContextFactory.Create())
             {
-                _constraintTypes = _constraintTypeQuery.All().Map(row => new ConstraintTypeModel(row));
-
                 View.PopulateArguments(_argumentQuery.All().Map(row => new ArgumentModel(row)));
 
                 View.DecimalTableNameValue = Model.Name;
@@ -272,14 +190,14 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
                     View.ColumnArgumentValue = ArgumentColumns.Name.MapFrom(columnArumentRow);
                 }
 
-                foreach (DataRow row in _matrixQuery.GetValues(Model.Id).Rows)
-                {
-                    View.AddElement(
-                        MatrixColumns.ElementColumns.ColumnIndex.MapFrom(row),
-                        MatrixColumns.ElementColumns.RowIndex.MapFrom(row),
-                        MatrixColumns.ElementColumns.DecimalValue.MapFrom(row)
-                    );
-                }
+                //foreach (MatrixElementModel row in Model.Elements)
+                //{
+                //    View.AddElement(
+                //        MatrixColumns.ElementColumns.ColumnIndex.MapFrom(row),
+                //        MatrixColumns.ElementColumns.RowIndex.MapFrom(row),
+                //        MatrixColumns.ElementColumns.DecimalValue.MapFrom(row)
+                //    );
+                //}
             }
         }
     }

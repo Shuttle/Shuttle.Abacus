@@ -99,41 +99,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
         {
             ColumnArgument.Enabled = true;
         }
-
-        public void PopulateConstraintTypes(DataGridViewComboBoxCell combo, bool restrictToAnswerCatalog)
-        {
-            combo.Items.Clear();
-            combo.DisplayMember = "Text";
-
-            Presenter.ConstraintTypes.ForEach(item =>
-            {
-                if (!restrictToAnswerCatalog || item.EnabledForRestrictedAnswers)
-                {
-                    combo.Items.Add(item);
-                }
-            });
-        }
-
-        public void ShowRowAnswerCatalogConstraints()
-        {
-            RowConstraints().ForEach(combo => PopulateConstraintTypes(combo, true));
-        }
-
-        public void ShowRowAllConstraints()
-        {
-            RowConstraints().ForEach(combo => PopulateConstraintTypes(combo, false));
-        }
-
-        public void ShowColumnAnswerCatalogConstraints()
-        {
-            ColumnConstraints().ForEach(combo => PopulateConstraintTypes(combo, true));
-        }
-
-        public void ShowColumnAllConstraints()
-        {
-            ColumnConstraints().ForEach(combo => PopulateConstraintTypes(combo, false));
-        }
-
+        
         public void EnableRowAnswerSelection(IEnumerable<string> answers)
         {
             for (var row = 2; row <= ValueGridView.RowCount - 1; row++)
@@ -195,10 +161,10 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
             GridInitialized = true;
 
-            RowFactorsOnly();
+            RowValuesOnly();
         }
 
-        public void RowFactorsOnly()
+        public void RowValuesOnly()
         {
             if (!GridInitialized)
             {
@@ -640,8 +606,6 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
             ValueGridView[column, row] = cell;
             ValueGridView[column, row].ReadOnly = false;
-
-            PopulateConstraintTypes(cell, Presenter.RowAnswers().Any());
         }
 
         private void AddRow()
@@ -664,7 +628,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
         private void DecimalTableName_Leave(object sender, EventArgs e)
         {
-            Presenter.DecimalTableNameExited();
+            Presenter.MatrixNameExited();
         }
 
         private void RowArgument_SelectedIndexChanged(object sender, EventArgs e)

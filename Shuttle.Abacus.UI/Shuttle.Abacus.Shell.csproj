@@ -269,7 +269,6 @@
     <Compile Include="Models\ArgumentValueModel.cs" />
     <Compile Include="Models\ArgumentDisplayModel.cs" />
     <Compile Include="Models\ManageFormulaConstraintsModel.cs" />
-    <Compile Include="Models\ConstraintTypeModel.cs" />
     <Compile Include="Models\FormulaViewModel.cs" />
     <Compile Include="Models\ManageFormulaOperationsModel.cs" />
     <Compile Include="Models\MatrixModel.cs" />
