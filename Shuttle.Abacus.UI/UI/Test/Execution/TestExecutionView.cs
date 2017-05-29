@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Forms;
+using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Localisation;
 using Shuttle.Abacus.Shell.Core.Presentation;
 using Shuttle.Abacus.Shell.Messages.Test;
@@ -10,8 +12,14 @@ namespace Shuttle.Abacus.Shell.UI.Test.Execution
 {
     public partial class TestExecutionExecutionView : GenericTestExecutionView, ITestExecutionView
     {
-        public TestExecutionExecutionView()
+        private readonly IConstraintComparison _constraintComparison;
+
+        public TestExecutionExecutionView(IConstraintComparison constraintComparison)
         {
+            Guard.AgainstNull(constraintComparison, "constraintComparison");
+
+            _constraintComparison = constraintComparison;
+
             InitializeComponent();
 
             ImageList.Images.Add("Success", Resources.Image_Mark);
@@ -51,9 +59,18 @@ namespace Shuttle.Abacus.Shell.UI.Test.Execution
                     return;
                 }
 
+                var item = (TestExecutionItemModel) lvi.Tag;
+
                 lvi.SubItems[1].Text = "Complete";
 
-                lvi.ImageKey = "Success";
+                lvi.ImageKey = _constraintComparison
+                    .IsSatisfiedBy(
+                        item.ExpectedResultType,
+                        message.Result.ToString(CultureInfo.InvariantCulture),
+                        item.Comparison,
+                        item.ExpectedResult)
+                    ? "Success"
+                    : "Error";
             });
         }
 

@@ -1,4 +1,4 @@
-﻿using log4net.Util;
+﻿using System;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Messages.v1;
 using Shuttle.Core.Data;
@@ -13,7 +13,8 @@ namespace Shuttle.Abacus.Server.CommandHandlers
         private readonly IExecutionServiceFactory _executionServiceFactory;
         private readonly ITestRepository _testRepository;
 
-        public TestExecutionHandler(IDatabaseContextFactory databaseContextFactory, IExecutionServiceFactory executionServiceFactory, ITestRepository testRepository)
+        public TestExecutionHandler(IDatabaseContextFactory databaseContextFactory,
+            IExecutionServiceFactory executionServiceFactory, ITestRepository testRepository)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(executionServiceFactory, "executionServiceFactory");
@@ -31,19 +32,70 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                 return;
             }
 
+            var message = context.Message;
+
+            ContextLogLevel logLevel;
+
+            if (!Enum.TryParse(message.LogLevel, true, out logLevel))
+            {
+                logLevel = ContextLogLevel.None;
+            }
+
             using (_databaseContextFactory.Create())
             {
-                var test = _testRepository.Get(context.Message.Id);
+                var test = _testRepository.Get(message.Id);
 
-                var executionContext = _executionServiceFactory.Create().Execute(test.FormulaName, test.ArgumentValues());
+                var executionContext = _executionServiceFactory.Create()
+                    .Execute(test.FormulaName, test.ArgumentValues(), new ContextLogger(logLevel));
 
-                context.Send(new TestExecutedEvent
+                var response = new TestExecutedEvent
                 {
                     Id = test.Id,
                     FormulaName = test.FormulaName,
-                    Result = executionContext.Result()
-                }, c=> c.Reply());
+                    Log = executionContext.Logger.ToString()
+                };
+
+                if (!executionContext.HasException)
+                {
+                    response.Exception = executionContext.Exception.Message;
+                    response.FormulaContext = new Messages.v1.TransferObjects.FormulaContext();
+
+                    response.FormulaContext = GetFormulaContext(executionContext.RootFormulaContext);
+                }
+                else
+                {
+                    response.Result = executionContext.Result();
+                }
+
+                context.Send(response, c => c.Reply());
             }
+        }
+
+        private Messages.v1.TransferObjects.FormulaContext GetFormulaContext(FormulaContext formulaContext)
+        {
+            var responseFormulaContext =
+                new Messages.v1.TransferObjects.FormulaContext
+                {
+                    Result = formulaContext.Result,
+                    DateStarted = formulaContext.DateStarted,
+                    DateCompleted = formulaContext.DateCompleted
+                };
+
+            foreach (var usedArgumentValue in formulaContext.UsedArgumentValues())
+            {
+                responseFormulaContext.ArgumentAnswers.Add(new Messages.v1.TransferObjects.ArgumentValue
+                {
+                    Name = usedArgumentValue.Name,
+                    Value = usedArgumentValue.Value
+                });
+            }
+
+            foreach (var containedFormulaContext in formulaContext.ContainedFormulaContexts())
+            {
+                responseFormulaContext.FormulaContexts.Add(GetFormulaContext(containedFormulaContext));
+            }
+
+            return responseFormulaContext;
         }
     }
 }

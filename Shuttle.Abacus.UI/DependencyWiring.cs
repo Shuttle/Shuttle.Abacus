@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Values;
 using Shuttle.Abacus.Shell.Core.Binding;
@@ -162,10 +163,10 @@ namespace Shuttle.Abacus.Shell
 
         private IDependencyWiringOptional AddCore()
         {
-            _container.Register(Component.For<IImageService>().ImplementedBy<ImageService>());
-
             _container.Register
             (
+                Component.For<IImageService>().ImplementedBy<ImageService>(),
+                Component.For<IConstraintComparison>().ImplementedBy<ConstraintComparison>(),
                 Component.For(typeof(IDataRepository<>)).ImplementedBy(typeof(DataRepository<>))
             );
 

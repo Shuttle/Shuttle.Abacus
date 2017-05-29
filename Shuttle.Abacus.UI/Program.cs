@@ -20,7 +20,7 @@ namespace Shuttle.Abacus.Shell
     {
         private static Splash _splash;
 
-        private static readonly WindsorContainer Container = new WindsorContainer();
+        private static readonly WindsorContainer _container = new WindsorContainer();
         private static IServiceBus _bus;
 
         private static IMessageBus _messageBus;
@@ -43,7 +43,7 @@ namespace Shuttle.Abacus.Shell
 
             _splashThread.Start();
 
-            var container = new WindsorComponentContainer(Container);
+            var container = new WindsorComponentContainer(_container);
 
             EventStore.Register(container);
             ServiceBus.Register(container);
@@ -52,7 +52,7 @@ namespace Shuttle.Abacus.Shell
 
             container.Resolve<IDatabaseContextFactory>().ConfigureWith("Abacus");
 
-            DependencyWiring.Start(Container).AddWindowsComponents();
+            DependencyWiring.Start(_container).AddWindowsComponents();
 
             _messageBus = DependencyResolver.Resolve<IMessageBus>();
 
@@ -82,20 +82,8 @@ namespace Shuttle.Abacus.Shell
 
         private static void Dispose()
         {
-            try
-            {
-                _bus.Dispose();
-            }
-            catch
-            {
-            }
-            try
-            {
-                Container.Dispose();
-            }
-            catch
-            {
-            }
+            _bus?.Dispose();
+            _container?.Dispose();
         }
 
         public static void CloseSplash()

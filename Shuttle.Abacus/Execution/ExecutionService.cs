@@ -46,12 +46,13 @@ namespace Shuttle.Abacus
         //{
         //}
 
-        public ExecutionContext Execute(string formulaName, IEnumerable<ArgumentValue> values)
+        public ExecutionContext Execute(string formulaName, IEnumerable<ArgumentValue> values, IContextLogger logger)
         {
             Guard.AgainstNullOrEmptyString(formulaName, "formulaName");
             Guard.AgainstNull(values, "values");
+            Guard.AgainstNull(logger, "logger");
 
-            var context = new ExecutionContext(_arguments.Values, values);
+            var context = new ExecutionContext(_arguments.Values, values, logger);
 
             try
             {
@@ -137,7 +138,5 @@ namespace Shuttle.Abacus
 
             return _arguments[name];
         }
-
-
     }
 }

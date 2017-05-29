@@ -38,7 +38,7 @@ namespace Shuttle.Abacus.Tests
             {
                 new ArgumentValue ("Operand1", "2"),
                 new ArgumentValue ("Operand2", "3")
-            });
+            }, new ContextLogger(ContextLogLevel.Verbose));
 
             Assert.AreEqual(5, context.RootResult().Value);
         }
@@ -73,9 +73,11 @@ namespace Shuttle.Abacus.Tests
             {
                 new ArgumentValue ("Operand1", "2"),
                 new ArgumentValue ("Operand2", "3")
-            });
+            }, new ContextLogger(ContextLogLevel.Verbose));
 
             Assert.AreEqual(0, context.RootResult().Value);
+
+            Console.WriteLine(context.Logger);
         }
 
         [Test]
@@ -95,7 +97,7 @@ namespace Shuttle.Abacus.Tests
 
             var service = new ExecutionService(new ConstraintComparison(new ValueTypeFactory()), formulas, new List<Argument>());
 
-            var context = service.Execute("Formula1", new List<ArgumentValue>());
+            var context = service.Execute("Formula1", new List<ArgumentValue>(), new ContextLogger(ContextLogLevel.Verbose));
 
             Assert.AreEqual(100, context.Result());
         }
@@ -132,7 +134,7 @@ namespace Shuttle.Abacus.Tests
 
             var service = new ExecutionService(new ConstraintComparison(new ValueTypeFactory()), formulas, new List<Argument>());
 
-            var context = service.Execute("Formula1", new List<ArgumentValue>());
+            var context = service.Execute("Formula1", new List<ArgumentValue>(), new ContextLogger(ContextLogLevel.Verbose));
 
             Assert.IsTrue(context.HasException);
             Assert.IsTrue(context.Exception.Message.Contains("Cyclic"));

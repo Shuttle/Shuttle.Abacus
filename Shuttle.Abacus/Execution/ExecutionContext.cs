@@ -15,10 +15,13 @@ namespace Shuttle.Abacus
         private readonly Dictionary<string, string> _values = new Dictionary<string, string>();
         private readonly List<ExecutionResult> _results = new List<ExecutionResult>();
 
-        public ExecutionContext(IEnumerable<Argument> arguments, IEnumerable<ArgumentValue> values)
+        public ExecutionContext(IEnumerable<Argument> arguments, IEnumerable<ArgumentValue> values, IContextLogger logger)
         {
             Guard.AgainstNull(arguments, "arguments");
             Guard.AgainstNull(values, "values");
+            Guard.AgainstNull(logger, "logger");
+
+            Logger = logger;
 
             foreach (var argument in arguments)
             {
@@ -28,6 +31,11 @@ namespace Shuttle.Abacus
             foreach (var argumentValue in values)
             {
                 _values.Add(argumentValue.Name, argumentValue.Value);
+
+                if (logger.LogLevel == ContextLogLevel.Verbose)
+                {
+                    logger.LogVerbose($"[input argument] {argumentValue.Name} = '{argumentValue.Value}'");
+                }
             }
         }
 
@@ -38,8 +46,17 @@ namespace Shuttle.Abacus
                 throw new InvalidOperationException(string.Format("There is no argument value with name '{0}'.", name));
             }
 
-            return _values[name];
+            var result = _values[name];
+
+            if (HasActiveFormulaContext)
+            {
+                ActiveFormulaContext().UsedArgumentValue(name, result);
+            }
+
+            return result;
         }
+
+        public bool HasActiveFormulaContext => _stack.Count > 0;
 
         public int Depth()
         {
@@ -50,10 +67,23 @@ namespace Shuttle.Abacus
         {
             var result = new FormulaContext(this, formulaName);
 
+            if (_stack.Count > 0)
+            {
+                _stack.Peek().Add(result);
+            }
+            else
+            {
+                RootFormulaContext = result;
+            }
+
             _stack.Push(result);
+
+            Logger.LogNormal($"[starting] : {formulaName}");
 
             return result;
         }
+
+        public FormulaContext RootFormulaContext { get; private set; }
 
         public Exception Exception { get; private set; }
 
@@ -68,13 +98,20 @@ namespace Shuttle.Abacus
 
             AddResult(formulaContext);
 
-            _stack.Pop();
+            Logger.LogNormal($"[completed] : {formulaContext.FormulaName} ({formulaContext.TotalMilliseconds} ms)");
+
+            if (_stack.Count > 0)
+            {
+                _stack.Pop();
+            }
         }
 
         private void AddResult(FormulaContext formulaContext)
         {
             Guard.AgainstNull(formulaContext, "formulaContext");
 
+            Logger.LogNormal($"[result] : {formulaContext.Result} ({formulaContext.FormulaName})");
+            
             AddResult(formulaContext.FormulaName, formulaContext.Result);
         }
 
@@ -129,5 +166,11 @@ namespace Shuttle.Abacus
         }
 
         public bool HasException => Exception != null;
+        public IContextLogger Logger { get; }
+
+        public FormulaContext ActiveFormulaContext()
+        {
+            return _stack.Count == 0 ? null : _stack.Peek();
+        }
     }
 }

@@ -151,8 +151,8 @@
     <Compile Include="Domain\MatrixElement.cs" />
     <Compile Include="Domain\Extensions\NumberExtensions.cs" />
     <Compile Include="Domain\IEntity.cs" />
-    <Compile Include="Domain\Logging\IExecutionContextLogger.cs" />
-    <Compile Include="Domain\Logging\ExecutionContextLogger.cs" />
+    <Compile Include="Domain\Logging\IContextLogger.cs" />
+    <Compile Include="Domain\Logging\ContextLogger.cs" />
     <Compile Include="Domain\Test.cs" />
     <Compile Include="Domain\Formula\FormulaOperation.cs" />
     <Compile Include="Events\Argument.v1\Registered.cs" />
