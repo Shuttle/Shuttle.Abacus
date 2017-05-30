@@ -46,6 +46,8 @@
             this.RowArgument = new System.Windows.Forms.ComboBox();
             this.ColumnArgument = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.ValueType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.ValueGridView)).BeginInit();
             this.GridViewMenu.SuspendLayout();
             this.SuspendLayout();
@@ -63,7 +65,7 @@
             // 
             this.MatrixName.Location = new System.Drawing.Point(12, 28);
             this.MatrixName.Name = "MatrixName";
-            this.MatrixName.Size = new System.Drawing.Size(424, 20);
+            this.MatrixName.Size = new System.Drawing.Size(306, 20);
             this.MatrixName.TabIndex = 3;
             this.MatrixName.Leave += new System.EventHandler(this.MatrixName_Leave);
             // 
@@ -84,7 +86,7 @@
             this.ValueGridView.Location = new System.Drawing.Point(0, 156);
             this.ValueGridView.Name = "ValueGridView";
             this.ValueGridView.RowHeadersVisible = false;
-            this.ValueGridView.Size = new System.Drawing.Size(476, 236);
+            this.ValueGridView.Size = new System.Drawing.Size(462, 236);
             this.ValueGridView.TabIndex = 4;
             // 
             // GridViewMenu
@@ -198,7 +200,7 @@
             this.RowArgument.FormattingEnabled = true;
             this.RowArgument.Location = new System.Drawing.Point(12, 72);
             this.RowArgument.Name = "RowArgument";
-            this.RowArgument.Size = new System.Drawing.Size(424, 21);
+            this.RowArgument.Size = new System.Drawing.Size(440, 21);
             this.RowArgument.TabIndex = 6;
             this.RowArgument.SelectedIndexChanged += new System.EventHandler(this.RowArgument_SelectedIndexChanged);
             // 
@@ -209,7 +211,7 @@
             this.ColumnArgument.FormattingEnabled = true;
             this.ColumnArgument.Location = new System.Drawing.Point(12, 120);
             this.ColumnArgument.Name = "ColumnArgument";
-            this.ColumnArgument.Size = new System.Drawing.Size(424, 21);
+            this.ColumnArgument.Size = new System.Drawing.Size(440, 21);
             this.ColumnArgument.TabIndex = 8;
             this.ColumnArgument.SelectedIndexChanged += new System.EventHandler(this.ColumnArgument_SelectedIndexChanged);
             // 
@@ -222,10 +224,37 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "Column argument";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(350, 12);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(57, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Value type";
+            // 
+            // ValueType
+            // 
+            this.ValueType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ValueType.FormattingEnabled = true;
+            this.ValueType.Items.AddRange(new object[] {
+            "Boolean",
+            "Date",
+            "Decimal",
+            "Integer",
+            "Text"});
+            this.ValueType.Location = new System.Drawing.Point(350, 28);
+            this.ValueType.Name = "ValueType";
+            this.ValueType.Size = new System.Drawing.Size(102, 21);
+            this.ValueType.Sorted = true;
+            this.ValueType.TabIndex = 10;
+            // 
             // MatrixView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.ValueType);
             this.Controls.Add(this.ColumnArgument);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.RowArgument);
@@ -234,7 +263,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MatrixName);
             this.Name = "MatrixView";
-            this.Size = new System.Drawing.Size(477, 396);
+            this.Size = new System.Drawing.Size(463, 396);
             ((System.ComponentModel.ISupportInitialize)(this.ValueGridView)).EndInit();
             this.GridViewMenu.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -261,5 +290,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem MoveColumnLeftMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MoveColumnRightMenuItem;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox ValueType;
     }
 }

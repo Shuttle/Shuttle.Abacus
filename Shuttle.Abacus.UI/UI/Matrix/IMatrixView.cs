@@ -17,7 +17,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
         string ColumnArgumentValue { get; set; }
         bool HasColumnArgument { get; }
         ArgumentModel ColumnArgumentModel { get; }
-        void PopulateArguments(IEnumerable<ArgumentModel> rows);
+        void PopulateArguments(IEnumerable<ArgumentModel> models);
         void EnableColumnArgument();
         void InitializeGrid();
         void RowValuesOnly();

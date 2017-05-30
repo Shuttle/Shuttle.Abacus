@@ -20,8 +20,6 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
         private readonly IValueTypeValidatorProvider _valueTypeValidatorProvider;
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IArgumentQuery _argumentQuery;
-        private bool _previousColumnArgumentWasText;
-        private bool _previousRowArgumentWasText;
 
         public MatrixPresenter(IMatrixView view, IMatrixRules matrixRules, IValueTypeValidatorProvider valueTypeValidatorProvider,
             IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery)
@@ -57,18 +55,6 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             }
 
             View.EnableColumnArgument();
-
-            var argumentModel = View.RowArgumentModel;
-
-            IEnumerable<string> answers;
-
-            using (_databaseContextFactory.Create())
-            {
-                answers =
-                    _argumentQuery.GetValues(argumentModel.Id)
-                        .Map(row => ArgumentColumns.ValueColumns.Value.MapFrom(row))
-                        .ToList();
-            }
         }
 
         public void ColumnArgumentChanged()
@@ -83,37 +69,16 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             }
         }
 
-        public bool IsDecimal(string value)
+        public bool IsValidValue(object value)
         {
             decimal dec;
 
-            return decimal.TryParse(value, out dec);
+            //TODO: depends on type of output
+            return true;
+            return decimal.TryParse(value.ToString(), out dec);
         }
 
-        public bool IsValidAnswer(ArgumentModel model, object value)
-        {
-            if (string.IsNullOrEmpty(model.ValueType))
-            {
-                return true;
-            }
-
-            if (!HasValidArgumentAnswer(model, Convert.ToString(value)))
-            {
-                return false;
-            }
-
-            if (model.IsText())
-            {
-                return !string.IsNullOrEmpty(Convert.ToString(value));
-            }
-
-            return
-                _valueTypeValidatorProvider.Get(model.ValueType)
-                    .Validate(Convert.ToString(value))
-                    .OK;
-        }
-
-        public void ShowInvalidDecimalTableMessage()
+        public void ShowInvalidMatrixMessage()
         {
             MessageBus.Publish(
                 Result.Create().AddFailureMessage("The decimal table has invalid values.  Please investigate."));
@@ -121,15 +86,15 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
         public IEnumerable<string> ColumnAnswers()
         {
-            return ArgumentAnswers(View.ColumnArgumentModel.Id);
+            return ArgumentValues(View.ColumnArgumentModel.Id);
         }
 
         public IEnumerable<string> RowAnswers()
         {
-            return ArgumentAnswers(View.RowArgumentModel.Id);
+            return ArgumentValues(View.RowArgumentModel.Id);
         }
 
-        private IEnumerable<string> ArgumentAnswers(Guid id)
+        private IEnumerable<string> ArgumentValues(Guid id)
         {
             using (_databaseContextFactory.Create())
             {
@@ -137,26 +102,6 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
                     _argumentQuery.GetValues(id)
                         .Map(row => ArgumentColumns.ValueColumns.Value.MapFrom(row));
             }
-        }
-
-        private bool HasValidArgumentAnswer(ArgumentModel model, string value)
-        {
-            var answers = ArgumentAnswers(model.Id).ToList();
-
-            if (!answers.Any())
-            {
-                return true;
-            }
-
-            foreach (var answer in answers)
-            {
-                if (answer.Equals(value, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         public override void OnInitialize()

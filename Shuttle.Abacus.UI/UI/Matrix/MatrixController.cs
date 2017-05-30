@@ -24,7 +24,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
             if (view.HasInvalidDecimalTable())
             {
-                WorkItem.GetPresenter<IMatrixPresenter>().ShowInvalidDecimalTableMessage();
+                WorkItem.GetPresenter<IMatrixPresenter>().ShowInvalidMatrixMessage();
 
                 return;
             }
@@ -51,7 +51,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
             if (view.HasInvalidDecimalTable())
             {
-                WorkItem.GetPresenter<IMatrixPresenter>().ShowInvalidDecimalTableMessage();
+                WorkItem.GetPresenter<IMatrixPresenter>().ShowInvalidMatrixMessage();
 
                 return;
             }

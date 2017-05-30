@@ -58,8 +58,6 @@
             "Date",
             "Decimal",
             "Integer",
-            "Mapping",
-            "Money",
             "Text"});
             this.ValueType.Location = new System.Drawing.Point(8, 72);
             this.ValueType.Name = "ValueType";

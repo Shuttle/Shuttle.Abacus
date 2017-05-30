@@ -1,32 +1,34 @@
 using System.Collections.Generic;
-using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Localisation;
 
 namespace Shuttle.Abacus.Invariants.Values
 {
     public class ValueTypeValidatorProvider : IValueTypeValidatorProvider
     {
-        private readonly Dictionary<string, IValueTypeValidator> validators = new Dictionary<string, IValueTypeValidator>();
+        private readonly Dictionary<string, IValueTypeValidator> _valueTypeValidators =
+            new Dictionary<string, IValueTypeValidator>();
 
         public ValueTypeValidatorProvider()
         {
-            DependencyResolver.Resolver.ResolveAll<IValueTypeValidator>().ForEach(validator => validators.Add(validator.Type.ToLower(), validator));
+            _valueTypeValidators.Add("integer", new IntegerValueTypeValidator());
+            _valueTypeValidators.Add("decimal", new DecimalValueTypeValidator());
+            _valueTypeValidators.Add("date", new DateValueTypeValidator());
         }
 
         public IValueTypeValidator Get(string type)
         {
-            if (!validators.ContainsKey(type.ToLower()))
+            if (!_valueTypeValidators.ContainsKey(type.ToLower()))
             {
                 throw new KeyNotFoundException(string.Format(Resources.KeyNotFoundException, type,
-                                                             "ValueTypeValidatorProvider"));
+                    "ValueTypeValidatorProvider"));
             }
 
-            return validators[type.ToLower()];
+            return _valueTypeValidators[type.ToLower()];
         }
 
         public bool Has(string type)
         {
-            return validators.ContainsKey(type.ToLower());
+            return _valueTypeValidators.ContainsKey(type.ToLower());
         }
     }
 }

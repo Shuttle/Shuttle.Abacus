@@ -9,9 +9,8 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
         void MatrixNameExited();
         void RowArgumentChanged();
         void ColumnArgumentChanged();
-        bool IsDecimal(string value);
-        bool IsValidAnswer(ArgumentModel model, object value);
-        void ShowInvalidDecimalTableMessage();
+        bool IsValidValue(object value);
+        void ShowInvalidMatrixMessage();
         IEnumerable<string> ColumnAnswers();
         IEnumerable<string> RowAnswers();
     }

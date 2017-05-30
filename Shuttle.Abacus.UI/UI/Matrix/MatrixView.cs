@@ -74,25 +74,24 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
         public bool HasColumnArgument => ColumnArgument.SelectedIndex > 0;
 
-        public void PopulateArguments(IEnumerable<ArgumentModel> rows)
+        public void PopulateArguments(IEnumerable<ArgumentModel> models)
         {
             RowArgument.DisplayMember = "Name";
             ColumnArgument.DisplayMember = "Name";
 
-            //TODO
-            //ColumnArgument.Items.Add(new DataRow
-            //                       {
-            //                           Name = "(none)",
-            //                           ValueType = string.Empty
-            //                       });
+            ColumnArgument.Items.Add(new ArgumentModel
+            {
+                Id = Guid.Empty,
+                Name = "(none)"
+            });
 
-            rows.ForEach(row =>
+            models.ForEach(model =>
                 {
-                    RowArgument.Items.Add(row);
-                    ColumnArgument.Items.Add(row);
+                    RowArgument.Items.Add(model);
+                    ColumnArgument.Items.Add(model);
                 });
 
-            ColumnArgument.SelectedIndex = 0;
+            ColumnArgument.SelectedIndex = -1;
         }
 
         public void EnableColumnArgument()
@@ -100,19 +99,19 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             ColumnArgument.Enabled = true;
         }
         
-        public void EnableRowAnswerSelection(IEnumerable<string> answers)
+        public void EnableRowAnswerSelection(IEnumerable<string> values)
         {
             for (var row = 2; row <= ValueGridView.RowCount - 1; row++)
             {
-                MakeAnswerSelectionCell(1, row, answers);
+                MakeSelectionCell(1, row, values);
             }
         }
 
-        public void EnableColumnAnswerSelection(IEnumerable<string> answers)
+        public void EnableColumnAnswerSelection(IEnumerable<string> values)
         {
             for (var column = 2; column <= ValueGridView.ColumnCount - 1; column++)
             {
-                MakeAnswerSelectionCell(column, 1, answers);
+                MakeSelectionCell(column, 1, values);
             }
         }
 
@@ -120,7 +119,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
         {
             for (var row = 2; row <= ValueGridView.RowCount - 1; row++)
             {
-                MakeAnswerEntryCell(1, row);
+                MakeEntryCell(1, row);
             }
         }
 
@@ -128,7 +127,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
         {
             for (var column = 2; column <= ValueGridView.ColumnCount - 1; column++)
             {
-                MakeAnswerEntryCell(column, 1);
+                MakeEntryCell(column, 1);
             }
         }
 
@@ -178,7 +177,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
             ValueGridView.Columns.Add("Value", string.Empty);
 
-            ValueGridView[2, 1].Value = "Value";
+            ValueGridView[2, 1].Value = string.Empty;
             ValueGridView[2, 1].ReadOnly = true;
             ValueGridView[2, 0].ReadOnly = true;
         }
@@ -192,14 +191,13 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             {
                 MakeConstraintCell(column, 0);
 
-                //TODO
                 //if (ColumnRow.HasAnswerCatalog)
                 //{
-                //    MakeAnswerSelectionCell(column, 1, ColumnRow.ArgumentValues);
+                //    MakeSelectionCell(column, 1, ColumnRow.ArgumentValues);
                 //}
                 //else
                 //{
-                //    MakeAnswerEntryCell(column, 1);
+                    MakeEntryCell(column, 1);
                 //}
             }
         }
@@ -424,7 +422,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
                 {
                     var cell = ValueGridView[column, row];
 
-                    if (Presenter.IsDecimal(Convert.ToString(cell.Value)))
+                    if (Presenter.IsValidValue(Convert.ToString(cell.Value)))
                     {
                         cell.Style = null;
 
@@ -451,7 +449,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             {
                 var cell = ValueGridView[column, 1];
 
-                if (Presenter.IsValidAnswer(ColumnArgumentModel, cell.Value))
+                if (Presenter.IsValidValue(cell.Value))
                 {
                     cell.Style = null;
 
@@ -472,7 +470,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             {
                 var cell = ValueGridView[1, row];
 
-                if (Presenter.IsValidAnswer(RowArgumentModel, cell.Value))
+                if (Presenter.IsValidValue(cell.Value))
                 {
                     cell.Style = null;
 
@@ -496,28 +494,13 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
                 return;
             }
 
-            var ok = true;
-
-            if (IsValueCell(e.ColumnIndex, e.RowIndex))
-            {
-                ok = Presenter.IsDecimal(Convert.ToString(value));
-            }
-
-            if (IsRowAnswerCell(e.ColumnIndex, e.RowIndex))
-            {
-                ok = Presenter.IsValidAnswer(RowArgumentModel, value);
-            }
-
-            if (IsColumnAnswerCell(e.ColumnIndex, e.RowIndex))
-            {
-                ok = Presenter.IsValidAnswer(ColumnArgumentModel, value);
-            }
+            var ok = Presenter.IsValidValue(Convert.ToString(value));
 
             var cell = ValueGridView[e.ColumnIndex, e.RowIndex];
 
             if (!ok)
             {
-                Presenter.ShowInvalidDecimalTableMessage();
+                Presenter.ShowInvalidMatrixMessage();
 
                 e.Cancel = true;
 
@@ -553,21 +536,21 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             return result;
         }
 
-        private void MakeAnswerSelectionCell(int column, int row, IEnumerable<string> answers)
+        private void MakeSelectionCell(int column, int row, IEnumerable<string> values)
         {
             var cell = new DataGridViewComboBoxCell
             {
                 DisplayMember = "Name",
-                DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox
+                DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing
             };
 
-            answers.ForEach(item => cell.Items.Add(item));
+            values.ForEach(item => cell.Items.Add(item));
 
             ValueGridView[column, row] = cell;
             ValueGridView[column, row].ReadOnly = false;
         }
 
-        private void MakeAnswerEntryCell(int column, int row)
+        private void MakeEntryCell(int column, int row)
         {
             ValueGridView[column, row] = new DataGridViewTextBoxCell
             {
@@ -575,25 +558,6 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             };
 
             ValueGridView[column, row].ReadOnly = false;
-        }
-
-        private bool IsRowAnswerCell(int columnIndex, int rowIndex)
-        {
-            return columnIndex == 1 && rowIndex > 1;
-            //TODO
-            //return !RowArgumentModel.HasAnswerCatalog && columnIndex == 1 && rowIndex > 1;
-        }
-
-        private bool IsColumnAnswerCell(int columnIndex, int rowIndex)
-        {
-            return columnIndex > 1 && rowIndex == 1;
-            //TODO
-            //return !ColumnArgumentModel.HasAnswerCatalog && columnIndex > 1 && rowIndex == 1;
-        }
-
-        private static bool IsValueCell(int columnIndex, int rowIndex)
-        {
-            return columnIndex > 1 && rowIndex > 1;
         }
 
         private void MakeConstraintCell(int column, int row)
@@ -632,11 +596,11 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
             if (Presenter.RowAnswers().Any())
             {
-                MakeAnswerSelectionCell(1, row, Presenter.RowAnswers());
+                MakeSelectionCell(1, row, Presenter.RowAnswers());
             }
             else
             {
-                MakeAnswerEntryCell(1, row);
+                MakeEntryCell(1, row);
             }
         }
 
@@ -768,11 +732,11 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
             if (Presenter.ColumnAnswers().Any())
             {
-                MakeAnswerSelectionCell(column, 1, Presenter.ColumnAnswers());
+                MakeSelectionCell(column, 1, Presenter.ColumnAnswers());
             }
             else
             {
-                MakeAnswerEntryCell(column, 1);
+                MakeEntryCell(column, 1);
             }
         }
 
