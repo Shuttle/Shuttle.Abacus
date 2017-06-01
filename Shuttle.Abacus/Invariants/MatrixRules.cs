@@ -5,14 +5,9 @@ namespace Shuttle.Abacus.Invariants
 {
     public class MatrixRules : IMatrixRules
     {
-        public IRuleCollection<object> DecimalTableNameRules()
+        public IRuleCollection<object> NameRules()
         {
             return Rule.With().Required().MaximumLength(160).Create();
-        }
-
-        public IRuleCollection<object> RowArgumentRules()
-        {
-            return Rule.With().Required().Create();
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Shuttle.Abacus.Shell.UI.Argument
     public interface IArgumentView : IView
     {
         string ArgumentNameValue { get; set; }
-        string AnswerTypeValue { get; set; }
+        string ValueTypeValue { get; set; }
         IRuleCollection<object> ArgumentNameRules { set; }
         IRuleCollection<object> AnswerTypeRules { set; }
     }

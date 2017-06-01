@@ -17,7 +17,7 @@ namespace Shuttle.Abacus.Shell.UI.Argument
             set { ArgumentName.Text = value; }
         }
 
-        public string AnswerTypeValue
+        public string ValueTypeValue
         {
             get { return ValueType.Text; }
             set { ValueType.Text = value; }

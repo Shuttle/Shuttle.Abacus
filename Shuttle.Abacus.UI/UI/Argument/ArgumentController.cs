@@ -25,7 +25,7 @@ namespace Shuttle.Abacus.Shell.UI.Argument
             var command = new RegisterArgumentCommand
                           {
                               Name = view.ArgumentNameValue,
-                              AnswerType = view.AnswerTypeValue
+                              AnswerType = view.ValueTypeValue
                           };
 
             Send(command);

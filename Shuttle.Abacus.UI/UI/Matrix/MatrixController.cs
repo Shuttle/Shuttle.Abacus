@@ -22,7 +22,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
             var view = WorkItem.GetView<IMatrixView>();
 
-            if (view.HasInvalidDecimalTable())
+            if (!view.HasValidMatrix())
             {
                 WorkItem.GetPresenter<IMatrixPresenter>().ShowInvalidMatrixMessage();
 
@@ -49,7 +49,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
             var view = WorkItem.GetView<IMatrixView>();
 
-            if (view.HasInvalidDecimalTable())
+            if (view.HasValidMatrix())
             {
                 WorkItem.GetPresenter<IMatrixPresenter>().ShowInvalidMatrixMessage();
 

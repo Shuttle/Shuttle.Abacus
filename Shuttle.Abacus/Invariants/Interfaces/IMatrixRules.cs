@@ -4,7 +4,6 @@ namespace Shuttle.Abacus.Invariants.Interfaces
 {
     public interface IMatrixRules
     {
-        IRuleCollection<object> DecimalTableNameRules();
-        IRuleCollection<object> RowArgumentRules();
+        IRuleCollection<object> NameRules();
     }
 }

@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Infrastructure;
 using Shuttle.Abacus.Invariants.Interfaces;
@@ -94,6 +92,11 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             return ArgumentValues(View.RowArgumentModel.Id);
         }
 
+        public bool IsValidValue(string value)
+        {
+            return _valueTypeValidatorProvider.Get(View.ValueTypeValue).Validate(value).OK;
+        }
+
         private IEnumerable<string> ArgumentValues(Guid id)
         {
             using (_databaseContextFactory.Create())
@@ -110,8 +113,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
             Guard.AgainstNull(Model, "Model");
 
-            View.DecimalTableNameRules = _matrixRules.DecimalTableNameRules();
-            View.RowArgumentRules = _matrixRules.RowArgumentRules();
+            View.NameRules = _matrixRules.NameRules();
 
             using (_databaseContextFactory.Create())
             {

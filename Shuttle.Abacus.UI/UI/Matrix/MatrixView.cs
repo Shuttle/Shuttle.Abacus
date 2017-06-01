@@ -11,7 +11,7 @@ using Shuttle.Abacus.Shell.Models;
 
 namespace Shuttle.Abacus.Shell.UI.Matrix
 {
-    public partial class MatrixView : GenericDecimalTableView, IMatrixView
+    public partial class MatrixView : GenericDecimalTableView, IMatrixView, IViewReady
     {
         private readonly DataGridViewCellStyle errorCellStyle;
 
@@ -56,19 +56,20 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             set { MatrixName.Text = value; }
         }
 
-        public IRuleCollection<object> DecimalTableNameRules
+        public IRuleCollection<object> NameRules
         {
             set { ViewValidator.Control(MatrixName).ShouldSatisfy(value); }
-        }
-
-        public IRuleCollection<object> RowArgumentRules
-        {
-            set { ViewValidator.Control(RowArgument).ShouldSatisfy(value); }
         }
 
         public ArgumentModel RowArgumentModel => (ArgumentModel)RowArgument.SelectedItem;
 
         public ArgumentModel ColumnArgumentModel => (ArgumentModel)ColumnArgument.SelectedItem;
+
+        public string ValueTypeValue
+        {
+            get { return ValueType.Text; }
+            set { ValueType.Text = value; }
+        }
 
         public bool GridInitialized { get; private set; }
 
@@ -98,7 +99,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
         {
             ColumnArgument.Enabled = true;
         }
-        
+
         public void EnableRowAnswerSelection(IEnumerable<string> values)
         {
             for (var row = 2; row <= ValueGridView.RowCount - 1; row++)
@@ -197,12 +198,12 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
                 //}
                 //else
                 //{
-                    MakeEntryCell(column, 1);
+                MakeEntryCell(column, 1);
                 //}
             }
         }
 
-        public bool HasInvalidDecimalTable()
+        public bool HasValidMatrix()
         {
             ValueGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
 
@@ -217,7 +218,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
         private bool HasSameRowAndColumnArgument()
         {
-            if (RowArgumentModel.Id.Equals(ColumnArgumentModel.Id))
+            if (HasColumnArgument && RowArgumentModel.Id.Equals(ColumnArgumentModel.Id))
             {
                 const string message = "Cannot have the same row and column argument.";
 
@@ -449,7 +450,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             {
                 var cell = ValueGridView[column, 1];
 
-                if (Presenter.IsValidValue(cell.Value))
+                if (Presenter.IsValidValue((cell.Value ?? string.Empty).ToString()))
                 {
                     cell.Style = null;
 
@@ -470,7 +471,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             {
                 var cell = ValueGridView[1, row];
 
-                if (Presenter.IsValidValue(cell.Value))
+                if (Presenter.IsValidValue((cell.Value ?? string.Empty).ToString()))
                 {
                     cell.Style = null;
 
@@ -810,6 +811,12 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             Down = 1,
             Left = 2,
             Right = 3
+        }
+
+        public void OnReady()
+        {
+            ViewValidator.Control(ValueType).ShouldSatisfy(RuleCollection.Required());
+            ViewValidator.Control(RowArgument).ShouldSatisfy(RuleCollection.Required());
         }
     }
 

@@ -9,20 +9,20 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
     public interface IMatrixView : IView
     {
         string MatrixNameValue { get; set; }
-        IRuleCollection<object> DecimalTableNameRules { set; }
-        IRuleCollection<object> RowArgumentRules { set; }
+        IRuleCollection<object> NameRules { set; }
         ArgumentModel RowArgumentModel { get; }
         bool GridInitialized { get; }
         string RowArgumentValue { get; set; }
         string ColumnArgumentValue { get; set; }
         bool HasColumnArgument { get; }
         ArgumentModel ColumnArgumentModel { get; }
+        string ValueTypeValue { get; set; }
         void PopulateArguments(IEnumerable<ArgumentModel> models);
         void EnableColumnArgument();
         void InitializeGrid();
         void RowValuesOnly();
         void ApplyColumnArgument();
-        bool HasInvalidDecimalTable();
+        bool HasValidMatrix();
         List<MatrixElement> DecimalValues();
         void AddElement(int column, int row, decimal value);
     }
