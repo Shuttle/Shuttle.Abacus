@@ -226,8 +226,7 @@
     <Compile Include="Messages\Core\SummaryViewActivatedMessage.cs" />
     <Compile Include="Messages\Core\WorkCompletedMessage.cs" />
     <Compile Include="Messages\Core\WorkStartedMessage.cs" />
-    <Compile Include="Messages\DecimalTable\EditMatrixMessage.cs" />
-    <Compile Include="Messages\DecimalTable\NewMatrixMessage.cs" />
+    <Compile Include="Messages\Matrix\RegisterMatrixMessage.cs" />
     <Compile Include="Messages\Explorer\ExplorerInitializeMessage.cs" />
     <Compile Include="Messages\Argument\RemoveArgumentMessage.cs" />
     <Compile Include="Messages\Argument\RenameArgumentMessage.cs" />

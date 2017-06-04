@@ -207,6 +207,8 @@
     <Compile Include="Invariants\Interfaces\ITestRules.cs" />
     <Compile Include="Invariants\Interfaces\ISystemUserRules.cs" />
     <Compile Include="Invariants\LimitRules.cs" />
+    <Compile Include="Invariants\Values\TextTypeValidator.cs" />
+    <Compile Include="Invariants\Values\BooleanTypeValidator.cs" />
     <Compile Include="Invariants\Values\DateValueTypeValidator.cs" />
     <Compile Include="Invariants\ValueTypeRules.cs" />
     <Compile Include="Invariants\TestRules.cs" />

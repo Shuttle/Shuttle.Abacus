@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -74,6 +75,8 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
         public bool GridInitialized { get; private set; }
 
         public bool HasColumnArgument => ColumnArgument.SelectedIndex > 0;
+
+        public bool HasValueType => !string.IsNullOrEmpty(ValueTypeValue);
 
         public void PopulateArguments(IEnumerable<ArgumentModel> models)
         {
@@ -192,14 +195,14 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             {
                 MakeConstraintCell(column, 0);
 
-                //if (ColumnRow.HasAnswerCatalog)
-                //{
-                //    MakeSelectionCell(column, 1, ColumnRow.ArgumentValues);
-                //}
-                //else
-                //{
-                MakeEntryCell(column, 1);
-                //}
+                if (Presenter.ColumnValues().Any())
+                {
+                    MakeSelectionCell(column, 1, Presenter.ColumnValues());
+                }
+                else
+                {
+                    MakeEntryCell(column, 1);
+                }
             }
         }
 
@@ -231,7 +234,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             return false;
         }
 
-        public List<MatrixElement> DecimalValues()
+        public List<MatrixElement> Elements()
         {
             var result = new List<MatrixElement>();
 
@@ -241,31 +244,14 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
                 {
                     var cell = ValueGridView[column, row];
 
-                    var decimalValue = new MatrixElement
+                    var element = new MatrixElement
                     {
                         Row = row,
                         Column = column,
-                        Value = decimal.Parse(Convert.ToString(cell.Value))
+                        Value = Convert.ToString(cell.Value)
                     };
 
-                    decimalValue.Constraints.Add(new Abacus.Messages.v1.TransferObjects.FormulaConstraint
-                    {
-                        ArgumentName = RowArgumentModel.Name,
-                        Comparison = RowComparison(row),
-                        Value = RowConstraintValue(row)
-                    });
-
-                    if (HasColumnArgument)
-                    {
-                        decimalValue.Constraints.Add(new Abacus.Messages.v1.TransferObjects.FormulaConstraint
-                        {
-                            ArgumentName = ColumnArgumentModel.Name,
-                            Comparison = ColumnComparison(column),
-                            Value = ColumnConstraintValue(column)
-                        });
-                    }
-
-                    result.Add(decimalValue);
+                    result.Add(element);
                 }
             }
 
@@ -291,6 +277,55 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             {
                 ValueGridView[column, row].Value = value;
             }
+        }
+
+        public void ValidateMatrix()
+        {
+            for (var column = 2; column <= ValueGridView.ColumnCount - 1; column++)
+            {
+                for (var row = 2; row <= ValueGridView.RowCount - 1; row++)
+                {
+                    var cell = ValueGridView[column, row];
+
+                    cell.Style = Presenter.IsValidValue(Convert.ToString(cell.Value))
+                        ? null
+                        : errorCellStyle;
+                }
+            }
+        }
+
+        public List<MatrixConstraint> Constraints()
+        {
+            var result = new List<MatrixConstraint>();
+
+            for (var row = 2; row <= ValueGridView.RowCount - 1; row++)
+            {
+                result.Add(new MatrixConstraint
+                {
+                    SequenceNumber = row - 1,
+                    Axis = "Row",
+                    Comparison = ValueGridView[0, row].Value.ToString(),
+                    Value = ValueGridView[1, row].Value.ToString()
+                });
+            }
+
+            if (!HasColumnArgument)
+            {
+                return result;
+            }
+
+            for (var column = 2; column <= ValueGridView.ColumnCount - 1; column++)
+            {
+                result.Add(new MatrixConstraint
+                {
+                    SequenceNumber = column - 1,
+                    Axis = "Column",
+                    Comparison = ValueGridView[column, 0].Value.ToString(),
+                    Value = ValueGridView[column, 1].Value.ToString()
+                });
+            }
+
+            return result;
         }
 
         private bool ValidCoordinates(int column, int row)
@@ -423,16 +458,8 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
                 {
                     var cell = ValueGridView[column, row];
 
-                    if (Presenter.IsValidValue(Convert.ToString(cell.Value)))
-                    {
-                        cell.Style = null;
-
-                        continue;
-                    }
-
-                    cell.Style = errorCellStyle;
-
-                    return true;
+                    if (!Presenter.IsValidValue(Convert.ToString(cell.Value)))
+                        return true;
                 }
             }
 
@@ -490,27 +517,21 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
         {
             var value = e.FormattedValue;
 
-            if (value == null || string.IsNullOrEmpty(Convert.ToString(value)))
+            if (value == null
+                ||
+                string.IsNullOrEmpty(Convert.ToString(value))
+                ||
+                e.ColumnIndex < 2
+                ||
+                e.RowIndex < 2
+                )
             {
                 return;
             }
 
-            var ok = Presenter.IsValidValue(Convert.ToString(value));
-
             var cell = ValueGridView[e.ColumnIndex, e.RowIndex];
 
-            if (!ok)
-            {
-                Presenter.ShowInvalidMatrixMessage();
-
-                e.Cancel = true;
-
-                cell.Style = errorCellStyle;
-            }
-            else
-            {
-                cell.Style = null;
-            }
+            cell.Style = !Presenter.IsValidValue(Convert.ToString(value)) ? errorCellStyle : null;
         }
 
         private IEnumerable<DataGridViewComboBoxCell> RowConstraints()
@@ -595,9 +616,9 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
             MakeConstraintCell(0, row);
 
-            if (Presenter.RowAnswers().Any())
+            if (Presenter.RowValues().Any())
             {
-                MakeSelectionCell(1, row, Presenter.RowAnswers());
+                MakeSelectionCell(1, row, Presenter.RowValues());
             }
             else
             {
@@ -731,9 +752,9 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
             MakeConstraintCell(column, 0);
 
-            if (Presenter.ColumnAnswers().Any())
+            if (Presenter.ColumnValues().Any())
             {
-                MakeSelectionCell(column, 1, Presenter.ColumnAnswers());
+                MakeSelectionCell(column, 1, Presenter.ColumnValues());
             }
             else
             {
@@ -817,6 +838,11 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
         {
             ViewValidator.Control(ValueType).ShouldSatisfy(RuleCollection.Required());
             ViewValidator.Control(RowArgument).ShouldSatisfy(RuleCollection.Required());
+        }
+
+        private void ValueType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Presenter.ValueTypeChanged();
         }
     }
 

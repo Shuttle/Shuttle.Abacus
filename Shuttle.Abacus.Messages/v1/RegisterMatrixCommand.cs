@@ -4,12 +4,20 @@ using Shuttle.Abacus.Messages.v1.TransferObjects;
 
 namespace Shuttle.Abacus.Messages.v1
 {
-    public class MatrixCommand
+    public class RegisterMatrixCommand
     {
         public Guid MatrixId { get; set; }
-        public string DecimalTableName { get; set; }
+        public string MatrixName { get; set; }
         public string RowArgumentName { get; set; }
         public string ColumnArgumentName { get; set; }
+
+        public RegisterMatrixCommand()
+        {
+            Elements = new List<MatrixElement>();
+            Constraints = new List<MatrixConstraint>();
+        }
+
         public List<MatrixElement> Elements { get; set; }
+        public List<MatrixConstraint> Constraints { get; set; }
     }
 }

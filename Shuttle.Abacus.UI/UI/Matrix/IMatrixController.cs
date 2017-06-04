@@ -6,8 +6,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 {
     public interface IMatrixController :
         IWorkItemController,
-        IMessageHandler<NewMatrixMessage>,
-        IMessageHandler<EditMatrixMessage>
+        IMessageHandler<RegisterMatrixMessage>
     {
         
     }

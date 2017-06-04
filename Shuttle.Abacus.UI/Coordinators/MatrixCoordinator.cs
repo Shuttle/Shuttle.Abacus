@@ -9,6 +9,7 @@ using Shuttle.Abacus.Shell.Messages.DecimalTable;
 using Shuttle.Abacus.Shell.Messages.Explorer;
 using Shuttle.Abacus.Shell.Messages.Resources;
 using Shuttle.Abacus.Shell.Models;
+using Shuttle.Abacus.Shell.Navigation;
 using Shuttle.Abacus.Shell.UI.Matrix;
 using Shuttle.Abacus.Shell.UI.Shell.TabbedWorkspace;
 using Shuttle.Abacus.Shell.UI.WorkItem.ContextToolbar;
@@ -19,19 +20,16 @@ namespace Shuttle.Abacus.Shell.Coordinators
 {
     public class MatrixCoordinator : Coordinator, IMatrixCoordinator
     {
-        private readonly IArgumentQuery _argumentQuery;
+        private readonly INavigationItem _register = new NavigationItem(new ResourceItem("Register", "Matrix"));
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IMatrixQuery _matrixQuery;
 
-        public MatrixCoordinator(IDatabaseContextFactory databaseContextFactory, IArgumentQuery argumentQuery,
-            IMatrixQuery matrixQuery)
+        public MatrixCoordinator(IDatabaseContextFactory databaseContextFactory, IMatrixQuery matrixQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
-            Guard.AgainstNull(argumentQuery, "argumentQuery");
             Guard.AgainstNull(matrixQuery, "matrixQuery");
 
             _databaseContextFactory = databaseContextFactory;
-            _argumentQuery = argumentQuery;
             _matrixQuery = matrixQuery;
         }
 
@@ -58,16 +56,15 @@ namespace Shuttle.Abacus.Shell.Coordinators
             {
                 case Resource.ResourceType.Container:
                 {
-                    message.NavigationItems.Add(NavigationItemFactory.Create<NewMatrixMessage>());
+                    message.NavigationItems.Add(_register
+                        .AssignMessage(new RegisterMatrixMessage(Guid.Empty)));
 
                     break;
                 }
                 case Resource.ResourceType.Item:
                 {
-                    message.NavigationItems.Add(
-                        NavigationItemFactory.Create(
-                            new EditMatrixMessage(message.Item.Key,
-                                message.Item.Text)));
+                    message.NavigationItems.Add(_register
+                        .AssignMessage(new RegisterMatrixMessage(message.Item.Key)));
 
                     break;
                 }
@@ -106,7 +103,7 @@ namespace Shuttle.Abacus.Shell.Coordinators
         public void HandleMessage(ResourceRefreshItemTextMessage message)
         {
             if (!message.Item.ResourceKey.Equals(ResourceKeys.Matrix) ||
-                                                message.Item.Type != Resource.ResourceType.Item)
+                message.Item.Type != Resource.ResourceType.Item)
             {
                 return;
             }
@@ -117,7 +114,7 @@ namespace Shuttle.Abacus.Shell.Coordinators
             }
         }
 
-        public void HandleMessage(NewMatrixMessage message)
+        public void HandleMessage(RegisterMatrixMessage message)
         {
             using (_databaseContextFactory.Create())
             {
@@ -128,30 +125,13 @@ namespace Shuttle.Abacus.Shell.Coordinators
                     .ControlledBy<IMatrixController>()
                     .ShowIn<IContextToolbarPresenter>()
                     .AddPresenter<IMatrixPresenter>().WithModel(model)
-                    .AddNavigationItem(NavigationItemFactory.Create(message).WithResourceItem(ResourceItems.Submit)).AsDefault()
+                    .AddNavigationItem(_register.WithResourceItem(ResourceItems.Submit)).AsDefault()
                     .AssignInitiator(message);
 
                 HostInWorkspace<ITabbedWorkspacePresenter>(item);
             }
         }
 
-        public void HandleMessage(EditMatrixMessage message)
-        {
-            using (_databaseContextFactory.Create())
-            {
-                var item = WorkItemManager
-                    .Create(string.Format("Decimal Table: {0}", message.DecimalTableName))
-                    .ControlledBy<IMatrixController>()
-                    .ShowIn<IContextToolbarPresenter>()
-                    .AddPresenter<IMatrixPresenter>()
-                    .WithModel(new MatrixModel(_matrixQuery.Get(message.MatrixId)))
-                    .AddNavigationItem(NavigationItemFactory.Create(message).WithResourceItem(ResourceItems.Submit))
-                    .AsDefault()
-                    .AssignInitiator(message);
-
-                HostInWorkspace<ITabbedWorkspacePresenter>(item);
-            }
-        }
 
         public void HandleMessage(SummaryViewRequestedMessage message)
         {

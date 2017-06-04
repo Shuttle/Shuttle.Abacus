@@ -9,8 +9,9 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
         void RowArgumentChanged();
         void ColumnArgumentChanged();
         void ShowInvalidMatrixMessage();
-        IEnumerable<string> ColumnAnswers();
-        IEnumerable<string> RowAnswers();
+        IEnumerable<string> ColumnValues();
+        IEnumerable<string> RowValues();
         bool IsValidValue(string value);
+        void ValueTypeChanged();
     }
 }

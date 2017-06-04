@@ -8,8 +8,7 @@ using Shuttle.Esb;
 namespace Shuttle.Abacus.Server.CommandHandlers
 {
     public class MatrixHandler :
-        IMessageHandler<CreateMatrixCommand>,
-        IMessageHandler<UpdateMatrixCommand>
+        IMessageHandler<RegisterMatrixCommand>
     {
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IMatrixElementRepository _matrixElementRepository;
@@ -27,36 +26,16 @@ namespace Shuttle.Abacus.Server.CommandHandlers
             _matrixElementRepository = matrixElementRepository;
         }
 
-        public void ProcessMessage(IHandlerContext<CreateMatrixCommand> context)
+        public void ProcessMessage(IHandlerContext<RegisterMatrixCommand> context)
         {
             var message = context.Message;
 
             using (_databaseContextFactory.Create())
             {
-                var table = new Matrix(Guid.NewGuid(), message.DecimalTableName, message.RowArgumentName,
+                var table = new Matrix(Guid.NewGuid(), message.MatrixName, message.RowArgumentName,
                     message.ColumnArgumentName);
 
                 _matrixRepository.Add(table);
-
-                foreach (var value in table.Elements)
-                {
-                    _matrixElementRepository.Add(table, value);
-                }
-            }
-        }
-
-        public void ProcessMessage(IHandlerContext<UpdateMatrixCommand> context)
-        {
-            var message = context.Message;
-
-            using (_databaseContextFactory.Create())
-            {
-                var table = new Matrix(message.MatrixId, message.DecimalTableName, message.RowArgumentName,
-                    message.ColumnArgumentName);
-
-                _matrixElementRepository.RemoveAllForDecimalTable(message.MatrixId);
-
-                _matrixRepository.Save(table);
 
                 foreach (var value in table.Elements)
                 {

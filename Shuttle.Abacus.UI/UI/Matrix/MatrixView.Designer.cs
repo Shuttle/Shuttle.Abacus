@@ -248,6 +248,7 @@
             this.ValueType.Size = new System.Drawing.Size(102, 21);
             this.ValueType.Sorted = true;
             this.ValueType.TabIndex = 10;
+            this.ValueType.SelectedIndexChanged += new System.EventHandler(this.ValueType_SelectedIndexChanged);
             // 
             // MatrixView
             // 

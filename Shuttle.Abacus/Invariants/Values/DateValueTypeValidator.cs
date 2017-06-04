@@ -15,7 +15,7 @@ namespace Shuttle.Abacus.Invariants.Values
 
             if (!DateTime.TryParse(value, out date))
             {
-                result.AddFailureMessage("Please enter an date/time value.");
+                result.AddFailureMessage("Please enter a date/time value.");
             }
 
             return result;

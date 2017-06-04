@@ -11,8 +11,7 @@ namespace Shuttle.Abacus.Shell.Coordinators
         IMessageHandler<ResourceMenuRequestMessage>,
         IMessageHandler<PopulateResourceMessage>,
         IMessageHandler<ResourceRefreshItemTextMessage>,
-        IMessageHandler<NewMatrixMessage>,
-        IMessageHandler<EditMatrixMessage>,
+        IMessageHandler<RegisterMatrixMessage>,
         IMessageHandler<SummaryViewRequestedMessage>
     {
         

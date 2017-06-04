@@ -13,6 +13,8 @@ namespace Shuttle.Abacus.Invariants.Values
             _valueTypeValidators.Add("integer", new IntegerValueTypeValidator());
             _valueTypeValidators.Add("decimal", new DecimalValueTypeValidator());
             _valueTypeValidators.Add("date", new DateValueTypeValidator());
+            _valueTypeValidators.Add("boolean", new BooleanTypeValidator());
+            _valueTypeValidators.Add("text", new TextTypeValidator());
         }
 
         public IValueTypeValidator Get(string type)

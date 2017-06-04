@@ -67,34 +67,25 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             }
         }
 
-        public bool IsValidValue(object value)
-        {
-            decimal dec;
-
-            //TODO: depends on type of output
-            return true;
-            return decimal.TryParse(value.ToString(), out dec);
-        }
-
         public void ShowInvalidMatrixMessage()
         {
             MessageBus.Publish(
                 Result.Create().AddFailureMessage("The decimal table has invalid values.  Please investigate."));
         }
 
-        public IEnumerable<string> ColumnAnswers()
+        public IEnumerable<string> ColumnValues()
         {
             return ArgumentValues(View.ColumnArgumentModel.Id);
         }
 
-        public IEnumerable<string> RowAnswers()
+        public IEnumerable<string> RowValues()
         {
             return ArgumentValues(View.RowArgumentModel.Id);
         }
 
         public bool IsValidValue(string value)
         {
-            return _valueTypeValidatorProvider.Get(View.ValueTypeValue).Validate(value).OK;
+            return !View.HasValueType || _valueTypeValidatorProvider.Get(View.ValueTypeValue).Validate(value).OK;
         }
 
         private IEnumerable<string> ArgumentValues(Guid id)
@@ -156,6 +147,11 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
                 //    );
                 //}
             }
+        }
+
+        public void ValueTypeChanged()
+        {
+            View.ValidateMatrix();
         }
     }
 }

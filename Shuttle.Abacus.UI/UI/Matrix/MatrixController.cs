@@ -13,7 +13,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
         {
         }
 
-        public void HandleMessage(NewMatrixMessage message)
+        public void HandleMessage(RegisterMatrixMessage message)
         {
             if (!WorkItem.PresentationValid())
             {
@@ -29,40 +29,13 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
                 return;
             }
 
-            var command = new CreateMatrixCommand
+            var command = new RegisterMatrixCommand
             {
-                DecimalTableName = view.MatrixNameValue,
+                MatrixName = view.MatrixNameValue,
                 RowArgumentName = view.RowArgumentModel.Name,
-                ColumnArgumentName = view.ColumnArgumentModel.Name,
-                Elements = view.DecimalValues()
-            };
-
-            Send(command);
-        }
-
-        public void HandleMessage(EditMatrixMessage message)
-        {
-            if (!WorkItem.PresentationValid())
-            {
-                return;
-            }
-
-            var view = WorkItem.GetView<IMatrixView>();
-
-            if (view.HasValidMatrix())
-            {
-                WorkItem.GetPresenter<IMatrixPresenter>().ShowInvalidMatrixMessage();
-
-                return;
-            }
-
-            var command = new UpdateMatrixCommand
-            {
-                MatrixId = message.MatrixId,
-                DecimalTableName = view.MatrixNameValue,
-                RowArgumentName = view.RowArgumentModel.Name,
-                ColumnArgumentName = view.ColumnArgumentModel.Name,
-                Elements = view.DecimalValues()
+                ColumnArgumentName = view.HasColumnArgument ? view.ColumnArgumentModel.Name : string.Empty,
+                Constraints = view.Constraints(),
+                Elements = view.Elements()
             };
 
             Send(command);
