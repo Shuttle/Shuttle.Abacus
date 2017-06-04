@@ -19,7 +19,7 @@ namespace Shuttle.Abacus.Tests
 
         //    value.AddConstraint(new EqualsConstraint(Guid.NewGuid(), answer));
 
-        //    table.AddDecimalValue(value);
+        //    table.AddElement(value);
 
         //    var contextTrue = new FormulaContextOLD();
 

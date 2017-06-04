@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using Shuttle.Abacus.Domain;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
+using Shuttle.Recall;
 
 namespace Shuttle.Abacus.DataAccess
 {
@@ -10,14 +12,17 @@ namespace Shuttle.Abacus.DataAccess
     {
         private readonly IDatabaseGateway _databaseGateway;
         private readonly IMatrixQueryFactory _matrixQueryFactory;
+        private readonly IKeyStore _keyStore;
 
-        public MatrixQuery(IDatabaseGateway databaseGateway, IMatrixQueryFactory matrixQueryFactory)
+        public MatrixQuery(IDatabaseGateway databaseGateway, IMatrixQueryFactory matrixQueryFactory, IKeyStore keyStore)
         {
             Guard.AgainstNull(databaseGateway, "databaseGateway");
             Guard.AgainstNull(matrixQueryFactory, "matrixQueryFactory");
+            Guard.AgainstNull(keyStore, "keyStore");
 
             _databaseGateway = databaseGateway;
             _matrixQueryFactory = matrixQueryFactory;
+            _keyStore = keyStore;
         }
 
         public IEnumerable<DataRow> All()
@@ -38,6 +43,11 @@ namespace Shuttle.Abacus.DataAccess
         public DataTable Report(Guid id)
         {
             return _databaseGateway.GetDataTableFor(_matrixQueryFactory.Report(id));
+        }
+
+        public bool Contains(string name)
+        {
+            return _keyStore.Contains(Matrix.Key(name));
         }
     }
 }

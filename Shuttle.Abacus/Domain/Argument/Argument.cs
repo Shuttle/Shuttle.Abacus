@@ -47,7 +47,7 @@ namespace Shuttle.Abacus.Domain
             });
         }
 
-        public Registered On(Registered registered)
+        private Registered On(Registered registered)
         {
             Guard.AgainstNull(registered, "registered");
 
@@ -67,7 +67,7 @@ namespace Shuttle.Abacus.Domain
             return On(new Removed());
         }
 
-        public Removed On(Removed removed)
+        private Removed On(Removed removed)
         {
             Guard.AgainstNull(removed, "removed");
 
@@ -98,7 +98,7 @@ namespace Shuttle.Abacus.Domain
             });
         }
 
-        public Renamed On(Renamed renamed)
+        private Renamed On(Renamed renamed)
         {
             Guard.AgainstNull(renamed, "renamed");
 
@@ -117,7 +117,7 @@ namespace Shuttle.Abacus.Domain
             });
         }
 
-        public ValueTypeChanged On(ValueTypeChanged valueTypeChanged)
+        private ValueTypeChanged On(ValueTypeChanged valueTypeChanged)
         {
             Guard.AgainstNull(valueTypeChanged, "valueTypeChanged");
 
@@ -139,7 +139,7 @@ namespace Shuttle.Abacus.Domain
             });
         }
 
-        public ValueAdded On(ValueAdded valueAdded)
+        private ValueAdded On(ValueAdded valueAdded)
         {
             Guard.AgainstNull(valueAdded, "valueAdded");
 
@@ -171,7 +171,7 @@ namespace Shuttle.Abacus.Domain
             });
         }
 
-        public ValueRemoved On(ValueRemoved valueRemoved)
+        private ValueRemoved On(ValueRemoved valueRemoved)
         {
             Guard.AgainstNull(valueRemoved, "valueRemoved");
 

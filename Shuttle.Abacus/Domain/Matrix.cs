@@ -1,22 +1,38 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Shuttle.Abacus.Events.Matrix.v1;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.Domain
 {
-    public class Matrix 
+    public class Matrix
     {
         //private static readonly MatrixElement ZeroMatrixElement = new MatrixElement(0);
 
         private readonly List<MatrixElement> _values = new List<MatrixElement>();
 
-        public Matrix(Guid id, string name, string rowArgumentName, string columnArgumentName)
+        public Matrix(Guid id)
         {
             Id = id;
-            Name = name;
-            RowArgumentName = rowArgumentName;
-            ColumnArgumentName = columnArgumentName;
+        }
+
+        public Registered Register(string name, string rowArgumentName, string columnArgumentName)
+        {
+            Guard.AgainstNullOrEmptyString(name, "name");
+            Guard.AgainstNullOrEmptyString(rowArgumentName, "rowArgumentName");
+
+            return On(new Registered
+            {
+                Name = name,
+                RowArgumentName = rowArgumentName,
+                ColumnArgumentName = columnArgumentName ?? string.Empty
+            });
+        }
+
+        private Registered On(Registered registered)
+        {
+            throw new NotImplementedException();
         }
 
         public Guid Id { get; private set; }
@@ -28,7 +44,12 @@ namespace Shuttle.Abacus.Domain
         public string RowArgumentName { get; private set; }
         public string ColumnArgumentName { get; private set; }
 
-        public void AddDecimalValue(MatrixElement matrixElement)
+        public static string Key(string name)
+        {
+            return string.Format("[matrix]:name={0}", name);
+        }
+
+        public void AddElement(MatrixElement matrixElement)
         {
             Guard.AgainstNull(matrixElement, "matrixElement");
 
@@ -54,7 +75,7 @@ namespace Shuttle.Abacus.Domain
             throw new NotImplementedException();
             //var result = new Matrix(Guid.NewGuid(), Name, RowArgumentId, ColumnArgumentId);
 
-            //_values.ForEach(value => result.AddDecimalValue(value.Copy()));
+            //_values.ForEach(value => result.AddElement(value.Copy()));
 
             //return result;
         }

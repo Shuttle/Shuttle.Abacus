@@ -42,7 +42,7 @@ namespace Shuttle.Abacus.Domain
             });
         }
 
-        public Registered On(Registered registered)
+        private Registered On(Registered registered)
         {
             Guard.AgainstNull(registered, "registered");
 
@@ -65,7 +65,7 @@ namespace Shuttle.Abacus.Domain
             return On(new Removed());
         }
 
-        public Removed On(Removed removed)
+        private Removed On(Removed removed)
         {
             Guard.AgainstNull(removed, "removed");
 
@@ -96,7 +96,7 @@ namespace Shuttle.Abacus.Domain
             });
         }
 
-        public Renamed On(Renamed renamed)
+        private Renamed On(Renamed renamed)
         {
             Guard.AgainstNull(renamed, "renamed");
 
@@ -122,7 +122,7 @@ namespace Shuttle.Abacus.Domain
             });
         }
 
-        public ArgumentSet On(ArgumentSet argumentSet)
+        private ArgumentSet On(ArgumentSet argumentSet)
         {
             Guard.AgainstNull(argumentSet, "argumentValueSet");
 
@@ -147,7 +147,7 @@ namespace Shuttle.Abacus.Domain
             });
         }
 
-        public ArgumentRemoved On(ArgumentRemoved argumentRemoved)
+        private ArgumentRemoved On(ArgumentRemoved argumentRemoved)
         {
             Guard.AgainstNull(argumentRemoved, "argumentRemoved");
 

@@ -10,5 +10,6 @@ namespace Shuttle.Abacus.DataAccess
         DataRow Get(Guid id);
         DataTable GetValues(Guid id);
         DataTable Report(Guid id);
+        bool Contains(string name);
     }
 }

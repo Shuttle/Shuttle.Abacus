@@ -38,7 +38,7 @@ namespace Shuttle.Abacus.Domain
                 ValueSelection = valueSelection});
         }
 
-        public OperationAdded On(OperationAdded operationAdded)
+        private OperationAdded On(OperationAdded operationAdded)
         {
             Guard.AgainstNull(operationAdded, "operationAdded");
 
@@ -61,7 +61,7 @@ namespace Shuttle.Abacus.Domain
                 Value = value});
         }
 
-        public ConstraintAdded On(ConstraintAdded constraintAdded)
+        private ConstraintAdded On(ConstraintAdded constraintAdded)
         {
             Guard.AgainstNull(constraintAdded, "constraintAdded");
 
@@ -86,7 +86,7 @@ namespace Shuttle.Abacus.Domain
             });
         }
 
-        public Registered On(Registered registered)
+        private Registered On(Registered registered)
         {
             Guard.AgainstNull(registered, "registered");
 
@@ -105,7 +105,7 @@ namespace Shuttle.Abacus.Domain
             return On(new Removed());
         }
 
-        public Removed On(Removed removed)
+        private Removed On(Removed removed)
         {
             Guard.AgainstNull(removed, "removed");
 
@@ -136,7 +136,7 @@ namespace Shuttle.Abacus.Domain
             });
         }
 
-        public Renamed On(Renamed renamed)
+        private Renamed On(Renamed renamed)
         {
             Guard.AgainstNull(renamed, "renamed");
 
@@ -155,7 +155,7 @@ namespace Shuttle.Abacus.Domain
             return On(new OperationsRemoved());
         }
 
-        public OperationsRemoved On(OperationsRemoved operationsRemoved)
+        private OperationsRemoved On(OperationsRemoved operationsRemoved)
         {
             Guard.AgainstNull(operationsRemoved, "operationsRemoved");
 
@@ -169,7 +169,7 @@ namespace Shuttle.Abacus.Domain
             return On(new ConstraintsRemoved());
         }
 
-        public ConstraintsRemoved On(ConstraintsRemoved constraintsRemoved)
+        private ConstraintsRemoved On(ConstraintsRemoved constraintsRemoved)
         {
             Guard.AgainstNull(constraintsRemoved, "constraintsRemoved");
 

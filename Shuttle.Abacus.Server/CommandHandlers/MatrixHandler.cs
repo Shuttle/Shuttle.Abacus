@@ -1,4 +1,5 @@
 using System;
+using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Messages.v1;
 using Shuttle.Core.Data;
@@ -11,19 +12,18 @@ namespace Shuttle.Abacus.Server.CommandHandlers
         IMessageHandler<RegisterMatrixCommand>
     {
         private readonly IDatabaseContextFactory _databaseContextFactory;
-        private readonly IMatrixElementRepository _matrixElementRepository;
         private readonly IMatrixRepository _matrixRepository;
+        private readonly IMatrixQuery _matrixQuery;
 
-        public MatrixHandler(IDatabaseContextFactory databaseContextFactory, IMatrixRepository matrixRepository,
-            IMatrixElementRepository matrixElementRepository)
+        public MatrixHandler(IDatabaseContextFactory databaseContextFactory, IMatrixRepository matrixRepository, IMatrixQuery matrixQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(matrixRepository, "matrixRepository");
-            Guard.AgainstNull(matrixElementRepository, "matrixElementRepository");
+            Guard.AgainstNull(matrixQuery, "matrixQuery");
 
             _databaseContextFactory = databaseContextFactory;
             _matrixRepository = matrixRepository;
-            _matrixElementRepository = matrixElementRepository;
+            _matrixQuery = matrixQuery;
         }
 
         public void ProcessMessage(IHandlerContext<RegisterMatrixCommand> context)
@@ -32,6 +32,11 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 
             using (_databaseContextFactory.Create())
             {
+                if (Guid.Empty.Equals(message.MatrixId) && _matrixQuery.Contains(message.MatrixName))
+                {
+                    return;
+                }
+
                 var table = new Matrix(Guid.NewGuid(), message.MatrixName, message.RowArgumentName,
                     message.ColumnArgumentName);
 
