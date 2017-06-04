@@ -32,20 +32,20 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 
             using (_databaseContextFactory.Create())
             {
-                if (Guid.Empty.Equals(message.MatrixId) && _matrixQuery.Contains(message.MatrixName))
-                {
-                    return;
-                }
+                //if (Guid.Empty.Equals(message.MatrixId) && _matrixQuery.Contains(message.MatrixName))
+                //{
+                //    return;
+                //}
 
-                var table = new Matrix(Guid.NewGuid(), message.MatrixName, message.RowArgumentName,
-                    message.ColumnArgumentName);
+                //var table = new Matrix(Guid.NewGuid(), message.MatrixName, message.RowArgumentName,
+                //    message.ColumnArgumentName);
 
-                _matrixRepository.Add(table);
+                //_matrixRepository.Add(table);
 
-                foreach (var value in table.Elements)
-                {
-                    _matrixElementRepository.Add(table, value);
-                }
+                //foreach (var value in table.Elements)
+                //{
+                //    _matrixElementRepository.Add(table, value);
+                //}
             }
         }
     }

@@ -46,7 +46,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                 }
 
                 var formula = new Formula(Guid.NewGuid());
-                var stream = new EventStream(formula.Id);
+                var stream = _eventStore.CreateEventStream(formula.Id);
 
                 stream.AddEvent(formula.Register(message.Name));
 

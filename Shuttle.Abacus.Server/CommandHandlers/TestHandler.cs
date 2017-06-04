@@ -43,7 +43,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                 }
 
                 var test = new Test(Guid.NewGuid());
-                var stream = new EventStream(test.Id);
+                var stream = _eventStore.CreateEventStream(test.Id);
 
                 stream.AddEvent(test.Register(message.Name, message.FormulaName, message.ExpectedResult, message.ExpectedResultType, message.Comparison));
 

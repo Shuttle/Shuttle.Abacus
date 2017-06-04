@@ -1,4 +1,5 @@
 using System;
+using System.Security.Principal;
 using Shuttle.Abacus.Domain;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
@@ -35,13 +36,15 @@ namespace Shuttle.Abacus.DataAccess
 
             Guarded.Entity<Matrix>(matrixRow, id);
 
-            var result = new Matrix(
-                MatrixColumns.Id.MapFrom(matrixRow),
-                MatrixColumns.Name.MapFrom(matrixRow),
-                MatrixColumns.RowArgumentName.MapFrom(matrixRow),
-                MatrixColumns.ColumnArgumentName.MapFrom(matrixRow));
+            throw new NotImplementedException();
 
-            return result;
+            //var result = new Matrix(
+            //    MatrixColumns.Id.MapFrom(matrixRow),
+            //    MatrixColumns.Name.MapFrom(matrixRow),
+            //    MatrixColumns.RowArgumentName.MapFrom(matrixRow),
+            //    MatrixColumns.ColumnArgumentName.MapFrom(matrixRow));
+
+            //return result;
         }
 
         public void Save(Matrix matrix)
