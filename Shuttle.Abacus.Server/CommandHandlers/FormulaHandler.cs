@@ -123,7 +123,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                     return;
                 }
 
-                _keyStore.Remove(Argument.Key(formula.Name));
+                _keyStore.Remove(Formula.Key(formula.Name));
 
                 stream.AddEvent(formula.Rename(message.Name));
 

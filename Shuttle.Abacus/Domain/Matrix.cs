@@ -8,16 +8,27 @@ namespace Shuttle.Abacus.Domain
 {
     public class Matrix
     {
-        //private static readonly MatrixElement ZeroMatrixElement = new MatrixElement(0);
-
-        private readonly List<MatrixElement> _values = new List<MatrixElement>();
+        private readonly List<Constraint> _constraints = new List<Constraint>();
+        private readonly List<Element> _elements = new List<Element>();
 
         public Matrix(Guid id)
         {
             Id = id;
         }
 
-        public Registered Register(string name, string rowArgumentName, string columnArgumentName)
+        public string ValueType { get; private set; }
+
+        public Guid Id { get; private set; }
+
+        public string Name { get; private set; }
+
+        public IEnumerable<Element> Elements => new ReadOnlyCollection<Element>(_elements);
+        public IEnumerable<Constraint> Constraints => new ReadOnlyCollection<Constraint>(_constraints);
+
+        public string RowArgumentName { get; private set; }
+        public string ColumnArgumentName { get; private set; }
+
+        public Registered Register(string name, string rowArgumentName, string columnArgumentName, string valueType)
         {
             Guard.AgainstNullOrEmptyString(name, "name");
             Guard.AgainstNullOrEmptyString(rowArgumentName, "rowArgumentName");
@@ -26,58 +37,141 @@ namespace Shuttle.Abacus.Domain
             {
                 Name = name,
                 RowArgumentName = rowArgumentName,
-                ColumnArgumentName = columnArgumentName ?? string.Empty
+                ColumnArgumentName = columnArgumentName ?? string.Empty,
+                ValueType = valueType
             });
         }
 
         private Registered On(Registered registered)
         {
-            throw new NotImplementedException();
+            Guard.AgainstNull(registered, "registered");
+
+            Name = registered.Name;
+            RowArgumentName = registered.RowArgumentName;
+            ColumnArgumentName = registered.ColumnArgumentName;
+            ValueType = registered.ValueType;
+
+            _constraints.Clear();
+            _elements.Clear();
+
+            return registered;
         }
-
-        public Guid Id { get; private set; }
-
-        public string Name { get; private set; }
-
-        public IEnumerable<MatrixElement> Elements => new ReadOnlyCollection<MatrixElement>(_values);
-
-        public string RowArgumentName { get; private set; }
-        public string ColumnArgumentName { get; private set; }
 
         public static string Key(string name)
         {
             return string.Format("[matrix]:name={0}", name);
         }
 
-        public void AddElement(MatrixElement matrixElement)
+        public ElementAdded AddElement(int row, int column, string value)
         {
-            Guard.AgainstNull(matrixElement, "matrixElement");
+            if (HasElement(row, column))
+            {
+                throw new DomainException(string.Format("There is already a value for row '{0}' and column '{1}'.", row,
+                    column));
+            }
 
-            _values.Add(matrixElement);
+            return On(new ElementAdded
+            {
+                Row = row,
+                Column = column,
+                Value = value
+            });
         }
 
-        //public MatrixElement Get(IMethodContext collectionContext)
-        //{
-        //    var result = Find(collectionContext);
-
-        //    if (result != null)
-        //    {
-        //        return result;
-        //    }
-
-        //    collectionContext.AddErrorMessage(string.Format("Could not find a qualifying value in decimal table '{0}'.", Name));
-
-        //    return ZeroMatrixElement;
-        //}
-
-        public Matrix Copy()
+        private ElementAdded On(ElementAdded elementAdded)
         {
-            throw new NotImplementedException();
-            //var result = new Matrix(Guid.NewGuid(), Name, RowArgumentId, ColumnArgumentId);
+            Guard.AgainstNull(elementAdded, "elementAdded");
 
-            //_values.ForEach(value => result.AddElement(value.Copy()));
+            _elements.Add(new Element(elementAdded.Row, elementAdded.Column, elementAdded.Value));
 
-            //return result;
+            return elementAdded;
+        }
+
+        public bool HasElement(int row, int column)
+        {
+            return _elements.Find(item => item.Row == row && item.Column == column) != null;
+        }
+
+        public bool IsNamed(string name)
+        {
+            return Name.Equals(name, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        public ConstraintAdded AddConstraint(string axis, int sequenceNumber, string comparison, string value)
+        {
+            Guard.AgainstNullOrEmptyString(axis, "axis");
+            Guard.AgainstNullOrEmptyString(comparison, "comparison");
+
+            if (HasConstraint(axis, sequenceNumber))
+            {
+                throw new DomainException(
+                    string.Format("There is already a constraint for axis '{0}' and sequence number '{1}'.", axis,
+                        sequenceNumber));
+            }
+
+            return On(new ConstraintAdded
+            {
+                Axis = axis,
+                SequenceNumber = sequenceNumber,
+                Comparison = comparison,
+                Value = value
+            });
+        }
+
+        private ConstraintAdded On(ConstraintAdded constraintAdded)
+        {
+            Guard.AgainstNull(constraintAdded, "constraintAdded");
+
+            _constraints.Add(new Constraint(constraintAdded.Axis, constraintAdded.SequenceNumber,
+                constraintAdded.Comparison, constraintAdded.Value));
+
+            return constraintAdded;
+        }
+
+        public bool HasConstraint(string axis, int sequenceNumber)
+        {
+            return
+                _constraints.Exists(
+                    item =>
+                        item.Axis.Equals(axis, StringComparison.InvariantCultureIgnoreCase) &&
+                        item.SequenceNumber == sequenceNumber);
+        }
+
+        public class Constraint
+        {
+            public Constraint(string axis, int sequenceNumber, string comparison, string value)
+            {
+                if (!axis.Equals("Row", StringComparison.InvariantCultureIgnoreCase)
+                    &&
+                    !axis.Equals("Column", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    throw new DomainException("Axis may only be 'Row' or 'Column'.");
+                }
+
+                Axis = axis;
+                SequenceNumber = sequenceNumber;
+                Comparison = comparison;
+                Value = value;
+            }
+
+            public string Axis { get; }
+            public int SequenceNumber { get; }
+            public string Comparison { get; private set; }
+            public string Value { get; private set; }
+        }
+
+        public class Element
+        {
+            public Element(int row, int column, string value)
+            {
+                Row = row;
+                Column = column;
+                Value = value;
+            }
+
+            public int Row { get; }
+            public int Column { get; }
+            public string Value { get; }
         }
     }
 }

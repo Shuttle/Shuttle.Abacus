@@ -31,9 +31,10 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
             var command = new RegisterMatrixCommand
             {
-                MatrixName = view.MatrixNameValue,
+                Name = view.MatrixNameValue,
                 RowArgumentName = view.RowArgumentModel.Name,
                 ColumnArgumentName = view.HasColumnArgument ? view.ColumnArgumentModel.Name : string.Empty,
+                ValueType = view.ValueTypeValue,
                 Constraints = view.Constraints(),
                 Elements = view.Elements()
             };

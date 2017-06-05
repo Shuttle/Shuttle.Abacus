@@ -61,7 +61,7 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Matrix name";
             // 
-            // MatrixName
+            // Name
             // 
             this.MatrixName.Location = new System.Drawing.Point(12, 28);
             this.MatrixName.Name = "MatrixName";
