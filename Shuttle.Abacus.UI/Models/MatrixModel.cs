@@ -11,7 +11,7 @@ namespace Shuttle.Abacus.Shell.Models
         {
             Guard.AgainstNull(row, "row");
 
-            Id = MatrixColumns.Id.MapFrom(row);
+            Id = MatrixColumns.MatrixId.MapFrom(row);
             Name = MatrixColumns.Name.MapFrom(row);
             RowArgumentName = MatrixColumns.RowArgumentName.MapFrom(row);
             ColumnArgumentName = MatrixColumns.RowArgumentName.MapFrom(row);

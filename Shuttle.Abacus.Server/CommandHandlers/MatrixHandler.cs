@@ -73,6 +73,11 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                     stream.AddEvent(matrix.AddConstraint(constraint.Axis, constraint.SequenceNumber,
                         constraint.Comparison, constraint.Value));
                 }
+
+                foreach (var element in message.Elements)
+                {
+                    stream.AddEvent(matrix.AddElement(element.Row, element.Column, element.Value));
+                }
             }
         }
     }

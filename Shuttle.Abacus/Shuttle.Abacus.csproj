@@ -89,8 +89,6 @@
     <Compile Include="DataAccess\ConstraintTypeQueryFactory.cs" />
     <Compile Include="DataAccess\Definitions\MatrixColumns.cs" />
     <Compile Include="DataAccess\MatrixQueryFactory.cs" />
-    <Compile Include="DataAccess\Definitions\ElementColumns.cs" />
-    <Compile Include="DataAccess\MatrixElementQueryFactory.cs" />
     <Compile Include="DataAccess\Definitions\FormulaColumns.cs" />
     <Compile Include="DataAccess\FormulaQueryFactory.cs" />
     <Compile Include="DataAccess\Definitions\GraphNodeArgumentColumns.cs" />

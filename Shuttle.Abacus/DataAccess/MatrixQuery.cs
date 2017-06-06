@@ -35,16 +35,6 @@ namespace Shuttle.Abacus.DataAccess
             return _databaseGateway.GetSingleRowUsing(_matrixQueryFactory.Get(id));
         }
 
-        public DataTable GetValues(Guid id)
-        {
-            return _databaseGateway.GetDataTableFor(_matrixQueryFactory.ConstrainedDecimalValues(id));
-        }
-
-        public DataTable Report(Guid id)
-        {
-            return _databaseGateway.GetDataTableFor(_matrixQueryFactory.Report(id));
-        }
-
         public bool Contains(string name)
         {
             return _keyStore.Contains(Matrix.Key(name));

@@ -81,7 +81,7 @@ namespace Shuttle.Abacus.Shell.Coordinators
                         foreach (var row in _formulaQuery.All())
                         {
                             message.Resources.Add(
-                                new Resource(ResourceKeys.Formula, FormulaColumns.Id.MapFrom(row),
+                                new Resource(ResourceKeys.Formula, FormulaColumns.FormulaId.MapFrom(row),
                                     FormulaColumns.Name.MapFrom(row), ImageResources.Formula));
                         }
                     }

@@ -42,4 +42,39 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="FormulaName" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="1c878c7f-9f81-488c-9089-f000ca46eb25" ChangeDateTime="06/06/2017 19:04:48">
+    <Property Name="ElementName" Value="[dbo].[MatrixElement].[RowIndex]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MatrixElement]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Row" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a7a38a0a-37a9-446f-804d-f979df70a55c" ChangeDateTime="06/06/2017 19:04:52">
+    <Property Name="ElementName" Value="[dbo].[MatrixElement].[ColumnIndex]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MatrixElement]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Column" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9dc74987-d0f1-4af8-b1d7-a4241b5e5f48" ChangeDateTime="06/06/2017 19:05:18">
+    <Property Name="ElementName" Value="[dbo].[FK_DecimalValue_DecimalTable]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[MatrixElement]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_MatrixElement_Matrix]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7e71de00-79de-4bd6-b512-e5c1911ca535" ChangeDateTime="06/06/2017 19:05:39">
+    <Property Name="ElementName" Value="[dbo].[FormulaConstraint].[FormulaId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[FormulaConstraint]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MatrixId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="973ee192-fca6-4b6d-abac-63895dea6ae7" ChangeDateTime="06/06/2017 19:05:49">
+    <Property Name="ElementName" Value="[dbo].[FormulaConstraint].[ArgumentName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[FormulaConstraint]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Axis" />
+  </Operation>
 </Operations>

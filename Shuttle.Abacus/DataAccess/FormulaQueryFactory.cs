@@ -30,7 +30,7 @@ from
 where
     FormulaId = @FormulaId
 ")
-                .AddParameterValue(FormulaColumns.Id, id);
+                .AddParameterValue(FormulaColumns.FormulaId, id);
         }
 
         public IQuery Get(Guid id)
@@ -38,21 +38,21 @@ where
             return RawQuery.Create(string.Concat(SelectClause, @"
 where
     FormulaId = @FormulaId"))
-                .AddParameterValue(FormulaColumns.Id, id);
+                .AddParameterValue(FormulaColumns.FormulaId, id);
         }
 
         public IQuery RemoveOperations(Guid formulaId)
         {
             return
                 RawQuery.Create("delete from FormulaOperation where FormulaId = @FormulaId")
-                    .AddParameterValue(FormulaColumns.Id, formulaId);
+                    .AddParameterValue(FormulaColumns.FormulaId, formulaId);
         }
 
         public IQuery RemoveConstraints(Guid formulaId)
         {
             return
                 RawQuery.Create("delete from FormulaConstraint where FormulaId = @FormulaId")
-                    .AddParameterValue(FormulaColumns.Id, formulaId);
+                    .AddParameterValue(FormulaColumns.FormulaId, formulaId);
         }
 
         public IQuery Constraints(Guid id)
@@ -69,7 +69,7 @@ from
 where
     FormulaId = @FormulaId
 ")
-                .AddParameterValue(FormulaColumns.Id, id);
+                .AddParameterValue(FormulaColumns.FormulaId, id);
         }
 
         public IQuery Registered(Guid formulaId, string name)
@@ -85,7 +85,7 @@ values
     @FormulaId,
     @Name
 )")
-                .AddParameterValue(FormulaColumns.Id, formulaId)
+                .AddParameterValue(FormulaColumns.FormulaId, formulaId)
                 .AddParameterValue(FormulaColumns.Name, name);
         }
 
@@ -93,7 +93,7 @@ values
         {
             return
                 RawQuery.Create("delete from Formula where FormulaId = @FormulaId")
-                    .AddParameterValue(FormulaColumns.Id, formulaId);
+                    .AddParameterValue(FormulaColumns.FormulaId, formulaId);
         }
 
         public IQuery Renamed(Guid formulaId, string name)
@@ -106,7 +106,7 @@ set
 where
     FormulaId = @FormulaId
 ")
-                .AddParameterValue(FormulaColumns.Id, formulaId)
+                .AddParameterValue(FormulaColumns.FormulaId, formulaId)
                 .AddParameterValue(FormulaColumns.Name, name);
         }
 
@@ -131,7 +131,7 @@ values
     @ValueSelection
 )
 ")
-                .AddParameterValue(FormulaColumns.Id, formulaId)
+                .AddParameterValue(FormulaColumns.FormulaId, formulaId)
                 .AddParameterValue(FormulaColumns.OperationColumns.Operation, operation)
                 .AddParameterValue(FormulaColumns.OperationColumns.ValueSource, valueSource)
                 .AddParameterValue(FormulaColumns.OperationColumns.ValueSelection, valueSelection)
@@ -149,7 +149,7 @@ where
     FormulaId = @FormulaId
 ")
                 .AddParameterValue(FormulaColumns.Name, item.Name)
-                .AddParameterValue(FormulaColumns.Id, item.Id);
+                .AddParameterValue(FormulaColumns.FormulaId, item.Id);
         }
 
         public IQuery All()
@@ -176,7 +176,7 @@ values
     @Comparison,
     @Value
 )")
-                .AddParameterValue(FormulaColumns.Id, formulaId)
+                .AddParameterValue(FormulaColumns.FormulaId, formulaId)
                 .AddParameterValue(FormulaColumns.ConstraintColumns.SequenceNumber, sequenceNumber)
                 .AddParameterValue(FormulaColumns.ConstraintColumns.ArgumentName, argumentName)
                 .AddParameterValue(FormulaColumns.ConstraintColumns.Comparison, comparison)

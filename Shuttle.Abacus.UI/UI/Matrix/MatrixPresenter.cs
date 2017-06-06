@@ -141,9 +141,9 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
                 //foreach (MatrixElementModel row in Model.Elements)
                 //{
                 //    View.AddElement(
-                //        MatrixColumns.ElementColumns.ColumnIndex.MapFrom(row),
-                //        MatrixColumns.ElementColumns.RowIndex.MapFrom(row),
-                //        MatrixColumns.ElementColumns.DecimalValue.MapFrom(row)
+                //        MatrixColumns.ElementColumns.Column.MapFrom(row),
+                //        MatrixColumns.ElementColumns.Row.MapFrom(row),
+                //        MatrixColumns.ElementColumns.Value.MapFrom(row)
                 //    );
                 //}
             }

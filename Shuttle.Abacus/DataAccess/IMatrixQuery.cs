@@ -8,8 +8,6 @@ namespace Shuttle.Abacus.DataAccess
     {
         IEnumerable<DataRow> All();
         DataRow Get(Guid id);
-        DataTable GetValues(Guid id);
-        DataTable Report(Guid id);
         bool Contains(string name);
     }
 }

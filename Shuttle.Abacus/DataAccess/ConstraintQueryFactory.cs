@@ -26,7 +26,7 @@ where
 order by
     SequenceNumber
 "))
-                .AddParameterValue(FormulaColumns.Id, formulaId);
+                .AddParameterValue(FormulaColumns.FormulaId, formulaId);
         }
 
         public IQuery Remove(Guid ownerId)

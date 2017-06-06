@@ -29,33 +29,7 @@ select
 from
     Matrix
 ")
-                .AddParameterValue(MatrixColumns.Id, id);
-        }
-
-        public IQuery ConstrainedDecimalValues(Guid id)
-        {
-            var query =
-                RawQuery.Create(
-                    @"
-                select
-                    dv.ColumnIndex,
-                    dv.RowIndex,
-                    dv.MatrixElement,
-                    c.Name,
-                    c.ArgumentName,
-                    c.ValueType,
-                    c.Answer
-                from
-                    [MatrixElement] dv
-                inner join
-                    [Constraint] c on
-                        (c.OwnerId = dv.DecimalValueId)
-                where
-                    dv.MatrixId = @MatrixId");
-
-            query.AddParameterValue(MatrixColumns.ElementColumns.MatrixId, id);
-
-            return query;
+                .AddParameterValue(MatrixColumns.MatrixId, id);
         }
 
         public IQuery Name(Guid id)
@@ -67,58 +41,7 @@ select
 from
     Matrix
 ")
-                .AddParameterValue(MatrixColumns.Id, id);
-        }
-
-        public IQuery Report(Guid decimalTableId)
-        {
-            var query =
-                RawQuery.Create(
-                    @"
-                        select 
-                            dt.Name As DecimalTableName,
-                            ra.Name  As RowArgumentName,
-                            ca.Name As ColumnArgumentName,
-                            dv.RowIndex,
-                            dv.ColumnIndex,
-                            dv.MatrixElement,
-                            (select MAX(ColumnIndex) from MatrixElement mc where mc.MatrixId = dt.MatrixId) As MaxColumn,
-                            rc.Name As RowConstraint,
-                            rc.Answer As RowConstraintTitle,
-                            cc.Name As ColumnConstraint,
-                            cc.Answer As ColumnConstraintTitle
-                        from 
-	                        Matrix dt
-                        inner join 
-	                        MatrixElement dv on 
-		                        dt.MatrixId = dv.MatrixId
-                        inner join 
-	                        Argument ra on 
-		                        dt.RowArgumentId = ra.ArgumentName
-                        left outer join 
-	                        Argument ca on 
-		                        dt.ColumnArgumentId = ca.ArgumentName
-                        left outer join 
-	                        [Constraint] rc on 
-		                        dv.DecimalValueId = rc.OwnerId 
-		                        and 
-		                        rc.SequenceNumber = 1
-                        left outer join 
-	                        [Constraint] cc on 
-		                        dv.DecimalValueId = cc.OwnerId 
-		                        and 
-		                        cc.SequenceNumber=2
-                        where 
-                            dt.MatrixId = @MatrixId
-                        order by 
-	                        dt.Name, 
-	                        dv.RowIndex, 
-	                        dv.ColumnIndex
-                    ");
-
-            query.AddParameterValue(MatrixColumns.Id, decimalTableId);
-
-            return query;
+                .AddParameterValue(MatrixColumns.MatrixId, id);
         }
 
         public IQuery Add(Matrix item)
@@ -138,7 +61,7 @@ values
     @RowArgumentName,
     @ColumnArgumentName
 )")
-                .AddParameterValue(MatrixColumns.Id, item.Id)
+                .AddParameterValue(MatrixColumns.MatrixId, item.Id)
                 .AddParameterValue(MatrixColumns.Name, item.Name)
                 .AddParameterValue(MatrixColumns.RowArgumentName, item.RowArgumentName)
                 .AddParameterValue(MatrixColumns.ColumnArgumentName, item.ColumnArgumentName);
@@ -148,7 +71,7 @@ values
         {
             return
                 RawQuery.Create("delete from Matrix where MatrixId = @MatrixId")
-                    .AddParameterValue(MatrixColumns.Id, id);
+                    .AddParameterValue(MatrixColumns.MatrixId, id);
         }
 
         public IQuery Save(Matrix item)
@@ -164,7 +87,7 @@ where
                 .AddParameterValue(MatrixColumns.Name, item.Name)
                 .AddParameterValue(MatrixColumns.RowArgumentName, item.RowArgumentName)
                 .AddParameterValue(MatrixColumns.ColumnArgumentName, item.ColumnArgumentName)
-                .AddParameterValue(MatrixColumns.Id, item.Id);
+                .AddParameterValue(MatrixColumns.MatrixId, item.Id);
         }
     }
 }

@@ -12,8 +12,8 @@ namespace Shuttle.Abacus.Shell.Models
             Row = row;
         }
 
-        public int ColumnIndex => MatrixColumns.ElementColumns.ColumnIndex.MapFrom(Row);
-        public int RowIndex => MatrixColumns.ElementColumns.RowIndex.MapFrom(Row);
-        public decimal DecimalValue => MatrixColumns.ElementColumns.DecimalValue.MapFrom(Row);
+        public int ColumnIndex => MatrixColumns.ElementColumns.Column.MapFrom(Row);
+        public int RowIndex => MatrixColumns.ElementColumns.Row.MapFrom(Row);
+        public decimal DecimalValue => MatrixColumns.ElementColumns.Value.MapFrom(Row);
     }
 }

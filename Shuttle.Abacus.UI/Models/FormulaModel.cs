@@ -16,7 +16,7 @@ namespace Shuttle.Abacus.Shell.Models
         {
             Guard.AgainstNull(row, "row");
 
-            Id = FormulaColumns.Id.MapFrom(row);
+            Id = FormulaColumns.FormulaId.MapFrom(row);
             Name = FormulaColumns.Name.MapFrom(row);
             MaximumFormulaName = FormulaColumns.MaximumFormulaName.MapFrom(row);
             MinimumFormulaName = FormulaColumns.MinimumFormulaName.MapFrom(row);

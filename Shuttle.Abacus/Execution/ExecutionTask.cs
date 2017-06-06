@@ -89,7 +89,7 @@ namespace Shuttle.Abacus
                 {
                     foreach (var row in _formulaQuery.All())
                     {
-                        Cache<Formula>(FormulaColumns.Id.MapFrom(row), formula => formula.Name);
+                        Cache<Formula>(FormulaColumns.FormulaId.MapFrom(row), formula => formula.Name);
                     }
                 }
 

@@ -7,9 +7,6 @@
     CONSTRAINT [PK_Matrix] PRIMARY KEY NONCLUSTERED ([MatrixId] ASC)
 );
 
-
-
-
 GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_Matrix]
     ON [dbo].[Matrix]([Name] ASC);
