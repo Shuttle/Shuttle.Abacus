@@ -24,8 +24,9 @@ order by
 select
     MatrixId,
     Name,
-    ColumnArgumentId,
-    RowArgumentId
+    ColumnArgumentName,
+    RowArgumentName,
+    ValueType
 from
     Matrix
 ")
@@ -52,14 +53,16 @@ insert into Matrix
     MatrixId,
     Name,
     RowArgumentName,
-    ColumnArgumentName
+    ColumnArgumentName,
+    ValueType
 )
 values
 (
     @MatrixId,
     @Name,
     @RowArgumentName,
-    @ColumnArgumentName
+    @ColumnArgumentName,
+    @ValueType
 )")
                 .AddParameterValue(MatrixColumns.MatrixId, item.Id)
                 .AddParameterValue(MatrixColumns.Name, item.Name)

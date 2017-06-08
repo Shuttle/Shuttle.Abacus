@@ -24,7 +24,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
         void InitializeGrid();
         void RowValuesOnly();
         void ApplyColumnArgument();
-        bool HasValidMatrix();
+        bool HasInvalidMatrix();
         List<MatrixElement> Elements();
         void AddElement(int column, int row, decimal value);
         void ValidateMatrix();

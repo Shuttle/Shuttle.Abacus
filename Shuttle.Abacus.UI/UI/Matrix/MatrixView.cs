@@ -206,15 +206,15 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             }
         }
 
-        public bool HasValidMatrix()
+        public bool HasInvalidMatrix()
         {
             ValueGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
 
             return
                 HasSameRowAndColumnArgument() ||
-                HasInvalidRowAnswers() ||
+                HasInvalidRowValues() ||
                 HasInvalidRowConstraints() ||
-                HasInvalidColumnAnswers() ||
+                HasInvalidColumnValues() ||
                 HasInvalidColumnConstraints() ||
                 HasInvalidValues();
         }
@@ -466,7 +466,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             return false;
         }
 
-        private bool HasInvalidColumnAnswers()
+        private bool HasInvalidColumnValues()
         {
             if (!HasColumnArgument)
             {
@@ -492,7 +492,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
             return false;
         }
 
-        private bool HasInvalidRowAnswers()
+        private bool HasInvalidRowValues()
         {
             for (var row = 2; row <= ValueGridView.RowCount - 1; row++)
             {

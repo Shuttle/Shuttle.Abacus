@@ -64,8 +64,6 @@
     <Folder Include="dbo\Tables\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\AnswerType.sql" />
-    <Build Include="dbo\Tables\ConstraintType.sql" />
     <Build Include="dbo\Tables\OperationType.sql" />
     <Build Include="dbo\Tables\ValueSourceType.sql" />
     <Build Include="dbo\Tables\Argument.sql" />

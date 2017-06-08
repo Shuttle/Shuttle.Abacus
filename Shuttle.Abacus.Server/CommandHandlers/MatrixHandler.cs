@@ -1,6 +1,5 @@
 using System;
 using System.Dynamic;
-using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Messages.v1;
 using Shuttle.Core.Data;
@@ -14,22 +13,16 @@ namespace Shuttle.Abacus.Server.CommandHandlers
         IMessageHandler<RegisterMatrixCommand>
     {
         private readonly IDatabaseContextFactory _databaseContextFactory;
-        private readonly IMatrixRepository _matrixRepository;
-        private readonly IMatrixQuery _matrixQuery;
         private readonly IEventStore _eventStore;
         private readonly IKeyStore _keyStore;
 
-        public MatrixHandler(IDatabaseContextFactory databaseContextFactory, IMatrixRepository matrixRepository, IMatrixQuery matrixQuery, IEventStore eventStore, IKeyStore keyStore)
+        public MatrixHandler(IDatabaseContextFactory databaseContextFactory, IEventStore eventStore, IKeyStore keyStore)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
-            Guard.AgainstNull(matrixRepository, "matrixRepository");
-            Guard.AgainstNull(matrixQuery, "matrixQuery");
             Guard.AgainstNull(eventStore, "eventStore");
             Guard.AgainstNull(keyStore, "keyStore");
 
             _databaseContextFactory = databaseContextFactory;
-            _matrixRepository = matrixRepository;
-            _matrixQuery = matrixQuery;
             _eventStore = eventStore;
             _keyStore = keyStore;
         }
@@ -47,19 +40,23 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 
                 if (message.MatrixId.Equals(Guid.Empty))
                 {
+                    stream = _eventStore.CreateEventStream();
+                    matrix = new Matrix(stream.Id);
+
+                    _keyStore.Add(matrix.Id, key);
+                }
+                else
+                {
                     stream = _eventStore.Get(message.MatrixId);
-                    matrix = _matrixRepository.Get(message.MatrixId);
+                    matrix = new Matrix(stream.Id);
+
+                    stream.Apply(matrix);
 
                     if (!matrix.IsNamed(message.Name) && !_keyStore.Contains(key))
                     {
                         _keyStore.Remove(Matrix.Key(message.Name));
-                        _keyStore.Add(message.MatrixId, key);
+                        _keyStore.Add(matrix.Id, key);
                     }
-                }
-                else
-                {
-                    stream = _eventStore.CreateEventStream();
-                    matrix = new Matrix(stream.Id);
                 }
 
                 stream.AddEvent(matrix.Register(
@@ -78,6 +75,8 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                 {
                     stream.AddEvent(matrix.AddElement(element.Row, element.Column, element.Value));
                 }
+
+                _eventStore.Save(stream);
             }
         }
     }

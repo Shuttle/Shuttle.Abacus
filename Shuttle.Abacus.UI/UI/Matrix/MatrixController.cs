@@ -22,7 +22,7 @@ namespace Shuttle.Abacus.Shell.UI.Matrix
 
             var view = WorkItem.GetView<IMatrixView>();
 
-            if (!view.HasValidMatrix())
+            if (view.HasInvalidMatrix())
             {
                 WorkItem.GetPresenter<IMatrixPresenter>().ShowInvalidMatrixMessage();
 
