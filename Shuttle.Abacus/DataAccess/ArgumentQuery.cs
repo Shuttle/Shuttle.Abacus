@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Shuttle.Abacus.DTO;
 using Shuttle.Abacus.Events.Argument.v1;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;

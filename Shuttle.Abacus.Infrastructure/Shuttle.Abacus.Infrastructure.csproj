@@ -54,38 +54,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Caching\Cache.cs" />
     <Compile Include="Collection\IRichList.cs" />
     <Compile Include="Collection\RichList.cs" />
     <Compile Include="DependencyResolver\DependencyResolver.cs" />
     <Compile Include="DependencyResolver\IDependencyResolver.cs" />
     <Compile Include="DependencyResolver\WindsorResolver.cs" />
-    <Compile Include="Exceptions\CircularReferenceException.cs" />
-    <Compile Include="Exceptions\ConventionException.cs" />
-    <Compile Include="Exceptions\InvalidCalculationOrderException.cs" />
-    <Compile Include="Exceptions\InvalidStateException.cs" />
     <Compile Include="Exceptions\NavigationItemNotFoundForMessageException.cs" />
-    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\EnumerableActions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
-    <Compile Include="Extensions\EnumerationExtensions.cs" />
     <Compile Include="Extensions\ExceptionExtensions.cs" />
-    <Compile Include="Extensions\GuidExtensions.cs" />
-    <Compile Include="Extensions\IEnumerableActions.cs" />
-    <Compile Include="Factories\FactoryProvider.cs" />
-    <Compile Include="Factories\IFactory.cs" />
-    <Compile Include="Factories\IFactoryProvider.cs" />
-    <Compile Include="ICanBeReadOnly.cs" />
     <Compile Include="Images\IImageService.cs" />
     <Compile Include="Images\ImageService.cs" />
-    <Compile Include="Money.cs" />
-    <Compile Include="Pattern\ICommand.cs" />
     <Compile Include="Pattern\IMapper.cs" />
-    <Compile Include="Pattern\IValueReturningVisitor.cs" />
-    <Compile Include="Pattern\IVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reflection\IReflectionService.cs" />
-    <Compile Include="Reflection\ReflectionService.cs" />
     <Compile Include="Result\AbstractResult.cs" />
     <Compile Include="Result\IAbstractResult.cs" />
     <Compile Include="Result\IResult.cs" />
@@ -101,15 +82,8 @@
     <Compile Include="Security\PermissionCollection.cs" />
     <Compile Include="Security\Permissions.cs" />
     <Compile Include="Security\Session.cs" />
-    <Compile Include="Specifications\AndSpecification.cs" />
-    <Compile Include="Specifications\CompositeSpecification.cs" />
-    <Compile Include="Specifications\NotSpecification.cs" />
-    <Compile Include="Specifications\OrSpecification.cs" />
-    <Compile Include="Specifications\Specification.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utilities\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Shuttle.Abacus.Localisation\Shuttle.Abacus.Localisation.csproj">
       <Project>{8B8949A1-EE10-4444-B974-62C1DC5708AC}</Project>

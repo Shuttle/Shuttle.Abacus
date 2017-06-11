@@ -208,7 +208,6 @@ namespace Shuttle.Abacus.Shell
 
             _container.Register
             (
-                Component.For(typeof(IFactoryProvider<>)).ImplementedBy(typeof(FactoryProvider<>)),
                 Component.For<IValueTypeValidatorProvider>().ImplementedBy<ValueTypeValidatorProvider>(),
                 Component.For<IExecutionTask>().ImplementedBy<ExecutionTask>()
             );

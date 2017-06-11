@@ -14,7 +14,7 @@ namespace Shuttle.Abacus.Shell.Handlers
         {
             Guard.AgainstNull(messageBus, "_messageBus");
 
-            this._messageBus = messageBus;
+            _messageBus = messageBus;
         }
 
         public void ProcessMessage(IHandlerContext<TestExecutedEvent> context)

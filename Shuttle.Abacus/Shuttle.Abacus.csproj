@@ -124,10 +124,6 @@
     <Compile Include="DataAccess\ISystemUserQuery.cs" />
     <Compile Include="DataAccess\SystemUserQuery.cs" />
     <Compile Include="DataAccess\SystemUserRepository.cs" />
-    <Compile Include="DataContracts\ExecuteMethodRequest.cs" />
-    <Compile Include="DataContracts\ExecuteMethodResponse.cs" />
-    <Compile Include="DataContracts\Message.cs" />
-    <Compile Include="DataContracts\NameValue.cs" />
     <Compile Include="Domain\ValueType\ValueType.cs" />
     <Compile Include="Domain\ValueType\BooleanValueType.cs" />
     <Compile Include="Domain\ValueType\DateTimeValueType.cs" />
@@ -211,10 +207,6 @@
     <Compile Include="Domain\SystemUser.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shuttle.Abacus.DTO\Shuttle.Abacus.DTO.csproj">
-      <Project>{5CD61A6D-ABCB-4400-A113-4EF4DA4C439C}</Project>
-      <Name>Shuttle.Abacus.DTO</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Shuttle.Abacus.Infrastructure\Shuttle.Abacus.Infrastructure.csproj">
       <Project>{1A365F2C-BA2B-41F0-969B-EEC08C6E2658}</Project>
       <Name>Shuttle.Abacus.Infrastructure</Name>

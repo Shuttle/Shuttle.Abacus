@@ -72,10 +72,9 @@
     <Compile Include="Calculator\FormulaTest.cs" />
     <Compile Include="Calculator\LimitsTest.cs" />
     <Compile Include="Calculator\MethodContextTest.cs" />
-    <Compile Include="DecimalTableTest.cs" />
+    <Compile Include="MatrixTest.cs" />
     <Compile Include="ExecutionServiceFixture.cs" />
     <Compile Include="MatrixElementTest.cs" />
-    <Compile Include="GraphNodeArgumentTest.cs" />
     <Compile Include="MaximumLengthRuleTest.cs" />
     <Compile Include="MinimumLengthRuleTest.cs" />
     <Compile Include="PermissionCollectionTest.cs" />
@@ -84,10 +83,6 @@
     <Compile Include="RuleBuilderTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shuttle.Abacus.DTO\Shuttle.Abacus.DTO.csproj">
-      <Project>{5CD61A6D-ABCB-4400-A113-4EF4DA4C439C}</Project>
-      <Name>Shuttle.Abacus.DTO</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Shuttle.Abacus.Infrastructure\Shuttle.Abacus.Infrastructure.csproj">
       <Project>{1A365F2C-BA2B-41F0-969B-EEC08C6E2658}</Project>
       <Name>Shuttle.Abacus.Infrastructure</Name>

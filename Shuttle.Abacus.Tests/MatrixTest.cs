@@ -5,7 +5,7 @@ using Shuttle.Abacus.Domain;
 namespace Shuttle.Abacus.Tests
 {
     [TestFixture]
-    public class DecimalTableTest
+    public class MatrixTest
     {
         //TODO
         //[Test]

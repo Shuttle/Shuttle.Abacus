@@ -36,16 +36,5 @@ namespace Shuttle.Abacus.Infrastructure
         {
             return new RichList<T>(base.GetRange(index, count));
         }
-
-        public void VisitAllItemWith(IVisitor<T> visitor)
-        {
-            ForEach(visitor.Visit);
-        }
-
-        public TResult GetResultOfVisitingAllItemsWith<TResult>(IValueReturningVisitor<TResult, T> visitor)
-        {
-            VisitAllItemWith(visitor);
-            return visitor.GetResult();
-        }
     }
 }

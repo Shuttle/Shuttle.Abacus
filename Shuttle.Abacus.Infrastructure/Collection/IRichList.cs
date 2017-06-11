@@ -48,8 +48,6 @@ namespace Shuttle.Abacus.Infrastructure
 
         IRichList<T> GetRange(int index, int count);
 
-        TResult GetResultOfVisitingAllItemsWith<TResult>(IValueReturningVisitor<TResult, T> visitor);
-
         int IndexOf(T item, int index);
 
         int IndexOf(T item, int index, int count);
@@ -85,7 +83,5 @@ namespace Shuttle.Abacus.Infrastructure
         void TrimExcess();
 
         bool TrueForAll(Predicate<T> match);
-
-        void VisitAllItemWith(IVisitor<T> visitor);
     }
 }

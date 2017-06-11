@@ -67,7 +67,6 @@
     <Build Include="dbo\Tables\Argument.sql" />
     <Build Include="dbo\Tables\Formula.sql" />
     <Build Include="dbo\Tables\SystemUser.sql" />
-    <Build Include="dbo\Tables\GraphNodeArgument.sql" />
     <Build Include="dbo\Tables\SystemUserPermission.sql" />
     <Build Include="dbo\Tables\SubscriberMessageType.sql" />
     <Build Include="dbo\Tables\TestArgument.sql" />

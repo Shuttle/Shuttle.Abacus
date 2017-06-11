@@ -112,7 +112,6 @@ namespace Shuttle.Abacus.Server
 
             _container.Register
             (
-                Component.For(typeof(IFactoryProvider<>)).ImplementedBy(typeof(FactoryProvider<>)),
                 Component.For<IValueTypeValidatorProvider>().ImplementedBy<ValueTypeValidatorProvider>(),
                 Component.For<IPipeline>().ImplementedBy<Pipeline>()
             );
