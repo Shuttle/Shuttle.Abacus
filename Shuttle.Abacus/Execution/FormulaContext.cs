@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Shuttle.Abacus.Domain;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus

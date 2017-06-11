@@ -89,13 +89,6 @@ namespace Shuttle.Abacus.Shell.UI.Formula.FormulaOperation
 
         public bool HasValueSelection => ValueSelection.Text.Length > 0;
 
-        public void PopulateValueSources(IEnumerable<ValueSourceTypeModel> models)
-        {
-            ValueSource.DisplayMember = "Text";
-
-            models.ForEach(source => ValueSource.Items.Add(source));
-        }
-
         public void PopulateArguments(IEnumerable<ArgumentModel> arguments)
         {
             arguments.ForEach(model => { ValueSelection.Items.Add(model.Name); });
@@ -119,13 +112,6 @@ namespace Shuttle.Abacus.Shell.UI.Formula.FormulaOperation
             item.SubItems.Add(string.Empty);
 
             OperationsListView.Items.Add(PopulateItem(item, operation, valueSource, valueSelection));
-        }
-
-        public void PopulateOperations(IEnumerable<string> enumerable)
-        {
-            Operation.DisplayMember = "Text";
-
-            enumerable.ForEach(item => Operation.Items.Add(item));
         }
 
         public void PopulateValues(IEnumerable<string> values)

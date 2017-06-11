@@ -20,29 +20,21 @@ namespace Shuttle.Abacus.Shell.Coordinators
     public class FormulaOperationCoordinator : Coordinator, IFormulaOperationCoordinator
     {
         private readonly IArgumentQuery _argumentQuery;
-        private readonly IOperationTypeQuery _operationTypeQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IFormulaQuery _formulaQuery;
         private readonly IMatrixQuery _matrixQuery;
-        private readonly IValueSourceTypeQuery _valueSourceTypeQuery;
 
         public FormulaOperationCoordinator(IDatabaseContextFactory databaseContextFactory, IFormulaQuery formulaQuery,
-            IArgumentQuery argumentQuery, IOperationTypeQuery operationTypeQuery,
-            IValueSourceTypeQuery valueSourceTypeQuery,
-            IMatrixQuery matrixQuery)
+            IArgumentQuery argumentQuery, IMatrixQuery matrixQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(formulaQuery, "formulaQuery");
             Guard.AgainstNull(argumentQuery, "argumentQuery");
-            Guard.AgainstNull(operationTypeQuery, "operationTypeQuery");
-            Guard.AgainstNull(valueSourceTypeQuery, "valueSourceTypeQuery");
             Guard.AgainstNull(matrixQuery, "matrixQuery");
 
             _databaseContextFactory = databaseContextFactory;
             _formulaQuery = formulaQuery;
             _argumentQuery = argumentQuery;
-            _operationTypeQuery = operationTypeQuery;
-            _valueSourceTypeQuery = valueSourceTypeQuery;
             _matrixQuery = matrixQuery;
         }
 
@@ -101,11 +93,8 @@ namespace Shuttle.Abacus.Shell.Coordinators
             {
                 var model = new ManageFormulaOperationsModel
                 {
-                    OperationTypes = _operationTypeQuery.All().Map(row => OperationTypeColumns.Name.MapFrom(row)),
                     Arguments = _argumentQuery.All().Map(row => new ArgumentModel(row)),
-                    FormulaOperations =
-                        _formulaQuery.Operations(message.FormulaId).Map(row => new FormulaOperationModel(row)),
-                    ValueSourceTypes = _valueSourceTypeQuery.All().Map(row => new ValueSourceTypeModel(row)),
+                    FormulaOperations = _formulaQuery.Operations(message.FormulaId).Map(row => new FormulaOperationModel(row)),
                     Matrixes = _matrixQuery.All().Map(row => new MatrixModel(row)),
                     Formulas = _formulaQuery.All().Map(row => new FormulaModel(row))
                 };

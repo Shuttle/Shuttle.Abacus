@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Shuttle.Abacus.Domain;
 using Shuttle.Core.Data;
 using Shuttle.Core.Infrastructure;
 using Shuttle.Recall;
@@ -35,9 +34,24 @@ namespace Shuttle.Abacus.DataAccess
             return _databaseGateway.GetSingleRowUsing(_matrixQueryFactory.Get(id));
         }
 
-        public bool Contains(string name)
+        public void Registered(Guid id, string name, string columnArgumentName, string rowArgumentName, string valueType)
         {
-            return _keyStore.Contains(Matrix.Key(name));
+            _databaseGateway.ExecuteUsing(_matrixQueryFactory.RemoveElements(id));
+            _databaseGateway.ExecuteUsing(_matrixQueryFactory.RemoveConstraints(id));
+            _databaseGateway.ExecuteUsing(_matrixQueryFactory.Remove(id));
+
+            _databaseGateway.ExecuteUsing(_matrixQueryFactory.Add(id, name, columnArgumentName, rowArgumentName, valueType));
+        }
+
+        public void ConstraintAdded(Guid id, int sequenceNumber, string axis, string comparison, string value)
+        {
+            _databaseGateway.ExecuteUsing(_matrixQueryFactory.ConstraintAdded(id, sequenceNumber, axis, comparison,
+                value));
+        }
+
+        public void ElementAdded(Guid id, int column, int row, string value)
+        {
+            _databaseGateway.ExecuteUsing(_matrixQueryFactory.ElementAdded(id, column, row, value));
         }
     }
 }

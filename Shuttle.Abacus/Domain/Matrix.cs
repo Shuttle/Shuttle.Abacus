@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Shuttle.Abacus.Events.Matrix.v1;
 using Shuttle.Core.Infrastructure;
 
@@ -172,6 +173,52 @@ namespace Shuttle.Abacus.Domain
             public int Row { get; }
             public int Column { get; }
             public string Value { get; }
+        }
+
+        public string GetValue(IConstraintComparison constraintComparison, ExecutionContext executionContext, Argument rowArgument, Argument columnArgument)
+        {
+            Guard.AgainstNull(constraintComparison, "constraintComparison");
+            Guard.AgainstNull(executionContext, "executionContext");
+            Guard.AgainstNull(rowArgument, "rowArgument");
+
+            if (HasColumnArgument)
+            {
+                Guard.AgainstNull(columnArgument, "columnArgument");
+            }
+
+            var row = FindConstraint("Row", constraintComparison, rowArgument.ValueType,
+                executionContext.GetArgumentValue(RowArgumentName));
+            var column = HasColumnArgument?
+                FindConstraint("Column", constraintComparison, columnArgument.ValueType,
+                executionContext.GetArgumentValue(ColumnArgumentName))
+                : 1;
+
+            var element = _elements.FirstOrDefault(item => item.Row == row && item.Column == column);
+
+            if (element == null)
+            {
+                throw new InvalidOperationException(string.Format("Could not an element for matrix '{0}' at intersection of row '{1}' and column '{2}'.", Name, row, column));
+            }
+
+            return element.Value;
+        }
+
+        public bool HasColumnArgument => !string.IsNullOrEmpty(ColumnArgumentName);
+
+        private int FindConstraint(string axis, IConstraintComparison constraintComparison, string valueType, string value)
+        {
+            var constraint = _constraints.FirstOrDefault(item =>
+                item.Axis.Equals(axis, StringComparison.InvariantCultureIgnoreCase)
+                &&
+                constraintComparison.IsSatisfiedBy(valueType, item.Value, item.Comparison, value)
+            );
+
+            if (constraint == null)
+            {
+                throw new InvalidOperationException(string.Format("There is no {0} constraint in matrix '{1}' where argument '{2}' is satisfied by '{3}'.", axis.ToLower(), Name, RowArgumentName, value));
+            }
+
+            return constraint.SequenceNumber;
         }
     }
 }

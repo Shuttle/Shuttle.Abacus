@@ -64,8 +64,6 @@
     <Folder Include="dbo\Tables\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\OperationType.sql" />
-    <Build Include="dbo\Tables\ValueSourceType.sql" />
     <Build Include="dbo\Tables\Argument.sql" />
     <Build Include="dbo\Tables\Formula.sql" />
     <Build Include="dbo\Tables\SystemUser.sql" />
@@ -77,7 +75,6 @@
     <Build Include="dbo\Tables\MatrixElement.sql" />
     <Build Include="dbo\Tables\Matrix.sql" />
     <Build Include="dbo\Tables\ArgumentValue.sql" />
-    <Build Include="dbo\Tables\Operation.sql" />
     <Build Include="dbo\Tables\FormulaOperation.sql" />
     <Build Include="dbo\Tables\FormulaConstraint.sql" />
     <Build Include="dbo\Tables\SnapshotStore.sql" />

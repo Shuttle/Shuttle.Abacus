@@ -8,6 +8,8 @@ namespace Shuttle.Abacus.DataAccess
     {
         IEnumerable<DataRow> All();
         DataRow Get(Guid id);
-        bool Contains(string name);
+        void Registered(Guid id, string name, string columnArgumentName, string rowArgumentName, string valueType);
+        void ConstraintAdded(Guid id, int sequenceNumber, string axis, string comparison, string value);
+        void ElementAdded(Guid id, int column, int row, string value);
     }
 }

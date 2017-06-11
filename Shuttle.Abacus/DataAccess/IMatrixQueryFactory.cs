@@ -1,5 +1,4 @@
 using System;
-using Shuttle.Abacus.Domain;
 using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
@@ -8,9 +7,11 @@ namespace Shuttle.Abacus.DataAccess
     {
         IQuery All();
         IQuery Get(Guid id);
-        IQuery Name(Guid id);
-        IQuery Add(Matrix item);
+        IQuery Add(Guid id, string name, string columnArgumentName, string rowArgumentName, string valueType);
         IQuery Remove(Guid id);
-        IQuery Save(Matrix item);
+        IQuery RemoveElements(Guid id);
+        IQuery RemoveConstraints(Guid id);
+        IQuery ConstraintAdded(Guid id, int sequenceNumber, string axis, string comparison, string value);
+        IQuery ElementAdded(Guid id, int column, int row, string value);
     }
 }

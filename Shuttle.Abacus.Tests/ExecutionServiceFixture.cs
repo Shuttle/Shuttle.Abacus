@@ -32,7 +32,7 @@ namespace Shuttle.Abacus.Tests
 
             var arguments = new List<Argument> { operand1, operand2 };
 
-            var service = new ExecutionService(new ConstraintComparison(new ValueTypeFactory()), formulas, arguments);
+            var service = new ExecutionService(new ConstraintComparison(new ValueTypeFactory()), formulas, arguments, new List<Matrix>());
 
             var context = service.Execute("Test", new List<ArgumentValue>
             {
@@ -67,7 +67,7 @@ namespace Shuttle.Abacus.Tests
 
             var arguments = new List<Argument> { operand1, operand2 };
 
-            var service = new ExecutionService(new ConstraintComparison(new ValueTypeFactory()), formulas, arguments);
+            var service = new ExecutionService(new ConstraintComparison(new ValueTypeFactory()), formulas, arguments, new List<Matrix>());
 
             var context = service.Execute("Test", new List<ArgumentValue>
             {
@@ -95,11 +95,43 @@ namespace Shuttle.Abacus.Tests
 
             var formulas = new List<Formula> { formula1, formula2 };
 
-            var service = new ExecutionService(new ConstraintComparison(new ValueTypeFactory()), formulas, new List<Argument>());
+            var service = new ExecutionService(new ConstraintComparison(new ValueTypeFactory()), formulas, new List<Argument>(), new List<Matrix>());
 
             var context = service.Execute("Formula1", new List<ArgumentValue>(), new ContextLogger(ContextLogLevel.Verbose));
 
             Assert.AreEqual(100, context.Result());
+        }
+
+        [Test]
+        public void Should_be_able_to_use_matrix()
+        {
+            var formula = new Formula(Guid.NewGuid());
+
+            formula.Register("Formula");
+            formula.AddOperation(1, "Addition", "Matrix", "simple-matrix");
+
+            var matrix = new Matrix(Guid.NewGuid());
+
+            matrix.Register("simple-matrix", "argument-one", string.Empty, "Decimal");
+            matrix.AddConstraint("Row", 1, "==", "the-value");
+            matrix.AddElement(1, 1, "1.25");
+
+            var argument = new Argument(Guid.NewGuid());
+
+            argument.Register("argument-one", "Text");
+
+            var service = new ExecutionService(
+                new ConstraintComparison(new ValueTypeFactory()),
+                new List<Formula> { formula },
+                new List<Argument> { argument },
+                new List<Matrix> { matrix });
+
+            var context = service.Execute("Formula", new List<ArgumentValue>
+            {
+                new ArgumentValue("argument-one", "the-value")
+            }, new ContextLogger(ContextLogLevel.Verbose));
+
+            Assert.AreEqual(1.25, context.Result());
         }
 
         [Test]
@@ -130,9 +162,9 @@ namespace Shuttle.Abacus.Tests
 
             formula5.Register("Formula5");
 
-            var formulas = new List<Formula> {formula1, formula2, formula3, formula4, formula5};
+            var formulas = new List<Formula> { formula1, formula2, formula3, formula4, formula5 };
 
-            var service = new ExecutionService(new ConstraintComparison(new ValueTypeFactory()), formulas, new List<Argument>());
+            var service = new ExecutionService(new ConstraintComparison(new ValueTypeFactory()), formulas, new List<Argument>(), new List<Matrix>());
 
             var context = service.Execute("Formula1", new List<ArgumentValue>(), new ContextLogger(ContextLogLevel.Verbose));
 

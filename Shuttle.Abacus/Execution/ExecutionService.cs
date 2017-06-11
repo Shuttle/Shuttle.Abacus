@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using Shuttle.Abacus.Domain;
-using Shuttle.Abacus.Invariants;
 using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus
 {
     public class ExecutionService
     {
+        private readonly Dictionary<string, Argument> _arguments = new Dictionary<string, Argument>();
         private readonly IConstraintComparison _constraintComparison;
         private readonly Dictionary<string, Formula> _formulas = new Dictionary<string, Formula>();
-        private readonly Dictionary<string, Argument> _arguments = new Dictionary<string, Argument>();
+        private readonly Dictionary<string, Matrix> _matrixes = new Dictionary<string, Matrix>();
 
-        public ExecutionService(IConstraintComparison constraintComparison, IEnumerable<Formula> formulas, IEnumerable<Argument> arguments)
+        public ExecutionService(IConstraintComparison constraintComparison, IEnumerable<Formula> formulas,
+            IEnumerable<Argument> arguments, IEnumerable<Matrix> matrixes)
         {
             Guard.AgainstNull(constraintComparison, "comparer");
             Guard.AgainstNull(formulas, "formulas");
@@ -24,7 +25,8 @@ namespace Shuttle.Abacus
             {
                 if (_formulas.ContainsKey(formula.Name))
                 {
-                    throw new DuplicateEntryException(string.Format("There is already a formula with name '{0}' registered.", formula.Name));
+                    throw new DuplicateEntryException(
+                        string.Format("There is already a formula with name '{0}' registered.", formula.Name));
                 }
 
                 _formulas.Add(formula.Name, formula);
@@ -34,14 +36,27 @@ namespace Shuttle.Abacus
             {
                 if (_arguments.ContainsKey(argument.Name))
                 {
-                    throw new DuplicateEntryException(string.Format("There is already an argument with name '{0}' registered.", argument.Name));
+                    throw new DuplicateEntryException(
+                        string.Format("There is already an argument with name '{0}' registered.", argument.Name));
                 }
 
                 _arguments.Add(argument.Name, argument);
             }
+
+            foreach (var matrix in matrixes)
+            {
+                if (_matrixes.ContainsKey(matrix.Name))
+                {
+                    throw new DuplicateEntryException(
+                        string.Format("There is already an matrix with name '{0}' registered.", matrix.Name));
+                }
+
+                _matrixes.Add(matrix.Name, matrix);
+            }
         }
 
         // perhaps something like this
+        // e.g. FormulaValueSource would have all the formulas
         //public ExecutionEngine AddValueSource(IValueSource valueSource)
         //{
         //}
@@ -52,7 +67,7 @@ namespace Shuttle.Abacus
             Guard.AgainstNull(values, "values");
             Guard.AgainstNull(logger, "logger");
 
-            var context = new ExecutionContext(_arguments.Values, values, logger);
+            var context = new ExecutionContext(values, logger);
 
             try
             {
@@ -82,7 +97,8 @@ namespace Shuttle.Abacus
                     if (!_constraintComparison.IsSatisfiedBy(argument.ValueType, argumentValue, constraint.Comparison,
                         constraint.Value))
                     {
-                        return formulaContext.Disqualified(constraint.ArgumentName, argumentValue, constraint.Comparison, constraint.Value);
+                        return formulaContext.Disqualified(constraint.ArgumentName, argumentValue, constraint.Comparison,
+                            constraint.Value);
                     }
                 }
 
@@ -104,6 +120,17 @@ namespace Shuttle.Abacus
 
                             break;
                         }
+                        case "matrix":
+                        {
+                            var matrix = GetMatrix(operation.ValueSelection);
+
+                            value =
+                                Convert.ToDecimal(matrix.GetValue(_constraintComparison, executionContext,
+                                    GetArgument(matrix.RowArgumentName),
+                                    matrix.HasColumnArgument ? GetArgument(matrix.ColumnArgumentName) : null));
+
+                            break;
+                        }
                         case "formula":
                         {
                             value = Execute(executionContext, operation.ValueSelection).Result;
@@ -117,6 +144,16 @@ namespace Shuttle.Abacus
 
                 return formulaContext;
             }
+        }
+
+        private Matrix GetMatrix(string matrixName)
+        {
+            if (!_matrixes.ContainsKey(matrixName))
+            {
+                throw new InvalidOperationException(string.Format("There is no matrix with name '{0}'.", matrixName));
+            }
+
+            return _matrixes[matrixName];
         }
 
         private Formula GetFormula(string formulaName)

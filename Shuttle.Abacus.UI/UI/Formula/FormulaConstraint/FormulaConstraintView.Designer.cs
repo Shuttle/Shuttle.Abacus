@@ -173,7 +173,7 @@
             // 
             // columnHeader5
             // 
-            this.columnHeader5.Text = "Constraint";
+            this.columnHeader5.Text = "Comparison";
             this.columnHeader5.Width = 150;
             // 
             // columnHeader6

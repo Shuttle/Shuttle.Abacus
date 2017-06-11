@@ -17,7 +17,6 @@ namespace Shuttle.Abacus.Shell.UI.Formula.FormulaOperation
         bool HasSelectedItem { get; }
         IEnumerable<FormulaOperationModel> FormulaOperations { get; set; }
         string NameValue { get; set; }
-        void PopulateValueSources(IEnumerable<ValueSourceTypeModel> models);
         void PopulateArguments(IEnumerable<ArgumentModel> arguments);
         void ShowValueSourceError();
         void ShowValueSelectionError(string message);
@@ -27,7 +26,6 @@ namespace Shuttle.Abacus.Shell.UI.Formula.FormulaOperation
         void DisableValues();
 
         void AddOperation(string operation, string valueSource, string valueSelection);
-        void PopulateOperations(IEnumerable<string> enumerable);
         void PopulateValues(IEnumerable<string> values);
         void PopulateMatrixes(IEnumerable<MatrixModel> matrixes);
         void ClearValueSelection();

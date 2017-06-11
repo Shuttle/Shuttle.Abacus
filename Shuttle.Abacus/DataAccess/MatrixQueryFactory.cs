@@ -1,5 +1,4 @@
 using System;
-using Shuttle.Abacus.Domain;
 using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
@@ -30,67 +29,105 @@ select
 from
     Matrix
 ")
-                .AddParameterValue(MatrixColumns.MatrixId, id);
+                .AddParameterValue(MatrixColumns.Id, id);
         }
 
-        public IQuery Name(Guid id)
-        {
-            return RawQuery.Create(@"
-select
-    MatrixId,
-    Name
-from
-    Matrix
-")
-                .AddParameterValue(MatrixColumns.MatrixId, id);
-        }
-
-        public IQuery Add(Matrix item)
+        public IQuery Add(Guid id, string name, string columnArgumentName, string rowArgumentName, string valueType)
         {
             return RawQuery.Create(@"
 insert into Matrix
 (
     MatrixId,
     Name,
-    RowArgumentName,
     ColumnArgumentName,
+    RowArgumentName,
     ValueType
 )
 values
 (
     @MatrixId,
     @Name,
-    @RowArgumentName,
     @ColumnArgumentName,
+    @RowArgumentName,
     @ValueType
 )")
-                .AddParameterValue(MatrixColumns.MatrixId, item.Id)
-                .AddParameterValue(MatrixColumns.Name, item.Name)
-                .AddParameterValue(MatrixColumns.RowArgumentName, item.RowArgumentName)
-                .AddParameterValue(MatrixColumns.ColumnArgumentName, item.ColumnArgumentName);
+                .AddParameterValue(MatrixColumns.Id, id)
+                .AddParameterValue(MatrixColumns.Name, name)
+                .AddParameterValue(MatrixColumns.ColumnArgumentName, columnArgumentName)
+                .AddParameterValue(MatrixColumns.RowArgumentName, rowArgumentName)
+                .AddParameterValue(MatrixColumns.ValueType, valueType);
         }
 
         public IQuery Remove(Guid id)
         {
             return
                 RawQuery.Create("delete from Matrix where MatrixId = @MatrixId")
-                    .AddParameterValue(MatrixColumns.MatrixId, id);
+                    .AddParameterValue(MatrixColumns.Id, id);
         }
 
-        public IQuery Save(Matrix item)
+        public IQuery RemoveElements(Guid id)
+        {
+            return
+                RawQuery.Create("delete from MatrixElement where MatrixId = @MatrixId")
+                    .AddParameterValue(MatrixColumns.Id, id);
+        }
+
+        public IQuery RemoveConstraints(Guid id)
+        {
+            return
+                RawQuery.Create("delete from MatrixConstraint where MatrixId = @MatrixId")
+                    .AddParameterValue(MatrixColumns.Id, id);
+        }
+
+        public IQuery ConstraintAdded(Guid id, int sequenceNumber, string axis, string comparison, string value)
         {
             return RawQuery.Create(@"
-update Matrix set
-    Name = @Name,
-    RowArgumentName = @RowArgumentName,
-    ColumnArgumentName = @ColumnArgumentName
-where
-    MatrixId = @MatrixId
+insert into MatrixConstraint
+(
+    MatrixId,
+    Axis,
+    SequenceNumber,
+    Comparison,
+    Value
+)
+values
+(
+    @MatrixId,
+    @Axis,
+    @SequenceNumber,
+    @Comparison,
+    @Value
+)
 ")
-                .AddParameterValue(MatrixColumns.Name, item.Name)
-                .AddParameterValue(MatrixColumns.RowArgumentName, item.RowArgumentName)
-                .AddParameterValue(MatrixColumns.ColumnArgumentName, item.ColumnArgumentName)
-                .AddParameterValue(MatrixColumns.MatrixId, item.Id);
+                .AddParameterValue(MatrixColumns.Id, id)
+                .AddParameterValue(MatrixColumns.ConstraintColumns.SequenceNumber, sequenceNumber)
+                .AddParameterValue(MatrixColumns.ConstraintColumns.Axis, axis)
+                .AddParameterValue(MatrixColumns.ConstraintColumns.Comparison, comparison)
+                .AddParameterValue(MatrixColumns.ConstraintColumns.Value, value);
+        }
+
+        public IQuery ElementAdded(Guid id, int column, int row, string value)
+        {
+            return RawQuery.Create(@"
+insert into MatrixElement
+(
+    MatrixId,
+    [Column],
+    [Row],
+    Value
+)
+values
+(
+    @MatrixId,
+    @Column,
+    @Row,
+    @Value
+)
+")
+                .AddParameterValue(MatrixColumns.Id, id)
+                .AddParameterValue(MatrixColumns.ElementColumns.Column, column)
+                .AddParameterValue(MatrixColumns.ElementColumns.Row, row)
+                .AddParameterValue(MatrixColumns.ElementColumns.Value, value);
         }
     }
 }

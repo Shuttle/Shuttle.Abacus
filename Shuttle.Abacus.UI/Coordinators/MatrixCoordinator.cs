@@ -89,7 +89,7 @@ namespace Shuttle.Abacus.Shell.Coordinators
                             _matrixQuery.All())
                         {
                             message.Resources.Add(new Resource(ResourceKeys.Matrix,
-                                MatrixColumns.MatrixId.MapFrom(row),
+                                MatrixColumns.Id.MapFrom(row),
                                 MatrixColumns.Name.MapFrom(row),
                                 ImageResources.Matrix).AsLeaf());
                         }

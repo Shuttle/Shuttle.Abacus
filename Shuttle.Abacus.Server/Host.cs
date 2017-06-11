@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Abacus.Domain;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using log4net;
@@ -66,6 +65,7 @@ namespace Shuttle.Abacus.Server
 
             container.Register<ArgumentHandler>();
             container.Register<FormulaHandler>();
+            container.Register<MatrixHandler>();
             container.Register<SystemUserHandler>();
             container.Register<TestHandler>();
 
@@ -73,6 +73,7 @@ namespace Shuttle.Abacus.Server
 
             _eventProcessor.AddProjection(new Projection("Argument").AddEventHandler(container.Resolve<ArgumentHandler>()));
             _eventProcessor.AddProjection(new Projection("Formula").AddEventHandler(container.Resolve<FormulaHandler>()));
+            _eventProcessor.AddProjection(new Projection("Matrix").AddEventHandler(container.Resolve<MatrixHandler>()));
             _eventProcessor.AddProjection(new Projection("Test").AddEventHandler(container.Resolve<TestHandler>()));
             //_eventProcessor.AddProjection(new Projection("SystemUser").AddEventHandler(container.Resolve<SystemUserHandler>()));
 

@@ -11,22 +11,15 @@ namespace Shuttle.Abacus
     {
         private readonly Stack<FormulaContext> _stack = new Stack<FormulaContext>();
 
-        private readonly Dictionary<string, Argument> _arguments = new Dictionary<string, Argument>();
         private readonly Dictionary<string, string> _values = new Dictionary<string, string>();
         private readonly List<ExecutionResult> _results = new List<ExecutionResult>();
 
-        public ExecutionContext(IEnumerable<Argument> arguments, IEnumerable<ArgumentValue> values, IContextLogger logger)
+        public ExecutionContext(IEnumerable<ArgumentValue> values, IContextLogger logger)
         {
-            Guard.AgainstNull(arguments, "arguments");
             Guard.AgainstNull(values, "values");
             Guard.AgainstNull(logger, "logger");
 
             Logger = logger;
-
-            foreach (var argument in arguments)
-            {
-                _arguments.Add(argument.Name, argument);
-            }
 
             foreach (var argumentValue in values)
             {
@@ -86,11 +79,6 @@ namespace Shuttle.Abacus
         public FormulaContext RootFormulaContext { get; private set; }
 
         public Exception Exception { get; private set; }
-
-        public Argument GetArgument(string name)
-        {
-            return _arguments[name];
-        }
 
         public void FormulaContextCompleted(FormulaContext formulaContext)
         {

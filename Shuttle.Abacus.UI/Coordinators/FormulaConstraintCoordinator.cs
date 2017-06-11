@@ -20,21 +20,18 @@ namespace Shuttle.Abacus.Shell.Coordinators
     public class FormulaConstraintCoordinator : Coordinator, IFormulaConstraintCoordinator
     {
         private readonly IArgumentQuery _argumentQuery;
-        private readonly IConstraintTypeQuery _constraintTypeQuery;
         private readonly IFormulaQuery _formulaQuery;
         private readonly IDatabaseContextFactory _databaseContextFactory;
 
         public FormulaConstraintCoordinator(IDatabaseContextFactory databaseContextFactory,
-            IArgumentQuery argumentQuery, IConstraintTypeQuery constraintTypeQuery, IFormulaQuery formulaQuery)
+            IArgumentQuery argumentQuery, IFormulaQuery formulaQuery)
         {
             Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
             Guard.AgainstNull(argumentQuery, "argumentQuery");
-            Guard.AgainstNull(constraintTypeQuery, "constraintTypeQuery");
             Guard.AgainstNull(formulaQuery, "formulaQuery");
 
             _databaseContextFactory = databaseContextFactory;
             _argumentQuery = argumentQuery;
-            _constraintTypeQuery = constraintTypeQuery;
             _formulaQuery = formulaQuery;
         }
 
@@ -94,7 +91,6 @@ namespace Shuttle.Abacus.Shell.Coordinators
             {
                 var model = new ManageFormulaConstraintsModel
                 {
-                    ConstraintTypes = _constraintTypeQuery.All().Map(row => ConstraintTypeColumns.Name.MapFrom(row)),
                     Arguments = _argumentQuery.All().Map(row => new ArgumentModel(row)),
                     Constraints = _formulaQuery.Constraints(message.FormulaId).Map(row => new FormulaConstraintModel(row))
                 };

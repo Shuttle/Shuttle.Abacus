@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="CommandHandlers\TestExecutionHandler.cs" />
     <Compile Include="EventHandlers\ArgumentHandler.cs" />
+    <Compile Include="EventHandlers\MatrixHandler.cs" />
     <Compile Include="EventHandlers\TestHandler.cs" />
     <Compile Include="EventHandlers\FormulaHandler.cs" />
     <Compile Include="EventHandlers\SystemUserHandler.cs" />

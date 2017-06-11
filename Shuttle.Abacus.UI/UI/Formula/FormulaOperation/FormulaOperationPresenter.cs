@@ -85,9 +85,6 @@ namespace Shuttle.Abacus.Shell.UI.Formula.FormulaOperation
                 throw new NullDependencyException("Model");
             }
 
-            View.PopulateOperations(Model.OperationTypes);
-            View.PopulateValueSources(Model.ValueSourceTypes);
-
             if (Model.FormulaOperations == null)
             {
                 return;

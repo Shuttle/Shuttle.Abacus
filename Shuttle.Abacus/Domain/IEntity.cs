@@ -1,6 +1,6 @@
 using System;
 
-namespace Abacus.Domain
+namespace Shuttle.Abacus.Domain
 {
     public interface IEntity
     {

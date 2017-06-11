@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Shuttle.Abacus.Domain;
 
-namespace Shuttle.Abacus.DataAccess
+namespace Shuttle.Abacus.Domain
 {
     public interface IArgumentRepository
     {
