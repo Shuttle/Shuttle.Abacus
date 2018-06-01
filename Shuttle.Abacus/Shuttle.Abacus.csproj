@@ -1,231 +1,36 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{23680A60-878A-48DA-B23C-9B0EA4A29305}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Shuttle.Abacus</RootNamespace>
-    <AssemblyName>Shuttle.Abacus</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFrameworks>net46;net461;net462;net47;net471;netstandard2.0;netcoreapp2.0</TargetFrameworks>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Shuttle.Core.Data, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Core.Data.8.0.0\lib\net452-full\Shuttle.Core.Data.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Shuttle.Core.Infrastructure, Version=8.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Core.Infrastructure.8.0.2\lib\net452-full\Shuttle.Core.Infrastructure.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Shuttle.Recall, Version=8.1.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Recall.8.1.3\lib\net452-full\Shuttle.Recall.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.Caching" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <None Include=".build\package.msbuild" />
+    <None Include=".build\package.nuspec" />
+    <None Include=".build\Shuttle.MSBuild.dll" />
+    <None Include=".build\Shuttle.MSBuild.targets" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="DataAccess\FormulaRepository.cs" />
-    <Compile Include="DataAccess\ArgumentRepository.cs" />
-    <Compile Include="DataAccess\MatrixRepository.cs" />
-    <Compile Include="Domain\IFormulaRepository.cs" />
-    <Compile Include="DataAccess\TestRepository.cs" />
-    <Compile Include="Domain\ConstraintComparison.cs" />
-    <Compile Include="Domain\Formula\FormulaConstraint.cs" />
-    <Compile Include="Domain\IConstraintComparison.cs" />
-    <Compile Include="Domain\IMatrixRepository.cs" />
-    <Compile Include="Domain\ITestRepository.cs" />
-    <Compile Include="Domain\ValueType\IValueTypeFactory.cs" />
-    <Compile Include="Domain\ValueSource\IValueSource.cs" />
-    <Compile Include="Domain\ValueSource\ValueSource.cs" />
-    <Compile Include="Domain\ValueType\ValueTypeFactory.cs" />
-    <Compile Include="Domain\ArgumentValue.cs" />
-    <Compile Include="Events\Matrix.v1\ConstraintAdded.cs" />
-    <Compile Include="Events\Matrix.v1\ElementAdded.cs" />
-    <Compile Include="Events\Matrix.v1\Registered.cs" />
-    <Compile Include="Execution\ArgumentValueSource.cs" />
-    <Compile Include="Execution\ConstraintViolation.cs" />
-    <Compile Include="Execution\ExecutionResult.cs" />
-    <Compile Include="Execution\ExecutionServiceFactory.cs" />
-    <Compile Include="Execution\ExecutionService.cs" />
-    <Compile Include="Execution\ExecutionContext.cs" />
-    <Compile Include="Execution\ExecutionTask.cs" />
-    <Compile Include="DataAccess\ArgumentQuery.cs" />
-    <Compile Include="DataAccess\MatrixQuery.cs" />
-    <Compile Include="DataAccess\Definitions\AnswerTypeColumns.cs" />
-    <Compile Include="DataAccess\Definitions\ArgumentColumns.cs" />
-    <Compile Include="DataAccess\ArgumentQueryFactory.cs" />
-    <Compile Include="DataAccess\ConstraintQueryFactory.cs" />
-    <Compile Include="DataAccess\Definitions\ConstraintTypeColumns.cs" />
-    <Compile Include="DataAccess\Definitions\MatrixColumns.cs" />
-    <Compile Include="DataAccess\MatrixQueryFactory.cs" />
-    <Compile Include="DataAccess\Definitions\FormulaColumns.cs" />
-    <Compile Include="DataAccess\FormulaQueryFactory.cs" />
-    <Compile Include="DataAccess\Definitions\GraphNodeArgumentColumns.cs" />
-    <Compile Include="DataAccess\GraphNodeArgumentQueryFactory.cs" />
-    <Compile Include="DataAccess\Guarded.cs" />
-    <Compile Include="DataAccess\IArgumentQueryFactory.cs" />
-    <Compile Include="DataAccess\IConstraintQueryFactory.cs" />
-    <Compile Include="DataAccess\IMatrixQueryFactory.cs" />
-    <Compile Include="DataAccess\IFormulaQueryFactory.cs" />
-    <Compile Include="DataAccess\ITestQueryFactory.cs" />
-    <Compile Include="DataAccess\Infrastructure\DataRowExtensions.cs" />
-    <Compile Include="DataAccess\Infrastructure\IDataReaderMapper.cs" />
-    <Compile Include="DataAccess\ISystemUserQueryFactory.cs" />
-    <Compile Include="Domain\DomainException.cs" />
-    <Compile Include="Domain\Formula\Formula.cs" />
-    <Compile Include="DataAccess\Mapping\SystemDataRowMapper.cs" />
-    <Compile Include="DataAccess\Definitions\TestColumns.cs" />
-    <Compile Include="DataAccess\TestQueryFactory.cs" />
-    <Compile Include="DataAccess\Definitions\OperationTypeColumns.cs" />
-    <Compile Include="DataAccess\Exceptions.cs" />
-    <Compile Include="DataAccess\Definitions\PermissionColumns.cs" />
-    <Compile Include="DataAccess\Definitions\SystemUserColumns.cs" />
-    <Compile Include="DataAccess\SystemUserQueryFactory.cs" />
-    <Compile Include="DataAccess\Definitions\ValueSourceTypeColumns.cs" />
-    <Compile Include="DataAccess\FormulaQuery.cs" />
-    <Compile Include="DataAccess\Infrastructure\IDataTableMapper.cs" />
-    <Compile Include="DataAccess\Infrastructure\IDataTableRepository.cs" />
-    <Compile Include="DataAccess\Mapping\SystemUserDataReaderMapper.cs" />
-    <Compile Include="DataAccess\TestQuery.cs" />
-    <Compile Include="DataAccess\IArgumentQuery.cs" />
-    <Compile Include="DataAccess\IMatrixQuery.cs" />
-    <Compile Include="DataAccess\IFormulaQuery.cs" />
-    <Compile Include="DataAccess\ITestQuery.cs" />
-    <Compile Include="DataAccess\ISystemUserQuery.cs" />
-    <Compile Include="DataAccess\SystemUserQuery.cs" />
-    <Compile Include="DataAccess\SystemUserRepository.cs" />
-    <Compile Include="Domain\ValueType\ValueType.cs" />
-    <Compile Include="Domain\ValueType\BooleanValueType.cs" />
-    <Compile Include="Domain\ValueType\DateTimeValueType.cs" />
-    <Compile Include="Domain\ValueType\ConstantValueType.cs" />
-    <Compile Include="Domain\ValueType\IntegerValueType.cs" />
-    <Compile Include="Domain\ValueType\NullValueType.cs" />
-    <Compile Include="Domain\ValueType\TextValueType.cs" />
-    <Compile Include="Domain\Argument\Argument.cs" />
-    <Compile Include="Domain\Matrix.cs" />
-    <Compile Include="Domain\Extensions\NumberExtensions.cs" />
-    <Compile Include="Domain\IEntity.cs" />
-    <Compile Include="Domain\Logging\IContextLogger.cs" />
-    <Compile Include="Domain\Logging\ContextLogger.cs" />
-    <Compile Include="Domain\Test.cs" />
-    <Compile Include="Domain\Formula\FormulaOperation.cs" />
-    <Compile Include="Events\Argument.v1\Registered.cs" />
-    <Compile Include="Events\Argument.v1\Removed.cs" />
-    <Compile Include="Events\Argument.v1\Renamed.cs" />
-    <Compile Include="Events\Argument.v1\ValueTypeChanged.cs" />
-    <Compile Include="Events\Argument.v1\ValueRemoved.cs" />
-    <Compile Include="Events\Argument.v1\ValueAdded.cs" />
-    <Compile Include="Events\Formula.v1\ConstraintAdded.cs" />
-    <Compile Include="Events\Formula.v1\OperationAdded.cs" />
-    <Compile Include="Events\Formula.v1\ConstraintsRemoved.cs" />
-    <Compile Include="Events\Formula.v1\OperationsRemoved.cs" />
-    <Compile Include="Events\Formula.v1\Renamed.cs" />
-    <Compile Include="Events\Formula.v1\Registered.cs" />
-    <Compile Include="Events\Formula.v1\Removed.cs" />
-    <Compile Include="Events\Test.v1\ArgumentSet.cs" />
-    <Compile Include="Events\Test.v1\Registered.cs" />
-    <Compile Include="Events\Test.v1\Removed.cs" />
-    <Compile Include="Events\Test.v1\Renamed.cs" />
-    <Compile Include="Events\Test.v1\ValueAdded.cs" />
-    <Compile Include="Events\Test.v1\ArgumentRemoved.cs" />
-    <Compile Include="Execution\FormulaContext.cs" />
-    <Compile Include="Execution\IExecutionServiceFactory.cs" />
-    <Compile Include="Execution\IExecutionTask.cs" />
-    <Compile Include="Domain\IArgumentRepository.cs" />
-    <Compile Include="Invariants\ArgumentValueRules.cs" />
-    <Compile Include="Invariants\Core\Rules\BooleanRule.cs" />
-    <Compile Include="Invariants\FormulaRules.cs" />
-    <Compile Include="Invariants\ArgumentRules.cs" />
-    <Compile Include="Invariants\Core\IRule.cs" />
-    <Compile Include="Invariants\Core\IRuleCollection.cs" />
-    <Compile Include="Invariants\Core\IRuleCollectionBuilder.cs" />
-    <Compile Include="Invariants\Core\IRuleResult.cs" />
-    <Compile Include="Invariants\Core\RequiredRule.cs" />
-    <Compile Include="Invariants\Core\Rule.cs" />
-    <Compile Include="Invariants\Core\RuleCollection.cs" />
-    <Compile Include="Invariants\Core\RuleCollectionBuilder.cs" />
-    <Compile Include="Invariants\Core\RuleMessage.cs" />
-    <Compile Include="Invariants\Core\RuleResult.cs" />
-    <Compile Include="Invariants\Core\Rules\DateTimeRule.cs" />
-    <Compile Include="Invariants\Core\Rules\DecimalRule.cs" />
-    <Compile Include="Invariants\Core\Rules\IntegerRule.cs" />
-    <Compile Include="Invariants\Core\Rules\MaximumLengthRule.cs" />
-    <Compile Include="Invariants\Core\Rules\MinimumLengthRule.cs" />
-    <Compile Include="Invariants\Interfaces\IArgumentValueRules.cs" />
-    <Compile Include="Invariants\Interfaces\IFormulaRules.cs" />
-    <Compile Include="Invariants\Interfaces\IValueTypeRules.cs" />
-    <Compile Include="Invariants\MatrixRules.cs" />
-    <Compile Include="Invariants\Interfaces\IArgumentRules.cs" />
-    <Compile Include="Invariants\Interfaces\IMatrixRules.cs" />
-    <Compile Include="Invariants\Interfaces\ILimitRules.cs" />
-    <Compile Include="Invariants\Interfaces\ITestRules.cs" />
-    <Compile Include="Invariants\Interfaces\ISystemUserRules.cs" />
-    <Compile Include="Invariants\LimitRules.cs" />
-    <Compile Include="Invariants\Values\TextTypeValidator.cs" />
-    <Compile Include="Invariants\Values\BooleanTypeValidator.cs" />
-    <Compile Include="Invariants\Values\DateValueTypeValidator.cs" />
-    <Compile Include="Invariants\ValueTypeRules.cs" />
-    <Compile Include="Invariants\TestRules.cs" />
-    <Compile Include="Invariants\SystemUserRules.cs" />
-    <Compile Include="Invariants\Values\DecimalValueTypeValidator.cs" />
-    <Compile Include="Invariants\Values\IntegerValueTypeValidator.cs" />
-    <Compile Include="Invariants\Values\IValueTypeValidator.cs" />
-    <Compile Include="Invariants\Values\IValueTypeValidatorProvider.cs" />
-    <Compile Include="Invariants\Values\ValueTypeValidatorProvider.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Domain\Repositories\ISystemUserRepository.cs" />
-    <Compile Include="Domain\SystemUser.cs" />
+    <PackageReference Include="Shuttle.Core.Contract" Version="10.0.0" />
+    <PackageReference Include="Shuttle.Core.Data" Version="10.0.4" />
+    <PackageReference Include="Shuttle.Recall" Version="10.0.0" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\Shuttle.Abacus.Infrastructure\Shuttle.Abacus.Infrastructure.csproj">
-      <Project>{1A365F2C-BA2B-41F0-969B-EEC08C6E2658}</Project>
-      <Name>Shuttle.Abacus.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Shuttle.Abacus.Localisation\Shuttle.Abacus.Localisation.csproj">
-      <Project>{8B8949A1-EE10-4444-B974-62C1DC5708AC}</Project>
-      <Name>Shuttle.Abacus.Localisation</Name>
-    </ProjectReference>
+    <Compile Update="Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="packages.config" />
+    <EmbeddedResource Update="Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

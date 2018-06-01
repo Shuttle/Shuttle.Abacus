@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Shuttle.Abacus.Domain;
-using Shuttle.Core.Infrastructure;
+using Shuttle.Core.Contract;
 
 namespace Shuttle.Abacus
 {
     public class ExecutionContext
     {
+        private readonly List<ExecutionResult> _results = new List<ExecutionResult>();
         private readonly Stack<FormulaContext> _stack = new Stack<FormulaContext>();
 
         private readonly Dictionary<string, string> _values = new Dictionary<string, string>();
-        private readonly List<ExecutionResult> _results = new List<ExecutionResult>();
 
         public ExecutionContext(IEnumerable<ArgumentValue> values, IContextLogger logger)
         {
@@ -32,6 +31,15 @@ namespace Shuttle.Abacus
             }
         }
 
+        public bool HasActiveFormulaContext => _stack.Count > 0;
+
+        public FormulaContext RootFormulaContext { get; private set; }
+
+        public Exception Exception { get; private set; }
+
+        public bool HasException => Exception != null;
+        public IContextLogger Logger { get; }
+
         public string GetArgumentValue(string name)
         {
             if (!_values.ContainsKey(name))
@@ -48,8 +56,6 @@ namespace Shuttle.Abacus
 
             return result;
         }
-
-        public bool HasActiveFormulaContext => _stack.Count > 0;
 
         public int Depth()
         {
@@ -76,10 +82,6 @@ namespace Shuttle.Abacus
             return result;
         }
 
-        public FormulaContext RootFormulaContext { get; private set; }
-
-        public Exception Exception { get; private set; }
-
         public void FormulaContextCompleted(FormulaContext formulaContext)
         {
             Guard.AgainstNull(formulaContext, "formulaContext");
@@ -99,7 +101,7 @@ namespace Shuttle.Abacus
             Guard.AgainstNull(formulaContext, "formulaContext");
 
             Logger.LogNormal($"[result] : {formulaContext.Result} ({formulaContext.FormulaName})");
-            
+
             AddResult(formulaContext.FormulaName, formulaContext.Result);
         }
 
@@ -152,9 +154,6 @@ namespace Shuttle.Abacus
 
             return this;
         }
-
-        public bool HasException => Exception != null;
-        public IContextLogger Logger { get; }
 
         public FormulaContext ActiveFormulaContext()
         {

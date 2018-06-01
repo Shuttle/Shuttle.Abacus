@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
-using Shuttle.Abacus.Domain;
-using Shuttle.Core.Infrastructure;
+using Shuttle.Core.Contract;
 using Shuttle.Recall;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public class FormulaRepository : IFormulaRepository
     {
-        private readonly IFormulaQuery _query;
         private readonly IEventStore _eventStore;
+        private readonly IFormulaQuery _query;
 
         public FormulaRepository(IFormulaQuery query, IEventStore eventStore)
         {

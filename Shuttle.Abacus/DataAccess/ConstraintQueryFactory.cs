@@ -1,13 +1,11 @@
 using System;
-using Shuttle.Abacus.Domain;
 using Shuttle.Core.Data;
-using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public class ConstraintQueryFactory : IConstraintQueryFactory
     {
-        private string SelectClause = @"
+        private readonly string SelectClause = @"
 select
     FormulaId,
     SequenceNumber,

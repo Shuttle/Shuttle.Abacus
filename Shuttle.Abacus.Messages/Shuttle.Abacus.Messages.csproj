@@ -1,116 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7A323D9C-E55E-4552-AAF1-E21A86009162}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Shuttle.Abacus.Messages</RootNamespace>
-    <AssemblyName>Shuttle.Abacus.Messages</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkProfile />
+    <TargetFrameworks>net46;net461;net462;net47;net471;netstandard2.0;netcoreapp2.0</TargetFrameworks>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Shuttle.Core.Infrastructure, Version=8.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shuttle.Core.Infrastructure.8.0.2\lib\net452-full\Shuttle.Core.Infrastructure.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <None Include=".build\package.msbuild" />
+    <None Include=".build\package.nuspec" />
+    <None Include=".build\Shuttle.MSBuild.dll" />
+    <None Include=".build\Shuttle.MSBuild.targets" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="v1\ExecuteTestCommand.cs" />
-    <Compile Include="v1\RegisterArgumentValueCommand.cs" />
-    <Compile Include="v1\RemoveTestCommand.cs" />
-    <Compile Include="v1\RemoveTestArgumentCommand.cs" />
-    <Compile Include="v1\SetTestArgumentCommand.cs" />
-    <Compile Include="v1\RemoveArgumentValueCommand.cs" />
-    <Compile Include="v1\RenameArgumentCommand.cs" />
-    <Compile Include="v1\ChangeLoginNameCommand.cs" />
-    <Compile Include="v1\RegisterArgumentCommand.cs" />
-    <Compile Include="v1\RegisterMatrixCommand.cs" />
-    <Compile Include="v1\FormulaCommand.cs" />
-    <Compile Include="v1\RegisterTestCommand.cs" />
-    <Compile Include="v1\CreateSystemUserCommand.cs" />
-    <Compile Include="v1\RemoveArgumentCommand.cs" />
-    <Compile Include="v1\RenameFormulaCommand.cs" />
-    <Compile Include="v1\SetFormulaMinimumCommand.cs" />
-    <Compile Include="v1\SetFormulaMaxmimumCommand.cs" />
-    <Compile Include="v1\RemoveFormulaCommand.cs" />
-    <Compile Include="v1\DeleteLimitCommand.cs" />
-    <Compile Include="v1\GrabCalculationsCommand.cs" />
-    <Compile Include="v1\RegisterFormulaCommand.cs" />
-    <Compile Include="v1\SetFormulaConstraintsCommand.cs" />
-    <Compile Include="v1\SetFormulaOperationsCommand.cs" />
-    <Compile Include="v1\SetPermissionsCommand.cs" />
-    <Compile Include="v1\TestExecutedEvent.cs" />
-    <Compile Include="v1\TransferObjects\ArgumentValue.cs" />
-    <Compile Include="v1\TransferObjects\FormulaConstraint.cs" />
-    <Compile Include="v1\TransferObjects\FormulaContext.cs" />
-    <Compile Include="v1\TransferObjects\MatrixConstraint.cs" />
-    <Compile Include="v1\TransferObjects\MatrixElement.cs" />
-    <Compile Include="v1\LoginCommand.cs" />
-    <Compile Include="v1\LoginCompletedEvent.cs" />
-    <Compile Include="v1\NotificationMessage.cs" />
-    <Compile Include="v1\LoginTimeoutCommand.cs" />
-    <Compile Include="v1\TransferObjects\FormulaOperation.cs" />
-    <Compile Include="v1\TransferObjects\Permission.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="v1\ReplyMessage.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Shuttle.Abacus.Infrastructure\Shuttle.Abacus.Infrastructure.csproj">
-      <Project>{1A365F2C-BA2B-41F0-969B-EEC08C6E2658}</Project>
-      <Name>Shuttle.Abacus.Infrastructure</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

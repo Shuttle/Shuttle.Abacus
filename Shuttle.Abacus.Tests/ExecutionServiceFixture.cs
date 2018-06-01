@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using Shuttle.Abacus.Domain;
 
 namespace Shuttle.Abacus.Tests
 {

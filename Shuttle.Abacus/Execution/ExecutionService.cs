@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Shuttle.Abacus.Domain;
-using Shuttle.Core.Infrastructure;
+using Shuttle.Core.Contract;
 
 namespace Shuttle.Abacus
 {
@@ -25,8 +24,8 @@ namespace Shuttle.Abacus
             {
                 if (_formulas.ContainsKey(formula.Name))
                 {
-                    throw new DuplicateEntryException(
-                        string.Format("There is already a formula with name '{0}' registered.", formula.Name));
+                    throw new ArgumentException(
+                        $"There is already a formula with name '{formula.Name}' registered.");
                 }
 
                 _formulas.Add(formula.Name, formula);
@@ -36,8 +35,8 @@ namespace Shuttle.Abacus
             {
                 if (_arguments.ContainsKey(argument.Name))
                 {
-                    throw new DuplicateEntryException(
-                        string.Format("There is already an argument with name '{0}' registered.", argument.Name));
+                    throw new ArgumentException(
+                        $"There is already an argument with name '{argument.Name}' registered.");
                 }
 
                 _arguments.Add(argument.Name, argument);
@@ -47,8 +46,8 @@ namespace Shuttle.Abacus
             {
                 if (_matrixes.ContainsKey(matrix.Name))
                 {
-                    throw new DuplicateEntryException(
-                        string.Format("There is already an matrix with name '{0}' registered.", matrix.Name));
+                    throw new ArgumentException(
+                        $"There is already an matrix with name '{matrix.Name}' registered.");
                 }
 
                 _matrixes.Add(matrix.Name, matrix);
@@ -97,7 +96,8 @@ namespace Shuttle.Abacus
                     if (!_constraintComparison.IsSatisfiedBy(argument.ValueType, argumentValue, constraint.Comparison,
                         constraint.Value))
                     {
-                        return formulaContext.Disqualified(constraint.ArgumentName, argumentValue, constraint.Comparison,
+                        return formulaContext.Disqualified(constraint.ArgumentName, argumentValue,
+                            constraint.Comparison,
                             constraint.Value);
                     }
                 }
@@ -150,7 +150,7 @@ namespace Shuttle.Abacus
         {
             if (!_matrixes.ContainsKey(matrixName))
             {
-                throw new InvalidOperationException(string.Format("There is no matrix with name '{0}'.", matrixName));
+                throw new InvalidOperationException($"There is no matrix with name '{matrixName}'.");
             }
 
             return _matrixes[matrixName];
@@ -160,7 +160,7 @@ namespace Shuttle.Abacus
         {
             if (!_formulas.ContainsKey(formulaName))
             {
-                throw new InvalidOperationException(string.Format("There is no formula with name '{0}'.", formulaName));
+                throw new InvalidOperationException($"There is no formula with name '{formulaName}'.");
             }
 
             return _formulas[formulaName];
@@ -170,7 +170,7 @@ namespace Shuttle.Abacus
         {
             if (!_arguments.ContainsKey(name))
             {
-                throw new InvalidOperationException(string.Format("There is no argument with name '{0}'.", name));
+                throw new InvalidOperationException($"There is no argument with name '{name}'.");
             }
 
             return _arguments[name];

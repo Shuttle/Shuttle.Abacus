@@ -7,7 +7,7 @@
     <Name>Shuttle.Abacus.Database</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{8ed7605d-bdd2-4e07-b36c-555ea036fd43}</ProjectGuid>
+    <ProjectGuid>{d7ad59d9-731c-465e-92be-48098cbc058a}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
@@ -17,15 +17,12 @@
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
-    <AutoCreateStatistics>False</AutoCreateStatistics>
-    <AutoUpdateStatistics>False</AutoUpdateStatistics>
-    <CompatibilityMode>120</CompatibilityMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -60,34 +57,26 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="dbo\" />
-    <Folder Include="dbo\Tables\" />
+    <Folder Include="Tables" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Argument.sql" />
-    <Build Include="dbo\Tables\Formula.sql" />
-    <Build Include="dbo\Tables\SystemUser.sql" />
-    <Build Include="dbo\Tables\SystemUserPermission.sql" />
-    <Build Include="dbo\Tables\SubscriberMessageType.sql" />
-    <Build Include="dbo\Tables\TestArgument.sql" />
-    <Build Include="dbo\Tables\Test.sql" />
-    <Build Include="dbo\Tables\MatrixElement.sql" />
-    <Build Include="dbo\Tables\Matrix.sql" />
-    <Build Include="dbo\Tables\ArgumentValue.sql" />
-    <Build Include="dbo\Tables\FormulaOperation.sql" />
-    <Build Include="dbo\Tables\FormulaConstraint.sql" />
-    <Build Include="dbo\Tables\SnapshotStore.sql" />
-    <Build Include="dbo\Tables\ProjectionPosition.sql" />
-    <Build Include="dbo\Tables\KeyStore.sql" />
-    <Build Include="dbo\Tables\EventStore.sql" />
-    <None Include="clear-events.sql" />
-    <Build Include="dbo\Tables\Tag.sql" />
-    <Build Include="dbo\Tables\MatrixConstraint.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="Shuttle.Abacus.Database.refactorlog" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="clear-projections.sql" />
+    <Build Include="Tables\Argument.sql" />
+    <Build Include="Tables\ArgumentValue.sql" />
+    <Build Include="Tables\EventStore.sql" />
+    <Build Include="Tables\Formula.sql" />
+    <Build Include="Tables\FormulaConstraint.sql" />
+    <Build Include="Tables\FormulaOperation.sql" />
+    <Build Include="Tables\KeyStore.sql" />
+    <Build Include="Tables\Matrix.sql" />
+    <Build Include="Tables\MatrixConstraint.sql" />
+    <Build Include="Tables\MatrixElement.sql" />
+    <Build Include="Tables\ProjectionPosition.sql" />
+    <Build Include="Tables\SnapshotStore.sql" />
+    <Build Include="Tables\SubscriberMessageType.sql" />
+    <Build Include="Tables\SystemUser.sql" />
+    <Build Include="Tables\SystemUserPermission.sql" />
+    <Build Include="Tables\Tag.sql" />
+    <Build Include="Tables\Test.sql" />
+    <Build Include="Tables\TestArgument.sql" />
   </ItemGroup>
 </Project>

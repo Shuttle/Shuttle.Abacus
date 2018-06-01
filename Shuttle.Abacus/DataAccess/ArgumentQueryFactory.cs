@@ -1,5 +1,4 @@
 using System;
-using Shuttle.Abacus.Domain;
 using Shuttle.Abacus.Events.Argument.v1;
 using Shuttle.Core.Data;
 using Shuttle.Recall;
@@ -16,6 +15,7 @@ select
 from
     Argument
 ";
+
         private readonly string SelectClauseDTO = @"
 select
     a.ArgumentId,
@@ -139,8 +139,8 @@ values
         public IQuery Removed(PrimitiveEvent primitiveEvent, Removed removed)
         {
             return
-               RawQuery.Create("delete from Argument where ArgumentId = @ArgumentId")
-                   .AddParameterValue(ArgumentColumns.Id, primitiveEvent.Id);
+                RawQuery.Create("delete from Argument where ArgumentId = @ArgumentId")
+                    .AddParameterValue(ArgumentColumns.Id, primitiveEvent.Id);
         }
 
         public IQuery Renamed(PrimitiveEvent primitiveEvent, Renamed renamed)
@@ -153,8 +153,8 @@ set
 where
     ArgumentId = @ArgumentId
 ")
-               .AddParameterValue(ArgumentColumns.Name, renamed.Name)
-               .AddParameterValue(ArgumentColumns.Id, primitiveEvent.Id);
+                .AddParameterValue(ArgumentColumns.Name, renamed.Name)
+                .AddParameterValue(ArgumentColumns.Id, primitiveEvent.Id);
         }
 
         public IQuery ValueAdded(PrimitiveEvent primitiveEvent, ValueAdded valueAdded)

@@ -1,5 +1,4 @@
 using System;
-using Shuttle.Abacus.Domain;
 using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
@@ -157,7 +156,8 @@ where
             return RawQuery.Create(string.Concat(SelectClause, "order by Name"));
         }
 
-        public IQuery AddConstraint(Guid formulaId, int sequenceNumber, string argumentName, string comparison, string value)
+        public IQuery AddConstraint(Guid formulaId, int sequenceNumber, string argumentName, string comparison,
+            string value)
         {
             return RawQuery.Create(@"
 insert into FormulaConstraint

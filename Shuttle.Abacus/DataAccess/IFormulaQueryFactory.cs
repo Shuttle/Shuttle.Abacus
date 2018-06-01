@@ -1,5 +1,4 @@
 using System;
-using Shuttle.Abacus.Domain;
 using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess

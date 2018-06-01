@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using Shuttle.Core.Contract;
 using Shuttle.Core.Data;
-using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.DataAccess
 {

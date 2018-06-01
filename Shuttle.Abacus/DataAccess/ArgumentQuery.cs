@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using Shuttle.Abacus.Events.Argument.v1;
+using Shuttle.Core.Contract;
 using Shuttle.Core.Data;
-using Shuttle.Core.Infrastructure;
 using Shuttle.Recall;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public class ArgumentQuery : IArgumentQuery
     {
-        private readonly IDatabaseGateway _databaseGateway;
         private readonly IArgumentQueryFactory _argumentQueryFactory;
+        private readonly IDatabaseGateway _databaseGateway;
 
         public ArgumentQuery(IDatabaseGateway databaseGateway, IArgumentQueryFactory argumentQueryFactory)
         {

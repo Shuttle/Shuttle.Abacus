@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using Shuttle.Core.Contract;
 using Shuttle.Core.Data;
-using Shuttle.Core.Infrastructure;
 
 namespace Shuttle.Abacus.DataAccess
 {
@@ -72,7 +72,8 @@ namespace Shuttle.Abacus.DataAccess
         public void AddConstraint(Guid formulaId, int sequenceNumber, string argumentName, string comparison,
             string value)
         {
-            _databaseGateway.ExecuteUsing(_queryFactory.AddConstraint(formulaId, sequenceNumber, argumentName, comparison, value));
+            _databaseGateway.ExecuteUsing(_queryFactory.AddConstraint(formulaId, sequenceNumber, argumentName,
+                comparison, value));
         }
 
         public IEnumerable<DataRow> Constraints(Guid formulaId)

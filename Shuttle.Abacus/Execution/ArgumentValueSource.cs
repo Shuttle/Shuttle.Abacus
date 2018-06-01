@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Shuttle.Abacus.Domain;
-using Shuttle.Core.Infrastructure;
+using Shuttle.Core.Contract;
 
 namespace Shuttle.Abacus
 {
@@ -22,7 +21,7 @@ namespace Shuttle.Abacus
         {
             if (!_arguments.ContainsKey(name))
             {
-                throw new InvalidOperationException(string.Format("Could not find an argument with name '{0}'.", name));
+                throw new InvalidOperationException($"Could not find an argument with name '{name}'.");
             }
 
             return _arguments[name];
