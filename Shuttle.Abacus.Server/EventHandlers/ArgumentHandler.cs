@@ -1,6 +1,6 @@
 ﻿using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Events.Argument.v1;
-using Shuttle.Core.Infrastructure;
+using Shuttle.Core.Contract;
 using Shuttle.Recall;
 
 namespace Shuttle.Abacus.Server.EventHandlers

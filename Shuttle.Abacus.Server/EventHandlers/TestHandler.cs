@@ -1,6 +1,6 @@
 ﻿using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Events.Test.v1;
-using Shuttle.Core.Infrastructure;
+using Shuttle.Core.Contract;
 using Shuttle.Recall;
 
 namespace Shuttle.Abacus.Server.EventHandlers
@@ -20,11 +20,17 @@ namespace Shuttle.Abacus.Server.EventHandlers
             _query = query;
         }
 
+        public void ProcessEvent(IEventHandlerContext<ArgumentSet> context)
+        {
+            _query.SetArgumentValue(context.PrimitiveEvent.Id, context.Event.ArgumentName, context.Event.Value);
+        }
+
         public void ProcessEvent(IEventHandlerContext<Registered> context)
         {
             var data = context.Event;
 
-            _query.Register(context.PrimitiveEvent.Id, data.Name, data.FormulaName, data.ExpectedResult, data.ExpectedResultType, data.Comparison);
+            _query.Register(context.PrimitiveEvent.Id, data.Name, data.FormulaName, data.ExpectedResult,
+                data.ExpectedResultType, data.Comparison);
         }
 
         public void ProcessEvent(IEventHandlerContext<Removed> context)
@@ -35,11 +41,6 @@ namespace Shuttle.Abacus.Server.EventHandlers
         public void ProcessEvent(IEventHandlerContext<Renamed> context)
         {
             _query.Rename(context.PrimitiveEvent.Id, context.Event.Name);
-        }
-
-        public void ProcessEvent(IEventHandlerContext<ArgumentSet> context)
-        {
-            _query.SetArgumentValue(context.PrimitiveEvent.Id, context.Event.ArgumentName, context.Event.Value);
         }
     }
 }

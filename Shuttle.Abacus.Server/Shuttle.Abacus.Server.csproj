@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Shuttle.Abacus" Version="1.0.0" />
+    <PackageReference Include="Shuttle.Abacus.Messages" Version="1.0.0" />
     <PackageReference Include="Shuttle.Core.Castle" Version="10.0.4" />
     <PackageReference Include="Shuttle.Core.Log4Net" Version="10.0.0" />
     <PackageReference Include="Shuttle.Core.ServiceHost" Version="10.0.0" />

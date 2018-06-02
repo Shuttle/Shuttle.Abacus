@@ -9,9 +9,9 @@
 		<projectUrl>https://github.com/shuttle/Shuttle.Abacus</projectUrl>
 		<iconUrl>https://raw.githubusercontent.com/Shuttle/Shuttle.Abacus/master/.media/logo.png</iconUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description></description>
+		<description>Constraint-based expression evaluation.</description>
 		<releaseNotes/>
 		<copyright>Copyright (c) {year}, Eben Roux</copyright>
-		<tags>shuttle</tags>
+		<tags>shuttle rules expression business inference rete calculation formula equation math</tags>
 	</metadata>
 </package>
