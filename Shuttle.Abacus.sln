@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shuttle.Abacus.Tests", "Shu
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Shuttle.Abacus.Database", "Shuttle.Abacus.Database\Shuttle.Abacus.Database.sqlproj", "{D7AD59D9-731C-465E-92BE-48098CBC058A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuttle.Abacus.Messages", "Shuttle.Abacus.Messages\Shuttle.Abacus.Messages.csproj", "{3A05FAFB-A430-4D32-AA9B-29A3688F88DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shuttle.Abacus.Messages", "Shuttle.Abacus.Messages\Shuttle.Abacus.Messages.csproj", "{3A05FAFB-A430-4D32-AA9B-29A3688F88DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuttle.Abacus.Server", "Shuttle.Abacus.Server\Shuttle.Abacus.Server.csproj", "{7828831E-21A2-4DA1-8675-AB1874C00FFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shuttle.Abacus.Server", "Shuttle.Abacus.Server\Shuttle.Abacus.Server.csproj", "{7828831E-21A2-4DA1-8675-AB1874C00FFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuttle.Abacus.WebApi", "Shuttle.Abacus.WebApi\Shuttle.Abacus.WebApi.csproj", "{B8857B03-C6CE-491F-95E2-F8607C9E8B0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{7828831E-21A2-4DA1-8675-AB1874C00FFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7828831E-21A2-4DA1-8675-AB1874C00FFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7828831E-21A2-4DA1-8675-AB1874C00FFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8857B03-C6CE-491F-95E2-F8607C9E8B0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8857B03-C6CE-491F-95E2-F8607C9E8B0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8857B03-C6CE-491F-95E2-F8607C9E8B0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8857B03-C6CE-491F-95E2-F8607C9E8B0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
