@@ -47,7 +47,7 @@ namespace Shuttle.Abacus
 
         private Registered On(Registered registered)
         {
-            Guard.AgainstNull(registered, "registered");
+            Guard.AgainstNull(registered, nameof(registered));
 
             Name = registered.Name;
             RowArgumentName = registered.RowArgumentName;
@@ -83,7 +83,7 @@ namespace Shuttle.Abacus
 
         private ElementAdded On(ElementAdded elementAdded)
         {
-            Guard.AgainstNull(elementAdded, "elementAdded");
+            Guard.AgainstNull(elementAdded, nameof(elementAdded));
 
             _elements.Add(new Element(elementAdded.Row, elementAdded.Column, elementAdded.Value));
 
@@ -123,7 +123,7 @@ namespace Shuttle.Abacus
 
         private ConstraintAdded On(ConstraintAdded constraintAdded)
         {
-            Guard.AgainstNull(constraintAdded, "constraintAdded");
+            Guard.AgainstNull(constraintAdded, nameof(constraintAdded));
 
             _constraints.Add(new Constraint(constraintAdded.Axis, constraintAdded.SequenceNumber,
                 constraintAdded.Comparison, constraintAdded.Value));
@@ -143,13 +143,13 @@ namespace Shuttle.Abacus
         public string GetValue(IConstraintComparison constraintComparison, ExecutionContext executionContext,
             Argument rowArgument, Argument columnArgument)
         {
-            Guard.AgainstNull(constraintComparison, "constraintComparison");
-            Guard.AgainstNull(executionContext, "executionContext");
-            Guard.AgainstNull(rowArgument, "rowArgument");
+            Guard.AgainstNull(constraintComparison, nameof(constraintComparison));
+            Guard.AgainstNull(executionContext, nameof(executionContext));
+            Guard.AgainstNull(rowArgument, nameof(rowArgument));
 
             if (HasColumnArgument)
             {
-                Guard.AgainstNull(columnArgument, "columnArgument");
+                Guard.AgainstNull(columnArgument, nameof(columnArgument));
             }
 
             var row = FindConstraint("Row", constraintComparison, rowArgument.ValueType,

@@ -1,0 +1,9 @@
+<fieldset class="form-group">
+    <cs-form-input focus:from="'true'" label:from="'name'" vm:value:bind="name"/>
+    <cs-button-submit vm:click:from="refresh" text:from="'search'"/>
+</fieldset>
+{{#if list.isResolved}}
+    <cs-table vm:columns:from="columns" vm:rows:from="list.value" />
+{{else}}
+    <cs-fetching title:from="'formulas'" />
+{{/if}}

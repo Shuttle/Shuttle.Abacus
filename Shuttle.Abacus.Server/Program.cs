@@ -32,12 +32,12 @@ namespace Shuttle.Abacus.Server
 
             var container = new WindsorComponentContainer(_container);
 
-            container.RegisterSuffixed("Shuttle.Access.Sql");
+            container.RegisterSuffixed("Shuttle.Abacus");
 
             EventStore.Register(container);
             ServiceBus.Register(container);
 
-            container.Resolve<IDatabaseContextFactory>().ConfigureWith("Access");
+            container.Resolve<IDatabaseContextFactory>().ConfigureWith("Abacus");
 
             _bus = ServiceBus.Create(container).Start();
         }

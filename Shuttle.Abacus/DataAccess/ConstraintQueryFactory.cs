@@ -36,8 +36,8 @@ order by
 
 //        public IQuery Add(IConstraintOwner owner, FormulaConstraint constraint)
 //        {
-//            Guard.AgainstNull(owner, "owner");
-//            Guard.AgainstNull(constraint, "constraint");
+//            Guard.AgainstNull(owner, nameof(owner));
+//            Guard.AgainstNull(constraint, nameof(constraint));
 
 //            return RawQuery.Create(@"
 //insert into Constraint

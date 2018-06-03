@@ -15,8 +15,8 @@ namespace Shuttle.Abacus.DataAccess
 
         public ArgumentQuery(IDatabaseGateway databaseGateway, IArgumentQueryFactory argumentQueryFactory)
         {
-            Guard.AgainstNull(databaseGateway, "databaseGateway");
-            Guard.AgainstNull(argumentQueryFactory, "argumentQueryFactory");
+            Guard.AgainstNull(databaseGateway, nameof(databaseGateway));
+            Guard.AgainstNull(argumentQueryFactory, nameof(argumentQueryFactory));
 
             _databaseGateway = databaseGateway;
             _argumentQueryFactory = argumentQueryFactory;

@@ -11,10 +11,11 @@ namespace Shuttle.Abacus.DataAccess
         private readonly IDatabaseGateway _databaseGateway;
         private readonly IFormulaQueryFactory _queryFactory;
 
-        public FormulaQuery(IDatabaseGateway databaseGateway, IFormulaQueryFactory queryFactory)
+        public FormulaQuery(IDatabaseGateway databaseGateway,
+            IFormulaQueryFactory queryFactory)
         {
-            Guard.AgainstNull(databaseGateway, "databaseGateway");
-            Guard.AgainstNull(queryFactory, "queryFactory");
+            Guard.AgainstNull(databaseGateway, nameof(databaseGateway));
+            Guard.AgainstNull(queryFactory, nameof(queryFactory));
 
             _databaseGateway = databaseGateway;
             _queryFactory = queryFactory;
@@ -30,9 +31,11 @@ namespace Shuttle.Abacus.DataAccess
             return _databaseGateway.GetSingleRowUsing(_queryFactory.Get(id));
         }
 
-        public IEnumerable<DataRow> All()
+        public IEnumerable<DataRow> All(FormulaSearchSpecification specification)
         {
-            return _databaseGateway.GetRowsUsing(_queryFactory.All());
+            Guard.AgainstNull(specification, nameof(specification));
+
+            return _databaseGateway.GetRowsUsing(_queryFactory.Search(specification));
         }
 
         public void Registered(Guid formulaId, string name)

@@ -19,9 +19,9 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 
         public TestHandler(IDatabaseContextFactory databaseContextFactory, IEventStore eventStore, IKeyStore keyStore)
         {
-            Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
-            Guard.AgainstNull(eventStore, "eventStore");
-            Guard.AgainstNull(keyStore, "keyStore");
+            Guard.AgainstNull(databaseContextFactory, nameof(databaseContextFactory));
+            Guard.AgainstNull(eventStore, nameof(eventStore));
+            Guard.AgainstNull(keyStore, nameof(keyStore));
 
             _databaseContextFactory = databaseContextFactory;
             _eventStore = eventStore;

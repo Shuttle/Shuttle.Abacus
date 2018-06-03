@@ -13,8 +13,8 @@ namespace Shuttle.Abacus.DataAccess
 
         public TestQuery(IDatabaseGateway databaseGateway, ITestQueryFactory queryFactory)
         {
-            Guard.AgainstNull(databaseGateway, "databaseGateway");
-            Guard.AgainstNull(queryFactory, "queryFactory");
+            Guard.AgainstNull(databaseGateway, nameof(databaseGateway));
+            Guard.AgainstNull(queryFactory, nameof(queryFactory));
 
             _databaseGateway = databaseGateway;
             _queryFactory = queryFactory;

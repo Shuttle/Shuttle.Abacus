@@ -151,9 +151,19 @@ where
                 .AddParameterValue(FormulaColumns.FormulaId, item.Id);
         }
 
-        public IQuery All()
+        public IQuery Search(FormulaSearchSpecification specification)
         {
-            return RawQuery.Create(string.Concat(SelectClause, "order by Name"));
+            return RawQuery.Create(string.Concat(SelectClause, @"
+where
+    @Name is null
+    or
+    @Name = ''
+    or
+    Name like @Name
+order by 
+    Name
+"))
+                .AddParameterValue(FormulaColumns.Name, specification.Name);
         }
 
         public IQuery AddConstraint(Guid formulaId, int sequenceNumber, string argumentName, string comparison,

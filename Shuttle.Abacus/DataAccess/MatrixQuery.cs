@@ -15,9 +15,9 @@ namespace Shuttle.Abacus.DataAccess
 
         public MatrixQuery(IDatabaseGateway databaseGateway, IMatrixQueryFactory matrixQueryFactory, IKeyStore keyStore)
         {
-            Guard.AgainstNull(databaseGateway, "databaseGateway");
-            Guard.AgainstNull(matrixQueryFactory, "matrixQueryFactory");
-            Guard.AgainstNull(keyStore, "keyStore");
+            Guard.AgainstNull(databaseGateway, nameof(databaseGateway));
+            Guard.AgainstNull(matrixQueryFactory, nameof(matrixQueryFactory));
+            Guard.AgainstNull(keyStore, nameof(keyStore));
 
             _databaseGateway = databaseGateway;
             _matrixQueryFactory = matrixQueryFactory;

@@ -11,7 +11,7 @@ namespace Shuttle.Abacus
 
         public ConstraintComparison(IValueTypeFactory valueTypeFactory)
         {
-            Guard.AgainstNull(valueTypeFactory, "valueTypeFactory");
+            Guard.AgainstNull(valueTypeFactory, nameof(valueTypeFactory));
 
             _valueTypeFactory = valueTypeFactory;
         }

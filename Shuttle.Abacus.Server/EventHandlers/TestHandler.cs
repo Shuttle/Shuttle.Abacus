@@ -15,7 +15,7 @@ namespace Shuttle.Abacus.Server.EventHandlers
 
         public TestHandler(ITestQuery query)
         {
-            Guard.AgainstNull(query, "query");
+            Guard.AgainstNull(query, nameof(query));
 
             _query = query;
         }

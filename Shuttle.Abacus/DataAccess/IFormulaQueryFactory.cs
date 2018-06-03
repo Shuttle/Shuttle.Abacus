@@ -13,7 +13,7 @@ namespace Shuttle.Abacus.DataAccess
             string valueSelection);
 
         IQuery Save(Formula item);
-        IQuery All();
+        IQuery Search(FormulaSearchSpecification specification);
         IQuery AddConstraint(Guid formulaId, int sequenceNumber, string argumentName, string comparison, string value);
         IQuery RemoveConstraints(Guid formulaId);
         IQuery Constraints(Guid id);

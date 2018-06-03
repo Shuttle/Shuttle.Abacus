@@ -4,11 +4,23 @@ using System.Data;
 
 namespace Shuttle.Abacus.DataAccess
 {
+    public class FormulaSearchSpecification
+    {
+        public string Name { get; private set; }
+
+        public FormulaSearchSpecification WithName(string name)
+        {
+            Name = name;
+
+            return this;
+        }
+    }
+
     public interface IFormulaQuery
     {
         IEnumerable<DataRow> Operations(Guid formulaId);
         DataRow Get(Guid id);
-        IEnumerable<DataRow> All();
+        IEnumerable<DataRow> All(FormulaSearchSpecification specification);
 
         void Registered(Guid formulaId, string name);
         void Remove(Guid formulaId);
@@ -21,5 +33,6 @@ namespace Shuttle.Abacus.DataAccess
         void RemoveConstraints(Guid formulaId);
         void AddConstraint(Guid formulaId, int sequenceNumber, string argumentName, string comparison, string value);
         IEnumerable<DataRow> Constraints(Guid formulaId);
+        
     }
 }

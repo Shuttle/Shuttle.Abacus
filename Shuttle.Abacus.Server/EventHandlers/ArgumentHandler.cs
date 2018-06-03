@@ -16,7 +16,7 @@ namespace Shuttle.Abacus.Server.EventHandlers
 
         public ArgumentHandler(IArgumentQuery query)
         {
-            Guard.AgainstNull(query, "query");
+            Guard.AgainstNull(query, nameof(query));
 
             _query = query;
         }

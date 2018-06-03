@@ -10,7 +10,7 @@ namespace Shuttle.Abacus.DataAccess
 
         public TestRepository(IEventStore eventStore)
         {
-            Guard.AgainstNull(eventStore, "eventStore");
+            Guard.AgainstNull(eventStore, nameof(eventStore));
 
             _eventStore = eventStore;
         }

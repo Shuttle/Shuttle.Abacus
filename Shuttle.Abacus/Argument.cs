@@ -49,7 +49,7 @@ namespace Shuttle.Abacus
 
         private Registered On(Registered registered)
         {
-            Guard.AgainstNull(registered, "registered");
+            Guard.AgainstNull(registered, nameof(registered));
 
             Name = registered.Name;
             ValueType = registered.ValueType;
@@ -69,7 +69,7 @@ namespace Shuttle.Abacus
 
         private Removed On(Removed removed)
         {
-            Guard.AgainstNull(removed, "removed");
+            Guard.AgainstNull(removed, nameof(removed));
 
             Removed = true;
 
@@ -100,7 +100,7 @@ namespace Shuttle.Abacus
 
         private Renamed On(Renamed renamed)
         {
-            Guard.AgainstNull(renamed, "renamed");
+            Guard.AgainstNull(renamed, nameof(renamed));
 
             Name = renamed.Name;
 
@@ -119,7 +119,7 @@ namespace Shuttle.Abacus
 
         private ValueTypeChanged On(ValueTypeChanged valueTypeChanged)
         {
-            Guard.AgainstNull(valueTypeChanged, "valueTypeChanged");
+            Guard.AgainstNull(valueTypeChanged, nameof(valueTypeChanged));
 
             ValueType = valueTypeChanged.ValueType;
 
@@ -141,7 +141,7 @@ namespace Shuttle.Abacus
 
         private ValueAdded On(ValueAdded valueAdded)
         {
-            Guard.AgainstNull(valueAdded, "valueAdded");
+            Guard.AgainstNull(valueAdded, nameof(valueAdded));
 
             _values.Add(valueAdded.Value);
 
@@ -173,7 +173,7 @@ namespace Shuttle.Abacus
 
         private ValueRemoved On(ValueRemoved valueRemoved)
         {
-            Guard.AgainstNull(valueRemoved, "valueRemoved");
+            Guard.AgainstNull(valueRemoved, nameof(valueRemoved));
 
             _values.Remove(valueRemoved.Value);
 

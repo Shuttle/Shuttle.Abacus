@@ -1,25 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using log4net;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Shuttle.Core.Log4Net;
+using Shuttle.Core.Logging;
 
-namespace Shuttle.Abacus.WebApi
+namespace Shuttle.Access.WebApi
 {
     public class Program
     {
         public static void Main(string[] args)
         {
+            Log.Assign(
+                new Log4NetLog(LogManager.GetLogger(typeof(Program)),
+                    new FileInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log4net.xml"))));
+
+            Log.Information("[started]");
+
             BuildWebHost(args).Run();
+
+            Log.Information("[stopped]");
+
+            LogManager.Shutdown();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .Build();
+        }
     }
 }

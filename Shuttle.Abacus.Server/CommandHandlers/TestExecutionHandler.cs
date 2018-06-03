@@ -15,9 +15,9 @@ namespace Shuttle.Abacus.Server.CommandHandlers
         public TestExecutionHandler(IDatabaseContextFactory databaseContextFactory,
             IExecutionServiceFactory executionServiceFactory, ITestRepository testRepository)
         {
-            Guard.AgainstNull(databaseContextFactory, "databaseContextFactory");
-            Guard.AgainstNull(executionServiceFactory, "executionServiceFactory");
-            Guard.AgainstNull(testRepository, "testRepository");
+            Guard.AgainstNull(databaseContextFactory, nameof(databaseContextFactory));
+            Guard.AgainstNull(executionServiceFactory, nameof(executionServiceFactory));
+            Guard.AgainstNull(testRepository, nameof(testRepository));
 
             _databaseContextFactory = databaseContextFactory;
             _executionServiceFactory = executionServiceFactory;

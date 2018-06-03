@@ -44,7 +44,7 @@ namespace Shuttle.Abacus
 
         private Registered On(Registered registered)
         {
-            Guard.AgainstNull(registered, "registered");
+            Guard.AgainstNull(registered, nameof(registered));
 
             Name = registered.Name;
             FormulaName = registered.Name;
@@ -67,7 +67,7 @@ namespace Shuttle.Abacus
 
         private Removed On(Removed removed)
         {
-            Guard.AgainstNull(removed, "removed");
+            Guard.AgainstNull(removed, nameof(removed));
 
             Removed = true;
 
@@ -98,7 +98,7 @@ namespace Shuttle.Abacus
 
         private Renamed On(Renamed renamed)
         {
-            Guard.AgainstNull(renamed, "renamed");
+            Guard.AgainstNull(renamed, nameof(renamed));
 
             Name = renamed.Name;
 
@@ -124,7 +124,7 @@ namespace Shuttle.Abacus
 
         private ArgumentSet On(ArgumentSet argumentSet)
         {
-            Guard.AgainstNull(argumentSet, "argumentValueSet");
+            Guard.AgainstNull(argumentSet, nameof(argumentSet));
 
             _values.Remove(FindValue(argumentSet.ArgumentName));
             _values.Add(new ArgumentValue(argumentSet.ArgumentName, argumentSet.Value));
@@ -150,7 +150,7 @@ namespace Shuttle.Abacus
 
         private ArgumentRemoved On(ArgumentRemoved argumentRemoved)
         {
-            Guard.AgainstNull(argumentRemoved, "argumentRemoved");
+            Guard.AgainstNull(argumentRemoved, nameof(argumentRemoved));
 
             _values.Remove(FindValue(argumentRemoved.ArgumentName));
 

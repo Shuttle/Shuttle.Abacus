@@ -11,8 +11,8 @@ namespace Shuttle.Abacus.DataAccess
 
         public ArgumentRepository(IArgumentQuery query, IEventStore store)
         {
-            Guard.AgainstNull(query, "query");
-            Guard.AgainstNull(store, "store");
+            Guard.AgainstNull(query, nameof(query));
+            Guard.AgainstNull(store, nameof(store));
 
             _query = query;
             _store = store;

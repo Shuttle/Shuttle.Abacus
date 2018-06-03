@@ -11,8 +11,8 @@ namespace Shuttle.Abacus.DataAccess
 
         public FormulaRepository(IFormulaQuery query, IEventStore eventStore)
         {
-            Guard.AgainstNull(query, "query");
-            Guard.AgainstNull(eventStore, "eventStore");
+            Guard.AgainstNull(query, nameof(query));
+            Guard.AgainstNull(eventStore, nameof(eventStore));
 
             _query = query;
             _eventStore = eventStore;
@@ -22,7 +22,7 @@ namespace Shuttle.Abacus.DataAccess
         {
             var result = new List<Formula>();
 
-            foreach (var row in _query.All())
+            foreach (var row in _query.All(new FormulaSearchSpecification()))
             {
                 var id = FormulaColumns.FormulaId.MapFrom(row);
 

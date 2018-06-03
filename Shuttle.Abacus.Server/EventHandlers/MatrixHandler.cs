@@ -14,7 +14,7 @@ namespace Shuttle.Abacus.Server.EventHandlers
 
         public MatrixHandler(IMatrixQuery query)
         {
-            Guard.AgainstNull(query, "query");
+            Guard.AgainstNull(query, nameof(query));
 
             _query = query;
         }
