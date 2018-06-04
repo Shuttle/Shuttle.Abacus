@@ -18,8 +18,11 @@ export const Map = DefineMap.extend({
     name: {
         type: 'string'
     },
-    select() {
-        state.stack.put('account', this);
+    maximumFormulaName: {
+        type: 'string'
+    },
+    minimumFormulaName: {
+        type: 'string'
     }
 });
 
@@ -57,15 +60,21 @@ export const ViewModel = DefineMap.extend({
 
         if (!columns.length) {
             columns.push({
-                columnTitle: 'select',
-                columnClass: 'col-1',
-                stache: '<cs-button text:from="\'select\'" click:from="select" elementClass:from="\'btn-sm\'"/>'
+                columnTitle: 'name',
+                columnClass: 'col',
+                attributeName: 'name'
             });
 
             columns.push({
                 columnTitle: 'name',
                 columnClass: 'col',
-                attributeName: 'name'
+                attributeName: 'minimumFormulaName'
+            });
+
+            columns.push({
+                columnTitle: 'name',
+                columnClass: 'col',
+                attributeName: 'maximumFormulaName'
             });
         }
 
@@ -85,7 +94,7 @@ export const ViewModel = DefineMap.extend({
 
     add: function() {
         router.goto({
-            resource: 'method',
+            resource: 'formula',
             action: 'add'
         });
     },

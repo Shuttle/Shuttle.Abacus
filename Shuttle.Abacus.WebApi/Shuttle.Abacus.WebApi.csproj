@@ -10,9 +10,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" />
     <PackageReference Include="Shuttle.Abacus" Version="1.0.0" />
     <PackageReference Include="Shuttle.Abacus.Messages" Version="1.0.0" />
+    <PackageReference Include="Shuttle.Access.Mvc" Version="1.0.0" />
     <PackageReference Include="Shuttle.Access.Sql" Version="1.0.4" />
     <PackageReference Include="Shuttle.Core.Castle" Version="10.0.4" />
     <PackageReference Include="Shuttle.Core.Data.Http" Version="10.0.2" />

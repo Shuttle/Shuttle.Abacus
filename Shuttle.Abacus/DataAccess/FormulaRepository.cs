@@ -22,7 +22,7 @@ namespace Shuttle.Abacus.DataAccess
         {
             var result = new List<Formula>();
 
-            foreach (var row in _query.All(new FormulaSearchSpecification()))
+            foreach (var row in _query.Search(new FormulaSearchSpecification()))
             {
                 var id = FormulaColumns.FormulaId.MapFrom(row);
 

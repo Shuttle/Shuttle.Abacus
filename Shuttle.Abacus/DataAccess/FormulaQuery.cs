@@ -31,7 +31,7 @@ namespace Shuttle.Abacus.DataAccess
             return _databaseGateway.GetSingleRowUsing(_queryFactory.Get(id));
         }
 
-        public IEnumerable<DataRow> All(FormulaSearchSpecification specification)
+        public IEnumerable<DataRow> Search(FormulaSearchSpecification specification)
         {
             Guard.AgainstNull(specification, nameof(specification));
 

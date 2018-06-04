@@ -64,6 +64,7 @@ namespace Shuttle.Access.WebApi
             var componentContainer = new WindsorComponentContainer(container);
 
             componentContainer.RegisterSuffixed("Shuttle.Access.Sql");
+            componentContainer.RegisterSuffixed("Shuttle.Abacus");
 
             componentContainer.Register<IHttpContextAccessor, HttpContextAccessor>();
             componentContainer.Register<IDatabaseContextCache, ContextDatabaseContextCache>();
@@ -84,7 +85,7 @@ namespace Shuttle.Access.WebApi
             ServiceBus.Register(componentContainer);
             EventStore.Register(componentContainer);
 
-            componentContainer.Resolve<IDatabaseContextFactory>().ConfigureWith("Access");
+            componentContainer.Resolve<IDatabaseContextFactory>().ConfigureWith("Abacus");
 
             _bus = ServiceBus.Create(componentContainer).Start();
 

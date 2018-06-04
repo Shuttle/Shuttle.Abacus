@@ -40,7 +40,7 @@
       "bootstrap": "bootstrap/dist/js/bootstrap",
       "tempusdominus": "tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.js"
     },
-    "serviceBaseURL": "http://localhost:63001/api/",
+    "serviceBaseURL": "http://localhost:6300/api/",
     "accessBaseURL": "http://localhost:5599/api/",
     "debug": true,
     "localeVersion": "1"

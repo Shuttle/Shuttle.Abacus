@@ -20,7 +20,7 @@ namespace Shuttle.Abacus.DataAccess
     {
         IEnumerable<DataRow> Operations(Guid formulaId);
         DataRow Get(Guid id);
-        IEnumerable<DataRow> All(FormulaSearchSpecification specification);
+        IEnumerable<DataRow> Search(FormulaSearchSpecification specification);
 
         void Registered(Guid formulaId, string name);
         void Remove(Guid formulaId);
