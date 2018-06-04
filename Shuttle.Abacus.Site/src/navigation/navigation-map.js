@@ -8,7 +8,7 @@ var map = [
     {
         href: '#!formula/list',
         text: 'formulas',
-        permission: Permissions.Manage.Formula
+        permission: Permissions.Manage.Formulas
     }
 ];
 

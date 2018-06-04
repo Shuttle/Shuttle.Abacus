@@ -10,25 +10,25 @@ import state from '~/state';
 import stack from '~/stack';
 import localisation from '~/localisation';
 
-resources.add('datastore', {action: 'add', permission: Permissions.Manage.DataStores});
+resources.add('formula', {action: 'add', permission: Permissions.Manage.Formulas});
 
-var datastores = new Api({
-    endpoint: 'datastores/{id}'
+var formulas = new Api({
+    endpoint: 'formulas/{id}'
 });
 
 export const ViewModel = DefineMap.extend({
     init: function () {
-        const result = stack.pop('datastore');
+        const result = stack.pop('formula');
 
-        state.title = 'datastore:add.title';
+        state.title = 'formula';
 
         if (!result) {
             return;
         }
 
         this.name = result.name;
-        this.connectionString = result.connectionString;
-        this.providerName = result.providerName;
+        this.minimumFormulaName = result.minimumFormulaName;
+        this.maximumFormulaName = result.maximumFormulaName;
     },
 
     name: {
@@ -39,20 +39,14 @@ export const ViewModel = DefineMap.extend({
         }
     },
 
-    connectionString: {
+    minimumFormulaName: {
         type: 'string',
-        default: '',
-        validate: {
-            presence: true
-        }
+        default: ''
     },
 
-    providerName: {
+    maximumFormulaName: {
         type: 'string',
-        default: '',
-        validate: {
-            presence: true
-        }
+        default: ''
     },
 
     add: function () {
@@ -60,10 +54,10 @@ export const ViewModel = DefineMap.extend({
             return false;
         }
 
-        datastores.post({
+        formulas.post({
             name: this.name,
-            connectionString: this.connectionString,
-            providerName: this.providerName
+            minimumFormulaName: this.minimumFormulaName,
+            maximumFormulaName: this.maximumFormulaName
         });
 
         this.close();
@@ -73,7 +67,7 @@ export const ViewModel = DefineMap.extend({
 
     close: function () {
         router.goto({
-            resource: 'datastore',
+            resource: 'formula',
             action: 'list'
         });
     }
@@ -82,7 +76,7 @@ export const ViewModel = DefineMap.extend({
 validator(ViewModel);
 
 export default Component.extend({
-    tag: 'sentinel-datastore-add',
+    tag: 'abacus-formula-add',
     ViewModel,
     view
 });

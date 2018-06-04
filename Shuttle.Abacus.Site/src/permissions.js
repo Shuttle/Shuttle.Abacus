@@ -1,6 +1,6 @@
 var Permissions = {
     Manage: {
-        Formula: 'abacus://formula/manage'
+        Formulas: 'abacus://formulas/manage'
     }
 };
 

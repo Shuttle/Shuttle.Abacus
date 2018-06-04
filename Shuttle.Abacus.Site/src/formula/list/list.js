@@ -66,13 +66,13 @@ export const ViewModel = DefineMap.extend({
             });
 
             columns.push({
-                columnTitle: 'name',
+                columnTitle: 'maximum-formula-name',
                 columnClass: 'col',
                 attributeName: 'minimumFormulaName'
             });
 
             columns.push({
-                columnTitle: 'name',
+                columnTitle: 'minimum-formula-name',
                 columnClass: 'col',
                 attributeName: 'maximumFormulaName'
             });
@@ -83,7 +83,7 @@ export const ViewModel = DefineMap.extend({
         state.navbar.addButton({
             type: 'add',
             viewModel: this,
-            permission: Permissions.Manage.Formula
+            permission: Permissions.Manage.Formulas
         });
 
         state.navbar.addButton({
