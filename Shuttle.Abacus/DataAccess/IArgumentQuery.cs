@@ -8,7 +8,7 @@ namespace Shuttle.Abacus.DataAccess
 {
     public interface IArgumentQuery
     {
-        IEnumerable<DataRow> All();
+        IEnumerable<DataRow> Search(ArgumentSearchSpecification specification);
         DataRow Get(Guid id);
         IEnumerable<DataRow> GetValues(Guid id);
         DataRow Get(string name);

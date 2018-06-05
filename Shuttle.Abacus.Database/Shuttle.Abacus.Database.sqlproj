@@ -73,8 +73,6 @@
     <Build Include="Tables\ProjectionPosition.sql" />
     <Build Include="Tables\SnapshotStore.sql" />
     <Build Include="Tables\SubscriberMessageType.sql" />
-    <Build Include="Tables\SystemUser.sql" />
-    <Build Include="Tables\SystemUserPermission.sql" />
     <Build Include="Tables\Tag.sql" />
     <Build Include="Tables\Test.sql" />
     <Build Include="Tables\TestArgument.sql" />

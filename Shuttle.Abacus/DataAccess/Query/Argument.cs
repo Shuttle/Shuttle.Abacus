@@ -1,6 +1,6 @@
-namespace Shuttle.Abacus.Messages.v1
+﻿namespace Shuttle.Abacus.DataAccess.Query
 {
-    public class RegisterArgumentCommand
+    public class Argument
     {
         public string Name { get; set; }
         public string ValueType { get; set; }

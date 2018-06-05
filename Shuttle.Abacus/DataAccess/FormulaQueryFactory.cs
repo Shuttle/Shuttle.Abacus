@@ -1,4 +1,5 @@
 using System;
+using Shuttle.Core.Contract;
 using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
@@ -153,17 +154,39 @@ where
 
         public IQuery Search(FormulaSearchSpecification specification)
         {
+            Guard.AgainstNull(specification, nameof(specification));
+
             return RawQuery.Create(string.Concat(SelectClause, @"
 where
+(
     @Name is null
     or
     @Name = ''
     or
-    Name like @Name
+    Name like '%' + @Name + '%'
+)
+    and
+(
+    @MaximumFormulaName is null
+    or
+    @MaximumFormulaName = ''
+    or
+    MaximumFormulaName like '%' + @MaximumFormulaName + '%'
+)
+    and
+(
+    @MinimumFormulaName is null
+    or
+    @MinimumFormulaName = ''
+    or
+    MinimumFormulaName like '%' + @MinimumFormulaName + '%'
+)
 order by 
     Name
 "))
-                .AddParameterValue(FormulaColumns.Name, specification.Name);
+                .AddParameterValue(FormulaColumns.Name, specification.Name)
+                .AddParameterValue(FormulaColumns.MaximumFormulaName, specification.MaximumFormulaName)
+                .AddParameterValue(FormulaColumns.MinimumFormulaName, specification.MinimumFormulaName);
         }
 
         public IQuery AddConstraint(Guid formulaId, int sequenceNumber, string argumentName, string comparison,

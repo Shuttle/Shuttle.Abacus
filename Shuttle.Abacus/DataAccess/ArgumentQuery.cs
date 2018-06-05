@@ -22,9 +22,9 @@ namespace Shuttle.Abacus.DataAccess
             _argumentQueryFactory = argumentQueryFactory;
         }
 
-        public IEnumerable<DataRow> All()
+        public IEnumerable<DataRow> Search(ArgumentSearchSpecification specification)
         {
-            return _databaseGateway.GetRowsUsing(_argumentQueryFactory.All());
+            return _databaseGateway.GetRowsUsing(_argumentQueryFactory.Search(specification));
         }
 
         public DataRow Get(Guid id)

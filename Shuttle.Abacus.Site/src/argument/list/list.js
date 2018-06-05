@@ -9,7 +9,7 @@ import localisation from '~/localisation';
 import state from '~/state';
 import Api from 'shuttle-can-api';
 
-resources.add('formula', { action: 'list', permission: Permissions.Manage.Formulas});
+resources.add('argument', { action: 'list', permission: Permissions.Manage.Arguments});
 
 export const Map = DefineMap.extend({
     id: {
@@ -18,33 +18,20 @@ export const Map = DefineMap.extend({
     name: {
         type: 'string'
     },
-    maximumFormulaName: {
-        type: 'string'
-    },
-    minimumFormulaName: {
+    valueType: {
         type: 'string'
     }
 });
 
 export const api = {
     search: new Api({
-        endpoint: 'formulas/search',
+        endpoint: 'arguments/search',
         Map
     })
 };
 
 export const ViewModel = DefineMap.extend({
     name: {
-        type: 'string',
-        default: ''
-    },
-
-    minimumFormulaName: {
-        type: 'string',
-        default: ''
-    },
-
-    maximumFormulaName: {
         type: 'string',
         default: ''
     },
@@ -60,7 +47,9 @@ export const ViewModel = DefineMap.extend({
     get list () {
         const refreshTimestamp = this.refreshTimestamp;
         return api.search.list({
-            name: this.name
+            name: this.name,
+            minimumFormulaName: this.minimumFormulaName,
+            maximumFormulaName: this.maximumFormulaName
         }, {
             post: true
         });
@@ -77,24 +66,18 @@ export const ViewModel = DefineMap.extend({
             });
 
             columns.push({
-                columnTitle: 'maximum-formula-name',
+                columnTitle: 'value-type',
                 columnClass: 'col',
-                attributeName: 'maximumFormulaName'
-            });
-
-            columns.push({
-                columnTitle: 'minimum-formula-name',
-                columnClass: 'col',
-                attributeName: 'minimumFormulaName'
+                attributeName: 'valueType'
             });
         }
 
-        state.title = 'formulas';
+        state.title = 'arguments';
 
         state.navbar.addButton({
             type: 'add',
             viewModel: this,
-            permission: Permissions.Manage.Formulas
+            permission: Permissions.Manage.Arguments
         });
 
         state.navbar.addButton({
@@ -105,7 +88,7 @@ export const ViewModel = DefineMap.extend({
 
     add: function() {
         router.goto({
-            resource: 'formula',
+            resource: 'argument',
             action: 'add'
         });
     },
@@ -116,7 +99,7 @@ export const ViewModel = DefineMap.extend({
 });
 
 export default Component.extend({
-    tag: 'abacus-formula-list',
+    tag: 'abacus-argument-list',
     ViewModel,
     view
 });

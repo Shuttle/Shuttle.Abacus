@@ -1,5 +1,6 @@
 using System;
 using Shuttle.Abacus.Events.Argument.v1;
+using Shuttle.Core.Contract;
 using Shuttle.Core.Data;
 using Shuttle.Recall;
 
@@ -29,9 +30,23 @@ left join
         on (a.ArgumentId = ava.ArgumentId) 
 ";
 
-        public IQuery All()
+        public IQuery Search(ArgumentSearchSpecification specification)
         {
-            return new RawQuery(string.Concat(SelectClause, "order by Name"));
+            Guard.AgainstNull(specification, nameof(specification));
+
+            return new RawQuery(string.Concat(SelectClause, @"
+where
+(
+    @Name is null
+    or
+    @Name = ''
+    or
+    Name like '%' + @Name + '%'
+)
+order by 
+    Name
+"))
+                .AddParameterValue(FormulaColumns.Name, specification.Name);
         }
 
         public IQuery Get(Guid id)

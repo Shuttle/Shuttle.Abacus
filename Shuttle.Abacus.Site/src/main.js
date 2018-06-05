@@ -28,6 +28,7 @@ import '~/login/';
 import '~/navigation/';
 import '~/dashboard/';
 
+import '~/argument/';
 import '~/formula/';
 
 import validate from 'validate.js';

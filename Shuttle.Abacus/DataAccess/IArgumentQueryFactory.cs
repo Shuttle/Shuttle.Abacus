@@ -7,7 +7,7 @@ namespace Shuttle.Abacus.DataAccess
 {
     public interface IArgumentQueryFactory
     {
-        IQuery All();
+        IQuery Search(ArgumentSearchSpecification specification);
         IQuery Get(Guid id);
         IQuery GetValues(Guid id);
         IQuery Add(Argument item);

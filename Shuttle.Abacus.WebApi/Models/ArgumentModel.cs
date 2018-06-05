@@ -1,6 +1,6 @@
-namespace Shuttle.Abacus.Messages.v1
+﻿namespace Shuttle.Abacus.WebApi
 {
-    public class RegisterArgumentCommand
+    public class ArgumentModel
     {
         public string Name { get; set; }
         public string ValueType { get; set; }

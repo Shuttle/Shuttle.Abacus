@@ -22,7 +22,7 @@ namespace Shuttle.Abacus.DataAccess
         {
             var result = new List<Argument>();
 
-            foreach (var row in _query.All())
+            foreach (var row in _query.Search(new ArgumentSearchSpecification()))
             {
                 var id = ArgumentColumns.Id.MapFrom(row);
 

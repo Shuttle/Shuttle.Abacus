@@ -9,6 +9,11 @@ var map = [
         href: '#!formula/list',
         text: 'formulas',
         permission: Permissions.Manage.Formulas
+    },
+    {
+        href: '#!argument/list',
+        text: 'arguments',
+        permission: Permissions.Manage.Arguments
     }
 ];
 

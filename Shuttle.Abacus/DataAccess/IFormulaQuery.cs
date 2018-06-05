@@ -4,18 +4,6 @@ using System.Data;
 
 namespace Shuttle.Abacus.DataAccess
 {
-    public class FormulaSearchSpecification
-    {
-        public string Name { get; private set; }
-
-        public FormulaSearchSpecification WithName(string name)
-        {
-            Name = name;
-
-            return this;
-        }
-    }
-
     public interface IFormulaQuery
     {
         IEnumerable<DataRow> Operations(Guid formulaId);

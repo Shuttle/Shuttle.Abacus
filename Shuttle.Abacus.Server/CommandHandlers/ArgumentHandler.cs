@@ -45,7 +45,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                 var stream = _eventStore.CreateEventStream();
                 var argument = new Argument(stream.Id);
 
-                stream.AddEvent(argument.Register(message.Name, message.AnswerType));
+                stream.AddEvent(argument.Register(message.Name, message.ValueType));
 
                 _eventStore.Save(stream);
                 _keyStore.Add(argument.Id, key);

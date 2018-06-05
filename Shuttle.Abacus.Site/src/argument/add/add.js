@@ -8,27 +8,28 @@ import Api from 'shuttle-can-api';
 import validator from 'can-define-validate-validatejs';
 import state from '~/state';
 import stack from '~/stack';
-import localisation from '~/localisation';
+import {OptionMap, OptionList} from 'shuttle-canstrap/select/';
 
-resources.add('formula', {action: 'add', permission: Permissions.Manage.Formulas});
+resources.add('argument', {action: 'add', permission: Permissions.Manage.Arguments});
 
-var formulas = new Api({
-    endpoint: 'formulas/{id}'
-});
+var api = {
+    arguments: new Api({
+        endpoint: 'arguments/{id}'
+    })
+};
 
 export const ViewModel = DefineMap.extend({
     init: function () {
         const result = stack.pop('formula');
 
-        state.title = 'formula';
+        state.title = 'arguments';
 
         if (!result) {
             return;
         }
 
         this.name = result.name;
-        this.minimumFormulaName = result.minimumFormulaName;
-        this.maximumFormulaName = result.maximumFormulaName;
+        this.valueType = result.valueType;
     },
 
     name: {
@@ -39,13 +40,33 @@ export const ViewModel = DefineMap.extend({
         }
     },
 
+    valueType: {
+        type: 'string',
+        default: '',
+        validate: {
+            presence: true
+        }
+    },
+
+    valueTypes: {
+        Type: OptionList,
+        default: [
+            {value: 'Boolean', label: 'Boolean'},
+            {value: 'Date', label: 'Date'},
+            {value: 'Decimal', label: 'Decimal'},
+            {value: 'Integer', label: 'Integer'},
+            {value: 'Text', label: 'Text'}
+        ]
+    },
+
     add: function () {
         if (!!this.errors()) {
             return false;
         }
 
-        formulas.post({
-            name: this.name
+        api.arguments.post({
+            name: this.name,
+            valueType: this.valueType
         });
 
         this.close();
@@ -55,7 +76,7 @@ export const ViewModel = DefineMap.extend({
 
     close: function () {
         router.goto({
-            resource: 'formula',
+            resource: 'argument',
             action: 'list'
         });
     }
@@ -64,7 +85,7 @@ export const ViewModel = DefineMap.extend({
 validator(ViewModel);
 
 export default Component.extend({
-    tag: 'abacus-formula-add',
+    tag: 'abacus-argument-add',
     ViewModel,
     view
 });
