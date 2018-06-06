@@ -10,7 +10,11 @@ import each from 'can-util/js/each/';
 import navbar from '~/navbar';
 
 var RouteData = DefineMap.extend({
-    resource: {
+    aggregate: {
+        type: 'string',
+        default: ''
+    },
+    value: {
         type: 'string',
         default: ''
     },
@@ -24,26 +28,19 @@ var RouteData = DefineMap.extend({
     },
     full: {
         get() {
-            return this.resource + (!!this.id ? `/${this.id}` : '') + (!!this.action ? `/${this.action}` : '');
+            return this.aggregate + (!!this.aggegateId ? `/${this.id}` : '') + (!!this.value ? `/${this.value}` : '') + (!!this.action ? `/${this.action}` : '');
         }
     }
 });
 
 var routeData = new RouteData();
 
-routeData.on('full', function (ev, newVal, oldVal) {
-    if (!access.isUserRequired || (this.resource === 'user' && this.action === 'register')) {
-        return;
-    }
-
-    this.update({resource: 'user', action: 'register'}, true);
-});
-
 var Router = DefineMap.extend({
     data: {
         Type: RouteData,
         default: routeData
     },
+
     previousHash: 'string',
 
     init: function () {
@@ -55,9 +52,10 @@ var Router = DefineMap.extend({
     },
 
     start: function () {
-        route.register('{resource}');
-        route.register('{resource}/{action}');
-        route.register('{resource}/{id}/{action}');
+        route.register('{aggregate}');
+        route.register('{aggregate}/{action}');
+        route.register('{aggregate}/{id}/{action}');
+        route.register('{aggregate}/{id}/{value}/{action}');
 
         route.data = this.data;
 
@@ -66,33 +64,25 @@ var Router = DefineMap.extend({
 
     process: function () {
         var resource;
-        var resourceName = this.data.resource;
-        var actionName = this.data.action;
-        var isActionRoute = !!actionName;
+        var aggregate = this.data.aggregate;
 
         if ($('#application-content').length === 0) {
             return;
         }
 
-        if (!resourceName) {
+        if (!aggregate) {
             return;
         }
 
-        if (isActionRoute) {
-            if (!actionName) {
-                return;
-            }
-
-            resource = resources.find(resourceName, {action: actionName});
-        } else {
-            resource = resources.find(resourceName);
-        }
+        resource = resources.find(aggregate, this.data);
 
         if (!resource) {
             state.alerts.show({
                 message: localisation.value('exceptions.resource-not-found', {
-                    resource: resourceName,
-                    action: actionName || '',
+                    aggregate: aggregate,
+                    value: this.data.value || '(-value)',
+                    action: this.data.action || '(-action)',
+                    id: this.data.id || '(-id)',
                     interpolation: {escape: false}
                 }), type: 'warning', name: 'route-error'
             });
@@ -103,7 +93,10 @@ var Router = DefineMap.extend({
         if (resource.permission && !access.hasPermission(resource.permission)) {
             state.alerts.show({
                 message: localisation.value('security.access-denied', {
-                    name: resource.name || window.location.hash,
+                    aggregate: aggregate,
+                    value: this.data.value || '(-value)',
+                    action: this.data.action || '(-action)',
+                    id: this.data.id || '(-id)',
                     permission: resource.permission,
                     interpolation: {escape: false}
                 }), type: 'danger', name: 'route-error'
@@ -116,7 +109,7 @@ var Router = DefineMap.extend({
         navbar.controls.clear();
         state.title = '';
 
-        var componentName = resource.componentName || 'abacus-' + resource.name + (isActionRoute ? `-${actionName}` : '');
+        var componentName = resource.componentName || 'abacus-' + resource.aggregate + (!!this.data.value ? `-${this.data.value}` : '') + (!!this.data.action ? `-${this.data.action}` : '');
 
         $('#application-content').html(stache('<' + componentName + '></' + componentName + '>')());
     },
@@ -128,13 +121,15 @@ var Router = DefineMap.extend({
             throw new Error('Call \'router.goto\' with route data: e.g. router.goto({resource: \'the-resource\', action: \'the-action\'});');
         }
 
-        if (!data.resource) {
-            throw new Error('The \'data\' argument does not contain a \'resource\' value.')
+        if (!data.aggregate) {
+            throw new Error('The \'data\' argument does not contain a \'aggregate\' value.')
         }
 
         each(Object.getOwnPropertyNames(data), function (propertyName) {
                 if (
-                    propertyName !== 'resource'
+                    propertyName !== 'aggregate'
+                    &&
+                    propertyName !== 'value'
                     &&
                     propertyName !== 'action'
                     &&
