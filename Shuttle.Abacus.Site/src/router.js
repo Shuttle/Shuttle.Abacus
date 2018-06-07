@@ -10,11 +10,11 @@ import each from 'can-util/js/each/';
 import navbar from '~/navbar';
 
 var RouteData = DefineMap.extend({
-    aggregate: {
+    resource: {
         type: 'string',
         default: ''
     },
-    value: {
+    item: {
         type: 'string',
         default: ''
     },
@@ -28,7 +28,7 @@ var RouteData = DefineMap.extend({
     },
     full: {
         get() {
-            return this.aggregate + (!!this.aggegateId ? `/${this.id}` : '') + (!!this.value ? `/${this.value}` : '') + (!!this.action ? `/${this.action}` : '');
+            return this.resource + (!!this.id ? `/${this.id}` : '') + (!!this.item ? `/${this.item}` : '') + (!!this.action ? `/${this.action}` : '');
         }
     }
 });
@@ -52,10 +52,10 @@ var Router = DefineMap.extend({
     },
 
     start: function () {
-        route.register('{aggregate}');
-        route.register('{aggregate}/{action}');
-        route.register('{aggregate}/{id}/{action}');
-        route.register('{aggregate}/{id}/{value}/{action}');
+        route.register('{resource}');
+        route.register('{resource}/{action}');
+        route.register('{resource}/{id}/{action}');
+        route.register('{resource}/{id}/{item}/{action}');
 
         route.data = this.data;
 
@@ -64,23 +64,22 @@ var Router = DefineMap.extend({
 
     process: function () {
         var resource;
-        var aggregate = this.data.aggregate;
 
         if ($('#application-content').length === 0) {
             return;
         }
 
-        if (!aggregate) {
+        if (!this.data.resource) {
             return;
         }
 
-        resource = resources.find(aggregate, this.data);
+        resource = resources.find(this.data.resource, this.data);
 
         if (!resource) {
             state.alerts.show({
                 message: localisation.value('exceptions.resource-not-found', {
-                    aggregate: aggregate,
-                    value: this.data.value || '(-value)',
+                    resource: this.data.resource,
+                    item: this.data.item|| '(-value)',
                     action: this.data.action || '(-action)',
                     id: this.data.id || '(-id)',
                     interpolation: {escape: false}
@@ -93,8 +92,8 @@ var Router = DefineMap.extend({
         if (resource.permission && !access.hasPermission(resource.permission)) {
             state.alerts.show({
                 message: localisation.value('security.access-denied', {
-                    aggregate: aggregate,
-                    value: this.data.value || '(-value)',
+                    resource: this.data.resource,
+                    item: this.data.item|| '(-value)',
                     action: this.data.action || '(-action)',
                     id: this.data.id || '(-id)',
                     permission: resource.permission,
@@ -109,7 +108,7 @@ var Router = DefineMap.extend({
         navbar.controls.clear();
         state.title = '';
 
-        var componentName = resource.componentName || 'abacus-' + resource.aggregate + (!!this.data.value ? `-${this.data.value}` : '') + (!!this.data.action ? `-${this.data.action}` : '');
+        var componentName = resource.componentName || 'abacus-' + resource.resource + (!!this.data.item ? `-${this.data.item}` : '') + (!!this.data.action ? `-${this.data.action}` : '');
 
         $('#application-content').html(stache('<' + componentName + '></' + componentName + '>')());
     },
@@ -121,15 +120,15 @@ var Router = DefineMap.extend({
             throw new Error('Call \'router.goto\' with route data: e.g. router.goto({resource: \'the-resource\', action: \'the-action\'});');
         }
 
-        if (!data.aggregate) {
-            throw new Error('The \'data\' argument does not contain a \'aggregate\' value.')
+        if (!data.resource) {
+            throw new Error('The \'data\' argument does not contain a \'resource\' value.')
         }
 
         each(Object.getOwnPropertyNames(data), function (propertyName) {
                 if (
-                    propertyName !== 'aggregate'
+                    propertyName !== 'resource'
                     &&
-                    propertyName !== 'value'
+                    propertyName !== 'item'
                     &&
                     propertyName !== 'action'
                     &&

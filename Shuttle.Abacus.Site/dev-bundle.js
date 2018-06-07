@@ -1,7 +1,5 @@
 /*[system-bundles-config]*/
-System.bundles = {"dev-bundle.css!":["shuttle-canstrap@1.0.50#canstrap.css!steal-css@1.3.2#css","bootstrap@4.1.1#dist/css/bootstrap.css!steal-css@1.3.2#css","font-awesome@4.7.0#css/font-awesome.css!steal-css@1.3.2#css"]};
-/*[steal-add-npm-packages]*/
-if (steal && typeof steal.addNpmPackages === 'function') { steal.addNpmPackages([{"origFileUrl":"file:C:/development.github/shuttle/Shuttle.Abacus/Shuttle.Abacus.Site/package.json","fileUrl":"./package.json","name":"ems","version":"1.0.0","description":"Sebata Enterprise Management System.","steal":{"main":"main.js","directories":{"lib":"src"},"npmAlgorithm":"flat","plugins":["steal-stache","steal-css"],"meta":{"tempusdominus":{"format":"global","deps":["mement"]}},"map":{"tempusdominus":"tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.js"},"serviceBaseURL":"http://localhost:63001/api/","accessBaseURL":"http://localhost:5599/api/","debug":true,"localeVersion":"1"},"scripts":{"test":"echo \"Error: no test specified\" && exit 1","postinstall":"steal-tools bundle --deps"},"author":"Eben Roux","homepage":"http://www.sebata.co.za/","dependencies":{"bootstrap":"^4.1.1","can-component":"^4.0.8","can-compute":"^4.0.3","can-connect":"^2.0.4","can-define":"^2.3.1","can-define-validate-validatejs":"^1.0.1","can-route":"^4.1.1","can-route-pushstate":"^4.0.4","can-set":"^1.5.2","can-stache":"^4.4.0","can-stache-bindings":"^4.1.3","can-stache-route-helpers":"^0.1.4","can-util":"^3.11.5","can-validate-validatejs":"^0.1.3","i18next":"^11.3.2","i18next-xhr-backend":"^1.5.1","jquery":"^3.3.1","moment":"^2.22.1","popper.js":"^1.14.3","shuttle-access":"^1.0.0","shuttle-can-api":"^1.0.17","shuttle-canstrap":"^1.0.50","shuttle-guard":"^1.0.0","steal":"^1.11.6","steal-css":"^1.3.2","steal-stache":"^4.1.0","tempusdominus-bootstrap-4":"^5.0.0-alpha18","validate.js":"^0.11.1"}},{"name":"steal-css","version":"1.3.2","origFileUrl":"./node_modules/steal-css/package.json","fileUrl":"./node_modules/steal-css/package.json","_from":"steal-css@^1.3.2","_id":"steal-css@1.3.2","_inBundle":false,"_integrity":"sha512-hT3j9+p+qxqu3Jh46zGoB31V/8SKYba/C9sRtGkryKRR8vf582UmLpcbo2s1FysSNZCISbCGi7jl/pZgvdIxbg==","_location":"/steal-css","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"steal-css@^1.3.2","name":"steal-css","escapedName":"steal-css","rawSpec":"^1.3.2","saveSpec":null,"fetchSpec":"^1.3.2"},"_requiredBy":["/","/shuttle-canstrap"],"_resolved":"https://registry.npmjs.org/steal-css/-/steal-css-1.3.2.tgz","_shasum":"66aeac1cb88940cd740af57d51472d0380c45eb7","_spec":"steal-css@^1.3.2","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"Bitovi"},"bit-docs":{"dependencies":{"bit-docs-glob-finder":"^0.0.5","bit-docs-dev":"^0.0.3","bit-docs-js":"^0.0.3","bit-docs-generate-readme":"^0.0.8"},"glob":{"pattern":"**/*.{js,md}","ignore":"node_modules/**/*"},"readme":{"apis":"./docs/apis.json"},"parent":"steal-css"},"bugs":{"url":"https://github.com/stealjs/steal-css/issues"},"bundleDependencies":false,"deprecated":false,"description":"CSS plugin for StealJS","devDependencies":{"async":"^2.3.0","bit-docs":"0.0.7","eslint":"^4.1.1","http-server":"^0.10.0","qunitjs":"~2.4.0","saucelabs":"^1.4.0","steal":"^1.0.0","steal-qunit":"^1.0.0","steal-test-helpers":"^0.2.0","steal-tools":"^1.0.0","test-saucelabs":"0.0.2","testee":"^0.6.1","wd":"^1.2.0"},"eslintConfig":{"extends":"eslint:recommended","rules":{"no-param-reassign":"error","no-useless-escape":"off"},"env":{"node":true,"browser":true},"globals":{"doneSsr":true,"Promise":true}},"homepage":"https://github.com/stealjs/steal-css","keywords":["StealJS","CSS"],"license":"MIT","main":"css.js","repository":{"type":"git","url":"git+https://github.com/stealjs/steal-css.git"},"scripts":{"build-1":"node test/css-paths/build.js","build-2":"steal-tools build --config test/css-before-js/stealconfig.js --main main --baseUrl test/css-before-js/ --minify false","build-3":"node test/css-instantiated/build.js","document":"bit-docs","eslint":"eslint css.js","http-server":"http-server -p 3000 --silent","run-tests":"testee test/test.html --browsers firefox --reporter Spec","saucelabs":"npm run build-1 && npm run build-2 && npm run build-3 && node test/saucelabs","test":"npm run eslint && npm run build-1 && npm run build-2 && npm run build-3 && npm run run-tests"},"steal":{"ext":{"css":"steal-css"},"map":{"$css":"steal-css@1.3.2#css"}}},{"name":"steal-stache","version":"4.1.0","origFileUrl":"./node_modules/steal-stache/package.json","fileUrl":"./node_modules/steal-stache/package.json","_from":"steal-stache@^4.1.0","_id":"steal-stache@4.1.0","_inBundle":false,"_integrity":"sha512-YXqT59q23aIyJ1vLr+NqnAdP7xrkfpx2maRQvfkuhP2o7l12uovQRzOPeOwIT1FaPhKonGz/Fx//eS8kvc2ejQ==","_location":"/steal-stache","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"steal-stache@^4.1.0","name":"steal-stache","escapedName":"steal-stache","rawSpec":"^4.1.0","saveSpec":null,"fetchSpec":"^4.1.0"},"_requiredBy":["/","/can-connect"],"_resolved":"https://registry.npmjs.org/steal-stache/-/steal-stache-4.1.0.tgz","_shasum":"0e90fe547922c7210bf430a017fc265ac46a11eb","_spec":"steal-stache@^4.1.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bugs":{"url":"https://github.com/canjs/steal-stache/issues"},"bundleDependencies":false,"dependencies":{"can-stache":"^4.0.0","can-stache-ast":"^1.0.0","can-stache-bindings":"^4.0.0","can-view-import":"^4.0.0","steal-config-utils":"^1.0.0"},"deprecated":false,"description":"Load can-stache templates with StealJS","devDependencies":{"bit-docs":"0.0.7","can-test-helpers":"^1.1.0","can-view-nodelist":"^4.0.0","jshint":"^2.9.4","steal":"^1.7.0","steal-qunit":"^1.0.0","steal-tools":"^1.0.0","testee":"^0.7.0"},"homepage":"http://canjs.com","keywords":["canjs","stealjs","donejs"],"main":"steal-stache.js","repository":{"type":"git","url":"git://github.com/canjs/steal-stache.git"},"scripts":{"jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag=pre","test":"npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"},"system":{"main":"steal-stache","configDependencies":["live-reload"],"npmIgnore":{"documentjs":true,"testee":true,"steal-tools":true},"npmAlgorithm":"flat","ext":{"stache":"steal-stache"}},"steal":{"main":"steal-stache","configDependencies":["live-reload"],"npmIgnore":{"documentjs":true,"testee":true,"steal-tools":true},"npmAlgorithm":"flat","ext":{"stache":"steal-stache"}}},{"name":"jquery","version":"3.3.1","origFileUrl":"./node_modules/jquery/package.json","fileUrl":"./node_modules/jquery/package.json","_from":"jquery@^3.3.1","_id":"jquery@3.3.1","_inBundle":false,"_integrity":"sha512-Ubldcmxp5np52/ENotGxlLe6aGMvmF4R8S6tZjsP6Knsaxd/xp3Zrh50cG93lR6nPXyUFwzN3ZSOQI0wRJNdGg==","_location":"/jquery","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"jquery@^3.3.1","name":"jquery","escapedName":"jquery","rawSpec":"^3.3.1","saveSpec":null,"fetchSpec":"^3.3.1"},"_requiredBy":["/","/shuttle-access","/shuttle-can-api","/tempusdominus-bootstrap-4"],"_resolved":"https://registry.npmjs.org/jquery/-/jquery-3.3.1.tgz","_shasum":"958ce29e81c9790f31be7792df5d4d95fc57fbca","_spec":"jquery@^3.3.1","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"JS Foundation and other contributors","url":"https://github.com/jquery/jquery/blob/3.3.1/AUTHORS.txt"},"bugs":{"url":"https://github.com/jquery/jquery/issues"},"bundleDependencies":false,"commitplease":{"nohook":true,"components":["Docs","Tests","Build","Support","Release","Core","Ajax","Attributes","Callbacks","CSS","Data","Deferred","Deprecated","Dimensions","Effects","Event","Manipulation","Offset","Queue","Selector","Serialize","Traversing","Wrap"],"markerPattern":"^((clos|fix|resolv)(e[sd]|ing))|^(refs?)","ticketPattern":"^((Closes|Fixes) ([a-zA-Z]{2,}-)[0-9]+)|^(Refs? [^#])"},"dependencies":{},"deprecated":false,"description":"JavaScript library for DOM operations","devDependencies":{"babel-core":"7.0.0-beta.0","babel-plugin-transform-es2015-for-of":"7.0.0-beta.0","commitplease":"2.7.10","core-js":"2.4.1","eslint-config-jquery":"1.0.1","grunt":"1.0.1","grunt-babel":"7.0.0","grunt-cli":"1.2.0","grunt-compare-size":"0.4.2","grunt-contrib-uglify":"3.0.1","grunt-contrib-watch":"1.0.0","grunt-eslint":"20.0.0","grunt-git-authors":"3.2.0","grunt-jsonlint":"1.1.0","grunt-karma":"2.0.0","grunt-newer":"1.3.0","grunt-npmcopy":"0.1.0","gzip-js":"0.3.2","husky":"0.14.3","insight":"0.8.4","jsdom":"5.6.1","karma":"1.7.0","karma-browserstack-launcher":"1.3.0","karma-chrome-launcher":"2.2.0","karma-firefox-launcher":"1.0.1","karma-qunit":"1.2.1","load-grunt-tasks":"3.5.2","native-promise-only":"0.8.1","promises-aplus-tests":"2.1.2","q":"1.5.0","qunit-assert-step":"1.0.3","qunitjs":"1.23.1","raw-body":"2.2.0","requirejs":"2.3.3","sinon":"2.3.7","sizzle":"2.3.3","strip-json-comments":"2.0.1","testswarm":"1.1.0","uglify-js":"3.3.4"},"homepage":"https://jquery.com","keywords":["jquery","javascript","browser","library"],"license":"MIT","main":"dist/jquery.js","repository":{"type":"git","url":"git+https://github.com/jquery/jquery.git"},"scripts":{"build":"npm install && grunt","commitmsg":"node node_modules/commitplease","jenkins":"npm run test:browserless","precommit":"grunt lint:newer qunit_fixture","start":"grunt watch","test":"grunt && grunt test:slow && grunt karma:main","test:browser":"grunt && grunt karma:main","test:browserless":"grunt && grunt test:slow"},"title":"jQuery"},{"name":"popper.js","version":"1.14.3","origFileUrl":"./node_modules/popper.js/package.json","fileUrl":"./node_modules/popper.js/package.json","_from":"popper.js@^1.14.3","_id":"popper.js@1.14.3","_inBundle":false,"_integrity":"sha1-FDj5jQRqz3tNeM1QK/QYrGTU8JU=","_location":"/popper.js","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"popper.js@^1.14.3","name":"popper.js","escapedName":"popper.js","rawSpec":"^1.14.3","saveSpec":null,"fetchSpec":"^1.14.3"},"_requiredBy":["/","/shuttle-canstrap","/tempusdominus-bootstrap-4"],"_resolved":"https://registry.npmjs.org/popper.js/-/popper.js-1.14.3.tgz","_shasum":"1438f98d046acf7b4d78cd502bf418ac64d4f095","_spec":"popper.js@^1.14.3","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"Federico Zivolo","email":"federico.zivolo@gmail.com"},"bugs":{"url":"https://github.com/FezVrasta/popper.js/issues"},"bundleDependencies":false,"contributors":[{"name":"Contributors","url":"https://github.com/FezVrasta/popper.js/graphs/contributors"}],"deprecated":false,"description":"A kickass library to manage your poppers","devDependencies":{"@popperjs/bundle":"^1.0.2","@popperjs/eslint-config-popper":"^1.0.0","@popperjs/test":"^1.0.0","@popperjs/test-utils":"^1.0.0","eslint":"^4.1.1","nuget-publish":"^1.0.3","typescript":"^2.7.1"},"homepage":"https://popper.js.org","keywords":["popperjs","component","drop","tooltip","popover","position","attached"],"license":"MIT","main":"dist/umd/popper.js","module":"dist/esm/popper.js","repository":{"type":"git","url":"git+https://github.com/FezVrasta/popper.js.git"},"resolutions":{"micromatch":"^3.0.3"},"scripts":{"build":"node bundle.js","coverage":"COVERAGE=true yarn test","lint":"eslint .","postpublish":"nuget-publish && ./bower-publish.sh","posttest":"tsc --project tests/types/tsconfig.json","prebuild":"yarn lint","prepare":"yarn build","pretest":"yarn lint","test":"popper-karma","test:dev":"BROWSERS=Chrome NODE_ENV=development yarn test"},"types":"index.d.ts"},{"name":"bootstrap","version":"4.1.1","origFileUrl":"./node_modules/bootstrap/package.json","fileUrl":"./node_modules/bootstrap/package.json","_from":"bootstrap@^4.1.1","_id":"bootstrap@4.1.1","_inBundle":false,"_integrity":"sha512-SpiDSOcbg4J/PjVSt4ny5eY6j74VbVSjROY4Fb/WIUXBV9cnb5luyR4KnPvNoXuGnBK1T+nJIWqRsvU3yP8Mcg==","_location":"/bootstrap","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"bootstrap@^4.1.1","name":"bootstrap","escapedName":"bootstrap","rawSpec":"^4.1.1","saveSpec":null,"fetchSpec":"^4.1.1"},"_requiredBy":["/","/shuttle-canstrap"],"_resolved":"https://registry.npmjs.org/bootstrap/-/bootstrap-4.1.1.tgz","_shasum":"3aec85000fa619085da8d2e4983dfd67cf2114cb","_spec":"bootstrap@^4.1.1","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"The Bootstrap Authors","url":"https://github.com/twbs/bootstrap/graphs/contributors"},"browserslist":["last 1 major version",">= 1%","Chrome >= 45","Firefox >= 38","Edge >= 12","Explorer >= 10","iOS >= 9","Safari >= 9","Android >= 4.4","Opera >= 30"],"bugs":{"url":"https://github.com/twbs/bootstrap/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/css/bootstrap-grid.css","maxSize":"5 kB"},{"path":"./dist/css/bootstrap-grid.min.css","maxSize":"5 kB"},{"path":"./dist/css/bootstrap-reboot.css","maxSize":"3 kB"},{"path":"./dist/css/bootstrap-reboot.min.css","maxSize":"3 kB"},{"path":"./dist/css/bootstrap.css","maxSize":"25 kB"},{"path":"./dist/css/bootstrap.min.css","maxSize":"21 kB"},{"path":"./dist/js/bootstrap.bundle.js","maxSize":"45 kB"},{"path":"./dist/js/bootstrap.bundle.min.js","maxSize":"25 kB"},{"path":"./dist/js/bootstrap.js","maxSize":"20 kB"},{"path":"./dist/js/bootstrap.min.js","maxSize":"15 kB"}],"contributors":[{"name":"Twitter, Inc."}],"dependencies":{},"deprecated":false,"description":"The most popular front-end framework for developing responsive, mobile first projects on the web.","devDependencies":{"@babel/cli":"7.0.0-beta.44","@babel/core":"7.0.0-beta.44","@babel/preset-env":"7.0.0-beta.44","autoprefixer":"^8.3.0","babel-eslint":"^8.2.3","babel-plugin-istanbul":"^4.1.6","babel-plugin-transform-es2015-modules-strip":"^0.1.1","bundlesize":"^0.17.0","clean-css-cli":"^4.1.11","cross-env":"^5.1.4","eslint":"^4.19.1","eslint-plugin-compat":"^2.2.0","glob":"^7.1.2","htmllint-cli":"^0.0.6","jsunitsaucelabs":"^1.3.0","karma":"^2.0.0","karma-chrome-launcher":"^2.2.0","karma-coverage-istanbul-reporter":"^1.4.2","karma-detect-browsers":"^2.3.2","karma-firefox-launcher":"^1.1.0","karma-qunit":"^1.2.1","karma-sinon":"^1.0.5","node-sass":"^4.8.3","nodemon":"^1.17.3","npm-run-all":"^4.1.2","popper.js":"^1.14.3","postcss-cli":"^5.0.0","qunitjs":"^2.4.1","rollup":"^0.58.0","rollup-plugin-babel":"4.0.0-beta.4","rollup-plugin-node-resolve":"^3.3.0","shelljs":"^0.8.1","shx":"^0.2.2","sinon":"^4.5.0","sri-toolbox":"^0.2.0","stylelint":"^9.2.0","stylelint-config-recommended-scss":"^3.2.0","stylelint-config-standard":"^18.2.0","stylelint-order":"^0.8.1","stylelint-scss":"^3.0.0","uglify-js":"^3.3.21","vnu-jar":"^18.3.0","workbox-build":"^3.1.0"},"engines":{"node":">=6"},"files":["dist/","js/{src,dist}/","scss/"],"homepage":"https://getbootstrap.com/","jspm":{"registry":"npm","main":"js/bootstrap","directories":{"lib":"dist"},"shim":{"js/bootstrap":{"deps":["jquery","popper.js"],"exports":"$"}},"dependencies":{},"peerDependencies":{"jquery":"1.9.1 - 3","popper.js":"^1.14.1"}},"keywords":["css","sass","mobile-first","responsive","front-end","framework","web"],"license":"MIT","main":"dist/js/bootstrap","peerDependencies":{"jquery":"1.9.1 - 3","popper.js":"^1.14.3"},"repository":{"type":"git","url":"git+https://github.com/twbs/bootstrap.git"},"sass":"scss/bootstrap.scss","scripts":{"bundlesize":"bundlesize","css":"npm-run-all --parallel css-lint* css-compile* --sequential css-prefix* css-minify*","css-compile":"node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 scss/bootstrap.scss dist/css/bootstrap.css && node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 scss/bootstrap-grid.scss dist/css/bootstrap-grid.css && node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 scss/bootstrap-reboot.scss dist/css/bootstrap-reboot.css","css-compile-docs":"node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 assets/scss/docs.scss assets/css/docs.min.css","css-docs":"npm-run-all --parallel css-lint-docs css-compile-docs --sequential css-prefix-docs css-minify-docs","css-lint":"stylelint --syntax scss \"scss/**/*.scss\"","css-lint-docs":"stylelint --syntax scss \"assets/scss/*.scss\" && stylelint \"docs/**/*.css\"","css-lint-vars":"node build/lint-vars.js scss/ assets/scss/","css-main":"npm-run-all --parallel css-lint css-compile --sequential css-prefix css-minify","css-minify":"cleancss --level 1 --source-map --source-map-inline-sources --output dist/css/bootstrap.min.css dist/css/bootstrap.css && cleancss --level 1 --source-map --source-map-inline-sources --output dist/css/bootstrap-grid.min.css dist/css/bootstrap-grid.css && cleancss --level 1 --source-map --source-map-inline-sources --output dist/css/bootstrap-reboot.min.css dist/css/bootstrap-reboot.css","css-minify-docs":"cleancss --level 1 --source-map --source-map-inline-sources --output assets/css/docs.min.css assets/css/docs.min.css","css-prefix":"postcss --config build/postcss.config.js --replace \"dist/css/*.css\" \"!dist/css/*.min.css\"","css-prefix-docs":"postcss --config build/postcss.config.js --replace \"assets/css/docs.min.css\" \"docs/**/*.css\"","dist":"npm-run-all --parallel css js","docs":"npm-run-all --parallel css-docs js-docs --sequential docs-compile docs-lint","docs-compile":"bundle exec jekyll build","docs-github":"shx echo \"github: true\" > twbsconfig.yml && npm run docs-compile -- --config _config.yml,twbsconfig.yml && shx rm ./twbsconfig.yml","docs-github-serve":"bundle exec jekyll serve --skip-initial-build --no-watch","docs-lint":"npm-run-all docs-lint-*","docs-lint-htmllint":"htmllint --rc build/.htmllintrc \"_gh_pages/**/*.html\" \"js/tests/**/*.html\"","docs-lint-vnu-jar":"node build/vnu-jar.js","docs-serve":"bundle exec jekyll serve","docs-upload-preview":"build/upload-preview.sh","docs-workbox-precache":"node build/workbox.js","js":"npm-run-all js-lint* js-compile js-minify","js-compile":"npm-run-all --parallel js-compile-*","js-compile-bundle":"rollup --environment BUNDLE:true --config build/rollup.config.js --sourcemap","js-compile-plugins":"cross-env PLUGINS=true babel js/src/ --out-dir js/dist/ --source-maps","js-compile-plugins-coverage":"cross-env PLUGINS=true NODE_ENV=test babel js/src/ --out-dir js/coverage/dist/ --source-maps","js-compile-standalone":"rollup --environment BUNDLE:false --config build/rollup.config.js --sourcemap","js-docs":"npm-run-all js-lint-docs js-minify-docs","js-lint":"eslint js/src js/tests build/","js-lint-docs":"eslint assets/js/ docs/ sw.js","js-main":"npm-run-all js-lint js-compile js-minify","js-minify":"npm-run-all --parallel js-minify-*","js-minify-bundle":"uglifyjs --compress typeofs=false --mangle --comments \"/^!/\" --source-map \"content=dist/js/bootstrap.bundle.js.map,includeSources,url=bootstrap.bundle.min.js.map\" --output dist/js/bootstrap.bundle.min.js dist/js/bootstrap.bundle.js","js-minify-docs":"uglifyjs --mangle --comments \"/^!/\" --output assets/js/docs.min.js assets/js/vendor/anchor.min.js assets/js/vendor/clipboard.min.js assets/js/vendor/holder.min.js \"assets/js/src/*.js\"","js-minify-standalone":"uglifyjs --compress typeofs=false --mangle --comments \"/^!/\" --source-map \"content=dist/js/bootstrap.js.map,includeSources,url=bootstrap.min.js.map\" --output dist/js/bootstrap.min.js dist/js/bootstrap.js","js-test":"npm-run-all --parallel js-test-karma*","js-test-cloud":"ruby -r webrick -e \"s = WEBrick::HTTPServer.new(:Port => 3000, :DocumentRoot => Dir.pwd, :Logger => WEBrick::Log.new('/dev/null'), :AccessLog => []); trap('INT') { s.shutdown }; s.start\" & node build/saucelabs-unit-test.js","js-test-karma":"karma start js/tests/karma.conf.js","js-test-karma-bundle":"cross-env karma start js/tests/karma-bundle.conf.js","js-test-karma-bundle-old":"cross-env USE_OLD_JQUERY=true npm run js-test-karma-bundle","js-test-karma-old":"cross-env USE_OLD_JQUERY=true npm run js-test-karma","maintenance-dependencies":"ncu -a -x jquery && npm update && bundle update && shx echo \"Manually update assets/js/vendor/*, js/tests/vendor/* and .travis.yml\"","postdocs-compile":"npm run docs-workbox-precache","release-sri":"node build/generate-sri.js","release-version":"node build/change-version.js","release-zip":"cd dist/ && zip -r9 bootstrap-$npm_package_version-dist.zip * && shx mv bootstrap-$npm_package_version-dist.zip ..","test":"npm-run-all dist js-test docs-compile docs-lint bundlesize","watch":"npm-run-all --parallel watch-css watch-js","watch-css":"nodemon --ignore js/ --ignore dist/ -e scss -x \"npm run css\"","watch-js":"nodemon --ignore scss/ --ignore js/dist/ --ignore dist/ -e js -x \"npm run js-compile\""},"style":"dist/css/bootstrap.css"},{"name":"moment","version":"2.22.2","origFileUrl":"./node_modules/moment/package.json","fileUrl":"./node_modules/moment/package.json","_from":"moment@^2.22.1","_id":"moment@2.22.2","_inBundle":false,"_integrity":"sha1-PCV/mDn8DpP/UxSWMiOeuQeD/2Y=","_location":"/moment","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"moment@^2.22.1","name":"moment","escapedName":"moment","rawSpec":"^2.22.1","saveSpec":null,"fetchSpec":"^2.22.1"},"_requiredBy":["/","/moment-timezone","/tempusdominus-bootstrap-4"],"_resolved":"https://registry.npmjs.org/moment/-/moment-2.22.2.tgz","_shasum":"3c257f9839fc0e93ff53149632239eb90783ff66","_spec":"moment@^2.22.1","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"Iskren Ivov Chernev","email":"iskren.chernev@gmail.com","url":"https://github.com/ichernev"},"bugs":{"url":"https://github.com/moment/moment/issues"},"bundleDependencies":false,"contributors":[{"name":"Tim Wood","email":"washwithcare@gmail.com","url":"http://timwoodcreates.com/"},{"name":"Rocky Meza","url":"http://rockymeza.com"},{"name":"Matt Johnson","email":"mj1856@hotmail.com","url":"http://codeofmatt.com"},{"name":"Isaac Cambron","email":"isaac@isaaccambron.com","url":"http://isaaccambron.com"},{"name":"Andre Polykanine","email":"andre@oire.org","url":"https://github.com/oire"}],"deprecated":false,"description":"Parse, validate, manipulate, and display dates","devDependencies":{"benchmark":"latest","coveralls":"^2.11.2","es6-promise":"latest","grunt":"~0.4","grunt-benchmark":"latest","grunt-cli":"latest","grunt-contrib-clean":"latest","grunt-contrib-concat":"latest","grunt-contrib-copy":"latest","grunt-contrib-jshint":"latest","grunt-contrib-uglify":"latest","grunt-contrib-watch":"latest","grunt-env":"latest","grunt-exec":"latest","grunt-jscs":"latest","grunt-karma":"latest","grunt-nuget":"latest","grunt-string-replace":"latest","karma":"latest","karma-chrome-launcher":"latest","karma-firefox-launcher":"latest","karma-qunit":"latest","karma-sauce-launcher":"latest","load-grunt-tasks":"~3.5.2","node-qunit":"^1.0.0","nyc":"^2.1.4","qunit":"^2.6.0","rollup":"latest","spacejam":"latest","typescript":"^1.8.10","uglify-js":"latest"},"dojoBuild":"package.js","ender":"./ender.js","engines":{"node":"*"},"homepage":"http://momentjs.com","jsnext:main":"./src/moment.js","jspm":{"files":["moment.js","moment.d.ts","locale"],"map":{"moment":"./moment"},"buildConfig":{"uglify":true}},"keywords":["moment","date","time","parse","format","validate","i18n","l10n","ender"],"license":"MIT","main":"./moment.js","repository":{"type":"git","url":"git+https://github.com/moment/moment.git"},"scripts":{"coverage":"nyc npm test && nyc report","coveralls":"nyc npm test && nyc report --reporter=text-lcov | coveralls","test":"grunt test","typescript-test":"tsc --project typing-tests"},"spm":{"main":"moment.js","output":["locale/*.js"]},"typings":"./moment.d.ts"},{"name":"tempusdominus-bootstrap-4","version":"5.0.0-alpha18","origFileUrl":"./node_modules/tempusdominus-bootstrap-4/package.json","fileUrl":"./node_modules/tempusdominus-bootstrap-4/package.json","_from":"tempusdominus-bootstrap-4@^5.0.0-alpha18","_id":"tempusdominus-bootstrap-4@5.0.0-alpha18","_inBundle":false,"_integrity":"sha512-HoRFb4e1kyVwfZ6HN7cA5mpfDDYJu0HboMhhozxlMW5HfS41RYnVqO9h6rHQ2rTX4cWMniOQ6BnaJBusK/BaCA==","_location":"/tempusdominus-bootstrap-4","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"tempusdominus-bootstrap-4@^5.0.0-alpha18","name":"tempusdominus-bootstrap-4","escapedName":"tempusdominus-bootstrap-4","rawSpec":"^5.0.0-alpha18","saveSpec":null,"fetchSpec":"^5.0.0-alpha18"},"_requiredBy":["/","/shuttle-canstrap"],"_resolved":"https://registry.npmjs.org/tempusdominus-bootstrap-4/-/tempusdominus-bootstrap-4-5.0.0-alpha18.tgz","_shasum":"3b6337f48761b2821fad1b0f90701afe762c7dcf","_spec":"tempusdominus-bootstrap-4@^5.0.0-alpha18","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"Jonathan Peterson"},"bugs":{"url":"https://github.com/tempusdominus/bootstrap-4/issues"},"bundleDependencies":false,"dependencies":{"bootstrap":"4.0.0","jquery":"^3.0","moment":"^2.17","moment-timezone":"^0.5.11","popper.js":"^1.12.9"},"deprecated":false,"description":"A date/time picker component designed to work with Bootstrap 4 and Momentjs. For usage, installation and demos see Project Site on GitHub","devDependencies":{"babel-plugin-transform-es2015-modules-strip":"^0.1.0","babel-preset-es2015":"^6.16.0","grunt":"latest","grunt-babel":"6.0.0","grunt-contrib-concat":"^1.0.1","grunt-contrib-connect":"^1.0.1","grunt-contrib-jasmine":"^1.0.3","grunt-contrib-uglify":"latest","grunt-contrib-watch":"^1.0.0","grunt-env":"^0.4.4","grunt-eslint":"^19.0.0","grunt-jscs":"latest","grunt-mkdocs":"^0.2.3","grunt-nuget":"^0.1.5","grunt-sass":"2.0.0","grunt-stamp":"^0.3.0","grunt-string-replace":"latest","load-grunt-tasks":"latest","node-sass":"4.7.2","tempusdominus-core":"^5.0.0-alpha17","uglify-js":"^2.7.5"},"files":["build","src/js/**/*.js","Gruntfile.js"],"homepage":"https://tempusdominus.github.io/bootstrap-4/","keywords":["bootstrap","datepicker","datetimepicker","timepicker","moment"],"license":"MIT","main":"build/js/tempusdominus-bootstrap-4.js","peerDependencies":{"bootstrap":"4.0.0","jquery":"^3.0","popper.js":"^1.12.9","moment":"^2.17","moment-timezone":"^0.5.11","tempusdominus-core":"5.0.0-alpha17"},"repository":{"type":"git","url":"git+https://github.com/tempusdominus/bootstrap-4.git"},"scripts":{"change-version":"node grunt/change-version.js","clean-css":"cleancss --skip-advanced --source-map --output dist/css/bootstrap.min.css dist/css/bootstrap.css && cleancss --skip-advanced --source-map --output dist/css/bootstrap-grid.min.css dist/css/bootstrap-grid.css && cleancss --skip-advanced --source-map --output dist/css/bootstrap-reboot.min.css dist/css/bootstrap-reboot.css","clean-css-docs":"cleancss --skip-advanced --source-map --output docs/assets/css/docs.min.css docs/assets/css/docs.min.css","eslint":"eslint --ignore-path .eslintignore js && eslint --config js/tests/.eslintrc.json --env node grunt Gruntfile.js && eslint --config js/tests/.eslintrc.json docs/assets/js/src docs/assets/js/ie-emulation-modes-warning.js docs/assets/js/ie10-viewport-bug-workaround.js","htmlhint":"htmlhint --config docs/.htmlhintrc _gh_pages/","postcss":"postcss --config grunt/postcss.js --replace dist/css/*.css","postcss-docs":"postcss --config grunt/postcss.js --no-map --replace docs/assets/css/docs.min.css && postcss --config grunt/postcss.js --no-map --replace docs/examples/**/*.css","scss-lint":"bundle exec scss-lint --config scss/.scss-lint.yml --exclude scss/_normalize.scss scss/*.scss","scss-lint-docs":"bundle exec scss-lint --config scss/.scss-lint.yml --exclude docs/assets/scss/docs.scss docs/assets/scss/*.scss","test":"npm run eslint && grunt test","uglify":"uglifyjs --compress warnings=false --mangle --output build/js/tempusdominus-bootstrap-3.min.js build/js/tempusdominus-bootstrap-3.js","uglify-docs":"uglifyjs --compress warnings=false --mangle --comments '/^!/' --output docs/assets/js/docs.min.js docs/assets/js/vendor/*.js docs/assets/js/src/application.js","update-shrinkwrap":"npm shrinkwrap --dev && shx mv ./npm-shrinkwrap.json ./grunt/npm-shrinkwrap.json"}},{"name":"can-stache-route-helpers","version":"0.1.4","origFileUrl":"./node_modules/can-stache-route-helpers/package.json","fileUrl":"./node_modules/can-stache-route-helpers/package.json","_from":"can-stache-route-helpers@^0.1.4","_id":"can-stache-route-helpers@0.1.4","_inBundle":false,"_integrity":"sha512-SlZo+GiuaXfNqfs8+7OnhTGSI226R4iOyA/vNt3r4vEHbK3NcmLobmTcW7metpzbX1ekj/oPnv9AeTR+F+ripg==","_location":"/can-stache-route-helpers","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-stache-route-helpers@^0.1.4","name":"can-stache-route-helpers","escapedName":"can-stache-route-helpers","rawSpec":"^0.1.4","saveSpec":null,"fetchSpec":"^0.1.4"},"_requiredBy":["/"],"_resolved":"https://registry.npmjs.org/can-stache-route-helpers/-/can-stache-route-helpers-0.1.4.tgz","_shasum":"6bb335a1f6633bd0c6531bb3c12e28007fe9ae3d","_spec":"can-stache-route-helpers@^0.1.4","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"DoneJS Core","email":"core@donejs.com","url":"donejs.com"},"bugs":{"url":"https://github.com/donejs/can-stache-route-helpers/issues"},"bundleDependencies":false,"dependencies":{"can-route":"^4.0.0-pre.0","can-stache":"^4.0.0-pre.31"},"deprecated":false,"description":"stache helpers for can-route","devDependencies":{"can-map":"^4.0.0-pre.0","jshint":"^2.9.1","steal":"^1.3.1","steal-qunit":"^1.0.1","steal-tools":"^1.2.0","testee":"^0.3.0"},"homepage":"http://canjs.com","keywords":["canjs","donejs","donejs-plugin"],"license":"MIT","main":"can-stache-route-helpers","repository":{"type":"git","url":"git://github.com/donejs/can-stache-route-helpers.git"},"scripts":{"develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run jshint && npm run testee","testee":"testee test.html --browsers firefox"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true}}},{"name":"shuttle-can-api","version":"1.0.17","origFileUrl":"./node_modules/shuttle-can-api/package.json","fileUrl":"./node_modules/shuttle-can-api/package.json","_from":"shuttle-can-api@^1.0.17","_id":"shuttle-can-api@1.0.17","_inBundle":false,"_integrity":"sha512-DPgoxWjrD/d+UN3KykrnUjzDLNWJ871tlqY/zVkSSBuObm+wc12JTn+1HwdTIYLzh7ITqOdGdJpv6bhegLQnig==","_location":"/shuttle-can-api","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"shuttle-can-api@^1.0.17","name":"shuttle-can-api","escapedName":"shuttle-can-api","rawSpec":"^1.0.17","saveSpec":null,"fetchSpec":"^1.0.17"},"_requiredBy":["/","/shuttle-access"],"_resolved":"https://registry.npmjs.org/shuttle-can-api/-/shuttle-can-api-1.0.17.tgz","_shasum":"1f6db00da8fcc837c5b6ac15b8f97c9ace9e2c0b","_spec":"shuttle-can-api@^1.0.17","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"Eben Roux"},"bugs":{"url":"https://github.com/shuttle-npm/shuttle-can-api/issues"},"bundleDependencies":false,"dependencies":{"can-define":"^2.0.3","can-util":"^3.11.3","jquery":"^3.3.1","shuttle-guard":"^1.0.0"},"deprecated":false,"description":"Simple web-api client for use with CanJS.","devDependencies":{"can-fixture":"^2.0.3","chai":"^4.1.2","mocha":"^5.0.1","steal":"^1.7.0","steal-mocha":"^1.0.0"},"homepage":"https://github.com/shuttle-npm/shuttle-can-api#readme","keywords":["canjs","api"],"license":"ISC","main":"shuttle-can-api.js","repository":{"type":"git","url":"git+https://github.com/shuttle-npm/shuttle-can-api.git"},"scripts":{"test":"echo \"Error: no test specified\" && exit 1"}},{"name":"shuttle-canstrap","version":"1.0.50","origFileUrl":"./node_modules/shuttle-canstrap/package.json","fileUrl":"./node_modules/shuttle-canstrap/package.json","_from":"shuttle-canstrap@^1.0.50","_id":"shuttle-canstrap@1.0.50","_inBundle":false,"_integrity":"sha512-YLeOMfqykMucPzyZb+xq8TRV0f//HDnJb2DJXvDG912TPvsOhIb5SChRZVAbdAB0FaYj//WznLxitBCh5x0aFw==","_location":"/shuttle-canstrap","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"shuttle-canstrap@^1.0.50","name":"shuttle-canstrap","escapedName":"shuttle-canstrap","rawSpec":"^1.0.50","saveSpec":null,"fetchSpec":"^1.0.50"},"_requiredBy":["/","/shuttle-access"],"_resolved":"https://registry.npmjs.org/shuttle-canstrap/-/shuttle-canstrap-1.0.50.tgz","_shasum":"2689c0bc198b68f3b7d6739d2fe788764c0a0016","_spec":"shuttle-canstrap@^1.0.50","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"Eben Roux"},"bugs":{"url":"https://github.com/shuttle-npm/shuttle-canstrap/issues"},"bundleDependencies":false,"dependencies":{"bootstrap":"^4.1.1","can-component":"^4.0.8","can-compute":"^4.0.3","can-connect":"^2.0.4","can-define":"^2.2.4","can-route":"^4.1.1","can-route-pushstate":"^4.0.4","can-set":"^1.5.2","can-stache":"^4.3.4","can-stache-bindings":"^4.1.3","font-awesome":"^4.7.0","popper.js":"^1.14.3","shuttle-guard":"^1.0.0","steal":"^1.11.6","steal-css":"^1.3.2","tempusdominus-bootstrap-4":"^5.0.0-alpha18","tether":"^1.4.4"},"deprecated":false,"description":"CanJS components using Bootstrap v4","devDependencies":{"sync-glob":"^1.3.8"},"homepage":"https://github.com/shuttle-npm/shuttle-canstrap#readme","keywords":["shuttle","canjs","bootstrap"],"license":"ISC","main":"shuttle-canstrap.js","repository":{"type":"git","url":"git+https://github.com/shuttle-npm/shuttle-canstrap.git"},"scripts":{"sync-samples":"node .\\node_modules\\sync-glob\\bin\\sync-glob.js --watch \"**/*\" \"!node_modules/**/*\" ..\\shuttle-canstrap-samples\\node_modules\\shuttle-canstrap\\"}},{"name":"shuttle-access","version":"1.0.0","origFileUrl":"./node_modules/shuttle-access/package.json","fileUrl":"./node_modules/shuttle-access/package.json","_from":"shuttle-access@^1.0.0","_id":"shuttle-access@1.0.0","_inBundle":false,"_integrity":"sha512-FyzYWrKGzzSCIaJKfeO3GEZdkr0HtdAHasM0x450bVHJtcEZDKhybI4r8Wg4ZKN5lRXnvL8zlfEjvCGbnh2NAg==","_location":"/shuttle-access","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"shuttle-access@^1.0.0","name":"shuttle-access","escapedName":"shuttle-access","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/"],"_resolved":"https://registry.npmjs.org/shuttle-access/-/shuttle-access-1.0.0.tgz","_shasum":"ae194f414f5c0718c777da930b7ddf5104fb575f","_spec":"shuttle-access@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"Eben Roux"},"bugs":{"url":"https://github.com/shuttle-npm/shuttle-access/issues"},"bundleDependencies":false,"dependencies":{"can-define":"^2.0.3","can-util":"^3.11.5","jquery":"^3.3.1","shuttle-can-api":"^1.0.15","shuttle-canstrap":"^1.0.37","shuttle-guard":"^1.0.0"},"deprecated":false,"description":"Shuttle.Access components for use in shuttle-canstrap applications (CanJS / Bootstrap).","devDependencies":{"can-fixture":"^2.0.3","chai":"^4.1.2","chai-as-promised":"^7.1.1","mocha":"^5.0.4","steal":"^1.9.1","steal-mocha":"^1.0.0"},"homepage":"https://github.com/shuttle-npm/shuttle-access#readme","keywords":["shuttle","shuttle-access","identity","access-control"],"license":"ISC","main":"shuttle-access.js","repository":{"type":"git","url":"git+https://github.com/shuttle-npm/shuttle-access.git"},"scripts":{"test":"mocha"}},{"name":"validate.js","version":"0.11.1","origFileUrl":"./node_modules/validate.js/package.json","fileUrl":"./node_modules/validate.js/package.json","_from":"validate.js@^0.11.1","_id":"validate.js@0.11.1","_inBundle":false,"_integrity":"sha1-9Rw8bEpW5jgKIKfrEEJFA38qVA0=","_location":"/validate.js","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"validate.js@^0.11.1","name":"validate.js","escapedName":"validate.js","rawSpec":"^0.11.1","saveSpec":null,"fetchSpec":"^0.11.1"},"_requiredBy":["/","/can-validate-validatejs"],"_resolved":"https://registry.npmjs.org/validate.js/-/validate.js-0.11.1.tgz","_shasum":"f51c3c6c4a56e6380a20a7eb104245037f2a540d","_spec":"validate.js@^0.11.1","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"Nicklas Ansman","email":"nicklas@ansman.se"},"bugs":{"url":"https://github.com/ansman/validate.js/issues"},"bundleDependencies":false,"deprecated":false,"description":"Declarative validations for JavaScript","devDependencies":{"coveralls":"2.11.9","grunt":"1.0.1","grunt-contrib-jasmine":"1.0.3","grunt-contrib-jshint":"1.0.0","grunt-contrib-uglify":"1.0.1","grunt-contrib-watch":"1.0.0","grunt-docco":"0.4.0","grunt-notify":"0.4.5","grunt-template-jasmine-istanbul":"0.4.0"},"homepage":"http://validatejs.org","keywords":["validation","validate","server","client"],"license":"MIT","main":"validate.js","repository":{"type":"git","url":"git+https://github.com/ansman/validate.js.git"},"scripts":{"build":"grunt build","docs":"grunt docco","test":"grunt test","watch":"grunt watch"},"typings":"validate.d.ts"},{"name":"font-awesome","version":"4.7.0","origFileUrl":"./node_modules/font-awesome/package.json","fileUrl":"./node_modules/font-awesome/package.json","_from":"font-awesome@^4.7.0","_id":"font-awesome@4.7.0","_inBundle":false,"_integrity":"sha1-j6jPBBGhoxr9B7BtKQK7n8gVoTM=","_location":"/font-awesome","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"font-awesome@^4.7.0","name":"font-awesome","escapedName":"font-awesome","rawSpec":"^4.7.0","saveSpec":null,"fetchSpec":"^4.7.0"},"_requiredBy":["/shuttle-canstrap"],"_resolved":"https://registry.npmjs.org/font-awesome/-/font-awesome-4.7.0.tgz","_shasum":"8fa8cf0411a1a31afd07b06d2902bb9fc815a133","_spec":"font-awesome@^4.7.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\shuttle-canstrap","author":{"name":"Dave Gandy","email":"dave@fontawesome.io","url":"http://twitter.com/davegandy"},"bugs":{"url":"http://github.com/FortAwesome/Font-Awesome/issues"},"bundleDependencies":false,"contributors":[{"name":"Brian Talbot","url":"http://twitter.com/talbs"},{"name":"Travis Chase","url":"http://twitter.com/supercodepoet"},{"name":"Rob Madole","url":"http://twitter.com/robmadole"},{"name":"Geremia Taglialatela","url":"http://twitter.com/gtagliala"}],"dependencies":{},"deprecated":false,"description":"The iconic font and CSS framework","engines":{"node":">=0.10.3"},"homepage":"http://fontawesome.io/","keywords":["font","awesome","fontawesome","icon","font","bootstrap"],"license":"(OFL-1.1 AND MIT)","repository":{"type":"git","url":"git+https://github.com/FortAwesome/Font-Awesome.git"},"style":"css/font-awesome.css"},{"name":"i18next","version":"11.3.2","origFileUrl":"./node_modules/i18next/package.json","fileUrl":"./node_modules/i18next/package.json","_from":"i18next@^11.3.2","_id":"i18next@11.3.2","_inBundle":false,"_integrity":"sha512-Y5yN46k4wcXOvucXrqADQRK1CyIplwjKQ5Sv2IYdukQWjr5Gf2Y7y+4AsjQbpCtLWzotcMd7YDmkrIYzVje6hg==","_location":"/i18next","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"i18next@^11.3.2","name":"i18next","escapedName":"i18next","rawSpec":"^11.3.2","saveSpec":null,"fetchSpec":"^11.3.2"},"_requiredBy":["/"],"_resolved":"https://registry.npmjs.org/i18next/-/i18next-11.3.2.tgz","_shasum":"4a1a7bb14383ba6aed4abca139b03681fc96e023","_spec":"i18next@^11.3.2","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"Jan Mühlemann","email":"jan.muehlemann@gmail.com","url":"https://github.com/jamuhl"},"bugs":{"url":"https://github.com/i18next/i18next/issues"},"bundleDependencies":false,"dependencies":{},"deprecated":false,"description":"i18next internationalization framework","devDependencies":{"babel-cli":"6.22.2","babel-core":"6.22.1","babel-eslint":"7.1.1","babel-plugin-external-helpers":"6.22.0","babel-plugin-transform-es2015-classes":"6.22.0","babel-plugin-transform-proto-to-assign":"6.22.0","babel-preset-es2015":"6.22.0","babel-preset-stage-0":"6.22.0","babelify":"7.3.0","browserify":"14.0.0","browserify-istanbul":"2.0.0","chai":"3.5.0","coveralls":"2.11.16","eslint":"3.15.0","eslint-config-airbnb":"14.1.0","eslint-plugin-import":"2.2.0","eslint-plugin-jsx-a11y":"4.0.0","eslint-plugin-react":"6.9.0","i18next-browser-languagedetector":"1.0.1","i18next-localstorage-cache":"0.3.0","i18next-sprintf-postprocessor":"0.2.2","i18next-xhr-backend":"1.3.0","istanbul":"github:gotwarlost/istanbul#source-map","karma":"1.4.1","karma-browserify":"5.1.1","karma-chai":"0.1.0","karma-chrome-launcher":"2.0.0","karma-cli":"1.0.1","karma-coverage":"github:douglasduteil/karma-coverage#next","karma-coveralls":"1.1.2","karma-expect":"1.1.3","karma-mocha":"1.3.0","karma-phantomjs-launcher":"1.0.2","karma-rollup-preprocessor":"3.0.3","karma-sinon":"1.0.5","karma-spec-reporter":"0.0.26","mkdirp":"0.5.1","mocha":"3.2.0","phantomjs-prebuilt":"2.1.14","rimraf":"2.5.4","rollup":"0.41.4","rollup-plugin-babel":"2.7.1","rollup-plugin-node-resolve":"2.0.0","rollup-plugin-uglify":"1.0.1","sinon":"1.17.7","watchify":"3.9.0","yargs":"6.6.0"},"homepage":"http://i18next.com","jsnext:main":"dist/es/index.js","keywords":["i18next","internationalization","i18n","translation","localization","l10n","globalization","gettext"],"license":"MIT","main":"./index.js","module":"dist/es/index.js","repository":{"type":"git","url":"git+https://github.com/i18next/i18next.git"},"scripts":{"build":"npm run clean && npm run build:cjs && npm run build:es && npm run build:umd && npm run copy","build:amd":"rollup -c rollup.config.js --format amd && rollup -c rollup.config.js --format umd --uglify","build:cjs":"babel src --out-dir dist/commonjs","build:es":"BABEL_ENV=jsnext babel src --out-dir dist/es","build:iife":"rollup -c rollup.config.js --format iife && rollup -c rollup.config.js --format iife --uglify","build:umd":"rollup -c rollup.config.js --format umd && rollup -c rollup.config.js --format umd --uglify","clean":"rimraf dist && mkdirp dist","copy":"cp ./dist/umd/i18next.min.js ./i18next.min.js && cp ./dist/umd/i18next.js ./i18next.js","postversion":"git push && git push --tags","preversion":"npm run test && npm run build && git push","tdd":"karma start karma.conf.js","tdd:compat":"karma start karma.backward.conf.js","test":"npm run test:new && npm run test:compat","test:compat":"karma start karma.backward.conf.js --singleRun","test:new":"karma start karma.conf.js --singleRun"}},{"name":"can-stache","version":"4.5.0","origFileUrl":"./node_modules/can-stache/package.json","fileUrl":"./node_modules/can-stache/package.json","_from":"can-stache@^4.4.0","_id":"can-stache@4.5.0","_inBundle":false,"_integrity":"sha512-+6U4EBRpN0C6knJQlfspPgFdgBy8GDn2TasII6JyvXzA/m2qGbiixrhOnuYgkN9Q/zcnWL2k29Wlaq8UG5G3xQ==","_location":"/can-stache","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-stache@^4.4.0","name":"can-stache","escapedName":"can-stache","rawSpec":"^4.4.0","saveSpec":null,"fetchSpec":"^4.4.0"},"_requiredBy":["/","/can-component","/can-connect","/can-stache-bindings","/can-stache-route-helpers","/shuttle-canstrap","/steal-stache"],"_resolved":"https://registry.npmjs.org/can-stache/-/can-stache-4.5.0.tgz","_shasum":"207ca35a54df9a054c6bc12fcc78e7c599e39893","_spec":"can-stache@^4.4.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-stache/issues"},"bundleDependencies":false,"dependencies":{"can-assign":"^1.1.1","can-attribute-encoder":"^1.0.0","can-child-nodes":"^1.0.0","can-dom-data":"^1.0.1","can-dom-data-state":"^1.0.0","can-dom-mutate":"^1.0.0","can-fragment":"^1.0.0","can-globals":"^1.1.1","can-import-module":"^1.0.0","can-join-uris":"^1.0.0","can-log":"^1.0.0","can-namespace":"1.0.0","can-observation":"^4.0.0","can-observation-recorder":"^1.0.0","can-reflect":"^1.16.2","can-simple-observable":"^2.0.3","can-stache-ast":"^1.0.0","can-stache-helpers":"^1.0.0","can-stache-key":"^1.0.0","can-string":"0.0.5","can-symbol":"^1.0.0","can-view-callbacks":"^4.0.0","can-view-live":"^4.0.3","can-view-nodelist":"^4.0.0","can-view-parser":"^4.0.0","can-view-scope":"^4.2.0","can-view-target":"^4.0.0"},"deprecated":false,"description":"Live binding handlebars templates","devDependencies":{"can-define":"^2.0.0","can-queues":"^1.0.0","can-simple-map":"^4.0.0","can-test-helpers":"^1.1.0","can-vdom":"^4.0.0","detect-cyclic-packages":"^1.1.0","jshint":"^2.9.4","steal":"^1.0.5","steal-benchmark":"^0.0.1","steal-qunit":"^1.0.0","steal-tools":"^1.0.1","testee":"^0.7.0"},"homepage":"https://canjs.com/doc/can-stache.html","keywords":["canjs","canjs-plugin","donejs"],"license":"MIT","main":"can-stache","repository":{"type":"git","url":"git://github.com/canjs/can-stache.git"},"scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages","jshint":"jshint . --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"}},{"name":"i18next-xhr-backend","version":"1.5.1","origFileUrl":"./node_modules/i18next-xhr-backend/package.json","fileUrl":"./node_modules/i18next-xhr-backend/package.json","_from":"i18next-xhr-backend@^1.5.1","_id":"i18next-xhr-backend@1.5.1","_inBundle":false,"_integrity":"sha512-9OLdC/9YxDvTFcgsH5t2BHCODHEotHCa6h7Ly0EUlUC7Y2GS09UeoHOGj3gWKQ3HCqXz8NlH4gOrK3NNc9vPuw==","_location":"/i18next-xhr-backend","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"i18next-xhr-backend@^1.5.1","name":"i18next-xhr-backend","escapedName":"i18next-xhr-backend","rawSpec":"^1.5.1","saveSpec":null,"fetchSpec":"^1.5.1"},"_requiredBy":["/"],"_resolved":"https://registry.npmjs.org/i18next-xhr-backend/-/i18next-xhr-backend-1.5.1.tgz","_shasum":"50282610780c6a696d880dfa7f4ac1d01e8c3ad5","_spec":"i18next-xhr-backend@^1.5.1","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"Jan Mühlemann","email":"jan.muehlemann@gmail.com","url":"https://github.com/jamuhl"},"bugs":{"url":"https://github.com/i18next/i18next-xhr-backend/issues"},"bundleDependencies":false,"dependencies":{},"deprecated":false,"description":"backend layer for i18next using browsers xhr","devDependencies":{"babel-cli":"6.18.0","babel-core":"6.21.0","babel-eslint":"7.1.1","babel-preset-es2015":"6.18.0","babel-preset-stage-0":"6.16.0","babelify":"7.3.0","browserify":"13.3.0","browserify-istanbul":"2.0.0","chai":"3.5.0","coveralls":"2.11.15","eslint":"3.13.0","eslint-config-airbnb":"13.0.0","i18next":"4.1.4","istanbul":"github:gotwarlost/istanbul#source-map","json5":"0.5.1","karma":"1.3.0","karma-browserify":"5.1.0","karma-chai":"0.1.0","karma-chrome-launcher":"2.0.0","karma-cli":"1.0.1","karma-coverage":"github:douglasduteil/karma-coverage#next","karma-coveralls":"1.1.2","karma-expect":"1.1.3","karma-mocha":"1.3.0","karma-phantomjs-launcher":"1.0.2","karma-rollup-preprocessor":"3.0.3","karma-sinon":"1.0.5","karma-spec-reporter":"0.0.26","mkdirp":"0.5.1","mocha":"3.2.0","phantomjs-prebuilt":"2.1.14","rimraf":"2.5.4","rollup":"0.41.1","rollup-plugin-babel":"2.7.1","rollup-plugin-node-resolve":"2.0.0","rollup-plugin-uglify":"1.0.1","sinon":"1.17.7","yargs":"6.6.0"},"homepage":"https://github.com/i18next/i18next-xhr-backend","jsnext:main":"dist/es/index.js","keywords":["i18next","i18next-backend"],"license":"MIT","lock":false,"main":"./index.js","repository":{"type":"git","url":"git+https://github.com/i18next/i18next-xhr-backend.git"},"scripts":{"build":"npm run clean && npm run build:cjs && npm run build:es && npm run build:umd && npm run copy","build-win":"npm run clean && npm run build:cjs && npm run build:es-win && npm run build:umd && npm run copy-win","build:amd":"rollup -c rollup.config.js --format amd && rollup -c rollup.config.js --format umd --uglify","build:cjs":"babel src --out-dir dist/commonjs","build:es":"BABEL_ENV=jsnext babel src --out-dir dist/es","build:es-win":"SET BABEL_ENV=jsnext babel src --out-dir dist/es","build:iife":"rollup -c rollup.config.js --format iife && rollup -c rollup.config.js --format iife --uglify","build:umd":"rollup -c rollup.config.js --format umd && rollup -c rollup.config.js --format umd --uglify","clean":"rimraf dist && mkdirp dist","copy":"cp ./dist/umd/i18nextXHRBackend.min.js ./i18nextXHRBackend.min.js && cp ./dist/umd/i18nextXHRBackend.js ./i18nextXHRBackend.js","copy-win":"xcopy .\\dist\\umd\\i18nextXHRBackend.min.js .\\i18nextXHRBackend.min.js /y && xcopy .\\dist\\umd\\i18nextXHRBackend.js .\\i18nextXHRBackend.js /y","postversion":"git push && git push --tags","preversion":"npm run test && npm run build && git push","tdd":"karma start karma.conf.js","test":"karma start karma.conf.js --singleRun"}},{"name":"can-define","version":"2.3.1","origFileUrl":"./node_modules/can-define/package.json","fileUrl":"./node_modules/can-define/package.json","_from":"can-define@^2.3.1","_id":"can-define@2.3.1","_inBundle":false,"_integrity":"sha512-5o6wnkQ0gsHW5TugxFcu4wr0botDXL6BTx8+N3BHWZBne/FbfCRtkBzfeFBmDCzICeS2wEGisTm4KwlgZmDE5g==","_location":"/can-define","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-define@^2.3.1","name":"can-define","escapedName":"can-define","rawSpec":"^2.3.1","saveSpec":null,"fetchSpec":"^2.3.1"},"_requiredBy":["/","/can-component","/can-connect","/can-define-validate-validatejs","/shuttle-access","/shuttle-can-api","/shuttle-canstrap"],"_resolved":"https://registry.npmjs.org/can-define/-/can-define-2.3.1.tgz","_shasum":"499d304888e415a79faabf949ae6c075062a6fec","_spec":"can-define@^2.3.1","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"Bitovi"},"bugs":{"url":"https://github.com/canjs/can-define/issues"},"bundleDependencies":false,"dependencies":{"can-assign":"^1.1.1","can-construct":"^3.2.0","can-data-types":"<2.0.0","can-define-lazy-value":"^1.0.0","can-diff":"^1.0.0","can-event-queue":"^1.0.0","can-log":"^1.0.0","can-namespace":"^1.0.0","can-observation":"^4.0.0","can-observation-recorder":"^1.0.0","can-queues":"^1.0.0","can-reflect":"^1.15.0","can-simple-observable":"^2.0.0","can-single-reference":"^1.0.0","can-string-to-any":"^1.0.1","can-symbol":"^1.0.0"},"deprecated":false,"description":"Create observable objects with JS dot operator compatibility","devDependencies":{"can-reflect-tests":"<2.0.0","can-test-helpers":"^1.1.0","detect-cyclic-packages":"^1.1.0","jshint":"^2.9.1","serve":"^6.0.1","steal":"^1.0.7","steal-qunit":"^1.0.0","testee":"^0.7.0"},"homepage":"https://github.com/canjs/can-define","keywords":["CanJS"],"license":"MIT","main":"can-define.js","repository":{"type":"git","url":"git+https://github.com/canjs/can-define.git"},"scripts":{"detect-cycle":"detect-cyclic-packages --ignore done-serve","jshint":"jshint --config .jshintrc --exclude ./node_modules,./dist .","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag pre","start":"serve -p 8080","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"}},{"name":"shuttle-guard","version":"1.0.0","origFileUrl":"./node_modules/shuttle-guard/package.json","fileUrl":"./node_modules/shuttle-guard/package.json","_from":"shuttle-guard@^1.0.0","_id":"shuttle-guard@1.0.0","_inBundle":false,"_integrity":"sha512-8ghDgPpykaH8qDfb7zn8ii7R2jlkZEkLDgxlEH8MlG9jEArM6f+2sJirynjp2EMxPHpK5Sp7aybT0fMGh3HWkw==","_location":"/shuttle-guard","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"shuttle-guard@^1.0.0","name":"shuttle-guard","escapedName":"shuttle-guard","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/","/shuttle-access","/shuttle-can-api","/shuttle-canstrap"],"_resolved":"https://registry.npmjs.org/shuttle-guard/-/shuttle-guard-1.0.0.tgz","_shasum":"2603352e1ad4962fba75b69a76d0a3b7ed42201b","_spec":"shuttle-guard@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"Eben Roux"},"bugs":{"url":"https://github.com/shuttle-npm/shuttle-guard/issues"},"bundleDependencies":false,"deprecated":false,"description":"Guard methods.","homepage":"https://github.com/shuttle-npm/shuttle-guard#readme","keywords":["guard"],"license":"BSD-3-Clause","main":"shuttle-guard.js","repository":{"type":"git","url":"git+https://github.com/shuttle-npm/shuttle-guard.git"},"scripts":{"test":"echo \"Error: no test specified\" && exit 1"}},{"name":"can-route","version":"4.1.2","origFileUrl":"./node_modules/can-route/package.json","fileUrl":"./node_modules/can-route/package.json","_from":"can-route@^4.1.1","_id":"can-route@4.1.2","_inBundle":false,"_integrity":"sha512-oOLtm05HPOyba7c2jpIvZdy1p4X++3lF7uQJbumiAaH6SMkL/o0L4ftzMGlVfnn7dICfL9If4QAeyUOFmvoKdA==","_location":"/can-route","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-route@^4.1.1","name":"can-route","escapedName":"can-route","rawSpec":"^4.1.1","saveSpec":null,"fetchSpec":"^4.1.1"},"_requiredBy":["/","/can-route-pushstate","/can-stache-route-helpers","/shuttle-canstrap"],"_resolved":"https://registry.npmjs.org/can-route/-/can-route-4.1.2.tgz","_shasum":"feb132caaabf044aa9867980cea7a60049f67eac","_spec":"can-route@^4.1.1","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-route/issues"},"bundleDependencies":false,"dependencies":{"can-deparam":"^1.0.1","can-dom-events":"^1.1.0","can-event-queue":"<2.0.0","can-globals":"<2.0.0","can-key-tree":"<2.0.0","can-log":"<2.0.0","can-namespace":"1.0.0","can-observation":"^4.0.0","can-observation-recorder":"<2.0.0","can-param":"^1.0.1","can-queues":"<2.0.0","can-reflect":"^1.6.0","can-simple-map":"^4.0.0","can-simple-observable":"^2.0.0","can-symbol":"^1.0.0","can-util":"^3.9.0"},"deprecated":false,"description":"Observable front-end application routing for CanJS.","devDependencies":{"can-define":"^2.0.0","can-map":"^4.0.0","can-observe":"^2.0.0","can-stache-key":"^1.0.0","detect-cyclic-packages":"^1.1.0","done-serve":"^1.5.0","jshint":"^2.9.1","steal":"^1.2.9","steal-qunit":"^1.0.1","steal-tools":"^1.1.2","testee":"^0.7.0"},"homepage":"https://canjs.com/doc/can-route.html","keywords":["canjs","canjs-plugin","donejs"],"license":"MIT","main":"can-route","repository":{"type":"git","url":"git://github.com/canjs/can-route.git"},"scripts":{"detect-cycle":"detect-cyclic-packages --ignore done-serve","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"}},{"name":"can-util","version":"3.11.6","origFileUrl":"./node_modules/can-util/package.json","fileUrl":"./node_modules/can-util/package.json","_from":"can-util@^3.11.5","_id":"can-util@3.11.6","_inBundle":false,"_integrity":"sha512-khmixn0kyHKXJ5Qlq/RKnK6e4YwjXscsMwJQYoP4xbSfUQP2Fa3JFo5VcAkFDyNbBE0fXxQUX0fwJNAgbccFCQ==","_location":"/can-util","_phantomChildren":{"can-cid":"1.1.2","can-namespace":"1.0.0"},"_requested":{"type":"range","registry":true,"raw":"can-util@^3.11.5","name":"can-util","escapedName":"can-util","rawSpec":"^3.11.5","saveSpec":null,"fetchSpec":"^3.11.5"},"_requiredBy":["/","/can-compute","/can-connect","/can-define-validate-validatejs","/can-list","/can-make-rest","/can-map","/can-reflect-promise","/can-route","/can-route-pushstate","/can-set","/can-simple-observable","/can-view-import","/can-view-nodelist","/shuttle-access","/shuttle-can-api"],"_resolved":"https://registry.npmjs.org/can-util/-/can-util-3.11.6.tgz","_shasum":"5f4e424e3bbc49db5f5554ab2db9a5d550e87023","_spec":"can-util@^3.11.5","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-util/issues"},"bundleDependencies":false,"dependencies":{"can-ajax":"^1.0.0","can-assign":"^1.0.0","can-cid":"^1.1.0","can-deparam":"^1.0.0","can-dom-data-state":"^0.2.0","can-event-dom-enter":"^1.0.4","can-event-dom-radiochange":"^1.0.4","can-globals":"^1.1.1","can-log":"^1.0.0","can-namespace":"1.0.0","can-param":"^1.0.0","can-parse-uri":"^1.0.0","can-reflect":"^1.2.0","can-symbol":"^1.0.0","can-types":"^1.1.0"},"deprecated":false,"description":"Common utilities for CanJS projects","devDependencies":{"async":"^2.2.0","can-vdom":"^3.2.3","detect-cyclic-packages":"^1.1.0","http-server":"^0.10.0","jshint":"^2.9.1","qunitjs":"^2.4.0","saucelabs":"^1.4.0","steal":"^1.11.4","steal-css":"^1.2.5","steal-qunit":"^1.0.0","steal-tools":"^1.4.1","test-saucelabs":"0.0.3","testee":"^0.7.0","wd":"^1.1.3","xmlhttprequest2":"^1.0.0"},"homepage":"http://canjs.com","keywords":["canjs","canjs-plugin","donejs"],"license":"MIT","main":"can-util","repository":{"type":"git","url":"git://github.com/canjs/can-util.git"},"scripts":{"build":"node build.js","ci":"npm run build && npm run test && node test/test-sauce-labs.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","http-server":"http-server -p 3000 --silent","jshint":"jshint dom/. js/. *.js --config","postversion":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag=pre","test":"npm run detect-cycle && npm run jshint && npm run test:server && npm run testee","test:server":"TEST=qunit qunit test/node.js","testee":"testee test/test.html --browsers firefox","version":"git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/"}},{"name":"can-component","version":"4.1.0","origFileUrl":"./node_modules/can-component/package.json","fileUrl":"./node_modules/can-component/package.json","_from":"can-component@^4.0.8","_id":"can-component@4.1.0","_inBundle":false,"_integrity":"sha512-0g++peCUB6I7Qj2+AgamlPN6ifqHYn0+bSshcfmJzY9JlqVV/tE+6J6hHMm6I2LMDyG7dynI//dNIO8OTHl4kw==","_location":"/can-component","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-component@^4.0.8","name":"can-component","escapedName":"can-component","rawSpec":"^4.0.8","saveSpec":null,"fetchSpec":"^4.0.8"},"_requiredBy":["/","/shuttle-canstrap"],"_resolved":"https://registry.npmjs.org/can-component/-/can-component-4.1.0.tgz","_shasum":"8440a9a8ba9d3cfafaf4693622655c3cfb2ee15e","_spec":"can-component@^4.0.8","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-component/issues"},"bundleDependencies":false,"dependencies":{"can-assign":"^1.1.1","can-child-nodes":"^1.0.0","can-construct":"^3.2.0","can-control":"^4.0.0","can-define":"^2.0.0","can-dom-data-state":"^1.0.1","can-dom-events":"^1.1.0","can-dom-mutate":"^1.0.0","can-fragment":"^1.0.0","can-globals":"^1.0.0","can-log":"^1.0.0","can-namespace":"1.0.0","can-observation":"^4.0.0","can-queues":"^1.0.0","can-reflect":"^1.6.0","can-simple-map":"^4.1.0","can-simple-observable":"^2.0.0","can-stache":"^4.1.0","can-stache-bindings":"^4.0.3","can-stache-key":"^1.0.0","can-string":"0.0.5","can-symbol":"^1.4.1","can-view-callbacks":"^4.0.0","can-view-model":"^4.0.0","can-view-nodelist":"^4.0.0","can-view-scope":"^4.0.0"},"deprecated":false,"description":"Custom elements for CanJS","devDependencies":{"can-observe":"^2.0.0","can-test-helpers":"^1.1.2","can-vdom":"^4.0.0","detect-cyclic-packages":"^1.1.0","done-serve":"^1.3.0","jshint":"^2.9.1","steal":"^1.0.0","steal-qunit":"^1.0.0","steal-tools":"^1.0.1","testee":"^0.7.0"},"homepage":"https://canjs.com/doc/can-component.html","keywords":["canjs","canjs-plugin","donejs"],"main":"can-component","repository":{"type":"git","url":"git://github.com/canjs/can-component.git"},"scripts":{"detect-cycle":"detect-cyclic-packages --ignore done-serve","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag=pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"},"system":{},"steal":{}},{"name":"can-define-validate-validatejs","version":"1.0.1","origFileUrl":"./node_modules/can-define-validate-validatejs/package.json","fileUrl":"./node_modules/can-define-validate-validatejs/package.json","_from":"can-define-validate-validatejs@^1.0.1","_id":"can-define-validate-validatejs@1.0.1","_inBundle":false,"_integrity":"sha512-gUeY2VYA4f1I/IsMpPOGMUg4wUTr49M3ZfP8O7Fe7KVDt4+DxFEIKjKt6aaigZ3zWQQ1wT7+v8qaStlzs8UZIg==","_location":"/can-define-validate-validatejs","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-define-validate-validatejs@^1.0.1","name":"can-define-validate-validatejs","escapedName":"can-define-validate-validatejs","rawSpec":"^1.0.1","saveSpec":null,"fetchSpec":"^1.0.1"},"_requiredBy":["/"],"_resolved":"https://registry.npmjs.org/can-define-validate-validatejs/-/can-define-validate-validatejs-1.0.1.tgz","_shasum":"35b82742c3eb4cd77b539a82098ec30cb680c9f7","_spec":"can-define-validate-validatejs@^1.0.1","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"Bitovi"},"browser":{},"bugs":{"url":"https://github.com/canjs/can-define-validate-validatejs/issues"},"bundleDependencies":false,"dependencies":{"can-assign":"^1.1.1","can-define":"^2.0.0","can-reflect":"^1.11.1","can-util":"^3.9.0","can-validate":"^1.1.0","can-validate-validatejs":"^0.1.0"},"deprecated":false,"description":"Validation helpers for can-define maps and lists.","devDependencies":{"bit-docs":"^0.0.8","can-compute":"^4.0.0","detect-cyclic-packages":"^1.1.0","http-server":"^0.10.0","jshint":"^2.9.5","steal":"^1.5.14","steal-qunit":"^1.0.0","steal-tools":"^1.9.0","testee":"^0.7.0"},"homepage":"https://github.com/canjs/can-define-validate-validatejs","keywords":["Validate","plugin","canjs"],"license":"MIT","main":"can-define-validate-validatejs.js","repository":{"type":"git","url":"git+https://github.com/canjs/can-define-validate-validatejs.git"},"scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","develop":"http-server -c-1","jshint":"jshint *.js --config","postversion":"git push --tags && git checkout - && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm run build && npm publish","release:minor":"npm version minor && npm run build && npm publish","release:patch":"npm version patch && npm run build && npm publish","release:pre":"npm version prerelease && npm run build && npm publish --tag=pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/"},"steal":{"ignoreBrowser":true,"npmIgnore":{"documentjs":true,"testee":true,"steal-tools":true},"npmDependencies":{"steal-qunit":true}}},{"name":"can-view-parser","version":"4.0.2","nestedFileUrl":"./node_modules/can-stache/node_modules/can-view-parser/package.json","origFileUrl":"./node_modules/can-view-parser/package.json","fileUrl":"./node_modules/can-view-parser/package.json","_from":"can-view-parser@^4.0.0","_id":"can-view-parser@4.0.2","_inBundle":false,"_integrity":"sha512-gbRrHzS2gtebmwBInOy9jGV67OtaI8oCvxNc17Xor4vOIa6QulVIlY31cIjx/OCfoTgPoSBzsvsthYStb/IC2A==","_location":"/can-view-parser","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-view-parser@^4.0.0","name":"can-view-parser","escapedName":"can-view-parser","rawSpec":"^4.0.0","saveSpec":null,"fetchSpec":"^4.0.0"},"_requiredBy":["/can-stache","/can-stache-ast","/can-view-live"],"_resolved":"https://registry.npmjs.org/can-view-parser/-/can-view-parser-4.0.2.tgz","_shasum":"bede05476b988ee0c1744d4de7eb459e1feba77b","_spec":"can-view-parser@^4.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-view-parser/issues"},"bundleDependencies":false,"dependencies":{"can-attribute-encoder":"^1.0.0","can-log":"^1.0.0","can-namespace":"1.0.0"},"deprecated":false,"description":"Parses html and magic tags","devDependencies":{"can-test-helpers":"^1.0.1","detect-cyclic-packages":"^1.1.0","jshint":"^2.9.1","steal":"^1.0.1","steal-qunit":"^1.0.0","testee":"^0.7.0"},"homepage":"http://canjs.com","keywords":["canjs","canjs-plugin","donejs"],"main":"can-view-parser","repository":{"type":"git","url":"git://github.com/canjs/can-view-parser.git"},"scripts":{"detect-cycle":"detect-cyclic-packages --ignore done-serve","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag=pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"}},{"name":"can-view-callbacks","version":"4.1.0","nestedFileUrl":"./node_modules/can-stache/node_modules/can-view-callbacks/package.json","origFileUrl":"./node_modules/can-view-callbacks/package.json","fileUrl":"./node_modules/can-view-callbacks/package.json","_from":"can-view-callbacks@^4.0.0","_id":"can-view-callbacks@4.1.0","_inBundle":false,"_integrity":"sha512-LKzgP+p+XOkLZtPlzRenMUN95ZbsEt3zwGal0B9U+1BGVxo2s6ufMSDRzgjcuVhzmiPChmVbarGUVjWH+Ww52g==","_location":"/can-view-callbacks","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-view-callbacks@^4.0.0","name":"can-view-callbacks","escapedName":"can-view-callbacks","rawSpec":"^4.0.0","saveSpec":null,"fetchSpec":"^4.0.0"},"_requiredBy":["/can-component","/can-connect","/can-stache","/can-stache-bindings","/can-view-import","/can-view-live"],"_resolved":"https://registry.npmjs.org/can-view-callbacks/-/can-view-callbacks-4.1.0.tgz","_shasum":"34519c6cd2e67dd7c8ea895bd318f96bd462f2a0","_spec":"can-view-callbacks@^4.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-view-callbacks/issues"},"bundleDependencies":false,"dependencies":{"can-dom-mutate":"^1.0.0","can-fragment":"^1.0.0","can-globals":"^1.0.0","can-log":"^1.0.0","can-namespace":"1.0.0","can-observation-recorder":"^1.0.0","can-view-nodelist":"^4.0.0"},"deprecated":false,"description":"Registered callbacks for behaviors","devDependencies":{"can-test-helpers":"^1.0.1","can-view-scope":"^4.0.0-pre.34","detect-cyclic-packages":"^1.1.0","done-serve":"^1.2.0","jshint":"^2.9.1","steal":"^1.5.6","steal-qunit":"^1.0.1","steal-tools":"^1.4.0","testee":"^0.7.0"},"homepage":"https://canjs.com/doc/can-view-callbacks.html","keywords":["canjs","canjs-plugin","donejs"],"main":"can-view-callbacks","repository":{"type":"git","url":"git://github.com/canjs/can-view-callbacks.git"},"scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"}},{"name":"can-stache-ast","version":"1.0.0","nestedFileUrl":"./node_modules/can-stache/node_modules/can-stache-ast/package.json","origFileUrl":"./node_modules/can-stache-ast/package.json","fileUrl":"./node_modules/can-stache-ast/package.json","_from":"can-stache-ast@^1.0.0","_id":"can-stache-ast@1.0.0","_inBundle":false,"_integrity":"sha512-kJmhL1GV3GjHyhJEdn+D0ITRyR8eZ4jQwfIMB+MxMsdgxRxmWEteYi9M2Kd9pXQtA1Unkm4ZUAVd2WXbeA5mAQ==","_location":"/can-stache-ast","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-stache-ast@^1.0.0","name":"can-stache-ast","escapedName":"can-stache-ast","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/can-stache","/steal-stache"],"_resolved":"https://registry.npmjs.org/can-stache-ast/-/can-stache-ast-1.0.0.tgz","_shasum":"474d32b3d7902f18021a5026457bde9bc92baabd","_spec":"can-stache-ast@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache","author":{"name":"Bitovi","email":"contact@bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-stache-ast/issues"},"bundleDependencies":false,"dependencies":{"can-view-parser":"^4.0.2"},"deprecated":false,"description":"[![Build Status](https://travis-ci.org/canjs/can-stache-ast.svg?branch=master)](https://travis-ci.org/canjs/can-stache-ast)","devDependencies":{"jshint":"^2.9.1","steal":"^1.6.5","steal-qunit":"^1.0.1","steal-tools":"^1.11.3","testee":"^0.7.0"},"homepage":"https://github.com/canjs/can-stache-ast#readme","keywords":["canjs","donejs-plugin"],"license":"MIT","main":"can-stache-ast.js","repository":{"type":"git","url":"git://github.com/canjs/can-stache-ast.git"},"scripts":{"jshint":"jshint ./*.js --config","postpublish":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update version number\" && git checkout -b release"}},{"name":"can-attribute-encoder","version":"1.0.5","nestedFileUrl":"./node_modules/can-stache/node_modules/can-attribute-encoder/package.json","origFileUrl":"./node_modules/can-attribute-encoder/package.json","fileUrl":"./node_modules/can-attribute-encoder/package.json","_from":"can-attribute-encoder@^1.0.0","_id":"can-attribute-encoder@1.0.5","_inBundle":false,"_integrity":"sha512-x9I+OllPDs3xxdUCj4Rbj1D2Xq/QzGq6OFVhGR7HgxYCD83r4d61skeeO1dWjHlprL5OhrMOxPXZE25+EwGP/w==","_location":"/can-attribute-encoder","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-attribute-encoder@^1.0.0","name":"can-attribute-encoder","escapedName":"can-attribute-encoder","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/can-stache","/can-stache-bindings","/can-view-parser"],"_resolved":"https://registry.npmjs.org/can-attribute-encoder/-/can-attribute-encoder-1.0.5.tgz","_shasum":"fb6b2a461c265dae8cd9d9ccf90c27eaa5db9c9b","_spec":"can-attribute-encoder@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-attribute-encoder/issues"},"bundleDependencies":false,"dependencies":{"can-log":"^1.0.0","can-namespace":"^1.0.0"},"deprecated":false,"description":"Encode / decode attributes for DOM elements","devDependencies":{"detect-cyclic-packages":"^1.1.0","jshint":"^2.9.5","steal":"^1.5.6","steal-qunit":"^1.0.1","testee":"^0.7.0"},"homepage":"https://canjs.com/","keywords":["canjs"],"license":"MIT","main":"can-attribute-encoder","repository":{"type":"git","url":"git://github.com/canjs/can-attribute-encoder.git"},"scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag=pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test.html --browsers firefox"},"steal":{"npmIgnore":{"testee":true,"steal-tools":true},"main":"can-attribute-encoder"}},{"name":"can-log","version":"1.0.0","nestedFileUrl":"./node_modules/can-stache/node_modules/can-log/package.json","origFileUrl":"./node_modules/can-log/package.json","fileUrl":"./node_modules/can-log/package.json","_from":"can-log@^1.0.0","_id":"can-log@1.0.0","_inBundle":false,"_integrity":"sha512-5W1zw0jxwVnzRKJJtV6jtxWgobl80rhSVMX0aMQS7QB5GyYL+xbE+3IpARugWlOEutEKmWGXlOkD3LdCL/zyAg==","_location":"/can-log","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-log@^1.0.0","name":"can-log","escapedName":"can-log","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/can-attribute-encoder","/can-component","/can-construct","/can-control","/can-define","/can-event-queue","/can-observation","/can-queues","/can-reflect-promise","/can-route","/can-simple-map","/can-simple-observable","/can-stache","/can-stache-bindings","/can-stache-key","/can-types","/can-util","/can-view-callbacks","/can-view-import","/can-view-parser","/can-view-scope"],"_resolved":"https://registry.npmjs.org/can-log/-/can-log-1.0.0.tgz","_shasum":"844b20c9c8db7cc8b771cc67b7e84730206379ec","_spec":"can-log@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"https://www.bitovi.com/"},"bugs":{"url":"https://github.com/canjs/can-log/issues"},"bundleDependencies":false,"dependencies":{},"deprecated":false,"description":"Utilities for logging to the console.","devDependencies":{"detect-cyclic-packages":"^1.1.0","done-serve":"^1.0.0","donejs-cli":"^1.0.0","generator-donejs":"^1.0.0","jshint":"^2.9.1","steal":"^1.3.1","steal-qunit":"^1.0.1","steal-tools":"^1.2.0","testee":"^0.3.0"},"homepage":"https://canjs.com/","keywords":["canjs","donejs-plugin"],"license":"MIT","main":"dist/cjs/can-log","repository":{"type":"git","url":"git://github.com/canjs/can-log.git"},"scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update version number\" && git checkout -b release && git add -f dist/"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true},"main":"can-log"}},{"name":"can-namespace","version":"1.0.0","nestedFileUrl":"./node_modules/can-stache/node_modules/can-namespace/package.json","origFileUrl":"./node_modules/can-namespace/package.json","fileUrl":"./node_modules/can-namespace/package.json","_from":"can-namespace@1.0.0","_id":"can-namespace@1.0.0","_inBundle":false,"_integrity":"sha1-C4+vr7sRNSuerUIi/+OCJAW0Ppk=","_location":"/can-namespace","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"can-namespace@1.0.0","name":"can-namespace","escapedName":"can-namespace","rawSpec":"1.0.0","saveSpec":null,"fetchSpec":"1.0.0"},"_requiredBy":["/can-ajax","/can-attribute-encoder","/can-attribute-observable/can-event-dom-radiochange","/can-child-nodes","/can-cid","/can-component","/can-compute","/can-connect","/can-construct","/can-control","/can-data-types","/can-define","/can-deparam","/can-dom-data","/can-dom-data-state","/can-dom-events","/can-event-dom-enter/can-dom-data-state","/can-event-dom-radiochange/can-dom-data-state","/can-fragment","/can-globals","/can-import-module","/can-join-uris","/can-key","/can-list","/can-map","/can-observation","/can-observation-recorder","/can-param","/can-parse-uri","/can-queues","/can-reflect","/can-route","/can-set","/can-simple-observable","/can-stache","/can-stache-helpers","/can-stache-key","/can-symbol","/can-types","/can-util","/can-util/can-dom-data-state","/can-view-callbacks","/can-view-model","/can-view-nodelist","/can-view-parser","/can-view-scope","/can-view-target"],"_resolved":"https://registry.npmjs.org/can-namespace/-/can-namespace-1.0.0.tgz","_shasum":"0b8fafafbb11352b9ead4222ffe3822405b43e99","_spec":"can-namespace@1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-namespace/issues"},"bundleDependencies":false,"dependencies":{},"deprecated":false,"description":"Namespace where can-* packages are registered","devDependencies":{},"homepage":"http://canjs.com","keywords":["canjs","canjs-plugin","donejs"],"main":"can-namespace","repository":{"type":"git","url":"git://github.com/canjs/can-namespace.git"},"scripts":{},"system":{"npmAlgorithm":"flat"},"steal":{"npmAlgorithm":"flat"}},{"name":"can-globals","version":"1.1.1","nestedFileUrl":"./node_modules/can-stache/node_modules/can-globals/package.json","origFileUrl":"./node_modules/can-globals/package.json","fileUrl":"./node_modules/can-globals/package.json","_from":"can-globals@^1.0.0","_id":"can-globals@1.1.1","_inBundle":false,"_integrity":"sha512-DBF2JCXi19eEjhG922yT2mCmFBsfGnBAyrf49pF1N5KlQ96Gyt/EDT5MojlAXyXsxPAu7ecrZxKd1eWcOkcitw==","_location":"/can-globals","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-globals@^1.0.0","name":"can-globals","escapedName":"can-globals","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/can-ajax","/can-attribute-observable","/can-attribute-observable/can-event-dom-radiochange","/can-component","/can-dom-events","/can-dom-mutate","/can-event-dom-radiochange","/can-fragment","/can-import-module","/can-route","/can-route-pushstate","/can-stache","/can-types","/can-util","/can-view-callbacks","/can-view-import","/can-view-model","/can-view-target"],"_resolved":"https://registry.npmjs.org/can-globals/-/can-globals-1.1.1.tgz","_shasum":"437dd01a394102f2475b37e9759bba2e04cf877a","_spec":"can-globals@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"https://www.bitovi.com/"},"bugs":{"url":"https://github.com/canjs/can-globals/issues"},"bundleDependencies":false,"dependencies":{"can-namespace":"^1.0.0","can-reflect":"^1.2.6","can-symbol":"^1.0.0"},"deprecated":false,"description":"This module provides a dependency injection container. Modules may define a key and specify a default value (which can be static, cached lazy, or dynamic lazy), but other code can set and reset the value as needed. There is also an event system, for alerting on value changes, both specific to a key and for any key.","devDependencies":{"detect-cyclic-packages":"^1.1.0","jshint":"^2.9.5","qunitjs":"^2.4.0","steal":"^1.5.6","steal-qunit":"^1.0.1","steal-tools":"^1.7.0","testee":"^0.7.0"},"homepage":"https://github.com/canjs/can-globals#readme","keywords":["canjs","can-globals","globals","dependancy","injection"],"license":"MIT","main":"can-globals.js","repository":{"type":"git","url":"git+https://github.com/canjs/can-globals.git"},"scripts":{"detect-cycle":"detect-cyclic-packages --ignore done-serve","document":"bit-docs","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm run build && npm publish --tag=pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test.html --browsers firefox"}},{"name":"can-assign","version":"1.1.1","nestedFileUrl":"./node_modules/can-stache/node_modules/can-assign/package.json","origFileUrl":"./node_modules/can-assign/package.json","fileUrl":"./node_modules/can-assign/package.json","_from":"can-assign@^1.1.1","_id":"can-assign@1.1.1","_inBundle":false,"_integrity":"sha512-PIxofVeqRsmq6biiD/w2nyEYQ28WeTzKF5kWGmSEldMRauMShvvmWzJdVyIFdl4YREkUhnnRH+nVc72uL2EpSg==","_location":"/can-assign","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-assign@^1.1.1","name":"can-assign","escapedName":"can-assign","rawSpec":"^1.1.1","saveSpec":null,"fetchSpec":"^1.1.1"},"_requiredBy":["/can-component","/can-compute","/can-control","/can-define","/can-define-validate-validatejs","/can-queues","/can-set","/can-stache","/can-stache-bindings","/can-util","/can-view-import","/can-view-scope"],"_resolved":"https://registry.npmjs.org/can-assign/-/can-assign-1.1.1.tgz","_shasum":"c6c7b4b2bb266eb08cf119720792cf0cb81c42d3","_spec":"can-assign@^1.1.1","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"https://www.bitovi.com/"},"bugs":{"url":"https://github.com/canjs/can-assign/issues"},"bundleDependencies":false,"dependencies":{},"deprecated":false,"description":"A simplified version of Object.assign, which only accepts a single source argument.","devDependencies":{"detect-cyclic-packages":"^1.1.0","done-serve":"^1.0.0","donejs-cli":"^1.0.0","generator-donejs":"^1.0.0","jshint":"^2.9.1","steal":"^1.3.1","steal-qunit":"^1.0.1","steal-tools":"^1.2.0","testee":"^0.3.0"},"homepage":"https://canjs.com/","keywords":["canjs","object","assign"],"main":"dist/cjs/can-assign","repository":{"type":"git","url":"git://github.com/canjs/can-assign.git"},"scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update version number\" && git checkout -b release && git add -f dist/"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true},"main":"can-assign"}},{"name":"can-import-module","version":"1.0.0","nestedFileUrl":"./node_modules/can-stache/node_modules/can-import-module/package.json","origFileUrl":"./node_modules/can-import-module/package.json","fileUrl":"./node_modules/can-import-module/package.json","_from":"can-import-module@^1.0.0","_id":"can-import-module@1.0.0","_inBundle":false,"_integrity":"sha512-W40eU7dYPYeEwKFNsCxSsoGb0ABLVAXJI1YXJW9+85RItWfjG5X6WmhBxIfDguIeh90VDz8DO2OWQFHysMHh+w==","_location":"/can-import-module","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-import-module@^1.0.0","name":"can-import-module","escapedName":"can-import-module","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/can-stache"],"_resolved":"https://registry.npmjs.org/can-import-module/-/can-import-module-1.0.0.tgz","_shasum":"27ea30bc7066a6bfbc83b1156b89e12fa8fdf135","_spec":"can-import-module@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache","author":"","bugs":{"url":"https://github.com/canjs/can-import-module/issues"},"bundleDependencies":false,"dependencies":{"can-globals":"^1.0.1","can-namespace":"^1.0.0"},"deprecated":false,"description":"[![Build Status](https://travis-ci.org/canjs/can-import-module.svg?branch=master)](https://travis-ci.org/canjs/can-import-module)","devDependencies":{"jshint":"^2.9.1","steal":"^1.6.5","steal-qunit":"^1.0.1","steal-tools":"^1.11.3","testee":"^0.7.0"},"homepage":"https://github.com/canjs/can-import-module#readme","keywords":["canjs","donejs-plugin"],"license":"MIT","main":"can-import-module.js","repository":{"type":"git","url":"git://github.com/canjs/can-import-module.git"},"scripts":{"build":"node build.js","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update version number\" && git checkout -b release && git add -f dist/"}},{"name":"can-reflect","version":"1.16.3","nestedFileUrl":"./node_modules/can-stache/node_modules/can-reflect/package.json","origFileUrl":"./node_modules/can-reflect/package.json","fileUrl":"./node_modules/can-reflect/package.json","_from":"can-reflect@^1.6.0","_id":"can-reflect@1.16.3","_inBundle":false,"_integrity":"sha512-Q/z90kwzMTRN3oT9Fzn3uGyw/lohArTfgvczwPk6zhbEWhM6OOan9e0lXvQt1vrULd5/Ua6gZgWFVXbp51yAzQ==","_location":"/can-reflect","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-reflect@^1.6.0","name":"can-reflect","escapedName":"can-reflect","rawSpec":"^1.6.0","saveSpec":null,"fetchSpec":"^1.6.0"},"_requiredBy":["/can-ajax","/can-attribute-observable","/can-component","/can-compute","/can-connect","/can-construct","/can-control","/can-data-types","/can-define","/can-define-validate-validatejs","/can-diff","/can-dom-events","/can-event-queue","/can-fragment","/can-globals","/can-key","/can-key-tree","/can-list","/can-map","/can-observation","/can-reflect-dependencies","/can-reflect-promise","/can-route","/can-route-pushstate","/can-simple-map","/can-simple-observable","/can-stache","/can-stache-bindings","/can-stache-key","/can-types","/can-util","/can-validate","/can-validate-validatejs","/can-view-live","/can-view-model","/can-view-scope"],"_resolved":"https://registry.npmjs.org/can-reflect/-/can-reflect-1.16.3.tgz","_shasum":"b4103abc82a2e5eaa11f89120a2830136f5203ac","_spec":"can-reflect@^1.6.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"DoneJS core team","email":"core@donejs.com","url":"http://donejs.com"},"bugs":{"url":"https://github.com/canjs/can-reflect/issues"},"bundleDependencies":false,"dependencies":{"can-namespace":"^1.0.0","can-symbol":"^1.3.0"},"deprecated":false,"description":"reflection on unknown data types","devDependencies":{"detect-cyclic-packages":"^1.1.0","http-server":"^0.10.0","jshint":"^2.9.1","steal":"^1.0.5","steal-qunit":"^1.0.0","steal-tools":"^1.0.1","test-saucelabs":"0.0.3","testee":"^0.7.0"},"homepage":"http://canjs.com","keywords":["donejs"],"main":"can-reflect","repository":{"type":"git","url":"git://github.com/canjs/can-reflect.git"},"scripts":{"build":"node build.js","ci":"npm run build && npm run test && node test-saucelabs.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","http-server":"http-server -p 3000 --silent","jshint":"jshint ./*.js --config","postversion":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/"}},{"name":"can-view-target","version":"4.0.1","nestedFileUrl":"./node_modules/can-stache/node_modules/can-view-target/package.json","origFileUrl":"./node_modules/can-view-target/package.json","fileUrl":"./node_modules/can-view-target/package.json","_from":"can-view-target@^4.0.0","_id":"can-view-target@4.0.1","_inBundle":false,"_integrity":"sha512-6oI8z0MQvdXpM6f/3PwKFxTLGEwM+eGVGnXgHKkg4196V/lpIrQE1Bev2RRoGD6fXJ51ZwTiEvDs1705Lb6njA==","_location":"/can-view-target","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-view-target@^4.0.0","name":"can-view-target","escapedName":"can-view-target","rawSpec":"^4.0.0","saveSpec":null,"fetchSpec":"^4.0.0"},"_requiredBy":["/can-stache","/can-view-live"],"_resolved":"https://registry.npmjs.org/can-view-target/-/can-view-target-4.0.1.tgz","_shasum":"2910ae6f5fe026b0b4b7b3aeb55c5813002ac9bb","_spec":"can-view-target@^4.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-view-target/issues"},"bundleDependencies":false,"dependencies":{"can-dom-mutate":"^1.0.0","can-globals":"^1.0.0","can-namespace":"1.0.0"},"deprecated":false,"description":"Fast cloning micro templates","devDependencies":{"can-simple-dom":"^1.0.2","detect-cyclic-packages":"^1.1.0","done-serve":"^1.0.0","donejs-cli":"^0.9.5","generator-donejs":"^1.0.7","jshint":"^2.9.1","steal":"^1.0.1","steal-qunit":"^1.0.0","testee":"^0.7.0"},"homepage":"http://canjs.com","keywords":["canjs","canjs-plugin","donejs"],"main":"can-view-target","repository":{"type":"git","url":"git://github.com/canjs/can-view-target.git"},"scripts":{"detect-cycle":"detect-cyclic-packages --ignore done-serve","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag=pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"}},{"name":"can-view-nodelist","version":"4.0.2","nestedFileUrl":"./node_modules/can-stache/node_modules/can-view-nodelist/package.json","origFileUrl":"./node_modules/can-view-nodelist/package.json","fileUrl":"./node_modules/can-view-nodelist/package.json","_from":"can-view-nodelist@^4.0.0","_id":"can-view-nodelist@4.0.2","_inBundle":false,"_integrity":"sha512-5hTLNiANzsZzu7hIPaNl46letIMiqIreWZegCRjy/DGnk3bX3wQwchMWk102He23q/uY6g21UZSMWwKlNvSqzQ==","_location":"/can-view-nodelist","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-view-nodelist@^4.0.0","name":"can-view-nodelist","escapedName":"can-view-nodelist","rawSpec":"^4.0.0","saveSpec":null,"fetchSpec":"^4.0.0"},"_requiredBy":["/can-component","/can-connect","/can-stache","/can-view-callbacks","/can-view-import","/can-view-live"],"_resolved":"https://registry.npmjs.org/can-view-nodelist/-/can-view-nodelist-4.0.2.tgz","_shasum":"36ee771b33e2854092a70f4865e651c399b1e737","_spec":"can-view-nodelist@^4.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-view-nodelist/issues"},"bundleDependencies":false,"dependencies":{"can-dom-mutate":"<2.0.0","can-namespace":"1.0.0","can-util":"^3.9.5"},"deprecated":false,"description":"Adds nesting of text nodes","devDependencies":{"detect-cyclic-packages":"^1.1.0","jshint":"^2.9.1","steal":"^1.0.1","steal-qunit":"^1.0.0","testee":"^0.3.0"},"homepage":"https://canjs.com/doc/can-view-nodelist.html","keywords":["canjs","canjs-plugin","donejs"],"main":"can-view-nodelist","repository":{"type":"git","url":"git://github.com/canjs/can-view-nodelist.git"},"scripts":{"detect-cycle":"detect-cyclic-packages --ignore done-serve","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag=pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"}},{"name":"can-queues","version":"1.1.0","nestedFileUrl":"./node_modules/can-route/node_modules/can-queues/package.json","origFileUrl":"./node_modules/can-queues/package.json","fileUrl":"./node_modules/can-queues/package.json","_from":"can-queues@^1.0.0","_id":"can-queues@1.1.0","_inBundle":false,"_integrity":"sha512-DUxZ/eVxUcvStqSN0Tmh7FUOd4GecwMbsUwqo0nchYfR9sgtmXFEaWNYuJqhrLlqJYVWOGEu2KPJgFajv2vRaw==","_location":"/can-queues","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-queues@^1.0.0","name":"can-queues","escapedName":"can-queues","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/can-attribute-observable","/can-component","/can-connect","/can-define","/can-diff","/can-event-queue","/can-list","/can-map","/can-observation","/can-reflect-promise","/can-route","/can-route-pushstate","/can-simple-map","/can-simple-observable","/can-stache-bindings","/can-view-live","/can-view-scope"],"_resolved":"https://registry.npmjs.org/can-queues/-/can-queues-1.1.0.tgz","_shasum":"298afd508f4aec4d280e04db13da5e0494f6a9fd","_spec":"can-queues@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"DoneJS Core Team","email":"core@donejs.com","url":"http://donejs.com"},"bugs":{"url":"https://github.com/canjs/can-queues/issues"},"bundleDependencies":false,"dependencies":{"can-assign":"^1.0.1","can-log":"^1.0.0","can-namespace":"^1.0.0"},"deprecated":false,"description":"A light weight JavaScript task queue","devDependencies":{"docco":"^0.7.0","done-serve":"^1.0.0","donejs-cli":"^1.0.0","generator-donejs":"^1.0.0","jshint":"^2.9.1","steal":"^1.3.1","steal-qunit":"^1.0.1","steal-tools":"^1.2.0","testee":"^0.3.0"},"homepage":"https://github.com/canjs/can-queues#readme","keywords":["canjs"],"license":"MIT","main":"./can-queues.js","repository":{"type":"git","url":"git://github.com/canjs/can-queues.git"},"scripts":{"build":"node build.js","develop":"done-serve --static --develop --port 8080","docco":"docco can-queues.js queue.js queue-state.js completion-queue.js priority-queue.js","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push && make","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run jshint && npm run testee","testee":"testee test.html --browsers firefox"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true},"main":"can-queues"}},{"name":"can-observation","version":"4.0.1","nestedFileUrl":"./node_modules/can-route/node_modules/can-observation/package.json","origFileUrl":"./node_modules/can-observation/package.json","fileUrl":"./node_modules/can-observation/package.json","_from":"can-observation@^4.0.0","_id":"can-observation@4.0.1","_inBundle":false,"_integrity":"sha512-xJgeipbzJvrDme5RFiRHehtCeZ7TE+/os9f1GO7ZZWTxuLCh8utHAYYhHCcn4xRgpvTTDehMIw3K33cQY3hLyQ==","_location":"/can-observation","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-observation@^4.0.0","name":"can-observation","escapedName":"can-observation","rawSpec":"^4.0.0","saveSpec":null,"fetchSpec":"^4.0.0"},"_requiredBy":["/can-attribute-observable","/can-component","/can-compute","/can-connect","/can-control","/can-define","/can-list","/can-reflect-promise","/can-route","/can-simple-map","/can-simple-observable","/can-stache","/can-view-live","/can-view-scope"],"_resolved":"https://registry.npmjs.org/can-observation/-/can-observation-4.0.1.tgz","_shasum":"04adf8d0ef820630fed00dfb9dc19076443e315b","_spec":"can-observation@^4.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-observation/issues"},"bundleDependencies":false,"dependencies":{"can-event-queue":"^1.0.0","can-key-tree":"^1.0.0","can-log":"^1.0.0","can-namespace":"1.0.0","can-observation-recorder":"^1.0.0","can-queues":"^1.0.0","can-reflect":"^1.7.0","can-symbol":"^1.4.2"},"deprecated":false,"description":"Core observable indicators","devDependencies":{"bit-docs":"^0.0.7","can-cid":"^1.0.0","detect-cyclic-packages":"^1.1.0","docco":"^0.7.0","done-serve":"^1.2.0","donejs-cli":"^1.0.1","generator-donejs":"^1.0.5","jshint":"^2.9.1","steal":"^1.2.3","steal-benchmark":"0.0.1","steal-qunit":"^1.0.1","steal-tools":"^1.1.2","testee":"^0.7.0"},"homepage":"http://canjs.com","keywords":["canjs","canjs-plugin","donejs"],"main":"can-observation","repository":{"type":"git","url":"git://github.com/canjs/can-observation.git"},"scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","develop":"done-serve --static --develop --port 8080","docco":"docco can-observation.js recorder-dependency-helpers.js temporarily-bind.js","jshint":"jshint *.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test.html --browsers firefox"},"system":{"npmAlgorithm":"flat"},"steal":{"npmAlgorithm":"flat"}},{"name":"can-symbol","version":"1.6.1","nestedFileUrl":"./node_modules/can-route/node_modules/can-symbol/package.json","origFileUrl":"./node_modules/can-symbol/package.json","fileUrl":"./node_modules/can-symbol/package.json","_from":"can-symbol@^1.4.1","_id":"can-symbol@1.6.1","_inBundle":false,"_integrity":"sha512-C2xIYJcVQ+FW/RrXXKQOoZXnEFqKM28qsPPrmDiV5Bx+kSqms8cnRMqt4SoZ7+89OMv5PSReRJ7fKDE06MdSCg==","_location":"/can-symbol","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-symbol@^1.4.1","name":"can-symbol","escapedName":"can-symbol","rawSpec":"^1.4.1","saveSpec":null,"fetchSpec":"^1.4.1"},"_requiredBy":["/can-component","/can-compute","/can-control","/can-define","/can-event-queue","/can-globals","/can-key","/can-list","/can-map","/can-observation","/can-observation-recorder","/can-reflect","/can-reflect-dependencies","/can-reflect-promise","/can-route","/can-simple-map","/can-simple-observable","/can-stache","/can-stache-bindings","/can-stache-key","/can-types","/can-util","/can-view-import","/can-view-live","/can-view-model","/can-view-scope"],"_resolved":"https://registry.npmjs.org/can-symbol/-/can-symbol-1.6.1.tgz","_shasum":"06d50399f980e31736a25f2f6417d0adcd5685c3","_spec":"can-symbol@^1.4.1","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"Bitovi","email":"core@donejs.com","url":"http://donejs.com"},"bugs":{"url":"https://github.com/canjs/can-symbol/issues"},"bundleDependencies":false,"dependencies":{"can-namespace":"^1.0.0"},"deprecated":false,"description":"Well known symbols used to detail how to operate on different objects","devDependencies":{"bit-docs":"0.0.7","detect-cyclic-packages":"^1.1.0","done-serve":"^1.0.0-alpha.0","donejs-cli":"^1.0.0-alpha.2","generator-donejs":"^1.0.0-alpha.0","jshint":"^2.9.1","steal":"^1.0.5","steal-qunit":"^1.0.0","steal-tools":"^1.0.1","testee":"^0.3.0"},"homepage":"http://canjs.com","keywords":["Done","JS"],"main":"can-symbol","repository":{"type":"git","url":"git://github.com/canjs/can-symbol.git"},"scripts":{"detect-cycle":"detect-cyclic-packages --ignore done-serve","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag=pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test.html --browsers firefox"},"system":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true},"main":"can-symbol"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true},"main":"can-symbol"}},{"name":"can-simple-observable","version":"2.0.4","nestedFileUrl":"./node_modules/can-route/node_modules/can-simple-observable/package.json","origFileUrl":"./node_modules/can-simple-observable/package.json","fileUrl":"./node_modules/can-simple-observable/package.json","_from":"can-simple-observable@^2.0.0","_id":"can-simple-observable@2.0.4","_inBundle":false,"_integrity":"sha512-aH093lREaRLjj3BFMVX4igxiMwoCV9GfBUR22FmHwXX/bE3u5svpXtpxq+apyABikTNQb26ivAgBIa7GleZ9Mg==","_location":"/can-simple-observable","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-simple-observable@^2.0.0","name":"can-simple-observable","escapedName":"can-simple-observable","rawSpec":"^2.0.0","saveSpec":null,"fetchSpec":"^2.0.0"},"_requiredBy":["/can-attribute-observable","/can-component","/can-compute","/can-define","/can-list","/can-map","/can-route","/can-route-pushstate","/can-stache","/can-stache-bindings","/can-view-live"],"_resolved":"https://registry.npmjs.org/can-simple-observable/-/can-simple-observable-2.0.4.tgz","_shasum":"4f36e483674121aa6277ef6a8062273a9cca4eb9","_spec":"can-simple-observable@^2.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"https://www.bitovi.com/"},"bugs":{"url":"https://github.com/canjs/can-simple-observable/issues"},"bundleDependencies":false,"dependencies":{"can-event-queue":"^1.0.0","can-key-tree":"^1.0.0","can-log":"^1.0.0","can-namespace":"1.0.0","can-observation":"^4.0.0","can-observation-recorder":"^1.0.0","can-queues":"^1.0.0","can-reflect":"^1.10.1","can-symbol":"^1.4.2","can-util":"^3.10.14"},"deprecated":false,"description":"Create an observable value.","devDependencies":{"detect-cyclic-packages":"^1.1.0","jshint":"^2.9.1","steal":"^1.3.1","steal-qunit":"^1.0.1","steal-tools":"^1.2.0","testee":"^0.3.0"},"homepage":"https://canjs.com/doc/can-simple-observable.html","keywords":["canjs","donejs-plugin"],"license":"MIT","main":"can-simple-observable","repository":{"type":"git","url":"git://github.com/canjs/can-simple-observable.git"},"scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test.html --browsers firefox"},"steal":{"npmIgnore":{"testee":true,"steal-tools":true}}},{"name":"can-simple-map","version":"4.1.1","nestedFileUrl":"./node_modules/can-route/node_modules/can-simple-map/package.json","origFileUrl":"./node_modules/can-simple-map/package.json","fileUrl":"./node_modules/can-simple-map/package.json","_from":"can-simple-map@^4.1.0","_id":"can-simple-map@4.1.1","_inBundle":false,"_integrity":"sha512-kDVOzwy/6maez8YJ0unZzj10Yi60/pOWUVBxHNx5AUuQA8PWDOlWd1vhEE0z33tgaIhQpekq0emANm62A1qNTw==","_location":"/can-simple-map","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-simple-map@^4.1.0","name":"can-simple-map","escapedName":"can-simple-map","rawSpec":"^4.1.0","saveSpec":null,"fetchSpec":"^4.1.0"},"_requiredBy":["/can-component","/can-route","/can-stache-bindings","/can-view-model","/can-view-scope"],"_resolved":"https://registry.npmjs.org/can-simple-map/-/can-simple-map-4.1.1.tgz","_shasum":"fe14eb8c544c76e3f3b2af2230d659405de9782a","_spec":"can-simple-map@^4.1.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-simple-map/issues"},"bundleDependencies":false,"dependencies":{"can-construct":"^3.2.0","can-event-queue":"^1.0.0","can-key-tree":"^1.0.0","can-log":"^1.0.0","can-observation":"^4.0.0","can-observation-recorder":"^1.0.0","can-queues":"^1.0.0","can-reflect":"^1.2.1","can-symbol":"^1.0.0"},"deprecated":false,"description":"A performant live-bound map","devDependencies":{"can-reflect-tests":"<2.0.0","detect-cyclic-packages":"^1.1.0","jshint":"^2.9.1","steal":"^1.2.9","steal-qunit":"^1.0.1","steal-tools":"^1.1.2","testee":"^0.7.0"},"homepage":"https://canjs.com/doc/can-simple-map.html","keywords":[],"main":"can-simple-map","repository":{"type":"git","url":"git://github.com/canjs/can-simple-map.git"},"scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"},"steal":{"npmIgnore":{"documentjs":true,"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true},"main":"can-simple-map"}},{"name":"can-event-queue","version":"1.0.1","nestedFileUrl":"./node_modules/can-define/node_modules/can-event-queue/package.json","origFileUrl":"./node_modules/can-event-queue/package.json","fileUrl":"./node_modules/can-event-queue/package.json","_from":"can-event-queue@<2.0.0","_id":"can-event-queue@1.0.1","_inBundle":false,"_integrity":"sha512-Yj+LQZjS4yqUP6QiW8UgsvqH8Joa4jZ244Th+oGLCjilC1qC8miBM73BeDl/9Kg+h4SPz/OxbzEiAB9D3DUZ2w==","_location":"/can-event-queue","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-event-queue@<2.0.0","name":"can-event-queue","escapedName":"can-event-queue","rawSpec":"<2.0.0","saveSpec":null,"fetchSpec":"<2.0.0"},"_requiredBy":["/can-compute","/can-connect","/can-control","/can-define","/can-list","/can-map","/can-observation","/can-route","/can-simple-map","/can-simple-observable","/can-stache-bindings","/can-view-scope"],"_resolved":"https://registry.npmjs.org/can-event-queue/-/can-event-queue-1.0.1.tgz","_shasum":"86f88477f9b9f221037f0c44f1fb6b13be46db85","_spec":"can-event-queue@<2.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-control","author":{"name":"DoneJS","email":"core@donejs.com","url":"http://canjs.com"},"bugs":{"url":"https://github.com/canjs/can-event-queue/issues"},"bundleDependencies":false,"dependencies":{"can-define-lazy-value":"^1.0.1","can-dom-events":"^1.0.0","can-key-tree":"^1.0.0","can-log":"^1.0.0","can-queues":"^1.0.0","can-reflect":"^1.10.2","can-symbol":"^1.2.0"},"deprecated":false,"description":"A event mixin that uses queues to dispatch handlers","devDependencies":{"done-serve":"^1.0.0","donejs-cli":"^1.0.0","generator-donejs":"^1.0.0","jshint":"^2.9.1","steal":"^1.3.1","steal-qunit":"^1.0.1","steal-tools":"^1.2.0","testee":"^0.3.0"},"homepage":"https://github.com/canjs/can-event-queue#readme","keywords":["canjs"],"license":"MIT","main":"./can-event-queue.js","repository":{"type":"git","url":"git://github.com/canjs/can-event-queue.git"},"scripts":{"build":"node build.js","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js map/**/*.js type/*.js value/*.js --config","postpublish":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update version number\" && git checkout -b release && git add -f dist/"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true},"plugins":["steal-less","steal-stache"]}},{"name":"can-construct","version":"3.4.3","nestedFileUrl":"./node_modules/can-define/node_modules/can-construct/package.json","origFileUrl":"./node_modules/can-construct/package.json","fileUrl":"./node_modules/can-construct/package.json","_from":"can-construct@^3.2.0","_id":"can-construct@3.4.3","_inBundle":false,"_integrity":"sha512-+tY6xZ5EL/EgzzHSfMHfbZyslAJnBZRRH0ih55qE/b3xVRpscATFIEVb6M4sCYZwBa7nP8jiHDkaMC+fjedO3A==","_location":"/can-construct","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-construct@^3.2.0","name":"can-construct","escapedName":"can-construct","rawSpec":"^3.2.0","saveSpec":null,"fetchSpec":"^3.2.0"},"_requiredBy":["/can-component","/can-connect","/can-control","/can-define","/can-list","/can-map","/can-simple-map","/can-view-scope"],"_resolved":"https://registry.npmjs.org/can-construct/-/can-construct-3.4.3.tgz","_shasum":"a88ad44a0b1503a33075f2c527407d9c47b47853","_spec":"can-construct@^3.2.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-construct/issues"},"bundleDependencies":false,"dependencies":{"can-log":"^1.0.0","can-namespace":"1.0.0","can-reflect":"^1.16.1","can-string":"0.0.5"},"deprecated":false,"description":"easy constructor functions","devDependencies":{"detect-cyclic-packages":"^1.1.0","jshint":"^2.9.1","steal":"^1.2.8","steal-qunit":"^1.0.1","steal-tools":"^1.1.2","testee":"^0.7.0"},"homepage":"http://canjs.com","keywords":["canjs","canjs-plugin","donejs"],"main":"can-construct","repository":{"type":"git","url":"git://github.com/canjs/can-construct.git"},"scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","jshint":"jshint *.js --config","postversion":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/"},"steal":{}},{"name":"can-observation-recorder","version":"1.1.1","nestedFileUrl":"./node_modules/can-define/node_modules/can-observation-recorder/package.json","origFileUrl":"./node_modules/can-observation-recorder/package.json","fileUrl":"./node_modules/can-observation-recorder/package.json","_from":"can-observation-recorder@^1.0.0","_id":"can-observation-recorder@1.1.1","_inBundle":false,"_integrity":"sha512-gABzXQ64KQbeyFo4O+EsmbdYhuvP8m9gUmb/PWde9pkBtGBgn7PNHQf5RL7fc//FZdxP2GlRGGwGEU42Na7mIw==","_location":"/can-observation-recorder","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-observation-recorder@^1.0.0","name":"can-observation-recorder","escapedName":"can-observation-recorder","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/can-attribute-observable","/can-compute","/can-connect","/can-define","/can-list","/can-map","/can-observation","/can-reflect-promise","/can-route","/can-route-pushstate","/can-simple-map","/can-simple-observable","/can-stache","/can-stache-bindings","/can-stache-key","/can-view-callbacks","/can-view-scope"],"_resolved":"https://registry.npmjs.org/can-observation-recorder/-/can-observation-recorder-1.1.1.tgz","_shasum":"69985a00be6d5292b8763a438b6fb019fdbac032","_spec":"can-observation-recorder@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-observation","author":{"name":"DoneJS","email":"core@donejs.com","url":"donejs.com"},"bugs":{"url":"https://github.com/canjs/can-observation-recorder/issues"},"bundleDependencies":false,"dependencies":{"can-namespace":"^1.0.0","can-symbol":"^1.6.1"},"deprecated":false,"description":"Records observations between two points in time","devDependencies":{"jshint":"^2.9.1","steal":"^1.3.1","steal-qunit":"^1.0.1","steal-tools":"^1.2.0","testee":"^0.3.0"},"homepage":"http://canjs.com","keywords":["canjs","donejs-plugin"],"license":"MIT","main":"./can-observation-recorder.js","repository":{"type":"git","url":"git://github.com/canjs/can-observation-recorder.git"},"scripts":{"build":"node build.js","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run jshint && npm run testee","testee":"testee test.html --browsers firefox"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true}}},{"name":"can-diff","version":"1.0.1","nestedFileUrl":"./node_modules/can-define/node_modules/can-diff/package.json","origFileUrl":"./node_modules/can-diff/package.json","fileUrl":"./node_modules/can-diff/package.json","_from":"can-diff@^1.0.0","_id":"can-diff@1.0.1","_inBundle":false,"_integrity":"sha512-llP5iLSEtPdP7ODQZh0JrWPuU2M09bNOvsUj06UeIOU5MShTD95EFuz66epTXiXbH+KA1wrGNu57jtvMgN2ZLw==","_location":"/can-diff","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-diff@^1.0.0","name":"can-diff","escapedName":"can-diff","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/can-attribute-observable","/can-define","/can-view-live"],"_resolved":"https://registry.npmjs.org/can-diff/-/can-diff-1.0.1.tgz","_shasum":"cdfd5e9c57694daec5a752f23a2de29f775a3fec","_spec":"can-diff@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-define","author":{"name":"DoneJS Core Team","email":"core@donejs.com","url":"http://donejs.com"},"bugs":{"url":"https://github.com/canjs/can-diff/issues"},"bundleDependencies":false,"dependencies":{"can-key-tree":"^1.0.2","can-queues":"^1.0.1","can-reflect":"^1.14.1"},"deprecated":false,"description":"Diffing helpers for can-reflect","devDependencies":{"can-define":"^2.1.0","can-key":"<2.0.0","can-simple-observable":"^2.0.4","can-symbol":"^1.6.1","jshint":"^2.9.1","steal":"^1.6.5","steal-qunit":"^1.0.1","steal-tools":"^1.11.3","testee":"^0.7.0"},"homepage":"http://canjs.com","keywords":["canjs","donejs","donejs-plugin"],"license":"MIT","main":"can-diff","repository":{"type":"git","url":"git://github.com/canjs/can-diff.git"},"scripts":{"build":"node build.js","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run jshint && npm run testee","testee":"testee test.html --browsers firefox"},"steal":{"main":"can-diff"}},{"name":"can-single-reference","version":"1.0.0","nestedFileUrl":"./node_modules/can-define/node_modules/can-single-reference/package.json","origFileUrl":"./node_modules/can-single-reference/package.json","fileUrl":"./node_modules/can-single-reference/package.json","_from":"can-single-reference@^1.0.0","_id":"can-single-reference@1.0.0","_inBundle":false,"_integrity":"sha512-XdNF6JgJF4BRFtuRhCWP8bOxUGaieUvQHxCjjMSpvNtZs3TAysEb69WMdUXnNEcydizzyxrCt8pqZ/IkAMo08A==","_location":"/can-single-reference","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-single-reference@^1.0.0","name":"can-single-reference","escapedName":"can-single-reference","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/can-define","/can-view-scope"],"_resolved":"https://registry.npmjs.org/can-single-reference/-/can-single-reference-1.0.0.tgz","_shasum":"fb4578d951669252cce06351e4335088e5891745","_spec":"can-single-reference@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-define","author":{"name":"DoneJS Contributors","email":"core@donejs.com","url":"http://donejs.com"},"bugs":{"url":"https://github.com/canjs/can-single-reference/issues"},"bundleDependencies":false,"dependencies":{"can-cid":"^1.1.2"},"deprecated":false,"description":"Assign a value to a function that can be collected later","devDependencies":{"jshint":"^2.9.1","steal":"^1.6.5","steal-qunit":"^1.0.1","steal-tools":"^1.11.3","testee":"^0.7.0"},"homepage":"http://canjs.com","keywords":["canjs","donejs","donejs-plugin"],"license":"MIT","main":"can-single-reference","repository":{"type":"git","url":"git://github.com/canjs/can-single-reference.git"},"scripts":{"build":"node build.js","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update version number\" && git checkout -b release && git add -f dist/"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true}}},{"name":"can-view-live","version":"4.1.0","nestedFileUrl":"./node_modules/can-stache/node_modules/can-view-live/package.json","origFileUrl":"./node_modules/can-view-live/package.json","fileUrl":"./node_modules/can-view-live/package.json","_from":"can-view-live@^4.0.3","_id":"can-view-live@4.1.0","_inBundle":false,"_integrity":"sha512-uKrH7amJdpwnP827TyP7zu+Z7TgvxzQ0/4nqIRkQ7PufDfI6IiWCVx2GpxQnVsIhrLiUdqWfYyjdWxVQnDPQ5w==","_location":"/can-view-live","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-view-live@^4.0.3","name":"can-view-live","escapedName":"can-view-live","rawSpec":"^4.0.3","saveSpec":null,"fetchSpec":"^4.0.3"},"_requiredBy":["/can-stache","/can-stache-bindings"],"_resolved":"https://registry.npmjs.org/can-view-live/-/can-view-live-4.1.0.tgz","_shasum":"3d7adf9fe5955d226274a77773e0e0651a2a1df8","_spec":"can-view-live@^4.0.3","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-view-live/issues"},"bundleDependencies":false,"dependencies":{"can-attribute-observable":"<2.0.0","can-child-nodes":"^1.0.0","can-diff":"^1.0.1","can-dom-mutate":"^1.0.0","can-fragment":"^1.0.0","can-observation":"^4.0.0","can-queues":"^1.0.0","can-reflect":"^1.10.2","can-reflect-dependencies":"^1.0.0","can-simple-observable":"^2.0.0","can-symbol":"^1.4.1","can-view-callbacks":"^4.0.0","can-view-nodelist":"^4.0.0","can-view-parser":"^4.0.0","can-view-target":"^4.0.0"},"deprecated":false,"description":"[![Sauce Labs Test Status](https://saucelabs.com/browser-matrix/can-view-live.svg)](https://saucelabs.com/u/can-view-live)","devDependencies":{"can-define":"^2.0.0","can-simple-map":"^4.0.0","can-test-helpers":"^1.1.0","detect-cyclic-packages":"^1.1.0","http-server":"^0.10.0","jshint":"^2.9.1","steal":"^1.2.10","steal-qunit":"^1.0.1","test-saucelabs":"0.0.3","testee":"^0.7.0"},"homepage":"https://canjs.com/doc/can-view-live.html","keywords":["CanJS","DoneJS"],"main":"can-view-live","repository":{"type":"git","url":"git://github.com/canjs/can-view-live.git"},"scripts":{"build":"node build.js","ci":"npm test && node test/sauce-labs.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","develop":"done-serve --static --develop --port 8080","http-server":"http-server -p 3000 --silent","jshint":"jshint test/*.js lib/*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"},"steal":{"npmIgnore":{"documentjs":true,"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true},"main":"can-view-live"}},{"name":"can-join-uris","version":"1.0.0","nestedFileUrl":"./node_modules/can-stache/node_modules/can-join-uris/package.json","origFileUrl":"./node_modules/can-join-uris/package.json","fileUrl":"./node_modules/can-join-uris/package.json","_from":"can-join-uris@^1.0.0","_id":"can-join-uris@1.0.0","_inBundle":false,"_integrity":"sha512-oAmUgxEF0ak7KNho6Yz78dEYZoQ+tHHr1Zhhe06qDD7ZAyc9mWxL1nU+HnXc+eeBTuKsDDyhUw0/mArN6oKIsw==","_location":"/can-join-uris","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-join-uris@^1.0.0","name":"can-join-uris","escapedName":"can-join-uris","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/can-stache"],"_resolved":"https://registry.npmjs.org/can-join-uris/-/can-join-uris-1.0.0.tgz","_shasum":"85b1fe159f9d02163127d7fcffad7c1418224c87","_spec":"can-join-uris@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache","author":{"name":"DoneJS Core Team","email":"core@donejs.com","url":"http://donejs.com"},"bugs":{"url":"https://github.com/canjs/can-join-uris/issues"},"bundleDependencies":false,"dependencies":{"can-namespace":"^1.0.0","can-parse-uri":"^1.1.0"},"deprecated":false,"description":"Join uris together","devDependencies":{"jshint":"^2.9.1","steal":"^1.6.5","steal-qunit":"^1.0.1","steal-tools":"^1.11.3","testee":"^0.7.0"},"homepage":"https://canjs.com","keywords":["canjs","donejs","donejs-plugin"],"license":"MIT","main":"can-join-uris","repository":{"type":"git","url":"git://github.com/canjs/can-join-uris.git"},"scripts":{"build":"node build.js","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update version number\" && git checkout -b release && git add -f dist/"},"steal":{}},{"name":"can-stache-helpers","version":"1.0.0","nestedFileUrl":"./node_modules/can-stache/node_modules/can-stache-helpers/package.json","origFileUrl":"./node_modules/can-stache-helpers/package.json","fileUrl":"./node_modules/can-stache-helpers/package.json","_from":"can-stache-helpers@^1.0.0","_id":"can-stache-helpers@1.0.0","_inBundle":false,"_integrity":"sha512-OR+cLZF1H5S+eW8o5ca4WfmdD8c29HXbUMC3HIXeLG+oOM6DEv5WdEzwvoKhKqNtrdG2nmOsijUX4xbVLaBhZg==","_location":"/can-stache-helpers","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-stache-helpers@^1.0.0","name":"can-stache-helpers","escapedName":"can-stache-helpers","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/can-stache","/can-view-scope"],"_resolved":"https://registry.npmjs.org/can-stache-helpers/-/can-stache-helpers-1.0.0.tgz","_shasum":"be5a6460ddafe30ce06eb8129a23b6bc1a965609","_spec":"can-stache-helpers@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-stache-helpers/issues"},"bundleDependencies":false,"dependencies":{"can-namespace":"1.0.0"},"deprecated":false,"description":"Helper functions for can-stache","devDependencies":{"detect-cyclic-packages":"^1.1.0","jshint":"^2.9.1","steal":"^1.3.1","steal-qunit":"^1.0.1","testee":"^0.3.0"},"homepage":"https://canjs.com/doc/can-stache-helpers.html","keywords":["canjs","canjs-plugin","donejs","donejs-plugin"],"license":"MIT","main":"can-stache-helpers","repository":{"type":"git","url":"git://github.com/canjs/can-stache-helpers.git"},"scripts":{"detect-cycle":"detect-cyclic-packages","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js ./src/ --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true}}},{"name":"can-dom-data","version":"1.0.1","nestedFileUrl":"./node_modules/can-stache/node_modules/can-dom-data/package.json","origFileUrl":"./node_modules/can-dom-data/package.json","fileUrl":"./node_modules/can-dom-data/package.json","_from":"can-dom-data@^1.0.1","_id":"can-dom-data@1.0.1","_inBundle":false,"_integrity":"sha512-ydbZ8HYwGIl2fRPxBLtiNzaFzMBX0s0CFOq+/EhMWFX08IBLSdrykfvmYxzfBOoF58R3eFiCSj3KMwNwvdXYWw==","_location":"/can-dom-data","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-dom-data@^1.0.1","name":"can-dom-data","escapedName":"can-dom-data","rawSpec":"^1.0.1","saveSpec":null,"fetchSpec":"^1.0.1"},"_requiredBy":["/can-stache"],"_resolved":"https://registry.npmjs.org/can-dom-data/-/can-dom-data-1.0.1.tgz","_shasum":"b4a0f93a14a2e3138f042cd968e16fa34968e918","_spec":"can-dom-data@^1.0.1","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"https://www.bitovi.com/"},"bugs":{"url":"https://github.com/canjs/can-dom-data/issues"},"bundleDependencies":false,"dependencies":{"can-dom-mutate":"^1.0.0","can-namespace":"1.0.0"},"deprecated":false,"description":"A key/value store (based on WeakMap) for associating data with DOM nodes.","devDependencies":{"detect-cyclic-packages":"^1.1.0","jshint":"^2.9.1","steal":"^1.5.13","steal-qunit":"^1.0.1","testee":"^0.7.0"},"homepage":"https://canjs.com/doc/can-dom-data.html","keywords":["canjs","data","dom"],"license":"MIT","main":"can-dom-data.js","repository":{"type":"git","url":"git://github.com/canjs/can-dom-data.git"},"scripts":{"detect-cycle":"detect-cyclic-packages","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"},"steal":{"npmIgnore":{"steal-tools":true,"testee":true},"main":"can-dom-data"}},{"name":"can-dom-data-state","version":"1.0.1","nestedFileUrl":"./node_modules/can-stache/node_modules/can-dom-data-state/package.json","origFileUrl":"./node_modules/can-dom-data-state/package.json","fileUrl":"./node_modules/can-dom-data-state/package.json","_from":"can-dom-data-state@^1.0.1","_id":"can-dom-data-state@1.0.1","_inBundle":false,"_integrity":"sha512-TM9tk3TrR6Uom4plcmqPzDDYckcYUfQ0+WyUuoFxaDmO0BQr3q38ndePkJSn8203I0mXRZJ6od/cn4OuWheN5A==","_location":"/can-dom-data-state","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-dom-data-state@^1.0.1","name":"can-dom-data-state","escapedName":"can-dom-data-state","rawSpec":"^1.0.1","saveSpec":null,"fetchSpec":"^1.0.1"},"_requiredBy":["/can-attribute-observable","/can-component","/can-stache","/can-stache-bindings","/can-view-import"],"_resolved":"https://registry.npmjs.org/can-dom-data-state/-/can-dom-data-state-1.0.1.tgz","_shasum":"b2fb9cbad67dffea4b77259aea900db6bfb0964e","_spec":"can-dom-data-state@^1.0.1","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"https://www.bitovi.com/"},"bugs":{"url":"https://github.com/canjs/can-dom-data-state/issues"},"bundleDependencies":false,"dependencies":{"can-cid":"^1.1.0","can-dom-mutate":"^1.0.0","can-namespace":"^1.0.0"},"deprecated":false,"description":"A key/value store useful for associating data with DOM Nodes.","devDependencies":{"detect-cyclic-packages":"^1.1.0","done-serve":"^1.0.0","donejs-cli":"^1.0.0","generator-donejs":"^1.0.0","jshint":"^2.9.1","steal":"^1.5.13","steal-qunit":"^1.0.1","testee":"^0.7.0"},"homepage":"https://canjs.com/","keywords":["canjs","data","dom","donejs-plugin"],"license":"MIT","main":"can-dom-data-state.js","repository":{"type":"git","url":"git://github.com/canjs/can-dom-data-state.git"},"scripts":{"detect-cycle":"detect-cyclic-packages --ignore done-serve","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true},"main":"can-dom-data-state"}},{"name":"can-stache-bindings","version":"4.2.4","nestedFileUrl":"./node_modules/can-component/node_modules/can-stache-bindings/package.json","origFileUrl":"./node_modules/can-stache-bindings/package.json","fileUrl":"./node_modules/can-stache-bindings/package.json","_from":"can-stache-bindings@^4.1.3","_id":"can-stache-bindings@4.2.4","_inBundle":false,"_integrity":"sha512-LLIGy3XMdUDBK+O8de63ZdlTMg2/nrbJpp667T2psCmwLxkt3wZFYPb19TDeSlRSOAxzHVIuUGdVcf+P19o+FA==","_location":"/can-stache-bindings","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-stache-bindings@^4.1.3","name":"can-stache-bindings","escapedName":"can-stache-bindings","rawSpec":"^4.1.3","saveSpec":null,"fetchSpec":"^4.1.3"},"_requiredBy":["/","/can-component","/can-connect","/shuttle-canstrap","/steal-stache"],"_resolved":"https://registry.npmjs.org/can-stache-bindings/-/can-stache-bindings-4.2.4.tgz","_shasum":"f5e472d4c734a4517304539b07f08c4ae475294d","_spec":"can-stache-bindings@^4.1.3","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bundleDependencies":false,"dependencies":{"can-assign":"^1.0.0","can-attribute-encoder":"^1.0.0","can-attribute-observable":"<2.0.0","can-dom-data-state":"^1.0.0","can-dom-events":"^1.1.1","can-dom-mutate":"^1.0.1","can-event-queue":"^1.0.0","can-log":"^1.0.0","can-observation-recorder":"^1.0.0","can-queues":"^1.0.0","can-reflect":"^1.6.0","can-reflect-dependencies":"^1.0.0","can-simple-map":"^4.0.0","can-simple-observable":"^2.0.0","can-stache":"^4.0.2","can-stache-key":"^1.0.0","can-symbol":"^1.0.0","can-view-callbacks":"^4.0.0","can-view-live":"^4.0.5","can-view-model":"^4.0.0","can-view-scope":"^4.0.0"},"deprecated":false,"description":"Default binding syntaxes for can-stache","devDependencies":{"can-define":"^2.0.0","can-event-dom-enter":"^2.0.0","can-globals":"^1.0.0","can-test-helpers":"^1.1.0","can-vdom":"^4.0.0","can-view-nodelist":"^4.0.0","detect-cyclic-packages":"^1.1.0","jshint":"^2.9.1","steal":"^1.2.9","steal-qunit":"^1.0.1","steal-tools":"^1.1.2","testee":"^0.7.0"},"homepage":"https://canjs.com/doc/can-stache-bindings.html","keywords":["canjs","donejs"],"main":"can-stache-bindings","scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","jshint":"jshint test/ ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag=pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"},"steal":{"main":"can-stache-bindings"}},{"name":"can-view-scope","version":"4.3.1","nestedFileUrl":"./node_modules/can-component/node_modules/can-view-scope/package.json","origFileUrl":"./node_modules/can-view-scope/package.json","fileUrl":"./node_modules/can-view-scope/package.json","_from":"can-view-scope@^4.0.0","_id":"can-view-scope@4.3.1","_inBundle":false,"_integrity":"sha512-i936eckAKILTSXSiO0MRtKUyzgzJ8YkdjB/jUroVBunKiNLjaK5Wn9TRN36lVTj78Y4vZN2artkoahWOlci/Mw==","_location":"/can-view-scope","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-view-scope@^4.0.0","name":"can-view-scope","escapedName":"can-view-scope","rawSpec":"^4.0.0","saveSpec":null,"fetchSpec":"^4.0.0"},"_requiredBy":["/can-component","/can-stache","/can-stache-bindings"],"_resolved":"https://registry.npmjs.org/can-view-scope/-/can-view-scope-4.3.1.tgz","_shasum":"f0d951041dbd0523f6ad59236276f857481f0fe1","_spec":"can-view-scope@^4.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-view-scope/issues"},"bundleDependencies":false,"dependencies":{"can-assign":"^1.1.1","can-construct":"^3.2.0","can-define-lazy-value":"^1.0.0","can-event-queue":"^1.0.0","can-key-tree":"^1.0.0","can-log":"^1.0.0","can-namespace":"1.0.0","can-observation":"^4.0.0","can-observation-recorder":"^1.0.0","can-queues":"^1.0.0","can-reflect":"^1.6.0","can-reflect-dependencies":"<2.0.0","can-simple-map":"^4.0.0","can-single-reference":"^1.0.0","can-stache-helpers":"^1.0.0","can-stache-key":"^1.0.0","can-symbol":"^1.0.0"},"deprecated":false,"description":"Observable scopes","devDependencies":{"can-simple-observable":"^2.0.0","can-test-helpers":"^1.0.1","detect-cyclic-packages":"^1.1.0","jshint":"^2.9.1","steal":"^1.0.1","steal-qunit":"^1.0.0","testee":"^0.7.0"},"homepage":"https://canjs.com/doc/can-view-scope.html","keywords":["canjs","canjs-plugin","donejs"],"main":"can-view-scope","repository":{"type":"git","url":"git://github.com/canjs/can-view-scope.git"},"scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js test/*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"}},{"name":"can-view-model","version":"4.0.1","nestedFileUrl":"./node_modules/can-component/node_modules/can-view-model/package.json","origFileUrl":"./node_modules/can-view-model/package.json","fileUrl":"./node_modules/can-view-model/package.json","_from":"can-view-model@^4.0.0","_id":"can-view-model@4.0.1","_inBundle":false,"_integrity":"sha512-GTGF0TcOeoJwLb6UwsPDdiWmQZXRbJWeWjwWDcuu7+5B8DvWSQuWpa2u0SWcapvGVm/MasbNvjxYVrUgmsJttw==","_location":"/can-view-model","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-view-model@^4.0.0","name":"can-view-model","escapedName":"can-view-model","rawSpec":"^4.0.0","saveSpec":null,"fetchSpec":"^4.0.0"},"_requiredBy":["/can-component","/can-stache-bindings"],"_resolved":"https://registry.npmjs.org/can-view-model/-/can-view-model-4.0.1.tgz","_shasum":"13f6d87e670aadf6d50d0f48368fd3d6d6173419","_spec":"can-view-model@^4.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bundleDependencies":false,"dependencies":{"can-globals":"^1.0.0","can-namespace":"1.0.0","can-reflect":"^1.2.1","can-simple-map":"^4.0.0","can-symbol":"^1.5.0"},"deprecated":false,"description":"Gets or sets the view model of an element.","devDependencies":{"detect-cyclic-packages":"^1.1.0","jshint":"^2.9.1","steal":"^1.0.1","steal-qunit":"^1.0.0","steal-tools":"^1.0.0","testee":"^0.7.0"},"homepage":"https://canjs.com/doc/can-view-model.html","keywords":["canjs","donejs"],"main":"can-view-model","scripts":{"detect-cycle":"detect-cyclic-packages --ignore done-serve","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"}},{"name":"can-child-nodes","version":"1.0.0","nestedFileUrl":"./node_modules/can-component/node_modules/can-child-nodes/package.json","origFileUrl":"./node_modules/can-child-nodes/package.json","fileUrl":"./node_modules/can-child-nodes/package.json","_from":"can-child-nodes@^1.0.0","_id":"can-child-nodes@1.0.0","_inBundle":false,"_integrity":"sha512-2jr0KGq2zOHigjZbaki62+no1qPGpol2sQTko5qvCwaoTtGMH+d96UjvzzMbzAKMt0YbQAlmyhYuraaH11xsgA==","_location":"/can-child-nodes","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-child-nodes@^1.0.0","name":"can-child-nodes","escapedName":"can-child-nodes","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/can-component","/can-fragment","/can-stache","/can-view-live"],"_resolved":"https://registry.npmjs.org/can-child-nodes/-/can-child-nodes-1.0.0.tgz","_shasum":"892f098801d1f9e30936ecbbbc8cbd5b02dddc5c","_spec":"can-child-nodes@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"donejs core team","email":"core@donejs.com","url":"http://donejs.com"},"bugs":{"url":"https://github.com/canjs/can-child-nodes/issues"},"bundleDependencies":false,"dependencies":{"can-namespace":"^1.0.0"},"deprecated":false,"description":"Read child nodes from elements","devDependencies":{"jshint":"^2.9.1","steal":"^1.6.5","steal-qunit":"^1.0.1","steal-tools":"^1.11.3","testee":"^0.7.0"},"homepage":"http://canjs","keywords":["canjs","donejs","donejs-plugin"],"license":"MIT","main":"can-child-nodes","repository":{"type":"git","url":"git://github.com/canjs/can-child-nodes.git"},"scripts":{"build":"node build.js","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update version number\" && git checkout -b release && git add -f dist/"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true}}},{"name":"can-dom-events","version":"1.2.0","nestedFileUrl":"./node_modules/can-component/node_modules/can-dom-events/package.json","origFileUrl":"./node_modules/can-dom-events/package.json","fileUrl":"./node_modules/can-dom-events/package.json","_from":"can-dom-events@^1.1.0","_id":"can-dom-events@1.2.0","_inBundle":false,"_integrity":"sha512-o3+aOgJym9AJfR51E3KmYKI2M8L7UJVkIaaHal49zVlwjEamXiKFrZD+gJ7aw39MjLryadzL0SUA3ajFF/2vrg==","_location":"/can-dom-events","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-dom-events@^1.1.0","name":"can-dom-events","escapedName":"can-dom-events","rawSpec":"^1.1.0","saveSpec":null,"fetchSpec":"^1.1.0"},"_requiredBy":["/can-attribute-observable","/can-attribute-observable/can-event-dom-radiochange","/can-component","/can-control","/can-event-dom-enter","/can-event-dom-radiochange","/can-event-queue","/can-route","/can-route-pushstate","/can-stache-bindings"],"_resolved":"https://registry.npmjs.org/can-dom-events/-/can-dom-events-1.2.0.tgz","_shasum":"c2e644bb573b4b2ec66c43e84555553a07ef4d52","_spec":"can-dom-events@^1.1.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"Chris Andrejewski","email":"core@donejs.com","url":"https://www.bitovi.com/"},"bugs":{"url":"https://github.com/canjs/can-dom-events/issues"},"bundleDependencies":false,"dependencies":{"can-globals":"<2.0.0","can-key-tree":"^1.0.0","can-namespace":"^1.0.0","can-reflect":"^1.11.1"},"deprecated":false,"description":"Listen for native and custom DOM events","devDependencies":{"detect-cyclic-packages":"^1.1.0","fixpack":"^2.3.1","jquery":"^3.2.1","jshint":"^2.9.1","steal":"^1.3.1","steal-qunit":"^1.0.1","steal-tools":"^1.2.0","testee":"^0.7.0"},"homepage":"https://github.com/canjs/can-dom-events","keywords":["canjs","custom","dom","events","listener"],"license":"MIT","main":"can-dom-events","repository":{"type":"git","url":"git://github.com/canjs/can-dom-events.git"},"scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","jshint":"jshint ./*.js ./helpers/*.js --config","lint":"fixpack && npm run jshint","postversion":"git push --follow-tags","preversion":"npm test && npm run build","test":"npm run detect-cycle && npm run lint && npm run testee","testee":"testee test.html --browsers firefox"}},{"name":"can-string","version":"0.0.5","nestedFileUrl":"./node_modules/can-component/node_modules/can-string/package.json","origFileUrl":"./node_modules/can-string/package.json","fileUrl":"./node_modules/can-string/package.json","_from":"can-string@0.0.5","_id":"can-string@0.0.5","_inBundle":false,"_integrity":"sha512-tpQoz/2gv/a0ieaA69dOqysFxktNAQRTMdKBWtiWPrcQBPjnkGCudHGtcyV9aaQh6sq527tVh7PQpUNMkeFYYg==","_location":"/can-string","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"can-string@0.0.5","name":"can-string","escapedName":"can-string","rawSpec":"0.0.5","saveSpec":null,"fetchSpec":"0.0.5"},"_requiredBy":["/can-component","/can-construct","/can-control","/can-stache"],"_resolved":"https://registry.npmjs.org/can-string/-/can-string-0.0.5.tgz","_shasum":"1bccf1b32abad078818f1380a854e88a67510298","_spec":"can-string@0.0.5","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"DoneJS","email":"core@donejs.com","url":"http://donejs.com"},"bugs":{"url":"https://github.com/canjs/can-string/issues"},"bundleDependencies":false,"dependencies":{},"deprecated":false,"description":"String helpers","devDependencies":{"jshint":"^2.9.1","steal":"^1.6.5","steal-qunit":"^1.0.1","steal-tools":"^1.11.3","testee":"^0.7.0"},"homepage":"http://canjs.com","keywords":["canjs","donejs-plugin"],"license":"MIT","main":"can-string","repository":{"type":"git","url":"git://github.com/canjs/can-string.git"},"scripts":{"jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run jshint && npm run testee","testee":"testee test.html --browsers firefox"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true},"plugins":["steal-less","steal-stache"]}},{"name":"can-dom-mutate","version":"1.0.4","nestedFileUrl":"./node_modules/can-component/node_modules/can-dom-mutate/package.json","origFileUrl":"./node_modules/can-dom-mutate/package.json","fileUrl":"./node_modules/can-dom-mutate/package.json","_from":"can-dom-mutate@^1.0.0","_id":"can-dom-mutate@1.0.4","_inBundle":false,"_integrity":"sha512-S5ifVTNl4AkWeRifNo3S6ceTZil9gP9jE4bvYPeSEwFaYb0LBGcTTs4QXNOIsV30EvLhMx+2LyQRtkbkdFS7+A==","_location":"/can-dom-mutate","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-dom-mutate@^1.0.0","name":"can-dom-mutate","escapedName":"can-dom-mutate","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/can-attribute-observable","/can-component","/can-connect","/can-control","/can-dom-data","/can-dom-data-state","/can-stache","/can-stache-bindings","/can-view-callbacks","/can-view-import","/can-view-live","/can-view-nodelist","/can-view-target"],"_resolved":"https://registry.npmjs.org/can-dom-mutate/-/can-dom-mutate-1.0.4.tgz","_shasum":"334fbe1256d8c4b0926d4c86a6ae2f3f95b7cce5","_spec":"can-dom-mutate@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"DoneJS Team","email":"core@donejs.com","url":"https://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-dom-mutate/issues"},"bundleDependencies":false,"dependencies":{"can-globals":"^1.0.0"},"deprecated":false,"description":"Dispatch and listen for DOM mutations","devDependencies":{"fixpack":"^2.3.1","jshint":"^2.9.1","steal":"^1.3.1","steal-qunit":"^1.0.1","steal-tools":"^1.2.0","testee":"^0.7.0"},"homepage":"https://github.com/canjs/can-dom-mutate","keywords":["canjs","mutation","mutationobserver","observer"],"license":"MIT","main":"can-dom-mutate","repository":{"type":"git","url":"git://github.com/canjs/can-dom-mutate.git"},"scripts":{"jshint":"jshint ./*.js ./test/*.js --config","lint":"fixpack && npm run jshint","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag pre","test":"npm run lint && npm run testee","testee":"testee test.html --browsers firefox"},"steal":{"main":"can-dom-mutate"}},{"name":"can-validate-validatejs","version":"0.1.3","nestedFileUrl":"./node_modules/can-define-validate-validatejs/node_modules/can-validate-validatejs/package.json","origFileUrl":"./node_modules/can-validate-validatejs/package.json","fileUrl":"./node_modules/can-validate-validatejs/package.json","_from":"can-validate-validatejs@^0.1.3","_id":"can-validate-validatejs@0.1.3","_inBundle":false,"_integrity":"sha512-01+CRMtAYpokG6YE01hh7/C+uaUnKW1QLXTyL7XUvUNIA7SvyrvPX64694YF1/X+UauYoXy9+ARQCInP3Qsmtg==","_location":"/can-validate-validatejs","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-validate-validatejs@^0.1.3","name":"can-validate-validatejs","escapedName":"can-validate-validatejs","rawSpec":"^0.1.3","saveSpec":null,"fetchSpec":"^0.1.3"},"_requiredBy":["/","/can-define-validate-validatejs"],"_resolved":"https://registry.npmjs.org/can-validate-validatejs/-/can-validate-validatejs-0.1.3.tgz","_shasum":"561f2a3f93595d0551f6f7679b5b2a8ec09059e8","_spec":"can-validate-validatejs@^0.1.3","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site","author":{"name":"Bitovi"},"bugs":{"url":"https://github.com/canjs/can-validate-validatejs/issues"},"bundleDependencies":false,"dependencies":{"can-reflect":"^1.11.1","validate.js":"^0.11.1"},"deprecated":false,"description":"Create validator functions that use ValidateJS to validate values.","devDependencies":{"bit-docs":"^0.0.8","detect-cyclic-packages":"^1.1.0","http-server":"^0.10.0","jshint":"^2.9.4","steal":"^1.0.8","steal-qunit":"^1.0.0","steal-tools":"^1.0.1","testee":"^0.7.0"},"homepage":"https://github.com/canjs/can-validate-validatejs#readme","keywords":["Validate","Validate.js","can-validate","plugin","canjs"],"license":"MIT","main":"can-validate-validatejs.js","repository":{"type":"git","url":"git+https://github.com/canjs/can-validate-validatejs.git"},"scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","develop":"http-server -c-1","jshint":"jshint . --config","postversion":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm run build && npm publish","release:minor":"npm version minor && npm run build && npm publish","release:patch":"npm version patch && npm run build && npm publish","release:pre":"npm version prerelease && npm run build && npm publish --tag=pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/"},"steal":{"ignoreBrowser":true,"npmIgnore":{"bit-docs":true,"testee":true,"steal-tools":true},"npmDependencies":{"steal-qunit":true},"paths":{"validate.js@0.11.1#validate":"./node_modules/validate.js/validate.js"}}},{"name":"can-validate","version":"1.1.4","nestedFileUrl":"./node_modules/can-define-validate-validatejs/node_modules/can-validate/package.json","origFileUrl":"./node_modules/can-validate/package.json","fileUrl":"./node_modules/can-validate/package.json","_from":"can-validate@^1.1.0","_id":"can-validate@1.1.4","_inBundle":false,"_integrity":"sha512-xjxrwxPGuCO8rJc0tBcbizB9jZzPZBgzVu5xj1fX46VxFZPC3YlMoKRWbw/ha+QzixrPIlTxTr+sw1pM+LfQHQ==","_location":"/can-validate","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-validate@^1.1.0","name":"can-validate","escapedName":"can-validate","rawSpec":"^1.1.0","saveSpec":null,"fetchSpec":"^1.1.0"},"_requiredBy":["/can-define-validate-validatejs"],"_resolved":"https://registry.npmjs.org/can-validate/-/can-validate-1.1.4.tgz","_shasum":"a7606ebb60fad9b6fdb6ea3da5f175eac4804e16","_spec":"can-validate@^1.1.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-define-validate-validatejs","author":{"name":"Bitovi"},"browser":{},"bugs":{"url":"https://github.com/canjs/can-validate/issues"},"bundleDependencies":false,"dependencies":{"can-reflect":"^1.11.1"},"deprecated":false,"description":"Validation plugin for CanJS.","devDependencies":{"bit-docs":"0.0.8","detect-cyclic-packages":"^1.1.0","http-server":"^0.10.0","jshint":"^2.9.4","steal":"^1.0.8","steal-qunit":"^1.0.0","steal-tools":"^1.0.1","testee":"^0.5.0"},"homepage":"https://github.com/canjs/can-validate","keywords":["Validate","plugin","canjs"],"license":"MIT","main":"can-validate.js","repository":{"type":"git","url":"git+https://github.com/canjs/can-validate.git"},"scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","develop":"http-server -c-1","jshint":"jshint . --config","postversion":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm run build && npm publish","release:minor":"npm version minor && npm run build && npm publish","release:patch":"npm version patch && npm run build && npm publish","release:pre":"npm version prerelease && npm run build && npm publish --tag=pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/"},"steal":{"ignoreBrowser":true,"npmIgnore":{"documentjs":true,"testee":true,"steal-tools":true},"npmDependencies":{"steal-qunit":true}}},{"name":"can-fragment","version":"1.0.1","nestedFileUrl":"./node_modules/can-view-callbacks/node_modules/can-fragment/package.json","origFileUrl":"./node_modules/can-fragment/package.json","fileUrl":"./node_modules/can-fragment/package.json","_from":"can-fragment@^1.0.0","_id":"can-fragment@1.0.1","_inBundle":false,"_integrity":"sha512-1mZY8kU4z9HEStjPfJPP+xQCNTIvlWdiRnSAqNMkdUkBsIeDEq1Si0CIzy6/UjmgZ0gAjG3FezJPsiITh5ALvQ==","_location":"/can-fragment","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-fragment@^1.0.0","name":"can-fragment","escapedName":"can-fragment","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/can-component","/can-stache","/can-view-callbacks","/can-view-live"],"_resolved":"https://registry.npmjs.org/can-fragment/-/can-fragment-1.0.1.tgz","_shasum":"af5df35633902808878a8bc3adcd94f706757c7f","_spec":"can-fragment@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"donejs core team","email":"core@donejs.com","url":"http://donejs.com"},"bugs":{"url":"https://github.com/canjs/can-fragment/issues"},"bundleDependencies":false,"dependencies":{"can-child-nodes":"^1.0.0","can-globals":"^1.0.1","can-namespace":"^1.0.0","can-reflect":"^1.16.1"},"deprecated":false,"description":"Create a fragment from lots of stuff","devDependencies":{"can-vdom":"^4.0.1","jshint":"^2.9.1","steal":"^1.6.5","steal-qunit":"^1.0.1","steal-tools":"^1.11.3","testee":"^0.7.0"},"homepage":"http://canjs","keywords":["canjs","donejs","donejs-plugin"],"license":"MIT","main":"can-fragment","repository":{"type":"git","url":"git://github.com/canjs/can-fragment.git"},"scripts":{"build":"node build.js","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update version number\" && git checkout -b release && git add -f dist/"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true}}},{"name":"can-stache-key","version":"1.1.0","nestedFileUrl":"./node_modules/can-stache/node_modules/can-stache-key/package.json","origFileUrl":"./node_modules/can-stache-key/package.json","fileUrl":"./node_modules/can-stache-key/package.json","_from":"can-stache-key@^1.0.0","_id":"can-stache-key@1.1.0","_inBundle":false,"_integrity":"sha512-D/MiJOoJQ42YSYNFrw5Qald2sE32lo4hniDkYTLx+IydMXpjW0EuEFxBfalOuzkhuas+WSa7s7C96dSyQNuhdA==","_location":"/can-stache-key","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-stache-key@^1.0.0","name":"can-stache-key","escapedName":"can-stache-key","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/can-component","/can-compute","/can-control","/can-list","/can-map","/can-stache","/can-stache-bindings","/can-view-scope"],"_resolved":"https://registry.npmjs.org/can-stache-key/-/can-stache-key-1.1.0.tgz","_shasum":"53cea99b4421e59efa2ea3145a4926bd90bd852b","_spec":"can-stache-key@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"DoneJS Team","email":"core@donejs.com","url":"http://donejs.com"},"bugs":{"url":"https://github.com/canjs/can-stache-key/issues"},"bundleDependencies":false,"dependencies":{"can-log":"^1.0.0","can-namespace":"1.0.0","can-observation-recorder":"^1.0.0","can-reflect":"^1.1.0","can-reflect-promise":"^2.0.0","can-symbol":"^1.0.0"},"deprecated":false,"description":"Read and write keys on a value","devDependencies":{"can-event-queue":"<2.0.0","can-observation":"^4.0.0-pre.2","can-simple-map":"^4.0.0","can-simple-observable":"^2.0.0-pre.11","can-test-helpers":"^1.1.1","detect-cyclic-packages":"^1.1.0","jshint":"^2.9.1","steal":"^1.3.1","steal-qunit":"^1.0.1","steal-tools":"^1.2.0","testee":"^0.7.0"},"homepage":"https://canjs.com","keywords":["DoneJS","CanJS"],"license":"MIT","main":"can-stache-key","repository":{"type":"git","url":"git://github.com/canjs/can-stache-key.git"},"scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test.html --browsers firefox"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true},"main":"can-stache-key"}},{"name":"can-deparam","version":"1.1.1","nestedFileUrl":"./node_modules/can-route/node_modules/can-deparam/package.json","origFileUrl":"./node_modules/can-deparam/package.json","fileUrl":"./node_modules/can-deparam/package.json","_from":"can-deparam@^1.0.0","_id":"can-deparam@1.1.1","_inBundle":false,"_integrity":"sha512-XYP87XLpnt5uOCc10K0cH3Pi39L6D18IDlC2+a8ygBOWeklQ4v3AFh4VqsLasQSKLaVnnLtmt6xPAqzj/h8eKw==","_location":"/can-deparam","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-deparam@^1.0.0","name":"can-deparam","escapedName":"can-deparam","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/can-route","/can-util"],"_resolved":"https://registry.npmjs.org/can-deparam/-/can-deparam-1.1.1.tgz","_shasum":"9e31e4ddb11d20a8f16c466c6dcc272f1007e9ac","_spec":"can-deparam@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-util","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"https://www.bitovi.com/"},"bugs":{"url":"https://github.com/canjs/can-deparam/issues"},"bundleDependencies":false,"dependencies":{"can-namespace":"1.0.0"},"deprecated":false,"description":"Deserialize a query string into an array or object.","devDependencies":{"can-string-to-any":"^1.0.1","detect-cyclic-packages":"^1.1.0","jshint":"^2.9.1","steal":"^1.3.1","steal-qunit":"^1.0.1","steal-tools":"^1.2.0","testee":"^0.3.0"},"homepage":"https://canjs.com/doc/can-deparam.html","keywords":["canjs","query string"],"main":"can-deparam","repository":{"type":"git","url":"git://github.com/canjs/can-deparam.git"},"scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update version number\" && git checkout -b release && git add -f dist/"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true}}},{"name":"can-key-tree","version":"1.0.2","nestedFileUrl":"./node_modules/can-route/node_modules/can-key-tree/package.json","origFileUrl":"./node_modules/can-key-tree/package.json","fileUrl":"./node_modules/can-key-tree/package.json","_from":"can-key-tree@^1.0.0","_id":"can-key-tree@1.0.2","_inBundle":false,"_integrity":"sha512-wzjDHVYPgT5PX6fTVuu54Zgw2+jNUNTC0ELfygabnR+KD+FMbOvmji7Mxx6Di4/eVXaP1pxk6nyEzUBkx+Z/FQ==","_location":"/can-key-tree","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-key-tree@^1.0.0","name":"can-key-tree","escapedName":"can-key-tree","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/can-diff","/can-dom-events","/can-event-queue","/can-observation","/can-reflect-promise","/can-route","/can-route-pushstate","/can-simple-map","/can-simple-observable","/can-view-scope"],"_resolved":"https://registry.npmjs.org/can-key-tree/-/can-key-tree-1.0.2.tgz","_shasum":"58484c71ae28b88d998bee3e3f63c17945db3b5a","_spec":"can-key-tree@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-dom-events","author":{"name":"DoneJS Core Team","email":"core@donejs.com","url":"http://donejs.com"},"bugs":{"url":"https://github.com/canjs/can-key-tree/issues"},"bundleDependencies":false,"dependencies":{"can-reflect":"^1.4.0"},"deprecated":false,"description":"Add and remove items to a tree","devDependencies":{"docco":"^0.7.0","done-serve":"^1.0.0","donejs-cli":"^1.0.0","generator-donejs":"^1.0.0","jshint":"^2.9.1","steal":"^1.3.1","steal-qunit":"^1.0.1","steal-tools":"^1.2.0","testee":"^0.3.0"},"homepage":"https://github.com/canjs/can-key-tree#readme","keywords":["CanJS","DoneJS","donejs-plugin"],"license":"MIT","main":"dist/cjs/can-key-tree","repository":{"type":"git","url":"git://github.com/canjs/can-key-tree.git"},"scripts":{"build":"node build.js","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update version number\" && git checkout -b release && git add -f dist/"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true},"plugins":["steal-less","steal-stache"],"main":"can-key-tree"}},{"name":"can-param","version":"1.0.4","nestedFileUrl":"./node_modules/can-route/node_modules/can-param/package.json","origFileUrl":"./node_modules/can-param/package.json","fileUrl":"./node_modules/can-param/package.json","_from":"can-param@^1.0.0","_id":"can-param@1.0.4","_inBundle":false,"_integrity":"sha512-cmq6LrIK+Vx0ojnb/VKH6UcAUoTfxBRe8tCR7lx0wdXs2DC/t4lnqQmddZp2waN6iQ9eJMtLvOQNEEiaxaP1XA==","_location":"/can-param","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-param@^1.0.0","name":"can-param","escapedName":"can-param","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/can-ajax","/can-route","/can-util"],"_resolved":"https://registry.npmjs.org/can-param/-/can-param-1.0.4.tgz","_shasum":"320b786d445818235d3bf9b2244857dcb491c1e7","_spec":"can-param@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-util","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"https://www.bitovi.com/"},"bugs":{"url":"https://github.com/canjs/can-param/issues"},"bundleDependencies":false,"dependencies":{"can-namespace":"1.0.0"},"deprecated":false,"description":"Serialize an array or object into a query string.","devDependencies":{"detect-cyclic-packages":"^1.1.0","jshint":"^2.9.1","steal":"^1.3.1","steal-qunit":"^1.0.1","steal-tools":"^1.2.0","testee":"^0.3.0"},"homepage":"https://canjs.com/doc/can-param.html","keywords":["canjs","parameter","query string"],"main":"can-param","repository":{"type":"git","url":"git://github.com/canjs/can-param.git"},"scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update version number\" && git checkout -b release && git add -f dist/"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true}}},{"name":"can-string-to-any","version":"1.0.1","nestedFileUrl":"./node_modules/can-define/node_modules/can-string-to-any/package.json","origFileUrl":"./node_modules/can-string-to-any/package.json","fileUrl":"./node_modules/can-string-to-any/package.json","_from":"can-string-to-any@^1.0.1","_id":"can-string-to-any@1.0.1","_inBundle":false,"_integrity":"sha512-RV1nH1TY70X4Yv4/F/ZPR0/qmGoG2e+ftNCn6MicNkOG0/t9EAbbj2dUhKU1qWIKM+wXR8urjsFvyyECD6Zymg==","_location":"/can-string-to-any","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-string-to-any@^1.0.1","name":"can-string-to-any","escapedName":"can-string-to-any","rawSpec":"^1.0.1","saveSpec":null,"fetchSpec":"^1.0.1"},"_requiredBy":["/can-define"],"_resolved":"https://registry.npmjs.org/can-string-to-any/-/can-string-to-any-1.0.1.tgz","_shasum":"d885c4738fde3075d5a6f8dd9e8605b967059cfa","_spec":"can-string-to-any@^1.0.1","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-define","author":{"name":"DoneJS Core Team","email":"core@donejs.com","url":"http://donejs.com"},"browser":{},"browserify":{"transform":["cssify"]},"bugs":{"url":"https://github.com/canjs/can-string-to-any/issues"},"bundleDependencies":false,"dependencies":{},"deprecated":false,"description":"Convert strings to equivalent JavaScript values","devDependencies":{"jshint":"^2.9.1","steal":"^1.6.5","steal-qunit":"^1.0.1","steal-tools":"^1.11.3","testee":"^0.7.0"},"homepage":"http://canjs.com","keywords":["canjs","donejs-plugin"],"license":"MIT","main":"dist/cjs/can-string-to-any","repository":{"type":"git","url":"git://github.com/canjs/can-string-to-any.git"},"scripts":{"build":"node build.js","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update version number\" && git checkout -b release && git add -f dist/"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true},"plugins":["steal-less","steal-stache"],"main":"can-string-to-any"}},{"name":"can-data-types","version":"0.1.1","nestedFileUrl":"./node_modules/can-define/node_modules/can-data-types/package.json","origFileUrl":"./node_modules/can-data-types/package.json","fileUrl":"./node_modules/can-data-types/package.json","_from":"can-data-types@<2.0.0","_id":"can-data-types@0.1.1","_inBundle":false,"_integrity":"sha512-oMlSHcyhizecNPahOWw41cId47b59SkvbNMUbDCHlwmP52PYb0LPUEiwo3c2jpgLWQ0CFK4mzrcsmGzYQP/0QA==","_location":"/can-data-types","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-data-types@<2.0.0","name":"can-data-types","escapedName":"can-data-types","rawSpec":"<2.0.0","saveSpec":null,"fetchSpec":"<2.0.0"},"_requiredBy":["/can-define"],"_resolved":"https://registry.npmjs.org/can-data-types/-/can-data-types-0.1.1.tgz","_shasum":"a2731cf1a4ef0f0b70e4b520017b280f92563586","_spec":"can-data-types@<2.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-define","author":{"name":"DoneJS Contributors","email":"core@donejs.com","url":"http://donejs.com"},"bugs":{"url":"https://github.com/canjs/can-data-types/issues"},"bundleDependencies":false,"dependencies":{"can-namespace":"^1.0.0","can-reflect":"^1.16.1"},"deprecated":false,"description":"Reusable special data types","devDependencies":{"can-symbol":"^1.6.1","jshint":"^2.9.1","steal":"^1.6.5","steal-qunit":"^1.0.1","steal-tools":"^1.11.3","testee":"^0.7.0"},"homepage":"https://github.com/canjs/can-data-types#readme","keywords":["canjs","donejs","donejs-plugin"],"license":"MIT","main":"can-data-types","repository":{"type":"git","url":"git://github.com/canjs/can-data-types.git"},"scripts":{"build":"node build.js","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run jshint && npm run testee","testee":"testee test.html --browsers firefox"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true},"main":"can-data-types"}},{"name":"can-define-lazy-value","version":"1.0.2","nestedFileUrl":"./node_modules/can-define/node_modules/can-define-lazy-value/package.json","origFileUrl":"./node_modules/can-define-lazy-value/package.json","fileUrl":"./node_modules/can-define-lazy-value/package.json","_from":"can-define-lazy-value@^1.0.1","_id":"can-define-lazy-value@1.0.2","_inBundle":false,"_integrity":"sha512-OlZ9bSqozc4Hk1aoJzh5O3ZLvfsGnudNsE4HmzD5KIagmnysJSCBy8zf6Yx+TC/LvNOcNm6NO9oOqwxGsxiijg==","_location":"/can-define-lazy-value","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-define-lazy-value@^1.0.1","name":"can-define-lazy-value","escapedName":"can-define-lazy-value","rawSpec":"^1.0.1","saveSpec":null,"fetchSpec":"^1.0.1"},"_requiredBy":["/can-define","/can-event-queue","/can-view-scope"],"_resolved":"https://registry.npmjs.org/can-define-lazy-value/-/can-define-lazy-value-1.0.2.tgz","_shasum":"1f6bb89fe682af08c9f2c1c2884f66139df05969","_spec":"can-define-lazy-value@^1.0.1","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-event-queue","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"https://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-define-lazy-value/issues"},"bundleDependencies":false,"dependencies":{},"deprecated":false,"description":"Define properties with lazy values using Object.defineProperty","devDependencies":{"jshint":"^2.9.1","steal":"^1.3.1","steal-qunit":"^1.0.1","steal-tools":"^1.2.0","testee":"^0.3.0"},"homepage":"https://canjs.com","keywords":["canjs","donejs-plugin"],"license":"MIT","main":"define-lazy-value","repository":{"type":"git","url":"git://github.com/canjs/can-define-lazy-value.git"},"scripts":{"build":"node build.js","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag=pre","test":"npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update version number\" && git checkout -b release && git add -f dist/"},"steal":{"npmIgnore":{"testee":true,"steal-tools":true}}},{"name":"can-cid","version":"1.1.2","nestedFileUrl":"./node_modules/can-single-reference/node_modules/can-cid/package.json","origFileUrl":"./node_modules/can-cid/package.json","fileUrl":"./node_modules/can-cid/package.json","_from":"can-cid@^1.1.0","_id":"can-cid@1.1.2","_inBundle":false,"_integrity":"sha512-pTZSC7BSJdN5RFPlPtBHNoIgnXTDoUzO9IVB06OvoZ6b5k5jMz87XMR42ahuR4nsgCEhNkcY3kpVufJSX1wD0Q==","_location":"/can-cid","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-cid@^1.1.0","name":"can-cid","escapedName":"can-cid","rawSpec":"^1.1.0","saveSpec":null,"fetchSpec":"^1.1.0"},"_requiredBy":["/can-dom-data-state","/can-event-dom-enter","/can-event-dom-enter/can-dom-data-state","/can-event-dom-radiochange","/can-event-dom-radiochange/can-dom-data-state","/can-list","/can-map","/can-single-reference","/can-util","/can-util/can-dom-data-state"],"_resolved":"https://registry.npmjs.org/can-cid/-/can-cid-1.1.2.tgz","_shasum":"b15f858e42213b2b54f3971cb0d83643e6be7367","_spec":"can-cid@^1.1.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-util","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-cid/issues"},"bundleDependencies":false,"dependencies":{"can-namespace":"1.0.0"},"deprecated":false,"description":"Utility for getting a unique identifier for an object","devDependencies":{"detect-cyclic-packages":"^1.1.0","documentjs":"^0.4.2","http-server":"^0.10.0","jshint":"^2.9.1","steal":"^1.2.8","steal-qunit":"^1.0.1","steal-tools":"^1.1.2","test-saucelabs":"0.0.2","testee":"^0.3.1"},"homepage":"http://canjs.com","keywords":["canjs","canjs","plugin","donejs"],"main":"can-cid","repository":{"type":"git","url":"git://github.com/canjs/can-cid.git"},"scripts":{"build":"node build.js","ci":"npm run build && npm run test && node test-saucelabs.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","http-server":"http-server -p 3000 --silent","jshint":"jshint ./*.js --config","postversion":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/"}},{"name":"can-parse-uri","version":"1.1.0","nestedFileUrl":"./node_modules/can-join-uris/node_modules/can-parse-uri/package.json","origFileUrl":"./node_modules/can-parse-uri/package.json","fileUrl":"./node_modules/can-parse-uri/package.json","_from":"can-parse-uri@^1.0.0","_id":"can-parse-uri@1.1.0","_inBundle":false,"_integrity":"sha512-mfOQkOk5lOyUp1IV4S8LI9ixllZ1jz7o+98/aUvkxl7tbG6qMfuhB1kzZg+rDq7Wi169CU2OUYyYZ7TtkJ1dUA==","_location":"/can-parse-uri","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-parse-uri@^1.0.0","name":"can-parse-uri","escapedName":"can-parse-uri","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/can-ajax","/can-join-uris","/can-util"],"_resolved":"https://registry.npmjs.org/can-parse-uri/-/can-parse-uri-1.1.0.tgz","_shasum":"22fee2aa005881e4db72439b2b59061a0ec79f37","_spec":"can-parse-uri@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-util","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"https://www.bitovi.com/"},"bugs":{"url":"https://github.com/canjs/can-parse-uri/issues"},"bundleDependencies":false,"dependencies":{"can-namespace":"^1.0.0"},"deprecated":false,"description":"Parse a URI into its components.","devDependencies":{"detect-cyclic-packages":"^1.1.0","jshint":"^2.9.1","steal":"^1.3.1","steal-qunit":"^1.0.1","steal-tools":"^1.2.0","testee":"^0.3.0"},"homepage":"https://canjs.com/","keywords":["canjs","parse","uri"],"main":"can-parse-uri","repository":{"type":"git","url":"git://github.com/canjs/can-parse-uri.git"},"scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update version number\" && git checkout -b release && git add -f dist/"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true},"main":"can-parse-uri"}},{"name":"can-reflect-dependencies","version":"1.0.2","nestedFileUrl":"./node_modules/can-stache-bindings/node_modules/can-reflect-dependencies/package.json","origFileUrl":"./node_modules/can-reflect-dependencies/package.json","fileUrl":"./node_modules/can-reflect-dependencies/package.json","_from":"can-reflect-dependencies@^1.0.0","_id":"can-reflect-dependencies@1.0.2","_inBundle":false,"_integrity":"sha512-VLzNSWowKfC7x7J5YngBXIoNcByjaYW5fxTLPgmDpfzAFMelypO7p5gcCan/ImymDzzKoN7mO9NNDrgvwzlNJQ==","_location":"/can-reflect-dependencies","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-reflect-dependencies@^1.0.0","name":"can-reflect-dependencies","escapedName":"can-reflect-dependencies","rawSpec":"^1.0.0","saveSpec":null,"fetchSpec":"^1.0.0"},"_requiredBy":["/can-attribute-observable","/can-stache-bindings","/can-view-live","/can-view-scope"],"_resolved":"https://registry.npmjs.org/can-reflect-dependencies/-/can-reflect-dependencies-1.0.2.tgz","_shasum":"38ff979d73220d773a95a5b938d0e4afd784c77a","_spec":"can-reflect-dependencies@^1.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-view-live","author":{"name":"Bitovi"},"bugs":{"url":"https://github.com/canjs/can-reflect-dependencies/issues"},"bundleDependencies":false,"dependencies":{"can-reflect":"^1.10.0","can-symbol":"^1.4.1"},"deprecated":false,"description":"Keep track of external observable dependendecies","devDependencies":{"can-simple-map":"^4.0.0","can-simple-observable":"^2.0.0","jshint":"^2.9.5","steal":"^1.5.15","steal-qunit":"^1.0.1","testee":"^0.7.0"},"homepage":"https://github.com/canjs/can-reflect-dependencies#readme","keywords":["canjs","can-reflect"],"license":"MIT","main":"can-reflect-dependencies.js","repository":{"type":"git","url":"git+https://github.com/canjs/can-reflect-dependencies.git"},"scripts":{"jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag pre","test":"npm run jshint && npm run testee","testee":"testee test.html --browsers firefox"}},{"name":"can-attribute-observable","version":"0.3.0","nestedFileUrl":"./node_modules/can-stache-bindings/node_modules/can-attribute-observable/package.json","origFileUrl":"./node_modules/can-attribute-observable/package.json","fileUrl":"./node_modules/can-attribute-observable/package.json","_from":"can-attribute-observable@<2.0.0","_id":"can-attribute-observable@0.3.0","_inBundle":false,"_integrity":"sha512-fQwkWuByWEdhu1IM1BH6O8aKj9IE0W3qoJgrAkZlNaBov0ecdvLL83ESF3kz6+VkPhQkYC5ie0uUTZmSuMV4sg==","_location":"/can-attribute-observable","_phantomChildren":{"can-dom-events":"1.2.0","can-globals":"1.1.1","can-namespace":"1.0.0"},"_requested":{"type":"range","registry":true,"raw":"can-attribute-observable@<2.0.0","name":"can-attribute-observable","escapedName":"can-attribute-observable","rawSpec":"<2.0.0","saveSpec":null,"fetchSpec":"<2.0.0"},"_requiredBy":["/can-stache-bindings","/can-view-live"],"_resolved":"https://registry.npmjs.org/can-attribute-observable/-/can-attribute-observable-0.3.0.tgz","_shasum":"a5543cdc46c956d1f0a3d54773e1507d5911ae8c","_spec":"can-attribute-observable@<2.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-view-live","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bundleDependencies":false,"dependencies":{"can-diff":"^1.0.1","can-dom-data-state":"^1.0.1","can-dom-events":"^1.1.2","can-dom-mutate":"^1.0.3","can-event-dom-radiochange":"^2.1.0","can-globals":"^1.0.1","can-observation":"^4.0.1","can-observation-recorder":"^1.0.2","can-queues":"^1.0.1","can-reflect":"^1.13.3","can-reflect-dependencies":"^1.0.1","can-simple-observable":"^2.0.2"},"deprecated":false,"description":"Create observables from HTML attributes.","devDependencies":{"can-vdom":"^4.0.1","detect-cyclic-packages":"^1.1.1","jshint":"^2.9.5","steal":"^1.6.5","steal-qunit":"^1.0.1","testee":"^0.7.0"},"keywords":[],"main":"can-attribute-observable","scripts":{"detect-cycle":"detect-cyclic-packages","jshint":"jshint ./*.js test/*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"}},{"name":"can-control","version":"4.1.2","nestedFileUrl":"./node_modules/can-component/node_modules/can-control/package.json","origFileUrl":"./node_modules/can-control/package.json","fileUrl":"./node_modules/can-control/package.json","_from":"can-control@^4.0.0","_id":"can-control@4.1.2","_inBundle":false,"_integrity":"sha512-INAV1jlj6BCMr+O6xyC0MSb4RSQqQlEwjxrHwBN7YqL+E4pWLZuF3JbuTHj3/jh87GxA5C0H1Uz03F8PZiEakw==","_location":"/can-control","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-control@^4.0.0","name":"can-control","escapedName":"can-control","rawSpec":"^4.0.0","saveSpec":null,"fetchSpec":"^4.0.0"},"_requiredBy":["/can-component"],"_resolved":"https://registry.npmjs.org/can-control/-/can-control-4.1.2.tgz","_shasum":"5a59a6db360849e1ae05ff5e24dd29c0c4446cd1","_spec":"can-control@^4.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-control/issues"},"bundleDependencies":false,"dependencies":{"can-assign":"^1.1.1","can-construct":"^3.2.0","can-dom-events":"^1.1.0","can-dom-mutate":"<2.0.0","can-event-queue":"<2.0.0","can-key":"<2.0.0","can-log":"^1.0.0","can-namespace":"1.0.0","can-observation":"^4.0.0","can-reflect":"^1.6.0","can-stache-key":"^1.0.0","can-string":"<2.0.0","can-symbol":"^1.0.0"},"deprecated":false,"description":"Declarative event bindings","devDependencies":{"can-define":"^2.0.0","can-queues":"<2.0.0","can-simple-map":"^4.0.0","can-simple-observable":"^2.0.0","can-util":"^3.9.0","detect-cyclic-packages":"^1.1.0","jshint":"^2.9.1","steal":"^1.2.8","steal-qunit":"^1.0.1","steal-tools":"^1.1.2","testee":"^0.7.0"},"homepage":"https://canjs.com/doc/can-control.html","keywords":["canjs","canjs-plugin","donejs"],"license":"MIT","main":"can-control","repository":{"type":"git","url":"git://github.com/canjs/can-control.git"},"scripts":{"detect-cycle":"detect-cyclic-packages","jshint":"jshint can-control.js can-control_test.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag=pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"}},{"name":"can-reflect-promise","version":"2.0.1","nestedFileUrl":"./node_modules/can-stache-key/node_modules/can-reflect-promise/package.json","origFileUrl":"./node_modules/can-reflect-promise/package.json","fileUrl":"./node_modules/can-reflect-promise/package.json","_from":"can-reflect-promise@^2.0.0","_id":"can-reflect-promise@2.0.1","_inBundle":false,"_integrity":"sha512-slTyeUlFwzxuc+m07gCKSY9Y+fcZaSWUlJjMGMx34LTsycxGVsfRlTSCw/sL2Hu1uGQ7+LMkrtQUbMYnBzpJOw==","_location":"/can-reflect-promise","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-reflect-promise@^2.0.0","name":"can-reflect-promise","escapedName":"can-reflect-promise","rawSpec":"^2.0.0","saveSpec":null,"fetchSpec":"^2.0.0"},"_requiredBy":["/can-stache-key"],"_resolved":"https://registry.npmjs.org/can-reflect-promise/-/can-reflect-promise-2.0.1.tgz","_shasum":"608623807e9441fea9a311eecd13c450eadd93c9","_spec":"can-reflect-promise@^2.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache-key","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"https://www.bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-reflect-promise/issues"},"bundleDependencies":false,"dependencies":{"can-key-tree":"^1.0.0","can-log":"^1.0.0","can-observation":"^4.0.0","can-observation-recorder":"^1.0.0","can-queues":"^1.0.0","can-reflect":"^1.1.0","can-symbol":"^1.0.0","can-util":"^3.9.0"},"deprecated":false,"description":"Reflection support for Promise types","devDependencies":{"can-jquery":"^3.2.0","can-test-helpers":"^1.1.0","detect-cyclic-packages":"^1.1.0","jshint":"^2.9.1","steal":"^1.5.4","steal-benchmark":"0.0.1","steal-qunit":"^1.0.1","steal-tools":"^1.1.2","testee":"^0.5.0"},"directories":{"test":"test"},"homepage":"https://canjs.com/doc/can-reflect-promise.html","keywords":["canjs","canjs-plugin","donejs"],"license":"MIT","main":"can-reflect-promise","repository":{"type":"git","url":"git://github.com/canjs/can-reflect-promise.git"},"scripts":{"detect-cycle":"detect-cyclic-packages --ignore done-serve","develop":"done-serve --static --develop --port 8080","jshint":"jshint *.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"},"system":{"npmAlgorithm":"flat"},"steal":{"npmAlgorithm":"flat"}},{"name":"can-event-dom-radiochange","version":"1.0.5","nestedFileUrl":"./node_modules/can-attribute-observable/node_modules/can-event-dom-radiochange/package.json","origFileUrl":"./node_modules/can-event-dom-radiochange/package.json","fileUrl":"./node_modules/can-event-dom-radiochange/package.json","_from":"can-event-dom-radiochange@^1.0.4","_id":"can-event-dom-radiochange@1.0.5","_inBundle":false,"_integrity":"sha512-1/Hscy2KN/eWkhsx0d2ngUwByusCPzVRnfvOC7F5kNg0ivjd7sto5e4JeflRulZv+vdruEB6yx1tzzUWERu3tQ==","_location":"/can-event-dom-radiochange","_phantomChildren":{"can-cid":"1.1.2","can-namespace":"1.0.0"},"_requested":{"type":"range","registry":true,"raw":"can-event-dom-radiochange@^1.0.4","name":"can-event-dom-radiochange","escapedName":"can-event-dom-radiochange","rawSpec":"^1.0.4","saveSpec":null,"fetchSpec":"^1.0.4"},"_requiredBy":["/can-util"],"_resolved":"https://registry.npmjs.org/can-event-dom-radiochange/-/can-event-dom-radiochange-1.0.5.tgz","_shasum":"7bbacdce612ec89c51e57268b0ff3993fc356a22","_spec":"can-event-dom-radiochange@^1.0.4","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-util","author":{"name":"Chris Andrejewski","email":"core@donejs.com","url":"https://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-event-dom-radiochange/issues"},"bundleDependencies":false,"dependencies":{"can-cid":"^1.1.0","can-dom-data-state":"^0.2.0","can-dom-events":"^1.0.2","can-globals":"<2.0.0"},"deprecated":false,"description":"Custom radiochange event","devDependencies":{"detect-cyclic-packages":"^1.1.0","fixpack":"^2.3.1","jshint":"^2.9.1","steal":"^1.3.1","steal-qunit":"^1.0.1","steal-tools":"^1.2.0","testee":"^0.6.0"},"homepage":"https://canjs.com/doc/can-event-dom-radiochange.html","keywords":["canjs","change","event","radio"],"license":"MIT","main":"can-event-dom-radiochange","repository":{"type":"git","url":"git://github.com/canjs/can-event-dom-radiochange.git"},"scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","install-canary":"npm install --no-shrinkwrap","install-locked":"npm install","jshint":"jshint ./*.js --config","lint":"fixpack && npm run jshint","postversion":"git push --follow-tags","preversion":"npm test && npm run build","test":"npm run detect-cycle && npm run lint && npm run testee","testee":"testee test.html --browsers firefox"},"steal":{"main":"can-event-dom-radiochange","npmIgnore":["testee","steal-tools"]}},{"name":"can-key","version":"0.5.0","nestedFileUrl":"./node_modules/can-control/node_modules/can-key/package.json","origFileUrl":"./node_modules/can-key/package.json","fileUrl":"./node_modules/can-key/package.json","_from":"can-key@<2.0.0","_id":"can-key@0.5.0","_inBundle":false,"_integrity":"sha512-CPUrwSNvtQSjLZ/Idkm+FJL63rLhvvRWN5no4kl6CIsa9dl7MGOkqYz6GoI4kV4YYeZBKYcqfSphrFh3ixXAfA==","_location":"/can-key","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-key@<2.0.0","name":"can-key","escapedName":"can-key","rawSpec":"<2.0.0","saveSpec":null,"fetchSpec":"<2.0.0"},"_requiredBy":["/can-control"],"_resolved":"https://registry.npmjs.org/can-key/-/can-key-0.5.0.tgz","_shasum":"2a75f20c644dbf2e40f1631d34223af4be3a9672","_spec":"can-key@<2.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-control","author":{"name":"DoneJS","email":"core@donejs.com","url":"donejs.com"},"bugs":{"url":"https://github.com/canjs/can-key/issues"},"bundleDependencies":false,"dependencies":{"can-namespace":"^1.0.0","can-reflect":"^1.13.3","can-symbol":"^1.0.0"},"deprecated":false,"description":"Read nested key values","devDependencies":{"jshint":"^2.9.1","steal":"^1.6.5","steal-qunit":"^1.0.1","steal-tools":"^1.11.3","testee":"^0.7.0"},"homepage":"http://canjs.com","keywords":["canjs","donejs-plugin"],"license":"MIT","main":"can-key","repository":{"type":"git","url":"git://github.com/canjs/can-key.git"},"scripts":{"build":"node build.js","develop":"done-serve --static --develop --port 8080","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git checkout master && git branch -D release && git push","preversion":"npm test && npm run build","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","test":"npm run jshint && npm run testee","testee":"testee test.html --browsers firefox","version":"git commit -am \"Update version number\" && git checkout -b release && git add -f dist/"},"steal":{"npmIgnore":{"testee":true,"generator-donejs":true,"donejs-cli":true,"steal-tools":true},"plugins":["steal-less","steal-stache"],"main":"can-key"}},{"name":"can-event-dom-radiochange","version":"2.1.0","nestedFileUrl":"./node_modules/can-attribute-observable/node_modules/can-event-dom-radiochange/package.json","origFileUrl":"./node_modules/can-event-dom-radiochange/package.json","__crawledNestedPosition":true,"nextFileUrl":"./node_modules/can-attribute-observable/node_modules/can-event-dom-radiochange/package.json","fileUrl":"./node_modules/can-attribute-observable/node_modules/can-event-dom-radiochange/package.json","_from":"can-event-dom-radiochange@^2.1.0","_id":"can-event-dom-radiochange@2.1.0","_inBundle":false,"_integrity":"sha512-qQhuMyak80+T8QSoOyC2q4sm7y4R86j1axwKx5puSBPBv1EB/HtP5veHnmPBckZgkEu6Y0qC3UgCl5AKy/BHtQ==","_location":"/can-attribute-observable/can-event-dom-radiochange","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-event-dom-radiochange@^2.1.0","name":"can-event-dom-radiochange","escapedName":"can-event-dom-radiochange","rawSpec":"^2.1.0","saveSpec":null,"fetchSpec":"^2.1.0"},"_requiredBy":["/can-attribute-observable"],"_resolved":"https://registry.npmjs.org/can-event-dom-radiochange/-/can-event-dom-radiochange-2.1.0.tgz","_shasum":"7ebb0a47884d73b6cabd06fc80036e5bd50b46fc","_spec":"can-event-dom-radiochange@^2.1.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-attribute-observable","author":{"name":"Chris Andrejewski","email":"core@donejs.com","url":"https://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-event-dom-radiochange/issues"},"bundleDependencies":false,"dependencies":{"can-dom-events":"<2.0.0","can-globals":"<2.0.0","can-namespace":"1.0.0"},"deprecated":false,"description":"Custom radiochange event","devDependencies":{"detect-cyclic-packages":"^1.1.0","fixpack":"^2.3.1","jshint":"^2.9.1","steal":"^1.3.1","steal-qunit":"^1.0.1","steal-tools":"^1.2.0","testee":"^0.6.0"},"homepage":"https://canjs.com/doc/can-event-dom-radiochange.html","keywords":["canjs","change","event","radio"],"license":"MIT","main":"can-event-dom-radiochange","repository":{"type":"git","url":"git://github.com/canjs/can-event-dom-radiochange.git"},"scripts":{"build":"node build.js","detect-cycle":"detect-cyclic-packages --ignore done-serve","install-canary":"npm install --no-shrinkwrap","install-locked":"npm install","jshint":"jshint ./*.js --config","lint":"fixpack && npm run jshint","postversion":"git push --follow-tags","preversion":"npm test && npm run build","test":"npm run detect-cycle && npm run lint && npm run testee","testee":"testee test.html --browsers firefox"},"steal":{"npmIgnore":{"testee":true,"steal-tools":true},"main":"can-event-dom-radiochange"}},{"name":"can-view-import","version":"4.0.2","nestedFileUrl":"./node_modules/steal-stache/node_modules/can-view-import/package.json","origFileUrl":"./node_modules/can-view-import/package.json","fileUrl":"./node_modules/can-view-import/package.json","_from":"can-view-import@^4.0.0","_id":"can-view-import@4.0.2","_inBundle":false,"_integrity":"sha512-Z3ZgwmeNKOSWu5W9b3eLyfIwBYwVpDcfMUdJvq5YBA8LqsAU2PsQA6oGq2McOIvJasXPninOKiwndzpFQ0ZukA==","_location":"/can-view-import","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"can-view-import@^4.0.0","name":"can-view-import","escapedName":"can-view-import","rawSpec":"^4.0.0","saveSpec":null,"fetchSpec":"^4.0.0"},"_requiredBy":["/can-connect","/steal-stache"],"_resolved":"https://registry.npmjs.org/can-view-import/-/can-view-import-4.0.2.tgz","_shasum":"73e5be197f05cf25b4fd6db0316889e7b6668208","_spec":"can-view-import@^4.0.0","_where":"C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-connect","author":{"name":"Bitovi","email":"contact@bitovi.com","url":"http://bitovi.com"},"bugs":{"url":"https://github.com/canjs/can-view-import/issues"},"bundleDependencies":false,"dependencies":{"can-assign":"^1.0.0","can-dom-data-state":"^1.0.0","can-dom-mutate":"<2.0.0","can-globals":"<2.0.0","can-log":"^1.0.0","can-symbol":"^1.5.0","can-util":"^3.9.5","can-view-callbacks":"^4.0.0","can-view-nodelist":"^4.0.0"},"deprecated":false,"description":"Import dependencies in CanJS views","devDependencies":{"bit-docs":"0.0.7","can-component":"^4.0.0","can-observation":"4.0.0","can-queues":"<2.0.0","can-simple-map":"^4.0.0","can-simple-observable":"^2.0.0","can-stache":"^4.0.0","can-test-helpers":"^1.0.1","detect-cyclic-packages":"^1.1.0","jshint":"^2.9.1","steal":"^1.2.0","steal-qunit":"^1.0.0","steal-stache":"^4.0.0-pre.1","steal-tools":"^1.0.0","testee":"^0.7.0"},"homepage":"https://canjs.com/doc/can-view-import.html","keywords":[],"main":"can-view-import","repository":{"type":"git","url":"git://github.com/canjs/can-view-import.git"},"scripts":{"detect-cycle":"detect-cyclic-packages --ignore done-serve,steal-stache","jshint":"jshint ./*.js --config","postpublish":"git push --tags && git push","preversion":"npm test","release:major":"npm version major && npm publish","release:minor":"npm version minor && npm publish","release:patch":"npm version patch && npm publish","release:pre":"npm version prerelease && npm publish --tag=pre","test":"npm run detect-cycle && npm run jshint && npm run testee","testee":"testee test/test.html --browsers firefox"}}]); }
+System.bundles = {"dev-bundle.css!":["shuttle-canstrap@1.0.50#canstrap.css!steal-css@1.3.2#css","font-awesome@4.7.0#css/font-awesome.css!steal-css@1.3.2#css","bootstrap@4.1.1#dist/css/bootstrap.css!steal-css@1.3.2#css"]};
 /*jquery@3.3.1#dist/jquery*/
 (function (global, factory) {
     'use strict';
@@ -8835,31 +8833,6 @@ define('can-define-validate-validatejs@1.0.1#can-define-validate-validatejs', [
     exports.Tooltip = Tooltip;
     Object.defineProperty(exports, '__esModule', { value: true });
 }));
-/*tempusdominus-bootstrap-4@5.0.0-alpha18#build/js/tempusdominus-bootstrap-4*/
-define('tempusdominus-bootstrap-4@5.0.0-alpha18#build/js/tempusdominus-bootstrap-4', [
-    'module',
-    '@loader',
-    'require'
-], function (module, loader, require) {
-    loader.get('@@global-helpers').prepareGlobal({
-        require: require,
-        name: module.id,
-        deps: []
-    });
-    var define = loader.global.define;
-    var require = loader.global.require;
-    var source = '/*@preserve\r\n * Tempus Dominus Bootstrap4 v5.0.0-alpha18 (https://tempusdominus.github.io/bootstrap-4/)\r\n * Copyright 2016-2018 Jonathan Peterson\r\n * Licensed under MIT (https://github.com/tempusdominus/bootstrap-3/blob/master/LICENSE)\r\n */\r\n\r\nif (typeof jQuery === \'undefined\') {\r\n  throw new Error(\'Tempus Dominus Bootstrap4\\\'s requires jQuery. jQuery must be included before Tempus Dominus Bootstrap4\\\'s JavaScript.\');\r\n}\r\n\r\n+function ($) {\r\n  var version = $.fn.jquery.split(\' \')[0].split(\'.\');\r\n  if ((version[0] < 2 && version[1] < 9) || (version[0] === 1 && version[1] === 9 && version[2] < 1) || (version[0] >= 4)) {\r\n    throw new Error(\'Tempus Dominus Bootstrap4\\\'s requires at least jQuery v3.0.0 but less than v4.0.0\');\r\n  }\r\n}(jQuery);\r\n\r\n\r\nif (typeof moment === \'undefined\') {\r\n  throw new Error(\'Tempus Dominus Bootstrap4\\\'s requires moment.js. Moment.js must be included before Tempus Dominus Bootstrap4\\\'s JavaScript.\');\r\n}\r\n\r\nvar version = moment.version.split(\'.\')\r\nif ((version[0] <= 2 && version[1] < 17) || (version[0] >= 3)) {\r\n  throw new Error(\'Tempus Dominus Bootstrap4\\\'s requires at least moment.js v2.17.0 but less than v3.0.0\');\r\n}\r\n\r\n+function () {\r\n\r\nvar _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn\'t been initialised - super() hasn\'t been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }\n\n// ReSharper disable once InconsistentNaming\nvar DateTimePicker = function ($) {\n    // ReSharper disable InconsistentNaming\n    var NAME = \'datetimepicker\',\n        VERSION = \'5.0.0-alpha7\',\n        DATA_KEY = \'\' + NAME,\n        EVENT_KEY = \'.\' + DATA_KEY,\n        EMIT_EVENT_KEY = DATA_KEY + \'.\',\n        DATA_API_KEY = \'.data-api\',\n        Selector = {\n        DATA_TOGGLE: \'[data-toggle="\' + DATA_KEY + \'"]\'\n    },\n        ClassName = {\n        INPUT: NAME + \'-input\'\n    },\n        Event = {\n        CHANGE: \'change\' + EVENT_KEY,\n        BLUR: \'blur\' + EVENT_KEY,\n        KEYUP: \'keyup\' + EVENT_KEY,\n        KEYDOWN: \'keydown\' + EVENT_KEY,\n        FOCUS: \'focus\' + EVENT_KEY,\n        CLICK_DATA_API: \'click\' + EVENT_KEY + DATA_API_KEY,\n        //emitted\n        UPDATE: EMIT_EVENT_KEY + \'update\',\n        ERROR: EMIT_EVENT_KEY + \'error\',\n        HIDE: EMIT_EVENT_KEY + \'hide\',\n        SHOW: EMIT_EVENT_KEY + \'show\'\n    },\n        Default = {\n        timeZone: \'\',\n        format: false,\n        dayViewHeaderFormat: \'MMMM YYYY\',\n        extraFormats: false,\n        stepping: 1,\n        minDate: false,\n        maxDate: false,\n        useCurrent: true,\n        collapse: true,\n        locale: window.moment.locale(),\n        defaultDate: false,\n        disabledDates: false,\n        enabledDates: false,\n        icons: {\n            time: \'fa fa-clock-o\',\n            date: \'fa fa-calendar\',\n            up: \'fa fa-arrow-up\',\n            down: \'fa fa-arrow-down\',\n            previous: \'fa fa-chevron-left\',\n            next: \'fa fa-chevron-right\',\n            today: \'fa fa-calendar-check-o\',\n            clear: \'fa fa-delete\',\n            close: \'fa fa-times\'\n        },\n        tooltips: {\n            today: \'Go to today\',\n            clear: \'Clear selection\',\n            close: \'Close the picker\',\n            selectMonth: \'Select Month\',\n            prevMonth: \'Previous Month\',\n            nextMonth: \'Next Month\',\n            selectYear: \'Select Year\',\n            prevYear: \'Previous Year\',\n            nextYear: \'Next Year\',\n            selectDecade: \'Select Decade\',\n            prevDecade: \'Previous Decade\',\n            nextDecade: \'Next Decade\',\n            prevCentury: \'Previous Century\',\n            nextCentury: \'Next Century\',\n            pickHour: \'Pick Hour\',\n            incrementHour: \'Increment Hour\',\n            decrementHour: \'Decrement Hour\',\n            pickMinute: \'Pick Minute\',\n            incrementMinute: \'Increment Minute\',\n            decrementMinute: \'Decrement Minute\',\n            pickSecond: \'Pick Second\',\n            incrementSecond: \'Increment Second\',\n            decrementSecond: \'Decrement Second\',\n            togglePeriod: \'Toggle Period\',\n            selectTime: \'Select Time\',\n            selectDate: \'Select Date\'\n        },\n        useStrict: false,\n        sideBySide: false,\n        daysOfWeekDisabled: false,\n        calendarWeeks: false,\n        viewMode: \'days\',\n        toolbarPlacement: \'default\',\n        buttons: {\n            showToday: false,\n            showClear: false,\n            showClose: false\n        },\n        widgetPositioning: {\n            horizontal: \'auto\',\n            vertical: \'auto\'\n        },\n        widgetParent: null,\n        ignoreReadonly: false,\n        keepOpen: false,\n        focusOnShow: true,\n        inline: false,\n        keepInvalid: false,\n        keyBinds: {\n            up: function up() {\n                if (!this.widget) {\n                    return false;\n                }\n                var d = this._dates[0] || this.getMoment();\n                if (this.widget.find(\'.datepicker\').is(\':visible\')) {\n                    this.date(d.clone().subtract(7, \'d\'));\n                } else {\n                    this.date(d.clone().add(this.stepping(), \'m\'));\n                }\n                return true;\n            },\n            down: function down() {\n                if (!this.widget) {\n                    this.show();\n                    return false;\n                }\n                var d = this._dates[0] || this.getMoment();\n                if (this.widget.find(\'.datepicker\').is(\':visible\')) {\n                    this.date(d.clone().add(7, \'d\'));\n                } else {\n                    this.date(d.clone().subtract(this.stepping(), \'m\'));\n                }\n                return true;\n            },\n            \'control up\': function controlUp() {\n                if (!this.widget) {\n                    return false;\n                }\n                var d = this._dates[0] || this.getMoment();\n                if (this.widget.find(\'.datepicker\').is(\':visible\')) {\n                    this.date(d.clone().subtract(1, \'y\'));\n                } else {\n                    this.date(d.clone().add(1, \'h\'));\n                }\n                return true;\n            },\n            \'control down\': function controlDown() {\n                if (!this.widget) {\n                    return false;\n                }\n                var d = this._dates[0] || this.getMoment();\n                if (this.widget.find(\'.datepicker\').is(\':visible\')) {\n                    this.date(d.clone().add(1, \'y\'));\n                } else {\n                    this.date(d.clone().subtract(1, \'h\'));\n                }\n                return true;\n            },\n            left: function left() {\n                if (!this.widget) {\n                    return false;\n                }\n                var d = this._dates[0] || this.getMoment();\n                if (this.widget.find(\'.datepicker\').is(\':visible\')) {\n                    this.date(d.clone().subtract(1, \'d\'));\n                }\n                return true;\n            },\n            right: function right() {\n                if (!this.widget) {\n                    return false;\n                }\n                var d = this._dates[0] || this.getMoment();\n                if (this.widget.find(\'.datepicker\').is(\':visible\')) {\n                    this.date(d.clone().add(1, \'d\'));\n                }\n                return true;\n            },\n            pageUp: function pageUp() {\n                if (!this.widget) {\n                    return false;\n                }\n                var d = this._dates[0] || this.getMoment();\n                if (this.widget.find(\'.datepicker\').is(\':visible\')) {\n                    this.date(d.clone().subtract(1, \'M\'));\n                }\n                return true;\n            },\n            pageDown: function pageDown() {\n                if (!this.widget) {\n                    return false;\n                }\n                var d = this._dates[0] || this.getMoment();\n                if (this.widget.find(\'.datepicker\').is(\':visible\')) {\n                    this.date(d.clone().add(1, \'M\'));\n                }\n                return true;\n            },\n            enter: function enter() {\n                this.hide();\n                return true;\n            },\n            escape: function escape() {\n                if (!this.widget) {\n                    return false;\n                }\n                this.hide();\n                return true;\n            },\n            \'control space\': function controlSpace() {\n                if (!this.widget) {\n                    return false;\n                }\n                if (this.widget.find(\'.timepicker\').is(\':visible\')) {\n                    this.widget.find(\'.btn[data-action="togglePeriod"]\').click();\n                }\n                return true;\n            },\n            t: function t() {\n                this.date(this.getMoment());\n                return true;\n            },\n            \'delete\': function _delete() {\n                if (!this.widget) {\n                    return false;\n                }\n                this.clear();\n                return true;\n            }\n        },\n        debug: false,\n        allowInputToggle: false,\n        disabledTimeIntervals: false,\n        disabledHours: false,\n        enabledHours: false,\n        viewDate: false,\n        allowMultidate: false,\n        multidateSeparator: \',\'\n    },\n        DatePickerModes = [{\n        CLASS_NAME: \'days\',\n        NAV_FUNCTION: \'M\',\n        NAV_STEP: 1\n    }, {\n        CLASS_NAME: \'months\',\n        NAV_FUNCTION: \'y\',\n        NAV_STEP: 1\n    }, {\n        CLASS_NAME: \'years\',\n        NAV_FUNCTION: \'y\',\n        NAV_STEP: 10\n    }, {\n        CLASS_NAME: \'decades\',\n        NAV_FUNCTION: \'y\',\n        NAV_STEP: 100\n    }],\n        KeyMap = {\n        \'up\': 38,\n        38: \'up\',\n        \'down\': 40,\n        40: \'down\',\n        \'left\': 37,\n        37: \'left\',\n        \'right\': 39,\n        39: \'right\',\n        \'tab\': 9,\n        9: \'tab\',\n        \'escape\': 27,\n        27: \'escape\',\n        \'enter\': 13,\n        13: \'enter\',\n        \'pageUp\': 33,\n        33: \'pageUp\',\n        \'pageDown\': 34,\n        34: \'pageDown\',\n        \'shift\': 16,\n        16: \'shift\',\n        \'control\': 17,\n        17: \'control\',\n        \'space\': 32,\n        32: \'space\',\n        \'t\': 84,\n        84: \'t\',\n        \'delete\': 46,\n        46: \'delete\'\n    },\n        ViewModes = [\'times\', \'days\', \'months\', \'years\', \'decades\'],\n        keyState = {},\n        keyPressHandled = {};\n\n    var MinViewModeNumber = 0;\n    // ReSharper restore InconsistentNaming\n\n    // ReSharper disable once DeclarationHides\n    // ReSharper disable once InconsistentNaming\n\n    var DateTimePicker = function () {\n        /** @namespace eData.dateOptions */\n        /** @namespace moment.tz */\n\n        function DateTimePicker(element, options) {\n            _classCallCheck(this, DateTimePicker);\n\n            this._options = this._getOptions(options);\n            this._element = element;\n            this._dates = [];\n            this._datesFormatted = [];\n            this._viewDate = null;\n            this.unset = true;\n            this.component = false;\n            this.widget = false;\n            this.use24Hours = null;\n            this.actualFormat = null;\n            this.parseFormats = null;\n            this.currentViewMode = null;\n\n            this._int();\n        }\n\n        /**\n         * @return {string}\n         */\n\n\n        //private\n\n        DateTimePicker.prototype._int = function _int() {\n            var targetInput = this._element.data(\'target-input\');\n            if (this._element.is(\'input\')) {\n                this.input = this._element;\n            } else if (targetInput !== undefined) {\n                if (targetInput === \'nearest\') {\n                    this.input = this._element.find(\'input\');\n                } else {\n                    this.input = $(targetInput);\n                }\n            }\n\n            this._dates = [];\n            this._dates[0] = this.getMoment();\n            this._viewDate = this.getMoment().clone();\n\n            $.extend(true, this._options, this._dataToOptions());\n\n            this.options(this._options);\n\n            this._initFormatting();\n\n            if (this.input !== undefined && this.input.is(\'input\') && this.input.val().trim().length !== 0) {\n                this._setValue(this._parseInputDate(this.input.val().trim()));\n            } else if (this._options.defaultDate && this.input !== undefined && this.input.attr(\'placeholder\') === undefined) {\n                this._setValue(this._options.defaultDate);\n            }\n            if (this._options.inline) {\n                this.show();\n            }\n        };\n\n        DateTimePicker.prototype._update = function _update() {\n            if (!this.widget) {\n                return;\n            }\n            this._fillDate();\n            this._fillTime();\n        };\n\n        DateTimePicker.prototype._setValue = function _setValue(targetMoment, index) {\n            var oldDate = this.unset ? null : this._dates[index];\n            var outpValue = \'\';\n            // case of calling setValue(null or false)\n            if (!targetMoment) {\n                if (!this._options.allowMultidate || this._dates.length === 1) {\n                    this.unset = true;\n                    this._dates = [];\n                    this._datesFormatted = [];\n                } else {\n                    outpValue = this._element.data(\'date\') + \',\';\n                    outpValue = outpValue.replace(oldDate.format(this.actualFormat) + \',\', \'\').replace(\',,\', \'\').replace(/,\\s*$/, \'\');\n                    this._dates.splice(index, 1);\n                    this._datesFormatted.splice(index, 1);\n                }\n                if (this.input !== undefined) {\n                    this.input.val(outpValue);\n                    this.input.trigger(\'input\');\n                }\n                this._element.data(\'date\', outpValue);\n                this._notifyEvent({\n                    type: DateTimePicker.Event.CHANGE,\n                    date: false,\n                    oldDate: oldDate\n                });\n                this._update();\n                return;\n            }\n\n            targetMoment = targetMoment.clone().locale(this._options.locale);\n\n            if (this._hasTimeZone()) {\n                targetMoment.tz(this._options.timeZone);\n            }\n\n            if (this._options.stepping !== 1) {\n                targetMoment.minutes(Math.round(targetMoment.minutes() / this._options.stepping) * this._options.stepping).seconds(0);\n            }\n\n            if (this._isValid(targetMoment)) {\n                this._dates[index] = targetMoment;\n                this._datesFormatted[index] = targetMoment.format(\'YYYY-MM-DD\');\n                this._viewDate = targetMoment.clone();\n                if (this._options.allowMultidate && this._dates.length > 1) {\n                    for (var i = 0; i < this._dates.length; i++) {\n                        outpValue += \'\' + this._dates[i].format(this.actualFormat) + this._options.multidateSeparator;\n                    }\n                    outpValue = outpValue.replace(/,\\s*$/, \'\');\n                } else {\n                    outpValue = this._dates[index].format(this.actualFormat);\n                }\n                if (this.input !== undefined) {\n                    this.input.val(outpValue);\n                    this.input.trigger(\'input\');\n                }\n                this._element.data(\'date\', outpValue);\n\n                this.unset = false;\n                this._update();\n                this._notifyEvent({\n                    type: DateTimePicker.Event.CHANGE,\n                    date: this._dates[index].clone(),\n                    oldDate: oldDate\n                });\n            } else {\n                if (!this._options.keepInvalid) {\n                    if (this.input !== undefined) {\n                        this.input.val(\'\' + (this.unset ? \'\' : this._dates[index].format(this.actualFormat)));\n                        this.input.trigger(\'input\');\n                    }\n                } else {\n                    this._notifyEvent({\n                        type: DateTimePicker.Event.CHANGE,\n                        date: targetMoment,\n                        oldDate: oldDate\n                    });\n                }\n                this._notifyEvent({\n                    type: DateTimePicker.Event.ERROR,\n                    date: targetMoment,\n                    oldDate: oldDate\n                });\n            }\n        };\n\n        DateTimePicker.prototype._change = function _change(e) {\n            var val = $(e.target).val().trim(),\n                parsedDate = val ? this._parseInputDate(val) : null;\n            this._setValue(parsedDate);\n            e.stopImmediatePropagation();\n            return false;\n        };\n\n        //noinspection JSMethodCanBeStatic\n\n\n        DateTimePicker.prototype._getOptions = function _getOptions(options) {\n            options = $.extend(true, {}, Default, options);\n            return options;\n        };\n\n        DateTimePicker.prototype._hasTimeZone = function _hasTimeZone() {\n            return window.moment.tz !== undefined && this._options.timeZone !== undefined && this._options.timeZone !== null && this._options.timeZone !== \'\';\n        };\n\n        DateTimePicker.prototype._isEnabled = function _isEnabled(granularity) {\n            if (typeof granularity !== \'string\' || granularity.length > 1) {\n                throw new TypeError(\'isEnabled expects a single character string parameter\');\n            }\n            switch (granularity) {\n                case \'y\':\n                    return this.actualFormat.indexOf(\'Y\') !== -1;\n                case \'M\':\n                    return this.actualFormat.indexOf(\'M\') !== -1;\n                case \'d\':\n                    return this.actualFormat.toLowerCase().indexOf(\'d\') !== -1;\n                case \'h\':\n                case \'H\':\n                    return this.actualFormat.toLowerCase().indexOf(\'h\') !== -1;\n                case \'m\':\n                    return this.actualFormat.indexOf(\'m\') !== -1;\n                case \'s\':\n                    return this.actualFormat.indexOf(\'s\') !== -1;\n                default:\n                    return false;\n            }\n        };\n\n        DateTimePicker.prototype._hasTime = function _hasTime() {\n            return this._isEnabled(\'h\') || this._isEnabled(\'m\') || this._isEnabled(\'s\');\n        };\n\n        DateTimePicker.prototype._hasDate = function _hasDate() {\n            return this._isEnabled(\'y\') || this._isEnabled(\'M\') || this._isEnabled(\'d\');\n        };\n\n        DateTimePicker.prototype._dataToOptions = function _dataToOptions() {\n            var eData = this._element.data();\n            var dataOptions = {};\n\n            if (eData.dateOptions && eData.dateOptions instanceof Object) {\n                dataOptions = $.extend(true, dataOptions, eData.dateOptions);\n            }\n\n            $.each(this._options, function (key) {\n                var attributeName = \'date\' + key.charAt(0).toUpperCase() + key.slice(1); //todo data api key\n                if (eData[attributeName] !== undefined) {\n                    dataOptions[key] = eData[attributeName];\n                } else {\n                    delete dataOptions[key];\n                }\n            });\n            return dataOptions;\n        };\n\n        DateTimePicker.prototype._notifyEvent = function _notifyEvent(e) {\n            if (e.type === DateTimePicker.Event.CHANGE && e.date && e.date.isSame(e.oldDate) || !e.date && !e.oldDate) {\n                return;\n            }\n            this._element.trigger(e);\n        };\n\n        DateTimePicker.prototype._viewUpdate = function _viewUpdate(e) {\n            if (e === \'y\') {\n                e = \'YYYY\';\n            }\n            this._notifyEvent({\n                type: DateTimePicker.Event.UPDATE,\n                change: e,\n                viewDate: this._viewDate.clone()\n            });\n        };\n\n        DateTimePicker.prototype._showMode = function _showMode(dir) {\n            if (!this.widget) {\n                return;\n            }\n            if (dir) {\n                this.currentViewMode = Math.max(MinViewModeNumber, Math.min(3, this.currentViewMode + dir));\n            }\n            this.widget.find(\'.datepicker > div\').hide().filter(\'.datepicker-\' + DatePickerModes[this.currentViewMode].CLASS_NAME).show();\n        };\n\n        DateTimePicker.prototype._isInDisabledDates = function _isInDisabledDates(testDate) {\n            return this._options.disabledDates[testDate.format(\'YYYY-MM-DD\')] === true;\n        };\n\n        DateTimePicker.prototype._isInEnabledDates = function _isInEnabledDates(testDate) {\n            return this._options.enabledDates[testDate.format(\'YYYY-MM-DD\')] === true;\n        };\n\n        DateTimePicker.prototype._isInDisabledHours = function _isInDisabledHours(testDate) {\n            return this._options.disabledHours[testDate.format(\'H\')] === true;\n        };\n\n        DateTimePicker.prototype._isInEnabledHours = function _isInEnabledHours(testDate) {\n            return this._options.enabledHours[testDate.format(\'H\')] === true;\n        };\n\n        DateTimePicker.prototype._isValid = function _isValid(targetMoment, granularity) {\n            if (!targetMoment.isValid()) {\n                return false;\n            }\n            if (this._options.disabledDates && granularity === \'d\' && this._isInDisabledDates(targetMoment)) {\n                return false;\n            }\n            if (this._options.enabledDates && granularity === \'d\' && !this._isInEnabledDates(targetMoment)) {\n                return false;\n            }\n            if (this._options.minDate && targetMoment.isBefore(this._options.minDate, granularity)) {\n                return false;\n            }\n            if (this._options.maxDate && targetMoment.isAfter(this._options.maxDate, granularity)) {\n                return false;\n            }\n            if (this._options.daysOfWeekDisabled && granularity === \'d\' && this._options.daysOfWeekDisabled.indexOf(targetMoment.day()) !== -1) {\n                return false;\n            }\n            if (this._options.disabledHours && (granularity === \'h\' || granularity === \'m\' || granularity === \'s\') && this._isInDisabledHours(targetMoment)) {\n                return false;\n            }\n            if (this._options.enabledHours && (granularity === \'h\' || granularity === \'m\' || granularity === \'s\') && !this._isInEnabledHours(targetMoment)) {\n                return false;\n            }\n            if (this._options.disabledTimeIntervals && (granularity === \'h\' || granularity === \'m\' || granularity === \'s\')) {\n                var found = false;\n                $.each(this._options.disabledTimeIntervals, function () {\n                    if (targetMoment.isBetween(this[0], this[1])) {\n                        found = true;\n                        return false;\n                    }\n                });\n                if (found) {\n                    return false;\n                }\n            }\n            return true;\n        };\n\n        DateTimePicker.prototype._parseInputDate = function _parseInputDate(inputDate) {\n            if (this._options.parseInputDate === undefined) {\n                if (!window.moment.isMoment(inputDate)) {\n                    inputDate = this.getMoment(inputDate);\n                }\n            } else {\n                inputDate = this._options.parseInputDate(inputDate);\n            }\n            //inputDate.locale(this.options.locale);\n            return inputDate;\n        };\n\n        DateTimePicker.prototype._keydown = function _keydown(e) {\n            var handler = null,\n                index = void 0,\n                index2 = void 0,\n                keyBindKeys = void 0,\n                allModifiersPressed = void 0;\n            var pressedKeys = [],\n                pressedModifiers = {},\n                currentKey = e.which,\n                pressed = \'p\';\n\n            keyState[currentKey] = pressed;\n\n            for (index in keyState) {\n                if (keyState.hasOwnProperty(index) && keyState[index] === pressed) {\n                    pressedKeys.push(index);\n                    if (parseInt(index, 10) !== currentKey) {\n                        pressedModifiers[index] = true;\n                    }\n                }\n            }\n\n            for (index in this._options.keyBinds) {\n                if (this._options.keyBinds.hasOwnProperty(index) && typeof this._options.keyBinds[index] === \'function\') {\n                    keyBindKeys = index.split(\' \');\n                    if (keyBindKeys.length === pressedKeys.length && KeyMap[currentKey] === keyBindKeys[keyBindKeys.length - 1]) {\n                        allModifiersPressed = true;\n                        for (index2 = keyBindKeys.length - 2; index2 >= 0; index2--) {\n                            if (!(KeyMap[keyBindKeys[index2]] in pressedModifiers)) {\n                                allModifiersPressed = false;\n                                break;\n                            }\n                        }\n                        if (allModifiersPressed) {\n                            handler = this._options.keyBinds[index];\n                            break;\n                        }\n                    }\n                }\n            }\n\n            if (handler) {\n                if (handler.call(this.widget)) {\n                    e.stopPropagation();\n                    e.preventDefault();\n                }\n            }\n        };\n\n        //noinspection JSMethodCanBeStatic,SpellCheckingInspection\n\n\n        DateTimePicker.prototype._keyup = function _keyup(e) {\n            keyState[e.which] = \'r\';\n            if (keyPressHandled[e.which]) {\n                keyPressHandled[e.which] = false;\n                e.stopPropagation();\n                e.preventDefault();\n            }\n        };\n\n        DateTimePicker.prototype._indexGivenDates = function _indexGivenDates(givenDatesArray) {\n            // Store given enabledDates and disabledDates as keys.\n            // This way we can check their existence in O(1) time instead of looping through whole array.\n            // (for example: options.enabledDates[\'2014-02-27\'] === true)\n            var givenDatesIndexed = {},\n                self = this;\n            $.each(givenDatesArray, function () {\n                var dDate = self._parseInputDate(this);\n                if (dDate.isValid()) {\n                    givenDatesIndexed[dDate.format(\'YYYY-MM-DD\')] = true;\n                }\n            });\n            return Object.keys(givenDatesIndexed).length ? givenDatesIndexed : false;\n        };\n\n        DateTimePicker.prototype._indexGivenHours = function _indexGivenHours(givenHoursArray) {\n            // Store given enabledHours and disabledHours as keys.\n            // This way we can check their existence in O(1) time instead of looping through whole array.\n            // (for example: options.enabledHours[\'2014-02-27\'] === true)\n            var givenHoursIndexed = {};\n            $.each(givenHoursArray, function () {\n                givenHoursIndexed[this] = true;\n            });\n            return Object.keys(givenHoursIndexed).length ? givenHoursIndexed : false;\n        };\n\n        DateTimePicker.prototype._initFormatting = function _initFormatting() {\n            var format = this._options.format || \'L LT\',\n                self = this;\n\n            this.actualFormat = format.replace(/(\\[[^\\[]*])|(\\\\)?(LTS|LT|LL?L?L?|l{1,4})/g, function (formatInput) {\n                return self._dates[0].localeData().longDateFormat(formatInput) || formatInput; //todo taking the first date should be ok\n            });\n\n            this.parseFormats = this._options.extraFormats ? this._options.extraFormats.slice() : [];\n            if (this.parseFormats.indexOf(format) < 0 && this.parseFormats.indexOf(this.actualFormat) < 0) {\n                this.parseFormats.push(this.actualFormat);\n            }\n\n            this.use24Hours = this.actualFormat.toLowerCase().indexOf(\'a\') < 1 && this.actualFormat.replace(/\\[.*?]/g, \'\').indexOf(\'h\') < 1;\n\n            if (this._isEnabled(\'y\')) {\n                MinViewModeNumber = 2;\n            }\n            if (this._isEnabled(\'M\')) {\n                MinViewModeNumber = 1;\n            }\n            if (this._isEnabled(\'d\')) {\n                MinViewModeNumber = 0;\n            }\n\n            this.currentViewMode = Math.max(MinViewModeNumber, this.currentViewMode);\n\n            if (!this.unset) {\n                this._setValue(this._dates[0], 0);\n            }\n        };\n\n        DateTimePicker.prototype._getLastPickedDate = function _getLastPickedDate() {\n            return this._dates[this._getLastPickedDateIndex()];\n        };\n\n        DateTimePicker.prototype._getLastPickedDateIndex = function _getLastPickedDateIndex() {\n            return this._dates.length - 1;\n        };\n\n        //public\n\n\n        DateTimePicker.prototype.getMoment = function getMoment(d) {\n            var returnMoment = void 0;\n\n            if (d === undefined || d === null) {\n                returnMoment = window.moment(); //TODO should this use format? and locale?\n            } else if (this._hasTimeZone()) {\n                // There is a string to parse and a default time zone\n                // parse with the tz function which takes a default time zone if it is not in the format string\n                returnMoment = window.moment.tz(d, this.parseFormats, this._options.useStrict, this._options.timeZone);\n            } else {\n                returnMoment = window.moment(d, this.parseFormats, this._options.useStrict);\n            }\n\n            if (this._hasTimeZone()) {\n                returnMoment.tz(this._options.timeZone);\n            }\n\n            return returnMoment;\n        };\n\n        DateTimePicker.prototype.toggle = function toggle() {\n            return this.widget ? this.hide() : this.show();\n        };\n\n        DateTimePicker.prototype.ignoreReadonly = function ignoreReadonly(_ignoreReadonly) {\n            if (arguments.length === 0) {\n                return this._options.ignoreReadonly;\n            }\n            if (typeof _ignoreReadonly !== \'boolean\') {\n                throw new TypeError(\'ignoreReadonly () expects a boolean parameter\');\n            }\n            this._options.ignoreReadonly = _ignoreReadonly;\n        };\n\n        DateTimePicker.prototype.options = function options(newOptions) {\n            if (arguments.length === 0) {\n                return $.extend(true, {}, this._options);\n            }\n\n            if (!(newOptions instanceof Object)) {\n                throw new TypeError(\'options() this.options parameter should be an object\');\n            }\n            $.extend(true, this._options, newOptions);\n            var self = this;\n            $.each(this._options, function (key, value) {\n                if (self[key] !== undefined) {\n                    self[key](value);\n                }\n            });\n        };\n\n        DateTimePicker.prototype.date = function date(newDate, index) {\n            index = index || 0;\n            if (arguments.length === 0) {\n                if (this.unset) {\n                    return null;\n                }\n                if (this._options.allowMultidate) {\n                    return this._dates.join(this._options.multidateSeparator);\n                } else {\n                    return this._dates[index].clone();\n                }\n            }\n\n            if (newDate !== null && typeof newDate !== \'string\' && !window.moment.isMoment(newDate) && !(newDate instanceof Date)) {\n                throw new TypeError(\'date() parameter must be one of [null, string, moment or Date]\');\n            }\n\n            this._setValue(newDate === null ? null : this._parseInputDate(newDate), index);\n        };\n\n        DateTimePicker.prototype.format = function format(newFormat) {\n            ///<summary>test su</summary>\n            ///<param name="newFormat">info about para</param>\n            ///<returns type="string|boolean">returns foo</returns>\n            if (arguments.length === 0) {\n                return this._options.format;\n            }\n\n            if (typeof newFormat !== \'string\' && (typeof newFormat !== \'boolean\' || newFormat !== false)) {\n                throw new TypeError(\'format() expects a string or boolean:false parameter \' + newFormat);\n            }\n\n            this._options.format = newFormat;\n            if (this.actualFormat) {\n                this._initFormatting(); // reinitialize formatting\n            }\n        };\n\n        DateTimePicker.prototype.timeZone = function timeZone(newZone) {\n            if (arguments.length === 0) {\n                return this._options.timeZone;\n            }\n\n            if (typeof newZone !== \'string\') {\n                throw new TypeError(\'newZone() expects a string parameter\');\n            }\n\n            this._options.timeZone = newZone;\n        };\n\n        DateTimePicker.prototype.dayViewHeaderFormat = function dayViewHeaderFormat(newFormat) {\n            if (arguments.length === 0) {\n                return this._options.dayViewHeaderFormat;\n            }\n\n            if (typeof newFormat !== \'string\') {\n                throw new TypeError(\'dayViewHeaderFormat() expects a string parameter\');\n            }\n\n            this._options.dayViewHeaderFormat = newFormat;\n        };\n\n        DateTimePicker.prototype.extraFormats = function extraFormats(formats) {\n            if (arguments.length === 0) {\n                return this._options.extraFormats;\n            }\n\n            if (formats !== false && !(formats instanceof Array)) {\n                throw new TypeError(\'extraFormats() expects an array or false parameter\');\n            }\n\n            this._options.extraFormats = formats;\n            if (this.parseFormats) {\n                this._initFormatting(); // reinit formatting\n            }\n        };\n\n        DateTimePicker.prototype.disabledDates = function disabledDates(dates) {\n            if (arguments.length === 0) {\n                return this._options.disabledDates ? $.extend({}, this._options.disabledDates) : this._options.disabledDates;\n            }\n\n            if (!dates) {\n                this._options.disabledDates = false;\n                this._update();\n                return true;\n            }\n            if (!(dates instanceof Array)) {\n                throw new TypeError(\'disabledDates() expects an array parameter\');\n            }\n            this._options.disabledDates = this._indexGivenDates(dates);\n            this._options.enabledDates = false;\n            this._update();\n        };\n\n        DateTimePicker.prototype.enabledDates = function enabledDates(dates) {\n            if (arguments.length === 0) {\n                return this._options.enabledDates ? $.extend({}, this._options.enabledDates) : this._options.enabledDates;\n            }\n\n            if (!dates) {\n                this._options.enabledDates = false;\n                this._update();\n                return true;\n            }\n            if (!(dates instanceof Array)) {\n                throw new TypeError(\'enabledDates() expects an array parameter\');\n            }\n            this._options.enabledDates = this._indexGivenDates(dates);\n            this._options.disabledDates = false;\n            this._update();\n        };\n\n        DateTimePicker.prototype.daysOfWeekDisabled = function daysOfWeekDisabled(_daysOfWeekDisabled) {\n            if (arguments.length === 0) {\n                return this._options.daysOfWeekDisabled.splice(0);\n            }\n\n            if (typeof _daysOfWeekDisabled === \'boolean\' && !_daysOfWeekDisabled) {\n                this._options.daysOfWeekDisabled = false;\n                this._update();\n                return true;\n            }\n\n            if (!(_daysOfWeekDisabled instanceof Array)) {\n                throw new TypeError(\'daysOfWeekDisabled() expects an array parameter\');\n            }\n            this._options.daysOfWeekDisabled = _daysOfWeekDisabled.reduce(function (previousValue, currentValue) {\n                currentValue = parseInt(currentValue, 10);\n                if (currentValue > 6 || currentValue < 0 || isNaN(currentValue)) {\n                    return previousValue;\n                }\n                if (previousValue.indexOf(currentValue) === -1) {\n                    previousValue.push(currentValue);\n                }\n                return previousValue;\n            }, []).sort();\n            if (this._options.useCurrent && !this._options.keepInvalid) {\n                for (var i = 0; i < this._dates.length; i++) {\n                    var tries = 0;\n                    while (!this._isValid(this._dates[i], \'d\')) {\n                        this._dates[i].add(1, \'d\');\n                        if (tries === 31) {\n                            throw \'Tried 31 times to find a valid date\';\n                        }\n                        tries++;\n                    }\n                    this._setValue(this._dates[i], i);\n                }\n            }\n            this._update();\n        };\n\n        DateTimePicker.prototype.maxDate = function maxDate(_maxDate) {\n            if (arguments.length === 0) {\n                return this._options.maxDate ? this._options.maxDate.clone() : this._options.maxDate;\n            }\n\n            if (typeof _maxDate === \'boolean\' && _maxDate === false) {\n                this._options.maxDate = false;\n                this._update();\n                return true;\n            }\n\n            if (typeof _maxDate === \'string\') {\n                if (_maxDate === \'now\' || _maxDate === \'moment\') {\n                    _maxDate = this.getMoment();\n                }\n            }\n\n            var parsedDate = this._parseInputDate(_maxDate);\n\n            if (!parsedDate.isValid()) {\n                throw new TypeError(\'maxDate() Could not parse date parameter: \' + _maxDate);\n            }\n            if (this._options.minDate && parsedDate.isBefore(this._options.minDate)) {\n                throw new TypeError(\'maxDate() date parameter is before this.options.minDate: \' + parsedDate.format(this.actualFormat));\n            }\n            this._options.maxDate = parsedDate;\n            for (var i = 0; i < this._dates.length; i++) {\n                if (this._options.useCurrent && !this._options.keepInvalid && this._dates[i].isAfter(_maxDate)) {\n                    this._setValue(this._options.maxDate, i);\n                }\n            }\n            if (this._viewDate.isAfter(parsedDate)) {\n                this._viewDate = parsedDate.clone().subtract(this._options.stepping, \'m\');\n            }\n            this._update();\n        };\n\n        DateTimePicker.prototype.minDate = function minDate(_minDate) {\n            if (arguments.length === 0) {\n                return this._options.minDate ? this._options.minDate.clone() : this._options.minDate;\n            }\n\n            if (typeof _minDate === \'boolean\' && _minDate === false) {\n                this._options.minDate = false;\n                this._update();\n                return true;\n            }\n\n            if (typeof _minDate === \'string\') {\n                if (_minDate === \'now\' || _minDate === \'moment\') {\n                    _minDate = this.getMoment();\n                }\n            }\n\n            var parsedDate = this._parseInputDate(_minDate);\n\n            if (!parsedDate.isValid()) {\n                throw new TypeError(\'minDate() Could not parse date parameter: \' + _minDate);\n            }\n            if (this._options.maxDate && parsedDate.isAfter(this._options.maxDate)) {\n                throw new TypeError(\'minDate() date parameter is after this.options.maxDate: \' + parsedDate.format(this.actualFormat));\n            }\n            this._options.minDate = parsedDate;\n            for (var i = 0; i < this._dates.length; i++) {\n                if (this._options.useCurrent && !this._options.keepInvalid && this._dates[i].isBefore(_minDate)) {\n                    this._setValue(this._options.minDate, i);\n                }\n            }\n            if (this._viewDate.isBefore(parsedDate)) {\n                this._viewDate = parsedDate.clone().add(this._options.stepping, \'m\');\n            }\n            this._update();\n        };\n\n        DateTimePicker.prototype.defaultDate = function defaultDate(_defaultDate) {\n            if (arguments.length === 0) {\n                return this._options.defaultDate ? this._options.defaultDate.clone() : this._options.defaultDate;\n            }\n            if (!_defaultDate) {\n                this._options.defaultDate = false;\n                return true;\n            }\n\n            if (typeof _defaultDate === \'string\') {\n                if (_defaultDate === \'now\' || _defaultDate === \'moment\') {\n                    _defaultDate = this.getMoment();\n                } else {\n                    _defaultDate = this.getMoment(_defaultDate);\n                }\n            }\n\n            var parsedDate = this._parseInputDate(_defaultDate);\n            if (!parsedDate.isValid()) {\n                throw new TypeError(\'defaultDate() Could not parse date parameter: \' + _defaultDate);\n            }\n            if (!this._isValid(parsedDate)) {\n                throw new TypeError(\'defaultDate() date passed is invalid according to component setup validations\');\n            }\n\n            this._options.defaultDate = parsedDate;\n\n            if (this._options.defaultDate && this._options.inline || this.input !== undefined && this.input.val().trim() === \'\') {\n                this._setValue(this._options.defaultDate, 0);\n            }\n        };\n\n        DateTimePicker.prototype.locale = function locale(_locale) {\n            if (arguments.length === 0) {\n                return this._options.locale;\n            }\n\n            if (!window.moment.localeData(_locale)) {\n                throw new TypeError(\'locale() locale \' + _locale + \' is not loaded from moment locales!\');\n            }\n\n            for (var i = 0; i < this._dates.length; i++) {\n                this._dates[i].locale(this._options.locale);\n            }\n            this._viewDate.locale(this._options.locale);\n\n            if (this.actualFormat) {\n                this._initFormatting(); // reinitialize formatting\n            }\n            if (this.widget) {\n                this.hide();\n                this.show();\n            }\n        };\n\n        DateTimePicker.prototype.stepping = function stepping(_stepping) {\n            if (arguments.length === 0) {\n                return this._options.stepping;\n            }\n\n            _stepping = parseInt(_stepping, 10);\n            if (isNaN(_stepping) || _stepping < 1) {\n                _stepping = 1;\n            }\n            this._options.stepping = _stepping;\n        };\n\n        DateTimePicker.prototype.useCurrent = function useCurrent(_useCurrent) {\n            var useCurrentOptions = [\'year\', \'month\', \'day\', \'hour\', \'minute\'];\n            if (arguments.length === 0) {\n                return this._options.useCurrent;\n            }\n\n            if (typeof _useCurrent !== \'boolean\' && typeof _useCurrent !== \'string\') {\n                throw new TypeError(\'useCurrent() expects a boolean or string parameter\');\n            }\n            if (typeof _useCurrent === \'string\' && useCurrentOptions.indexOf(_useCurrent.toLowerCase()) === -1) {\n                throw new TypeError(\'useCurrent() expects a string parameter of \' + useCurrentOptions.join(\', \'));\n            }\n            this._options.useCurrent = _useCurrent;\n        };\n\n        DateTimePicker.prototype.collapse = function collapse(_collapse) {\n            if (arguments.length === 0) {\n                return this._options.collapse;\n            }\n\n            if (typeof _collapse !== \'boolean\') {\n                throw new TypeError(\'collapse() expects a boolean parameter\');\n            }\n            if (this._options.collapse === _collapse) {\n                return true;\n            }\n            this._options.collapse = _collapse;\n            if (this.widget) {\n                this.hide();\n                this.show();\n            }\n        };\n\n        DateTimePicker.prototype.icons = function icons(_icons) {\n            if (arguments.length === 0) {\n                return $.extend({}, this._options.icons);\n            }\n\n            if (!(_icons instanceof Object)) {\n                throw new TypeError(\'icons() expects parameter to be an Object\');\n            }\n\n            $.extend(this._options.icons, _icons);\n\n            if (this.widget) {\n                this.hide();\n                this.show();\n            }\n        };\n\n        DateTimePicker.prototype.tooltips = function tooltips(_tooltips) {\n            if (arguments.length === 0) {\n                return $.extend({}, this._options.tooltips);\n            }\n\n            if (!(_tooltips instanceof Object)) {\n                throw new TypeError(\'tooltips() expects parameter to be an Object\');\n            }\n            $.extend(this._options.tooltips, _tooltips);\n            if (this.widget) {\n                this.hide();\n                this.show();\n            }\n        };\n\n        DateTimePicker.prototype.useStrict = function useStrict(_useStrict) {\n            if (arguments.length === 0) {\n                return this._options.useStrict;\n            }\n\n            if (typeof _useStrict !== \'boolean\') {\n                throw new TypeError(\'useStrict() expects a boolean parameter\');\n            }\n            this._options.useStrict = _useStrict;\n        };\n\n        DateTimePicker.prototype.sideBySide = function sideBySide(_sideBySide) {\n            if (arguments.length === 0) {\n                return this._options.sideBySide;\n            }\n\n            if (typeof _sideBySide !== \'boolean\') {\n                throw new TypeError(\'sideBySide() expects a boolean parameter\');\n            }\n            this._options.sideBySide = _sideBySide;\n            if (this.widget) {\n                this.hide();\n                this.show();\n            }\n        };\n\n        DateTimePicker.prototype.viewMode = function viewMode(_viewMode) {\n            if (arguments.length === 0) {\n                return this._options.viewMode;\n            }\n\n            if (typeof _viewMode !== \'string\') {\n                throw new TypeError(\'viewMode() expects a string parameter\');\n            }\n\n            if (DateTimePicker.ViewModes.indexOf(_viewMode) === -1) {\n                throw new TypeError(\'viewMode() parameter must be one of (\' + DateTimePicker.ViewModes.join(\', \') + \') value\');\n            }\n\n            this._options.viewMode = _viewMode;\n            this.currentViewMode = Math.max(DateTimePicker.ViewModes.indexOf(_viewMode) - 1, DateTimePicker.MinViewModeNumber);\n\n            this._showMode();\n        };\n\n        DateTimePicker.prototype.calendarWeeks = function calendarWeeks(_calendarWeeks) {\n            if (arguments.length === 0) {\n                return this._options.calendarWeeks;\n            }\n\n            if (typeof _calendarWeeks !== \'boolean\') {\n                throw new TypeError(\'calendarWeeks() expects parameter to be a boolean value\');\n            }\n\n            this._options.calendarWeeks = _calendarWeeks;\n            this._update();\n        };\n\n        DateTimePicker.prototype.buttons = function buttons(_buttons) {\n            if (arguments.length === 0) {\n                return $.extend({}, this._options.buttons);\n            }\n\n            if (!(_buttons instanceof Object)) {\n                throw new TypeError(\'buttons() expects parameter to be an Object\');\n            }\n\n            $.extend(this._options.buttons, _buttons);\n\n            if (typeof this._options.buttons.showToday !== \'boolean\') {\n                throw new TypeError(\'buttons.showToday expects a boolean parameter\');\n            }\n            if (typeof this._options.buttons.showClear !== \'boolean\') {\n                throw new TypeError(\'buttons.showClear expects a boolean parameter\');\n            }\n            if (typeof this._options.buttons.showClose !== \'boolean\') {\n                throw new TypeError(\'buttons.showClose expects a boolean parameter\');\n            }\n\n            if (this.widget) {\n                this.hide();\n                this.show();\n            }\n        };\n\n        DateTimePicker.prototype.keepOpen = function keepOpen(_keepOpen) {\n            if (arguments.length === 0) {\n                return this._options.keepOpen;\n            }\n\n            if (typeof _keepOpen !== \'boolean\') {\n                throw new TypeError(\'keepOpen() expects a boolean parameter\');\n            }\n\n            this._options.keepOpen = _keepOpen;\n        };\n\n        DateTimePicker.prototype.focusOnShow = function focusOnShow(_focusOnShow) {\n            if (arguments.length === 0) {\n                return this._options.focusOnShow;\n            }\n\n            if (typeof _focusOnShow !== \'boolean\') {\n                throw new TypeError(\'focusOnShow() expects a boolean parameter\');\n            }\n\n            this._options.focusOnShow = _focusOnShow;\n        };\n\n        DateTimePicker.prototype.inline = function inline(_inline) {\n            if (arguments.length === 0) {\n                return this._options.inline;\n            }\n\n            if (typeof _inline !== \'boolean\') {\n                throw new TypeError(\'inline() expects a boolean parameter\');\n            }\n\n            this._options.inline = _inline;\n        };\n\n        DateTimePicker.prototype.clear = function clear() {\n            this._setValue(null); //todo\n        };\n\n        DateTimePicker.prototype.keyBinds = function keyBinds(_keyBinds) {\n            if (arguments.length === 0) {\n                return this._options.keyBinds;\n            }\n\n            this._options.keyBinds = _keyBinds;\n        };\n\n        DateTimePicker.prototype.debug = function debug(_debug) {\n            if (typeof _debug !== \'boolean\') {\n                throw new TypeError(\'debug() expects a boolean parameter\');\n            }\n\n            this._options.debug = _debug;\n        };\n\n        DateTimePicker.prototype.allowInputToggle = function allowInputToggle(_allowInputToggle) {\n            if (arguments.length === 0) {\n                return this._options.allowInputToggle;\n            }\n\n            if (typeof _allowInputToggle !== \'boolean\') {\n                throw new TypeError(\'allowInputToggle() expects a boolean parameter\');\n            }\n\n            this._options.allowInputToggle = _allowInputToggle;\n        };\n\n        DateTimePicker.prototype.keepInvalid = function keepInvalid(_keepInvalid) {\n            if (arguments.length === 0) {\n                return this._options.keepInvalid;\n            }\n\n            if (typeof _keepInvalid !== \'boolean\') {\n                throw new TypeError(\'keepInvalid() expects a boolean parameter\');\n            }\n            this._options.keepInvalid = _keepInvalid;\n        };\n\n        DateTimePicker.prototype.datepickerInput = function datepickerInput(_datepickerInput) {\n            if (arguments.length === 0) {\n                return this._options.datepickerInput;\n            }\n\n            if (typeof _datepickerInput !== \'string\') {\n                throw new TypeError(\'datepickerInput() expects a string parameter\');\n            }\n\n            this._options.datepickerInput = _datepickerInput;\n        };\n\n        DateTimePicker.prototype.parseInputDate = function parseInputDate(_parseInputDate2) {\n            if (arguments.length === 0) {\n                return this._options.parseInputDate;\n            }\n\n            if (typeof _parseInputDate2 !== \'function\') {\n                throw new TypeError(\'parseInputDate() should be as function\');\n            }\n\n            this._options.parseInputDate = _parseInputDate2;\n        };\n\n        DateTimePicker.prototype.disabledTimeIntervals = function disabledTimeIntervals(_disabledTimeIntervals) {\n            if (arguments.length === 0) {\n                return this._options.disabledTimeIntervals ? $.extend({}, this._options.disabledTimeIntervals) : this._options.disabledTimeIntervals;\n            }\n\n            if (!_disabledTimeIntervals) {\n                this._options.disabledTimeIntervals = false;\n                this._update();\n                return true;\n            }\n            if (!(_disabledTimeIntervals instanceof Array)) {\n                throw new TypeError(\'disabledTimeIntervals() expects an array parameter\');\n            }\n            this._options.disabledTimeIntervals = _disabledTimeIntervals;\n            this._update();\n        };\n\n        DateTimePicker.prototype.disabledHours = function disabledHours(hours) {\n            if (arguments.length === 0) {\n                return this._options.disabledHours ? $.extend({}, this._options.disabledHours) : this._options.disabledHours;\n            }\n\n            if (!hours) {\n                this._options.disabledHours = false;\n                this._update();\n                return true;\n            }\n            if (!(hours instanceof Array)) {\n                throw new TypeError(\'disabledHours() expects an array parameter\');\n            }\n            this._options.disabledHours = this._indexGivenHours(hours);\n            this._options.enabledHours = false;\n            if (this._options.useCurrent && !this._options.keepInvalid) {\n                for (var i = 0; i < this._dates.length; i++) {\n                    var tries = 0;\n                    while (!this._isValid(this._dates[i], \'h\')) {\n                        this._dates[i].add(1, \'h\');\n                        if (tries === 24) {\n                            throw \'Tried 24 times to find a valid date\';\n                        }\n                        tries++;\n                    }\n                    this._setValue(this._dates[i], i);\n                }\n            }\n            this._update();\n        };\n\n        DateTimePicker.prototype.enabledHours = function enabledHours(hours) {\n            if (arguments.length === 0) {\n                return this._options.enabledHours ? $.extend({}, this._options.enabledHours) : this._options.enabledHours;\n            }\n\n            if (!hours) {\n                this._options.enabledHours = false;\n                this._update();\n                return true;\n            }\n            if (!(hours instanceof Array)) {\n                throw new TypeError(\'enabledHours() expects an array parameter\');\n            }\n            this._options.enabledHours = this._indexGivenHours(hours);\n            this._options.disabledHours = false;\n            if (this._options.useCurrent && !this._options.keepInvalid) {\n                for (var i = 0; i < this._dates.length; i++) {\n                    var tries = 0;\n                    while (!this._isValid(this._dates[i], \'h\')) {\n                        this._dates[i].add(1, \'h\');\n                        if (tries === 24) {\n                            throw \'Tried 24 times to find a valid date\';\n                        }\n                        tries++;\n                    }\n                    this._setValue(this._dates[i], i);\n                }\n            }\n            this._update();\n        };\n\n        DateTimePicker.prototype.viewDate = function viewDate(newDate) {\n            if (arguments.length === 0) {\n                return this._viewDate.clone();\n            }\n\n            if (!newDate) {\n                this._viewDate = (this._dates[0] || this.getMoment()).clone();\n                return true;\n            }\n\n            if (typeof newDate !== \'string\' && !window.moment.isMoment(newDate) && !(newDate instanceof Date)) {\n                throw new TypeError(\'viewDate() parameter must be one of [string, moment or Date]\');\n            }\n\n            this._viewDate = this._parseInputDate(newDate);\n            this._viewUpdate();\n        };\n\n        DateTimePicker.prototype.allowMultidate = function allowMultidate(_allowMultidate) {\n            if (typeof _allowMultidate !== \'boolean\') {\n                throw new TypeError(\'allowMultidate() expects a boolean parameter\');\n            }\n\n            this._options.allowMultidate = _allowMultidate;\n        };\n\n        DateTimePicker.prototype.multidateSeparator = function multidateSeparator(_multidateSeparator) {\n            if (arguments.length === 0) {\n                return this._options.multidateSeparator;\n            }\n\n            if (typeof _multidateSeparator !== \'string\' || _multidateSeparator.length > 1) {\n                throw new TypeError(\'multidateSeparator expects a single character string parameter\');\n            }\n\n            this._options.multidateSeparator = _multidateSeparator;\n        };\n\n        _createClass(DateTimePicker, null, [{\n            key: \'NAME\',\n            get: function get() {\n                return NAME;\n            }\n\n            /**\n             * @return {string}\n             */\n\n        }, {\n            key: \'VERSION\',\n            get: function get() {\n                return VERSION;\n            }\n\n            /**\n             * @return {string}\n             */\n\n        }, {\n            key: \'DATA_KEY\',\n            get: function get() {\n                return DATA_KEY;\n            }\n\n            /**\n             * @return {string}\n             */\n\n        }, {\n            key: \'EVENT_KEY\',\n            get: function get() {\n                return EVENT_KEY;\n            }\n\n            /**\n             * @return {string}\n             */\n\n        }, {\n            key: \'DATA_API_KEY\',\n            get: function get() {\n                return DATA_API_KEY;\n            }\n        }, {\n            key: \'DatePickerModes\',\n            get: function get() {\n                return DatePickerModes;\n            }\n        }, {\n            key: \'ViewModes\',\n            get: function get() {\n                return ViewModes;\n            }\n\n            /**\n             * @return {number}\n             */\n\n        }, {\n            key: \'MinViewModeNumber\',\n            get: function get() {\n                return MinViewModeNumber;\n            }\n        }, {\n            key: \'Event\',\n            get: function get() {\n                return Event;\n            }\n        }, {\n            key: \'Selector\',\n            get: function get() {\n                return Selector;\n            }\n        }, {\n            key: \'Default\',\n            get: function get() {\n                return Default;\n            }\n        }, {\n            key: \'ClassName\',\n            get: function get() {\n                return ClassName;\n            }\n        }]);\n\n        return DateTimePicker;\n    }();\n\n    return DateTimePicker;\n}(jQuery);\n\n//noinspection JSUnusedGlobalSymbols\n/* global DateTimePicker */\nvar TempusDominusBootstrap4 = function ($) {\n    // eslint-disable-line no-unused-vars\n    // ReSharper disable once InconsistentNaming\n    var JQUERY_NO_CONFLICT = $.fn[DateTimePicker.NAME],\n        verticalModes = [\'top\', \'bottom\', \'auto\'],\n        horizontalModes = [\'left\', \'right\', \'auto\'],\n        toolbarPlacements = [\'default\', \'top\', \'bottom\'],\n        getSelectorFromElement = function getSelectorFromElement($element) {\n        var selector = $element.data(\'target\'),\n            $selector = void 0;\n\n        if (!selector) {\n            selector = $element.attr(\'href\') || \'\';\n            selector = /^#[a-z]/i.test(selector) ? selector : null;\n        }\n        $selector = $(selector);\n        if ($selector.length === 0) {\n            return $selector;\n        }\n\n        if (!$selector.data(DateTimePicker.DATA_KEY)) {\n            $.extend({}, $selector.data(), $(this).data());\n        }\n\n        return $selector;\n    };\n\n    // ReSharper disable once InconsistentNaming\n\n    var TempusDominusBootstrap4 = function (_DateTimePicker) {\n        _inherits(TempusDominusBootstrap4, _DateTimePicker);\n\n        function TempusDominusBootstrap4(element, options) {\n            _classCallCheck(this, TempusDominusBootstrap4);\n\n            var _this = _possibleConstructorReturn(this, _DateTimePicker.call(this, element, options));\n\n            _this._init();\n            return _this;\n        }\n\n        TempusDominusBootstrap4.prototype._init = function _init() {\n            if (this._element.hasClass(\'input-group\')) {\n                var datepickerButton = this._element.find(\'.datepickerbutton\');\n                if (datepickerButton.length === 0) {\n                    this.component = this._element.find(\'[data-toggle="datetimepicker"]\');\n                } else {\n                    this.component = datepickerButton;\n                }\n            }\n        };\n\n        TempusDominusBootstrap4.prototype._getDatePickerTemplate = function _getDatePickerTemplate() {\n            var headTemplate = $(\'<thead>\').append($(\'<tr>\').append($(\'<th>\').addClass(\'prev\').attr(\'data-action\', \'previous\').append($(\'<span>\').addClass(this._options.icons.previous))).append($(\'<th>\').addClass(\'picker-switch\').attr(\'data-action\', \'pickerSwitch\').attr(\'colspan\', \'\' + (this._options.calendarWeeks ? \'6\' : \'5\'))).append($(\'<th>\').addClass(\'next\').attr(\'data-action\', \'next\').append($(\'<span>\').addClass(this._options.icons.next)))),\n                contTemplate = $(\'<tbody>\').append($(\'<tr>\').append($(\'<td>\').attr(\'colspan\', \'\' + (this._options.calendarWeeks ? \'8\' : \'7\'))));\n\n            return [$(\'<div>\').addClass(\'datepicker-days\').append($(\'<table>\').addClass(\'table table-sm\').append(headTemplate).append($(\'<tbody>\'))), $(\'<div>\').addClass(\'datepicker-months\').append($(\'<table>\').addClass(\'table-condensed\').append(headTemplate.clone()).append(contTemplate.clone())), $(\'<div>\').addClass(\'datepicker-years\').append($(\'<table>\').addClass(\'table-condensed\').append(headTemplate.clone()).append(contTemplate.clone())), $(\'<div>\').addClass(\'datepicker-decades\').append($(\'<table>\').addClass(\'table-condensed\').append(headTemplate.clone()).append(contTemplate.clone()))];\n        };\n\n        TempusDominusBootstrap4.prototype._getTimePickerMainTemplate = function _getTimePickerMainTemplate() {\n            var topRow = $(\'<tr>\'),\n                middleRow = $(\'<tr>\'),\n                bottomRow = $(\'<tr>\');\n\n            if (this._isEnabled(\'h\')) {\n                topRow.append($(\'<td>\').append($(\'<a>\').attr({\n                    href: \'#\',\n                    tabindex: \'-1\',\n                    \'title\': this._options.tooltips.incrementHour\n                }).addClass(\'btn\').attr(\'data-action\', \'incrementHours\').append($(\'<span>\').addClass(this._options.icons.up))));\n                middleRow.append($(\'<td>\').append($(\'<span>\').addClass(\'timepicker-hour\').attr({\n                    \'data-time-component\': \'hours\',\n                    \'title\': this._options.tooltips.pickHour\n                }).attr(\'data-action\', \'showHours\')));\n                bottomRow.append($(\'<td>\').append($(\'<a>\').attr({\n                    href: \'#\',\n                    tabindex: \'-1\',\n                    \'title\': this._options.tooltips.decrementHour\n                }).addClass(\'btn\').attr(\'data-action\', \'decrementHours\').append($(\'<span>\').addClass(this._options.icons.down))));\n            }\n            if (this._isEnabled(\'m\')) {\n                if (this._isEnabled(\'h\')) {\n                    topRow.append($(\'<td>\').addClass(\'separator\'));\n                    middleRow.append($(\'<td>\').addClass(\'separator\').html(\':\'));\n                    bottomRow.append($(\'<td>\').addClass(\'separator\'));\n                }\n                topRow.append($(\'<td>\').append($(\'<a>\').attr({\n                    href: \'#\',\n                    tabindex: \'-1\',\n                    \'title\': this._options.tooltips.incrementMinute\n                }).addClass(\'btn\').attr(\'data-action\', \'incrementMinutes\').append($(\'<span>\').addClass(this._options.icons.up))));\n                middleRow.append($(\'<td>\').append($(\'<span>\').addClass(\'timepicker-minute\').attr({\n                    \'data-time-component\': \'minutes\',\n                    \'title\': this._options.tooltips.pickMinute\n                }).attr(\'data-action\', \'showMinutes\')));\n                bottomRow.append($(\'<td>\').append($(\'<a>\').attr({\n                    href: \'#\',\n                    tabindex: \'-1\',\n                    \'title\': this._options.tooltips.decrementMinute\n                }).addClass(\'btn\').attr(\'data-action\', \'decrementMinutes\').append($(\'<span>\').addClass(this._options.icons.down))));\n            }\n            if (this._isEnabled(\'s\')) {\n                if (this._isEnabled(\'m\')) {\n                    topRow.append($(\'<td>\').addClass(\'separator\'));\n                    middleRow.append($(\'<td>\').addClass(\'separator\').html(\':\'));\n                    bottomRow.append($(\'<td>\').addClass(\'separator\'));\n                }\n                topRow.append($(\'<td>\').append($(\'<a>\').attr({\n                    href: \'#\',\n                    tabindex: \'-1\',\n                    \'title\': this._options.tooltips.incrementSecond\n                }).addClass(\'btn\').attr(\'data-action\', \'incrementSeconds\').append($(\'<span>\').addClass(this._options.icons.up))));\n                middleRow.append($(\'<td>\').append($(\'<span>\').addClass(\'timepicker-second\').attr({\n                    \'data-time-component\': \'seconds\',\n                    \'title\': this._options.tooltips.pickSecond\n                }).attr(\'data-action\', \'showSeconds\')));\n                bottomRow.append($(\'<td>\').append($(\'<a>\').attr({\n                    href: \'#\',\n                    tabindex: \'-1\',\n                    \'title\': this._options.tooltips.decrementSecond\n                }).addClass(\'btn\').attr(\'data-action\', \'decrementSeconds\').append($(\'<span>\').addClass(this._options.icons.down))));\n            }\n\n            if (!this.use24Hours) {\n                topRow.append($(\'<td>\').addClass(\'separator\'));\n                middleRow.append($(\'<td>\').append($(\'<button>\').addClass(\'btn btn-primary\').attr({\n                    \'data-action\': \'togglePeriod\',\n                    tabindex: \'-1\',\n                    \'title\': this._options.tooltips.togglePeriod\n                })));\n                bottomRow.append($(\'<td>\').addClass(\'separator\'));\n            }\n\n            return $(\'<div>\').addClass(\'timepicker-picker\').append($(\'<table>\').addClass(\'table-condensed\').append([topRow, middleRow, bottomRow]));\n        };\n\n        TempusDominusBootstrap4.prototype._getTimePickerTemplate = function _getTimePickerTemplate() {\n            var hoursView = $(\'<div>\').addClass(\'timepicker-hours\').append($(\'<table>\').addClass(\'table-condensed\')),\n                minutesView = $(\'<div>\').addClass(\'timepicker-minutes\').append($(\'<table>\').addClass(\'table-condensed\')),\n                secondsView = $(\'<div>\').addClass(\'timepicker-seconds\').append($(\'<table>\').addClass(\'table-condensed\')),\n                ret = [this._getTimePickerMainTemplate()];\n\n            if (this._isEnabled(\'h\')) {\n                ret.push(hoursView);\n            }\n            if (this._isEnabled(\'m\')) {\n                ret.push(minutesView);\n            }\n            if (this._isEnabled(\'s\')) {\n                ret.push(secondsView);\n            }\n\n            return ret;\n        };\n\n        TempusDominusBootstrap4.prototype._getToolbar = function _getToolbar() {\n            var row = [];\n            if (this._options.buttons.showToday) {\n                row.push($(\'<td>\').append($(\'<a>\').attr({\n                    href: \'#\',\n                    tabindex: \'-1\',\n                    \'data-action\': \'today\',\n                    \'title\': this._options.tooltips.today\n                }).append($(\'<span>\').addClass(this._options.icons.today))));\n            }\n            if (!this._options.sideBySide && this._hasDate() && this._hasTime()) {\n                row.push($(\'<td>\').append($(\'<a>\').attr({\n                    href: \'#\',\n                    tabindex: \'-1\',\n                    \'data-action\': \'togglePicker\',\n                    \'title\': this._options.tooltips.selectTime\n                }).append($(\'<span>\').addClass(this._options.icons.time))));\n            }\n            if (this._options.buttons.showClear) {\n                row.push($(\'<td>\').append($(\'<a>\').attr({\n                    href: \'#\',\n                    tabindex: \'-1\',\n                    \'data-action\': \'clear\',\n                    \'title\': this._options.tooltips.clear\n                }).append($(\'<span>\').addClass(this._options.icons.clear))));\n            }\n            if (this._options.buttons.showClose) {\n                row.push($(\'<td>\').append($(\'<a>\').attr({\n                    href: \'#\',\n                    tabindex: \'-1\',\n                    \'data-action\': \'close\',\n                    \'title\': this._options.tooltips.close\n                }).append($(\'<span>\').addClass(this._options.icons.close))));\n            }\n            return row.length === 0 ? \'\' : $(\'<table>\').addClass(\'table-condensed\').append($(\'<tbody>\').append($(\'<tr>\').append(row)));\n        };\n\n        TempusDominusBootstrap4.prototype._getTemplate = function _getTemplate() {\n            var template = $(\'<div>\').addClass(\'bootstrap-datetimepicker-widget dropdown-menu\'),\n                dateView = $(\'<div>\').addClass(\'datepicker\').append(this._getDatePickerTemplate()),\n                timeView = $(\'<div>\').addClass(\'timepicker\').append(this._getTimePickerTemplate()),\n                content = $(\'<ul>\').addClass(\'list-unstyled\'),\n                toolbar = $(\'<li>\').addClass(\'picker-switch\' + (this._options.collapse ? \' accordion-toggle\' : \'\')).append(this._getToolbar());\n\n            if (this._options.inline) {\n                template.removeClass(\'dropdown-menu\');\n            }\n\n            if (this.use24Hours) {\n                template.addClass(\'usetwentyfour\');\n            }\n            if (this._isEnabled(\'s\') && !this.use24Hours) {\n                template.addClass(\'wider\');\n            }\n\n            if (this._options.sideBySide && this._hasDate() && this._hasTime()) {\n                template.addClass(\'timepicker-sbs\');\n                if (this._options.toolbarPlacement === \'top\') {\n                    template.append(toolbar);\n                }\n                template.append($(\'<div>\').addClass(\'row\').append(dateView.addClass(\'col-md-6\')).append(timeView.addClass(\'col-md-6\')));\n                if (this._options.toolbarPlacement === \'bottom\' || this._options.toolbarPlacement === \'default\') {\n                    template.append(toolbar);\n                }\n                return template;\n            }\n\n            if (this._options.toolbarPlacement === \'top\') {\n                content.append(toolbar);\n            }\n            if (this._hasDate()) {\n                content.append($(\'<li>\').addClass(this._options.collapse && this._hasTime() ? \'collapse\' : \'\').addClass(this._options.collapse && this._hasTime() && this._options.viewMode === \'time\' ? \'\' : \'show\').append(dateView));\n            }\n            if (this._options.toolbarPlacement === \'default\') {\n                content.append(toolbar);\n            }\n            if (this._hasTime()) {\n                content.append($(\'<li>\').addClass(this._options.collapse && this._hasDate() ? \'collapse\' : \'\').addClass(this._options.collapse && this._hasDate() && this._options.viewMode === \'time\' ? \'show\' : \'\').append(timeView));\n            }\n            if (this._options.toolbarPlacement === \'bottom\') {\n                content.append(toolbar);\n            }\n            return template.append(content);\n        };\n\n        TempusDominusBootstrap4.prototype._place = function _place(e) {\n            var self = e && e.data && e.data.picker || this,\n                vertical = self._options.widgetPositioning.vertical,\n                horizontal = self._options.widgetPositioning.horizontal,\n                parent = void 0;\n            var position = (self.component && self.component.length ? self.component : self._element).position(),\n                offset = (self.component && self.component.length ? self.component : self._element).offset();\n            if (self._options.widgetParent) {\n                parent = self._options.widgetParent.append(self.widget);\n            } else if (self._element.is(\'input\')) {\n                parent = self._element.after(self.widget).parent();\n            } else if (self._options.inline) {\n                parent = self._element.append(self.widget);\n                return;\n            } else {\n                parent = self._element;\n                self._element.children().first().after(self.widget);\n            }\n\n            // Top and bottom logic\n            if (vertical === \'auto\') {\n                //noinspection JSValidateTypes\n                if (offset.top + self.widget.height() * 1.5 >= $(window).height() + $(window).scrollTop() && self.widget.height() + self._element.outerHeight() < offset.top) {\n                    vertical = \'top\';\n                } else {\n                    vertical = \'bottom\';\n                }\n            }\n\n            // Left and right logic\n            if (horizontal === \'auto\') {\n                if (parent.width() < offset.left + self.widget.outerWidth() / 2 && offset.left + self.widget.outerWidth() > $(window).width()) {\n                    horizontal = \'right\';\n                } else {\n                    horizontal = \'left\';\n                }\n            }\n\n            if (vertical === \'top\') {\n                self.widget.addClass(\'top\').removeClass(\'bottom\');\n            } else {\n                self.widget.addClass(\'bottom\').removeClass(\'top\');\n            }\n\n            if (horizontal === \'right\') {\n                self.widget.addClass(\'float-right\');\n            } else {\n                self.widget.removeClass(\'float-right\');\n            }\n\n            // find the first parent element that has a relative css positioning\n            if (parent.css(\'position\') !== \'relative\') {\n                parent = parent.parents().filter(function () {\n                    return $(this).css(\'position\') === \'relative\';\n                }).first();\n            }\n\n            if (parent.length === 0) {\n                throw new Error(\'datetimepicker component should be placed within a relative positioned container\');\n            }\n\n            self.widget.css({\n                top: vertical === \'top\' ? \'auto\' : position.top + self._element.outerHeight() + \'px\',\n                bottom: vertical === \'top\' ? parent.outerHeight() - (parent === self._element ? 0 : position.top) + \'px\' : \'auto\',\n                left: horizontal === \'left\' ? (parent === self._element ? 0 : position.left) + \'px\' : \'auto\',\n                right: horizontal === \'left\' ? \'auto\' : parent.outerWidth() - self._element.outerWidth() - (parent === self._element ? 0 : position.left) + \'px\'\n            });\n        };\n\n        TempusDominusBootstrap4.prototype._fillDow = function _fillDow() {\n            var row = $(\'<tr>\'),\n                currentDate = this._viewDate.clone().startOf(\'w\').startOf(\'d\');\n\n            if (this._options.calendarWeeks === true) {\n                row.append($(\'<th>\').addClass(\'cw\').text(\'#\'));\n            }\n\n            while (currentDate.isBefore(this._viewDate.clone().endOf(\'w\'))) {\n                row.append($(\'<th>\').addClass(\'dow\').text(currentDate.format(\'dd\')));\n                currentDate.add(1, \'d\');\n            }\n            this.widget.find(\'.datepicker-days thead\').append(row);\n        };\n\n        TempusDominusBootstrap4.prototype._fillMonths = function _fillMonths() {\n            var spans = [],\n                monthsShort = this._viewDate.clone().startOf(\'y\').startOf(\'d\');\n            while (monthsShort.isSame(this._viewDate, \'y\')) {\n                spans.push($(\'<span>\').attr(\'data-action\', \'selectMonth\').addClass(\'month\').text(monthsShort.format(\'MMM\')));\n                monthsShort.add(1, \'M\');\n            }\n            this.widget.find(\'.datepicker-months td\').empty().append(spans);\n        };\n\n        TempusDominusBootstrap4.prototype._updateMonths = function _updateMonths() {\n            var monthsView = this.widget.find(\'.datepicker-months\'),\n                monthsViewHeader = monthsView.find(\'th\'),\n                months = monthsView.find(\'tbody\').find(\'span\'),\n                self = this;\n\n            monthsViewHeader.eq(0).find(\'span\').attr(\'title\', this._options.tooltips.prevYear);\n            monthsViewHeader.eq(1).attr(\'title\', this._options.tooltips.selectYear);\n            monthsViewHeader.eq(2).find(\'span\').attr(\'title\', this._options.tooltips.nextYear);\n\n            monthsView.find(\'.disabled\').removeClass(\'disabled\');\n\n            if (!this._isValid(this._viewDate.clone().subtract(1, \'y\'), \'y\')) {\n                monthsViewHeader.eq(0).addClass(\'disabled\');\n            }\n\n            monthsViewHeader.eq(1).text(this._viewDate.year());\n\n            if (!this._isValid(this._viewDate.clone().add(1, \'y\'), \'y\')) {\n                monthsViewHeader.eq(2).addClass(\'disabled\');\n            }\n\n            months.removeClass(\'active\');\n            if (this._getLastPickedDate().isSame(this._viewDate, \'y\') && !this.unset) {\n                months.eq(this._getLastPickedDate().month()).addClass(\'active\');\n            }\n\n            months.each(function (index) {\n                if (!self._isValid(self._viewDate.clone().month(index), \'M\')) {\n                    $(this).addClass(\'disabled\');\n                }\n            });\n        };\n\n        TempusDominusBootstrap4.prototype._getStartEndYear = function _getStartEndYear(factor, year) {\n            var step = factor / 10,\n                startYear = Math.floor(year / factor) * factor,\n                endYear = startYear + step * 9,\n                focusValue = Math.floor(year / step) * step;\n            return [startYear, endYear, focusValue];\n        };\n\n        TempusDominusBootstrap4.prototype._updateYears = function _updateYears() {\n            var yearsView = this.widget.find(\'.datepicker-years\'),\n                yearsViewHeader = yearsView.find(\'th\'),\n                yearCaps = this._getStartEndYear(10, this._viewDate.year()),\n                startYear = this._viewDate.clone().year(yearCaps[0]),\n                endYear = this._viewDate.clone().year(yearCaps[1]);\n            var html = \'\';\n\n            yearsViewHeader.eq(0).find(\'span\').attr(\'title\', this._options.tooltips.prevDecade);\n            yearsViewHeader.eq(1).attr(\'title\', this._options.tooltips.selectDecade);\n            yearsViewHeader.eq(2).find(\'span\').attr(\'title\', this._options.tooltips.nextDecade);\n\n            yearsView.find(\'.disabled\').removeClass(\'disabled\');\n\n            if (this._options.minDate && this._options.minDate.isAfter(startYear, \'y\')) {\n                yearsViewHeader.eq(0).addClass(\'disabled\');\n            }\n\n            yearsViewHeader.eq(1).text(startYear.year() + \'-\' + endYear.year());\n\n            if (this._options.maxDate && this._options.maxDate.isBefore(endYear, \'y\')) {\n                yearsViewHeader.eq(2).addClass(\'disabled\');\n            }\n\n            html += \'<span data-action="selectYear" class="year old">\' + (startYear.year() - 1) + \'</span>\';\n            while (!startYear.isAfter(endYear, \'y\')) {\n                html += \'<span data-action="selectYear" class="year\' + (startYear.isSame(this._getLastPickedDate(), \'y\') && !this.unset ? \' active\' : \'\') + (!this._isValid(startYear, \'y\') ? \' disabled\' : \'\') + \'">\' + startYear.year() + \'</span>\';\n                startYear.add(1, \'y\');\n            }\n            html += \'<span data-action="selectYear" class="year old">\' + startYear.year() + \'</span>\';\n\n            yearsView.find(\'td\').html(html);\n        };\n\n        TempusDominusBootstrap4.prototype._updateDecades = function _updateDecades() {\n            var decadesView = this.widget.find(\'.datepicker-decades\'),\n                decadesViewHeader = decadesView.find(\'th\'),\n                yearCaps = this._getStartEndYear(100, this._viewDate.year()),\n                startDecade = this._viewDate.clone().year(yearCaps[0]),\n                endDecade = this._viewDate.clone().year(yearCaps[1]);\n            var minDateDecade = false,\n                maxDateDecade = false,\n                endDecadeYear = void 0,\n                html = \'\';\n\n            decadesViewHeader.eq(0).find(\'span\').attr(\'title\', this._options.tooltips.prevCentury);\n            decadesViewHeader.eq(2).find(\'span\').attr(\'title\', this._options.tooltips.nextCentury);\n\n            decadesView.find(\'.disabled\').removeClass(\'disabled\');\n\n            if (startDecade.year() === 0 || this._options.minDate && this._options.minDate.isAfter(startDecade, \'y\')) {\n                decadesViewHeader.eq(0).addClass(\'disabled\');\n            }\n\n            decadesViewHeader.eq(1).text(startDecade.year() + \'-\' + endDecade.year());\n\n            if (this._options.maxDate && this._options.maxDate.isBefore(endDecade, \'y\')) {\n                decadesViewHeader.eq(2).addClass(\'disabled\');\n            }\n\n            if (startDecade.year() - 10 < 0) {\n                html += \'<span>&nbsp;</span>\';\n            } else {\n                html += \'<span data-action="selectDecade" class="decade old" data-selection="\' + (startDecade.year() + 6) + \'">\' + (startDecade.year() - 10) + \'</span>\';\n            }\n\n            while (!startDecade.isAfter(endDecade, \'y\')) {\n                endDecadeYear = startDecade.year() + 11;\n                minDateDecade = this._options.minDate && this._options.minDate.isAfter(startDecade, \'y\') && this._options.minDate.year() <= endDecadeYear;\n                maxDateDecade = this._options.maxDate && this._options.maxDate.isAfter(startDecade, \'y\') && this._options.maxDate.year() <= endDecadeYear;\n                html += \'<span data-action="selectDecade" class="decade\' + (this._getLastPickedDate().isAfter(startDecade) && this._getLastPickedDate().year() <= endDecadeYear ? \' active\' : \'\') + (!this._isValid(startDecade, \'y\') && !minDateDecade && !maxDateDecade ? \' disabled\' : \'\') + \'" data-selection="\' + (startDecade.year() + 6) + \'">\' + startDecade.year() + \'</span>\';\n                startDecade.add(10, \'y\');\n            }\n            html += \'<span data-action="selectDecade" class="decade old" data-selection="\' + (startDecade.year() + 6) + \'">\' + startDecade.year() + \'</span>\';\n\n            decadesView.find(\'td\').html(html);\n        };\n\n        TempusDominusBootstrap4.prototype._fillDate = function _fillDate() {\n            var daysView = this.widget.find(\'.datepicker-days\'),\n                daysViewHeader = daysView.find(\'th\'),\n                html = [];\n            var currentDate = void 0,\n                row = void 0,\n                clsName = void 0,\n                i = void 0;\n\n            if (!this._hasDate()) {\n                return;\n            }\n\n            daysViewHeader.eq(0).find(\'span\').attr(\'title\', this._options.tooltips.prevMonth);\n            daysViewHeader.eq(1).attr(\'title\', this._options.tooltips.selectMonth);\n            daysViewHeader.eq(2).find(\'span\').attr(\'title\', this._options.tooltips.nextMonth);\n\n            daysView.find(\'.disabled\').removeClass(\'disabled\');\n            daysViewHeader.eq(1).text(this._viewDate.format(this._options.dayViewHeaderFormat));\n\n            if (!this._isValid(this._viewDate.clone().subtract(1, \'M\'), \'M\')) {\n                daysViewHeader.eq(0).addClass(\'disabled\');\n            }\n            if (!this._isValid(this._viewDate.clone().add(1, \'M\'), \'M\')) {\n                daysViewHeader.eq(2).addClass(\'disabled\');\n            }\n\n            currentDate = this._viewDate.clone().startOf(\'M\').startOf(\'w\').startOf(\'d\');\n\n            for (i = 0; i < 42; i++) {\n                //always display 42 days (should show 6 weeks)\n                if (currentDate.weekday() === 0) {\n                    row = $(\'<tr>\');\n                    if (this._options.calendarWeeks) {\n                        row.append(\'<td class="cw">\' + currentDate.week() + \'</td>\');\n                    }\n                    html.push(row);\n                }\n                clsName = \'\';\n                if (currentDate.isBefore(this._viewDate, \'M\')) {\n                    clsName += \' old\';\n                }\n                if (currentDate.isAfter(this._viewDate, \'M\')) {\n                    clsName += \' new\';\n                }\n                if (this._options.allowMultidate) {\n                    var index = this._datesFormatted.indexOf(currentDate.format(\'YYYY-MM-DD\'));\n                    if (index !== -1) {\n                        if (currentDate.isSame(this._datesFormatted[index], \'d\') && !this.unset) {\n                            clsName += \' active\';\n                        }\n                    }\n                } else {\n                    if (currentDate.isSame(this._getLastPickedDate(), \'d\') && !this.unset) {\n                        clsName += \' active\';\n                    }\n                }\n                if (!this._isValid(currentDate, \'d\')) {\n                    clsName += \' disabled\';\n                }\n                if (currentDate.isSame(this.getMoment(), \'d\')) {\n                    clsName += \' today\';\n                }\n                if (currentDate.day() === 0 || currentDate.day() === 6) {\n                    clsName += \' weekend\';\n                }\n                row.append(\'<td data-action="selectDay" data-day="\' + currentDate.format(\'L\') + \'" class="day\' + clsName + \'">\' + currentDate.date() + \'</td>\');\n                currentDate.add(1, \'d\');\n            }\n\n            daysView.find(\'tbody\').empty().append(html);\n\n            this._updateMonths();\n\n            this._updateYears();\n\n            this._updateDecades();\n        };\n\n        TempusDominusBootstrap4.prototype._fillHours = function _fillHours() {\n            var table = this.widget.find(\'.timepicker-hours table\'),\n                currentHour = this._viewDate.clone().startOf(\'d\'),\n                html = [];\n            var row = $(\'<tr>\');\n\n            if (this._viewDate.hour() > 11 && !this.use24Hours) {\n                currentHour.hour(12);\n            }\n            while (currentHour.isSame(this._viewDate, \'d\') && (this.use24Hours || this._viewDate.hour() < 12 && currentHour.hour() < 12 || this._viewDate.hour() > 11)) {\n                if (currentHour.hour() % 4 === 0) {\n                    row = $(\'<tr>\');\n                    html.push(row);\n                }\n                row.append(\'<td data-action="selectHour" class="hour\' + (!this._isValid(currentHour, \'h\') ? \' disabled\' : \'\') + \'">\' + currentHour.format(this.use24Hours ? \'HH\' : \'hh\') + \'</td>\');\n                currentHour.add(1, \'h\');\n            }\n            table.empty().append(html);\n        };\n\n        TempusDominusBootstrap4.prototype._fillMinutes = function _fillMinutes() {\n            var table = this.widget.find(\'.timepicker-minutes table\'),\n                currentMinute = this._viewDate.clone().startOf(\'h\'),\n                html = [],\n                step = this._options.stepping === 1 ? 5 : this._options.stepping;\n            var row = $(\'<tr>\');\n\n            while (this._viewDate.isSame(currentMinute, \'h\')) {\n                if (currentMinute.minute() % (step * 4) === 0) {\n                    row = $(\'<tr>\');\n                    html.push(row);\n                }\n                row.append(\'<td data-action="selectMinute" class="minute\' + (!this._isValid(currentMinute, \'m\') ? \' disabled\' : \'\') + \'">\' + currentMinute.format(\'mm\') + \'</td>\');\n                currentMinute.add(step, \'m\');\n            }\n            table.empty().append(html);\n        };\n\n        TempusDominusBootstrap4.prototype._fillSeconds = function _fillSeconds() {\n            var table = this.widget.find(\'.timepicker-seconds table\'),\n                currentSecond = this._viewDate.clone().startOf(\'m\'),\n                html = [];\n            var row = $(\'<tr>\');\n\n            while (this._viewDate.isSame(currentSecond, \'m\')) {\n                if (currentSecond.second() % 20 === 0) {\n                    row = $(\'<tr>\');\n                    html.push(row);\n                }\n                row.append(\'<td data-action="selectSecond" class="second\' + (!this._isValid(currentSecond, \'s\') ? \' disabled\' : \'\') + \'">\' + currentSecond.format(\'ss\') + \'</td>\');\n                currentSecond.add(5, \'s\');\n            }\n\n            table.empty().append(html);\n        };\n\n        TempusDominusBootstrap4.prototype._fillTime = function _fillTime() {\n            var toggle = void 0,\n                newDate = void 0;\n            var timeComponents = this.widget.find(\'.timepicker span[data-time-component]\');\n\n            if (!this.use24Hours) {\n                toggle = this.widget.find(\'.timepicker [data-action=togglePeriod]\');\n                newDate = this._getLastPickedDate().clone().add(this._getLastPickedDate().hours() >= 12 ? -12 : 12, \'h\');\n\n                toggle.text(this._getLastPickedDate().format(\'A\'));\n\n                if (this._isValid(newDate, \'h\')) {\n                    toggle.removeClass(\'disabled\');\n                } else {\n                    toggle.addClass(\'disabled\');\n                }\n            }\n            timeComponents.filter(\'[data-time-component=hours]\').text(this._getLastPickedDate().format(\'\' + (this.use24Hours ? \'HH\' : \'hh\')));\n            timeComponents.filter(\'[data-time-component=minutes]\').text(this._getLastPickedDate().format(\'mm\'));\n            timeComponents.filter(\'[data-time-component=seconds]\').text(this._getLastPickedDate().format(\'ss\'));\n\n            this._fillHours();\n            this._fillMinutes();\n            this._fillSeconds();\n        };\n\n        TempusDominusBootstrap4.prototype._doAction = function _doAction(e, action) {\n            var lastPicked = this._getLastPickedDate();\n            if ($(e.currentTarget).is(\'.disabled\')) {\n                return false;\n            }\n            action = action || $(e.currentTarget).data(\'action\');\n            switch (action) {\n                case \'next\':\n                    {\n                        var navFnc = DateTimePicker.DatePickerModes[this.currentViewMode].NAV_FUNCTION;\n                        this._viewDate.add(DateTimePicker.DatePickerModes[this.currentViewMode].NAV_STEP, navFnc);\n                        this._fillDate();\n                        this._viewUpdate(navFnc);\n                        break;\n                    }\n                case \'previous\':\n                    {\n                        var _navFnc = DateTimePicker.DatePickerModes[this.currentViewMode].NAV_FUNCTION;\n                        this._viewDate.subtract(DateTimePicker.DatePickerModes[this.currentViewMode].NAV_STEP, _navFnc);\n                        this._fillDate();\n                        this._viewUpdate(_navFnc);\n                        break;\n                    }\n                case \'pickerSwitch\':\n                    this._showMode(1);\n                    break;\n                case \'selectMonth\':\n                    {\n                        var month = $(e.target).closest(\'tbody\').find(\'span\').index($(e.target));\n                        this._viewDate.month(month);\n                        if (this.currentViewMode === DateTimePicker.MinViewModeNumber) {\n                            this._setValue(lastPicked.clone().year(this._viewDate.year()).month(this._viewDate.month()), this._getLastPickedDateIndex());\n                            if (!this._options.inline) {\n                                this.hide();\n                            }\n                        } else {\n                            this._showMode(-1);\n                            this._fillDate();\n                        }\n                        this._viewUpdate(\'M\');\n                        break;\n                    }\n                case \'selectYear\':\n                    {\n                        var year = parseInt($(e.target).text(), 10) || 0;\n                        this._viewDate.year(year);\n                        if (this.currentViewMode === DateTimePicker.MinViewModeNumber) {\n                            this._setValue(lastPicked.clone().year(this._viewDate.year()), this._getLastPickedDateIndex());\n                            if (!this._options.inline) {\n                                this.hide();\n                            }\n                        } else {\n                            this._showMode(-1);\n                            this._fillDate();\n                        }\n                        this._viewUpdate(\'YYYY\');\n                        break;\n                    }\n                case \'selectDecade\':\n                    {\n                        var _year = parseInt($(e.target).data(\'selection\'), 10) || 0;\n                        this._viewDate.year(_year);\n                        if (this.currentViewMode === DateTimePicker.MinViewModeNumber) {\n                            this._setValue(lastPicked.clone().year(this._viewDate.year()), this._getLastPickedDateIndex());\n                            if (!this._options.inline) {\n                                this.hide();\n                            }\n                        } else {\n                            this._showMode(-1);\n                            this._fillDate();\n                        }\n                        this._viewUpdate(\'YYYY\');\n                        break;\n                    }\n                case \'selectDay\':\n                    {\n                        var day = this._viewDate.clone();\n                        if ($(e.target).is(\'.old\')) {\n                            day.subtract(1, \'M\');\n                        }\n                        if ($(e.target).is(\'.new\')) {\n                            day.add(1, \'M\');\n                        }\n                        this._setValue(day.date(parseInt($(e.target).text(), 10)), this._getLastPickedDateIndex());\n                        if (!this._hasTime() && !this._options.keepOpen && !this._options.inline) {\n                            this.hide();\n                        }\n                        break;\n                    }\n                case \'incrementHours\':\n                    {\n                        var newDate = lastPicked.clone().add(1, \'h\');\n                        if (this._isValid(newDate, \'h\')) {\n                            this._setValue(newDate, this._getLastPickedDateIndex());\n                        }\n                        break;\n                    }\n                case \'incrementMinutes\':\n                    {\n                        var _newDate = lastPicked.clone().add(this._options.stepping, \'m\');\n                        if (this._isValid(_newDate, \'m\')) {\n                            this._setValue(_newDate, this._getLastPickedDateIndex());\n                        }\n                        break;\n                    }\n                case \'incrementSeconds\':\n                    {\n                        var _newDate2 = lastPicked.clone().add(1, \'s\');\n                        if (this._isValid(_newDate2, \'s\')) {\n                            this._setValue(_newDate2, this._getLastPickedDateIndex());\n                        }\n                        break;\n                    }\n                case \'decrementHours\':\n                    {\n                        var _newDate3 = lastPicked.clone().subtract(1, \'h\');\n                        if (this._isValid(_newDate3, \'h\')) {\n                            this._setValue(_newDate3, this._getLastPickedDateIndex());\n                        }\n                        break;\n                    }\n                case \'decrementMinutes\':\n                    {\n                        var _newDate4 = lastPicked.clone().subtract(this._options.stepping, \'m\');\n                        if (this._isValid(_newDate4, \'m\')) {\n                            this._setValue(_newDate4, this._getLastPickedDateIndex());\n                        }\n                        break;\n                    }\n                case \'decrementSeconds\':\n                    {\n                        var _newDate5 = lastPicked.clone().subtract(1, \'s\');\n                        if (this._isValid(_newDate5, \'s\')) {\n                            this._setValue(_newDate5, this._getLastPickedDateIndex());\n                        }\n                        break;\n                    }\n                case \'togglePeriod\':\n                    {\n                        this._setValue(lastPicked.clone().add(lastPicked.hours() >= 12 ? -12 : 12, \'h\'), this._getLastPickedDateIndex());\n                        break;\n                    }\n                case \'togglePicker\':\n                    {\n                        var $this = $(e.target),\n                            $link = $this.closest(\'a\'),\n                            $parent = $this.closest(\'ul\'),\n                            expanded = $parent.find(\'.show\'),\n                            closed = $parent.find(\'.collapse:not(.show)\'),\n                            $span = $this.is(\'span\') ? $this : $this.find(\'span\');\n                        var collapseData = void 0;\n\n                        if (expanded && expanded.length) {\n                            collapseData = expanded.data(\'collapse\');\n                            if (collapseData && collapseData.transitioning) {\n                                return true;\n                            }\n                            if (expanded.collapse) {\n                                // if collapse plugin is available through bootstrap.js then use it\n                                expanded.collapse(\'hide\');\n                                closed.collapse(\'show\');\n                            } else {\n                                // otherwise just toggle in class on the two views\n                                expanded.removeClass(\'show\');\n                                closed.addClass(\'show\');\n                            }\n                            $span.toggleClass(this._options.icons.time + \' \' + this._options.icons.date);\n\n                            if ($span.hasClass(this._options.icons.date)) {\n                                $link.attr(\'title\', this._options.tooltips.selectDate);\n                            } else {\n                                $link.attr(\'title\', this._options.tooltips.selectTime);\n                            }\n                        }\n                    }\n                    break;\n                case \'showPicker\':\n                    this.widget.find(\'.timepicker > div:not(.timepicker-picker)\').hide();\n                    this.widget.find(\'.timepicker .timepicker-picker\').show();\n                    break;\n                case \'showHours\':\n                    this.widget.find(\'.timepicker .timepicker-picker\').hide();\n                    this.widget.find(\'.timepicker .timepicker-hours\').show();\n                    break;\n                case \'showMinutes\':\n                    this.widget.find(\'.timepicker .timepicker-picker\').hide();\n                    this.widget.find(\'.timepicker .timepicker-minutes\').show();\n                    break;\n                case \'showSeconds\':\n                    this.widget.find(\'.timepicker .timepicker-picker\').hide();\n                    this.widget.find(\'.timepicker .timepicker-seconds\').show();\n                    break;\n                case \'selectHour\':\n                    {\n                        var hour = parseInt($(e.target).text(), 10);\n\n                        if (!this.use24Hours) {\n                            if (lastPicked.hours() >= 12) {\n                                if (hour !== 12) {\n                                    hour += 12;\n                                }\n                            } else {\n                                if (hour === 12) {\n                                    hour = 0;\n                                }\n                            }\n                        }\n                        this._setValue(lastPicked.clone().hours(hour), this._getLastPickedDateIndex());\n                        if (!this._isEnabled(\'a\') && !this._isEnabled(\'m\') && !this._options.keepOpen && !this._options.inline) {\n                            this.hide();\n                        } else {\n                            this._doAction(e, \'showPicker\');\n                        }\n                        break;\n                    }\n                case \'selectMinute\':\n                    this._setValue(lastPicked.clone().minutes(parseInt($(e.target).text(), 10)), this._getLastPickedDateIndex());\n                    if (!this._isEnabled(\'a\') && !this._isEnabled(\'s\') && !this._options.keepOpen && !this._options.inline) {\n                        this.hide();\n                    } else {\n                        this._doAction(e, \'showPicker\');\n                    }\n                    break;\n                case \'selectSecond\':\n                    this._setValue(lastPicked.clone().seconds(parseInt($(e.target).text(), 10)), this._getLastPickedDateIndex());\n                    if (!this._isEnabled(\'a\') && !this._options.keepOpen && !this._options.inline) {\n                        this.hide();\n                    } else {\n                        this._doAction(e, \'showPicker\');\n                    }\n                    break;\n                case \'clear\':\n                    this.clear();\n                    break;\n                case \'close\':\n                    this.hide();\n                    break;\n                case \'today\':\n                    {\n                        var todaysDate = this.getMoment();\n                        if (this._isValid(todaysDate, \'d\')) {\n                            this._setValue(todaysDate, this._getLastPickedDateIndex());\n                        }\n                        break;\n                    }\n            }\n            return false;\n        };\n\n        //public\n\n\n        TempusDominusBootstrap4.prototype.hide = function hide() {\n            var transitioning = false;\n            if (!this.widget) {\n                return;\n            }\n            // Ignore event if in the middle of a picker transition\n            this.widget.find(\'.collapse\').each(function () {\n                var collapseData = $(this).data(\'collapse\');\n                if (collapseData && collapseData.transitioning) {\n                    transitioning = true;\n                    return false;\n                }\n                return true;\n            });\n            if (transitioning) {\n                return;\n            }\n            if (this.component && this.component.hasClass(\'btn\')) {\n                this.component.toggleClass(\'active\');\n            }\n            this.widget.hide();\n\n            $(window).off(\'resize\', this._place());\n            this.widget.off(\'click\', \'[data-action]\');\n            this.widget.off(\'mousedown\', false);\n\n            this.widget.remove();\n            this.widget = false;\n\n            this._notifyEvent({\n                type: DateTimePicker.Event.HIDE,\n                date: this._getLastPickedDate().clone()\n            });\n\n            if (this.input !== undefined) {\n                this.input.blur();\n            }\n\n            this._viewDate = this._getLastPickedDate().clone();\n        };\n\n        TempusDominusBootstrap4.prototype.show = function show() {\n            var currentMoment = void 0;\n            var useCurrentGranularity = {\n                \'year\': function year(m) {\n                    return m.month(0).date(1).hours(0).seconds(0).minutes(0);\n                },\n                \'month\': function month(m) {\n                    return m.date(1).hours(0).seconds(0).minutes(0);\n                },\n                \'day\': function day(m) {\n                    return m.hours(0).seconds(0).minutes(0);\n                },\n                \'hour\': function hour(m) {\n                    return m.seconds(0).minutes(0);\n                },\n                \'minute\': function minute(m) {\n                    return m.seconds(0);\n                }\n            };\n\n            if (this.input !== undefined) {\n                if (this.input.prop(\'disabled\') || !this._options.ignoreReadonly && this.input.prop(\'readonly\') || this.widget) {\n                    return;\n                }\n                if (this.input.val() !== undefined && this.input.val().trim().length !== 0) {\n                    this._setValue(this._parseInputDate(this.input.val().trim()), 0);\n                } else if (this.unset && this._options.useCurrent) {\n                    currentMoment = this.getMoment();\n                    if (typeof this._options.useCurrent === \'string\') {\n                        currentMoment = useCurrentGranularity[this._options.useCurrent](currentMoment);\n                    }\n                    this._setValue(currentMoment, 0);\n                }\n            } else if (this.unset && this._options.useCurrent) {\n                currentMoment = this.getMoment();\n                if (typeof this._options.useCurrent === \'string\') {\n                    currentMoment = useCurrentGranularity[this._options.useCurrent](currentMoment);\n                }\n                this._setValue(currentMoment, 0);\n            }\n\n            this.widget = this._getTemplate();\n\n            this._fillDow();\n            this._fillMonths();\n\n            this.widget.find(\'.timepicker-hours\').hide();\n            this.widget.find(\'.timepicker-minutes\').hide();\n            this.widget.find(\'.timepicker-seconds\').hide();\n\n            this._update();\n            this._showMode();\n\n            $(window).on(\'resize\', { picker: this }, this._place);\n            this.widget.on(\'click\', \'[data-action]\', $.proxy(this._doAction, this)); // this handles clicks on the widget\n            this.widget.on(\'mousedown\', false);\n\n            if (this.component && this.component.hasClass(\'btn\')) {\n                this.component.toggleClass(\'active\');\n            }\n            this._place();\n            this.widget.show();\n            if (this.input !== undefined && this._options.focusOnShow && !this.input.is(\':focus\')) {\n                this.input.focus();\n            }\n\n            this._notifyEvent({\n                type: DateTimePicker.Event.SHOW\n            });\n        };\n\n        TempusDominusBootstrap4.prototype.destroy = function destroy() {\n            this.hide();\n            //todo doc off?\n            this._element.removeData(DateTimePicker.DATA_KEY);\n            this._element.removeData(\'date\');\n        };\n\n        TempusDominusBootstrap4.prototype.disable = function disable() {\n            this.hide();\n            if (this.component && this.component.hasClass(\'btn\')) {\n                this.component.addClass(\'disabled\');\n            }\n            if (this.input !== undefined) {\n                this.input.prop(\'disabled\', true); //todo disable this/comp if input is null\n            }\n        };\n\n        TempusDominusBootstrap4.prototype.enable = function enable() {\n            if (this.component && this.component.hasClass(\'btn\')) {\n                this.component.removeClass(\'disabled\');\n            }\n            if (this.input !== undefined) {\n                this.input.prop(\'disabled\', false); //todo enable comp/this if input is null\n            }\n        };\n\n        TempusDominusBootstrap4.prototype.toolbarPlacement = function toolbarPlacement(_toolbarPlacement) {\n            if (arguments.length === 0) {\n                return this._options.toolbarPlacement;\n            }\n\n            if (typeof _toolbarPlacement !== \'string\') {\n                throw new TypeError(\'toolbarPlacement() expects a string parameter\');\n            }\n            if (toolbarPlacements.indexOf(_toolbarPlacement) === -1) {\n                throw new TypeError(\'toolbarPlacement() parameter must be one of (\' + toolbarPlacements.join(\', \') + \') value\');\n            }\n            this._options.toolbarPlacement = _toolbarPlacement;\n\n            if (this.widget) {\n                this.hide();\n                this.show();\n            }\n        };\n\n        TempusDominusBootstrap4.prototype.widgetPositioning = function widgetPositioning(_widgetPositioning) {\n            if (arguments.length === 0) {\n                return $.extend({}, this._options.widgetPositioning);\n            }\n\n            if ({}.toString.call(_widgetPositioning) !== \'[object Object]\') {\n                throw new TypeError(\'widgetPositioning() expects an object variable\');\n            }\n            if (_widgetPositioning.horizontal) {\n                if (typeof _widgetPositioning.horizontal !== \'string\') {\n                    throw new TypeError(\'widgetPositioning() horizontal variable must be a string\');\n                }\n                _widgetPositioning.horizontal = _widgetPositioning.horizontal.toLowerCase();\n                if (horizontalModes.indexOf(_widgetPositioning.horizontal) === -1) {\n                    throw new TypeError(\'widgetPositioning() expects horizontal parameter to be one of (\' + horizontalModes.join(\', \') + \')\');\n                }\n                this._options.widgetPositioning.horizontal = _widgetPositioning.horizontal;\n            }\n            if (_widgetPositioning.vertical) {\n                if (typeof _widgetPositioning.vertical !== \'string\') {\n                    throw new TypeError(\'widgetPositioning() vertical variable must be a string\');\n                }\n                _widgetPositioning.vertical = _widgetPositioning.vertical.toLowerCase();\n                if (verticalModes.indexOf(_widgetPositioning.vertical) === -1) {\n                    throw new TypeError(\'widgetPositioning() expects vertical parameter to be one of (\' + verticalModes.join(\', \') + \')\');\n                }\n                this._options.widgetPositioning.vertical = _widgetPositioning.vertical;\n            }\n            this._update();\n        };\n\n        TempusDominusBootstrap4.prototype.widgetParent = function widgetParent(_widgetParent) {\n            if (arguments.length === 0) {\n                return this._options.widgetParent;\n            }\n\n            if (typeof _widgetParent === \'string\') {\n                _widgetParent = $(_widgetParent);\n            }\n\n            if (_widgetParent !== null && typeof _widgetParent !== \'string\' && !(_widgetParent instanceof $)) {\n                throw new TypeError(\'widgetParent() expects a string or a jQuery object parameter\');\n            }\n\n            this._options.widgetParent = _widgetParent;\n            if (this.widget) {\n                this.hide();\n                this.show();\n            }\n        };\n\n        //static\n\n\n        TempusDominusBootstrap4._jQueryHandleThis = function _jQueryHandleThis(me, option, argument) {\n            var data = $(me).data(DateTimePicker.DATA_KEY);\n            if ((typeof option === \'undefined\' ? \'undefined\' : _typeof(option)) === \'object\') {\n                $.extend({}, DateTimePicker.Default, option);\n            }\n\n            if (!data) {\n                data = new TempusDominusBootstrap4($(me), option);\n                $(me).data(DateTimePicker.DATA_KEY, data);\n            }\n\n            if (typeof option === \'string\') {\n                if (data[option] === undefined) {\n                    throw new Error(\'No method named "\' + option + \'"\');\n                }\n                if (argument === undefined) {\n                    return data[option]();\n                } else {\n                    return data[option](argument);\n                }\n            }\n        };\n\n        TempusDominusBootstrap4._jQueryInterface = function _jQueryInterface(option, argument) {\n            if (this.length === 1) {\n                return TempusDominusBootstrap4._jQueryHandleThis(this[0], option, argument);\n            }\n            return this.each(function () {\n                TempusDominusBootstrap4._jQueryHandleThis(this, option, argument);\n            });\n        };\n\n        return TempusDominusBootstrap4;\n    }(DateTimePicker);\n\n    /**\r\n    * ------------------------------------------------------------------------\r\n    * jQuery\r\n    * ------------------------------------------------------------------------\r\n    */\n\n\n    $(document).on(DateTimePicker.Event.CLICK_DATA_API, DateTimePicker.Selector.DATA_TOGGLE, function () {\n        var $target = getSelectorFromElement($(this));\n        if ($target.length === 0) {\n            return;\n        }\n        TempusDominusBootstrap4._jQueryInterface.call($target, \'toggle\');\n    }).on(DateTimePicker.Event.CHANGE, \'.\' + DateTimePicker.ClassName.INPUT, function (event) {\n        var $target = getSelectorFromElement($(this));\n        if ($target.length === 0) {\n            return;\n        }\n        TempusDominusBootstrap4._jQueryInterface.call($target, \'_change\', event);\n    }).on(DateTimePicker.Event.BLUR, \'.\' + DateTimePicker.ClassName.INPUT, function (event) {\n        var $target = getSelectorFromElement($(this)),\n            config = $target.data(DateTimePicker.DATA_KEY);\n        if ($target.length === 0) {\n            return;\n        }\n        if (config._options.debug || window.debug) {\n            return;\n        }\n        TempusDominusBootstrap4._jQueryInterface.call($target, \'hide\', event);\n    }).on(DateTimePicker.Event.KEYDOWN, \'.\' + DateTimePicker.ClassName.INPUT, function (event) {\n        var $target = getSelectorFromElement($(this));\n        if ($target.length === 0) {\n            return;\n        }\n        TempusDominusBootstrap4._jQueryInterface.call($target, \'_keydown\', event);\n    }).on(DateTimePicker.Event.KEYUP, \'.\' + DateTimePicker.ClassName.INPUT, function (event) {\n        var $target = getSelectorFromElement($(this));\n        if ($target.length === 0) {\n            return;\n        }\n        TempusDominusBootstrap4._jQueryInterface.call($target, \'_keyup\', event);\n    }).on(DateTimePicker.Event.FOCUS, \'.\' + DateTimePicker.ClassName.INPUT, function (event) {\n        var $target = getSelectorFromElement($(this)),\n            config = $target.data(DateTimePicker.DATA_KEY);\n        if ($target.length === 0) {\n            return;\n        }\n        if (!config._options.allowInputToggle) {\n            return;\n        }\n        TempusDominusBootstrap4._jQueryInterface.call($target, config, event);\n    });\n\n    $.fn[DateTimePicker.NAME] = TempusDominusBootstrap4._jQueryInterface;\n    $.fn[DateTimePicker.NAME].Constructor = TempusDominusBootstrap4;\n    $.fn[DateTimePicker.NAME].noConflict = function () {\n        $.fn[DateTimePicker.NAME] = JQUERY_NO_CONFLICT;\n        return TempusDominusBootstrap4._jQueryInterface;\n    };\n\n    return TempusDominusBootstrap4;\n}(jQuery);\r\n\r\n}();\r\n';
-    loader.global.define = undefined;
-    loader.global.module = undefined;
-    loader.global.exports = undefined;
-    loader.__exec({
-        'source': source,
-        'address': module.uri
-    });
-    loader.global.require = require;
-    loader.global.define = define;
-    return loader.get('@@global-helpers').retrieveGlobal(module.id, undefined);
-});
 /*moment@2.22.2#moment*/
 define('moment@2.22.2#moment', [
     'module',
@@ -22180,6 +22153,29 @@ define('can-globals@1.1.1#base-url/base-url', [
         return this;
     }(), require, exports, module));
 });
+/*can-parse-uri@1.1.0#can-parse-uri*/
+define('can-parse-uri@1.1.0#can-parse-uri', [
+    'require',
+    'exports',
+    'module',
+    'can-namespace'
+], function (require, exports, module) {
+    var namespace = require('can-namespace');
+    module.exports = namespace.parseURI = function (url) {
+        var m = String(url).replace(/^\s+|\s+$/g, '').match(/^([^:\/?#]+:)?(\/\/(?:[^:@]*(?::[^:@]*)?@)?(([^:\/?#]*)(?::(\d*))?))?([^?#]*)(\?[^#]*)?(#[\s\S]*)?/);
+        return m ? {
+            href: m[0] || '',
+            protocol: m[1] || '',
+            authority: m[2] || '',
+            host: m[3] || '',
+            hostname: m[4] || '',
+            port: m[5] || '',
+            pathname: m[6] || '',
+            search: m[7] || '',
+            hash: m[8] || ''
+        } : null;
+    };
+});
 /*popper.js@1.14.3#dist/umd/popper*/
 define('popper.js@1.14.3#dist/umd/popper', [
     'module',
@@ -22205,34 +22201,6 @@ define('popper.js@1.14.3#dist/umd/popper', [
     loader.global.require = require;
     loader.global.define = define;
     return loader.get('@@global-helpers').retrieveGlobal(module.id, undefined);
-});
-/*can-join-uris@1.0.0#can-join-uris*/
-define('can-join-uris@1.0.0#can-join-uris', [
-    'require',
-    'exports',
-    'module',
-    'can-namespace',
-    'can-parse-uri'
-], function (require, exports, module) {
-    'use strict';
-    var namespace = require('can-namespace');
-    var parseURI = require('can-parse-uri');
-    module.exports = namespace.joinURIs = function (base, href) {
-        function removeDotSegments(input) {
-            var output = [];
-            input.replace(/^(\.\.?(\/|$))+/, '').replace(/\/(\.(\/|$))+/g, '/').replace(/\/\.\.$/, '/../').replace(/\/?[^\/]*/g, function (p) {
-                if (p === '/..') {
-                    output.pop();
-                } else {
-                    output.push(p);
-                }
-            });
-            return output.join('').replace(/^\//, input.charAt(0) === '/' ? '/' : '');
-        }
-        href = parseURI(href || '');
-        base = parseURI(base || '');
-        return !href || !base ? null : (href.protocol || base.protocol) + (href.protocol || href.authority ? href.authority : base.authority) + removeDotSegments(href.protocol || href.authority || href.pathname.charAt(0) === '/' ? href.pathname : href.pathname ? (base.authority && !base.pathname ? '/' : '') + base.pathname.slice(0, base.pathname.lastIndexOf('/') + 1) + href.pathname : base.pathname) + (href.protocol || href.authority || href.pathname ? href.search : href.search || base.search) + href.hash;
-    };
 });
 /*can-stache@4.5.0#helpers/-debugger*/
 define('can-stache@4.5.0#helpers/-debugger', [
@@ -37374,6 +37342,31 @@ define('shuttle-canstrap@1.0.50#shuttle-canstrap', [
     }
     exports.default = _options2.default;
 });
+/*tempusdominus-bootstrap-4@5.0.0-alpha18#build/js/tempusdominus-bootstrap-4*/
+define('tempusdominus-bootstrap-4@5.0.0-alpha18#build/js/tempusdominus-bootstrap-4', [
+    'module',
+    '@loader',
+    'require'
+], function (module, loader, require) {
+    loader.get('@@global-helpers').prepareGlobal({
+        require: require,
+        name: module.id,
+        deps: []
+    });
+    var define = loader.global.define;
+    var require = loader.global.require;
+    var source = '/*@preserve\r\n * Tempus Dominus Bootstrap4 v5.0.0-alpha18 (https://tempusdominus.github.io/bootstrap-4/)\r\n * Copyright 2016-2018 Jonathan Peterson\r\n * Licensed under MIT (https://github.com/tempusdominus/bootstrap-3/blob/master/LICENSE)\r\n */\r\n\r\nif (typeof jQuery === \'undefined\') {\r\n  throw new Error(\'Tempus Dominus Bootstrap4\\\'s requires jQuery. jQuery must be included before Tempus Dominus Bootstrap4\\\'s JavaScript.\');\r\n}\r\n\r\n+function ($) {\r\n  var version = $.fn.jquery.split(\' \')[0].split(\'.\');\r\n  if ((version[0] < 2 && version[1] < 9) || (version[0] === 1 && version[1] === 9 && version[2] < 1) || (version[0] >= 4)) {\r\n    throw new Error(\'Tempus Dominus Bootstrap4\\\'s requires at least jQuery v3.0.0 but less than v4.0.0\');\r\n  }\r\n}(jQuery);\r\n\r\n\r\nif (typeof moment === \'undefined\') {\r\n  throw new Error(\'Tempus Dominus Bootstrap4\\\'s requires moment.js. Moment.js must be included before Tempus Dominus Bootstrap4\\\'s JavaScript.\');\r\n}\r\n\r\nvar version = moment.version.split(\'.\')\r\nif ((version[0] <= 2 && version[1] < 17) || (version[0] >= 3)) {\r\n  throw new Error(\'Tempus Dominus Bootstrap4\\\'s requires at least moment.js v2.17.0 but less than v3.0.0\');\r\n}\r\n\r\n+function () {\r\n\r\nvar _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn\'t been initialised - super() hasn\'t been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }\n\n// ReSharper disable once InconsistentNaming\nvar DateTimePicker = function ($) {\n    // ReSharper disable InconsistentNaming\n    var NAME = \'datetimepicker\',\n        VERSION = \'5.0.0-alpha7\',\n        DATA_KEY = \'\' + NAME,\n        EVENT_KEY = \'.\' + DATA_KEY,\n        EMIT_EVENT_KEY = DATA_KEY + \'.\',\n        DATA_API_KEY = \'.data-api\',\n        Selector = {\n        DATA_TOGGLE: \'[data-toggle="\' + DATA_KEY + \'"]\'\n    },\n        ClassName = {\n        INPUT: NAME + \'-input\'\n    },\n        Event = {\n        CHANGE: \'change\' + EVENT_KEY,\n        BLUR: \'blur\' + EVENT_KEY,\n        KEYUP: \'keyup\' + EVENT_KEY,\n        KEYDOWN: \'keydown\' + EVENT_KEY,\n        FOCUS: \'focus\' + EVENT_KEY,\n        CLICK_DATA_API: \'click\' + EVENT_KEY + DATA_API_KEY,\n        //emitted\n        UPDATE: EMIT_EVENT_KEY + \'update\',\n        ERROR: EMIT_EVENT_KEY + \'error\',\n        HIDE: EMIT_EVENT_KEY + \'hide\',\n        SHOW: EMIT_EVENT_KEY + \'show\'\n    },\n        Default = {\n        timeZone: \'\',\n        format: false,\n        dayViewHeaderFormat: \'MMMM YYYY\',\n        extraFormats: false,\n        stepping: 1,\n        minDate: false,\n        maxDate: false,\n        useCurrent: true,\n        collapse: true,\n        locale: window.moment.locale(),\n        defaultDate: false,\n        disabledDates: false,\n        enabledDates: false,\n        icons: {\n            time: \'fa fa-clock-o\',\n            date: \'fa fa-calendar\',\n            up: \'fa fa-arrow-up\',\n            down: \'fa fa-arrow-down\',\n            previous: \'fa fa-chevron-left\',\n            next: \'fa fa-chevron-right\',\n            today: \'fa fa-calendar-check-o\',\n            clear: \'fa fa-delete\',\n            close: \'fa fa-times\'\n        },\n        tooltips: {\n            today: \'Go to today\',\n            clear: \'Clear selection\',\n            close: \'Close the picker\',\n            selectMonth: \'Select Month\',\n            prevMonth: \'Previous Month\',\n            nextMonth: \'Next Month\',\n            selectYear: \'Select Year\',\n            prevYear: \'Previous Year\',\n            nextYear: \'Next Year\',\n            selectDecade: \'Select Decade\',\n            prevDecade: \'Previous Decade\',\n            nextDecade: \'Next Decade\',\n            prevCentury: \'Previous Century\',\n            nextCentury: \'Next Century\',\n            pickHour: \'Pick Hour\',\n            incrementHour: \'Increment Hour\',\n            decrementHour: \'Decrement Hour\',\n            pickMinute: \'Pick Minute\',\n            incrementMinute: \'Increment Minute\',\n            decrementMinute: \'Decrement Minute\',\n            pickSecond: \'Pick Second\',\n            incrementSecond: \'Increment Second\',\n            decrementSecond: \'Decrement Second\',\n            togglePeriod: \'Toggle Period\',\n            selectTime: \'Select Time\',\n            selectDate: \'Select Date\'\n        },\n        useStrict: false,\n        sideBySide: false,\n        daysOfWeekDisabled: false,\n        calendarWeeks: false,\n        viewMode: \'days\',\n        toolbarPlacement: \'default\',\n        buttons: {\n            showToday: false,\n            showClear: false,\n            showClose: false\n        },\n        widgetPositioning: {\n            horizontal: \'auto\',\n            vertical: \'auto\'\n        },\n        widgetParent: null,\n        ignoreReadonly: false,\n        keepOpen: false,\n        focusOnShow: true,\n        inline: false,\n        keepInvalid: false,\n        keyBinds: {\n            up: function up() {\n                if (!this.widget) {\n                    return false;\n                }\n                var d = this._dates[0] || this.getMoment();\n                if (this.widget.find(\'.datepicker\').is(\':visible\')) {\n                    this.date(d.clone().subtract(7, \'d\'));\n                } else {\n                    this.date(d.clone().add(this.stepping(), \'m\'));\n                }\n                return true;\n            },\n            down: function down() {\n                if (!this.widget) {\n                    this.show();\n                    return false;\n                }\n                var d = this._dates[0] || this.getMoment();\n                if (this.widget.find(\'.datepicker\').is(\':visible\')) {\n                    this.date(d.clone().add(7, \'d\'));\n                } else {\n                    this.date(d.clone().subtract(this.stepping(), \'m\'));\n                }\n                return true;\n            },\n            \'control up\': function controlUp() {\n                if (!this.widget) {\n                    return false;\n                }\n                var d = this._dates[0] || this.getMoment();\n                if (this.widget.find(\'.datepicker\').is(\':visible\')) {\n                    this.date(d.clone().subtract(1, \'y\'));\n                } else {\n                    this.date(d.clone().add(1, \'h\'));\n                }\n                return true;\n            },\n            \'control down\': function controlDown() {\n                if (!this.widget) {\n                    return false;\n                }\n                var d = this._dates[0] || this.getMoment();\n                if (this.widget.find(\'.datepicker\').is(\':visible\')) {\n                    this.date(d.clone().add(1, \'y\'));\n                } else {\n                    this.date(d.clone().subtract(1, \'h\'));\n                }\n                return true;\n            },\n            left: function left() {\n                if (!this.widget) {\n                    return false;\n                }\n                var d = this._dates[0] || this.getMoment();\n                if (this.widget.find(\'.datepicker\').is(\':visible\')) {\n                    this.date(d.clone().subtract(1, \'d\'));\n                }\n                return true;\n            },\n            right: function right() {\n                if (!this.widget) {\n                    return false;\n                }\n                var d = this._dates[0] || this.getMoment();\n                if (this.widget.find(\'.datepicker\').is(\':visible\')) {\n                    this.date(d.clone().add(1, \'d\'));\n                }\n                return true;\n            },\n            pageUp: function pageUp() {\n                if (!this.widget) {\n                    return false;\n                }\n                var d = this._dates[0] || this.getMoment();\n                if (this.widget.find(\'.datepicker\').is(\':visible\')) {\n                    this.date(d.clone().subtract(1, \'M\'));\n                }\n                return true;\n            },\n            pageDown: function pageDown() {\n                if (!this.widget) {\n                    return false;\n                }\n                var d = this._dates[0] || this.getMoment();\n                if (this.widget.find(\'.datepicker\').is(\':visible\')) {\n                    this.date(d.clone().add(1, \'M\'));\n                }\n                return true;\n            },\n            enter: function enter() {\n                this.hide();\n                return true;\n            },\n            escape: function escape() {\n                if (!this.widget) {\n                    return false;\n                }\n                this.hide();\n                return true;\n            },\n            \'control space\': function controlSpace() {\n                if (!this.widget) {\n                    return false;\n                }\n                if (this.widget.find(\'.timepicker\').is(\':visible\')) {\n                    this.widget.find(\'.btn[data-action="togglePeriod"]\').click();\n                }\n                return true;\n            },\n            t: function t() {\n                this.date(this.getMoment());\n                return true;\n            },\n            \'delete\': function _delete() {\n                if (!this.widget) {\n                    return false;\n                }\n                this.clear();\n                return true;\n            }\n        },\n        debug: false,\n        allowInputToggle: false,\n        disabledTimeIntervals: false,\n        disabledHours: false,\n        enabledHours: false,\n        viewDate: false,\n        allowMultidate: false,\n        multidateSeparator: \',\'\n    },\n        DatePickerModes = [{\n        CLASS_NAME: \'days\',\n        NAV_FUNCTION: \'M\',\n        NAV_STEP: 1\n    }, {\n        CLASS_NAME: \'months\',\n        NAV_FUNCTION: \'y\',\n        NAV_STEP: 1\n    }, {\n        CLASS_NAME: \'years\',\n        NAV_FUNCTION: \'y\',\n        NAV_STEP: 10\n    }, {\n        CLASS_NAME: \'decades\',\n        NAV_FUNCTION: \'y\',\n        NAV_STEP: 100\n    }],\n        KeyMap = {\n        \'up\': 38,\n        38: \'up\',\n        \'down\': 40,\n        40: \'down\',\n        \'left\': 37,\n        37: \'left\',\n        \'right\': 39,\n        39: \'right\',\n        \'tab\': 9,\n        9: \'tab\',\n        \'escape\': 27,\n        27: \'escape\',\n        \'enter\': 13,\n        13: \'enter\',\n        \'pageUp\': 33,\n        33: \'pageUp\',\n        \'pageDown\': 34,\n        34: \'pageDown\',\n        \'shift\': 16,\n        16: \'shift\',\n        \'control\': 17,\n        17: \'control\',\n        \'space\': 32,\n        32: \'space\',\n        \'t\': 84,\n        84: \'t\',\n        \'delete\': 46,\n        46: \'delete\'\n    },\n        ViewModes = [\'times\', \'days\', \'months\', \'years\', \'decades\'],\n        keyState = {},\n        keyPressHandled = {};\n\n    var MinViewModeNumber = 0;\n    // ReSharper restore InconsistentNaming\n\n    // ReSharper disable once DeclarationHides\n    // ReSharper disable once InconsistentNaming\n\n    var DateTimePicker = function () {\n        /** @namespace eData.dateOptions */\n        /** @namespace moment.tz */\n\n        function DateTimePicker(element, options) {\n            _classCallCheck(this, DateTimePicker);\n\n            this._options = this._getOptions(options);\n            this._element = element;\n            this._dates = [];\n            this._datesFormatted = [];\n            this._viewDate = null;\n            this.unset = true;\n            this.component = false;\n            this.widget = false;\n            this.use24Hours = null;\n            this.actualFormat = null;\n            this.parseFormats = null;\n            this.currentViewMode = null;\n\n            this._int();\n        }\n\n        /**\n         * @return {string}\n         */\n\n\n        //private\n\n        DateTimePicker.prototype._int = function _int() {\n            var targetInput = this._element.data(\'target-input\');\n            if (this._element.is(\'input\')) {\n                this.input = this._element;\n            } else if (targetInput !== undefined) {\n                if (targetInput === \'nearest\') {\n                    this.input = this._element.find(\'input\');\n                } else {\n                    this.input = $(targetInput);\n                }\n            }\n\n            this._dates = [];\n            this._dates[0] = this.getMoment();\n            this._viewDate = this.getMoment().clone();\n\n            $.extend(true, this._options, this._dataToOptions());\n\n            this.options(this._options);\n\n            this._initFormatting();\n\n            if (this.input !== undefined && this.input.is(\'input\') && this.input.val().trim().length !== 0) {\n                this._setValue(this._parseInputDate(this.input.val().trim()));\n            } else if (this._options.defaultDate && this.input !== undefined && this.input.attr(\'placeholder\') === undefined) {\n                this._setValue(this._options.defaultDate);\n            }\n            if (this._options.inline) {\n                this.show();\n            }\n        };\n\n        DateTimePicker.prototype._update = function _update() {\n            if (!this.widget) {\n                return;\n            }\n            this._fillDate();\n            this._fillTime();\n        };\n\n        DateTimePicker.prototype._setValue = function _setValue(targetMoment, index) {\n            var oldDate = this.unset ? null : this._dates[index];\n            var outpValue = \'\';\n            // case of calling setValue(null or false)\n            if (!targetMoment) {\n                if (!this._options.allowMultidate || this._dates.length === 1) {\n                    this.unset = true;\n                    this._dates = [];\n                    this._datesFormatted = [];\n                } else {\n                    outpValue = this._element.data(\'date\') + \',\';\n                    outpValue = outpValue.replace(oldDate.format(this.actualFormat) + \',\', \'\').replace(\',,\', \'\').replace(/,\\s*$/, \'\');\n                    this._dates.splice(index, 1);\n                    this._datesFormatted.splice(index, 1);\n                }\n                if (this.input !== undefined) {\n                    this.input.val(outpValue);\n                    this.input.trigger(\'input\');\n                }\n                this._element.data(\'date\', outpValue);\n                this._notifyEvent({\n                    type: DateTimePicker.Event.CHANGE,\n                    date: false,\n                    oldDate: oldDate\n                });\n                this._update();\n                return;\n            }\n\n            targetMoment = targetMoment.clone().locale(this._options.locale);\n\n            if (this._hasTimeZone()) {\n                targetMoment.tz(this._options.timeZone);\n            }\n\n            if (this._options.stepping !== 1) {\n                targetMoment.minutes(Math.round(targetMoment.minutes() / this._options.stepping) * this._options.stepping).seconds(0);\n            }\n\n            if (this._isValid(targetMoment)) {\n                this._dates[index] = targetMoment;\n                this._datesFormatted[index] = targetMoment.format(\'YYYY-MM-DD\');\n                this._viewDate = targetMoment.clone();\n                if (this._options.allowMultidate && this._dates.length > 1) {\n                    for (var i = 0; i < this._dates.length; i++) {\n                        outpValue += \'\' + this._dates[i].format(this.actualFormat) + this._options.multidateSeparator;\n                    }\n                    outpValue = outpValue.replace(/,\\s*$/, \'\');\n                } else {\n                    outpValue = this._dates[index].format(this.actualFormat);\n                }\n                if (this.input !== undefined) {\n                    this.input.val(outpValue);\n                    this.input.trigger(\'input\');\n                }\n                this._element.data(\'date\', outpValue);\n\n                this.unset = false;\n                this._update();\n                this._notifyEvent({\n                    type: DateTimePicker.Event.CHANGE,\n                    date: this._dates[index].clone(),\n                    oldDate: oldDate\n                });\n            } else {\n                if (!this._options.keepInvalid) {\n                    if (this.input !== undefined) {\n                        this.input.val(\'\' + (this.unset ? \'\' : this._dates[index].format(this.actualFormat)));\n                        this.input.trigger(\'input\');\n                    }\n                } else {\n                    this._notifyEvent({\n                        type: DateTimePicker.Event.CHANGE,\n                        date: targetMoment,\n                        oldDate: oldDate\n                    });\n                }\n                this._notifyEvent({\n                    type: DateTimePicker.Event.ERROR,\n                    date: targetMoment,\n                    oldDate: oldDate\n                });\n            }\n        };\n\n        DateTimePicker.prototype._change = function _change(e) {\n            var val = $(e.target).val().trim(),\n                parsedDate = val ? this._parseInputDate(val) : null;\n            this._setValue(parsedDate);\n            e.stopImmediatePropagation();\n            return false;\n        };\n\n        //noinspection JSMethodCanBeStatic\n\n\n        DateTimePicker.prototype._getOptions = function _getOptions(options) {\n            options = $.extend(true, {}, Default, options);\n            return options;\n        };\n\n        DateTimePicker.prototype._hasTimeZone = function _hasTimeZone() {\n            return window.moment.tz !== undefined && this._options.timeZone !== undefined && this._options.timeZone !== null && this._options.timeZone !== \'\';\n        };\n\n        DateTimePicker.prototype._isEnabled = function _isEnabled(granularity) {\n            if (typeof granularity !== \'string\' || granularity.length > 1) {\n                throw new TypeError(\'isEnabled expects a single character string parameter\');\n            }\n            switch (granularity) {\n                case \'y\':\n                    return this.actualFormat.indexOf(\'Y\') !== -1;\n                case \'M\':\n                    return this.actualFormat.indexOf(\'M\') !== -1;\n                case \'d\':\n                    return this.actualFormat.toLowerCase().indexOf(\'d\') !== -1;\n                case \'h\':\n                case \'H\':\n                    return this.actualFormat.toLowerCase().indexOf(\'h\') !== -1;\n                case \'m\':\n                    return this.actualFormat.indexOf(\'m\') !== -1;\n                case \'s\':\n                    return this.actualFormat.indexOf(\'s\') !== -1;\n                default:\n                    return false;\n            }\n        };\n\n        DateTimePicker.prototype._hasTime = function _hasTime() {\n            return this._isEnabled(\'h\') || this._isEnabled(\'m\') || this._isEnabled(\'s\');\n        };\n\n        DateTimePicker.prototype._hasDate = function _hasDate() {\n            return this._isEnabled(\'y\') || this._isEnabled(\'M\') || this._isEnabled(\'d\');\n        };\n\n        DateTimePicker.prototype._dataToOptions = function _dataToOptions() {\n            var eData = this._element.data();\n            var dataOptions = {};\n\n            if (eData.dateOptions && eData.dateOptions instanceof Object) {\n                dataOptions = $.extend(true, dataOptions, eData.dateOptions);\n            }\n\n            $.each(this._options, function (key) {\n                var attributeName = \'date\' + key.charAt(0).toUpperCase() + key.slice(1); //todo data api key\n                if (eData[attributeName] !== undefined) {\n                    dataOptions[key] = eData[attributeName];\n                } else {\n                    delete dataOptions[key];\n                }\n            });\n            return dataOptions;\n        };\n\n        DateTimePicker.prototype._notifyEvent = function _notifyEvent(e) {\n            if (e.type === DateTimePicker.Event.CHANGE && e.date && e.date.isSame(e.oldDate) || !e.date && !e.oldDate) {\n                return;\n            }\n            this._element.trigger(e);\n        };\n\n        DateTimePicker.prototype._viewUpdate = function _viewUpdate(e) {\n            if (e === \'y\') {\n                e = \'YYYY\';\n            }\n            this._notifyEvent({\n                type: DateTimePicker.Event.UPDATE,\n                change: e,\n                viewDate: this._viewDate.clone()\n            });\n        };\n\n        DateTimePicker.prototype._showMode = function _showMode(dir) {\n            if (!this.widget) {\n                return;\n            }\n            if (dir) {\n                this.currentViewMode = Math.max(MinViewModeNumber, Math.min(3, this.currentViewMode + dir));\n            }\n            this.widget.find(\'.datepicker > div\').hide().filter(\'.datepicker-\' + DatePickerModes[this.currentViewMode].CLASS_NAME).show();\n        };\n\n        DateTimePicker.prototype._isInDisabledDates = function _isInDisabledDates(testDate) {\n            return this._options.disabledDates[testDate.format(\'YYYY-MM-DD\')] === true;\n        };\n\n        DateTimePicker.prototype._isInEnabledDates = function _isInEnabledDates(testDate) {\n            return this._options.enabledDates[testDate.format(\'YYYY-MM-DD\')] === true;\n        };\n\n        DateTimePicker.prototype._isInDisabledHours = function _isInDisabledHours(testDate) {\n            return this._options.disabledHours[testDate.format(\'H\')] === true;\n        };\n\n        DateTimePicker.prototype._isInEnabledHours = function _isInEnabledHours(testDate) {\n            return this._options.enabledHours[testDate.format(\'H\')] === true;\n        };\n\n        DateTimePicker.prototype._isValid = function _isValid(targetMoment, granularity) {\n            if (!targetMoment.isValid()) {\n                return false;\n            }\n            if (this._options.disabledDates && granularity === \'d\' && this._isInDisabledDates(targetMoment)) {\n                return false;\n            }\n            if (this._options.enabledDates && granularity === \'d\' && !this._isInEnabledDates(targetMoment)) {\n                return false;\n            }\n            if (this._options.minDate && targetMoment.isBefore(this._options.minDate, granularity)) {\n                return false;\n            }\n            if (this._options.maxDate && targetMoment.isAfter(this._options.maxDate, granularity)) {\n                return false;\n            }\n            if (this._options.daysOfWeekDisabled && granularity === \'d\' && this._options.daysOfWeekDisabled.indexOf(targetMoment.day()) !== -1) {\n                return false;\n            }\n            if (this._options.disabledHours && (granularity === \'h\' || granularity === \'m\' || granularity === \'s\') && this._isInDisabledHours(targetMoment)) {\n                return false;\n            }\n            if (this._options.enabledHours && (granularity === \'h\' || granularity === \'m\' || granularity === \'s\') && !this._isInEnabledHours(targetMoment)) {\n                return false;\n            }\n            if (this._options.disabledTimeIntervals && (granularity === \'h\' || granularity === \'m\' || granularity === \'s\')) {\n                var found = false;\n                $.each(this._options.disabledTimeIntervals, function () {\n                    if (targetMoment.isBetween(this[0], this[1])) {\n                        found = true;\n                        return false;\n                    }\n                });\n                if (found) {\n                    return false;\n                }\n            }\n            return true;\n        };\n\n        DateTimePicker.prototype._parseInputDate = function _parseInputDate(inputDate) {\n            if (this._options.parseInputDate === undefined) {\n                if (!window.moment.isMoment(inputDate)) {\n                    inputDate = this.getMoment(inputDate);\n                }\n            } else {\n                inputDate = this._options.parseInputDate(inputDate);\n            }\n            //inputDate.locale(this.options.locale);\n            return inputDate;\n        };\n\n        DateTimePicker.prototype._keydown = function _keydown(e) {\n            var handler = null,\n                index = void 0,\n                index2 = void 0,\n                keyBindKeys = void 0,\n                allModifiersPressed = void 0;\n            var pressedKeys = [],\n                pressedModifiers = {},\n                currentKey = e.which,\n                pressed = \'p\';\n\n            keyState[currentKey] = pressed;\n\n            for (index in keyState) {\n                if (keyState.hasOwnProperty(index) && keyState[index] === pressed) {\n                    pressedKeys.push(index);\n                    if (parseInt(index, 10) !== currentKey) {\n                        pressedModifiers[index] = true;\n                    }\n                }\n            }\n\n            for (index in this._options.keyBinds) {\n                if (this._options.keyBinds.hasOwnProperty(index) && typeof this._options.keyBinds[index] === \'function\') {\n                    keyBindKeys = index.split(\' \');\n                    if (keyBindKeys.length === pressedKeys.length && KeyMap[currentKey] === keyBindKeys[keyBindKeys.length - 1]) {\n                        allModifiersPressed = true;\n                        for (index2 = keyBindKeys.length - 2; index2 >= 0; index2--) {\n                            if (!(KeyMap[keyBindKeys[index2]] in pressedModifiers)) {\n                                allModifiersPressed = false;\n                                break;\n                            }\n                        }\n                        if (allModifiersPressed) {\n                            handler = this._options.keyBinds[index];\n                            break;\n                        }\n                    }\n                }\n            }\n\n            if (handler) {\n                if (handler.call(this.widget)) {\n                    e.stopPropagation();\n                    e.preventDefault();\n                }\n            }\n        };\n\n        //noinspection JSMethodCanBeStatic,SpellCheckingInspection\n\n\n        DateTimePicker.prototype._keyup = function _keyup(e) {\n            keyState[e.which] = \'r\';\n            if (keyPressHandled[e.which]) {\n                keyPressHandled[e.which] = false;\n                e.stopPropagation();\n                e.preventDefault();\n            }\n        };\n\n        DateTimePicker.prototype._indexGivenDates = function _indexGivenDates(givenDatesArray) {\n            // Store given enabledDates and disabledDates as keys.\n            // This way we can check their existence in O(1) time instead of looping through whole array.\n            // (for example: options.enabledDates[\'2014-02-27\'] === true)\n            var givenDatesIndexed = {},\n                self = this;\n            $.each(givenDatesArray, function () {\n                var dDate = self._parseInputDate(this);\n                if (dDate.isValid()) {\n                    givenDatesIndexed[dDate.format(\'YYYY-MM-DD\')] = true;\n                }\n            });\n            return Object.keys(givenDatesIndexed).length ? givenDatesIndexed : false;\n        };\n\n        DateTimePicker.prototype._indexGivenHours = function _indexGivenHours(givenHoursArray) {\n            // Store given enabledHours and disabledHours as keys.\n            // This way we can check their existence in O(1) time instead of looping through whole array.\n            // (for example: options.enabledHours[\'2014-02-27\'] === true)\n            var givenHoursIndexed = {};\n            $.each(givenHoursArray, function () {\n                givenHoursIndexed[this] = true;\n            });\n            return Object.keys(givenHoursIndexed).length ? givenHoursIndexed : false;\n        };\n\n        DateTimePicker.prototype._initFormatting = function _initFormatting() {\n            var format = this._options.format || \'L LT\',\n                self = this;\n\n            this.actualFormat = format.replace(/(\\[[^\\[]*])|(\\\\)?(LTS|LT|LL?L?L?|l{1,4})/g, function (formatInput) {\n                return self._dates[0].localeData().longDateFormat(formatInput) || formatInput; //todo taking the first date should be ok\n            });\n\n            this.parseFormats = this._options.extraFormats ? this._options.extraFormats.slice() : [];\n            if (this.parseFormats.indexOf(format) < 0 && this.parseFormats.indexOf(this.actualFormat) < 0) {\n                this.parseFormats.push(this.actualFormat);\n            }\n\n            this.use24Hours = this.actualFormat.toLowerCase().indexOf(\'a\') < 1 && this.actualFormat.replace(/\\[.*?]/g, \'\').indexOf(\'h\') < 1;\n\n            if (this._isEnabled(\'y\')) {\n                MinViewModeNumber = 2;\n            }\n            if (this._isEnabled(\'M\')) {\n                MinViewModeNumber = 1;\n            }\n            if (this._isEnabled(\'d\')) {\n                MinViewModeNumber = 0;\n            }\n\n            this.currentViewMode = Math.max(MinViewModeNumber, this.currentViewMode);\n\n            if (!this.unset) {\n                this._setValue(this._dates[0], 0);\n            }\n        };\n\n        DateTimePicker.prototype._getLastPickedDate = function _getLastPickedDate() {\n            return this._dates[this._getLastPickedDateIndex()];\n        };\n\n        DateTimePicker.prototype._getLastPickedDateIndex = function _getLastPickedDateIndex() {\n            return this._dates.length - 1;\n        };\n\n        //public\n\n\n        DateTimePicker.prototype.getMoment = function getMoment(d) {\n            var returnMoment = void 0;\n\n            if (d === undefined || d === null) {\n                returnMoment = window.moment(); //TODO should this use format? and locale?\n            } else if (this._hasTimeZone()) {\n                // There is a string to parse and a default time zone\n                // parse with the tz function which takes a default time zone if it is not in the format string\n                returnMoment = window.moment.tz(d, this.parseFormats, this._options.useStrict, this._options.timeZone);\n            } else {\n                returnMoment = window.moment(d, this.parseFormats, this._options.useStrict);\n            }\n\n            if (this._hasTimeZone()) {\n                returnMoment.tz(this._options.timeZone);\n            }\n\n            return returnMoment;\n        };\n\n        DateTimePicker.prototype.toggle = function toggle() {\n            return this.widget ? this.hide() : this.show();\n        };\n\n        DateTimePicker.prototype.ignoreReadonly = function ignoreReadonly(_ignoreReadonly) {\n            if (arguments.length === 0) {\n                return this._options.ignoreReadonly;\n            }\n            if (typeof _ignoreReadonly !== \'boolean\') {\n                throw new TypeError(\'ignoreReadonly () expects a boolean parameter\');\n            }\n            this._options.ignoreReadonly = _ignoreReadonly;\n        };\n\n        DateTimePicker.prototype.options = function options(newOptions) {\n            if (arguments.length === 0) {\n                return $.extend(true, {}, this._options);\n            }\n\n            if (!(newOptions instanceof Object)) {\n                throw new TypeError(\'options() this.options parameter should be an object\');\n            }\n            $.extend(true, this._options, newOptions);\n            var self = this;\n            $.each(this._options, function (key, value) {\n                if (self[key] !== undefined) {\n                    self[key](value);\n                }\n            });\n        };\n\n        DateTimePicker.prototype.date = function date(newDate, index) {\n            index = index || 0;\n            if (arguments.length === 0) {\n                if (this.unset) {\n                    return null;\n                }\n                if (this._options.allowMultidate) {\n                    return this._dates.join(this._options.multidateSeparator);\n                } else {\n                    return this._dates[index].clone();\n                }\n            }\n\n            if (newDate !== null && typeof newDate !== \'string\' && !window.moment.isMoment(newDate) && !(newDate instanceof Date)) {\n                throw new TypeError(\'date() parameter must be one of [null, string, moment or Date]\');\n            }\n\n            this._setValue(newDate === null ? null : this._parseInputDate(newDate), index);\n        };\n\n        DateTimePicker.prototype.format = function format(newFormat) {\n            ///<summary>test su</summary>\n            ///<param name="newFormat">info about para</param>\n            ///<returns type="string|boolean">returns foo</returns>\n            if (arguments.length === 0) {\n                return this._options.format;\n            }\n\n            if (typeof newFormat !== \'string\' && (typeof newFormat !== \'boolean\' || newFormat !== false)) {\n                throw new TypeError(\'format() expects a string or boolean:false parameter \' + newFormat);\n            }\n\n            this._options.format = newFormat;\n            if (this.actualFormat) {\n                this._initFormatting(); // reinitialize formatting\n            }\n        };\n\n        DateTimePicker.prototype.timeZone = function timeZone(newZone) {\n            if (arguments.length === 0) {\n                return this._options.timeZone;\n            }\n\n            if (typeof newZone !== \'string\') {\n                throw new TypeError(\'newZone() expects a string parameter\');\n            }\n\n            this._options.timeZone = newZone;\n        };\n\n        DateTimePicker.prototype.dayViewHeaderFormat = function dayViewHeaderFormat(newFormat) {\n            if (arguments.length === 0) {\n                return this._options.dayViewHeaderFormat;\n            }\n\n            if (typeof newFormat !== \'string\') {\n                throw new TypeError(\'dayViewHeaderFormat() expects a string parameter\');\n            }\n\n            this._options.dayViewHeaderFormat = newFormat;\n        };\n\n        DateTimePicker.prototype.extraFormats = function extraFormats(formats) {\n            if (arguments.length === 0) {\n                return this._options.extraFormats;\n            }\n\n            if (formats !== false && !(formats instanceof Array)) {\n                throw new TypeError(\'extraFormats() expects an array or false parameter\');\n            }\n\n            this._options.extraFormats = formats;\n            if (this.parseFormats) {\n                this._initFormatting(); // reinit formatting\n            }\n        };\n\n        DateTimePicker.prototype.disabledDates = function disabledDates(dates) {\n            if (arguments.length === 0) {\n                return this._options.disabledDates ? $.extend({}, this._options.disabledDates) : this._options.disabledDates;\n            }\n\n            if (!dates) {\n                this._options.disabledDates = false;\n                this._update();\n                return true;\n            }\n            if (!(dates instanceof Array)) {\n                throw new TypeError(\'disabledDates() expects an array parameter\');\n            }\n            this._options.disabledDates = this._indexGivenDates(dates);\n            this._options.enabledDates = false;\n            this._update();\n        };\n\n        DateTimePicker.prototype.enabledDates = function enabledDates(dates) {\n            if (arguments.length === 0) {\n                return this._options.enabledDates ? $.extend({}, this._options.enabledDates) : this._options.enabledDates;\n            }\n\n            if (!dates) {\n                this._options.enabledDates = false;\n                this._update();\n                return true;\n            }\n            if (!(dates instanceof Array)) {\n                throw new TypeError(\'enabledDates() expects an array parameter\');\n            }\n            this._options.enabledDates = this._indexGivenDates(dates);\n            this._options.disabledDates = false;\n            this._update();\n        };\n\n        DateTimePicker.prototype.daysOfWeekDisabled = function daysOfWeekDisabled(_daysOfWeekDisabled) {\n            if (arguments.length === 0) {\n                return this._options.daysOfWeekDisabled.splice(0);\n            }\n\n            if (typeof _daysOfWeekDisabled === \'boolean\' && !_daysOfWeekDisabled) {\n                this._options.daysOfWeekDisabled = false;\n                this._update();\n                return true;\n            }\n\n            if (!(_daysOfWeekDisabled instanceof Array)) {\n                throw new TypeError(\'daysOfWeekDisabled() expects an array parameter\');\n            }\n            this._options.daysOfWeekDisabled = _daysOfWeekDisabled.reduce(function (previousValue, currentValue) {\n                currentValue = parseInt(currentValue, 10);\n                if (currentValue > 6 || currentValue < 0 || isNaN(currentValue)) {\n                    return previousValue;\n                }\n                if (previousValue.indexOf(currentValue) === -1) {\n                    previousValue.push(currentValue);\n                }\n                return previousValue;\n            }, []).sort();\n            if (this._options.useCurrent && !this._options.keepInvalid) {\n                for (var i = 0; i < this._dates.length; i++) {\n                    var tries = 0;\n                    while (!this._isValid(this._dates[i], \'d\')) {\n                        this._dates[i].add(1, \'d\');\n                        if (tries === 31) {\n                            throw \'Tried 31 times to find a valid date\';\n                        }\n                        tries++;\n                    }\n                    this._setValue(this._dates[i], i);\n                }\n            }\n            this._update();\n        };\n\n        DateTimePicker.prototype.maxDate = function maxDate(_maxDate) {\n            if (arguments.length === 0) {\n                return this._options.maxDate ? this._options.maxDate.clone() : this._options.maxDate;\n            }\n\n            if (typeof _maxDate === \'boolean\' && _maxDate === false) {\n                this._options.maxDate = false;\n                this._update();\n                return true;\n            }\n\n            if (typeof _maxDate === \'string\') {\n                if (_maxDate === \'now\' || _maxDate === \'moment\') {\n                    _maxDate = this.getMoment();\n                }\n            }\n\n            var parsedDate = this._parseInputDate(_maxDate);\n\n            if (!parsedDate.isValid()) {\n                throw new TypeError(\'maxDate() Could not parse date parameter: \' + _maxDate);\n            }\n            if (this._options.minDate && parsedDate.isBefore(this._options.minDate)) {\n                throw new TypeError(\'maxDate() date parameter is before this.options.minDate: \' + parsedDate.format(this.actualFormat));\n            }\n            this._options.maxDate = parsedDate;\n            for (var i = 0; i < this._dates.length; i++) {\n                if (this._options.useCurrent && !this._options.keepInvalid && this._dates[i].isAfter(_maxDate)) {\n                    this._setValue(this._options.maxDate, i);\n                }\n            }\n            if (this._viewDate.isAfter(parsedDate)) {\n                this._viewDate = parsedDate.clone().subtract(this._options.stepping, \'m\');\n            }\n            this._update();\n        };\n\n        DateTimePicker.prototype.minDate = function minDate(_minDate) {\n            if (arguments.length === 0) {\n                return this._options.minDate ? this._options.minDate.clone() : this._options.minDate;\n            }\n\n            if (typeof _minDate === \'boolean\' && _minDate === false) {\n                this._options.minDate = false;\n                this._update();\n                return true;\n            }\n\n            if (typeof _minDate === \'string\') {\n                if (_minDate === \'now\' || _minDate === \'moment\') {\n                    _minDate = this.getMoment();\n                }\n            }\n\n            var parsedDate = this._parseInputDate(_minDate);\n\n            if (!parsedDate.isValid()) {\n                throw new TypeError(\'minDate() Could not parse date parameter: \' + _minDate);\n            }\n            if (this._options.maxDate && parsedDate.isAfter(this._options.maxDate)) {\n                throw new TypeError(\'minDate() date parameter is after this.options.maxDate: \' + parsedDate.format(this.actualFormat));\n            }\n            this._options.minDate = parsedDate;\n            for (var i = 0; i < this._dates.length; i++) {\n                if (this._options.useCurrent && !this._options.keepInvalid && this._dates[i].isBefore(_minDate)) {\n                    this._setValue(this._options.minDate, i);\n                }\n            }\n            if (this._viewDate.isBefore(parsedDate)) {\n                this._viewDate = parsedDate.clone().add(this._options.stepping, \'m\');\n            }\n            this._update();\n        };\n\n        DateTimePicker.prototype.defaultDate = function defaultDate(_defaultDate) {\n            if (arguments.length === 0) {\n                return this._options.defaultDate ? this._options.defaultDate.clone() : this._options.defaultDate;\n            }\n            if (!_defaultDate) {\n                this._options.defaultDate = false;\n                return true;\n            }\n\n            if (typeof _defaultDate === \'string\') {\n                if (_defaultDate === \'now\' || _defaultDate === \'moment\') {\n                    _defaultDate = this.getMoment();\n                } else {\n                    _defaultDate = this.getMoment(_defaultDate);\n                }\n            }\n\n            var parsedDate = this._parseInputDate(_defaultDate);\n            if (!parsedDate.isValid()) {\n                throw new TypeError(\'defaultDate() Could not parse date parameter: \' + _defaultDate);\n            }\n            if (!this._isValid(parsedDate)) {\n                throw new TypeError(\'defaultDate() date passed is invalid according to component setup validations\');\n            }\n\n            this._options.defaultDate = parsedDate;\n\n            if (this._options.defaultDate && this._options.inline || this.input !== undefined && this.input.val().trim() === \'\') {\n                this._setValue(this._options.defaultDate, 0);\n            }\n        };\n\n        DateTimePicker.prototype.locale = function locale(_locale) {\n            if (arguments.length === 0) {\n                return this._options.locale;\n            }\n\n            if (!window.moment.localeData(_locale)) {\n                throw new TypeError(\'locale() locale \' + _locale + \' is not loaded from moment locales!\');\n            }\n\n            for (var i = 0; i < this._dates.length; i++) {\n                this._dates[i].locale(this._options.locale);\n            }\n            this._viewDate.locale(this._options.locale);\n\n            if (this.actualFormat) {\n                this._initFormatting(); // reinitialize formatting\n            }\n            if (this.widget) {\n                this.hide();\n                this.show();\n            }\n        };\n\n        DateTimePicker.prototype.stepping = function stepping(_stepping) {\n            if (arguments.length === 0) {\n                return this._options.stepping;\n            }\n\n            _stepping = parseInt(_stepping, 10);\n            if (isNaN(_stepping) || _stepping < 1) {\n                _stepping = 1;\n            }\n            this._options.stepping = _stepping;\n        };\n\n        DateTimePicker.prototype.useCurrent = function useCurrent(_useCurrent) {\n            var useCurrentOptions = [\'year\', \'month\', \'day\', \'hour\', \'minute\'];\n            if (arguments.length === 0) {\n                return this._options.useCurrent;\n            }\n\n            if (typeof _useCurrent !== \'boolean\' && typeof _useCurrent !== \'string\') {\n                throw new TypeError(\'useCurrent() expects a boolean or string parameter\');\n            }\n            if (typeof _useCurrent === \'string\' && useCurrentOptions.indexOf(_useCurrent.toLowerCase()) === -1) {\n                throw new TypeError(\'useCurrent() expects a string parameter of \' + useCurrentOptions.join(\', \'));\n            }\n            this._options.useCurrent = _useCurrent;\n        };\n\n        DateTimePicker.prototype.collapse = function collapse(_collapse) {\n            if (arguments.length === 0) {\n                return this._options.collapse;\n            }\n\n            if (typeof _collapse !== \'boolean\') {\n                throw new TypeError(\'collapse() expects a boolean parameter\');\n            }\n            if (this._options.collapse === _collapse) {\n                return true;\n            }\n            this._options.collapse = _collapse;\n            if (this.widget) {\n                this.hide();\n                this.show();\n            }\n        };\n\n        DateTimePicker.prototype.icons = function icons(_icons) {\n            if (arguments.length === 0) {\n                return $.extend({}, this._options.icons);\n            }\n\n            if (!(_icons instanceof Object)) {\n                throw new TypeError(\'icons() expects parameter to be an Object\');\n            }\n\n            $.extend(this._options.icons, _icons);\n\n            if (this.widget) {\n                this.hide();\n                this.show();\n            }\n        };\n\n        DateTimePicker.prototype.tooltips = function tooltips(_tooltips) {\n            if (arguments.length === 0) {\n                return $.extend({}, this._options.tooltips);\n            }\n\n            if (!(_tooltips instanceof Object)) {\n                throw new TypeError(\'tooltips() expects parameter to be an Object\');\n            }\n            $.extend(this._options.tooltips, _tooltips);\n            if (this.widget) {\n                this.hide();\n                this.show();\n            }\n        };\n\n        DateTimePicker.prototype.useStrict = function useStrict(_useStrict) {\n            if (arguments.length === 0) {\n                return this._options.useStrict;\n            }\n\n            if (typeof _useStrict !== \'boolean\') {\n                throw new TypeError(\'useStrict() expects a boolean parameter\');\n            }\n            this._options.useStrict = _useStrict;\n        };\n\n        DateTimePicker.prototype.sideBySide = function sideBySide(_sideBySide) {\n            if (arguments.length === 0) {\n                return this._options.sideBySide;\n            }\n\n            if (typeof _sideBySide !== \'boolean\') {\n                throw new TypeError(\'sideBySide() expects a boolean parameter\');\n            }\n            this._options.sideBySide = _sideBySide;\n            if (this.widget) {\n                this.hide();\n                this.show();\n            }\n        };\n\n        DateTimePicker.prototype.viewMode = function viewMode(_viewMode) {\n            if (arguments.length === 0) {\n                return this._options.viewMode;\n            }\n\n            if (typeof _viewMode !== \'string\') {\n                throw new TypeError(\'viewMode() expects a string parameter\');\n            }\n\n            if (DateTimePicker.ViewModes.indexOf(_viewMode) === -1) {\n                throw new TypeError(\'viewMode() parameter must be one of (\' + DateTimePicker.ViewModes.join(\', \') + \') value\');\n            }\n\n            this._options.viewMode = _viewMode;\n            this.currentViewMode = Math.max(DateTimePicker.ViewModes.indexOf(_viewMode) - 1, DateTimePicker.MinViewModeNumber);\n\n            this._showMode();\n        };\n\n        DateTimePicker.prototype.calendarWeeks = function calendarWeeks(_calendarWeeks) {\n            if (arguments.length === 0) {\n                return this._options.calendarWeeks;\n            }\n\n            if (typeof _calendarWeeks !== \'boolean\') {\n                throw new TypeError(\'calendarWeeks() expects parameter to be a boolean value\');\n            }\n\n            this._options.calendarWeeks = _calendarWeeks;\n            this._update();\n        };\n\n        DateTimePicker.prototype.buttons = function buttons(_buttons) {\n            if (arguments.length === 0) {\n                return $.extend({}, this._options.buttons);\n            }\n\n            if (!(_buttons instanceof Object)) {\n                throw new TypeError(\'buttons() expects parameter to be an Object\');\n            }\n\n            $.extend(this._options.buttons, _buttons);\n\n            if (typeof this._options.buttons.showToday !== \'boolean\') {\n                throw new TypeError(\'buttons.showToday expects a boolean parameter\');\n            }\n            if (typeof this._options.buttons.showClear !== \'boolean\') {\n                throw new TypeError(\'buttons.showClear expects a boolean parameter\');\n            }\n            if (typeof this._options.buttons.showClose !== \'boolean\') {\n                throw new TypeError(\'buttons.showClose expects a boolean parameter\');\n            }\n\n            if (this.widget) {\n                this.hide();\n                this.show();\n            }\n        };\n\n        DateTimePicker.prototype.keepOpen = function keepOpen(_keepOpen) {\n            if (arguments.length === 0) {\n                return this._options.keepOpen;\n            }\n\n            if (typeof _keepOpen !== \'boolean\') {\n                throw new TypeError(\'keepOpen() expects a boolean parameter\');\n            }\n\n            this._options.keepOpen = _keepOpen;\n        };\n\n        DateTimePicker.prototype.focusOnShow = function focusOnShow(_focusOnShow) {\n            if (arguments.length === 0) {\n                return this._options.focusOnShow;\n            }\n\n            if (typeof _focusOnShow !== \'boolean\') {\n                throw new TypeError(\'focusOnShow() expects a boolean parameter\');\n            }\n\n            this._options.focusOnShow = _focusOnShow;\n        };\n\n        DateTimePicker.prototype.inline = function inline(_inline) {\n            if (arguments.length === 0) {\n                return this._options.inline;\n            }\n\n            if (typeof _inline !== \'boolean\') {\n                throw new TypeError(\'inline() expects a boolean parameter\');\n            }\n\n            this._options.inline = _inline;\n        };\n\n        DateTimePicker.prototype.clear = function clear() {\n            this._setValue(null); //todo\n        };\n\n        DateTimePicker.prototype.keyBinds = function keyBinds(_keyBinds) {\n            if (arguments.length === 0) {\n                return this._options.keyBinds;\n            }\n\n            this._options.keyBinds = _keyBinds;\n        };\n\n        DateTimePicker.prototype.debug = function debug(_debug) {\n            if (typeof _debug !== \'boolean\') {\n                throw new TypeError(\'debug() expects a boolean parameter\');\n            }\n\n            this._options.debug = _debug;\n        };\n\n        DateTimePicker.prototype.allowInputToggle = function allowInputToggle(_allowInputToggle) {\n            if (arguments.length === 0) {\n                return this._options.allowInputToggle;\n            }\n\n            if (typeof _allowInputToggle !== \'boolean\') {\n                throw new TypeError(\'allowInputToggle() expects a boolean parameter\');\n            }\n\n            this._options.allowInputToggle = _allowInputToggle;\n        };\n\n        DateTimePicker.prototype.keepInvalid = function keepInvalid(_keepInvalid) {\n            if (arguments.length === 0) {\n                return this._options.keepInvalid;\n            }\n\n            if (typeof _keepInvalid !== \'boolean\') {\n                throw new TypeError(\'keepInvalid() expects a boolean parameter\');\n            }\n            this._options.keepInvalid = _keepInvalid;\n        };\n\n        DateTimePicker.prototype.datepickerInput = function datepickerInput(_datepickerInput) {\n            if (arguments.length === 0) {\n                return this._options.datepickerInput;\n            }\n\n            if (typeof _datepickerInput !== \'string\') {\n                throw new TypeError(\'datepickerInput() expects a string parameter\');\n            }\n\n            this._options.datepickerInput = _datepickerInput;\n        };\n\n        DateTimePicker.prototype.parseInputDate = function parseInputDate(_parseInputDate2) {\n            if (arguments.length === 0) {\n                return this._options.parseInputDate;\n            }\n\n            if (typeof _parseInputDate2 !== \'function\') {\n                throw new TypeError(\'parseInputDate() should be as function\');\n            }\n\n            this._options.parseInputDate = _parseInputDate2;\n        };\n\n        DateTimePicker.prototype.disabledTimeIntervals = function disabledTimeIntervals(_disabledTimeIntervals) {\n            if (arguments.length === 0) {\n                return this._options.disabledTimeIntervals ? $.extend({}, this._options.disabledTimeIntervals) : this._options.disabledTimeIntervals;\n            }\n\n            if (!_disabledTimeIntervals) {\n                this._options.disabledTimeIntervals = false;\n                this._update();\n                return true;\n            }\n            if (!(_disabledTimeIntervals instanceof Array)) {\n                throw new TypeError(\'disabledTimeIntervals() expects an array parameter\');\n            }\n            this._options.disabledTimeIntervals = _disabledTimeIntervals;\n            this._update();\n        };\n\n        DateTimePicker.prototype.disabledHours = function disabledHours(hours) {\n            if (arguments.length === 0) {\n                return this._options.disabledHours ? $.extend({}, this._options.disabledHours) : this._options.disabledHours;\n            }\n\n            if (!hours) {\n                this._options.disabledHours = false;\n                this._update();\n                return true;\n            }\n            if (!(hours instanceof Array)) {\n                throw new TypeError(\'disabledHours() expects an array parameter\');\n            }\n            this._options.disabledHours = this._indexGivenHours(hours);\n            this._options.enabledHours = false;\n            if (this._options.useCurrent && !this._options.keepInvalid) {\n                for (var i = 0; i < this._dates.length; i++) {\n                    var tries = 0;\n                    while (!this._isValid(this._dates[i], \'h\')) {\n                        this._dates[i].add(1, \'h\');\n                        if (tries === 24) {\n                            throw \'Tried 24 times to find a valid date\';\n                        }\n                        tries++;\n                    }\n                    this._setValue(this._dates[i], i);\n                }\n            }\n            this._update();\n        };\n\n        DateTimePicker.prototype.enabledHours = function enabledHours(hours) {\n            if (arguments.length === 0) {\n                return this._options.enabledHours ? $.extend({}, this._options.enabledHours) : this._options.enabledHours;\n            }\n\n            if (!hours) {\n                this._options.enabledHours = false;\n                this._update();\n                return true;\n            }\n            if (!(hours instanceof Array)) {\n                throw new TypeError(\'enabledHours() expects an array parameter\');\n            }\n            this._options.enabledHours = this._indexGivenHours(hours);\n            this._options.disabledHours = false;\n            if (this._options.useCurrent && !this._options.keepInvalid) {\n                for (var i = 0; i < this._dates.length; i++) {\n                    var tries = 0;\n                    while (!this._isValid(this._dates[i], \'h\')) {\n                        this._dates[i].add(1, \'h\');\n                        if (tries === 24) {\n                            throw \'Tried 24 times to find a valid date\';\n                        }\n                        tries++;\n                    }\n                    this._setValue(this._dates[i], i);\n                }\n            }\n            this._update();\n        };\n\n        DateTimePicker.prototype.viewDate = function viewDate(newDate) {\n            if (arguments.length === 0) {\n                return this._viewDate.clone();\n            }\n\n            if (!newDate) {\n                this._viewDate = (this._dates[0] || this.getMoment()).clone();\n                return true;\n            }\n\n            if (typeof newDate !== \'string\' && !window.moment.isMoment(newDate) && !(newDate instanceof Date)) {\n                throw new TypeError(\'viewDate() parameter must be one of [string, moment or Date]\');\n            }\n\n            this._viewDate = this._parseInputDate(newDate);\n            this._viewUpdate();\n        };\n\n        DateTimePicker.prototype.allowMultidate = function allowMultidate(_allowMultidate) {\n            if (typeof _allowMultidate !== \'boolean\') {\n                throw new TypeError(\'allowMultidate() expects a boolean parameter\');\n            }\n\n            this._options.allowMultidate = _allowMultidate;\n        };\n\n        DateTimePicker.prototype.multidateSeparator = function multidateSeparator(_multidateSeparator) {\n            if (arguments.length === 0) {\n                return this._options.multidateSeparator;\n            }\n\n            if (typeof _multidateSeparator !== \'string\' || _multidateSeparator.length > 1) {\n                throw new TypeError(\'multidateSeparator expects a single character string parameter\');\n            }\n\n            this._options.multidateSeparator = _multidateSeparator;\n        };\n\n        _createClass(DateTimePicker, null, [{\n            key: \'NAME\',\n            get: function get() {\n                return NAME;\n            }\n\n            /**\n             * @return {string}\n             */\n\n        }, {\n            key: \'VERSION\',\n            get: function get() {\n                return VERSION;\n            }\n\n            /**\n             * @return {string}\n             */\n\n        }, {\n            key: \'DATA_KEY\',\n            get: function get() {\n                return DATA_KEY;\n            }\n\n            /**\n             * @return {string}\n             */\n\n        }, {\n            key: \'EVENT_KEY\',\n            get: function get() {\n                return EVENT_KEY;\n            }\n\n            /**\n             * @return {string}\n             */\n\n        }, {\n            key: \'DATA_API_KEY\',\n            get: function get() {\n                return DATA_API_KEY;\n            }\n        }, {\n            key: \'DatePickerModes\',\n            get: function get() {\n                return DatePickerModes;\n            }\n        }, {\n            key: \'ViewModes\',\n            get: function get() {\n                return ViewModes;\n            }\n\n            /**\n             * @return {number}\n             */\n\n        }, {\n            key: \'MinViewModeNumber\',\n            get: function get() {\n                return MinViewModeNumber;\n            }\n        }, {\n            key: \'Event\',\n            get: function get() {\n                return Event;\n            }\n        }, {\n            key: \'Selector\',\n            get: function get() {\n                return Selector;\n            }\n        }, {\n            key: \'Default\',\n            get: function get() {\n                return Default;\n            }\n        }, {\n            key: \'ClassName\',\n            get: function get() {\n                return ClassName;\n            }\n        }]);\n\n        return DateTimePicker;\n    }();\n\n    return DateTimePicker;\n}(jQuery);\n\n//noinspection JSUnusedGlobalSymbols\n/* global DateTimePicker */\nvar TempusDominusBootstrap4 = function ($) {\n    // eslint-disable-line no-unused-vars\n    // ReSharper disable once InconsistentNaming\n    var JQUERY_NO_CONFLICT = $.fn[DateTimePicker.NAME],\n        verticalModes = [\'top\', \'bottom\', \'auto\'],\n        horizontalModes = [\'left\', \'right\', \'auto\'],\n        toolbarPlacements = [\'default\', \'top\', \'bottom\'],\n        getSelectorFromElement = function getSelectorFromElement($element) {\n        var selector = $element.data(\'target\'),\n            $selector = void 0;\n\n        if (!selector) {\n            selector = $element.attr(\'href\') || \'\';\n            selector = /^#[a-z]/i.test(selector) ? selector : null;\n        }\n        $selector = $(selector);\n        if ($selector.length === 0) {\n            return $selector;\n        }\n\n        if (!$selector.data(DateTimePicker.DATA_KEY)) {\n            $.extend({}, $selector.data(), $(this).data());\n        }\n\n        return $selector;\n    };\n\n    // ReSharper disable once InconsistentNaming\n\n    var TempusDominusBootstrap4 = function (_DateTimePicker) {\n        _inherits(TempusDominusBootstrap4, _DateTimePicker);\n\n        function TempusDominusBootstrap4(element, options) {\n            _classCallCheck(this, TempusDominusBootstrap4);\n\n            var _this = _possibleConstructorReturn(this, _DateTimePicker.call(this, element, options));\n\n            _this._init();\n            return _this;\n        }\n\n        TempusDominusBootstrap4.prototype._init = function _init() {\n            if (this._element.hasClass(\'input-group\')) {\n                var datepickerButton = this._element.find(\'.datepickerbutton\');\n                if (datepickerButton.length === 0) {\n                    this.component = this._element.find(\'[data-toggle="datetimepicker"]\');\n                } else {\n                    this.component = datepickerButton;\n                }\n            }\n        };\n\n        TempusDominusBootstrap4.prototype._getDatePickerTemplate = function _getDatePickerTemplate() {\n            var headTemplate = $(\'<thead>\').append($(\'<tr>\').append($(\'<th>\').addClass(\'prev\').attr(\'data-action\', \'previous\').append($(\'<span>\').addClass(this._options.icons.previous))).append($(\'<th>\').addClass(\'picker-switch\').attr(\'data-action\', \'pickerSwitch\').attr(\'colspan\', \'\' + (this._options.calendarWeeks ? \'6\' : \'5\'))).append($(\'<th>\').addClass(\'next\').attr(\'data-action\', \'next\').append($(\'<span>\').addClass(this._options.icons.next)))),\n                contTemplate = $(\'<tbody>\').append($(\'<tr>\').append($(\'<td>\').attr(\'colspan\', \'\' + (this._options.calendarWeeks ? \'8\' : \'7\'))));\n\n            return [$(\'<div>\').addClass(\'datepicker-days\').append($(\'<table>\').addClass(\'table table-sm\').append(headTemplate).append($(\'<tbody>\'))), $(\'<div>\').addClass(\'datepicker-months\').append($(\'<table>\').addClass(\'table-condensed\').append(headTemplate.clone()).append(contTemplate.clone())), $(\'<div>\').addClass(\'datepicker-years\').append($(\'<table>\').addClass(\'table-condensed\').append(headTemplate.clone()).append(contTemplate.clone())), $(\'<div>\').addClass(\'datepicker-decades\').append($(\'<table>\').addClass(\'table-condensed\').append(headTemplate.clone()).append(contTemplate.clone()))];\n        };\n\n        TempusDominusBootstrap4.prototype._getTimePickerMainTemplate = function _getTimePickerMainTemplate() {\n            var topRow = $(\'<tr>\'),\n                middleRow = $(\'<tr>\'),\n                bottomRow = $(\'<tr>\');\n\n            if (this._isEnabled(\'h\')) {\n                topRow.append($(\'<td>\').append($(\'<a>\').attr({\n                    href: \'#\',\n                    tabindex: \'-1\',\n                    \'title\': this._options.tooltips.incrementHour\n                }).addClass(\'btn\').attr(\'data-action\', \'incrementHours\').append($(\'<span>\').addClass(this._options.icons.up))));\n                middleRow.append($(\'<td>\').append($(\'<span>\').addClass(\'timepicker-hour\').attr({\n                    \'data-time-component\': \'hours\',\n                    \'title\': this._options.tooltips.pickHour\n                }).attr(\'data-action\', \'showHours\')));\n                bottomRow.append($(\'<td>\').append($(\'<a>\').attr({\n                    href: \'#\',\n                    tabindex: \'-1\',\n                    \'title\': this._options.tooltips.decrementHour\n                }).addClass(\'btn\').attr(\'data-action\', \'decrementHours\').append($(\'<span>\').addClass(this._options.icons.down))));\n            }\n            if (this._isEnabled(\'m\')) {\n                if (this._isEnabled(\'h\')) {\n                    topRow.append($(\'<td>\').addClass(\'separator\'));\n                    middleRow.append($(\'<td>\').addClass(\'separator\').html(\':\'));\n                    bottomRow.append($(\'<td>\').addClass(\'separator\'));\n                }\n                topRow.append($(\'<td>\').append($(\'<a>\').attr({\n                    href: \'#\',\n                    tabindex: \'-1\',\n                    \'title\': this._options.tooltips.incrementMinute\n                }).addClass(\'btn\').attr(\'data-action\', \'incrementMinutes\').append($(\'<span>\').addClass(this._options.icons.up))));\n                middleRow.append($(\'<td>\').append($(\'<span>\').addClass(\'timepicker-minute\').attr({\n                    \'data-time-component\': \'minutes\',\n                    \'title\': this._options.tooltips.pickMinute\n                }).attr(\'data-action\', \'showMinutes\')));\n                bottomRow.append($(\'<td>\').append($(\'<a>\').attr({\n                    href: \'#\',\n                    tabindex: \'-1\',\n                    \'title\': this._options.tooltips.decrementMinute\n                }).addClass(\'btn\').attr(\'data-action\', \'decrementMinutes\').append($(\'<span>\').addClass(this._options.icons.down))));\n            }\n            if (this._isEnabled(\'s\')) {\n                if (this._isEnabled(\'m\')) {\n                    topRow.append($(\'<td>\').addClass(\'separator\'));\n                    middleRow.append($(\'<td>\').addClass(\'separator\').html(\':\'));\n                    bottomRow.append($(\'<td>\').addClass(\'separator\'));\n                }\n                topRow.append($(\'<td>\').append($(\'<a>\').attr({\n                    href: \'#\',\n                    tabindex: \'-1\',\n                    \'title\': this._options.tooltips.incrementSecond\n                }).addClass(\'btn\').attr(\'data-action\', \'incrementSeconds\').append($(\'<span>\').addClass(this._options.icons.up))));\n                middleRow.append($(\'<td>\').append($(\'<span>\').addClass(\'timepicker-second\').attr({\n                    \'data-time-component\': \'seconds\',\n                    \'title\': this._options.tooltips.pickSecond\n                }).attr(\'data-action\', \'showSeconds\')));\n                bottomRow.append($(\'<td>\').append($(\'<a>\').attr({\n                    href: \'#\',\n                    tabindex: \'-1\',\n                    \'title\': this._options.tooltips.decrementSecond\n                }).addClass(\'btn\').attr(\'data-action\', \'decrementSeconds\').append($(\'<span>\').addClass(this._options.icons.down))));\n            }\n\n            if (!this.use24Hours) {\n                topRow.append($(\'<td>\').addClass(\'separator\'));\n                middleRow.append($(\'<td>\').append($(\'<button>\').addClass(\'btn btn-primary\').attr({\n                    \'data-action\': \'togglePeriod\',\n                    tabindex: \'-1\',\n                    \'title\': this._options.tooltips.togglePeriod\n                })));\n                bottomRow.append($(\'<td>\').addClass(\'separator\'));\n            }\n\n            return $(\'<div>\').addClass(\'timepicker-picker\').append($(\'<table>\').addClass(\'table-condensed\').append([topRow, middleRow, bottomRow]));\n        };\n\n        TempusDominusBootstrap4.prototype._getTimePickerTemplate = function _getTimePickerTemplate() {\n            var hoursView = $(\'<div>\').addClass(\'timepicker-hours\').append($(\'<table>\').addClass(\'table-condensed\')),\n                minutesView = $(\'<div>\').addClass(\'timepicker-minutes\').append($(\'<table>\').addClass(\'table-condensed\')),\n                secondsView = $(\'<div>\').addClass(\'timepicker-seconds\').append($(\'<table>\').addClass(\'table-condensed\')),\n                ret = [this._getTimePickerMainTemplate()];\n\n            if (this._isEnabled(\'h\')) {\n                ret.push(hoursView);\n            }\n            if (this._isEnabled(\'m\')) {\n                ret.push(minutesView);\n            }\n            if (this._isEnabled(\'s\')) {\n                ret.push(secondsView);\n            }\n\n            return ret;\n        };\n\n        TempusDominusBootstrap4.prototype._getToolbar = function _getToolbar() {\n            var row = [];\n            if (this._options.buttons.showToday) {\n                row.push($(\'<td>\').append($(\'<a>\').attr({\n                    href: \'#\',\n                    tabindex: \'-1\',\n                    \'data-action\': \'today\',\n                    \'title\': this._options.tooltips.today\n                }).append($(\'<span>\').addClass(this._options.icons.today))));\n            }\n            if (!this._options.sideBySide && this._hasDate() && this._hasTime()) {\n                row.push($(\'<td>\').append($(\'<a>\').attr({\n                    href: \'#\',\n                    tabindex: \'-1\',\n                    \'data-action\': \'togglePicker\',\n                    \'title\': this._options.tooltips.selectTime\n                }).append($(\'<span>\').addClass(this._options.icons.time))));\n            }\n            if (this._options.buttons.showClear) {\n                row.push($(\'<td>\').append($(\'<a>\').attr({\n                    href: \'#\',\n                    tabindex: \'-1\',\n                    \'data-action\': \'clear\',\n                    \'title\': this._options.tooltips.clear\n                }).append($(\'<span>\').addClass(this._options.icons.clear))));\n            }\n            if (this._options.buttons.showClose) {\n                row.push($(\'<td>\').append($(\'<a>\').attr({\n                    href: \'#\',\n                    tabindex: \'-1\',\n                    \'data-action\': \'close\',\n                    \'title\': this._options.tooltips.close\n                }).append($(\'<span>\').addClass(this._options.icons.close))));\n            }\n            return row.length === 0 ? \'\' : $(\'<table>\').addClass(\'table-condensed\').append($(\'<tbody>\').append($(\'<tr>\').append(row)));\n        };\n\n        TempusDominusBootstrap4.prototype._getTemplate = function _getTemplate() {\n            var template = $(\'<div>\').addClass(\'bootstrap-datetimepicker-widget dropdown-menu\'),\n                dateView = $(\'<div>\').addClass(\'datepicker\').append(this._getDatePickerTemplate()),\n                timeView = $(\'<div>\').addClass(\'timepicker\').append(this._getTimePickerTemplate()),\n                content = $(\'<ul>\').addClass(\'list-unstyled\'),\n                toolbar = $(\'<li>\').addClass(\'picker-switch\' + (this._options.collapse ? \' accordion-toggle\' : \'\')).append(this._getToolbar());\n\n            if (this._options.inline) {\n                template.removeClass(\'dropdown-menu\');\n            }\n\n            if (this.use24Hours) {\n                template.addClass(\'usetwentyfour\');\n            }\n            if (this._isEnabled(\'s\') && !this.use24Hours) {\n                template.addClass(\'wider\');\n            }\n\n            if (this._options.sideBySide && this._hasDate() && this._hasTime()) {\n                template.addClass(\'timepicker-sbs\');\n                if (this._options.toolbarPlacement === \'top\') {\n                    template.append(toolbar);\n                }\n                template.append($(\'<div>\').addClass(\'row\').append(dateView.addClass(\'col-md-6\')).append(timeView.addClass(\'col-md-6\')));\n                if (this._options.toolbarPlacement === \'bottom\' || this._options.toolbarPlacement === \'default\') {\n                    template.append(toolbar);\n                }\n                return template;\n            }\n\n            if (this._options.toolbarPlacement === \'top\') {\n                content.append(toolbar);\n            }\n            if (this._hasDate()) {\n                content.append($(\'<li>\').addClass(this._options.collapse && this._hasTime() ? \'collapse\' : \'\').addClass(this._options.collapse && this._hasTime() && this._options.viewMode === \'time\' ? \'\' : \'show\').append(dateView));\n            }\n            if (this._options.toolbarPlacement === \'default\') {\n                content.append(toolbar);\n            }\n            if (this._hasTime()) {\n                content.append($(\'<li>\').addClass(this._options.collapse && this._hasDate() ? \'collapse\' : \'\').addClass(this._options.collapse && this._hasDate() && this._options.viewMode === \'time\' ? \'show\' : \'\').append(timeView));\n            }\n            if (this._options.toolbarPlacement === \'bottom\') {\n                content.append(toolbar);\n            }\n            return template.append(content);\n        };\n\n        TempusDominusBootstrap4.prototype._place = function _place(e) {\n            var self = e && e.data && e.data.picker || this,\n                vertical = self._options.widgetPositioning.vertical,\n                horizontal = self._options.widgetPositioning.horizontal,\n                parent = void 0;\n            var position = (self.component && self.component.length ? self.component : self._element).position(),\n                offset = (self.component && self.component.length ? self.component : self._element).offset();\n            if (self._options.widgetParent) {\n                parent = self._options.widgetParent.append(self.widget);\n            } else if (self._element.is(\'input\')) {\n                parent = self._element.after(self.widget).parent();\n            } else if (self._options.inline) {\n                parent = self._element.append(self.widget);\n                return;\n            } else {\n                parent = self._element;\n                self._element.children().first().after(self.widget);\n            }\n\n            // Top and bottom logic\n            if (vertical === \'auto\') {\n                //noinspection JSValidateTypes\n                if (offset.top + self.widget.height() * 1.5 >= $(window).height() + $(window).scrollTop() && self.widget.height() + self._element.outerHeight() < offset.top) {\n                    vertical = \'top\';\n                } else {\n                    vertical = \'bottom\';\n                }\n            }\n\n            // Left and right logic\n            if (horizontal === \'auto\') {\n                if (parent.width() < offset.left + self.widget.outerWidth() / 2 && offset.left + self.widget.outerWidth() > $(window).width()) {\n                    horizontal = \'right\';\n                } else {\n                    horizontal = \'left\';\n                }\n            }\n\n            if (vertical === \'top\') {\n                self.widget.addClass(\'top\').removeClass(\'bottom\');\n            } else {\n                self.widget.addClass(\'bottom\').removeClass(\'top\');\n            }\n\n            if (horizontal === \'right\') {\n                self.widget.addClass(\'float-right\');\n            } else {\n                self.widget.removeClass(\'float-right\');\n            }\n\n            // find the first parent element that has a relative css positioning\n            if (parent.css(\'position\') !== \'relative\') {\n                parent = parent.parents().filter(function () {\n                    return $(this).css(\'position\') === \'relative\';\n                }).first();\n            }\n\n            if (parent.length === 0) {\n                throw new Error(\'datetimepicker component should be placed within a relative positioned container\');\n            }\n\n            self.widget.css({\n                top: vertical === \'top\' ? \'auto\' : position.top + self._element.outerHeight() + \'px\',\n                bottom: vertical === \'top\' ? parent.outerHeight() - (parent === self._element ? 0 : position.top) + \'px\' : \'auto\',\n                left: horizontal === \'left\' ? (parent === self._element ? 0 : position.left) + \'px\' : \'auto\',\n                right: horizontal === \'left\' ? \'auto\' : parent.outerWidth() - self._element.outerWidth() - (parent === self._element ? 0 : position.left) + \'px\'\n            });\n        };\n\n        TempusDominusBootstrap4.prototype._fillDow = function _fillDow() {\n            var row = $(\'<tr>\'),\n                currentDate = this._viewDate.clone().startOf(\'w\').startOf(\'d\');\n\n            if (this._options.calendarWeeks === true) {\n                row.append($(\'<th>\').addClass(\'cw\').text(\'#\'));\n            }\n\n            while (currentDate.isBefore(this._viewDate.clone().endOf(\'w\'))) {\n                row.append($(\'<th>\').addClass(\'dow\').text(currentDate.format(\'dd\')));\n                currentDate.add(1, \'d\');\n            }\n            this.widget.find(\'.datepicker-days thead\').append(row);\n        };\n\n        TempusDominusBootstrap4.prototype._fillMonths = function _fillMonths() {\n            var spans = [],\n                monthsShort = this._viewDate.clone().startOf(\'y\').startOf(\'d\');\n            while (monthsShort.isSame(this._viewDate, \'y\')) {\n                spans.push($(\'<span>\').attr(\'data-action\', \'selectMonth\').addClass(\'month\').text(monthsShort.format(\'MMM\')));\n                monthsShort.add(1, \'M\');\n            }\n            this.widget.find(\'.datepicker-months td\').empty().append(spans);\n        };\n\n        TempusDominusBootstrap4.prototype._updateMonths = function _updateMonths() {\n            var monthsView = this.widget.find(\'.datepicker-months\'),\n                monthsViewHeader = monthsView.find(\'th\'),\n                months = monthsView.find(\'tbody\').find(\'span\'),\n                self = this;\n\n            monthsViewHeader.eq(0).find(\'span\').attr(\'title\', this._options.tooltips.prevYear);\n            monthsViewHeader.eq(1).attr(\'title\', this._options.tooltips.selectYear);\n            monthsViewHeader.eq(2).find(\'span\').attr(\'title\', this._options.tooltips.nextYear);\n\n            monthsView.find(\'.disabled\').removeClass(\'disabled\');\n\n            if (!this._isValid(this._viewDate.clone().subtract(1, \'y\'), \'y\')) {\n                monthsViewHeader.eq(0).addClass(\'disabled\');\n            }\n\n            monthsViewHeader.eq(1).text(this._viewDate.year());\n\n            if (!this._isValid(this._viewDate.clone().add(1, \'y\'), \'y\')) {\n                monthsViewHeader.eq(2).addClass(\'disabled\');\n            }\n\n            months.removeClass(\'active\');\n            if (this._getLastPickedDate().isSame(this._viewDate, \'y\') && !this.unset) {\n                months.eq(this._getLastPickedDate().month()).addClass(\'active\');\n            }\n\n            months.each(function (index) {\n                if (!self._isValid(self._viewDate.clone().month(index), \'M\')) {\n                    $(this).addClass(\'disabled\');\n                }\n            });\n        };\n\n        TempusDominusBootstrap4.prototype._getStartEndYear = function _getStartEndYear(factor, year) {\n            var step = factor / 10,\n                startYear = Math.floor(year / factor) * factor,\n                endYear = startYear + step * 9,\n                focusValue = Math.floor(year / step) * step;\n            return [startYear, endYear, focusValue];\n        };\n\n        TempusDominusBootstrap4.prototype._updateYears = function _updateYears() {\n            var yearsView = this.widget.find(\'.datepicker-years\'),\n                yearsViewHeader = yearsView.find(\'th\'),\n                yearCaps = this._getStartEndYear(10, this._viewDate.year()),\n                startYear = this._viewDate.clone().year(yearCaps[0]),\n                endYear = this._viewDate.clone().year(yearCaps[1]);\n            var html = \'\';\n\n            yearsViewHeader.eq(0).find(\'span\').attr(\'title\', this._options.tooltips.prevDecade);\n            yearsViewHeader.eq(1).attr(\'title\', this._options.tooltips.selectDecade);\n            yearsViewHeader.eq(2).find(\'span\').attr(\'title\', this._options.tooltips.nextDecade);\n\n            yearsView.find(\'.disabled\').removeClass(\'disabled\');\n\n            if (this._options.minDate && this._options.minDate.isAfter(startYear, \'y\')) {\n                yearsViewHeader.eq(0).addClass(\'disabled\');\n            }\n\n            yearsViewHeader.eq(1).text(startYear.year() + \'-\' + endYear.year());\n\n            if (this._options.maxDate && this._options.maxDate.isBefore(endYear, \'y\')) {\n                yearsViewHeader.eq(2).addClass(\'disabled\');\n            }\n\n            html += \'<span data-action="selectYear" class="year old">\' + (startYear.year() - 1) + \'</span>\';\n            while (!startYear.isAfter(endYear, \'y\')) {\n                html += \'<span data-action="selectYear" class="year\' + (startYear.isSame(this._getLastPickedDate(), \'y\') && !this.unset ? \' active\' : \'\') + (!this._isValid(startYear, \'y\') ? \' disabled\' : \'\') + \'">\' + startYear.year() + \'</span>\';\n                startYear.add(1, \'y\');\n            }\n            html += \'<span data-action="selectYear" class="year old">\' + startYear.year() + \'</span>\';\n\n            yearsView.find(\'td\').html(html);\n        };\n\n        TempusDominusBootstrap4.prototype._updateDecades = function _updateDecades() {\n            var decadesView = this.widget.find(\'.datepicker-decades\'),\n                decadesViewHeader = decadesView.find(\'th\'),\n                yearCaps = this._getStartEndYear(100, this._viewDate.year()),\n                startDecade = this._viewDate.clone().year(yearCaps[0]),\n                endDecade = this._viewDate.clone().year(yearCaps[1]);\n            var minDateDecade = false,\n                maxDateDecade = false,\n                endDecadeYear = void 0,\n                html = \'\';\n\n            decadesViewHeader.eq(0).find(\'span\').attr(\'title\', this._options.tooltips.prevCentury);\n            decadesViewHeader.eq(2).find(\'span\').attr(\'title\', this._options.tooltips.nextCentury);\n\n            decadesView.find(\'.disabled\').removeClass(\'disabled\');\n\n            if (startDecade.year() === 0 || this._options.minDate && this._options.minDate.isAfter(startDecade, \'y\')) {\n                decadesViewHeader.eq(0).addClass(\'disabled\');\n            }\n\n            decadesViewHeader.eq(1).text(startDecade.year() + \'-\' + endDecade.year());\n\n            if (this._options.maxDate && this._options.maxDate.isBefore(endDecade, \'y\')) {\n                decadesViewHeader.eq(2).addClass(\'disabled\');\n            }\n\n            if (startDecade.year() - 10 < 0) {\n                html += \'<span>&nbsp;</span>\';\n            } else {\n                html += \'<span data-action="selectDecade" class="decade old" data-selection="\' + (startDecade.year() + 6) + \'">\' + (startDecade.year() - 10) + \'</span>\';\n            }\n\n            while (!startDecade.isAfter(endDecade, \'y\')) {\n                endDecadeYear = startDecade.year() + 11;\n                minDateDecade = this._options.minDate && this._options.minDate.isAfter(startDecade, \'y\') && this._options.minDate.year() <= endDecadeYear;\n                maxDateDecade = this._options.maxDate && this._options.maxDate.isAfter(startDecade, \'y\') && this._options.maxDate.year() <= endDecadeYear;\n                html += \'<span data-action="selectDecade" class="decade\' + (this._getLastPickedDate().isAfter(startDecade) && this._getLastPickedDate().year() <= endDecadeYear ? \' active\' : \'\') + (!this._isValid(startDecade, \'y\') && !minDateDecade && !maxDateDecade ? \' disabled\' : \'\') + \'" data-selection="\' + (startDecade.year() + 6) + \'">\' + startDecade.year() + \'</span>\';\n                startDecade.add(10, \'y\');\n            }\n            html += \'<span data-action="selectDecade" class="decade old" data-selection="\' + (startDecade.year() + 6) + \'">\' + startDecade.year() + \'</span>\';\n\n            decadesView.find(\'td\').html(html);\n        };\n\n        TempusDominusBootstrap4.prototype._fillDate = function _fillDate() {\n            var daysView = this.widget.find(\'.datepicker-days\'),\n                daysViewHeader = daysView.find(\'th\'),\n                html = [];\n            var currentDate = void 0,\n                row = void 0,\n                clsName = void 0,\n                i = void 0;\n\n            if (!this._hasDate()) {\n                return;\n            }\n\n            daysViewHeader.eq(0).find(\'span\').attr(\'title\', this._options.tooltips.prevMonth);\n            daysViewHeader.eq(1).attr(\'title\', this._options.tooltips.selectMonth);\n            daysViewHeader.eq(2).find(\'span\').attr(\'title\', this._options.tooltips.nextMonth);\n\n            daysView.find(\'.disabled\').removeClass(\'disabled\');\n            daysViewHeader.eq(1).text(this._viewDate.format(this._options.dayViewHeaderFormat));\n\n            if (!this._isValid(this._viewDate.clone().subtract(1, \'M\'), \'M\')) {\n                daysViewHeader.eq(0).addClass(\'disabled\');\n            }\n            if (!this._isValid(this._viewDate.clone().add(1, \'M\'), \'M\')) {\n                daysViewHeader.eq(2).addClass(\'disabled\');\n            }\n\n            currentDate = this._viewDate.clone().startOf(\'M\').startOf(\'w\').startOf(\'d\');\n\n            for (i = 0; i < 42; i++) {\n                //always display 42 days (should show 6 weeks)\n                if (currentDate.weekday() === 0) {\n                    row = $(\'<tr>\');\n                    if (this._options.calendarWeeks) {\n                        row.append(\'<td class="cw">\' + currentDate.week() + \'</td>\');\n                    }\n                    html.push(row);\n                }\n                clsName = \'\';\n                if (currentDate.isBefore(this._viewDate, \'M\')) {\n                    clsName += \' old\';\n                }\n                if (currentDate.isAfter(this._viewDate, \'M\')) {\n                    clsName += \' new\';\n                }\n                if (this._options.allowMultidate) {\n                    var index = this._datesFormatted.indexOf(currentDate.format(\'YYYY-MM-DD\'));\n                    if (index !== -1) {\n                        if (currentDate.isSame(this._datesFormatted[index], \'d\') && !this.unset) {\n                            clsName += \' active\';\n                        }\n                    }\n                } else {\n                    if (currentDate.isSame(this._getLastPickedDate(), \'d\') && !this.unset) {\n                        clsName += \' active\';\n                    }\n                }\n                if (!this._isValid(currentDate, \'d\')) {\n                    clsName += \' disabled\';\n                }\n                if (currentDate.isSame(this.getMoment(), \'d\')) {\n                    clsName += \' today\';\n                }\n                if (currentDate.day() === 0 || currentDate.day() === 6) {\n                    clsName += \' weekend\';\n                }\n                row.append(\'<td data-action="selectDay" data-day="\' + currentDate.format(\'L\') + \'" class="day\' + clsName + \'">\' + currentDate.date() + \'</td>\');\n                currentDate.add(1, \'d\');\n            }\n\n            daysView.find(\'tbody\').empty().append(html);\n\n            this._updateMonths();\n\n            this._updateYears();\n\n            this._updateDecades();\n        };\n\n        TempusDominusBootstrap4.prototype._fillHours = function _fillHours() {\n            var table = this.widget.find(\'.timepicker-hours table\'),\n                currentHour = this._viewDate.clone().startOf(\'d\'),\n                html = [];\n            var row = $(\'<tr>\');\n\n            if (this._viewDate.hour() > 11 && !this.use24Hours) {\n                currentHour.hour(12);\n            }\n            while (currentHour.isSame(this._viewDate, \'d\') && (this.use24Hours || this._viewDate.hour() < 12 && currentHour.hour() < 12 || this._viewDate.hour() > 11)) {\n                if (currentHour.hour() % 4 === 0) {\n                    row = $(\'<tr>\');\n                    html.push(row);\n                }\n                row.append(\'<td data-action="selectHour" class="hour\' + (!this._isValid(currentHour, \'h\') ? \' disabled\' : \'\') + \'">\' + currentHour.format(this.use24Hours ? \'HH\' : \'hh\') + \'</td>\');\n                currentHour.add(1, \'h\');\n            }\n            table.empty().append(html);\n        };\n\n        TempusDominusBootstrap4.prototype._fillMinutes = function _fillMinutes() {\n            var table = this.widget.find(\'.timepicker-minutes table\'),\n                currentMinute = this._viewDate.clone().startOf(\'h\'),\n                html = [],\n                step = this._options.stepping === 1 ? 5 : this._options.stepping;\n            var row = $(\'<tr>\');\n\n            while (this._viewDate.isSame(currentMinute, \'h\')) {\n                if (currentMinute.minute() % (step * 4) === 0) {\n                    row = $(\'<tr>\');\n                    html.push(row);\n                }\n                row.append(\'<td data-action="selectMinute" class="minute\' + (!this._isValid(currentMinute, \'m\') ? \' disabled\' : \'\') + \'">\' + currentMinute.format(\'mm\') + \'</td>\');\n                currentMinute.add(step, \'m\');\n            }\n            table.empty().append(html);\n        };\n\n        TempusDominusBootstrap4.prototype._fillSeconds = function _fillSeconds() {\n            var table = this.widget.find(\'.timepicker-seconds table\'),\n                currentSecond = this._viewDate.clone().startOf(\'m\'),\n                html = [];\n            var row = $(\'<tr>\');\n\n            while (this._viewDate.isSame(currentSecond, \'m\')) {\n                if (currentSecond.second() % 20 === 0) {\n                    row = $(\'<tr>\');\n                    html.push(row);\n                }\n                row.append(\'<td data-action="selectSecond" class="second\' + (!this._isValid(currentSecond, \'s\') ? \' disabled\' : \'\') + \'">\' + currentSecond.format(\'ss\') + \'</td>\');\n                currentSecond.add(5, \'s\');\n            }\n\n            table.empty().append(html);\n        };\n\n        TempusDominusBootstrap4.prototype._fillTime = function _fillTime() {\n            var toggle = void 0,\n                newDate = void 0;\n            var timeComponents = this.widget.find(\'.timepicker span[data-time-component]\');\n\n            if (!this.use24Hours) {\n                toggle = this.widget.find(\'.timepicker [data-action=togglePeriod]\');\n                newDate = this._getLastPickedDate().clone().add(this._getLastPickedDate().hours() >= 12 ? -12 : 12, \'h\');\n\n                toggle.text(this._getLastPickedDate().format(\'A\'));\n\n                if (this._isValid(newDate, \'h\')) {\n                    toggle.removeClass(\'disabled\');\n                } else {\n                    toggle.addClass(\'disabled\');\n                }\n            }\n            timeComponents.filter(\'[data-time-component=hours]\').text(this._getLastPickedDate().format(\'\' + (this.use24Hours ? \'HH\' : \'hh\')));\n            timeComponents.filter(\'[data-time-component=minutes]\').text(this._getLastPickedDate().format(\'mm\'));\n            timeComponents.filter(\'[data-time-component=seconds]\').text(this._getLastPickedDate().format(\'ss\'));\n\n            this._fillHours();\n            this._fillMinutes();\n            this._fillSeconds();\n        };\n\n        TempusDominusBootstrap4.prototype._doAction = function _doAction(e, action) {\n            var lastPicked = this._getLastPickedDate();\n            if ($(e.currentTarget).is(\'.disabled\')) {\n                return false;\n            }\n            action = action || $(e.currentTarget).data(\'action\');\n            switch (action) {\n                case \'next\':\n                    {\n                        var navFnc = DateTimePicker.DatePickerModes[this.currentViewMode].NAV_FUNCTION;\n                        this._viewDate.add(DateTimePicker.DatePickerModes[this.currentViewMode].NAV_STEP, navFnc);\n                        this._fillDate();\n                        this._viewUpdate(navFnc);\n                        break;\n                    }\n                case \'previous\':\n                    {\n                        var _navFnc = DateTimePicker.DatePickerModes[this.currentViewMode].NAV_FUNCTION;\n                        this._viewDate.subtract(DateTimePicker.DatePickerModes[this.currentViewMode].NAV_STEP, _navFnc);\n                        this._fillDate();\n                        this._viewUpdate(_navFnc);\n                        break;\n                    }\n                case \'pickerSwitch\':\n                    this._showMode(1);\n                    break;\n                case \'selectMonth\':\n                    {\n                        var month = $(e.target).closest(\'tbody\').find(\'span\').index($(e.target));\n                        this._viewDate.month(month);\n                        if (this.currentViewMode === DateTimePicker.MinViewModeNumber) {\n                            this._setValue(lastPicked.clone().year(this._viewDate.year()).month(this._viewDate.month()), this._getLastPickedDateIndex());\n                            if (!this._options.inline) {\n                                this.hide();\n                            }\n                        } else {\n                            this._showMode(-1);\n                            this._fillDate();\n                        }\n                        this._viewUpdate(\'M\');\n                        break;\n                    }\n                case \'selectYear\':\n                    {\n                        var year = parseInt($(e.target).text(), 10) || 0;\n                        this._viewDate.year(year);\n                        if (this.currentViewMode === DateTimePicker.MinViewModeNumber) {\n                            this._setValue(lastPicked.clone().year(this._viewDate.year()), this._getLastPickedDateIndex());\n                            if (!this._options.inline) {\n                                this.hide();\n                            }\n                        } else {\n                            this._showMode(-1);\n                            this._fillDate();\n                        }\n                        this._viewUpdate(\'YYYY\');\n                        break;\n                    }\n                case \'selectDecade\':\n                    {\n                        var _year = parseInt($(e.target).data(\'selection\'), 10) || 0;\n                        this._viewDate.year(_year);\n                        if (this.currentViewMode === DateTimePicker.MinViewModeNumber) {\n                            this._setValue(lastPicked.clone().year(this._viewDate.year()), this._getLastPickedDateIndex());\n                            if (!this._options.inline) {\n                                this.hide();\n                            }\n                        } else {\n                            this._showMode(-1);\n                            this._fillDate();\n                        }\n                        this._viewUpdate(\'YYYY\');\n                        break;\n                    }\n                case \'selectDay\':\n                    {\n                        var day = this._viewDate.clone();\n                        if ($(e.target).is(\'.old\')) {\n                            day.subtract(1, \'M\');\n                        }\n                        if ($(e.target).is(\'.new\')) {\n                            day.add(1, \'M\');\n                        }\n                        this._setValue(day.date(parseInt($(e.target).text(), 10)), this._getLastPickedDateIndex());\n                        if (!this._hasTime() && !this._options.keepOpen && !this._options.inline) {\n                            this.hide();\n                        }\n                        break;\n                    }\n                case \'incrementHours\':\n                    {\n                        var newDate = lastPicked.clone().add(1, \'h\');\n                        if (this._isValid(newDate, \'h\')) {\n                            this._setValue(newDate, this._getLastPickedDateIndex());\n                        }\n                        break;\n                    }\n                case \'incrementMinutes\':\n                    {\n                        var _newDate = lastPicked.clone().add(this._options.stepping, \'m\');\n                        if (this._isValid(_newDate, \'m\')) {\n                            this._setValue(_newDate, this._getLastPickedDateIndex());\n                        }\n                        break;\n                    }\n                case \'incrementSeconds\':\n                    {\n                        var _newDate2 = lastPicked.clone().add(1, \'s\');\n                        if (this._isValid(_newDate2, \'s\')) {\n                            this._setValue(_newDate2, this._getLastPickedDateIndex());\n                        }\n                        break;\n                    }\n                case \'decrementHours\':\n                    {\n                        var _newDate3 = lastPicked.clone().subtract(1, \'h\');\n                        if (this._isValid(_newDate3, \'h\')) {\n                            this._setValue(_newDate3, this._getLastPickedDateIndex());\n                        }\n                        break;\n                    }\n                case \'decrementMinutes\':\n                    {\n                        var _newDate4 = lastPicked.clone().subtract(this._options.stepping, \'m\');\n                        if (this._isValid(_newDate4, \'m\')) {\n                            this._setValue(_newDate4, this._getLastPickedDateIndex());\n                        }\n                        break;\n                    }\n                case \'decrementSeconds\':\n                    {\n                        var _newDate5 = lastPicked.clone().subtract(1, \'s\');\n                        if (this._isValid(_newDate5, \'s\')) {\n                            this._setValue(_newDate5, this._getLastPickedDateIndex());\n                        }\n                        break;\n                    }\n                case \'togglePeriod\':\n                    {\n                        this._setValue(lastPicked.clone().add(lastPicked.hours() >= 12 ? -12 : 12, \'h\'), this._getLastPickedDateIndex());\n                        break;\n                    }\n                case \'togglePicker\':\n                    {\n                        var $this = $(e.target),\n                            $link = $this.closest(\'a\'),\n                            $parent = $this.closest(\'ul\'),\n                            expanded = $parent.find(\'.show\'),\n                            closed = $parent.find(\'.collapse:not(.show)\'),\n                            $span = $this.is(\'span\') ? $this : $this.find(\'span\');\n                        var collapseData = void 0;\n\n                        if (expanded && expanded.length) {\n                            collapseData = expanded.data(\'collapse\');\n                            if (collapseData && collapseData.transitioning) {\n                                return true;\n                            }\n                            if (expanded.collapse) {\n                                // if collapse plugin is available through bootstrap.js then use it\n                                expanded.collapse(\'hide\');\n                                closed.collapse(\'show\');\n                            } else {\n                                // otherwise just toggle in class on the two views\n                                expanded.removeClass(\'show\');\n                                closed.addClass(\'show\');\n                            }\n                            $span.toggleClass(this._options.icons.time + \' \' + this._options.icons.date);\n\n                            if ($span.hasClass(this._options.icons.date)) {\n                                $link.attr(\'title\', this._options.tooltips.selectDate);\n                            } else {\n                                $link.attr(\'title\', this._options.tooltips.selectTime);\n                            }\n                        }\n                    }\n                    break;\n                case \'showPicker\':\n                    this.widget.find(\'.timepicker > div:not(.timepicker-picker)\').hide();\n                    this.widget.find(\'.timepicker .timepicker-picker\').show();\n                    break;\n                case \'showHours\':\n                    this.widget.find(\'.timepicker .timepicker-picker\').hide();\n                    this.widget.find(\'.timepicker .timepicker-hours\').show();\n                    break;\n                case \'showMinutes\':\n                    this.widget.find(\'.timepicker .timepicker-picker\').hide();\n                    this.widget.find(\'.timepicker .timepicker-minutes\').show();\n                    break;\n                case \'showSeconds\':\n                    this.widget.find(\'.timepicker .timepicker-picker\').hide();\n                    this.widget.find(\'.timepicker .timepicker-seconds\').show();\n                    break;\n                case \'selectHour\':\n                    {\n                        var hour = parseInt($(e.target).text(), 10);\n\n                        if (!this.use24Hours) {\n                            if (lastPicked.hours() >= 12) {\n                                if (hour !== 12) {\n                                    hour += 12;\n                                }\n                            } else {\n                                if (hour === 12) {\n                                    hour = 0;\n                                }\n                            }\n                        }\n                        this._setValue(lastPicked.clone().hours(hour), this._getLastPickedDateIndex());\n                        if (!this._isEnabled(\'a\') && !this._isEnabled(\'m\') && !this._options.keepOpen && !this._options.inline) {\n                            this.hide();\n                        } else {\n                            this._doAction(e, \'showPicker\');\n                        }\n                        break;\n                    }\n                case \'selectMinute\':\n                    this._setValue(lastPicked.clone().minutes(parseInt($(e.target).text(), 10)), this._getLastPickedDateIndex());\n                    if (!this._isEnabled(\'a\') && !this._isEnabled(\'s\') && !this._options.keepOpen && !this._options.inline) {\n                        this.hide();\n                    } else {\n                        this._doAction(e, \'showPicker\');\n                    }\n                    break;\n                case \'selectSecond\':\n                    this._setValue(lastPicked.clone().seconds(parseInt($(e.target).text(), 10)), this._getLastPickedDateIndex());\n                    if (!this._isEnabled(\'a\') && !this._options.keepOpen && !this._options.inline) {\n                        this.hide();\n                    } else {\n                        this._doAction(e, \'showPicker\');\n                    }\n                    break;\n                case \'clear\':\n                    this.clear();\n                    break;\n                case \'close\':\n                    this.hide();\n                    break;\n                case \'today\':\n                    {\n                        var todaysDate = this.getMoment();\n                        if (this._isValid(todaysDate, \'d\')) {\n                            this._setValue(todaysDate, this._getLastPickedDateIndex());\n                        }\n                        break;\n                    }\n            }\n            return false;\n        };\n\n        //public\n\n\n        TempusDominusBootstrap4.prototype.hide = function hide() {\n            var transitioning = false;\n            if (!this.widget) {\n                return;\n            }\n            // Ignore event if in the middle of a picker transition\n            this.widget.find(\'.collapse\').each(function () {\n                var collapseData = $(this).data(\'collapse\');\n                if (collapseData && collapseData.transitioning) {\n                    transitioning = true;\n                    return false;\n                }\n                return true;\n            });\n            if (transitioning) {\n                return;\n            }\n            if (this.component && this.component.hasClass(\'btn\')) {\n                this.component.toggleClass(\'active\');\n            }\n            this.widget.hide();\n\n            $(window).off(\'resize\', this._place());\n            this.widget.off(\'click\', \'[data-action]\');\n            this.widget.off(\'mousedown\', false);\n\n            this.widget.remove();\n            this.widget = false;\n\n            this._notifyEvent({\n                type: DateTimePicker.Event.HIDE,\n                date: this._getLastPickedDate().clone()\n            });\n\n            if (this.input !== undefined) {\n                this.input.blur();\n            }\n\n            this._viewDate = this._getLastPickedDate().clone();\n        };\n\n        TempusDominusBootstrap4.prototype.show = function show() {\n            var currentMoment = void 0;\n            var useCurrentGranularity = {\n                \'year\': function year(m) {\n                    return m.month(0).date(1).hours(0).seconds(0).minutes(0);\n                },\n                \'month\': function month(m) {\n                    return m.date(1).hours(0).seconds(0).minutes(0);\n                },\n                \'day\': function day(m) {\n                    return m.hours(0).seconds(0).minutes(0);\n                },\n                \'hour\': function hour(m) {\n                    return m.seconds(0).minutes(0);\n                },\n                \'minute\': function minute(m) {\n                    return m.seconds(0);\n                }\n            };\n\n            if (this.input !== undefined) {\n                if (this.input.prop(\'disabled\') || !this._options.ignoreReadonly && this.input.prop(\'readonly\') || this.widget) {\n                    return;\n                }\n                if (this.input.val() !== undefined && this.input.val().trim().length !== 0) {\n                    this._setValue(this._parseInputDate(this.input.val().trim()), 0);\n                } else if (this.unset && this._options.useCurrent) {\n                    currentMoment = this.getMoment();\n                    if (typeof this._options.useCurrent === \'string\') {\n                        currentMoment = useCurrentGranularity[this._options.useCurrent](currentMoment);\n                    }\n                    this._setValue(currentMoment, 0);\n                }\n            } else if (this.unset && this._options.useCurrent) {\n                currentMoment = this.getMoment();\n                if (typeof this._options.useCurrent === \'string\') {\n                    currentMoment = useCurrentGranularity[this._options.useCurrent](currentMoment);\n                }\n                this._setValue(currentMoment, 0);\n            }\n\n            this.widget = this._getTemplate();\n\n            this._fillDow();\n            this._fillMonths();\n\n            this.widget.find(\'.timepicker-hours\').hide();\n            this.widget.find(\'.timepicker-minutes\').hide();\n            this.widget.find(\'.timepicker-seconds\').hide();\n\n            this._update();\n            this._showMode();\n\n            $(window).on(\'resize\', { picker: this }, this._place);\n            this.widget.on(\'click\', \'[data-action]\', $.proxy(this._doAction, this)); // this handles clicks on the widget\n            this.widget.on(\'mousedown\', false);\n\n            if (this.component && this.component.hasClass(\'btn\')) {\n                this.component.toggleClass(\'active\');\n            }\n            this._place();\n            this.widget.show();\n            if (this.input !== undefined && this._options.focusOnShow && !this.input.is(\':focus\')) {\n                this.input.focus();\n            }\n\n            this._notifyEvent({\n                type: DateTimePicker.Event.SHOW\n            });\n        };\n\n        TempusDominusBootstrap4.prototype.destroy = function destroy() {\n            this.hide();\n            //todo doc off?\n            this._element.removeData(DateTimePicker.DATA_KEY);\n            this._element.removeData(\'date\');\n        };\n\n        TempusDominusBootstrap4.prototype.disable = function disable() {\n            this.hide();\n            if (this.component && this.component.hasClass(\'btn\')) {\n                this.component.addClass(\'disabled\');\n            }\n            if (this.input !== undefined) {\n                this.input.prop(\'disabled\', true); //todo disable this/comp if input is null\n            }\n        };\n\n        TempusDominusBootstrap4.prototype.enable = function enable() {\n            if (this.component && this.component.hasClass(\'btn\')) {\n                this.component.removeClass(\'disabled\');\n            }\n            if (this.input !== undefined) {\n                this.input.prop(\'disabled\', false); //todo enable comp/this if input is null\n            }\n        };\n\n        TempusDominusBootstrap4.prototype.toolbarPlacement = function toolbarPlacement(_toolbarPlacement) {\n            if (arguments.length === 0) {\n                return this._options.toolbarPlacement;\n            }\n\n            if (typeof _toolbarPlacement !== \'string\') {\n                throw new TypeError(\'toolbarPlacement() expects a string parameter\');\n            }\n            if (toolbarPlacements.indexOf(_toolbarPlacement) === -1) {\n                throw new TypeError(\'toolbarPlacement() parameter must be one of (\' + toolbarPlacements.join(\', \') + \') value\');\n            }\n            this._options.toolbarPlacement = _toolbarPlacement;\n\n            if (this.widget) {\n                this.hide();\n                this.show();\n            }\n        };\n\n        TempusDominusBootstrap4.prototype.widgetPositioning = function widgetPositioning(_widgetPositioning) {\n            if (arguments.length === 0) {\n                return $.extend({}, this._options.widgetPositioning);\n            }\n\n            if ({}.toString.call(_widgetPositioning) !== \'[object Object]\') {\n                throw new TypeError(\'widgetPositioning() expects an object variable\');\n            }\n            if (_widgetPositioning.horizontal) {\n                if (typeof _widgetPositioning.horizontal !== \'string\') {\n                    throw new TypeError(\'widgetPositioning() horizontal variable must be a string\');\n                }\n                _widgetPositioning.horizontal = _widgetPositioning.horizontal.toLowerCase();\n                if (horizontalModes.indexOf(_widgetPositioning.horizontal) === -1) {\n                    throw new TypeError(\'widgetPositioning() expects horizontal parameter to be one of (\' + horizontalModes.join(\', \') + \')\');\n                }\n                this._options.widgetPositioning.horizontal = _widgetPositioning.horizontal;\n            }\n            if (_widgetPositioning.vertical) {\n                if (typeof _widgetPositioning.vertical !== \'string\') {\n                    throw new TypeError(\'widgetPositioning() vertical variable must be a string\');\n                }\n                _widgetPositioning.vertical = _widgetPositioning.vertical.toLowerCase();\n                if (verticalModes.indexOf(_widgetPositioning.vertical) === -1) {\n                    throw new TypeError(\'widgetPositioning() expects vertical parameter to be one of (\' + verticalModes.join(\', \') + \')\');\n                }\n                this._options.widgetPositioning.vertical = _widgetPositioning.vertical;\n            }\n            this._update();\n        };\n\n        TempusDominusBootstrap4.prototype.widgetParent = function widgetParent(_widgetParent) {\n            if (arguments.length === 0) {\n                return this._options.widgetParent;\n            }\n\n            if (typeof _widgetParent === \'string\') {\n                _widgetParent = $(_widgetParent);\n            }\n\n            if (_widgetParent !== null && typeof _widgetParent !== \'string\' && !(_widgetParent instanceof $)) {\n                throw new TypeError(\'widgetParent() expects a string or a jQuery object parameter\');\n            }\n\n            this._options.widgetParent = _widgetParent;\n            if (this.widget) {\n                this.hide();\n                this.show();\n            }\n        };\n\n        //static\n\n\n        TempusDominusBootstrap4._jQueryHandleThis = function _jQueryHandleThis(me, option, argument) {\n            var data = $(me).data(DateTimePicker.DATA_KEY);\n            if ((typeof option === \'undefined\' ? \'undefined\' : _typeof(option)) === \'object\') {\n                $.extend({}, DateTimePicker.Default, option);\n            }\n\n            if (!data) {\n                data = new TempusDominusBootstrap4($(me), option);\n                $(me).data(DateTimePicker.DATA_KEY, data);\n            }\n\n            if (typeof option === \'string\') {\n                if (data[option] === undefined) {\n                    throw new Error(\'No method named "\' + option + \'"\');\n                }\n                if (argument === undefined) {\n                    return data[option]();\n                } else {\n                    return data[option](argument);\n                }\n            }\n        };\n\n        TempusDominusBootstrap4._jQueryInterface = function _jQueryInterface(option, argument) {\n            if (this.length === 1) {\n                return TempusDominusBootstrap4._jQueryHandleThis(this[0], option, argument);\n            }\n            return this.each(function () {\n                TempusDominusBootstrap4._jQueryHandleThis(this, option, argument);\n            });\n        };\n\n        return TempusDominusBootstrap4;\n    }(DateTimePicker);\n\n    /**\r\n    * ------------------------------------------------------------------------\r\n    * jQuery\r\n    * ------------------------------------------------------------------------\r\n    */\n\n\n    $(document).on(DateTimePicker.Event.CLICK_DATA_API, DateTimePicker.Selector.DATA_TOGGLE, function () {\n        var $target = getSelectorFromElement($(this));\n        if ($target.length === 0) {\n            return;\n        }\n        TempusDominusBootstrap4._jQueryInterface.call($target, \'toggle\');\n    }).on(DateTimePicker.Event.CHANGE, \'.\' + DateTimePicker.ClassName.INPUT, function (event) {\n        var $target = getSelectorFromElement($(this));\n        if ($target.length === 0) {\n            return;\n        }\n        TempusDominusBootstrap4._jQueryInterface.call($target, \'_change\', event);\n    }).on(DateTimePicker.Event.BLUR, \'.\' + DateTimePicker.ClassName.INPUT, function (event) {\n        var $target = getSelectorFromElement($(this)),\n            config = $target.data(DateTimePicker.DATA_KEY);\n        if ($target.length === 0) {\n            return;\n        }\n        if (config._options.debug || window.debug) {\n            return;\n        }\n        TempusDominusBootstrap4._jQueryInterface.call($target, \'hide\', event);\n    }).on(DateTimePicker.Event.KEYDOWN, \'.\' + DateTimePicker.ClassName.INPUT, function (event) {\n        var $target = getSelectorFromElement($(this));\n        if ($target.length === 0) {\n            return;\n        }\n        TempusDominusBootstrap4._jQueryInterface.call($target, \'_keydown\', event);\n    }).on(DateTimePicker.Event.KEYUP, \'.\' + DateTimePicker.ClassName.INPUT, function (event) {\n        var $target = getSelectorFromElement($(this));\n        if ($target.length === 0) {\n            return;\n        }\n        TempusDominusBootstrap4._jQueryInterface.call($target, \'_keyup\', event);\n    }).on(DateTimePicker.Event.FOCUS, \'.\' + DateTimePicker.ClassName.INPUT, function (event) {\n        var $target = getSelectorFromElement($(this)),\n            config = $target.data(DateTimePicker.DATA_KEY);\n        if ($target.length === 0) {\n            return;\n        }\n        if (!config._options.allowInputToggle) {\n            return;\n        }\n        TempusDominusBootstrap4._jQueryInterface.call($target, config, event);\n    });\n\n    $.fn[DateTimePicker.NAME] = TempusDominusBootstrap4._jQueryInterface;\n    $.fn[DateTimePicker.NAME].Constructor = TempusDominusBootstrap4;\n    $.fn[DateTimePicker.NAME].noConflict = function () {\n        $.fn[DateTimePicker.NAME] = JQUERY_NO_CONFLICT;\n        return TempusDominusBootstrap4._jQueryInterface;\n    };\n\n    return TempusDominusBootstrap4;\n}(jQuery);\r\n\r\n}();\r\n';
+    loader.global.define = undefined;
+    loader.global.module = undefined;
+    loader.global.exports = undefined;
+    loader.__exec({
+        'source': source,
+        'address': module.uri
+    });
+    loader.global.require = require;
+    loader.global.define = define;
+    return loader.get('@@global-helpers').retrieveGlobal(module.id, undefined);
+});
 /*validate.js@0.11.1#validate*/
 (function (exports, module, define) {
     'use strict';
@@ -38142,517 +38135,6 @@ define('shuttle-canstrap@1.0.50#shuttle-canstrap', [
     };
     validate.exposeModule(validate, this, exports, module, define);
 }.call(this, typeof exports !== 'undefined' ? exports : null, typeof module !== 'undefined' ? module : null, typeof define !== 'undefined' ? define : null));
-/*shuttle-can-api@1.0.17#shuttle-can-api*/
-define('shuttle-can-api@1.0.17#shuttle-can-api', [
-    'exports',
-    'jquery',
-    'can-define/map/',
-    'can-define/list/',
-    'shuttle-guard',
-    'can-util/js/each/'
-], function (exports, _jquery, _map, _list, _shuttleGuard, _each) {
-    'use strict';
-    Object.defineProperty(exports, '__esModule', { value: true });
-    exports.options = exports.Options = undefined;
-    var _jquery2 = _interopRequireDefault(_jquery);
-    var _map2 = _interopRequireDefault(_map);
-    var _list2 = _interopRequireDefault(_list);
-    var _shuttleGuard2 = _interopRequireDefault(_shuttleGuard);
-    var _each2 = _interopRequireDefault(_each);
-    function _interopRequireDefault(obj) {
-        return obj && obj.__esModule ? obj : { default: obj };
-    }
-    var _templateObject = _taggedTemplateLiteral(['Endpoint \'{endpoint}\' contains parameter \'{name}\' that is not at least 3 characters in length.'], ['Endpoint \'{endpoint}\' contains parameter \'{name}\' that is not at least 3 characters in length.']);
-    function _taggedTemplateLiteral(strings, raw) {
-        return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
-    }
-    var Options = exports.Options = _map2.default.extend({
-        url: {
-            type: 'string',
-            default: '',
-            get: function get(value) {
-                if (!value) {
-                    throw new Error('Use `import {options} from \'shuttle-can-api\';` to get the options and then set the api endpoint url `options.url = \'http://server-endpoint\';`.');
-                }
-                return value + (!value.endsWith('/') ? '/' : '');
-            }
-        }
-    });
-    var options = exports.options = new Options({});
-    var parameterExpression = /\{.*?\}/g;
-    var Api = _map2.default.extend('Api', {
-        endpoint: {
-            type: 'string',
-            default: ''
-        },
-        cache: {
-            type: 'boolean',
-            default: false
-        },
-        working: {
-            type: 'boolean',
-            default: false
-        },
-        Map: { type: '*' },
-        List: { type: '*' },
-        _call: function _call(options) {
-            var _this = this;
-            return new Promise(function (resolve, reject) {
-                try {
-                    var o = options || {};
-                    var parsedEndpoint = _this.parseEndpoint(_this.endpoint, o.parameters);
-                    var ajax = {
-                        url: parsedEndpoint.url,
-                        type: o.method,
-                        async: true,
-                        beforeSend: o.beforeSend,
-                        timeout: o.timeout || 60000
-                    };
-                    switch (o.method.toLowerCase()) {
-                    case 'get': {
-                            ajax.cache = _this.cache;
-                            break;
-                        }
-                    case 'post':
-                    case 'put': {
-                            ajax.data = JSON.stringify(o.data || {});
-                            ajax.contentType = 'application/json';
-                            break;
-                        }
-                    }
-                    _jquery2.default.ajax(ajax).done(function (response) {
-                        resolve(response);
-                    }).fail(function (jqXHR, textStatus, errorThrown) {
-                        reject(new Error(errorThrown));
-                    });
-                } catch (e) {
-                    reject(e);
-                }
-            });
-        },
-        parseEndpoint: function parseEndpoint(endpoint, parameters) {
-            _shuttleGuard2.default.againstUndefined(endpoint, 'endpoint');
-            var p = parameters || {};
-            var params = [];
-            var match = void 0;
-            do {
-                match = parameterExpression.exec(endpoint);
-                if (match) {
-                    var name = match[0];
-                    if (name.length < 3) {
-                        throw new Error((0, _jquery2.default)(_templateObject));
-                    }
-                    params.push({
-                        name: name.substr(1, name.length - 2),
-                        index: match.index
-                    });
-                }
-            } while (match);
-            var url;
-            if (endpoint.indexOf('http') < 0) {
-                if (!this.endpoint) {
-                    throw new Error('No \'endpoint\' has been specified.  You either need to use a full url (starting with http/https) or specify the endpoint when instantiating the api: new Api({ endpoint: \'users\' });');
-                }
-                url = options.url + endpoint;
-            } else {
-                url = endpoint;
-            }
-            (0, _each2.default)(params, function (param) {
-                url = url.replace('{' + param.name + '}', !!p[param.name] ? p[param.name] : '');
-            });
-            return {
-                url: url,
-                parameters: params
-            };
-        },
-        post: function post(data, parameters) {
-            var _this2 = this;
-            _shuttleGuard2.default.againstUndefined(data, 'data');
-            return new Promise(function (resolve, reject) {
-                try {
-                    var self = _this2;
-                    _this2.working = true;
-                    _this2._call({
-                        data: data,
-                        parameters: parameters,
-                        method: 'POST'
-                    }).then(function (response) {
-                        self.working = false;
-                        resolve(response);
-                    }, function (error) {
-                        self.working = false;
-                        reject(new Error(error));
-                    });
-                } catch (e) {
-                    reject(e);
-                }
-            });
-        },
-        put: function put(data, parameters) {
-            var _this3 = this;
-            _shuttleGuard2.default.againstUndefined(data, 'data');
-            return new Promise(function (resolve, reject) {
-                try {
-                    var self = _this3;
-                    _this3.working = true;
-                    _this3._call({
-                        data: data,
-                        parameters: parameters,
-                        method: 'PUT'
-                    }).then(function (response) {
-                        self.working = false;
-                        resolve(response);
-                    }).catch(function (error) {
-                        self.working = false;
-                        reject(new Error(error));
-                    });
-                } catch (e) {
-                    reject(e);
-                }
-            });
-        },
-        map: function map(parameters) {
-            var _this4 = this;
-            var self = this;
-            this.working = true;
-            return new Promise(function (resolve, reject) {
-                try {
-                    var _self = _this4;
-                    _this4.working = true;
-                    _this4._call({
-                        method: 'GET',
-                        parameters: parameters
-                    }).then(function (response) {
-                        var data;
-                        _self.working = false;
-                        if (!response) {
-                            reject(new Error('No response received.'));
-                            return;
-                        }
-                        data = response.data || response;
-                        resolve(!!_self.Map ? new _self.Map(data) : new _map2.default(data));
-                    }).catch(function (error) {
-                        _self.working = false;
-                        reject(new Error(error));
-                    });
-                } catch (e) {
-                    reject(e);
-                }
-            });
-        },
-        list: function list(parameters, options) {
-            var _this5 = this;
-            var o = options || {};
-            return new Promise(function (resolve, reject) {
-                try {
-                    var self = _this5;
-                    var callOptions = !!o.post ? {
-                        method: 'POST',
-                        data: parameters
-                    } : {
-                        method: 'GET',
-                        parameters: parameters
-                    };
-                    _this5.working = true;
-                    _this5._call(callOptions).then(function (response) {
-                        var data;
-                        self.working = false;
-                        if (!response) {
-                            reject(new Error('No response received.'));
-                            return;
-                        }
-                        data = response.data || response;
-                        if (!!self.List) {
-                            resolve(new self.List(data));
-                            return;
-                        }
-                        var result = new _list2.default();
-                        (0, _each2.default)(data, function (item) {
-                            result.push(!!self.Map ? new self.Map(item) : new _map2.default(item));
-                        });
-                        resolve(result);
-                    }).catch(function (error) {
-                        self.working = false;
-                        reject(new Error(error));
-                    });
-                } catch (e) {
-                    reject(e);
-                }
-            });
-        },
-        'delete': function _delete(parameters) {
-            var _this6 = this;
-            _shuttleGuard2.default.againstUndefined(parameters, 'parameters');
-            var self = this;
-            this.working = true;
-            return new Promise(function (resolve, reject) {
-                try {
-                    var _self2 = _this6;
-                    _this6.working = true;
-                    _this6._call({
-                        method: 'DELETE',
-                        parameters: parameters
-                    }).then(function (response) {
-                        _self2.working = false;
-                        resolve(response);
-                    }).catch(function (error) {
-                        _self2.working = false;
-                        reject(new Error(error));
-                    });
-                } catch (e) {
-                    reject(e);
-                }
-            });
-        }
-    });
-    exports.default = Api;
-});
-/*shuttle-access@1.0.0#shuttle-access*/
-define('shuttle-access@1.0.0#shuttle-access', [
-    'exports',
-    'jquery',
-    'can-define/map/',
-    'can-define/list/',
-    'shuttle-can-api',
-    'can-util/js/each/',
-    'shuttle-guard'
-], function (exports, _jquery, _map, _list, _shuttleCanApi, _each, _shuttleGuard) {
-    'use strict';
-    Object.defineProperty(exports, '__esModule', { value: true });
-    exports.AnonymousMap = exports.PermissionList = exports.PermissionMap = exports.messages = undefined;
-    var _jquery2 = _interopRequireDefault(_jquery);
-    var _map2 = _interopRequireDefault(_map);
-    var _list2 = _interopRequireDefault(_list);
-    var _shuttleCanApi2 = _interopRequireDefault(_shuttleCanApi);
-    var _each2 = _interopRequireDefault(_each);
-    var _shuttleGuard2 = _interopRequireDefault(_shuttleGuard);
-    function _interopRequireDefault(obj) {
-        return obj && obj.__esModule ? obj : { default: obj };
-    }
-    var Messages = _map2.default.extend({
-        missingCredentials: {
-            type: 'string',
-            default: 'No credentials specified.'
-        },
-        loginFailure: {
-            type: 'string',
-            default: 'Invalid login credentials.'
-        },
-        missingStorage: {
-            type: 'string',
-            default: 'No storage has been specified.'
-        },
-        missingSessionsApi: {
-            type: 'string',
-            default: 'The \'sessions\' api has not been set.  Make a call to \'access.start()\' before accessing the \'sessions\' api.'
-        },
-        missingAnonymousApi: {
-            type: 'string',
-            default: 'The \'anonymous\' api has not been set.  Make a call to \'access.start()\' before accessing the \'anonymous\' api.'
-        },
-        invalidStorage: {
-            type: 'string',
-            default: 'An invalid \'storage\' instance has been specified.  It should have a \'getItem\', \'setItem\', and \'removeItem\' method.'
-        }
-    });
-    var messages = exports.messages = new Messages({});
-    var PermissionMap = exports.PermissionMap = _map2.default.extend({
-        type: {
-            type: 'string',
-            default: 'user'
-        },
-        permission: {
-            type: 'string',
-            default: ''
-        }
-    });
-    var PermissionList = exports.PermissionList = _list2.default.extend({ '#': PermissionMap });
-    var AnonymousMap = exports.AnonymousMap = _map2.default.extend({
-        isUserRequired: {
-            type: 'boolean',
-            default: false
-        },
-        permissions: { Default: PermissionList }
-    });
-    var AccessApi = _map2.default.extend({
-        sessions: {
-            get: function get(value) {
-                if (!value) {
-                    throw new Error(messages.missingSessionsApi);
-                }
-                return value;
-            }
-        },
-        anonymous: {
-            get: function get(value) {
-                if (!value) {
-                    throw new Error(messages.missingAnonymousApi);
-                }
-                return value;
-            }
-        }
-    });
-    var Access = _map2.default.extend({
-        url: {
-            type: 'string',
-            default: '',
-            get: function get(value) {
-                if (!value) {
-                    throw new Error('Use `import {options} from \'shuttle-access\';` to get the options and then set the api endpoint url `this.url = \'http://server-endpoint\';`.');
-                }
-                return value + (!value.endsWith('/') ? '/' : '');
-            }
-        },
-        api: { Default: AccessApi },
-        storage: {
-            default: function _default() {
-                return localStorage;
-            },
-            set: function set(newval) {
-                _shuttleGuard2.default.againstUndefined(newval, 'newval');
-                if (typeof newval.getItem !== 'function' || typeof newval.setItem !== 'function' || typeof newval.removeItem !== 'function') {
-                    throw new Error(messages.invalidStorage);
-                }
-                return newval;
-            }
-        },
-        username: {
-            type: 'string',
-            default: ''
-        },
-        token: {
-            type: 'string',
-            default: undefined
-        },
-        isUserRequired: 'boolean',
-        permissions: { Default: PermissionList },
-        hasSession: function hasSession() {
-            return this.token != undefined;
-        },
-        hasPermission: function hasPermission(permission) {
-            var result = false;
-            var permissionCompare = permission.toLowerCase();
-            this.permissions.forEach(function (item) {
-                if (result) {
-                    return;
-                }
-                result = item.permission === '*' || item.permission.toLowerCase() === permissionCompare;
-            });
-            return result;
-        },
-        removePermission: function removePermission(permission) {
-            this.permissions = this.permissions.filter(function (item) {
-                return item.permission !== permission;
-            });
-        },
-        start: function start() {
-            var self = this;
-            if (!this.storage) {
-                throw new Error(messages.missingStorage);
-            }
-            this.api.anonymous = new _shuttleCanApi2.default({
-                endpoint: this.url + 'anonymouspermissions',
-                Map: AnonymousMap
-            });
-            this.api.sessions = new _shuttleCanApi2.default({ endpoint: this.url + 'sessions' });
-            return this.api.anonymous.map().then(function (map) {
-                var username = self.storage.getItem('username');
-                var token = self.storage.getItem('token');
-                self.isUserRequired = map.isUserRequired;
-                (0, _each2.default)(map.permissions, function (item) {
-                    self.addPermission('anonymous', item.permission);
-                });
-                if (!!username && !!token) {
-                    return self.login({
-                        username: username,
-                        token: token
-                    }).then(function (response) {
-                        return response;
-                    });
-                }
-                return map;
-            });
-        },
-        addPermission: function addPermission(type, permission) {
-            if (this.hasPermission(permission)) {
-                return;
-            }
-            this.permissions.push({
-                type: type,
-                permission: permission
-            });
-        },
-        login: function login(credentials) {
-            var _this = this;
-            var self = this;
-            return new Promise(function (resolve, reject) {
-                if (!credentials || !credentials.username || !(!!credentials.password || !!credentials.token)) {
-                    reject(new Error(messages.missingCredentials));
-                    return;
-                }
-                var usingToken = !!_this.token;
-                return _this.api.sessions.post({
-                    username: credentials.username,
-                    password: credentials.password,
-                    token: credentials.token
-                }).then(function (response) {
-                    if (response.registered) {
-                        self.storage.setItem('username', credentials.username);
-                        self.storage.setItem('token', response.token);
-                        self.username = credentials.username;
-                        self.token = response.token;
-                        self.isUserRequired = false;
-                        self.removeUserPermissions();
-                        (0, _each2.default)(response.permissions, function (item) {
-                            self.addPermission('user', item.permission);
-                        });
-                        resolve();
-                    } else {
-                        if (usingToken) {
-                            self.username = undefined;
-                            self.token = undefined;
-                            self.storage.removeItem('username');
-                            self.storage.removeItem('token');
-                        } else {
-                            reject(new Error(messages.loginFailure));
-                        }
-                    }
-                }).catch(function (error) {
-                    reject(error);
-                });
-            });
-        },
-        logout: function logout() {
-            this.username = undefined;
-            this.token = undefined;
-            this.storage.removeItem('username');
-            this.storage.removeItem('token');
-            this.removeUserPermissions();
-        },
-        removeUserPermissions: function removeUserPermissions() {
-            this.permissions = this.permissions.filter(function (item) {
-                return item.type !== 'user';
-            });
-        },
-        loginStatus: {
-            get: function get() {
-                return this.isUserRequired ? 'user-required' : this.token == undefined ? 'not-logged-in' : 'logged-in';
-            }
-        }
-    });
-    var access = new Access();
-    _jquery2.default.ajaxPrefilter(function (options, originalOptions) {
-        options.beforeSend = function (xhr) {
-            if (access.token) {
-                xhr.setRequestHeader('access-sessiontoken', access.token);
-            }
-            if (originalOptions.beforeSend) {
-                originalOptions.beforeSend(xhr);
-            }
-        };
-    });
-    exports.default = access;
-});
 /*can-simple-observable@2.0.4#make-compute/make-compute*/
 define('can-simple-observable@2.0.4#make-compute/make-compute', [
     'require',
@@ -39836,6 +39318,517 @@ define('can-stache-route-helpers@0.1.4#can-stache-route-helpers', [
     };
     routeCurrent.callAsMethod = true;
     helpers.registerHelper('routeCurrent', routeCurrent);
+});
+/*shuttle-can-api@1.0.17#shuttle-can-api*/
+define('shuttle-can-api@1.0.17#shuttle-can-api', [
+    'exports',
+    'jquery',
+    'can-define/map/',
+    'can-define/list/',
+    'shuttle-guard',
+    'can-util/js/each/'
+], function (exports, _jquery, _map, _list, _shuttleGuard, _each) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    exports.options = exports.Options = undefined;
+    var _jquery2 = _interopRequireDefault(_jquery);
+    var _map2 = _interopRequireDefault(_map);
+    var _list2 = _interopRequireDefault(_list);
+    var _shuttleGuard2 = _interopRequireDefault(_shuttleGuard);
+    var _each2 = _interopRequireDefault(_each);
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { default: obj };
+    }
+    var _templateObject = _taggedTemplateLiteral(['Endpoint \'{endpoint}\' contains parameter \'{name}\' that is not at least 3 characters in length.'], ['Endpoint \'{endpoint}\' contains parameter \'{name}\' that is not at least 3 characters in length.']);
+    function _taggedTemplateLiteral(strings, raw) {
+        return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
+    }
+    var Options = exports.Options = _map2.default.extend({
+        url: {
+            type: 'string',
+            default: '',
+            get: function get(value) {
+                if (!value) {
+                    throw new Error('Use `import {options} from \'shuttle-can-api\';` to get the options and then set the api endpoint url `options.url = \'http://server-endpoint\';`.');
+                }
+                return value + (!value.endsWith('/') ? '/' : '');
+            }
+        }
+    });
+    var options = exports.options = new Options({});
+    var parameterExpression = /\{.*?\}/g;
+    var Api = _map2.default.extend('Api', {
+        endpoint: {
+            type: 'string',
+            default: ''
+        },
+        cache: {
+            type: 'boolean',
+            default: false
+        },
+        working: {
+            type: 'boolean',
+            default: false
+        },
+        Map: { type: '*' },
+        List: { type: '*' },
+        _call: function _call(options) {
+            var _this = this;
+            return new Promise(function (resolve, reject) {
+                try {
+                    var o = options || {};
+                    var parsedEndpoint = _this.parseEndpoint(_this.endpoint, o.parameters);
+                    var ajax = {
+                        url: parsedEndpoint.url,
+                        type: o.method,
+                        async: true,
+                        beforeSend: o.beforeSend,
+                        timeout: o.timeout || 60000
+                    };
+                    switch (o.method.toLowerCase()) {
+                    case 'get': {
+                            ajax.cache = _this.cache;
+                            break;
+                        }
+                    case 'post':
+                    case 'put': {
+                            ajax.data = JSON.stringify(o.data || {});
+                            ajax.contentType = 'application/json';
+                            break;
+                        }
+                    }
+                    _jquery2.default.ajax(ajax).done(function (response) {
+                        resolve(response);
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                        reject(new Error(errorThrown));
+                    });
+                } catch (e) {
+                    reject(e);
+                }
+            });
+        },
+        parseEndpoint: function parseEndpoint(endpoint, parameters) {
+            _shuttleGuard2.default.againstUndefined(endpoint, 'endpoint');
+            var p = parameters || {};
+            var params = [];
+            var match = void 0;
+            do {
+                match = parameterExpression.exec(endpoint);
+                if (match) {
+                    var name = match[0];
+                    if (name.length < 3) {
+                        throw new Error((0, _jquery2.default)(_templateObject));
+                    }
+                    params.push({
+                        name: name.substr(1, name.length - 2),
+                        index: match.index
+                    });
+                }
+            } while (match);
+            var url;
+            if (endpoint.indexOf('http') < 0) {
+                if (!this.endpoint) {
+                    throw new Error('No \'endpoint\' has been specified.  You either need to use a full url (starting with http/https) or specify the endpoint when instantiating the api: new Api({ endpoint: \'users\' });');
+                }
+                url = options.url + endpoint;
+            } else {
+                url = endpoint;
+            }
+            (0, _each2.default)(params, function (param) {
+                url = url.replace('{' + param.name + '}', !!p[param.name] ? p[param.name] : '');
+            });
+            return {
+                url: url,
+                parameters: params
+            };
+        },
+        post: function post(data, parameters) {
+            var _this2 = this;
+            _shuttleGuard2.default.againstUndefined(data, 'data');
+            return new Promise(function (resolve, reject) {
+                try {
+                    var self = _this2;
+                    _this2.working = true;
+                    _this2._call({
+                        data: data,
+                        parameters: parameters,
+                        method: 'POST'
+                    }).then(function (response) {
+                        self.working = false;
+                        resolve(response);
+                    }, function (error) {
+                        self.working = false;
+                        reject(new Error(error));
+                    });
+                } catch (e) {
+                    reject(e);
+                }
+            });
+        },
+        put: function put(data, parameters) {
+            var _this3 = this;
+            _shuttleGuard2.default.againstUndefined(data, 'data');
+            return new Promise(function (resolve, reject) {
+                try {
+                    var self = _this3;
+                    _this3.working = true;
+                    _this3._call({
+                        data: data,
+                        parameters: parameters,
+                        method: 'PUT'
+                    }).then(function (response) {
+                        self.working = false;
+                        resolve(response);
+                    }).catch(function (error) {
+                        self.working = false;
+                        reject(new Error(error));
+                    });
+                } catch (e) {
+                    reject(e);
+                }
+            });
+        },
+        map: function map(parameters) {
+            var _this4 = this;
+            var self = this;
+            this.working = true;
+            return new Promise(function (resolve, reject) {
+                try {
+                    var _self = _this4;
+                    _this4.working = true;
+                    _this4._call({
+                        method: 'GET',
+                        parameters: parameters
+                    }).then(function (response) {
+                        var data;
+                        _self.working = false;
+                        if (!response) {
+                            reject(new Error('No response received.'));
+                            return;
+                        }
+                        data = response.data || response;
+                        resolve(!!_self.Map ? new _self.Map(data) : new _map2.default(data));
+                    }).catch(function (error) {
+                        _self.working = false;
+                        reject(new Error(error));
+                    });
+                } catch (e) {
+                    reject(e);
+                }
+            });
+        },
+        list: function list(parameters, options) {
+            var _this5 = this;
+            var o = options || {};
+            return new Promise(function (resolve, reject) {
+                try {
+                    var self = _this5;
+                    var callOptions = !!o.post ? {
+                        method: 'POST',
+                        data: parameters
+                    } : {
+                        method: 'GET',
+                        parameters: parameters
+                    };
+                    _this5.working = true;
+                    _this5._call(callOptions).then(function (response) {
+                        var data;
+                        self.working = false;
+                        if (!response) {
+                            reject(new Error('No response received.'));
+                            return;
+                        }
+                        data = response.data || response;
+                        if (!!self.List) {
+                            resolve(new self.List(data));
+                            return;
+                        }
+                        var result = new _list2.default();
+                        (0, _each2.default)(data, function (item) {
+                            result.push(!!self.Map ? new self.Map(item) : new _map2.default(item));
+                        });
+                        resolve(result);
+                    }).catch(function (error) {
+                        self.working = false;
+                        reject(new Error(error));
+                    });
+                } catch (e) {
+                    reject(e);
+                }
+            });
+        },
+        'delete': function _delete(parameters) {
+            var _this6 = this;
+            _shuttleGuard2.default.againstUndefined(parameters, 'parameters');
+            var self = this;
+            this.working = true;
+            return new Promise(function (resolve, reject) {
+                try {
+                    var _self2 = _this6;
+                    _this6.working = true;
+                    _this6._call({
+                        method: 'DELETE',
+                        parameters: parameters
+                    }).then(function (response) {
+                        _self2.working = false;
+                        resolve(response);
+                    }).catch(function (error) {
+                        _self2.working = false;
+                        reject(new Error(error));
+                    });
+                } catch (e) {
+                    reject(e);
+                }
+            });
+        }
+    });
+    exports.default = Api;
+});
+/*shuttle-access@1.0.0#shuttle-access*/
+define('shuttle-access@1.0.0#shuttle-access', [
+    'exports',
+    'jquery',
+    'can-define/map/',
+    'can-define/list/',
+    'shuttle-can-api',
+    'can-util/js/each/',
+    'shuttle-guard'
+], function (exports, _jquery, _map, _list, _shuttleCanApi, _each, _shuttleGuard) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    exports.AnonymousMap = exports.PermissionList = exports.PermissionMap = exports.messages = undefined;
+    var _jquery2 = _interopRequireDefault(_jquery);
+    var _map2 = _interopRequireDefault(_map);
+    var _list2 = _interopRequireDefault(_list);
+    var _shuttleCanApi2 = _interopRequireDefault(_shuttleCanApi);
+    var _each2 = _interopRequireDefault(_each);
+    var _shuttleGuard2 = _interopRequireDefault(_shuttleGuard);
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { default: obj };
+    }
+    var Messages = _map2.default.extend({
+        missingCredentials: {
+            type: 'string',
+            default: 'No credentials specified.'
+        },
+        loginFailure: {
+            type: 'string',
+            default: 'Invalid login credentials.'
+        },
+        missingStorage: {
+            type: 'string',
+            default: 'No storage has been specified.'
+        },
+        missingSessionsApi: {
+            type: 'string',
+            default: 'The \'sessions\' api has not been set.  Make a call to \'access.start()\' before accessing the \'sessions\' api.'
+        },
+        missingAnonymousApi: {
+            type: 'string',
+            default: 'The \'anonymous\' api has not been set.  Make a call to \'access.start()\' before accessing the \'anonymous\' api.'
+        },
+        invalidStorage: {
+            type: 'string',
+            default: 'An invalid \'storage\' instance has been specified.  It should have a \'getItem\', \'setItem\', and \'removeItem\' method.'
+        }
+    });
+    var messages = exports.messages = new Messages({});
+    var PermissionMap = exports.PermissionMap = _map2.default.extend({
+        type: {
+            type: 'string',
+            default: 'user'
+        },
+        permission: {
+            type: 'string',
+            default: ''
+        }
+    });
+    var PermissionList = exports.PermissionList = _list2.default.extend({ '#': PermissionMap });
+    var AnonymousMap = exports.AnonymousMap = _map2.default.extend({
+        isUserRequired: {
+            type: 'boolean',
+            default: false
+        },
+        permissions: { Default: PermissionList }
+    });
+    var AccessApi = _map2.default.extend({
+        sessions: {
+            get: function get(value) {
+                if (!value) {
+                    throw new Error(messages.missingSessionsApi);
+                }
+                return value;
+            }
+        },
+        anonymous: {
+            get: function get(value) {
+                if (!value) {
+                    throw new Error(messages.missingAnonymousApi);
+                }
+                return value;
+            }
+        }
+    });
+    var Access = _map2.default.extend({
+        url: {
+            type: 'string',
+            default: '',
+            get: function get(value) {
+                if (!value) {
+                    throw new Error('Use `import {options} from \'shuttle-access\';` to get the options and then set the api endpoint url `this.url = \'http://server-endpoint\';`.');
+                }
+                return value + (!value.endsWith('/') ? '/' : '');
+            }
+        },
+        api: { Default: AccessApi },
+        storage: {
+            default: function _default() {
+                return localStorage;
+            },
+            set: function set(newval) {
+                _shuttleGuard2.default.againstUndefined(newval, 'newval');
+                if (typeof newval.getItem !== 'function' || typeof newval.setItem !== 'function' || typeof newval.removeItem !== 'function') {
+                    throw new Error(messages.invalidStorage);
+                }
+                return newval;
+            }
+        },
+        username: {
+            type: 'string',
+            default: ''
+        },
+        token: {
+            type: 'string',
+            default: undefined
+        },
+        isUserRequired: 'boolean',
+        permissions: { Default: PermissionList },
+        hasSession: function hasSession() {
+            return this.token != undefined;
+        },
+        hasPermission: function hasPermission(permission) {
+            var result = false;
+            var permissionCompare = permission.toLowerCase();
+            this.permissions.forEach(function (item) {
+                if (result) {
+                    return;
+                }
+                result = item.permission === '*' || item.permission.toLowerCase() === permissionCompare;
+            });
+            return result;
+        },
+        removePermission: function removePermission(permission) {
+            this.permissions = this.permissions.filter(function (item) {
+                return item.permission !== permission;
+            });
+        },
+        start: function start() {
+            var self = this;
+            if (!this.storage) {
+                throw new Error(messages.missingStorage);
+            }
+            this.api.anonymous = new _shuttleCanApi2.default({
+                endpoint: this.url + 'anonymouspermissions',
+                Map: AnonymousMap
+            });
+            this.api.sessions = new _shuttleCanApi2.default({ endpoint: this.url + 'sessions' });
+            return this.api.anonymous.map().then(function (map) {
+                var username = self.storage.getItem('username');
+                var token = self.storage.getItem('token');
+                self.isUserRequired = map.isUserRequired;
+                (0, _each2.default)(map.permissions, function (item) {
+                    self.addPermission('anonymous', item.permission);
+                });
+                if (!!username && !!token) {
+                    return self.login({
+                        username: username,
+                        token: token
+                    }).then(function (response) {
+                        return response;
+                    });
+                }
+                return map;
+            });
+        },
+        addPermission: function addPermission(type, permission) {
+            if (this.hasPermission(permission)) {
+                return;
+            }
+            this.permissions.push({
+                type: type,
+                permission: permission
+            });
+        },
+        login: function login(credentials) {
+            var _this = this;
+            var self = this;
+            return new Promise(function (resolve, reject) {
+                if (!credentials || !credentials.username || !(!!credentials.password || !!credentials.token)) {
+                    reject(new Error(messages.missingCredentials));
+                    return;
+                }
+                var usingToken = !!_this.token;
+                return _this.api.sessions.post({
+                    username: credentials.username,
+                    password: credentials.password,
+                    token: credentials.token
+                }).then(function (response) {
+                    if (response.registered) {
+                        self.storage.setItem('username', credentials.username);
+                        self.storage.setItem('token', response.token);
+                        self.username = credentials.username;
+                        self.token = response.token;
+                        self.isUserRequired = false;
+                        self.removeUserPermissions();
+                        (0, _each2.default)(response.permissions, function (item) {
+                            self.addPermission('user', item.permission);
+                        });
+                        resolve();
+                    } else {
+                        if (usingToken) {
+                            self.username = undefined;
+                            self.token = undefined;
+                            self.storage.removeItem('username');
+                            self.storage.removeItem('token');
+                        } else {
+                            reject(new Error(messages.loginFailure));
+                        }
+                    }
+                }).catch(function (error) {
+                    reject(error);
+                });
+            });
+        },
+        logout: function logout() {
+            this.username = undefined;
+            this.token = undefined;
+            this.storage.removeItem('username');
+            this.storage.removeItem('token');
+            this.removeUserPermissions();
+        },
+        removeUserPermissions: function removeUserPermissions() {
+            this.permissions = this.permissions.filter(function (item) {
+                return item.type !== 'user';
+            });
+        },
+        loginStatus: {
+            get: function get() {
+                return this.isUserRequired ? 'user-required' : this.token == undefined ? 'not-logged-in' : 'logged-in';
+            }
+        }
+    });
+    var access = new Access();
+    _jquery2.default.ajaxPrefilter(function (options, originalOptions) {
+        options.beforeSend = function (xhr) {
+            if (access.token) {
+                xhr.setRequestHeader('access-sessiontoken', access.token);
+            }
+            if (originalOptions.beforeSend) {
+                originalOptions.beforeSend(xhr);
+            }
+        };
+    });
+    exports.default = access;
 });
 /*i18next@11.3.2#dist/commonjs/logger*/
 define('i18next@11.3.2#dist/commonjs/logger', function (require, exports, module) {
@@ -42759,26 +42752,7190 @@ define('can-util@3.11.6#js/is-empty-object/is-empty-object', [
         return true;
     };
 });
-/*can-parse-uri@1.1.0#can-parse-uri*/
-define('can-parse-uri@1.1.0#can-parse-uri', [
+/*can-join-uris@1.0.0#can-join-uris*/
+define('can-join-uris@1.0.0#can-join-uris', [
     'require',
     'exports',
     'module',
-    'can-namespace'
+    'can-namespace',
+    'can-parse-uri'
 ], function (require, exports, module) {
+    'use strict';
     var namespace = require('can-namespace');
-    module.exports = namespace.parseURI = function (url) {
-        var m = String(url).replace(/^\s+|\s+$/g, '').match(/^([^:\/?#]+:)?(\/\/(?:[^:@]*(?::[^:@]*)?@)?(([^:\/?#]*)(?::(\d*))?))?([^?#]*)(\?[^#]*)?(#[\s\S]*)?/);
-        return m ? {
-            href: m[0] || '',
-            protocol: m[1] || '',
-            authority: m[2] || '',
-            host: m[3] || '',
-            hostname: m[4] || '',
-            port: m[5] || '',
-            pathname: m[6] || '',
-            search: m[7] || '',
-            hash: m[8] || ''
-        } : null;
+    var parseURI = require('can-parse-uri');
+    module.exports = namespace.joinURIs = function (base, href) {
+        function removeDotSegments(input) {
+            var output = [];
+            input.replace(/^(\.\.?(\/|$))+/, '').replace(/\/(\.(\/|$))+/g, '/').replace(/\/\.\.$/, '/../').replace(/\/?[^\/]*/g, function (p) {
+                if (p === '/..') {
+                    output.pop();
+                } else {
+                    output.push(p);
+                }
+            });
+            return output.join('').replace(/^\//, input.charAt(0) === '/' ? '/' : '');
+        }
+        href = parseURI(href || '');
+        base = parseURI(base || '');
+        return !href || !base ? null : (href.protocol || base.protocol) + (href.protocol || href.authority ? href.authority : base.authority) + removeDotSegments(href.protocol || href.authority || href.pathname.charAt(0) === '/' ? href.pathname : href.pathname ? (base.authority && !base.pathname ? '/' : '') + base.pathname.slice(0, base.pathname.lastIndexOf('/') + 1) + href.pathname : base.pathname) + (href.protocol || href.authority || href.pathname ? href.search : href.search || base.search) + href.hash;
     };
 });
+/*[steal-add-npm-packages]*/
+if (steal && typeof steal.addNpmPackages === "function") {
+    steal.addNpmPackages([
+        {
+            origFileUrl:
+                "file:C:/development.github/shuttle/Shuttle.Abacus/Shuttle.Abacus.Site/package.json",
+            fileUrl: "./package.json",
+            name: "abacus",
+            version: "1.0.0",
+            description: "Shuttle.Abacus constraint-based calculation engine.",
+            steal: {
+                main: "main.js",
+                directories: { lib: "src" },
+                npmAlgorithm: "flat",
+                plugins: ["steal-stache", "steal-css"],
+                meta: { tempusdominus: { format: "global", deps: ["mement"] } },
+                map: {
+                    tempusdominus:
+                        "tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.js"
+                },
+                serviceBaseURL: "http://localhost:6300/api/",
+                accessBaseURL: "http://localhost:5599/api/",
+                debug: true,
+                localeVersion: "1"
+            },
+            scripts: {
+                test: 'echo "Error: no test specified" && exit 1',
+                postinstall: "steal-tools bundle --deps --no-minify"
+            },
+            author: "Eben Roux",
+            homepage: "https://github.com/Shuttle/Shuttle.Abacus",
+            dependencies: {
+                bootstrap: "^4.1.1",
+                "can-component": "^4.0.8",
+                "can-compute": "^4.0.3",
+                "can-connect": "^2.0.4",
+                "can-define": "^2.3.1",
+                "can-define-validate-validatejs": "^1.0.1",
+                "can-route": "^4.1.1",
+                "can-route-pushstate": "^4.0.4",
+                "can-set": "^1.5.2",
+                "can-stache": "^4.4.0",
+                "can-stache-bindings": "^4.1.3",
+                "can-stache-route-helpers": "^0.1.4",
+                "can-util": "^3.11.5",
+                "can-validate-validatejs": "^0.1.3",
+                i18next: "^11.3.2",
+                "i18next-xhr-backend": "^1.5.1",
+                jquery: "^3.3.1",
+                moment: "^2.22.1",
+                "popper.js": "^1.14.3",
+                "shuttle-access": "^1.0.0",
+                "shuttle-can-api": "^1.0.17",
+                "shuttle-canstrap": "^1.0.50",
+                "shuttle-guard": "^1.0.0",
+                steal: "^1.11.6",
+                "steal-css": "^1.3.2",
+                "steal-stache": "^4.1.0",
+                "tempusdominus-bootstrap-4": "^5.0.0-alpha18",
+                "validate.js": "^0.11.1"
+            }
+        },
+        {
+            name: "steal-stache",
+            version: "4.1.0",
+            origFileUrl: "./node_modules/steal-stache/package.json",
+            fileUrl: "./node_modules/steal-stache/package.json",
+            _from: "steal-stache@^4.1.0",
+            _id: "steal-stache@4.1.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-YXqT59q23aIyJ1vLr+NqnAdP7xrkfpx2maRQvfkuhP2o7l12uovQRzOPeOwIT1FaPhKonGz/Fx//eS8kvc2ejQ==",
+            _location: "/steal-stache",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "steal-stache@^4.1.0",
+                name: "steal-stache",
+                escapedName: "steal-stache",
+                rawSpec: "^4.1.0",
+                saveSpec: null,
+                fetchSpec: "^4.1.0"
+            },
+            _requiredBy: ["/", "/can-connect"],
+            _resolved:
+                "https://registry.npmjs.org/steal-stache/-/steal-stache-4.1.0.tgz",
+            _shasum: "0e90fe547922c7210bf430a017fc265ac46a11eb",
+            _spec: "steal-stache@^4.1.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/steal-stache/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-stache": "^4.0.0",
+                "can-stache-ast": "^1.0.0",
+                "can-stache-bindings": "^4.0.0",
+                "can-view-import": "^4.0.0",
+                "steal-config-utils": "^1.0.0"
+            },
+            deprecated: false,
+            description: "Load can-stache templates with StealJS",
+            devDependencies: {
+                "bit-docs": "0.0.7",
+                "can-test-helpers": "^1.1.0",
+                "can-view-nodelist": "^4.0.0",
+                jshint: "^2.9.4",
+                steal: "^1.7.0",
+                "steal-qunit": "^1.0.0",
+                "steal-tools": "^1.0.0",
+                testee: "^0.7.0"
+            },
+            homepage: "http://canjs.com",
+            keywords: ["canjs", "stealjs", "donejs"],
+            main: "steal-stache.js",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/steal-stache.git"
+            },
+            scripts: {
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag=pre",
+                test: "npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            },
+            system: {
+                main: "steal-stache",
+                configDependencies: ["live-reload"],
+                npmIgnore: {
+                    documentjs: true,
+                    testee: true,
+                    "steal-tools": true
+                },
+                npmAlgorithm: "flat",
+                ext: { stache: "steal-stache" }
+            },
+            steal: {
+                main: "steal-stache",
+                configDependencies: ["live-reload"],
+                npmIgnore: {
+                    documentjs: true,
+                    testee: true,
+                    "steal-tools": true
+                },
+                npmAlgorithm: "flat",
+                ext: { stache: "steal-stache" }
+            }
+        },
+        {
+            name: "steal-css",
+            version: "1.3.2",
+            origFileUrl: "./node_modules/steal-css/package.json",
+            fileUrl: "./node_modules/steal-css/package.json",
+            _from: "steal-css@^1.3.2",
+            _id: "steal-css@1.3.2",
+            _inBundle: false,
+            _integrity:
+                "sha512-hT3j9+p+qxqu3Jh46zGoB31V/8SKYba/C9sRtGkryKRR8vf582UmLpcbo2s1FysSNZCISbCGi7jl/pZgvdIxbg==",
+            _location: "/steal-css",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "steal-css@^1.3.2",
+                name: "steal-css",
+                escapedName: "steal-css",
+                rawSpec: "^1.3.2",
+                saveSpec: null,
+                fetchSpec: "^1.3.2"
+            },
+            _requiredBy: ["/", "/shuttle-canstrap"],
+            _resolved:
+                "https://registry.npmjs.org/steal-css/-/steal-css-1.3.2.tgz",
+            _shasum: "66aeac1cb88940cd740af57d51472d0380c45eb7",
+            _spec: "steal-css@^1.3.2",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: { name: "Bitovi" },
+            "bit-docs": {
+                dependencies: {
+                    "bit-docs-glob-finder": "^0.0.5",
+                    "bit-docs-dev": "^0.0.3",
+                    "bit-docs-js": "^0.0.3",
+                    "bit-docs-generate-readme": "^0.0.8"
+                },
+                glob: { pattern: "**/*.{js,md}", ignore: "node_modules/**/*" },
+                readme: { apis: "./docs/apis.json" },
+                parent: "steal-css"
+            },
+            bugs: { url: "https://github.com/stealjs/steal-css/issues" },
+            bundleDependencies: false,
+            deprecated: false,
+            description: "CSS plugin for StealJS",
+            devDependencies: {
+                async: "^2.3.0",
+                "bit-docs": "0.0.7",
+                eslint: "^4.1.1",
+                "http-server": "^0.10.0",
+                qunitjs: "~2.4.0",
+                saucelabs: "^1.4.0",
+                steal: "^1.0.0",
+                "steal-qunit": "^1.0.0",
+                "steal-test-helpers": "^0.2.0",
+                "steal-tools": "^1.0.0",
+                "test-saucelabs": "0.0.2",
+                testee: "^0.6.1",
+                wd: "^1.2.0"
+            },
+            eslintConfig: {
+                extends: "eslint:recommended",
+                rules: {
+                    "no-param-reassign": "error",
+                    "no-useless-escape": "off"
+                },
+                env: { node: true, browser: true },
+                globals: { doneSsr: true, Promise: true }
+            },
+            homepage: "https://github.com/stealjs/steal-css",
+            keywords: ["StealJS", "CSS"],
+            license: "MIT",
+            main: "css.js",
+            repository: {
+                type: "git",
+                url: "git+https://github.com/stealjs/steal-css.git"
+            },
+            scripts: {
+                "build-1": "node test/css-paths/build.js",
+                "build-2":
+                    "steal-tools build --config test/css-before-js/stealconfig.js --main main --baseUrl test/css-before-js/ --minify false",
+                "build-3": "node test/css-instantiated/build.js",
+                document: "bit-docs",
+                eslint: "eslint css.js",
+                "http-server": "http-server -p 3000 --silent",
+                "run-tests":
+                    "testee test/test.html --browsers firefox --reporter Spec",
+                saucelabs:
+                    "npm run build-1 && npm run build-2 && npm run build-3 && node test/saucelabs",
+                test:
+                    "npm run eslint && npm run build-1 && npm run build-2 && npm run build-3 && npm run run-tests"
+            },
+            steal: {
+                ext: { css: "steal-css" },
+                map: { $css: "steal-css@1.3.2#css" }
+            }
+        },
+        {
+            name: "moment",
+            version: "2.22.2",
+            origFileUrl: "./node_modules/moment/package.json",
+            fileUrl: "./node_modules/moment/package.json",
+            _from: "moment@^2.22.1",
+            _id: "moment@2.22.2",
+            _inBundle: false,
+            _integrity: "sha1-PCV/mDn8DpP/UxSWMiOeuQeD/2Y=",
+            _location: "/moment",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "moment@^2.22.1",
+                name: "moment",
+                escapedName: "moment",
+                rawSpec: "^2.22.1",
+                saveSpec: null,
+                fetchSpec: "^2.22.1"
+            },
+            _requiredBy: [
+                "/",
+                "/moment-timezone",
+                "/tempusdominus-bootstrap-4"
+            ],
+            _resolved: "https://registry.npmjs.org/moment/-/moment-2.22.2.tgz",
+            _shasum: "3c257f9839fc0e93ff53149632239eb90783ff66",
+            _spec: "moment@^2.22.1",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: {
+                name: "Iskren Ivov Chernev",
+                email: "iskren.chernev@gmail.com",
+                url: "https://github.com/ichernev"
+            },
+            bugs: { url: "https://github.com/moment/moment/issues" },
+            bundleDependencies: false,
+            contributors: [
+                {
+                    name: "Tim Wood",
+                    email: "washwithcare@gmail.com",
+                    url: "http://timwoodcreates.com/"
+                },
+                { name: "Rocky Meza", url: "http://rockymeza.com" },
+                {
+                    name: "Matt Johnson",
+                    email: "mj1856@hotmail.com",
+                    url: "http://codeofmatt.com"
+                },
+                {
+                    name: "Isaac Cambron",
+                    email: "isaac@isaaccambron.com",
+                    url: "http://isaaccambron.com"
+                },
+                {
+                    name: "Andre Polykanine",
+                    email: "andre@oire.org",
+                    url: "https://github.com/oire"
+                }
+            ],
+            deprecated: false,
+            description: "Parse, validate, manipulate, and display dates",
+            devDependencies: {
+                benchmark: "latest",
+                coveralls: "^2.11.2",
+                "es6-promise": "latest",
+                grunt: "~0.4",
+                "grunt-benchmark": "latest",
+                "grunt-cli": "latest",
+                "grunt-contrib-clean": "latest",
+                "grunt-contrib-concat": "latest",
+                "grunt-contrib-copy": "latest",
+                "grunt-contrib-jshint": "latest",
+                "grunt-contrib-uglify": "latest",
+                "grunt-contrib-watch": "latest",
+                "grunt-env": "latest",
+                "grunt-exec": "latest",
+                "grunt-jscs": "latest",
+                "grunt-karma": "latest",
+                "grunt-nuget": "latest",
+                "grunt-string-replace": "latest",
+                karma: "latest",
+                "karma-chrome-launcher": "latest",
+                "karma-firefox-launcher": "latest",
+                "karma-qunit": "latest",
+                "karma-sauce-launcher": "latest",
+                "load-grunt-tasks": "~3.5.2",
+                "node-qunit": "^1.0.0",
+                nyc: "^2.1.4",
+                qunit: "^2.6.0",
+                rollup: "latest",
+                spacejam: "latest",
+                typescript: "^1.8.10",
+                "uglify-js": "latest"
+            },
+            dojoBuild: "package.js",
+            ender: "./ender.js",
+            engines: { node: "*" },
+            homepage: "http://momentjs.com",
+            "jsnext:main": "./src/moment.js",
+            jspm: {
+                files: ["moment.js", "moment.d.ts", "locale"],
+                map: { moment: "./moment" },
+                buildConfig: { uglify: true }
+            },
+            keywords: [
+                "moment",
+                "date",
+                "time",
+                "parse",
+                "format",
+                "validate",
+                "i18n",
+                "l10n",
+                "ender"
+            ],
+            license: "MIT",
+            main: "./moment.js",
+            repository: {
+                type: "git",
+                url: "git+https://github.com/moment/moment.git"
+            },
+            scripts: {
+                coverage: "nyc npm test && nyc report",
+                coveralls:
+                    "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+                test: "grunt test",
+                "typescript-test": "tsc --project typing-tests"
+            },
+            spm: { main: "moment.js", output: ["locale/*.js"] },
+            typings: "./moment.d.ts"
+        },
+        {
+            name: "jquery",
+            version: "3.3.1",
+            origFileUrl: "./node_modules/jquery/package.json",
+            fileUrl: "./node_modules/jquery/package.json",
+            _from: "jquery@^3.3.1",
+            _id: "jquery@3.3.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-Ubldcmxp5np52/ENotGxlLe6aGMvmF4R8S6tZjsP6Knsaxd/xp3Zrh50cG93lR6nPXyUFwzN3ZSOQI0wRJNdGg==",
+            _location: "/jquery",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "jquery@^3.3.1",
+                name: "jquery",
+                escapedName: "jquery",
+                rawSpec: "^3.3.1",
+                saveSpec: null,
+                fetchSpec: "^3.3.1"
+            },
+            _requiredBy: [
+                "/",
+                "/shuttle-access",
+                "/shuttle-can-api",
+                "/tempusdominus-bootstrap-4"
+            ],
+            _resolved: "https://registry.npmjs.org/jquery/-/jquery-3.3.1.tgz",
+            _shasum: "958ce29e81c9790f31be7792df5d4d95fc57fbca",
+            _spec: "jquery@^3.3.1",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: {
+                name: "JS Foundation and other contributors",
+                url: "https://github.com/jquery/jquery/blob/3.3.1/AUTHORS.txt"
+            },
+            bugs: { url: "https://github.com/jquery/jquery/issues" },
+            bundleDependencies: false,
+            commitplease: {
+                nohook: true,
+                components: [
+                    "Docs",
+                    "Tests",
+                    "Build",
+                    "Support",
+                    "Release",
+                    "Core",
+                    "Ajax",
+                    "Attributes",
+                    "Callbacks",
+                    "CSS",
+                    "Data",
+                    "Deferred",
+                    "Deprecated",
+                    "Dimensions",
+                    "Effects",
+                    "Event",
+                    "Manipulation",
+                    "Offset",
+                    "Queue",
+                    "Selector",
+                    "Serialize",
+                    "Traversing",
+                    "Wrap"
+                ],
+                markerPattern: "^((clos|fix|resolv)(e[sd]|ing))|^(refs?)",
+                ticketPattern:
+                    "^((Closes|Fixes) ([a-zA-Z]{2,}-)[0-9]+)|^(Refs? [^#])"
+            },
+            dependencies: {},
+            deprecated: false,
+            description: "JavaScript library for DOM operations",
+            devDependencies: {
+                "babel-core": "7.0.0-beta.0",
+                "babel-plugin-transform-es2015-for-of": "7.0.0-beta.0",
+                commitplease: "2.7.10",
+                "core-js": "2.4.1",
+                "eslint-config-jquery": "1.0.1",
+                grunt: "1.0.1",
+                "grunt-babel": "7.0.0",
+                "grunt-cli": "1.2.0",
+                "grunt-compare-size": "0.4.2",
+                "grunt-contrib-uglify": "3.0.1",
+                "grunt-contrib-watch": "1.0.0",
+                "grunt-eslint": "20.0.0",
+                "grunt-git-authors": "3.2.0",
+                "grunt-jsonlint": "1.1.0",
+                "grunt-karma": "2.0.0",
+                "grunt-newer": "1.3.0",
+                "grunt-npmcopy": "0.1.0",
+                "gzip-js": "0.3.2",
+                husky: "0.14.3",
+                insight: "0.8.4",
+                jsdom: "5.6.1",
+                karma: "1.7.0",
+                "karma-browserstack-launcher": "1.3.0",
+                "karma-chrome-launcher": "2.2.0",
+                "karma-firefox-launcher": "1.0.1",
+                "karma-qunit": "1.2.1",
+                "load-grunt-tasks": "3.5.2",
+                "native-promise-only": "0.8.1",
+                "promises-aplus-tests": "2.1.2",
+                q: "1.5.0",
+                "qunit-assert-step": "1.0.3",
+                qunitjs: "1.23.1",
+                "raw-body": "2.2.0",
+                requirejs: "2.3.3",
+                sinon: "2.3.7",
+                sizzle: "2.3.3",
+                "strip-json-comments": "2.0.1",
+                testswarm: "1.1.0",
+                "uglify-js": "3.3.4"
+            },
+            homepage: "https://jquery.com",
+            keywords: ["jquery", "javascript", "browser", "library"],
+            license: "MIT",
+            main: "dist/jquery.js",
+            repository: {
+                type: "git",
+                url: "git+https://github.com/jquery/jquery.git"
+            },
+            scripts: {
+                build: "npm install && grunt",
+                commitmsg: "node node_modules/commitplease",
+                jenkins: "npm run test:browserless",
+                precommit: "grunt lint:newer qunit_fixture",
+                start: "grunt watch",
+                test: "grunt && grunt test:slow && grunt karma:main",
+                "test:browser": "grunt && grunt karma:main",
+                "test:browserless": "grunt && grunt test:slow"
+            },
+            title: "jQuery"
+        },
+        {
+            name: "popper.js",
+            version: "1.14.3",
+            origFileUrl: "./node_modules/popper.js/package.json",
+            fileUrl: "./node_modules/popper.js/package.json",
+            _from: "popper.js@^1.14.3",
+            _id: "popper.js@1.14.3",
+            _inBundle: false,
+            _integrity: "sha1-FDj5jQRqz3tNeM1QK/QYrGTU8JU=",
+            _location: "/popper.js",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "popper.js@^1.14.3",
+                name: "popper.js",
+                escapedName: "popper.js",
+                rawSpec: "^1.14.3",
+                saveSpec: null,
+                fetchSpec: "^1.14.3"
+            },
+            _requiredBy: [
+                "/",
+                "/shuttle-canstrap",
+                "/tempusdominus-bootstrap-4"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/popper.js/-/popper.js-1.14.3.tgz",
+            _shasum: "1438f98d046acf7b4d78cd502bf418ac64d4f095",
+            _spec: "popper.js@^1.14.3",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: {
+                name: "Federico Zivolo",
+                email: "federico.zivolo@gmail.com"
+            },
+            bugs: { url: "https://github.com/FezVrasta/popper.js/issues" },
+            bundleDependencies: false,
+            contributors: [
+                {
+                    name: "Contributors",
+                    url:
+                        "https://github.com/FezVrasta/popper.js/graphs/contributors"
+                }
+            ],
+            deprecated: false,
+            description: "A kickass library to manage your poppers",
+            devDependencies: {
+                "@popperjs/bundle": "^1.0.2",
+                "@popperjs/eslint-config-popper": "^1.0.0",
+                "@popperjs/test": "^1.0.0",
+                "@popperjs/test-utils": "^1.0.0",
+                eslint: "^4.1.1",
+                "nuget-publish": "^1.0.3",
+                typescript: "^2.7.1"
+            },
+            homepage: "https://popper.js.org",
+            keywords: [
+                "popperjs",
+                "component",
+                "drop",
+                "tooltip",
+                "popover",
+                "position",
+                "attached"
+            ],
+            license: "MIT",
+            main: "dist/umd/popper.js",
+            module: "dist/esm/popper.js",
+            repository: {
+                type: "git",
+                url: "git+https://github.com/FezVrasta/popper.js.git"
+            },
+            resolutions: { micromatch: "^3.0.3" },
+            scripts: {
+                build: "node bundle.js",
+                coverage: "COVERAGE=true yarn test",
+                lint: "eslint .",
+                postpublish: "nuget-publish && ./bower-publish.sh",
+                posttest: "tsc --project tests/types/tsconfig.json",
+                prebuild: "yarn lint",
+                prepare: "yarn build",
+                pretest: "yarn lint",
+                test: "popper-karma",
+                "test:dev": "BROWSERS=Chrome NODE_ENV=development yarn test"
+            },
+            types: "index.d.ts"
+        },
+        {
+            name: "bootstrap",
+            version: "4.1.1",
+            origFileUrl: "./node_modules/bootstrap/package.json",
+            fileUrl: "./node_modules/bootstrap/package.json",
+            _from: "bootstrap@^4.1.1",
+            _id: "bootstrap@4.1.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-SpiDSOcbg4J/PjVSt4ny5eY6j74VbVSjROY4Fb/WIUXBV9cnb5luyR4KnPvNoXuGnBK1T+nJIWqRsvU3yP8Mcg==",
+            _location: "/bootstrap",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "bootstrap@^4.1.1",
+                name: "bootstrap",
+                escapedName: "bootstrap",
+                rawSpec: "^4.1.1",
+                saveSpec: null,
+                fetchSpec: "^4.1.1"
+            },
+            _requiredBy: ["/", "/shuttle-canstrap"],
+            _resolved:
+                "https://registry.npmjs.org/bootstrap/-/bootstrap-4.1.1.tgz",
+            _shasum: "3aec85000fa619085da8d2e4983dfd67cf2114cb",
+            _spec: "bootstrap@^4.1.1",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: {
+                name: "The Bootstrap Authors",
+                url: "https://github.com/twbs/bootstrap/graphs/contributors"
+            },
+            browserslist: [
+                "last 1 major version",
+                ">= 1%",
+                "Chrome >= 45",
+                "Firefox >= 38",
+                "Edge >= 12",
+                "Explorer >= 10",
+                "iOS >= 9",
+                "Safari >= 9",
+                "Android >= 4.4",
+                "Opera >= 30"
+            ],
+            bugs: { url: "https://github.com/twbs/bootstrap/issues" },
+            bundleDependencies: false,
+            bundlesize: [
+                { path: "./dist/css/bootstrap-grid.css", maxSize: "5 kB" },
+                { path: "./dist/css/bootstrap-grid.min.css", maxSize: "5 kB" },
+                { path: "./dist/css/bootstrap-reboot.css", maxSize: "3 kB" },
+                {
+                    path: "./dist/css/bootstrap-reboot.min.css",
+                    maxSize: "3 kB"
+                },
+                { path: "./dist/css/bootstrap.css", maxSize: "25 kB" },
+                { path: "./dist/css/bootstrap.min.css", maxSize: "21 kB" },
+                { path: "./dist/js/bootstrap.bundle.js", maxSize: "45 kB" },
+                { path: "./dist/js/bootstrap.bundle.min.js", maxSize: "25 kB" },
+                { path: "./dist/js/bootstrap.js", maxSize: "20 kB" },
+                { path: "./dist/js/bootstrap.min.js", maxSize: "15 kB" }
+            ],
+            contributors: [{ name: "Twitter, Inc." }],
+            dependencies: {},
+            deprecated: false,
+            description:
+                "The most popular front-end framework for developing responsive, mobile first projects on the web.",
+            devDependencies: {
+                "@babel/cli": "7.0.0-beta.44",
+                "@babel/core": "7.0.0-beta.44",
+                "@babel/preset-env": "7.0.0-beta.44",
+                autoprefixer: "^8.3.0",
+                "babel-eslint": "^8.2.3",
+                "babel-plugin-istanbul": "^4.1.6",
+                "babel-plugin-transform-es2015-modules-strip": "^0.1.1",
+                bundlesize: "^0.17.0",
+                "clean-css-cli": "^4.1.11",
+                "cross-env": "^5.1.4",
+                eslint: "^4.19.1",
+                "eslint-plugin-compat": "^2.2.0",
+                glob: "^7.1.2",
+                "htmllint-cli": "^0.0.6",
+                jsunitsaucelabs: "^1.3.0",
+                karma: "^2.0.0",
+                "karma-chrome-launcher": "^2.2.0",
+                "karma-coverage-istanbul-reporter": "^1.4.2",
+                "karma-detect-browsers": "^2.3.2",
+                "karma-firefox-launcher": "^1.1.0",
+                "karma-qunit": "^1.2.1",
+                "karma-sinon": "^1.0.5",
+                "node-sass": "^4.8.3",
+                nodemon: "^1.17.3",
+                "npm-run-all": "^4.1.2",
+                "popper.js": "^1.14.3",
+                "postcss-cli": "^5.0.0",
+                qunitjs: "^2.4.1",
+                rollup: "^0.58.0",
+                "rollup-plugin-babel": "4.0.0-beta.4",
+                "rollup-plugin-node-resolve": "^3.3.0",
+                shelljs: "^0.8.1",
+                shx: "^0.2.2",
+                sinon: "^4.5.0",
+                "sri-toolbox": "^0.2.0",
+                stylelint: "^9.2.0",
+                "stylelint-config-recommended-scss": "^3.2.0",
+                "stylelint-config-standard": "^18.2.0",
+                "stylelint-order": "^0.8.1",
+                "stylelint-scss": "^3.0.0",
+                "uglify-js": "^3.3.21",
+                "vnu-jar": "^18.3.0",
+                "workbox-build": "^3.1.0"
+            },
+            engines: { node: ">=6" },
+            files: ["dist/", "js/{src,dist}/", "scss/"],
+            homepage: "https://getbootstrap.com/",
+            jspm: {
+                registry: "npm",
+                main: "js/bootstrap",
+                directories: { lib: "dist" },
+                shim: {
+                    "js/bootstrap": {
+                        deps: ["jquery", "popper.js"],
+                        exports: "$"
+                    }
+                },
+                dependencies: {},
+                peerDependencies: {
+                    jquery: "1.9.1 - 3",
+                    "popper.js": "^1.14.1"
+                }
+            },
+            keywords: [
+                "css",
+                "sass",
+                "mobile-first",
+                "responsive",
+                "front-end",
+                "framework",
+                "web"
+            ],
+            license: "MIT",
+            main: "dist/js/bootstrap",
+            peerDependencies: { jquery: "1.9.1 - 3", "popper.js": "^1.14.3" },
+            repository: {
+                type: "git",
+                url: "git+https://github.com/twbs/bootstrap.git"
+            },
+            sass: "scss/bootstrap.scss",
+            scripts: {
+                bundlesize: "bundlesize",
+                css:
+                    "npm-run-all --parallel css-lint* css-compile* --sequential css-prefix* css-minify*",
+                "css-compile":
+                    "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 scss/bootstrap.scss dist/css/bootstrap.css && node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 scss/bootstrap-grid.scss dist/css/bootstrap-grid.css && node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 scss/bootstrap-reboot.scss dist/css/bootstrap-reboot.css",
+                "css-compile-docs":
+                    "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 assets/scss/docs.scss assets/css/docs.min.css",
+                "css-docs":
+                    "npm-run-all --parallel css-lint-docs css-compile-docs --sequential css-prefix-docs css-minify-docs",
+                "css-lint": 'stylelint --syntax scss "scss/**/*.scss"',
+                "css-lint-docs":
+                    'stylelint --syntax scss "assets/scss/*.scss" && stylelint "docs/**/*.css"',
+                "css-lint-vars": "node build/lint-vars.js scss/ assets/scss/",
+                "css-main":
+                    "npm-run-all --parallel css-lint css-compile --sequential css-prefix css-minify",
+                "css-minify":
+                    "cleancss --level 1 --source-map --source-map-inline-sources --output dist/css/bootstrap.min.css dist/css/bootstrap.css && cleancss --level 1 --source-map --source-map-inline-sources --output dist/css/bootstrap-grid.min.css dist/css/bootstrap-grid.css && cleancss --level 1 --source-map --source-map-inline-sources --output dist/css/bootstrap-reboot.min.css dist/css/bootstrap-reboot.css",
+                "css-minify-docs":
+                    "cleancss --level 1 --source-map --source-map-inline-sources --output assets/css/docs.min.css assets/css/docs.min.css",
+                "css-prefix":
+                    'postcss --config build/postcss.config.js --replace "dist/css/*.css" "!dist/css/*.min.css"',
+                "css-prefix-docs":
+                    'postcss --config build/postcss.config.js --replace "assets/css/docs.min.css" "docs/**/*.css"',
+                dist: "npm-run-all --parallel css js",
+                docs:
+                    "npm-run-all --parallel css-docs js-docs --sequential docs-compile docs-lint",
+                "docs-compile": "bundle exec jekyll build",
+                "docs-github":
+                    'shx echo "github: true" > twbsconfig.yml && npm run docs-compile -- --config _config.yml,twbsconfig.yml && shx rm ./twbsconfig.yml',
+                "docs-github-serve":
+                    "bundle exec jekyll serve --skip-initial-build --no-watch",
+                "docs-lint": "npm-run-all docs-lint-*",
+                "docs-lint-htmllint":
+                    'htmllint --rc build/.htmllintrc "_gh_pages/**/*.html" "js/tests/**/*.html"',
+                "docs-lint-vnu-jar": "node build/vnu-jar.js",
+                "docs-serve": "bundle exec jekyll serve",
+                "docs-upload-preview": "build/upload-preview.sh",
+                "docs-workbox-precache": "node build/workbox.js",
+                js: "npm-run-all js-lint* js-compile js-minify",
+                "js-compile": "npm-run-all --parallel js-compile-*",
+                "js-compile-bundle":
+                    "rollup --environment BUNDLE:true --config build/rollup.config.js --sourcemap",
+                "js-compile-plugins":
+                    "cross-env PLUGINS=true babel js/src/ --out-dir js/dist/ --source-maps",
+                "js-compile-plugins-coverage":
+                    "cross-env PLUGINS=true NODE_ENV=test babel js/src/ --out-dir js/coverage/dist/ --source-maps",
+                "js-compile-standalone":
+                    "rollup --environment BUNDLE:false --config build/rollup.config.js --sourcemap",
+                "js-docs": "npm-run-all js-lint-docs js-minify-docs",
+                "js-lint": "eslint js/src js/tests build/",
+                "js-lint-docs": "eslint assets/js/ docs/ sw.js",
+                "js-main": "npm-run-all js-lint js-compile js-minify",
+                "js-minify": "npm-run-all --parallel js-minify-*",
+                "js-minify-bundle":
+                    'uglifyjs --compress typeofs=false --mangle --comments "/^!/" --source-map "content=dist/js/bootstrap.bundle.js.map,includeSources,url=bootstrap.bundle.min.js.map" --output dist/js/bootstrap.bundle.min.js dist/js/bootstrap.bundle.js',
+                "js-minify-docs":
+                    'uglifyjs --mangle --comments "/^!/" --output assets/js/docs.min.js assets/js/vendor/anchor.min.js assets/js/vendor/clipboard.min.js assets/js/vendor/holder.min.js "assets/js/src/*.js"',
+                "js-minify-standalone":
+                    'uglifyjs --compress typeofs=false --mangle --comments "/^!/" --source-map "content=dist/js/bootstrap.js.map,includeSources,url=bootstrap.min.js.map" --output dist/js/bootstrap.min.js dist/js/bootstrap.js',
+                "js-test": "npm-run-all --parallel js-test-karma*",
+                "js-test-cloud":
+                    "ruby -r webrick -e \"s = WEBrick::HTTPServer.new(:Port => 3000, :DocumentRoot => Dir.pwd, :Logger => WEBrick::Log.new('/dev/null'), :AccessLog => []); trap('INT') { s.shutdown }; s.start\" & node build/saucelabs-unit-test.js",
+                "js-test-karma": "karma start js/tests/karma.conf.js",
+                "js-test-karma-bundle":
+                    "cross-env karma start js/tests/karma-bundle.conf.js",
+                "js-test-karma-bundle-old":
+                    "cross-env USE_OLD_JQUERY=true npm run js-test-karma-bundle",
+                "js-test-karma-old":
+                    "cross-env USE_OLD_JQUERY=true npm run js-test-karma",
+                "maintenance-dependencies":
+                    'ncu -a -x jquery && npm update && bundle update && shx echo "Manually update assets/js/vendor/*, js/tests/vendor/* and .travis.yml"',
+                "postdocs-compile": "npm run docs-workbox-precache",
+                "release-sri": "node build/generate-sri.js",
+                "release-version": "node build/change-version.js",
+                "release-zip":
+                    "cd dist/ && zip -r9 bootstrap-$npm_package_version-dist.zip * && shx mv bootstrap-$npm_package_version-dist.zip ..",
+                test:
+                    "npm-run-all dist js-test docs-compile docs-lint bundlesize",
+                watch: "npm-run-all --parallel watch-css watch-js",
+                "watch-css":
+                    'nodemon --ignore js/ --ignore dist/ -e scss -x "npm run css"',
+                "watch-js":
+                    'nodemon --ignore scss/ --ignore js/dist/ --ignore dist/ -e js -x "npm run js-compile"'
+            },
+            style: "dist/css/bootstrap.css"
+        },
+        {
+            name: "tempusdominus-bootstrap-4",
+            version: "5.0.0-alpha18",
+            origFileUrl:
+                "./node_modules/tempusdominus-bootstrap-4/package.json",
+            fileUrl: "./node_modules/tempusdominus-bootstrap-4/package.json",
+            _from: "tempusdominus-bootstrap-4@^5.0.0-alpha18",
+            _id: "tempusdominus-bootstrap-4@5.0.0-alpha18",
+            _inBundle: false,
+            _integrity:
+                "sha512-HoRFb4e1kyVwfZ6HN7cA5mpfDDYJu0HboMhhozxlMW5HfS41RYnVqO9h6rHQ2rTX4cWMniOQ6BnaJBusK/BaCA==",
+            _location: "/tempusdominus-bootstrap-4",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "tempusdominus-bootstrap-4@^5.0.0-alpha18",
+                name: "tempusdominus-bootstrap-4",
+                escapedName: "tempusdominus-bootstrap-4",
+                rawSpec: "^5.0.0-alpha18",
+                saveSpec: null,
+                fetchSpec: "^5.0.0-alpha18"
+            },
+            _requiredBy: ["/", "/shuttle-canstrap"],
+            _resolved:
+                "https://registry.npmjs.org/tempusdominus-bootstrap-4/-/tempusdominus-bootstrap-4-5.0.0-alpha18.tgz",
+            _shasum: "3b6337f48761b2821fad1b0f90701afe762c7dcf",
+            _spec: "tempusdominus-bootstrap-4@^5.0.0-alpha18",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: { name: "Jonathan Peterson" },
+            bugs: {
+                url: "https://github.com/tempusdominus/bootstrap-4/issues"
+            },
+            bundleDependencies: false,
+            dependencies: {
+                bootstrap: "4.0.0",
+                jquery: "^3.0",
+                moment: "^2.17",
+                "moment-timezone": "^0.5.11",
+                "popper.js": "^1.12.9"
+            },
+            deprecated: false,
+            description:
+                "A date/time picker component designed to work with Bootstrap 4 and Momentjs. For usage, installation and demos see Project Site on GitHub",
+            devDependencies: {
+                "babel-plugin-transform-es2015-modules-strip": "^0.1.0",
+                "babel-preset-es2015": "^6.16.0",
+                grunt: "latest",
+                "grunt-babel": "6.0.0",
+                "grunt-contrib-concat": "^1.0.1",
+                "grunt-contrib-connect": "^1.0.1",
+                "grunt-contrib-jasmine": "^1.0.3",
+                "grunt-contrib-uglify": "latest",
+                "grunt-contrib-watch": "^1.0.0",
+                "grunt-env": "^0.4.4",
+                "grunt-eslint": "^19.0.0",
+                "grunt-jscs": "latest",
+                "grunt-mkdocs": "^0.2.3",
+                "grunt-nuget": "^0.1.5",
+                "grunt-sass": "2.0.0",
+                "grunt-stamp": "^0.3.0",
+                "grunt-string-replace": "latest",
+                "load-grunt-tasks": "latest",
+                "node-sass": "4.7.2",
+                "tempusdominus-core": "^5.0.0-alpha17",
+                "uglify-js": "^2.7.5"
+            },
+            files: ["build", "src/js/**/*.js", "Gruntfile.js"],
+            homepage: "https://tempusdominus.github.io/bootstrap-4/",
+            keywords: [
+                "bootstrap",
+                "datepicker",
+                "datetimepicker",
+                "timepicker",
+                "moment"
+            ],
+            license: "MIT",
+            main: "build/js/tempusdominus-bootstrap-4.js",
+            peerDependencies: {
+                bootstrap: "4.0.0",
+                jquery: "^3.0",
+                "popper.js": "^1.12.9",
+                moment: "^2.17",
+                "moment-timezone": "^0.5.11",
+                "tempusdominus-core": "5.0.0-alpha17"
+            },
+            repository: {
+                type: "git",
+                url: "git+https://github.com/tempusdominus/bootstrap-4.git"
+            },
+            scripts: {
+                "change-version": "node grunt/change-version.js",
+                "clean-css":
+                    "cleancss --skip-advanced --source-map --output dist/css/bootstrap.min.css dist/css/bootstrap.css && cleancss --skip-advanced --source-map --output dist/css/bootstrap-grid.min.css dist/css/bootstrap-grid.css && cleancss --skip-advanced --source-map --output dist/css/bootstrap-reboot.min.css dist/css/bootstrap-reboot.css",
+                "clean-css-docs":
+                    "cleancss --skip-advanced --source-map --output docs/assets/css/docs.min.css docs/assets/css/docs.min.css",
+                eslint:
+                    "eslint --ignore-path .eslintignore js && eslint --config js/tests/.eslintrc.json --env node grunt Gruntfile.js && eslint --config js/tests/.eslintrc.json docs/assets/js/src docs/assets/js/ie-emulation-modes-warning.js docs/assets/js/ie10-viewport-bug-workaround.js",
+                htmlhint: "htmlhint --config docs/.htmlhintrc _gh_pages/",
+                postcss:
+                    "postcss --config grunt/postcss.js --replace dist/css/*.css",
+                "postcss-docs":
+                    "postcss --config grunt/postcss.js --no-map --replace docs/assets/css/docs.min.css && postcss --config grunt/postcss.js --no-map --replace docs/examples/**/*.css",
+                "scss-lint":
+                    "bundle exec scss-lint --config scss/.scss-lint.yml --exclude scss/_normalize.scss scss/*.scss",
+                "scss-lint-docs":
+                    "bundle exec scss-lint --config scss/.scss-lint.yml --exclude docs/assets/scss/docs.scss docs/assets/scss/*.scss",
+                test: "npm run eslint && grunt test",
+                uglify:
+                    "uglifyjs --compress warnings=false --mangle --output build/js/tempusdominus-bootstrap-3.min.js build/js/tempusdominus-bootstrap-3.js",
+                "uglify-docs":
+                    "uglifyjs --compress warnings=false --mangle --comments '/^!/' --output docs/assets/js/docs.min.js docs/assets/js/vendor/*.js docs/assets/js/src/application.js",
+                "update-shrinkwrap":
+                    "npm shrinkwrap --dev && shx mv ./npm-shrinkwrap.json ./grunt/npm-shrinkwrap.json"
+            }
+        },
+        {
+            name: "shuttle-can-api",
+            version: "1.0.17",
+            origFileUrl: "./node_modules/shuttle-can-api/package.json",
+            fileUrl: "./node_modules/shuttle-can-api/package.json",
+            _from: "shuttle-can-api@^1.0.17",
+            _id: "shuttle-can-api@1.0.17",
+            _inBundle: false,
+            _integrity:
+                "sha512-DPgoxWjrD/d+UN3KykrnUjzDLNWJ871tlqY/zVkSSBuObm+wc12JTn+1HwdTIYLzh7ITqOdGdJpv6bhegLQnig==",
+            _location: "/shuttle-can-api",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "shuttle-can-api@^1.0.17",
+                name: "shuttle-can-api",
+                escapedName: "shuttle-can-api",
+                rawSpec: "^1.0.17",
+                saveSpec: null,
+                fetchSpec: "^1.0.17"
+            },
+            _requiredBy: ["/", "/shuttle-access"],
+            _resolved:
+                "https://registry.npmjs.org/shuttle-can-api/-/shuttle-can-api-1.0.17.tgz",
+            _shasum: "1f6db00da8fcc837c5b6ac15b8f97c9ace9e2c0b",
+            _spec: "shuttle-can-api@^1.0.17",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: { name: "Eben Roux" },
+            bugs: {
+                url: "https://github.com/shuttle-npm/shuttle-can-api/issues"
+            },
+            bundleDependencies: false,
+            dependencies: {
+                "can-define": "^2.0.3",
+                "can-util": "^3.11.3",
+                jquery: "^3.3.1",
+                "shuttle-guard": "^1.0.0"
+            },
+            deprecated: false,
+            description: "Simple web-api client for use with CanJS.",
+            devDependencies: {
+                "can-fixture": "^2.0.3",
+                chai: "^4.1.2",
+                mocha: "^5.0.1",
+                steal: "^1.7.0",
+                "steal-mocha": "^1.0.0"
+            },
+            homepage: "https://github.com/shuttle-npm/shuttle-can-api#readme",
+            keywords: ["canjs", "api"],
+            license: "ISC",
+            main: "shuttle-can-api.js",
+            repository: {
+                type: "git",
+                url: "git+https://github.com/shuttle-npm/shuttle-can-api.git"
+            },
+            scripts: { test: 'echo "Error: no test specified" && exit 1' }
+        },
+        {
+            name: "can-stache-route-helpers",
+            version: "0.1.4",
+            origFileUrl: "./node_modules/can-stache-route-helpers/package.json",
+            fileUrl: "./node_modules/can-stache-route-helpers/package.json",
+            _from: "can-stache-route-helpers@^0.1.4",
+            _id: "can-stache-route-helpers@0.1.4",
+            _inBundle: false,
+            _integrity:
+                "sha512-SlZo+GiuaXfNqfs8+7OnhTGSI226R4iOyA/vNt3r4vEHbK3NcmLobmTcW7metpzbX1ekj/oPnv9AeTR+F+ripg==",
+            _location: "/can-stache-route-helpers",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-stache-route-helpers@^0.1.4",
+                name: "can-stache-route-helpers",
+                escapedName: "can-stache-route-helpers",
+                rawSpec: "^0.1.4",
+                saveSpec: null,
+                fetchSpec: "^0.1.4"
+            },
+            _requiredBy: ["/"],
+            _resolved:
+                "https://registry.npmjs.org/can-stache-route-helpers/-/can-stache-route-helpers-0.1.4.tgz",
+            _shasum: "6bb335a1f6633bd0c6531bb3c12e28007fe9ae3d",
+            _spec: "can-stache-route-helpers@^0.1.4",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: {
+                name: "DoneJS Core",
+                email: "core@donejs.com",
+                url: "donejs.com"
+            },
+            bugs: {
+                url: "https://github.com/donejs/can-stache-route-helpers/issues"
+            },
+            bundleDependencies: false,
+            dependencies: {
+                "can-route": "^4.0.0-pre.0",
+                "can-stache": "^4.0.0-pre.31"
+            },
+            deprecated: false,
+            description: "stache helpers for can-route",
+            devDependencies: {
+                "can-map": "^4.0.0-pre.0",
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.2.0",
+                testee: "^0.3.0"
+            },
+            homepage: "http://canjs.com",
+            keywords: ["canjs", "donejs", "donejs-plugin"],
+            license: "MIT",
+            main: "can-stache-route-helpers",
+            repository: {
+                type: "git",
+                url: "git://github.com/donejs/can-stache-route-helpers.git"
+            },
+            scripts: {
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test: "npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox"
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                }
+            }
+        },
+        {
+            name: "shuttle-canstrap",
+            version: "1.0.50",
+            origFileUrl: "./node_modules/shuttle-canstrap/package.json",
+            fileUrl: "./node_modules/shuttle-canstrap/package.json",
+            _from: "shuttle-canstrap@^1.0.50",
+            _id: "shuttle-canstrap@1.0.50",
+            _inBundle: false,
+            _integrity:
+                "sha512-YLeOMfqykMucPzyZb+xq8TRV0f//HDnJb2DJXvDG912TPvsOhIb5SChRZVAbdAB0FaYj//WznLxitBCh5x0aFw==",
+            _location: "/shuttle-canstrap",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "shuttle-canstrap@^1.0.50",
+                name: "shuttle-canstrap",
+                escapedName: "shuttle-canstrap",
+                rawSpec: "^1.0.50",
+                saveSpec: null,
+                fetchSpec: "^1.0.50"
+            },
+            _requiredBy: ["/", "/shuttle-access"],
+            _resolved:
+                "https://registry.npmjs.org/shuttle-canstrap/-/shuttle-canstrap-1.0.50.tgz",
+            _shasum: "2689c0bc198b68f3b7d6739d2fe788764c0a0016",
+            _spec: "shuttle-canstrap@^1.0.50",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: { name: "Eben Roux" },
+            bugs: {
+                url: "https://github.com/shuttle-npm/shuttle-canstrap/issues"
+            },
+            bundleDependencies: false,
+            dependencies: {
+                bootstrap: "^4.1.1",
+                "can-component": "^4.0.8",
+                "can-compute": "^4.0.3",
+                "can-connect": "^2.0.4",
+                "can-define": "^2.2.4",
+                "can-route": "^4.1.1",
+                "can-route-pushstate": "^4.0.4",
+                "can-set": "^1.5.2",
+                "can-stache": "^4.3.4",
+                "can-stache-bindings": "^4.1.3",
+                "font-awesome": "^4.7.0",
+                "popper.js": "^1.14.3",
+                "shuttle-guard": "^1.0.0",
+                steal: "^1.11.6",
+                "steal-css": "^1.3.2",
+                "tempusdominus-bootstrap-4": "^5.0.0-alpha18",
+                tether: "^1.4.4"
+            },
+            deprecated: false,
+            description: "CanJS components using Bootstrap v4",
+            devDependencies: { "sync-glob": "^1.3.8" },
+            homepage: "https://github.com/shuttle-npm/shuttle-canstrap#readme",
+            keywords: ["shuttle", "canjs", "bootstrap"],
+            license: "ISC",
+            main: "shuttle-canstrap.js",
+            repository: {
+                type: "git",
+                url: "git+https://github.com/shuttle-npm/shuttle-canstrap.git"
+            },
+            scripts: {
+                "sync-samples":
+                    'node .\\node_modules\\sync-glob\\bin\\sync-glob.js --watch "**/*" "!node_modules/**/*" ..\\shuttle-canstrap-samples\\node_modules\\shuttle-canstrap\\'
+            }
+        },
+        {
+            name: "shuttle-access",
+            version: "1.0.0",
+            origFileUrl: "./node_modules/shuttle-access/package.json",
+            fileUrl: "./node_modules/shuttle-access/package.json",
+            _from: "shuttle-access@^1.0.0",
+            _id: "shuttle-access@1.0.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-FyzYWrKGzzSCIaJKfeO3GEZdkr0HtdAHasM0x450bVHJtcEZDKhybI4r8Wg4ZKN5lRXnvL8zlfEjvCGbnh2NAg==",
+            _location: "/shuttle-access",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "shuttle-access@^1.0.0",
+                name: "shuttle-access",
+                escapedName: "shuttle-access",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: ["/"],
+            _resolved:
+                "https://registry.npmjs.org/shuttle-access/-/shuttle-access-1.0.0.tgz",
+            _shasum: "ae194f414f5c0718c777da930b7ddf5104fb575f",
+            _spec: "shuttle-access@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: { name: "Eben Roux" },
+            bugs: {
+                url: "https://github.com/shuttle-npm/shuttle-access/issues"
+            },
+            bundleDependencies: false,
+            dependencies: {
+                "can-define": "^2.0.3",
+                "can-util": "^3.11.5",
+                jquery: "^3.3.1",
+                "shuttle-can-api": "^1.0.15",
+                "shuttle-canstrap": "^1.0.37",
+                "shuttle-guard": "^1.0.0"
+            },
+            deprecated: false,
+            description:
+                "Shuttle.Access components for use in shuttle-canstrap applications (CanJS / Bootstrap).",
+            devDependencies: {
+                "can-fixture": "^2.0.3",
+                chai: "^4.1.2",
+                "chai-as-promised": "^7.1.1",
+                mocha: "^5.0.4",
+                steal: "^1.9.1",
+                "steal-mocha": "^1.0.0"
+            },
+            homepage: "https://github.com/shuttle-npm/shuttle-access#readme",
+            keywords: [
+                "shuttle",
+                "shuttle-access",
+                "identity",
+                "access-control"
+            ],
+            license: "ISC",
+            main: "shuttle-access.js",
+            repository: {
+                type: "git",
+                url: "git+https://github.com/shuttle-npm/shuttle-access.git"
+            },
+            scripts: { test: "mocha" }
+        },
+        {
+            name: "validate.js",
+            version: "0.11.1",
+            origFileUrl: "./node_modules/validate.js/package.json",
+            fileUrl: "./node_modules/validate.js/package.json",
+            _from: "validate.js@^0.11.1",
+            _id: "validate.js@0.11.1",
+            _inBundle: false,
+            _integrity: "sha1-9Rw8bEpW5jgKIKfrEEJFA38qVA0=",
+            _location: "/validate.js",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "validate.js@^0.11.1",
+                name: "validate.js",
+                escapedName: "validate.js",
+                rawSpec: "^0.11.1",
+                saveSpec: null,
+                fetchSpec: "^0.11.1"
+            },
+            _requiredBy: ["/", "/can-validate-validatejs"],
+            _resolved:
+                "https://registry.npmjs.org/validate.js/-/validate.js-0.11.1.tgz",
+            _shasum: "f51c3c6c4a56e6380a20a7eb104245037f2a540d",
+            _spec: "validate.js@^0.11.1",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: { name: "Nicklas Ansman", email: "nicklas@ansman.se" },
+            bugs: { url: "https://github.com/ansman/validate.js/issues" },
+            bundleDependencies: false,
+            deprecated: false,
+            description: "Declarative validations for JavaScript",
+            devDependencies: {
+                coveralls: "2.11.9",
+                grunt: "1.0.1",
+                "grunt-contrib-jasmine": "1.0.3",
+                "grunt-contrib-jshint": "1.0.0",
+                "grunt-contrib-uglify": "1.0.1",
+                "grunt-contrib-watch": "1.0.0",
+                "grunt-docco": "0.4.0",
+                "grunt-notify": "0.4.5",
+                "grunt-template-jasmine-istanbul": "0.4.0"
+            },
+            homepage: "http://validatejs.org",
+            keywords: ["validation", "validate", "server", "client"],
+            license: "MIT",
+            main: "validate.js",
+            repository: {
+                type: "git",
+                url: "git+https://github.com/ansman/validate.js.git"
+            },
+            scripts: {
+                build: "grunt build",
+                docs: "grunt docco",
+                test: "grunt test",
+                watch: "grunt watch"
+            },
+            typings: "validate.d.ts"
+        },
+        {
+            name: "font-awesome",
+            version: "4.7.0",
+            origFileUrl: "./node_modules/font-awesome/package.json",
+            fileUrl: "./node_modules/font-awesome/package.json",
+            _from: "font-awesome@^4.7.0",
+            _id: "font-awesome@4.7.0",
+            _inBundle: false,
+            _integrity: "sha1-j6jPBBGhoxr9B7BtKQK7n8gVoTM=",
+            _location: "/font-awesome",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "font-awesome@^4.7.0",
+                name: "font-awesome",
+                escapedName: "font-awesome",
+                rawSpec: "^4.7.0",
+                saveSpec: null,
+                fetchSpec: "^4.7.0"
+            },
+            _requiredBy: ["/shuttle-canstrap"],
+            _resolved:
+                "https://registry.npmjs.org/font-awesome/-/font-awesome-4.7.0.tgz",
+            _shasum: "8fa8cf0411a1a31afd07b06d2902bb9fc815a133",
+            _spec: "font-awesome@^4.7.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\shuttle-canstrap",
+            author: {
+                name: "Dave Gandy",
+                email: "dave@fontawesome.io",
+                url: "http://twitter.com/davegandy"
+            },
+            bugs: { url: "http://github.com/FortAwesome/Font-Awesome/issues" },
+            bundleDependencies: false,
+            contributors: [
+                { name: "Brian Talbot", url: "http://twitter.com/talbs" },
+                {
+                    name: "Travis Chase",
+                    url: "http://twitter.com/supercodepoet"
+                },
+                { name: "Rob Madole", url: "http://twitter.com/robmadole" },
+                {
+                    name: "Geremia Taglialatela",
+                    url: "http://twitter.com/gtagliala"
+                }
+            ],
+            dependencies: {},
+            deprecated: false,
+            description: "The iconic font and CSS framework",
+            engines: { node: ">=0.10.3" },
+            homepage: "http://fontawesome.io/",
+            keywords: [
+                "font",
+                "awesome",
+                "fontawesome",
+                "icon",
+                "font",
+                "bootstrap"
+            ],
+            license: "(OFL-1.1 AND MIT)",
+            repository: {
+                type: "git",
+                url: "git+https://github.com/FortAwesome/Font-Awesome.git"
+            },
+            style: "css/font-awesome.css"
+        },
+        {
+            name: "can-stache",
+            version: "4.5.0",
+            nestedFileUrl:
+                "./node_modules/can-stache-route-helpers/node_modules/can-stache/package.json",
+            origFileUrl: "./node_modules/can-stache/package.json",
+            fileUrl: "./node_modules/can-stache/package.json",
+            _from: "can-stache@^4.4.0",
+            _id: "can-stache@4.5.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-+6U4EBRpN0C6knJQlfspPgFdgBy8GDn2TasII6JyvXzA/m2qGbiixrhOnuYgkN9Q/zcnWL2k29Wlaq8UG5G3xQ==",
+            _location: "/can-stache",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-stache@^4.4.0",
+                name: "can-stache",
+                escapedName: "can-stache",
+                rawSpec: "^4.4.0",
+                saveSpec: null,
+                fetchSpec: "^4.4.0"
+            },
+            _requiredBy: [
+                "/",
+                "/can-component",
+                "/can-connect",
+                "/can-stache-bindings",
+                "/can-stache-route-helpers",
+                "/shuttle-canstrap",
+                "/steal-stache"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-stache/-/can-stache-4.5.0.tgz",
+            _shasum: "207ca35a54df9a054c6bc12fcc78e7c599e39893",
+            _spec: "can-stache@^4.4.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-stache/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-assign": "^1.1.1",
+                "can-attribute-encoder": "^1.0.0",
+                "can-child-nodes": "^1.0.0",
+                "can-dom-data": "^1.0.1",
+                "can-dom-data-state": "^1.0.0",
+                "can-dom-mutate": "^1.0.0",
+                "can-fragment": "^1.0.0",
+                "can-globals": "^1.1.1",
+                "can-import-module": "^1.0.0",
+                "can-join-uris": "^1.0.0",
+                "can-log": "^1.0.0",
+                "can-namespace": "1.0.0",
+                "can-observation": "^4.0.0",
+                "can-observation-recorder": "^1.0.0",
+                "can-reflect": "^1.16.2",
+                "can-simple-observable": "^2.0.3",
+                "can-stache-ast": "^1.0.0",
+                "can-stache-helpers": "^1.0.0",
+                "can-stache-key": "^1.0.0",
+                "can-string": "0.0.5",
+                "can-symbol": "^1.0.0",
+                "can-view-callbacks": "^4.0.0",
+                "can-view-live": "^4.0.3",
+                "can-view-nodelist": "^4.0.0",
+                "can-view-parser": "^4.0.0",
+                "can-view-scope": "^4.2.0",
+                "can-view-target": "^4.0.0"
+            },
+            deprecated: false,
+            description: "Live binding handlebars templates",
+            devDependencies: {
+                "can-define": "^2.0.0",
+                "can-queues": "^1.0.0",
+                "can-simple-map": "^4.0.0",
+                "can-test-helpers": "^1.1.0",
+                "can-vdom": "^4.0.0",
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.4",
+                steal: "^1.0.5",
+                "steal-benchmark": "^0.0.1",
+                "steal-qunit": "^1.0.0",
+                "steal-tools": "^1.0.1",
+                testee: "^0.7.0"
+            },
+            homepage: "https://canjs.com/doc/can-stache.html",
+            keywords: ["canjs", "canjs-plugin", "donejs"],
+            license: "MIT",
+            main: "can-stache",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-stache.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages",
+                jshint: "jshint . --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            }
+        },
+        {
+            name: "can-route",
+            version: "4.1.2",
+            nestedFileUrl:
+                "./node_modules/can-stache-route-helpers/node_modules/can-route/package.json",
+            origFileUrl: "./node_modules/can-route/package.json",
+            fileUrl: "./node_modules/can-route/package.json",
+            _from: "can-route@^4.1.1",
+            _id: "can-route@4.1.2",
+            _inBundle: false,
+            _integrity:
+                "sha512-oOLtm05HPOyba7c2jpIvZdy1p4X++3lF7uQJbumiAaH6SMkL/o0L4ftzMGlVfnn7dICfL9If4QAeyUOFmvoKdA==",
+            _location: "/can-route",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-route@^4.1.1",
+                name: "can-route",
+                escapedName: "can-route",
+                rawSpec: "^4.1.1",
+                saveSpec: null,
+                fetchSpec: "^4.1.1"
+            },
+            _requiredBy: [
+                "/",
+                "/can-route-pushstate",
+                "/can-stache-route-helpers",
+                "/shuttle-canstrap"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-route/-/can-route-4.1.2.tgz",
+            _shasum: "feb132caaabf044aa9867980cea7a60049f67eac",
+            _spec: "can-route@^4.1.1",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-route/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-deparam": "^1.0.1",
+                "can-dom-events": "^1.1.0",
+                "can-event-queue": "<2.0.0",
+                "can-globals": "<2.0.0",
+                "can-key-tree": "<2.0.0",
+                "can-log": "<2.0.0",
+                "can-namespace": "1.0.0",
+                "can-observation": "^4.0.0",
+                "can-observation-recorder": "<2.0.0",
+                "can-param": "^1.0.1",
+                "can-queues": "<2.0.0",
+                "can-reflect": "^1.6.0",
+                "can-simple-map": "^4.0.0",
+                "can-simple-observable": "^2.0.0",
+                "can-symbol": "^1.0.0",
+                "can-util": "^3.9.0"
+            },
+            deprecated: false,
+            description: "Observable front-end application routing for CanJS.",
+            devDependencies: {
+                "can-define": "^2.0.0",
+                "can-map": "^4.0.0",
+                "can-observe": "^2.0.0",
+                "can-stache-key": "^1.0.0",
+                "detect-cyclic-packages": "^1.1.0",
+                "done-serve": "^1.5.0",
+                jshint: "^2.9.1",
+                steal: "^1.2.9",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.1.2",
+                testee: "^0.7.0"
+            },
+            homepage: "https://canjs.com/doc/can-route.html",
+            keywords: ["canjs", "canjs-plugin", "donejs"],
+            license: "MIT",
+            main: "can-route",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-route.git"
+            },
+            scripts: {
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            }
+        },
+        {
+            name: "can-util",
+            version: "3.11.6",
+            nestedFileUrl:
+                "./node_modules/can-stache-route-helpers/node_modules/can-util/package.json",
+            origFileUrl: "./node_modules/can-util/package.json",
+            fileUrl: "./node_modules/can-util/package.json",
+            _from: "can-util@^3.11.5",
+            _id: "can-util@3.11.6",
+            _inBundle: false,
+            _integrity:
+                "sha512-khmixn0kyHKXJ5Qlq/RKnK6e4YwjXscsMwJQYoP4xbSfUQP2Fa3JFo5VcAkFDyNbBE0fXxQUX0fwJNAgbccFCQ==",
+            _location: "/can-util",
+            _phantomChildren: { "can-cid": "1.1.2", "can-namespace": "1.0.0" },
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-util@^3.11.5",
+                name: "can-util",
+                escapedName: "can-util",
+                rawSpec: "^3.11.5",
+                saveSpec: null,
+                fetchSpec: "^3.11.5"
+            },
+            _requiredBy: [
+                "/",
+                "/can-compute",
+                "/can-connect",
+                "/can-define-validate-validatejs",
+                "/can-list",
+                "/can-make-rest",
+                "/can-map",
+                "/can-reflect-promise",
+                "/can-route",
+                "/can-route-pushstate",
+                "/can-set",
+                "/can-simple-observable",
+                "/can-view-import",
+                "/can-view-nodelist",
+                "/shuttle-access",
+                "/shuttle-can-api"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-util/-/can-util-3.11.6.tgz",
+            _shasum: "5f4e424e3bbc49db5f5554ab2db9a5d550e87023",
+            _spec: "can-util@^3.11.5",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-util/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-ajax": "^1.0.0",
+                "can-assign": "^1.0.0",
+                "can-cid": "^1.1.0",
+                "can-deparam": "^1.0.0",
+                "can-dom-data-state": "^0.2.0",
+                "can-event-dom-enter": "^1.0.4",
+                "can-event-dom-radiochange": "^1.0.4",
+                "can-globals": "^1.1.1",
+                "can-log": "^1.0.0",
+                "can-namespace": "1.0.0",
+                "can-param": "^1.0.0",
+                "can-parse-uri": "^1.0.0",
+                "can-reflect": "^1.2.0",
+                "can-symbol": "^1.0.0",
+                "can-types": "^1.1.0"
+            },
+            deprecated: false,
+            description: "Common utilities for CanJS projects",
+            devDependencies: {
+                async: "^2.2.0",
+                "can-vdom": "^3.2.3",
+                "detect-cyclic-packages": "^1.1.0",
+                "http-server": "^0.10.0",
+                jshint: "^2.9.1",
+                qunitjs: "^2.4.0",
+                saucelabs: "^1.4.0",
+                steal: "^1.11.4",
+                "steal-css": "^1.2.5",
+                "steal-qunit": "^1.0.0",
+                "steal-tools": "^1.4.1",
+                "test-saucelabs": "0.0.3",
+                testee: "^0.7.0",
+                wd: "^1.1.3",
+                xmlhttprequest2: "^1.0.0"
+            },
+            homepage: "http://canjs.com",
+            keywords: ["canjs", "canjs-plugin", "donejs"],
+            license: "MIT",
+            main: "can-util",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-util.git"
+            },
+            scripts: {
+                build: "node build.js",
+                ci:
+                    "npm run build && npm run test && node test/test-sauce-labs.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                "http-server": "http-server -p 3000 --silent",
+                jshint: "jshint dom/. js/. *.js --config",
+                postversion:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag=pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run test:server && npm run testee",
+                "test:server": "TEST=qunit qunit test/node.js",
+                testee: "testee test/test.html --browsers firefox",
+                version:
+                    'git commit -am "Update dist for release" && git checkout -b release && git add -f dist/'
+            }
+        },
+        {
+            name: "can-define",
+            version: "2.3.1",
+            nestedFileUrl:
+                "./node_modules/shuttle-can-api/node_modules/can-define/package.json",
+            origFileUrl: "./node_modules/can-define/package.json",
+            fileUrl: "./node_modules/can-define/package.json",
+            _from: "can-define@^2.3.1",
+            _id: "can-define@2.3.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-5o6wnkQ0gsHW5TugxFcu4wr0botDXL6BTx8+N3BHWZBne/FbfCRtkBzfeFBmDCzICeS2wEGisTm4KwlgZmDE5g==",
+            _location: "/can-define",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-define@^2.3.1",
+                name: "can-define",
+                escapedName: "can-define",
+                rawSpec: "^2.3.1",
+                saveSpec: null,
+                fetchSpec: "^2.3.1"
+            },
+            _requiredBy: [
+                "/",
+                "/can-component",
+                "/can-connect",
+                "/can-define-validate-validatejs",
+                "/shuttle-access",
+                "/shuttle-can-api",
+                "/shuttle-canstrap"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-define/-/can-define-2.3.1.tgz",
+            _shasum: "499d304888e415a79faabf949ae6c075062a6fec",
+            _spec: "can-define@^2.3.1",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: { name: "Bitovi" },
+            bugs: { url: "https://github.com/canjs/can-define/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-assign": "^1.1.1",
+                "can-construct": "^3.2.0",
+                "can-data-types": "<2.0.0",
+                "can-define-lazy-value": "^1.0.0",
+                "can-diff": "^1.0.0",
+                "can-event-queue": "^1.0.0",
+                "can-log": "^1.0.0",
+                "can-namespace": "^1.0.0",
+                "can-observation": "^4.0.0",
+                "can-observation-recorder": "^1.0.0",
+                "can-queues": "^1.0.0",
+                "can-reflect": "^1.15.0",
+                "can-simple-observable": "^2.0.0",
+                "can-single-reference": "^1.0.0",
+                "can-string-to-any": "^1.0.1",
+                "can-symbol": "^1.0.0"
+            },
+            deprecated: false,
+            description:
+                "Create observable objects with JS dot operator compatibility",
+            devDependencies: {
+                "can-reflect-tests": "<2.0.0",
+                "can-test-helpers": "^1.1.0",
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                serve: "^6.0.1",
+                steal: "^1.0.7",
+                "steal-qunit": "^1.0.0",
+                testee: "^0.7.0"
+            },
+            homepage: "https://github.com/canjs/can-define",
+            keywords: ["CanJS"],
+            license: "MIT",
+            main: "can-define.js",
+            repository: {
+                type: "git",
+                url: "git+https://github.com/canjs/can-define.git"
+            },
+            scripts: {
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                jshint:
+                    "jshint --config .jshintrc --exclude ./node_modules,./dist .",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                start: "serve -p 8080",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            }
+        },
+        {
+            name: "shuttle-guard",
+            version: "1.0.0",
+            nestedFileUrl:
+                "./node_modules/shuttle-can-api/node_modules/shuttle-guard/package.json",
+            origFileUrl: "./node_modules/shuttle-guard/package.json",
+            fileUrl: "./node_modules/shuttle-guard/package.json",
+            _from: "shuttle-guard@^1.0.0",
+            _id: "shuttle-guard@1.0.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-8ghDgPpykaH8qDfb7zn8ii7R2jlkZEkLDgxlEH8MlG9jEArM6f+2sJirynjp2EMxPHpK5Sp7aybT0fMGh3HWkw==",
+            _location: "/shuttle-guard",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "shuttle-guard@^1.0.0",
+                name: "shuttle-guard",
+                escapedName: "shuttle-guard",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: [
+                "/",
+                "/shuttle-access",
+                "/shuttle-can-api",
+                "/shuttle-canstrap"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/shuttle-guard/-/shuttle-guard-1.0.0.tgz",
+            _shasum: "2603352e1ad4962fba75b69a76d0a3b7ed42201b",
+            _spec: "shuttle-guard@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: { name: "Eben Roux" },
+            bugs: {
+                url: "https://github.com/shuttle-npm/shuttle-guard/issues"
+            },
+            bundleDependencies: false,
+            deprecated: false,
+            description: "Guard methods.",
+            homepage: "https://github.com/shuttle-npm/shuttle-guard#readme",
+            keywords: ["guard"],
+            license: "BSD-3-Clause",
+            main: "shuttle-guard.js",
+            repository: {
+                type: "git",
+                url: "git+https://github.com/shuttle-npm/shuttle-guard.git"
+            },
+            scripts: { test: 'echo "Error: no test specified" && exit 1' }
+        },
+        {
+            name: "i18next",
+            version: "11.3.2",
+            origFileUrl: "./node_modules/i18next/package.json",
+            fileUrl: "./node_modules/i18next/package.json",
+            _from: "i18next@^11.3.2",
+            _id: "i18next@11.3.2",
+            _inBundle: false,
+            _integrity:
+                "sha512-Y5yN46k4wcXOvucXrqADQRK1CyIplwjKQ5Sv2IYdukQWjr5Gf2Y7y+4AsjQbpCtLWzotcMd7YDmkrIYzVje6hg==",
+            _location: "/i18next",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "i18next@^11.3.2",
+                name: "i18next",
+                escapedName: "i18next",
+                rawSpec: "^11.3.2",
+                saveSpec: null,
+                fetchSpec: "^11.3.2"
+            },
+            _requiredBy: ["/"],
+            _resolved:
+                "https://registry.npmjs.org/i18next/-/i18next-11.3.2.tgz",
+            _shasum: "4a1a7bb14383ba6aed4abca139b03681fc96e023",
+            _spec: "i18next@^11.3.2",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: {
+                name: "Jan Mühlemann",
+                email: "jan.muehlemann@gmail.com",
+                url: "https://github.com/jamuhl"
+            },
+            bugs: { url: "https://github.com/i18next/i18next/issues" },
+            bundleDependencies: false,
+            dependencies: {},
+            deprecated: false,
+            description: "i18next internationalization framework",
+            devDependencies: {
+                "babel-cli": "6.22.2",
+                "babel-core": "6.22.1",
+                "babel-eslint": "7.1.1",
+                "babel-plugin-external-helpers": "6.22.0",
+                "babel-plugin-transform-es2015-classes": "6.22.0",
+                "babel-plugin-transform-proto-to-assign": "6.22.0",
+                "babel-preset-es2015": "6.22.0",
+                "babel-preset-stage-0": "6.22.0",
+                babelify: "7.3.0",
+                browserify: "14.0.0",
+                "browserify-istanbul": "2.0.0",
+                chai: "3.5.0",
+                coveralls: "2.11.16",
+                eslint: "3.15.0",
+                "eslint-config-airbnb": "14.1.0",
+                "eslint-plugin-import": "2.2.0",
+                "eslint-plugin-jsx-a11y": "4.0.0",
+                "eslint-plugin-react": "6.9.0",
+                "i18next-browser-languagedetector": "1.0.1",
+                "i18next-localstorage-cache": "0.3.0",
+                "i18next-sprintf-postprocessor": "0.2.2",
+                "i18next-xhr-backend": "1.3.0",
+                istanbul: "github:gotwarlost/istanbul#source-map",
+                karma: "1.4.1",
+                "karma-browserify": "5.1.1",
+                "karma-chai": "0.1.0",
+                "karma-chrome-launcher": "2.0.0",
+                "karma-cli": "1.0.1",
+                "karma-coverage": "github:douglasduteil/karma-coverage#next",
+                "karma-coveralls": "1.1.2",
+                "karma-expect": "1.1.3",
+                "karma-mocha": "1.3.0",
+                "karma-phantomjs-launcher": "1.0.2",
+                "karma-rollup-preprocessor": "3.0.3",
+                "karma-sinon": "1.0.5",
+                "karma-spec-reporter": "0.0.26",
+                mkdirp: "0.5.1",
+                mocha: "3.2.0",
+                "phantomjs-prebuilt": "2.1.14",
+                rimraf: "2.5.4",
+                rollup: "0.41.4",
+                "rollup-plugin-babel": "2.7.1",
+                "rollup-plugin-node-resolve": "2.0.0",
+                "rollup-plugin-uglify": "1.0.1",
+                sinon: "1.17.7",
+                watchify: "3.9.0",
+                yargs: "6.6.0"
+            },
+            homepage: "http://i18next.com",
+            "jsnext:main": "dist/es/index.js",
+            keywords: [
+                "i18next",
+                "internationalization",
+                "i18n",
+                "translation",
+                "localization",
+                "l10n",
+                "globalization",
+                "gettext"
+            ],
+            license: "MIT",
+            main: "./index.js",
+            module: "dist/es/index.js",
+            repository: {
+                type: "git",
+                url: "git+https://github.com/i18next/i18next.git"
+            },
+            scripts: {
+                build:
+                    "npm run clean && npm run build:cjs && npm run build:es && npm run build:umd && npm run copy",
+                "build:amd":
+                    "rollup -c rollup.config.js --format amd && rollup -c rollup.config.js --format umd --uglify",
+                "build:cjs": "babel src --out-dir dist/commonjs",
+                "build:es": "BABEL_ENV=jsnext babel src --out-dir dist/es",
+                "build:iife":
+                    "rollup -c rollup.config.js --format iife && rollup -c rollup.config.js --format iife --uglify",
+                "build:umd":
+                    "rollup -c rollup.config.js --format umd && rollup -c rollup.config.js --format umd --uglify",
+                clean: "rimraf dist && mkdirp dist",
+                copy:
+                    "cp ./dist/umd/i18next.min.js ./i18next.min.js && cp ./dist/umd/i18next.js ./i18next.js",
+                postversion: "git push && git push --tags",
+                preversion: "npm run test && npm run build && git push",
+                tdd: "karma start karma.conf.js",
+                "tdd:compat": "karma start karma.backward.conf.js",
+                test: "npm run test:new && npm run test:compat",
+                "test:compat": "karma start karma.backward.conf.js --singleRun",
+                "test:new": "karma start karma.conf.js --singleRun"
+            }
+        },
+        {
+            name: "i18next-xhr-backend",
+            version: "1.5.1",
+            origFileUrl: "./node_modules/i18next-xhr-backend/package.json",
+            fileUrl: "./node_modules/i18next-xhr-backend/package.json",
+            _from: "i18next-xhr-backend@^1.5.1",
+            _id: "i18next-xhr-backend@1.5.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-9OLdC/9YxDvTFcgsH5t2BHCODHEotHCa6h7Ly0EUlUC7Y2GS09UeoHOGj3gWKQ3HCqXz8NlH4gOrK3NNc9vPuw==",
+            _location: "/i18next-xhr-backend",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "i18next-xhr-backend@^1.5.1",
+                name: "i18next-xhr-backend",
+                escapedName: "i18next-xhr-backend",
+                rawSpec: "^1.5.1",
+                saveSpec: null,
+                fetchSpec: "^1.5.1"
+            },
+            _requiredBy: ["/"],
+            _resolved:
+                "https://registry.npmjs.org/i18next-xhr-backend/-/i18next-xhr-backend-1.5.1.tgz",
+            _shasum: "50282610780c6a696d880dfa7f4ac1d01e8c3ad5",
+            _spec: "i18next-xhr-backend@^1.5.1",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: {
+                name: "Jan Mühlemann",
+                email: "jan.muehlemann@gmail.com",
+                url: "https://github.com/jamuhl"
+            },
+            bugs: {
+                url: "https://github.com/i18next/i18next-xhr-backend/issues"
+            },
+            bundleDependencies: false,
+            dependencies: {},
+            deprecated: false,
+            description: "backend layer for i18next using browsers xhr",
+            devDependencies: {
+                "babel-cli": "6.18.0",
+                "babel-core": "6.21.0",
+                "babel-eslint": "7.1.1",
+                "babel-preset-es2015": "6.18.0",
+                "babel-preset-stage-0": "6.16.0",
+                babelify: "7.3.0",
+                browserify: "13.3.0",
+                "browserify-istanbul": "2.0.0",
+                chai: "3.5.0",
+                coveralls: "2.11.15",
+                eslint: "3.13.0",
+                "eslint-config-airbnb": "13.0.0",
+                i18next: "4.1.4",
+                istanbul: "github:gotwarlost/istanbul#source-map",
+                json5: "0.5.1",
+                karma: "1.3.0",
+                "karma-browserify": "5.1.0",
+                "karma-chai": "0.1.0",
+                "karma-chrome-launcher": "2.0.0",
+                "karma-cli": "1.0.1",
+                "karma-coverage": "github:douglasduteil/karma-coverage#next",
+                "karma-coveralls": "1.1.2",
+                "karma-expect": "1.1.3",
+                "karma-mocha": "1.3.0",
+                "karma-phantomjs-launcher": "1.0.2",
+                "karma-rollup-preprocessor": "3.0.3",
+                "karma-sinon": "1.0.5",
+                "karma-spec-reporter": "0.0.26",
+                mkdirp: "0.5.1",
+                mocha: "3.2.0",
+                "phantomjs-prebuilt": "2.1.14",
+                rimraf: "2.5.4",
+                rollup: "0.41.1",
+                "rollup-plugin-babel": "2.7.1",
+                "rollup-plugin-node-resolve": "2.0.0",
+                "rollup-plugin-uglify": "1.0.1",
+                sinon: "1.17.7",
+                yargs: "6.6.0"
+            },
+            homepage: "https://github.com/i18next/i18next-xhr-backend",
+            "jsnext:main": "dist/es/index.js",
+            keywords: ["i18next", "i18next-backend"],
+            license: "MIT",
+            lock: false,
+            main: "./index.js",
+            repository: {
+                type: "git",
+                url: "git+https://github.com/i18next/i18next-xhr-backend.git"
+            },
+            scripts: {
+                build:
+                    "npm run clean && npm run build:cjs && npm run build:es && npm run build:umd && npm run copy",
+                "build-win":
+                    "npm run clean && npm run build:cjs && npm run build:es-win && npm run build:umd && npm run copy-win",
+                "build:amd":
+                    "rollup -c rollup.config.js --format amd && rollup -c rollup.config.js --format umd --uglify",
+                "build:cjs": "babel src --out-dir dist/commonjs",
+                "build:es": "BABEL_ENV=jsnext babel src --out-dir dist/es",
+                "build:es-win":
+                    "SET BABEL_ENV=jsnext babel src --out-dir dist/es",
+                "build:iife":
+                    "rollup -c rollup.config.js --format iife && rollup -c rollup.config.js --format iife --uglify",
+                "build:umd":
+                    "rollup -c rollup.config.js --format umd && rollup -c rollup.config.js --format umd --uglify",
+                clean: "rimraf dist && mkdirp dist",
+                copy:
+                    "cp ./dist/umd/i18nextXHRBackend.min.js ./i18nextXHRBackend.min.js && cp ./dist/umd/i18nextXHRBackend.js ./i18nextXHRBackend.js",
+                "copy-win":
+                    "xcopy .\\dist\\umd\\i18nextXHRBackend.min.js .\\i18nextXHRBackend.min.js /y && xcopy .\\dist\\umd\\i18nextXHRBackend.js .\\i18nextXHRBackend.js /y",
+                postversion: "git push && git push --tags",
+                preversion: "npm run test && npm run build && git push",
+                tdd: "karma start karma.conf.js",
+                test: "karma start karma.conf.js --singleRun"
+            }
+        },
+        {
+            name: "can-component",
+            version: "4.1.0",
+            origFileUrl: "./node_modules/can-component/package.json",
+            fileUrl: "./node_modules/can-component/package.json",
+            _from: "can-component@^4.0.8",
+            _id: "can-component@4.1.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-0g++peCUB6I7Qj2+AgamlPN6ifqHYn0+bSshcfmJzY9JlqVV/tE+6J6hHMm6I2LMDyG7dynI//dNIO8OTHl4kw==",
+            _location: "/can-component",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-component@^4.0.8",
+                name: "can-component",
+                escapedName: "can-component",
+                rawSpec: "^4.0.8",
+                saveSpec: null,
+                fetchSpec: "^4.0.8"
+            },
+            _requiredBy: ["/", "/shuttle-canstrap"],
+            _resolved:
+                "https://registry.npmjs.org/can-component/-/can-component-4.1.0.tgz",
+            _shasum: "8440a9a8ba9d3cfafaf4693622655c3cfb2ee15e",
+            _spec: "can-component@^4.0.8",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-component/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-assign": "^1.1.1",
+                "can-child-nodes": "^1.0.0",
+                "can-construct": "^3.2.0",
+                "can-control": "^4.0.0",
+                "can-define": "^2.0.0",
+                "can-dom-data-state": "^1.0.1",
+                "can-dom-events": "^1.1.0",
+                "can-dom-mutate": "^1.0.0",
+                "can-fragment": "^1.0.0",
+                "can-globals": "^1.0.0",
+                "can-log": "^1.0.0",
+                "can-namespace": "1.0.0",
+                "can-observation": "^4.0.0",
+                "can-queues": "^1.0.0",
+                "can-reflect": "^1.6.0",
+                "can-simple-map": "^4.1.0",
+                "can-simple-observable": "^2.0.0",
+                "can-stache": "^4.1.0",
+                "can-stache-bindings": "^4.0.3",
+                "can-stache-key": "^1.0.0",
+                "can-string": "0.0.5",
+                "can-symbol": "^1.4.1",
+                "can-view-callbacks": "^4.0.0",
+                "can-view-model": "^4.0.0",
+                "can-view-nodelist": "^4.0.0",
+                "can-view-scope": "^4.0.0"
+            },
+            deprecated: false,
+            description: "Custom elements for CanJS",
+            devDependencies: {
+                "can-observe": "^2.0.0",
+                "can-test-helpers": "^1.1.2",
+                "can-vdom": "^4.0.0",
+                "detect-cyclic-packages": "^1.1.0",
+                "done-serve": "^1.3.0",
+                jshint: "^2.9.1",
+                steal: "^1.0.0",
+                "steal-qunit": "^1.0.0",
+                "steal-tools": "^1.0.1",
+                testee: "^0.7.0"
+            },
+            homepage: "https://canjs.com/doc/can-component.html",
+            keywords: ["canjs", "canjs-plugin", "donejs"],
+            main: "can-component",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-component.git"
+            },
+            scripts: {
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag=pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            },
+            system: {},
+            steal: {}
+        },
+        {
+            name: "can-define-validate-validatejs",
+            version: "1.0.1",
+            origFileUrl:
+                "./node_modules/can-define-validate-validatejs/package.json",
+            fileUrl:
+                "./node_modules/can-define-validate-validatejs/package.json",
+            _from: "can-define-validate-validatejs@^1.0.1",
+            _id: "can-define-validate-validatejs@1.0.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-gUeY2VYA4f1I/IsMpPOGMUg4wUTr49M3ZfP8O7Fe7KVDt4+DxFEIKjKt6aaigZ3zWQQ1wT7+v8qaStlzs8UZIg==",
+            _location: "/can-define-validate-validatejs",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-define-validate-validatejs@^1.0.1",
+                name: "can-define-validate-validatejs",
+                escapedName: "can-define-validate-validatejs",
+                rawSpec: "^1.0.1",
+                saveSpec: null,
+                fetchSpec: "^1.0.1"
+            },
+            _requiredBy: ["/"],
+            _resolved:
+                "https://registry.npmjs.org/can-define-validate-validatejs/-/can-define-validate-validatejs-1.0.1.tgz",
+            _shasum: "35b82742c3eb4cd77b539a82098ec30cb680c9f7",
+            _spec: "can-define-validate-validatejs@^1.0.1",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: { name: "Bitovi" },
+            browser: {},
+            bugs: {
+                url:
+                    "https://github.com/canjs/can-define-validate-validatejs/issues"
+            },
+            bundleDependencies: false,
+            dependencies: {
+                "can-assign": "^1.1.1",
+                "can-define": "^2.0.0",
+                "can-reflect": "^1.11.1",
+                "can-util": "^3.9.0",
+                "can-validate": "^1.1.0",
+                "can-validate-validatejs": "^0.1.0"
+            },
+            deprecated: false,
+            description: "Validation helpers for can-define maps and lists.",
+            devDependencies: {
+                "bit-docs": "^0.0.8",
+                "can-compute": "^4.0.0",
+                "detect-cyclic-packages": "^1.1.0",
+                "http-server": "^0.10.0",
+                jshint: "^2.9.5",
+                steal: "^1.5.14",
+                "steal-qunit": "^1.0.0",
+                "steal-tools": "^1.9.0",
+                testee: "^0.7.0"
+            },
+            homepage: "https://github.com/canjs/can-define-validate-validatejs",
+            keywords: ["Validate", "plugin", "canjs"],
+            license: "MIT",
+            main: "can-define-validate-validatejs.js",
+            repository: {
+                type: "git",
+                url:
+                    "git+https://github.com/canjs/can-define-validate-validatejs.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "http-server -c-1",
+                jshint: "jshint *.js --config",
+                postversion:
+                    "git push --tags && git checkout - && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major":
+                    "npm version major && npm run build && npm publish",
+                "release:minor":
+                    "npm version minor && npm run build && npm publish",
+                "release:patch":
+                    "npm version patch && npm run build && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm run build && npm publish --tag=pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update dist for release" && git checkout -b release && git add -f dist/'
+            },
+            steal: {
+                ignoreBrowser: true,
+                npmIgnore: {
+                    documentjs: true,
+                    testee: true,
+                    "steal-tools": true
+                },
+                npmDependencies: { "steal-qunit": true }
+            }
+        },
+        {
+            name: "can-symbol",
+            version: "1.6.1",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-symbol/package.json",
+            origFileUrl: "./node_modules/can-symbol/package.json",
+            fileUrl: "./node_modules/can-symbol/package.json",
+            _from: "can-symbol@^1.4.1",
+            _id: "can-symbol@1.6.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-C2xIYJcVQ+FW/RrXXKQOoZXnEFqKM28qsPPrmDiV5Bx+kSqms8cnRMqt4SoZ7+89OMv5PSReRJ7fKDE06MdSCg==",
+            _location: "/can-symbol",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-symbol@^1.4.1",
+                name: "can-symbol",
+                escapedName: "can-symbol",
+                rawSpec: "^1.4.1",
+                saveSpec: null,
+                fetchSpec: "^1.4.1"
+            },
+            _requiredBy: [
+                "/can-component",
+                "/can-compute",
+                "/can-control",
+                "/can-define",
+                "/can-event-queue",
+                "/can-globals",
+                "/can-key",
+                "/can-list",
+                "/can-map",
+                "/can-observation",
+                "/can-observation-recorder",
+                "/can-reflect",
+                "/can-reflect-dependencies",
+                "/can-reflect-promise",
+                "/can-route",
+                "/can-simple-map",
+                "/can-simple-observable",
+                "/can-stache",
+                "/can-stache-bindings",
+                "/can-stache-key",
+                "/can-types",
+                "/can-util",
+                "/can-view-import",
+                "/can-view-live",
+                "/can-view-model",
+                "/can-view-scope"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-symbol/-/can-symbol-1.6.1.tgz",
+            _shasum: "06d50399f980e31736a25f2f6417d0adcd5685c3",
+            _spec: "can-symbol@^1.4.1",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "Bitovi",
+                email: "core@donejs.com",
+                url: "http://donejs.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-symbol/issues" },
+            bundleDependencies: false,
+            dependencies: { "can-namespace": "^1.0.0" },
+            deprecated: false,
+            description:
+                "Well known symbols used to detail how to operate on different objects",
+            devDependencies: {
+                "bit-docs": "0.0.7",
+                "detect-cyclic-packages": "^1.1.0",
+                "done-serve": "^1.0.0-alpha.0",
+                "donejs-cli": "^1.0.0-alpha.2",
+                "generator-donejs": "^1.0.0-alpha.0",
+                jshint: "^2.9.1",
+                steal: "^1.0.5",
+                "steal-qunit": "^1.0.0",
+                "steal-tools": "^1.0.1",
+                testee: "^0.3.0"
+            },
+            homepage: "http://canjs.com",
+            keywords: ["Done", "JS"],
+            main: "can-symbol",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-symbol.git"
+            },
+            scripts: {
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag=pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox"
+            },
+            system: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                },
+                main: "can-symbol"
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                },
+                main: "can-symbol"
+            }
+        },
+        {
+            name: "can-reflect",
+            version: "1.16.3",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-reflect/package.json",
+            origFileUrl: "./node_modules/can-reflect/package.json",
+            fileUrl: "./node_modules/can-reflect/package.json",
+            _from: "can-reflect@^1.6.0",
+            _id: "can-reflect@1.16.3",
+            _inBundle: false,
+            _integrity:
+                "sha512-Q/z90kwzMTRN3oT9Fzn3uGyw/lohArTfgvczwPk6zhbEWhM6OOan9e0lXvQt1vrULd5/Ua6gZgWFVXbp51yAzQ==",
+            _location: "/can-reflect",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-reflect@^1.6.0",
+                name: "can-reflect",
+                escapedName: "can-reflect",
+                rawSpec: "^1.6.0",
+                saveSpec: null,
+                fetchSpec: "^1.6.0"
+            },
+            _requiredBy: [
+                "/can-ajax",
+                "/can-attribute-observable",
+                "/can-component",
+                "/can-compute",
+                "/can-connect",
+                "/can-construct",
+                "/can-control",
+                "/can-data-types",
+                "/can-define",
+                "/can-define-validate-validatejs",
+                "/can-diff",
+                "/can-dom-events",
+                "/can-event-queue",
+                "/can-fragment",
+                "/can-globals",
+                "/can-key",
+                "/can-key-tree",
+                "/can-list",
+                "/can-map",
+                "/can-observation",
+                "/can-reflect-dependencies",
+                "/can-reflect-promise",
+                "/can-route",
+                "/can-route-pushstate",
+                "/can-simple-map",
+                "/can-simple-observable",
+                "/can-stache",
+                "/can-stache-bindings",
+                "/can-stache-key",
+                "/can-types",
+                "/can-util",
+                "/can-validate",
+                "/can-validate-validatejs",
+                "/can-view-live",
+                "/can-view-model",
+                "/can-view-scope"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-reflect/-/can-reflect-1.16.3.tgz",
+            _shasum: "b4103abc82a2e5eaa11f89120a2830136f5203ac",
+            _spec: "can-reflect@^1.6.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "DoneJS core team",
+                email: "core@donejs.com",
+                url: "http://donejs.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-reflect/issues" },
+            bundleDependencies: false,
+            dependencies: { "can-namespace": "^1.0.0", "can-symbol": "^1.3.0" },
+            deprecated: false,
+            description: "reflection on unknown data types",
+            devDependencies: {
+                "detect-cyclic-packages": "^1.1.0",
+                "http-server": "^0.10.0",
+                jshint: "^2.9.1",
+                steal: "^1.0.5",
+                "steal-qunit": "^1.0.0",
+                "steal-tools": "^1.0.1",
+                "test-saucelabs": "0.0.3",
+                testee: "^0.7.0"
+            },
+            homepage: "http://canjs.com",
+            keywords: ["donejs"],
+            main: "can-reflect",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-reflect.git"
+            },
+            scripts: {
+                build: "node build.js",
+                ci: "npm run build && npm run test && node test-saucelabs.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                "http-server": "http-server -p 3000 --silent",
+                jshint: "jshint ./*.js --config",
+                postversion:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update dist for release" && git checkout -b release && git add -f dist/'
+            }
+        },
+        {
+            name: "can-assign",
+            version: "1.1.1",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-assign/package.json",
+            origFileUrl: "./node_modules/can-assign/package.json",
+            fileUrl: "./node_modules/can-assign/package.json",
+            _from: "can-assign@^1.1.1",
+            _id: "can-assign@1.1.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-PIxofVeqRsmq6biiD/w2nyEYQ28WeTzKF5kWGmSEldMRauMShvvmWzJdVyIFdl4YREkUhnnRH+nVc72uL2EpSg==",
+            _location: "/can-assign",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-assign@^1.1.1",
+                name: "can-assign",
+                escapedName: "can-assign",
+                rawSpec: "^1.1.1",
+                saveSpec: null,
+                fetchSpec: "^1.1.1"
+            },
+            _requiredBy: [
+                "/can-component",
+                "/can-compute",
+                "/can-control",
+                "/can-define",
+                "/can-define-validate-validatejs",
+                "/can-queues",
+                "/can-set",
+                "/can-stache",
+                "/can-stache-bindings",
+                "/can-util",
+                "/can-view-import",
+                "/can-view-scope"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-assign/-/can-assign-1.1.1.tgz",
+            _shasum: "c6c7b4b2bb266eb08cf119720792cf0cb81c42d3",
+            _spec: "can-assign@^1.1.1",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "https://www.bitovi.com/"
+            },
+            bugs: { url: "https://github.com/canjs/can-assign/issues" },
+            bundleDependencies: false,
+            dependencies: {},
+            deprecated: false,
+            description:
+                "A simplified version of Object.assign, which only accepts a single source argument.",
+            devDependencies: {
+                "detect-cyclic-packages": "^1.1.0",
+                "done-serve": "^1.0.0",
+                "donejs-cli": "^1.0.0",
+                "generator-donejs": "^1.0.0",
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.2.0",
+                testee: "^0.3.0"
+            },
+            homepage: "https://canjs.com/",
+            keywords: ["canjs", "object", "assign"],
+            main: "dist/cjs/can-assign",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-assign.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update version number" && git checkout -b release && git add -f dist/'
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                },
+                main: "can-assign"
+            }
+        },
+        {
+            name: "can-namespace",
+            version: "1.0.0",
+            nestedFileUrl:
+                "./node_modules/can-util/node_modules/can-namespace/package.json",
+            origFileUrl: "./node_modules/can-namespace/package.json",
+            fileUrl: "./node_modules/can-namespace/package.json",
+            _from: "can-namespace@1.0.0",
+            _id: "can-namespace@1.0.0",
+            _inBundle: false,
+            _integrity: "sha1-C4+vr7sRNSuerUIi/+OCJAW0Ppk=",
+            _location: "/can-namespace",
+            _phantomChildren: {},
+            _requested: {
+                type: "version",
+                registry: true,
+                raw: "can-namespace@1.0.0",
+                name: "can-namespace",
+                escapedName: "can-namespace",
+                rawSpec: "1.0.0",
+                saveSpec: null,
+                fetchSpec: "1.0.0"
+            },
+            _requiredBy: [
+                "/can-ajax",
+                "/can-attribute-encoder",
+                "/can-attribute-observable/can-event-dom-radiochange",
+                "/can-child-nodes",
+                "/can-cid",
+                "/can-component",
+                "/can-compute",
+                "/can-connect",
+                "/can-construct",
+                "/can-control",
+                "/can-data-types",
+                "/can-define",
+                "/can-deparam",
+                "/can-dom-data",
+                "/can-dom-data-state",
+                "/can-dom-events",
+                "/can-event-dom-enter/can-dom-data-state",
+                "/can-event-dom-radiochange/can-dom-data-state",
+                "/can-fragment",
+                "/can-globals",
+                "/can-import-module",
+                "/can-join-uris",
+                "/can-key",
+                "/can-list",
+                "/can-map",
+                "/can-observation",
+                "/can-observation-recorder",
+                "/can-param",
+                "/can-parse-uri",
+                "/can-queues",
+                "/can-reflect",
+                "/can-route",
+                "/can-set",
+                "/can-simple-observable",
+                "/can-stache",
+                "/can-stache-helpers",
+                "/can-stache-key",
+                "/can-symbol",
+                "/can-types",
+                "/can-util",
+                "/can-util/can-dom-data-state",
+                "/can-view-callbacks",
+                "/can-view-model",
+                "/can-view-nodelist",
+                "/can-view-parser",
+                "/can-view-scope",
+                "/can-view-target"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-namespace/-/can-namespace-1.0.0.tgz",
+            _shasum: "0b8fafafbb11352b9ead4222ffe3822405b43e99",
+            _spec: "can-namespace@1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-namespace/issues" },
+            bundleDependencies: false,
+            dependencies: {},
+            deprecated: false,
+            description: "Namespace where can-* packages are registered",
+            devDependencies: {},
+            homepage: "http://canjs.com",
+            keywords: ["canjs", "canjs-plugin", "donejs"],
+            main: "can-namespace",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-namespace.git"
+            },
+            scripts: {},
+            system: { npmAlgorithm: "flat" },
+            steal: { npmAlgorithm: "flat" }
+        },
+        {
+            name: "can-view-live",
+            version: "4.1.0",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-view-live/package.json",
+            origFileUrl: "./node_modules/can-view-live/package.json",
+            fileUrl: "./node_modules/can-view-live/package.json",
+            _from: "can-view-live@^4.0.3",
+            _id: "can-view-live@4.1.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-uKrH7amJdpwnP827TyP7zu+Z7TgvxzQ0/4nqIRkQ7PufDfI6IiWCVx2GpxQnVsIhrLiUdqWfYyjdWxVQnDPQ5w==",
+            _location: "/can-view-live",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-view-live@^4.0.3",
+                name: "can-view-live",
+                escapedName: "can-view-live",
+                rawSpec: "^4.0.3",
+                saveSpec: null,
+                fetchSpec: "^4.0.3"
+            },
+            _requiredBy: ["/can-stache", "/can-stache-bindings"],
+            _resolved:
+                "https://registry.npmjs.org/can-view-live/-/can-view-live-4.1.0.tgz",
+            _shasum: "3d7adf9fe5955d226274a77773e0e0651a2a1df8",
+            _spec: "can-view-live@^4.0.3",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-view-live/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-attribute-observable": "<2.0.0",
+                "can-child-nodes": "^1.0.0",
+                "can-diff": "^1.0.1",
+                "can-dom-mutate": "^1.0.0",
+                "can-fragment": "^1.0.0",
+                "can-observation": "^4.0.0",
+                "can-queues": "^1.0.0",
+                "can-reflect": "^1.10.2",
+                "can-reflect-dependencies": "^1.0.0",
+                "can-simple-observable": "^2.0.0",
+                "can-symbol": "^1.4.1",
+                "can-view-callbacks": "^4.0.0",
+                "can-view-nodelist": "^4.0.0",
+                "can-view-parser": "^4.0.0",
+                "can-view-target": "^4.0.0"
+            },
+            deprecated: false,
+            description:
+                "[![Sauce Labs Test Status](https://saucelabs.com/browser-matrix/can-view-live.svg)](https://saucelabs.com/u/can-view-live)",
+            devDependencies: {
+                "can-define": "^2.0.0",
+                "can-simple-map": "^4.0.0",
+                "can-test-helpers": "^1.1.0",
+                "detect-cyclic-packages": "^1.1.0",
+                "http-server": "^0.10.0",
+                jshint: "^2.9.1",
+                steal: "^1.2.10",
+                "steal-qunit": "^1.0.1",
+                "test-saucelabs": "0.0.3",
+                testee: "^0.7.0"
+            },
+            homepage: "https://canjs.com/doc/can-view-live.html",
+            keywords: ["CanJS", "DoneJS"],
+            main: "can-view-live",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-view-live.git"
+            },
+            scripts: {
+                build: "node build.js",
+                ci: "npm test && node test/sauce-labs.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "done-serve --static --develop --port 8080",
+                "http-server": "http-server -p 3000 --silent",
+                jshint: "jshint test/*.js lib/*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            },
+            steal: {
+                npmIgnore: {
+                    documentjs: true,
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                },
+                main: "can-view-live"
+            }
+        },
+        {
+            name: "can-globals",
+            version: "1.1.1",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-globals/package.json",
+            origFileUrl: "./node_modules/can-globals/package.json",
+            fileUrl: "./node_modules/can-globals/package.json",
+            _from: "can-globals@^1.0.0",
+            _id: "can-globals@1.1.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-DBF2JCXi19eEjhG922yT2mCmFBsfGnBAyrf49pF1N5KlQ96Gyt/EDT5MojlAXyXsxPAu7ecrZxKd1eWcOkcitw==",
+            _location: "/can-globals",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-globals@^1.0.0",
+                name: "can-globals",
+                escapedName: "can-globals",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: [
+                "/can-ajax",
+                "/can-attribute-observable",
+                "/can-attribute-observable/can-event-dom-radiochange",
+                "/can-component",
+                "/can-dom-events",
+                "/can-dom-mutate",
+                "/can-event-dom-radiochange",
+                "/can-fragment",
+                "/can-import-module",
+                "/can-route",
+                "/can-route-pushstate",
+                "/can-stache",
+                "/can-types",
+                "/can-util",
+                "/can-view-callbacks",
+                "/can-view-import",
+                "/can-view-model",
+                "/can-view-target"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-globals/-/can-globals-1.1.1.tgz",
+            _shasum: "437dd01a394102f2475b37e9759bba2e04cf877a",
+            _spec: "can-globals@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "https://www.bitovi.com/"
+            },
+            bugs: { url: "https://github.com/canjs/can-globals/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-namespace": "^1.0.0",
+                "can-reflect": "^1.2.6",
+                "can-symbol": "^1.0.0"
+            },
+            deprecated: false,
+            description:
+                "This module provides a dependency injection container. Modules may define a key and specify a default value (which can be static, cached lazy, or dynamic lazy), but other code can set and reset the value as needed. There is also an event system, for alerting on value changes, both specific to a key and for any key.",
+            devDependencies: {
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.5",
+                qunitjs: "^2.4.0",
+                steal: "^1.5.6",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.7.0",
+                testee: "^0.7.0"
+            },
+            homepage: "https://github.com/canjs/can-globals#readme",
+            keywords: [
+                "canjs",
+                "can-globals",
+                "globals",
+                "dependancy",
+                "injection"
+            ],
+            license: "MIT",
+            main: "can-globals.js",
+            repository: {
+                type: "git",
+                url: "git+https://github.com/canjs/can-globals.git"
+            },
+            scripts: {
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                document: "bit-docs",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm run build && npm publish --tag=pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox"
+            }
+        },
+        {
+            name: "can-view-nodelist",
+            version: "4.0.2",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-view-nodelist/package.json",
+            origFileUrl: "./node_modules/can-view-nodelist/package.json",
+            fileUrl: "./node_modules/can-view-nodelist/package.json",
+            _from: "can-view-nodelist@^4.0.0",
+            _id: "can-view-nodelist@4.0.2",
+            _inBundle: false,
+            _integrity:
+                "sha512-5hTLNiANzsZzu7hIPaNl46letIMiqIreWZegCRjy/DGnk3bX3wQwchMWk102He23q/uY6g21UZSMWwKlNvSqzQ==",
+            _location: "/can-view-nodelist",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-view-nodelist@^4.0.0",
+                name: "can-view-nodelist",
+                escapedName: "can-view-nodelist",
+                rawSpec: "^4.0.0",
+                saveSpec: null,
+                fetchSpec: "^4.0.0"
+            },
+            _requiredBy: [
+                "/can-component",
+                "/can-connect",
+                "/can-stache",
+                "/can-view-callbacks",
+                "/can-view-import",
+                "/can-view-live"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-view-nodelist/-/can-view-nodelist-4.0.2.tgz",
+            _shasum: "36ee771b33e2854092a70f4865e651c399b1e737",
+            _spec: "can-view-nodelist@^4.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-view-nodelist/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-dom-mutate": "<2.0.0",
+                "can-namespace": "1.0.0",
+                "can-util": "^3.9.5"
+            },
+            deprecated: false,
+            description: "Adds nesting of text nodes",
+            devDependencies: {
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                steal: "^1.0.1",
+                "steal-qunit": "^1.0.0",
+                testee: "^0.3.0"
+            },
+            homepage: "https://canjs.com/doc/can-view-nodelist.html",
+            keywords: ["canjs", "canjs-plugin", "donejs"],
+            main: "can-view-nodelist",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-view-nodelist.git"
+            },
+            scripts: {
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag=pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            }
+        },
+        {
+            name: "can-log",
+            version: "1.0.0",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-log/package.json",
+            origFileUrl: "./node_modules/can-log/package.json",
+            fileUrl: "./node_modules/can-log/package.json",
+            _from: "can-log@^1.0.0",
+            _id: "can-log@1.0.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-5W1zw0jxwVnzRKJJtV6jtxWgobl80rhSVMX0aMQS7QB5GyYL+xbE+3IpARugWlOEutEKmWGXlOkD3LdCL/zyAg==",
+            _location: "/can-log",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-log@^1.0.0",
+                name: "can-log",
+                escapedName: "can-log",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: [
+                "/can-attribute-encoder",
+                "/can-component",
+                "/can-construct",
+                "/can-control",
+                "/can-define",
+                "/can-event-queue",
+                "/can-observation",
+                "/can-queues",
+                "/can-reflect-promise",
+                "/can-route",
+                "/can-simple-map",
+                "/can-simple-observable",
+                "/can-stache",
+                "/can-stache-bindings",
+                "/can-stache-key",
+                "/can-types",
+                "/can-util",
+                "/can-view-callbacks",
+                "/can-view-import",
+                "/can-view-parser",
+                "/can-view-scope"
+            ],
+            _resolved: "https://registry.npmjs.org/can-log/-/can-log-1.0.0.tgz",
+            _shasum: "844b20c9c8db7cc8b771cc67b7e84730206379ec",
+            _spec: "can-log@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "https://www.bitovi.com/"
+            },
+            bugs: { url: "https://github.com/canjs/can-log/issues" },
+            bundleDependencies: false,
+            dependencies: {},
+            deprecated: false,
+            description: "Utilities for logging to the console.",
+            devDependencies: {
+                "detect-cyclic-packages": "^1.1.0",
+                "done-serve": "^1.0.0",
+                "donejs-cli": "^1.0.0",
+                "generator-donejs": "^1.0.0",
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.2.0",
+                testee: "^0.3.0"
+            },
+            homepage: "https://canjs.com/",
+            keywords: ["canjs", "donejs-plugin"],
+            license: "MIT",
+            main: "dist/cjs/can-log",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-log.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update version number" && git checkout -b release && git add -f dist/'
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                },
+                main: "can-log"
+            }
+        },
+        {
+            name: "can-join-uris",
+            version: "1.0.0",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-join-uris/package.json",
+            origFileUrl: "./node_modules/can-join-uris/package.json",
+            fileUrl: "./node_modules/can-join-uris/package.json",
+            _from: "can-join-uris@^1.0.0",
+            _id: "can-join-uris@1.0.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-oAmUgxEF0ak7KNho6Yz78dEYZoQ+tHHr1Zhhe06qDD7ZAyc9mWxL1nU+HnXc+eeBTuKsDDyhUw0/mArN6oKIsw==",
+            _location: "/can-join-uris",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-join-uris@^1.0.0",
+                name: "can-join-uris",
+                escapedName: "can-join-uris",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: ["/can-stache"],
+            _resolved:
+                "https://registry.npmjs.org/can-join-uris/-/can-join-uris-1.0.0.tgz",
+            _shasum: "85b1fe159f9d02163127d7fcffad7c1418224c87",
+            _spec: "can-join-uris@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache",
+            author: {
+                name: "DoneJS Core Team",
+                email: "core@donejs.com",
+                url: "http://donejs.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-join-uris/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-namespace": "^1.0.0",
+                "can-parse-uri": "^1.1.0"
+            },
+            deprecated: false,
+            description: "Join uris together",
+            devDependencies: {
+                jshint: "^2.9.1",
+                steal: "^1.6.5",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.11.3",
+                testee: "^0.7.0"
+            },
+            homepage: "https://canjs.com",
+            keywords: ["canjs", "donejs", "donejs-plugin"],
+            license: "MIT",
+            main: "can-join-uris",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-join-uris.git"
+            },
+            scripts: {
+                build: "node build.js",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test: "npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update version number" && git checkout -b release && git add -f dist/'
+            },
+            steal: {}
+        },
+        {
+            name: "can-observation",
+            version: "4.0.1",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-observation/package.json",
+            origFileUrl: "./node_modules/can-observation/package.json",
+            fileUrl: "./node_modules/can-observation/package.json",
+            _from: "can-observation@^4.0.0",
+            _id: "can-observation@4.0.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-xJgeipbzJvrDme5RFiRHehtCeZ7TE+/os9f1GO7ZZWTxuLCh8utHAYYhHCcn4xRgpvTTDehMIw3K33cQY3hLyQ==",
+            _location: "/can-observation",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-observation@^4.0.0",
+                name: "can-observation",
+                escapedName: "can-observation",
+                rawSpec: "^4.0.0",
+                saveSpec: null,
+                fetchSpec: "^4.0.0"
+            },
+            _requiredBy: [
+                "/can-attribute-observable",
+                "/can-component",
+                "/can-compute",
+                "/can-connect",
+                "/can-control",
+                "/can-define",
+                "/can-list",
+                "/can-reflect-promise",
+                "/can-route",
+                "/can-simple-map",
+                "/can-simple-observable",
+                "/can-stache",
+                "/can-view-live",
+                "/can-view-scope"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-observation/-/can-observation-4.0.1.tgz",
+            _shasum: "04adf8d0ef820630fed00dfb9dc19076443e315b",
+            _spec: "can-observation@^4.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-observation/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-event-queue": "^1.0.0",
+                "can-key-tree": "^1.0.0",
+                "can-log": "^1.0.0",
+                "can-namespace": "1.0.0",
+                "can-observation-recorder": "^1.0.0",
+                "can-queues": "^1.0.0",
+                "can-reflect": "^1.7.0",
+                "can-symbol": "^1.4.2"
+            },
+            deprecated: false,
+            description: "Core observable indicators",
+            devDependencies: {
+                "bit-docs": "^0.0.7",
+                "can-cid": "^1.0.0",
+                "detect-cyclic-packages": "^1.1.0",
+                docco: "^0.7.0",
+                "done-serve": "^1.2.0",
+                "donejs-cli": "^1.0.1",
+                "generator-donejs": "^1.0.5",
+                jshint: "^2.9.1",
+                steal: "^1.2.3",
+                "steal-benchmark": "0.0.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.1.2",
+                testee: "^0.7.0"
+            },
+            homepage: "http://canjs.com",
+            keywords: ["canjs", "canjs-plugin", "donejs"],
+            main: "can-observation",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-observation.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "done-serve --static --develop --port 8080",
+                docco:
+                    "docco can-observation.js recorder-dependency-helpers.js temporarily-bind.js",
+                jshint: "jshint *.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox"
+            },
+            system: { npmAlgorithm: "flat" },
+            steal: { npmAlgorithm: "flat" }
+        },
+        {
+            name: "can-stache-helpers",
+            version: "1.0.0",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-stache-helpers/package.json",
+            origFileUrl: "./node_modules/can-stache-helpers/package.json",
+            fileUrl: "./node_modules/can-stache-helpers/package.json",
+            _from: "can-stache-helpers@^1.0.0",
+            _id: "can-stache-helpers@1.0.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-OR+cLZF1H5S+eW8o5ca4WfmdD8c29HXbUMC3HIXeLG+oOM6DEv5WdEzwvoKhKqNtrdG2nmOsijUX4xbVLaBhZg==",
+            _location: "/can-stache-helpers",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-stache-helpers@^1.0.0",
+                name: "can-stache-helpers",
+                escapedName: "can-stache-helpers",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: ["/can-stache", "/can-view-scope"],
+            _resolved:
+                "https://registry.npmjs.org/can-stache-helpers/-/can-stache-helpers-1.0.0.tgz",
+            _shasum: "be5a6460ddafe30ce06eb8129a23b6bc1a965609",
+            _spec: "can-stache-helpers@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-stache-helpers/issues" },
+            bundleDependencies: false,
+            dependencies: { "can-namespace": "1.0.0" },
+            deprecated: false,
+            description: "Helper functions for can-stache",
+            devDependencies: {
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                testee: "^0.3.0"
+            },
+            homepage: "https://canjs.com/doc/can-stache-helpers.html",
+            keywords: ["canjs", "canjs-plugin", "donejs", "donejs-plugin"],
+            license: "MIT",
+            main: "can-stache-helpers",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-stache-helpers.git"
+            },
+            scripts: {
+                "detect-cycle": "detect-cyclic-packages",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js ./src/ --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                }
+            }
+        },
+        {
+            name: "can-observation-recorder",
+            version: "1.1.1",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-observation-recorder/package.json",
+            origFileUrl: "./node_modules/can-observation-recorder/package.json",
+            fileUrl: "./node_modules/can-observation-recorder/package.json",
+            _from: "can-observation-recorder@^1.0.0",
+            _id: "can-observation-recorder@1.1.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-gABzXQ64KQbeyFo4O+EsmbdYhuvP8m9gUmb/PWde9pkBtGBgn7PNHQf5RL7fc//FZdxP2GlRGGwGEU42Na7mIw==",
+            _location: "/can-observation-recorder",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-observation-recorder@^1.0.0",
+                name: "can-observation-recorder",
+                escapedName: "can-observation-recorder",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: [
+                "/can-attribute-observable",
+                "/can-compute",
+                "/can-connect",
+                "/can-define",
+                "/can-list",
+                "/can-map",
+                "/can-observation",
+                "/can-reflect-promise",
+                "/can-route",
+                "/can-route-pushstate",
+                "/can-simple-map",
+                "/can-simple-observable",
+                "/can-stache",
+                "/can-stache-bindings",
+                "/can-stache-key",
+                "/can-view-callbacks",
+                "/can-view-scope"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-observation-recorder/-/can-observation-recorder-1.1.1.tgz",
+            _shasum: "69985a00be6d5292b8763a438b6fb019fdbac032",
+            _spec: "can-observation-recorder@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-observation",
+            author: {
+                name: "DoneJS",
+                email: "core@donejs.com",
+                url: "donejs.com"
+            },
+            bugs: {
+                url: "https://github.com/canjs/can-observation-recorder/issues"
+            },
+            bundleDependencies: false,
+            dependencies: { "can-namespace": "^1.0.0", "can-symbol": "^1.6.1" },
+            deprecated: false,
+            description: "Records observations between two points in time",
+            devDependencies: {
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.2.0",
+                testee: "^0.3.0"
+            },
+            homepage: "http://canjs.com",
+            keywords: ["canjs", "donejs-plugin"],
+            license: "MIT",
+            main: "./can-observation-recorder.js",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-observation-recorder.git"
+            },
+            scripts: {
+                build: "node build.js",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test: "npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox"
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                }
+            }
+        },
+        {
+            name: "can-dom-data",
+            version: "1.0.1",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-dom-data/package.json",
+            origFileUrl: "./node_modules/can-dom-data/package.json",
+            fileUrl: "./node_modules/can-dom-data/package.json",
+            _from: "can-dom-data@^1.0.1",
+            _id: "can-dom-data@1.0.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-ydbZ8HYwGIl2fRPxBLtiNzaFzMBX0s0CFOq+/EhMWFX08IBLSdrykfvmYxzfBOoF58R3eFiCSj3KMwNwvdXYWw==",
+            _location: "/can-dom-data",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-dom-data@^1.0.1",
+                name: "can-dom-data",
+                escapedName: "can-dom-data",
+                rawSpec: "^1.0.1",
+                saveSpec: null,
+                fetchSpec: "^1.0.1"
+            },
+            _requiredBy: ["/can-stache"],
+            _resolved:
+                "https://registry.npmjs.org/can-dom-data/-/can-dom-data-1.0.1.tgz",
+            _shasum: "b4a0f93a14a2e3138f042cd968e16fa34968e918",
+            _spec: "can-dom-data@^1.0.1",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "https://www.bitovi.com/"
+            },
+            bugs: { url: "https://github.com/canjs/can-dom-data/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-dom-mutate": "^1.0.0",
+                "can-namespace": "1.0.0"
+            },
+            deprecated: false,
+            description:
+                "A key/value store (based on WeakMap) for associating data with DOM nodes.",
+            devDependencies: {
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                steal: "^1.5.13",
+                "steal-qunit": "^1.0.1",
+                testee: "^0.7.0"
+            },
+            homepage: "https://canjs.com/doc/can-dom-data.html",
+            keywords: ["canjs", "data", "dom"],
+            license: "MIT",
+            main: "can-dom-data.js",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-dom-data.git"
+            },
+            scripts: {
+                "detect-cycle": "detect-cyclic-packages",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre": "npm version prerelease && npm publish",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            },
+            steal: {
+                npmIgnore: { "steal-tools": true, testee: true },
+                main: "can-dom-data"
+            }
+        },
+        {
+            name: "can-dom-data-state",
+            version: "1.0.1",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-dom-data-state/package.json",
+            origFileUrl: "./node_modules/can-dom-data-state/package.json",
+            fileUrl: "./node_modules/can-dom-data-state/package.json",
+            _from: "can-dom-data-state@^1.0.1",
+            _id: "can-dom-data-state@1.0.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-TM9tk3TrR6Uom4plcmqPzDDYckcYUfQ0+WyUuoFxaDmO0BQr3q38ndePkJSn8203I0mXRZJ6od/cn4OuWheN5A==",
+            _location: "/can-dom-data-state",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-dom-data-state@^1.0.1",
+                name: "can-dom-data-state",
+                escapedName: "can-dom-data-state",
+                rawSpec: "^1.0.1",
+                saveSpec: null,
+                fetchSpec: "^1.0.1"
+            },
+            _requiredBy: [
+                "/can-attribute-observable",
+                "/can-component",
+                "/can-stache",
+                "/can-stache-bindings",
+                "/can-view-import"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-dom-data-state/-/can-dom-data-state-1.0.1.tgz",
+            _shasum: "b2fb9cbad67dffea4b77259aea900db6bfb0964e",
+            _spec: "can-dom-data-state@^1.0.1",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "https://www.bitovi.com/"
+            },
+            bugs: { url: "https://github.com/canjs/can-dom-data-state/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-cid": "^1.1.0",
+                "can-dom-mutate": "^1.0.0",
+                "can-namespace": "^1.0.0"
+            },
+            deprecated: false,
+            description:
+                "A key/value store useful for associating data with DOM Nodes.",
+            devDependencies: {
+                "detect-cyclic-packages": "^1.1.0",
+                "done-serve": "^1.0.0",
+                "donejs-cli": "^1.0.0",
+                "generator-donejs": "^1.0.0",
+                jshint: "^2.9.1",
+                steal: "^1.5.13",
+                "steal-qunit": "^1.0.1",
+                testee: "^0.7.0"
+            },
+            homepage: "https://canjs.com/",
+            keywords: ["canjs", "data", "dom", "donejs-plugin"],
+            license: "MIT",
+            main: "can-dom-data-state.js",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-dom-data-state.git"
+            },
+            scripts: {
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre": "npm version prerelease && npm publish",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                },
+                main: "can-dom-data-state"
+            }
+        },
+        {
+            name: "can-queues",
+            version: "1.1.0",
+            nestedFileUrl:
+                "./node_modules/can-route/node_modules/can-queues/package.json",
+            origFileUrl: "./node_modules/can-queues/package.json",
+            fileUrl: "./node_modules/can-queues/package.json",
+            _from: "can-queues@^1.0.0",
+            _id: "can-queues@1.1.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-DUxZ/eVxUcvStqSN0Tmh7FUOd4GecwMbsUwqo0nchYfR9sgtmXFEaWNYuJqhrLlqJYVWOGEu2KPJgFajv2vRaw==",
+            _location: "/can-queues",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-queues@^1.0.0",
+                name: "can-queues",
+                escapedName: "can-queues",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: [
+                "/can-attribute-observable",
+                "/can-component",
+                "/can-connect",
+                "/can-define",
+                "/can-diff",
+                "/can-event-queue",
+                "/can-list",
+                "/can-map",
+                "/can-observation",
+                "/can-reflect-promise",
+                "/can-route",
+                "/can-route-pushstate",
+                "/can-simple-map",
+                "/can-simple-observable",
+                "/can-stache-bindings",
+                "/can-view-live",
+                "/can-view-scope"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-queues/-/can-queues-1.1.0.tgz",
+            _shasum: "298afd508f4aec4d280e04db13da5e0494f6a9fd",
+            _spec: "can-queues@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "DoneJS Core Team",
+                email: "core@donejs.com",
+                url: "http://donejs.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-queues/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-assign": "^1.0.1",
+                "can-log": "^1.0.0",
+                "can-namespace": "^1.0.0"
+            },
+            deprecated: false,
+            description: "A light weight JavaScript task queue",
+            devDependencies: {
+                docco: "^0.7.0",
+                "done-serve": "^1.0.0",
+                "donejs-cli": "^1.0.0",
+                "generator-donejs": "^1.0.0",
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.2.0",
+                testee: "^0.3.0"
+            },
+            homepage: "https://github.com/canjs/can-queues#readme",
+            keywords: ["canjs"],
+            license: "MIT",
+            main: "./can-queues.js",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-queues.git"
+            },
+            scripts: {
+                build: "node build.js",
+                develop: "done-serve --static --develop --port 8080",
+                docco:
+                    "docco can-queues.js queue.js queue-state.js completion-queue.js priority-queue.js",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push && make",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test: "npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox"
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                },
+                main: "can-queues"
+            }
+        },
+        {
+            name: "can-simple-observable",
+            version: "2.0.4",
+            nestedFileUrl:
+                "./node_modules/can-route/node_modules/can-simple-observable/package.json",
+            origFileUrl: "./node_modules/can-simple-observable/package.json",
+            fileUrl: "./node_modules/can-simple-observable/package.json",
+            _from: "can-simple-observable@^2.0.0",
+            _id: "can-simple-observable@2.0.4",
+            _inBundle: false,
+            _integrity:
+                "sha512-aH093lREaRLjj3BFMVX4igxiMwoCV9GfBUR22FmHwXX/bE3u5svpXtpxq+apyABikTNQb26ivAgBIa7GleZ9Mg==",
+            _location: "/can-simple-observable",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-simple-observable@^2.0.0",
+                name: "can-simple-observable",
+                escapedName: "can-simple-observable",
+                rawSpec: "^2.0.0",
+                saveSpec: null,
+                fetchSpec: "^2.0.0"
+            },
+            _requiredBy: [
+                "/can-attribute-observable",
+                "/can-component",
+                "/can-compute",
+                "/can-define",
+                "/can-list",
+                "/can-map",
+                "/can-route",
+                "/can-route-pushstate",
+                "/can-stache",
+                "/can-stache-bindings",
+                "/can-view-live"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-simple-observable/-/can-simple-observable-2.0.4.tgz",
+            _shasum: "4f36e483674121aa6277ef6a8062273a9cca4eb9",
+            _spec: "can-simple-observable@^2.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "https://www.bitovi.com/"
+            },
+            bugs: {
+                url: "https://github.com/canjs/can-simple-observable/issues"
+            },
+            bundleDependencies: false,
+            dependencies: {
+                "can-event-queue": "^1.0.0",
+                "can-key-tree": "^1.0.0",
+                "can-log": "^1.0.0",
+                "can-namespace": "1.0.0",
+                "can-observation": "^4.0.0",
+                "can-observation-recorder": "^1.0.0",
+                "can-queues": "^1.0.0",
+                "can-reflect": "^1.10.1",
+                "can-symbol": "^1.4.2",
+                "can-util": "^3.10.14"
+            },
+            deprecated: false,
+            description: "Create an observable value.",
+            devDependencies: {
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.2.0",
+                testee: "^0.3.0"
+            },
+            homepage: "https://canjs.com/doc/can-simple-observable.html",
+            keywords: ["canjs", "donejs-plugin"],
+            license: "MIT",
+            main: "can-simple-observable",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-simple-observable.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox"
+            },
+            steal: { npmIgnore: { testee: true, "steal-tools": true } }
+        },
+        {
+            name: "can-simple-map",
+            version: "4.1.1",
+            nestedFileUrl:
+                "./node_modules/can-route/node_modules/can-simple-map/package.json",
+            origFileUrl: "./node_modules/can-simple-map/package.json",
+            fileUrl: "./node_modules/can-simple-map/package.json",
+            _from: "can-simple-map@^4.1.0",
+            _id: "can-simple-map@4.1.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-kDVOzwy/6maez8YJ0unZzj10Yi60/pOWUVBxHNx5AUuQA8PWDOlWd1vhEE0z33tgaIhQpekq0emANm62A1qNTw==",
+            _location: "/can-simple-map",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-simple-map@^4.1.0",
+                name: "can-simple-map",
+                escapedName: "can-simple-map",
+                rawSpec: "^4.1.0",
+                saveSpec: null,
+                fetchSpec: "^4.1.0"
+            },
+            _requiredBy: [
+                "/can-component",
+                "/can-route",
+                "/can-stache-bindings",
+                "/can-view-model",
+                "/can-view-scope"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-simple-map/-/can-simple-map-4.1.1.tgz",
+            _shasum: "fe14eb8c544c76e3f3b2af2230d659405de9782a",
+            _spec: "can-simple-map@^4.1.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-simple-map/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-construct": "^3.2.0",
+                "can-event-queue": "^1.0.0",
+                "can-key-tree": "^1.0.0",
+                "can-log": "^1.0.0",
+                "can-observation": "^4.0.0",
+                "can-observation-recorder": "^1.0.0",
+                "can-queues": "^1.0.0",
+                "can-reflect": "^1.2.1",
+                "can-symbol": "^1.0.0"
+            },
+            deprecated: false,
+            description: "A performant live-bound map",
+            devDependencies: {
+                "can-reflect-tests": "<2.0.0",
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                steal: "^1.2.9",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.1.2",
+                testee: "^0.7.0"
+            },
+            homepage: "https://canjs.com/doc/can-simple-map.html",
+            keywords: [],
+            main: "can-simple-map",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-simple-map.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            },
+            steal: {
+                npmIgnore: {
+                    documentjs: true,
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                },
+                main: "can-simple-map"
+            }
+        },
+        {
+            name: "can-construct",
+            version: "3.4.3",
+            nestedFileUrl:
+                "./node_modules/can-define/node_modules/can-construct/package.json",
+            origFileUrl: "./node_modules/can-construct/package.json",
+            fileUrl: "./node_modules/can-construct/package.json",
+            _from: "can-construct@^3.2.0",
+            _id: "can-construct@3.4.3",
+            _inBundle: false,
+            _integrity:
+                "sha512-+tY6xZ5EL/EgzzHSfMHfbZyslAJnBZRRH0ih55qE/b3xVRpscATFIEVb6M4sCYZwBa7nP8jiHDkaMC+fjedO3A==",
+            _location: "/can-construct",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-construct@^3.2.0",
+                name: "can-construct",
+                escapedName: "can-construct",
+                rawSpec: "^3.2.0",
+                saveSpec: null,
+                fetchSpec: "^3.2.0"
+            },
+            _requiredBy: [
+                "/can-component",
+                "/can-connect",
+                "/can-control",
+                "/can-define",
+                "/can-list",
+                "/can-map",
+                "/can-simple-map",
+                "/can-view-scope"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-construct/-/can-construct-3.4.3.tgz",
+            _shasum: "a88ad44a0b1503a33075f2c527407d9c47b47853",
+            _spec: "can-construct@^3.2.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-construct/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-log": "^1.0.0",
+                "can-namespace": "1.0.0",
+                "can-reflect": "^1.16.1",
+                "can-string": "0.0.5"
+            },
+            deprecated: false,
+            description: "easy constructor functions",
+            devDependencies: {
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                steal: "^1.2.8",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.1.2",
+                testee: "^0.7.0"
+            },
+            homepage: "http://canjs.com",
+            keywords: ["canjs", "canjs-plugin", "donejs"],
+            main: "can-construct",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-construct.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                jshint: "jshint *.js --config",
+                postversion:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre": "npm version prerelease && npm publish",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update dist for release" && git checkout -b release && git add -f dist/'
+            },
+            steal: {}
+        },
+        {
+            name: "can-event-queue",
+            version: "1.0.1",
+            nestedFileUrl:
+                "./node_modules/can-define/node_modules/can-event-queue/package.json",
+            origFileUrl: "./node_modules/can-event-queue/package.json",
+            fileUrl: "./node_modules/can-event-queue/package.json",
+            _from: "can-event-queue@<2.0.0",
+            _id: "can-event-queue@1.0.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-Yj+LQZjS4yqUP6QiW8UgsvqH8Joa4jZ244Th+oGLCjilC1qC8miBM73BeDl/9Kg+h4SPz/OxbzEiAB9D3DUZ2w==",
+            _location: "/can-event-queue",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-event-queue@<2.0.0",
+                name: "can-event-queue",
+                escapedName: "can-event-queue",
+                rawSpec: "<2.0.0",
+                saveSpec: null,
+                fetchSpec: "<2.0.0"
+            },
+            _requiredBy: [
+                "/can-compute",
+                "/can-connect",
+                "/can-control",
+                "/can-define",
+                "/can-list",
+                "/can-map",
+                "/can-observation",
+                "/can-route",
+                "/can-simple-map",
+                "/can-simple-observable",
+                "/can-stache-bindings",
+                "/can-view-scope"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-event-queue/-/can-event-queue-1.0.1.tgz",
+            _shasum: "86f88477f9b9f221037f0c44f1fb6b13be46db85",
+            _spec: "can-event-queue@<2.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-control",
+            author: {
+                name: "DoneJS",
+                email: "core@donejs.com",
+                url: "http://canjs.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-event-queue/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-define-lazy-value": "^1.0.1",
+                "can-dom-events": "^1.0.0",
+                "can-key-tree": "^1.0.0",
+                "can-log": "^1.0.0",
+                "can-queues": "^1.0.0",
+                "can-reflect": "^1.10.2",
+                "can-symbol": "^1.2.0"
+            },
+            deprecated: false,
+            description: "A event mixin that uses queues to dispatch handlers",
+            devDependencies: {
+                "done-serve": "^1.0.0",
+                "donejs-cli": "^1.0.0",
+                "generator-donejs": "^1.0.0",
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.2.0",
+                testee: "^0.3.0"
+            },
+            homepage: "https://github.com/canjs/can-event-queue#readme",
+            keywords: ["canjs"],
+            license: "MIT",
+            main: "./can-event-queue.js",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-event-queue.git"
+            },
+            scripts: {
+                build: "node build.js",
+                develop: "done-serve --static --develop --port 8080",
+                jshint:
+                    "jshint ./*.js map/**/*.js type/*.js value/*.js --config",
+                postpublish:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test: "npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update version number" && git checkout -b release && git add -f dist/'
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                },
+                plugins: ["steal-less", "steal-stache"]
+            }
+        },
+        {
+            name: "can-diff",
+            version: "1.0.1",
+            nestedFileUrl:
+                "./node_modules/can-define/node_modules/can-diff/package.json",
+            origFileUrl: "./node_modules/can-diff/package.json",
+            fileUrl: "./node_modules/can-diff/package.json",
+            _from: "can-diff@^1.0.0",
+            _id: "can-diff@1.0.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-llP5iLSEtPdP7ODQZh0JrWPuU2M09bNOvsUj06UeIOU5MShTD95EFuz66epTXiXbH+KA1wrGNu57jtvMgN2ZLw==",
+            _location: "/can-diff",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-diff@^1.0.0",
+                name: "can-diff",
+                escapedName: "can-diff",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: [
+                "/can-attribute-observable",
+                "/can-define",
+                "/can-view-live"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-diff/-/can-diff-1.0.1.tgz",
+            _shasum: "cdfd5e9c57694daec5a752f23a2de29f775a3fec",
+            _spec: "can-diff@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-define",
+            author: {
+                name: "DoneJS Core Team",
+                email: "core@donejs.com",
+                url: "http://donejs.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-diff/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-key-tree": "^1.0.2",
+                "can-queues": "^1.0.1",
+                "can-reflect": "^1.14.1"
+            },
+            deprecated: false,
+            description: "Diffing helpers for can-reflect",
+            devDependencies: {
+                "can-define": "^2.1.0",
+                "can-key": "<2.0.0",
+                "can-simple-observable": "^2.0.4",
+                "can-symbol": "^1.6.1",
+                jshint: "^2.9.1",
+                steal: "^1.6.5",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.11.3",
+                testee: "^0.7.0"
+            },
+            homepage: "http://canjs.com",
+            keywords: ["canjs", "donejs", "donejs-plugin"],
+            license: "MIT",
+            main: "can-diff",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-diff.git"
+            },
+            scripts: {
+                build: "node build.js",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test: "npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox"
+            },
+            steal: { main: "can-diff" }
+        },
+        {
+            name: "can-single-reference",
+            version: "1.0.0",
+            nestedFileUrl:
+                "./node_modules/can-define/node_modules/can-single-reference/package.json",
+            origFileUrl: "./node_modules/can-single-reference/package.json",
+            fileUrl: "./node_modules/can-single-reference/package.json",
+            _from: "can-single-reference@^1.0.0",
+            _id: "can-single-reference@1.0.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-XdNF6JgJF4BRFtuRhCWP8bOxUGaieUvQHxCjjMSpvNtZs3TAysEb69WMdUXnNEcydizzyxrCt8pqZ/IkAMo08A==",
+            _location: "/can-single-reference",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-single-reference@^1.0.0",
+                name: "can-single-reference",
+                escapedName: "can-single-reference",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: ["/can-define", "/can-view-scope"],
+            _resolved:
+                "https://registry.npmjs.org/can-single-reference/-/can-single-reference-1.0.0.tgz",
+            _shasum: "fb4578d951669252cce06351e4335088e5891745",
+            _spec: "can-single-reference@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-define",
+            author: {
+                name: "DoneJS Contributors",
+                email: "core@donejs.com",
+                url: "http://donejs.com"
+            },
+            bugs: {
+                url: "https://github.com/canjs/can-single-reference/issues"
+            },
+            bundleDependencies: false,
+            dependencies: { "can-cid": "^1.1.2" },
+            deprecated: false,
+            description:
+                "Assign a value to a function that can be collected later",
+            devDependencies: {
+                jshint: "^2.9.1",
+                steal: "^1.6.5",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.11.3",
+                testee: "^0.7.0"
+            },
+            homepage: "http://canjs.com",
+            keywords: ["canjs", "donejs", "donejs-plugin"],
+            license: "MIT",
+            main: "can-single-reference",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-single-reference.git"
+            },
+            scripts: {
+                build: "node build.js",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test: "npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update version number" && git checkout -b release && git add -f dist/'
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                }
+            }
+        },
+        {
+            name: "can-view-parser",
+            version: "4.0.2",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-view-parser/package.json",
+            origFileUrl: "./node_modules/can-view-parser/package.json",
+            fileUrl: "./node_modules/can-view-parser/package.json",
+            _from: "can-view-parser@^4.0.0",
+            _id: "can-view-parser@4.0.2",
+            _inBundle: false,
+            _integrity:
+                "sha512-gbRrHzS2gtebmwBInOy9jGV67OtaI8oCvxNc17Xor4vOIa6QulVIlY31cIjx/OCfoTgPoSBzsvsthYStb/IC2A==",
+            _location: "/can-view-parser",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-view-parser@^4.0.0",
+                name: "can-view-parser",
+                escapedName: "can-view-parser",
+                rawSpec: "^4.0.0",
+                saveSpec: null,
+                fetchSpec: "^4.0.0"
+            },
+            _requiredBy: ["/can-stache", "/can-stache-ast", "/can-view-live"],
+            _resolved:
+                "https://registry.npmjs.org/can-view-parser/-/can-view-parser-4.0.2.tgz",
+            _shasum: "bede05476b988ee0c1744d4de7eb459e1feba77b",
+            _spec: "can-view-parser@^4.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-view-parser/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-attribute-encoder": "^1.0.0",
+                "can-log": "^1.0.0",
+                "can-namespace": "1.0.0"
+            },
+            deprecated: false,
+            description: "Parses html and magic tags",
+            devDependencies: {
+                "can-test-helpers": "^1.0.1",
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                steal: "^1.0.1",
+                "steal-qunit": "^1.0.0",
+                testee: "^0.7.0"
+            },
+            homepage: "http://canjs.com",
+            keywords: ["canjs", "canjs-plugin", "donejs"],
+            main: "can-view-parser",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-view-parser.git"
+            },
+            scripts: {
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag=pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            }
+        },
+        {
+            name: "can-stache-ast",
+            version: "1.0.0",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-stache-ast/package.json",
+            origFileUrl: "./node_modules/can-stache-ast/package.json",
+            fileUrl: "./node_modules/can-stache-ast/package.json",
+            _from: "can-stache-ast@^1.0.0",
+            _id: "can-stache-ast@1.0.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-kJmhL1GV3GjHyhJEdn+D0ITRyR8eZ4jQwfIMB+MxMsdgxRxmWEteYi9M2Kd9pXQtA1Unkm4ZUAVd2WXbeA5mAQ==",
+            _location: "/can-stache-ast",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-stache-ast@^1.0.0",
+                name: "can-stache-ast",
+                escapedName: "can-stache-ast",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: ["/can-stache", "/steal-stache"],
+            _resolved:
+                "https://registry.npmjs.org/can-stache-ast/-/can-stache-ast-1.0.0.tgz",
+            _shasum: "474d32b3d7902f18021a5026457bde9bc92baabd",
+            _spec: "can-stache-ast@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache",
+            author: { name: "Bitovi", email: "contact@bitovi.com" },
+            bugs: { url: "https://github.com/canjs/can-stache-ast/issues" },
+            bundleDependencies: false,
+            dependencies: { "can-view-parser": "^4.0.2" },
+            deprecated: false,
+            description:
+                "[![Build Status](https://travis-ci.org/canjs/can-stache-ast.svg?branch=master)](https://travis-ci.org/canjs/can-stache-ast)",
+            devDependencies: {
+                jshint: "^2.9.1",
+                steal: "^1.6.5",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.11.3",
+                testee: "^0.7.0"
+            },
+            homepage: "https://github.com/canjs/can-stache-ast#readme",
+            keywords: ["canjs", "donejs-plugin"],
+            license: "MIT",
+            main: "can-stache-ast.js",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-stache-ast.git"
+            },
+            scripts: {
+                jshint: "jshint ./*.js --config",
+                postpublish:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test: "npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update version number" && git checkout -b release'
+            }
+        },
+        {
+            name: "can-attribute-encoder",
+            version: "1.0.5",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-attribute-encoder/package.json",
+            origFileUrl: "./node_modules/can-attribute-encoder/package.json",
+            fileUrl: "./node_modules/can-attribute-encoder/package.json",
+            _from: "can-attribute-encoder@^1.0.0",
+            _id: "can-attribute-encoder@1.0.5",
+            _inBundle: false,
+            _integrity:
+                "sha512-x9I+OllPDs3xxdUCj4Rbj1D2Xq/QzGq6OFVhGR7HgxYCD83r4d61skeeO1dWjHlprL5OhrMOxPXZE25+EwGP/w==",
+            _location: "/can-attribute-encoder",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-attribute-encoder@^1.0.0",
+                name: "can-attribute-encoder",
+                escapedName: "can-attribute-encoder",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: [
+                "/can-stache",
+                "/can-stache-bindings",
+                "/can-view-parser"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-attribute-encoder/-/can-attribute-encoder-1.0.5.tgz",
+            _shasum: "fb6b2a461c265dae8cd9d9ccf90c27eaa5db9c9b",
+            _spec: "can-attribute-encoder@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: {
+                url: "https://github.com/canjs/can-attribute-encoder/issues"
+            },
+            bundleDependencies: false,
+            dependencies: { "can-log": "^1.0.0", "can-namespace": "^1.0.0" },
+            deprecated: false,
+            description: "Encode / decode attributes for DOM elements",
+            devDependencies: {
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.5",
+                steal: "^1.5.6",
+                "steal-qunit": "^1.0.1",
+                testee: "^0.7.0"
+            },
+            homepage: "https://canjs.com/",
+            keywords: ["canjs"],
+            license: "MIT",
+            main: "can-attribute-encoder",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-attribute-encoder.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag=pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox"
+            },
+            steal: {
+                npmIgnore: { testee: true, "steal-tools": true },
+                main: "can-attribute-encoder"
+            }
+        },
+        {
+            name: "can-import-module",
+            version: "1.0.0",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-import-module/package.json",
+            origFileUrl: "./node_modules/can-import-module/package.json",
+            fileUrl: "./node_modules/can-import-module/package.json",
+            _from: "can-import-module@^1.0.0",
+            _id: "can-import-module@1.0.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-W40eU7dYPYeEwKFNsCxSsoGb0ABLVAXJI1YXJW9+85RItWfjG5X6WmhBxIfDguIeh90VDz8DO2OWQFHysMHh+w==",
+            _location: "/can-import-module",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-import-module@^1.0.0",
+                name: "can-import-module",
+                escapedName: "can-import-module",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: ["/can-stache"],
+            _resolved:
+                "https://registry.npmjs.org/can-import-module/-/can-import-module-1.0.0.tgz",
+            _shasum: "27ea30bc7066a6bfbc83b1156b89e12fa8fdf135",
+            _spec: "can-import-module@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache",
+            author: "",
+            bugs: { url: "https://github.com/canjs/can-import-module/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-globals": "^1.0.1",
+                "can-namespace": "^1.0.0"
+            },
+            deprecated: false,
+            description:
+                "[![Build Status](https://travis-ci.org/canjs/can-import-module.svg?branch=master)](https://travis-ci.org/canjs/can-import-module)",
+            devDependencies: {
+                jshint: "^2.9.1",
+                steal: "^1.6.5",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.11.3",
+                testee: "^0.7.0"
+            },
+            homepage: "https://github.com/canjs/can-import-module#readme",
+            keywords: ["canjs", "donejs-plugin"],
+            license: "MIT",
+            main: "can-import-module.js",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-import-module.git"
+            },
+            scripts: {
+                build: "node build.js",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test: "npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update version number" && git checkout -b release && git add -f dist/'
+            }
+        },
+        {
+            name: "can-view-callbacks",
+            version: "4.1.0",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-view-callbacks/package.json",
+            origFileUrl: "./node_modules/can-view-callbacks/package.json",
+            fileUrl: "./node_modules/can-view-callbacks/package.json",
+            _from: "can-view-callbacks@^4.0.0",
+            _id: "can-view-callbacks@4.1.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-LKzgP+p+XOkLZtPlzRenMUN95ZbsEt3zwGal0B9U+1BGVxo2s6ufMSDRzgjcuVhzmiPChmVbarGUVjWH+Ww52g==",
+            _location: "/can-view-callbacks",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-view-callbacks@^4.0.0",
+                name: "can-view-callbacks",
+                escapedName: "can-view-callbacks",
+                rawSpec: "^4.0.0",
+                saveSpec: null,
+                fetchSpec: "^4.0.0"
+            },
+            _requiredBy: [
+                "/can-component",
+                "/can-connect",
+                "/can-stache",
+                "/can-stache-bindings",
+                "/can-view-import",
+                "/can-view-live"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-view-callbacks/-/can-view-callbacks-4.1.0.tgz",
+            _shasum: "34519c6cd2e67dd7c8ea895bd318f96bd462f2a0",
+            _spec: "can-view-callbacks@^4.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-view-callbacks/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-dom-mutate": "^1.0.0",
+                "can-fragment": "^1.0.0",
+                "can-globals": "^1.0.0",
+                "can-log": "^1.0.0",
+                "can-namespace": "1.0.0",
+                "can-observation-recorder": "^1.0.0",
+                "can-view-nodelist": "^4.0.0"
+            },
+            deprecated: false,
+            description: "Registered callbacks for behaviors",
+            devDependencies: {
+                "can-test-helpers": "^1.0.1",
+                "can-view-scope": "^4.0.0-pre.34",
+                "detect-cyclic-packages": "^1.1.0",
+                "done-serve": "^1.2.0",
+                jshint: "^2.9.1",
+                steal: "^1.5.6",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.4.0",
+                testee: "^0.7.0"
+            },
+            homepage: "https://canjs.com/doc/can-view-callbacks.html",
+            keywords: ["canjs", "canjs-plugin", "donejs"],
+            main: "can-view-callbacks",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-view-callbacks.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            }
+        },
+        {
+            name: "can-view-target",
+            version: "4.0.1",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-view-target/package.json",
+            origFileUrl: "./node_modules/can-view-target/package.json",
+            fileUrl: "./node_modules/can-view-target/package.json",
+            _from: "can-view-target@^4.0.0",
+            _id: "can-view-target@4.0.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-6oI8z0MQvdXpM6f/3PwKFxTLGEwM+eGVGnXgHKkg4196V/lpIrQE1Bev2RRoGD6fXJ51ZwTiEvDs1705Lb6njA==",
+            _location: "/can-view-target",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-view-target@^4.0.0",
+                name: "can-view-target",
+                escapedName: "can-view-target",
+                rawSpec: "^4.0.0",
+                saveSpec: null,
+                fetchSpec: "^4.0.0"
+            },
+            _requiredBy: ["/can-stache", "/can-view-live"],
+            _resolved:
+                "https://registry.npmjs.org/can-view-target/-/can-view-target-4.0.1.tgz",
+            _shasum: "2910ae6f5fe026b0b4b7b3aeb55c5813002ac9bb",
+            _spec: "can-view-target@^4.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-view-target/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-dom-mutate": "^1.0.0",
+                "can-globals": "^1.0.0",
+                "can-namespace": "1.0.0"
+            },
+            deprecated: false,
+            description: "Fast cloning micro templates",
+            devDependencies: {
+                "can-simple-dom": "^1.0.2",
+                "detect-cyclic-packages": "^1.1.0",
+                "done-serve": "^1.0.0",
+                "donejs-cli": "^0.9.5",
+                "generator-donejs": "^1.0.7",
+                jshint: "^2.9.1",
+                steal: "^1.0.1",
+                "steal-qunit": "^1.0.0",
+                testee: "^0.7.0"
+            },
+            homepage: "http://canjs.com",
+            keywords: ["canjs", "canjs-plugin", "donejs"],
+            main: "can-view-target",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-view-target.git"
+            },
+            scripts: {
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag=pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            }
+        },
+        {
+            name: "can-view-model",
+            version: "4.0.1",
+            nestedFileUrl:
+                "./node_modules/can-component/node_modules/can-view-model/package.json",
+            origFileUrl: "./node_modules/can-view-model/package.json",
+            fileUrl: "./node_modules/can-view-model/package.json",
+            _from: "can-view-model@^4.0.0",
+            _id: "can-view-model@4.0.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-GTGF0TcOeoJwLb6UwsPDdiWmQZXRbJWeWjwWDcuu7+5B8DvWSQuWpa2u0SWcapvGVm/MasbNvjxYVrUgmsJttw==",
+            _location: "/can-view-model",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-view-model@^4.0.0",
+                name: "can-view-model",
+                escapedName: "can-view-model",
+                rawSpec: "^4.0.0",
+                saveSpec: null,
+                fetchSpec: "^4.0.0"
+            },
+            _requiredBy: ["/can-component", "/can-stache-bindings"],
+            _resolved:
+                "https://registry.npmjs.org/can-view-model/-/can-view-model-4.0.1.tgz",
+            _shasum: "13f6d87e670aadf6d50d0f48368fd3d6d6173419",
+            _spec: "can-view-model@^4.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bundleDependencies: false,
+            dependencies: {
+                "can-globals": "^1.0.0",
+                "can-namespace": "1.0.0",
+                "can-reflect": "^1.2.1",
+                "can-simple-map": "^4.0.0",
+                "can-symbol": "^1.5.0"
+            },
+            deprecated: false,
+            description: "Gets or sets the view model of an element.",
+            devDependencies: {
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                steal: "^1.0.1",
+                "steal-qunit": "^1.0.0",
+                "steal-tools": "^1.0.0",
+                testee: "^0.7.0"
+            },
+            homepage: "https://canjs.com/doc/can-view-model.html",
+            keywords: ["canjs", "donejs"],
+            main: "can-view-model",
+            scripts: {
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            }
+        },
+        {
+            name: "can-stache-bindings",
+            version: "4.2.4",
+            nestedFileUrl:
+                "./node_modules/can-component/node_modules/can-stache-bindings/package.json",
+            origFileUrl: "./node_modules/can-stache-bindings/package.json",
+            fileUrl: "./node_modules/can-stache-bindings/package.json",
+            _from: "can-stache-bindings@^4.1.3",
+            _id: "can-stache-bindings@4.2.4",
+            _inBundle: false,
+            _integrity:
+                "sha512-LLIGy3XMdUDBK+O8de63ZdlTMg2/nrbJpp667T2psCmwLxkt3wZFYPb19TDeSlRSOAxzHVIuUGdVcf+P19o+FA==",
+            _location: "/can-stache-bindings",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-stache-bindings@^4.1.3",
+                name: "can-stache-bindings",
+                escapedName: "can-stache-bindings",
+                rawSpec: "^4.1.3",
+                saveSpec: null,
+                fetchSpec: "^4.1.3"
+            },
+            _requiredBy: [
+                "/",
+                "/can-component",
+                "/can-connect",
+                "/shuttle-canstrap",
+                "/steal-stache"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-stache-bindings/-/can-stache-bindings-4.2.4.tgz",
+            _shasum: "f5e472d4c734a4517304539b07f08c4ae475294d",
+            _spec: "can-stache-bindings@^4.1.3",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bundleDependencies: false,
+            dependencies: {
+                "can-assign": "^1.0.0",
+                "can-attribute-encoder": "^1.0.0",
+                "can-attribute-observable": "<2.0.0",
+                "can-dom-data-state": "^1.0.0",
+                "can-dom-events": "^1.1.1",
+                "can-dom-mutate": "^1.0.1",
+                "can-event-queue": "^1.0.0",
+                "can-log": "^1.0.0",
+                "can-observation-recorder": "^1.0.0",
+                "can-queues": "^1.0.0",
+                "can-reflect": "^1.6.0",
+                "can-reflect-dependencies": "^1.0.0",
+                "can-simple-map": "^4.0.0",
+                "can-simple-observable": "^2.0.0",
+                "can-stache": "^4.0.2",
+                "can-stache-key": "^1.0.0",
+                "can-symbol": "^1.0.0",
+                "can-view-callbacks": "^4.0.0",
+                "can-view-live": "^4.0.5",
+                "can-view-model": "^4.0.0",
+                "can-view-scope": "^4.0.0"
+            },
+            deprecated: false,
+            description: "Default binding syntaxes for can-stache",
+            devDependencies: {
+                "can-define": "^2.0.0",
+                "can-event-dom-enter": "^2.0.0",
+                "can-globals": "^1.0.0",
+                "can-test-helpers": "^1.1.0",
+                "can-vdom": "^4.0.0",
+                "can-view-nodelist": "^4.0.0",
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                steal: "^1.2.9",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.1.2",
+                testee: "^0.7.0"
+            },
+            homepage: "https://canjs.com/doc/can-stache-bindings.html",
+            keywords: ["canjs", "donejs"],
+            main: "can-stache-bindings",
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                jshint: "jshint test/ ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag=pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            },
+            steal: { main: "can-stache-bindings" }
+        },
+        {
+            name: "can-view-scope",
+            version: "4.3.1",
+            nestedFileUrl:
+                "./node_modules/can-component/node_modules/can-view-scope/package.json",
+            origFileUrl: "./node_modules/can-view-scope/package.json",
+            fileUrl: "./node_modules/can-view-scope/package.json",
+            _from: "can-view-scope@^4.0.0",
+            _id: "can-view-scope@4.3.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-i936eckAKILTSXSiO0MRtKUyzgzJ8YkdjB/jUroVBunKiNLjaK5Wn9TRN36lVTj78Y4vZN2artkoahWOlci/Mw==",
+            _location: "/can-view-scope",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-view-scope@^4.0.0",
+                name: "can-view-scope",
+                escapedName: "can-view-scope",
+                rawSpec: "^4.0.0",
+                saveSpec: null,
+                fetchSpec: "^4.0.0"
+            },
+            _requiredBy: [
+                "/can-component",
+                "/can-stache",
+                "/can-stache-bindings"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-view-scope/-/can-view-scope-4.3.1.tgz",
+            _shasum: "f0d951041dbd0523f6ad59236276f857481f0fe1",
+            _spec: "can-view-scope@^4.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-view-scope/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-assign": "^1.1.1",
+                "can-construct": "^3.2.0",
+                "can-define-lazy-value": "^1.0.0",
+                "can-event-queue": "^1.0.0",
+                "can-key-tree": "^1.0.0",
+                "can-log": "^1.0.0",
+                "can-namespace": "1.0.0",
+                "can-observation": "^4.0.0",
+                "can-observation-recorder": "^1.0.0",
+                "can-queues": "^1.0.0",
+                "can-reflect": "^1.6.0",
+                "can-reflect-dependencies": "<2.0.0",
+                "can-simple-map": "^4.0.0",
+                "can-single-reference": "^1.0.0",
+                "can-stache-helpers": "^1.0.0",
+                "can-stache-key": "^1.0.0",
+                "can-symbol": "^1.0.0"
+            },
+            deprecated: false,
+            description: "Observable scopes",
+            devDependencies: {
+                "can-simple-observable": "^2.0.0",
+                "can-test-helpers": "^1.0.1",
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                steal: "^1.0.1",
+                "steal-qunit": "^1.0.0",
+                testee: "^0.7.0"
+            },
+            homepage: "https://canjs.com/doc/can-view-scope.html",
+            keywords: ["canjs", "canjs-plugin", "donejs"],
+            main: "can-view-scope",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-view-scope.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js test/*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            }
+        },
+        {
+            name: "can-child-nodes",
+            version: "1.0.0",
+            nestedFileUrl:
+                "./node_modules/can-component/node_modules/can-child-nodes/package.json",
+            origFileUrl: "./node_modules/can-child-nodes/package.json",
+            fileUrl: "./node_modules/can-child-nodes/package.json",
+            _from: "can-child-nodes@^1.0.0",
+            _id: "can-child-nodes@1.0.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-2jr0KGq2zOHigjZbaki62+no1qPGpol2sQTko5qvCwaoTtGMH+d96UjvzzMbzAKMt0YbQAlmyhYuraaH11xsgA==",
+            _location: "/can-child-nodes",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-child-nodes@^1.0.0",
+                name: "can-child-nodes",
+                escapedName: "can-child-nodes",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: [
+                "/can-component",
+                "/can-fragment",
+                "/can-stache",
+                "/can-view-live"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-child-nodes/-/can-child-nodes-1.0.0.tgz",
+            _shasum: "892f098801d1f9e30936ecbbbc8cbd5b02dddc5c",
+            _spec: "can-child-nodes@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "donejs core team",
+                email: "core@donejs.com",
+                url: "http://donejs.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-child-nodes/issues" },
+            bundleDependencies: false,
+            dependencies: { "can-namespace": "^1.0.0" },
+            deprecated: false,
+            description: "Read child nodes from elements",
+            devDependencies: {
+                jshint: "^2.9.1",
+                steal: "^1.6.5",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.11.3",
+                testee: "^0.7.0"
+            },
+            homepage: "http://canjs",
+            keywords: ["canjs", "donejs", "donejs-plugin"],
+            license: "MIT",
+            main: "can-child-nodes",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-child-nodes.git"
+            },
+            scripts: {
+                build: "node build.js",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test: "npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update version number" && git checkout -b release && git add -f dist/'
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                }
+            }
+        },
+        {
+            name: "can-string",
+            version: "0.0.5",
+            nestedFileUrl:
+                "./node_modules/can-component/node_modules/can-string/package.json",
+            origFileUrl: "./node_modules/can-string/package.json",
+            fileUrl: "./node_modules/can-string/package.json",
+            _from: "can-string@0.0.5",
+            _id: "can-string@0.0.5",
+            _inBundle: false,
+            _integrity:
+                "sha512-tpQoz/2gv/a0ieaA69dOqysFxktNAQRTMdKBWtiWPrcQBPjnkGCudHGtcyV9aaQh6sq527tVh7PQpUNMkeFYYg==",
+            _location: "/can-string",
+            _phantomChildren: {},
+            _requested: {
+                type: "version",
+                registry: true,
+                raw: "can-string@0.0.5",
+                name: "can-string",
+                escapedName: "can-string",
+                rawSpec: "0.0.5",
+                saveSpec: null,
+                fetchSpec: "0.0.5"
+            },
+            _requiredBy: [
+                "/can-component",
+                "/can-construct",
+                "/can-control",
+                "/can-stache"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-string/-/can-string-0.0.5.tgz",
+            _shasum: "1bccf1b32abad078818f1380a854e88a67510298",
+            _spec: "can-string@0.0.5",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "DoneJS",
+                email: "core@donejs.com",
+                url: "http://donejs.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-string/issues" },
+            bundleDependencies: false,
+            dependencies: {},
+            deprecated: false,
+            description: "String helpers",
+            devDependencies: {
+                jshint: "^2.9.1",
+                steal: "^1.6.5",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.11.3",
+                testee: "^0.7.0"
+            },
+            homepage: "http://canjs.com",
+            keywords: ["canjs", "donejs-plugin"],
+            license: "MIT",
+            main: "can-string",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-string.git"
+            },
+            scripts: {
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test: "npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox"
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                },
+                plugins: ["steal-less", "steal-stache"]
+            }
+        },
+        {
+            name: "can-dom-events",
+            version: "1.2.0",
+            nestedFileUrl:
+                "./node_modules/can-component/node_modules/can-dom-events/package.json",
+            origFileUrl: "./node_modules/can-dom-events/package.json",
+            fileUrl: "./node_modules/can-dom-events/package.json",
+            _from: "can-dom-events@^1.1.0",
+            _id: "can-dom-events@1.2.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-o3+aOgJym9AJfR51E3KmYKI2M8L7UJVkIaaHal49zVlwjEamXiKFrZD+gJ7aw39MjLryadzL0SUA3ajFF/2vrg==",
+            _location: "/can-dom-events",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-dom-events@^1.1.0",
+                name: "can-dom-events",
+                escapedName: "can-dom-events",
+                rawSpec: "^1.1.0",
+                saveSpec: null,
+                fetchSpec: "^1.1.0"
+            },
+            _requiredBy: [
+                "/can-attribute-observable",
+                "/can-attribute-observable/can-event-dom-radiochange",
+                "/can-component",
+                "/can-control",
+                "/can-event-dom-enter",
+                "/can-event-dom-radiochange",
+                "/can-event-queue",
+                "/can-route",
+                "/can-route-pushstate",
+                "/can-stache-bindings"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-dom-events/-/can-dom-events-1.2.0.tgz",
+            _shasum: "c2e644bb573b4b2ec66c43e84555553a07ef4d52",
+            _spec: "can-dom-events@^1.1.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "Chris Andrejewski",
+                email: "core@donejs.com",
+                url: "https://www.bitovi.com/"
+            },
+            bugs: { url: "https://github.com/canjs/can-dom-events/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-globals": "<2.0.0",
+                "can-key-tree": "^1.0.0",
+                "can-namespace": "^1.0.0",
+                "can-reflect": "^1.11.1"
+            },
+            deprecated: false,
+            description: "Listen for native and custom DOM events",
+            devDependencies: {
+                "detect-cyclic-packages": "^1.1.0",
+                fixpack: "^2.3.1",
+                jquery: "^3.2.1",
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.2.0",
+                testee: "^0.7.0"
+            },
+            homepage: "https://github.com/canjs/can-dom-events",
+            keywords: ["canjs", "custom", "dom", "events", "listener"],
+            license: "MIT",
+            main: "can-dom-events",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-dom-events.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                jshint: "jshint ./*.js ./helpers/*.js --config",
+                lint: "fixpack && npm run jshint",
+                postversion: "git push --follow-tags",
+                preversion: "npm test && npm run build",
+                test: "npm run detect-cycle && npm run lint && npm run testee",
+                testee: "testee test.html --browsers firefox"
+            }
+        },
+        {
+            name: "can-validate-validatejs",
+            version: "0.1.3",
+            nestedFileUrl:
+                "./node_modules/can-define-validate-validatejs/node_modules/can-validate-validatejs/package.json",
+            origFileUrl: "./node_modules/can-validate-validatejs/package.json",
+            fileUrl: "./node_modules/can-validate-validatejs/package.json",
+            _from: "can-validate-validatejs@^0.1.3",
+            _id: "can-validate-validatejs@0.1.3",
+            _inBundle: false,
+            _integrity:
+                "sha512-01+CRMtAYpokG6YE01hh7/C+uaUnKW1QLXTyL7XUvUNIA7SvyrvPX64694YF1/X+UauYoXy9+ARQCInP3Qsmtg==",
+            _location: "/can-validate-validatejs",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-validate-validatejs@^0.1.3",
+                name: "can-validate-validatejs",
+                escapedName: "can-validate-validatejs",
+                rawSpec: "^0.1.3",
+                saveSpec: null,
+                fetchSpec: "^0.1.3"
+            },
+            _requiredBy: ["/", "/can-define-validate-validatejs"],
+            _resolved:
+                "https://registry.npmjs.org/can-validate-validatejs/-/can-validate-validatejs-0.1.3.tgz",
+            _shasum: "561f2a3f93595d0551f6f7679b5b2a8ec09059e8",
+            _spec: "can-validate-validatejs@^0.1.3",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: { name: "Bitovi" },
+            bugs: {
+                url: "https://github.com/canjs/can-validate-validatejs/issues"
+            },
+            bundleDependencies: false,
+            dependencies: {
+                "can-reflect": "^1.11.1",
+                "validate.js": "^0.11.1"
+            },
+            deprecated: false,
+            description:
+                "Create validator functions that use ValidateJS to validate values.",
+            devDependencies: {
+                "bit-docs": "^0.0.8",
+                "detect-cyclic-packages": "^1.1.0",
+                "http-server": "^0.10.0",
+                jshint: "^2.9.4",
+                steal: "^1.0.8",
+                "steal-qunit": "^1.0.0",
+                "steal-tools": "^1.0.1",
+                testee: "^0.7.0"
+            },
+            homepage: "https://github.com/canjs/can-validate-validatejs#readme",
+            keywords: [
+                "Validate",
+                "Validate.js",
+                "can-validate",
+                "plugin",
+                "canjs"
+            ],
+            license: "MIT",
+            main: "can-validate-validatejs.js",
+            repository: {
+                type: "git",
+                url: "git+https://github.com/canjs/can-validate-validatejs.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "http-server -c-1",
+                jshint: "jshint . --config",
+                postversion:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major":
+                    "npm version major && npm run build && npm publish",
+                "release:minor":
+                    "npm version minor && npm run build && npm publish",
+                "release:patch":
+                    "npm version patch && npm run build && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm run build && npm publish --tag=pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update dist for release" && git checkout -b release && git add -f dist/'
+            },
+            steal: {
+                ignoreBrowser: true,
+                npmIgnore: {
+                    "bit-docs": true,
+                    testee: true,
+                    "steal-tools": true
+                },
+                npmDependencies: { "steal-qunit": true },
+                paths: {
+                    "validate.js@0.11.1#validate":
+                        "./node_modules/validate.js/validate.js"
+                }
+            }
+        },
+        {
+            name: "can-dom-mutate",
+            version: "1.0.4",
+            nestedFileUrl:
+                "./node_modules/can-component/node_modules/can-dom-mutate/package.json",
+            origFileUrl: "./node_modules/can-dom-mutate/package.json",
+            fileUrl: "./node_modules/can-dom-mutate/package.json",
+            _from: "can-dom-mutate@^1.0.0",
+            _id: "can-dom-mutate@1.0.4",
+            _inBundle: false,
+            _integrity:
+                "sha512-S5ifVTNl4AkWeRifNo3S6ceTZil9gP9jE4bvYPeSEwFaYb0LBGcTTs4QXNOIsV30EvLhMx+2LyQRtkbkdFS7+A==",
+            _location: "/can-dom-mutate",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-dom-mutate@^1.0.0",
+                name: "can-dom-mutate",
+                escapedName: "can-dom-mutate",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: [
+                "/can-attribute-observable",
+                "/can-component",
+                "/can-connect",
+                "/can-control",
+                "/can-dom-data",
+                "/can-dom-data-state",
+                "/can-stache",
+                "/can-stache-bindings",
+                "/can-view-callbacks",
+                "/can-view-import",
+                "/can-view-live",
+                "/can-view-nodelist",
+                "/can-view-target"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-dom-mutate/-/can-dom-mutate-1.0.4.tgz",
+            _shasum: "334fbe1256d8c4b0926d4c86a6ae2f3f95b7cce5",
+            _spec: "can-dom-mutate@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "DoneJS Team",
+                email: "core@donejs.com",
+                url: "https://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-dom-mutate/issues" },
+            bundleDependencies: false,
+            dependencies: { "can-globals": "^1.0.0" },
+            deprecated: false,
+            description: "Dispatch and listen for DOM mutations",
+            devDependencies: {
+                fixpack: "^2.3.1",
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.2.0",
+                testee: "^0.7.0"
+            },
+            homepage: "https://github.com/canjs/can-dom-mutate",
+            keywords: ["canjs", "mutation", "mutationobserver", "observer"],
+            license: "MIT",
+            main: "can-dom-mutate",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-dom-mutate.git"
+            },
+            scripts: {
+                jshint: "jshint ./*.js ./test/*.js --config",
+                lint: "fixpack && npm run jshint",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                test: "npm run lint && npm run testee",
+                testee: "testee test.html --browsers firefox"
+            },
+            steal: { main: "can-dom-mutate" }
+        },
+        {
+            name: "can-validate",
+            version: "1.1.4",
+            nestedFileUrl:
+                "./node_modules/can-define-validate-validatejs/node_modules/can-validate/package.json",
+            origFileUrl: "./node_modules/can-validate/package.json",
+            fileUrl: "./node_modules/can-validate/package.json",
+            _from: "can-validate@^1.1.0",
+            _id: "can-validate@1.1.4",
+            _inBundle: false,
+            _integrity:
+                "sha512-xjxrwxPGuCO8rJc0tBcbizB9jZzPZBgzVu5xj1fX46VxFZPC3YlMoKRWbw/ha+QzixrPIlTxTr+sw1pM+LfQHQ==",
+            _location: "/can-validate",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-validate@^1.1.0",
+                name: "can-validate",
+                escapedName: "can-validate",
+                rawSpec: "^1.1.0",
+                saveSpec: null,
+                fetchSpec: "^1.1.0"
+            },
+            _requiredBy: ["/can-define-validate-validatejs"],
+            _resolved:
+                "https://registry.npmjs.org/can-validate/-/can-validate-1.1.4.tgz",
+            _shasum: "a7606ebb60fad9b6fdb6ea3da5f175eac4804e16",
+            _spec: "can-validate@^1.1.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-define-validate-validatejs",
+            author: { name: "Bitovi" },
+            browser: {},
+            bugs: { url: "https://github.com/canjs/can-validate/issues" },
+            bundleDependencies: false,
+            dependencies: { "can-reflect": "^1.11.1" },
+            deprecated: false,
+            description: "Validation plugin for CanJS.",
+            devDependencies: {
+                "bit-docs": "0.0.8",
+                "detect-cyclic-packages": "^1.1.0",
+                "http-server": "^0.10.0",
+                jshint: "^2.9.4",
+                steal: "^1.0.8",
+                "steal-qunit": "^1.0.0",
+                "steal-tools": "^1.0.1",
+                testee: "^0.5.0"
+            },
+            homepage: "https://github.com/canjs/can-validate",
+            keywords: ["Validate", "plugin", "canjs"],
+            license: "MIT",
+            main: "can-validate.js",
+            repository: {
+                type: "git",
+                url: "git+https://github.com/canjs/can-validate.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "http-server -c-1",
+                jshint: "jshint . --config",
+                postversion:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major":
+                    "npm version major && npm run build && npm publish",
+                "release:minor":
+                    "npm version minor && npm run build && npm publish",
+                "release:patch":
+                    "npm version patch && npm run build && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm run build && npm publish --tag=pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update dist for release" && git checkout -b release && git add -f dist/'
+            },
+            steal: {
+                ignoreBrowser: true,
+                npmIgnore: {
+                    documentjs: true,
+                    testee: true,
+                    "steal-tools": true
+                },
+                npmDependencies: { "steal-qunit": true }
+            }
+        },
+        {
+            name: "can-stache-key",
+            version: "1.1.0",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-stache-key/package.json",
+            origFileUrl: "./node_modules/can-stache-key/package.json",
+            fileUrl: "./node_modules/can-stache-key/package.json",
+            _from: "can-stache-key@^1.0.0",
+            _id: "can-stache-key@1.1.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-D/MiJOoJQ42YSYNFrw5Qald2sE32lo4hniDkYTLx+IydMXpjW0EuEFxBfalOuzkhuas+WSa7s7C96dSyQNuhdA==",
+            _location: "/can-stache-key",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-stache-key@^1.0.0",
+                name: "can-stache-key",
+                escapedName: "can-stache-key",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: [
+                "/can-component",
+                "/can-compute",
+                "/can-control",
+                "/can-list",
+                "/can-map",
+                "/can-stache",
+                "/can-stache-bindings",
+                "/can-view-scope"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-stache-key/-/can-stache-key-1.1.0.tgz",
+            _shasum: "53cea99b4421e59efa2ea3145a4926bd90bd852b",
+            _spec: "can-stache-key@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "DoneJS Team",
+                email: "core@donejs.com",
+                url: "http://donejs.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-stache-key/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-log": "^1.0.0",
+                "can-namespace": "1.0.0",
+                "can-observation-recorder": "^1.0.0",
+                "can-reflect": "^1.1.0",
+                "can-reflect-promise": "^2.0.0",
+                "can-symbol": "^1.0.0"
+            },
+            deprecated: false,
+            description: "Read and write keys on a value",
+            devDependencies: {
+                "can-event-queue": "<2.0.0",
+                "can-observation": "^4.0.0-pre.2",
+                "can-simple-map": "^4.0.0",
+                "can-simple-observable": "^2.0.0-pre.11",
+                "can-test-helpers": "^1.1.1",
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.2.0",
+                testee: "^0.7.0"
+            },
+            homepage: "https://canjs.com",
+            keywords: ["DoneJS", "CanJS"],
+            license: "MIT",
+            main: "can-stache-key",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-stache-key.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox"
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                },
+                main: "can-stache-key"
+            }
+        },
+        {
+            name: "can-parse-uri",
+            version: "1.1.0",
+            nestedFileUrl:
+                "./node_modules/can-join-uris/node_modules/can-parse-uri/package.json",
+            origFileUrl: "./node_modules/can-parse-uri/package.json",
+            fileUrl: "./node_modules/can-parse-uri/package.json",
+            _from: "can-parse-uri@^1.0.0",
+            _id: "can-parse-uri@1.1.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-mfOQkOk5lOyUp1IV4S8LI9ixllZ1jz7o+98/aUvkxl7tbG6qMfuhB1kzZg+rDq7Wi169CU2OUYyYZ7TtkJ1dUA==",
+            _location: "/can-parse-uri",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-parse-uri@^1.0.0",
+                name: "can-parse-uri",
+                escapedName: "can-parse-uri",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: ["/can-ajax", "/can-join-uris", "/can-util"],
+            _resolved:
+                "https://registry.npmjs.org/can-parse-uri/-/can-parse-uri-1.1.0.tgz",
+            _shasum: "22fee2aa005881e4db72439b2b59061a0ec79f37",
+            _spec: "can-parse-uri@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-util",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "https://www.bitovi.com/"
+            },
+            bugs: { url: "https://github.com/canjs/can-parse-uri/issues" },
+            bundleDependencies: false,
+            dependencies: { "can-namespace": "^1.0.0" },
+            deprecated: false,
+            description: "Parse a URI into its components.",
+            devDependencies: {
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.2.0",
+                testee: "^0.3.0"
+            },
+            homepage: "https://canjs.com/",
+            keywords: ["canjs", "parse", "uri"],
+            main: "can-parse-uri",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-parse-uri.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update version number" && git checkout -b release && git add -f dist/'
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                },
+                main: "can-parse-uri"
+            }
+        },
+        {
+            name: "can-cid",
+            version: "1.1.2",
+            nestedFileUrl:
+                "./node_modules/can-dom-data-state/node_modules/can-cid/package.json",
+            origFileUrl: "./node_modules/can-cid/package.json",
+            fileUrl: "./node_modules/can-cid/package.json",
+            _from: "can-cid@^1.1.0",
+            _id: "can-cid@1.1.2",
+            _inBundle: false,
+            _integrity:
+                "sha512-pTZSC7BSJdN5RFPlPtBHNoIgnXTDoUzO9IVB06OvoZ6b5k5jMz87XMR42ahuR4nsgCEhNkcY3kpVufJSX1wD0Q==",
+            _location: "/can-cid",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-cid@^1.1.0",
+                name: "can-cid",
+                escapedName: "can-cid",
+                rawSpec: "^1.1.0",
+                saveSpec: null,
+                fetchSpec: "^1.1.0"
+            },
+            _requiredBy: [
+                "/can-dom-data-state",
+                "/can-event-dom-enter",
+                "/can-event-dom-enter/can-dom-data-state",
+                "/can-event-dom-radiochange",
+                "/can-event-dom-radiochange/can-dom-data-state",
+                "/can-list",
+                "/can-map",
+                "/can-single-reference",
+                "/can-util",
+                "/can-util/can-dom-data-state"
+            ],
+            _resolved: "https://registry.npmjs.org/can-cid/-/can-cid-1.1.2.tgz",
+            _shasum: "b15f858e42213b2b54f3971cb0d83643e6be7367",
+            _spec: "can-cid@^1.1.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-util",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-cid/issues" },
+            bundleDependencies: false,
+            dependencies: { "can-namespace": "1.0.0" },
+            deprecated: false,
+            description:
+                "Utility for getting a unique identifier for an object",
+            devDependencies: {
+                "detect-cyclic-packages": "^1.1.0",
+                documentjs: "^0.4.2",
+                "http-server": "^0.10.0",
+                jshint: "^2.9.1",
+                steal: "^1.2.8",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.1.2",
+                "test-saucelabs": "0.0.2",
+                testee: "^0.3.1"
+            },
+            homepage: "http://canjs.com",
+            keywords: ["canjs", "canjs", "plugin", "donejs"],
+            main: "can-cid",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-cid.git"
+            },
+            scripts: {
+                build: "node build.js",
+                ci: "npm run build && npm run test && node test-saucelabs.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                "http-server": "http-server -p 3000 --silent",
+                jshint: "jshint ./*.js --config",
+                postversion:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update dist for release" && git checkout -b release && git add -f dist/'
+            }
+        },
+        {
+            name: "can-param",
+            version: "1.0.4",
+            nestedFileUrl:
+                "./node_modules/can-route/node_modules/can-param/package.json",
+            origFileUrl: "./node_modules/can-param/package.json",
+            fileUrl: "./node_modules/can-param/package.json",
+            _from: "can-param@^1.0.0",
+            _id: "can-param@1.0.4",
+            _inBundle: false,
+            _integrity:
+                "sha512-cmq6LrIK+Vx0ojnb/VKH6UcAUoTfxBRe8tCR7lx0wdXs2DC/t4lnqQmddZp2waN6iQ9eJMtLvOQNEEiaxaP1XA==",
+            _location: "/can-param",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-param@^1.0.0",
+                name: "can-param",
+                escapedName: "can-param",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: ["/can-ajax", "/can-route", "/can-util"],
+            _resolved:
+                "https://registry.npmjs.org/can-param/-/can-param-1.0.4.tgz",
+            _shasum: "320b786d445818235d3bf9b2244857dcb491c1e7",
+            _spec: "can-param@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-util",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "https://www.bitovi.com/"
+            },
+            bugs: { url: "https://github.com/canjs/can-param/issues" },
+            bundleDependencies: false,
+            dependencies: { "can-namespace": "1.0.0" },
+            deprecated: false,
+            description: "Serialize an array or object into a query string.",
+            devDependencies: {
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.2.0",
+                testee: "^0.3.0"
+            },
+            homepage: "https://canjs.com/doc/can-param.html",
+            keywords: ["canjs", "parameter", "query string"],
+            main: "can-param",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-param.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update version number" && git checkout -b release && git add -f dist/'
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                }
+            }
+        },
+        {
+            name: "can-deparam",
+            version: "1.1.1",
+            nestedFileUrl:
+                "./node_modules/can-route/node_modules/can-deparam/package.json",
+            origFileUrl: "./node_modules/can-deparam/package.json",
+            fileUrl: "./node_modules/can-deparam/package.json",
+            _from: "can-deparam@^1.0.0",
+            _id: "can-deparam@1.1.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-XYP87XLpnt5uOCc10K0cH3Pi39L6D18IDlC2+a8ygBOWeklQ4v3AFh4VqsLasQSKLaVnnLtmt6xPAqzj/h8eKw==",
+            _location: "/can-deparam",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-deparam@^1.0.0",
+                name: "can-deparam",
+                escapedName: "can-deparam",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: ["/can-route", "/can-util"],
+            _resolved:
+                "https://registry.npmjs.org/can-deparam/-/can-deparam-1.1.1.tgz",
+            _shasum: "9e31e4ddb11d20a8f16c466c6dcc272f1007e9ac",
+            _spec: "can-deparam@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-util",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "https://www.bitovi.com/"
+            },
+            bugs: { url: "https://github.com/canjs/can-deparam/issues" },
+            bundleDependencies: false,
+            dependencies: { "can-namespace": "1.0.0" },
+            deprecated: false,
+            description: "Deserialize a query string into an array or object.",
+            devDependencies: {
+                "can-string-to-any": "^1.0.1",
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.2.0",
+                testee: "^0.3.0"
+            },
+            homepage: "https://canjs.com/doc/can-deparam.html",
+            keywords: ["canjs", "query string"],
+            main: "can-deparam",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-deparam.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update version number" && git checkout -b release && git add -f dist/'
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                }
+            }
+        },
+        {
+            name: "can-key-tree",
+            version: "1.0.2",
+            nestedFileUrl:
+                "./node_modules/can-route/node_modules/can-key-tree/package.json",
+            origFileUrl: "./node_modules/can-key-tree/package.json",
+            fileUrl: "./node_modules/can-key-tree/package.json",
+            _from: "can-key-tree@^1.0.0",
+            _id: "can-key-tree@1.0.2",
+            _inBundle: false,
+            _integrity:
+                "sha512-wzjDHVYPgT5PX6fTVuu54Zgw2+jNUNTC0ELfygabnR+KD+FMbOvmji7Mxx6Di4/eVXaP1pxk6nyEzUBkx+Z/FQ==",
+            _location: "/can-key-tree",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-key-tree@^1.0.0",
+                name: "can-key-tree",
+                escapedName: "can-key-tree",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: [
+                "/can-diff",
+                "/can-dom-events",
+                "/can-event-queue",
+                "/can-observation",
+                "/can-reflect-promise",
+                "/can-route",
+                "/can-route-pushstate",
+                "/can-simple-map",
+                "/can-simple-observable",
+                "/can-view-scope"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-key-tree/-/can-key-tree-1.0.2.tgz",
+            _shasum: "58484c71ae28b88d998bee3e3f63c17945db3b5a",
+            _spec: "can-key-tree@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-dom-events",
+            author: {
+                name: "DoneJS Core Team",
+                email: "core@donejs.com",
+                url: "http://donejs.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-key-tree/issues" },
+            bundleDependencies: false,
+            dependencies: { "can-reflect": "^1.4.0" },
+            deprecated: false,
+            description: "Add and remove items to a tree",
+            devDependencies: {
+                docco: "^0.7.0",
+                "done-serve": "^1.0.0",
+                "donejs-cli": "^1.0.0",
+                "generator-donejs": "^1.0.0",
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.2.0",
+                testee: "^0.3.0"
+            },
+            homepage: "https://github.com/canjs/can-key-tree#readme",
+            keywords: ["CanJS", "DoneJS", "donejs-plugin"],
+            license: "MIT",
+            main: "dist/cjs/can-key-tree",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-key-tree.git"
+            },
+            scripts: {
+                build: "node build.js",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test: "npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update version number" && git checkout -b release && git add -f dist/'
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                },
+                plugins: ["steal-less", "steal-stache"],
+                main: "can-key-tree"
+            }
+        },
+        {
+            name: "can-data-types",
+            version: "0.1.1",
+            nestedFileUrl:
+                "./node_modules/can-define/node_modules/can-data-types/package.json",
+            origFileUrl: "./node_modules/can-data-types/package.json",
+            fileUrl: "./node_modules/can-data-types/package.json",
+            _from: "can-data-types@<2.0.0",
+            _id: "can-data-types@0.1.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-oMlSHcyhizecNPahOWw41cId47b59SkvbNMUbDCHlwmP52PYb0LPUEiwo3c2jpgLWQ0CFK4mzrcsmGzYQP/0QA==",
+            _location: "/can-data-types",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-data-types@<2.0.0",
+                name: "can-data-types",
+                escapedName: "can-data-types",
+                rawSpec: "<2.0.0",
+                saveSpec: null,
+                fetchSpec: "<2.0.0"
+            },
+            _requiredBy: ["/can-define"],
+            _resolved:
+                "https://registry.npmjs.org/can-data-types/-/can-data-types-0.1.1.tgz",
+            _shasum: "a2731cf1a4ef0f0b70e4b520017b280f92563586",
+            _spec: "can-data-types@<2.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-define",
+            author: {
+                name: "DoneJS Contributors",
+                email: "core@donejs.com",
+                url: "http://donejs.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-data-types/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-namespace": "^1.0.0",
+                "can-reflect": "^1.16.1"
+            },
+            deprecated: false,
+            description: "Reusable special data types",
+            devDependencies: {
+                "can-symbol": "^1.6.1",
+                jshint: "^2.9.1",
+                steal: "^1.6.5",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.11.3",
+                testee: "^0.7.0"
+            },
+            homepage: "https://github.com/canjs/can-data-types#readme",
+            keywords: ["canjs", "donejs", "donejs-plugin"],
+            license: "MIT",
+            main: "can-data-types",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-data-types.git"
+            },
+            scripts: {
+                build: "node build.js",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test: "npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox"
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                },
+                main: "can-data-types"
+            }
+        },
+        {
+            name: "can-define-lazy-value",
+            version: "1.0.2",
+            nestedFileUrl:
+                "./node_modules/can-define/node_modules/can-define-lazy-value/package.json",
+            origFileUrl: "./node_modules/can-define-lazy-value/package.json",
+            fileUrl: "./node_modules/can-define-lazy-value/package.json",
+            _from: "can-define-lazy-value@^1.0.1",
+            _id: "can-define-lazy-value@1.0.2",
+            _inBundle: false,
+            _integrity:
+                "sha512-OlZ9bSqozc4Hk1aoJzh5O3ZLvfsGnudNsE4HmzD5KIagmnysJSCBy8zf6Yx+TC/LvNOcNm6NO9oOqwxGsxiijg==",
+            _location: "/can-define-lazy-value",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-define-lazy-value@^1.0.1",
+                name: "can-define-lazy-value",
+                escapedName: "can-define-lazy-value",
+                rawSpec: "^1.0.1",
+                saveSpec: null,
+                fetchSpec: "^1.0.1"
+            },
+            _requiredBy: ["/can-define", "/can-event-queue", "/can-view-scope"],
+            _resolved:
+                "https://registry.npmjs.org/can-define-lazy-value/-/can-define-lazy-value-1.0.2.tgz",
+            _shasum: "1f6bb89fe682af08c9f2c1c2884f66139df05969",
+            _spec: "can-define-lazy-value@^1.0.1",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-event-queue",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "https://bitovi.com"
+            },
+            bugs: {
+                url: "https://github.com/canjs/can-define-lazy-value/issues"
+            },
+            bundleDependencies: false,
+            dependencies: {},
+            deprecated: false,
+            description:
+                "Define properties with lazy values using Object.defineProperty",
+            devDependencies: {
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.2.0",
+                testee: "^0.3.0"
+            },
+            homepage: "https://canjs.com",
+            keywords: ["canjs", "donejs-plugin"],
+            license: "MIT",
+            main: "define-lazy-value",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-define-lazy-value.git"
+            },
+            scripts: {
+                build: "node build.js",
+                jshint: "jshint ./*.js --config",
+                postpublish:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag=pre",
+                test: "npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update version number" && git checkout -b release && git add -f dist/'
+            },
+            steal: { npmIgnore: { testee: true, "steal-tools": true } }
+        },
+        {
+            name: "can-string-to-any",
+            version: "1.0.1",
+            nestedFileUrl:
+                "./node_modules/can-define/node_modules/can-string-to-any/package.json",
+            origFileUrl: "./node_modules/can-string-to-any/package.json",
+            fileUrl: "./node_modules/can-string-to-any/package.json",
+            _from: "can-string-to-any@^1.0.1",
+            _id: "can-string-to-any@1.0.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-RV1nH1TY70X4Yv4/F/ZPR0/qmGoG2e+ftNCn6MicNkOG0/t9EAbbj2dUhKU1qWIKM+wXR8urjsFvyyECD6Zymg==",
+            _location: "/can-string-to-any",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-string-to-any@^1.0.1",
+                name: "can-string-to-any",
+                escapedName: "can-string-to-any",
+                rawSpec: "^1.0.1",
+                saveSpec: null,
+                fetchSpec: "^1.0.1"
+            },
+            _requiredBy: ["/can-define"],
+            _resolved:
+                "https://registry.npmjs.org/can-string-to-any/-/can-string-to-any-1.0.1.tgz",
+            _shasum: "d885c4738fde3075d5a6f8dd9e8605b967059cfa",
+            _spec: "can-string-to-any@^1.0.1",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-define",
+            author: {
+                name: "DoneJS Core Team",
+                email: "core@donejs.com",
+                url: "http://donejs.com"
+            },
+            browser: {},
+            browserify: { transform: ["cssify"] },
+            bugs: { url: "https://github.com/canjs/can-string-to-any/issues" },
+            bundleDependencies: false,
+            dependencies: {},
+            deprecated: false,
+            description: "Convert strings to equivalent JavaScript values",
+            devDependencies: {
+                jshint: "^2.9.1",
+                steal: "^1.6.5",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.11.3",
+                testee: "^0.7.0"
+            },
+            homepage: "http://canjs.com",
+            keywords: ["canjs", "donejs-plugin"],
+            license: "MIT",
+            main: "dist/cjs/can-string-to-any",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-string-to-any.git"
+            },
+            scripts: {
+                build: "node build.js",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test: "npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update version number" && git checkout -b release && git add -f dist/'
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                },
+                plugins: ["steal-less", "steal-stache"],
+                main: "can-string-to-any"
+            }
+        },
+        {
+            name: "can-fragment",
+            version: "1.0.1",
+            nestedFileUrl:
+                "./node_modules/can-view-callbacks/node_modules/can-fragment/package.json",
+            origFileUrl: "./node_modules/can-fragment/package.json",
+            fileUrl: "./node_modules/can-fragment/package.json",
+            _from: "can-fragment@^1.0.0",
+            _id: "can-fragment@1.0.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-1mZY8kU4z9HEStjPfJPP+xQCNTIvlWdiRnSAqNMkdUkBsIeDEq1Si0CIzy6/UjmgZ0gAjG3FezJPsiITh5ALvQ==",
+            _location: "/can-fragment",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-fragment@^1.0.0",
+                name: "can-fragment",
+                escapedName: "can-fragment",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: [
+                "/can-component",
+                "/can-stache",
+                "/can-view-callbacks",
+                "/can-view-live"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-fragment/-/can-fragment-1.0.1.tgz",
+            _shasum: "af5df35633902808878a8bc3adcd94f706757c7f",
+            _spec: "can-fragment@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "donejs core team",
+                email: "core@donejs.com",
+                url: "http://donejs.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-fragment/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-child-nodes": "^1.0.0",
+                "can-globals": "^1.0.1",
+                "can-namespace": "^1.0.0",
+                "can-reflect": "^1.16.1"
+            },
+            deprecated: false,
+            description: "Create a fragment from lots of stuff",
+            devDependencies: {
+                "can-vdom": "^4.0.1",
+                jshint: "^2.9.1",
+                steal: "^1.6.5",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.11.3",
+                testee: "^0.7.0"
+            },
+            homepage: "http://canjs",
+            keywords: ["canjs", "donejs", "donejs-plugin"],
+            license: "MIT",
+            main: "can-fragment",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-fragment.git"
+            },
+            scripts: {
+                build: "node build.js",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test: "npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update version number" && git checkout -b release && git add -f dist/'
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                }
+            }
+        },
+        {
+            name: "can-reflect-dependencies",
+            version: "1.0.2",
+            nestedFileUrl:
+                "./node_modules/can-stache-bindings/node_modules/can-reflect-dependencies/package.json",
+            origFileUrl: "./node_modules/can-reflect-dependencies/package.json",
+            fileUrl: "./node_modules/can-reflect-dependencies/package.json",
+            _from: "can-reflect-dependencies@^1.0.0",
+            _id: "can-reflect-dependencies@1.0.2",
+            _inBundle: false,
+            _integrity:
+                "sha512-VLzNSWowKfC7x7J5YngBXIoNcByjaYW5fxTLPgmDpfzAFMelypO7p5gcCan/ImymDzzKoN7mO9NNDrgvwzlNJQ==",
+            _location: "/can-reflect-dependencies",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-reflect-dependencies@^1.0.0",
+                name: "can-reflect-dependencies",
+                escapedName: "can-reflect-dependencies",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: [
+                "/can-attribute-observable",
+                "/can-stache-bindings",
+                "/can-view-live",
+                "/can-view-scope"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-reflect-dependencies/-/can-reflect-dependencies-1.0.2.tgz",
+            _shasum: "38ff979d73220d773a95a5b938d0e4afd784c77a",
+            _spec: "can-reflect-dependencies@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-view-live",
+            author: { name: "Bitovi" },
+            bugs: {
+                url: "https://github.com/canjs/can-reflect-dependencies/issues"
+            },
+            bundleDependencies: false,
+            dependencies: { "can-reflect": "^1.10.0", "can-symbol": "^1.4.1" },
+            deprecated: false,
+            description: "Keep track of external observable dependendecies",
+            devDependencies: {
+                "can-simple-map": "^4.0.0",
+                "can-simple-observable": "^2.0.0",
+                jshint: "^2.9.5",
+                steal: "^1.5.15",
+                "steal-qunit": "^1.0.1",
+                testee: "^0.7.0"
+            },
+            homepage:
+                "https://github.com/canjs/can-reflect-dependencies#readme",
+            keywords: ["canjs", "can-reflect"],
+            license: "MIT",
+            main: "can-reflect-dependencies.js",
+            repository: {
+                type: "git",
+                url: "git+https://github.com/canjs/can-reflect-dependencies.git"
+            },
+            scripts: {
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                test: "npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox"
+            }
+        },
+        {
+            name: "can-control",
+            version: "4.1.2",
+            nestedFileUrl:
+                "./node_modules/can-component/node_modules/can-control/package.json",
+            origFileUrl: "./node_modules/can-control/package.json",
+            fileUrl: "./node_modules/can-control/package.json",
+            _from: "can-control@^4.0.0",
+            _id: "can-control@4.1.2",
+            _inBundle: false,
+            _integrity:
+                "sha512-INAV1jlj6BCMr+O6xyC0MSb4RSQqQlEwjxrHwBN7YqL+E4pWLZuF3JbuTHj3/jh87GxA5C0H1Uz03F8PZiEakw==",
+            _location: "/can-control",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-control@^4.0.0",
+                name: "can-control",
+                escapedName: "can-control",
+                rawSpec: "^4.0.0",
+                saveSpec: null,
+                fetchSpec: "^4.0.0"
+            },
+            _requiredBy: ["/can-component"],
+            _resolved:
+                "https://registry.npmjs.org/can-control/-/can-control-4.1.2.tgz",
+            _shasum: "5a59a6db360849e1ae05ff5e24dd29c0c4446cd1",
+            _spec: "can-control@^4.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-control/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-assign": "^1.1.1",
+                "can-construct": "^3.2.0",
+                "can-dom-events": "^1.1.0",
+                "can-dom-mutate": "<2.0.0",
+                "can-event-queue": "<2.0.0",
+                "can-key": "<2.0.0",
+                "can-log": "^1.0.0",
+                "can-namespace": "1.0.0",
+                "can-observation": "^4.0.0",
+                "can-reflect": "^1.6.0",
+                "can-stache-key": "^1.0.0",
+                "can-string": "<2.0.0",
+                "can-symbol": "^1.0.0"
+            },
+            deprecated: false,
+            description: "Declarative event bindings",
+            devDependencies: {
+                "can-define": "^2.0.0",
+                "can-queues": "<2.0.0",
+                "can-simple-map": "^4.0.0",
+                "can-simple-observable": "^2.0.0",
+                "can-util": "^3.9.0",
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                steal: "^1.2.8",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.1.2",
+                testee: "^0.7.0"
+            },
+            homepage: "https://canjs.com/doc/can-control.html",
+            keywords: ["canjs", "canjs-plugin", "donejs"],
+            license: "MIT",
+            main: "can-control",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-control.git"
+            },
+            scripts: {
+                "detect-cycle": "detect-cyclic-packages",
+                jshint: "jshint can-control.js can-control_test.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag=pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            }
+        },
+        {
+            name: "can-attribute-observable",
+            version: "0.3.0",
+            nestedFileUrl:
+                "./node_modules/can-stache-bindings/node_modules/can-attribute-observable/package.json",
+            origFileUrl: "./node_modules/can-attribute-observable/package.json",
+            fileUrl: "./node_modules/can-attribute-observable/package.json",
+            _from: "can-attribute-observable@<2.0.0",
+            _id: "can-attribute-observable@0.3.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-fQwkWuByWEdhu1IM1BH6O8aKj9IE0W3qoJgrAkZlNaBov0ecdvLL83ESF3kz6+VkPhQkYC5ie0uUTZmSuMV4sg==",
+            _location: "/can-attribute-observable",
+            _phantomChildren: {
+                "can-dom-events": "1.2.0",
+                "can-globals": "1.1.1",
+                "can-namespace": "1.0.0"
+            },
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-attribute-observable@<2.0.0",
+                name: "can-attribute-observable",
+                escapedName: "can-attribute-observable",
+                rawSpec: "<2.0.0",
+                saveSpec: null,
+                fetchSpec: "<2.0.0"
+            },
+            _requiredBy: ["/can-stache-bindings", "/can-view-live"],
+            _resolved:
+                "https://registry.npmjs.org/can-attribute-observable/-/can-attribute-observable-0.3.0.tgz",
+            _shasum: "a5543cdc46c956d1f0a3d54773e1507d5911ae8c",
+            _spec: "can-attribute-observable@<2.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-view-live",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bundleDependencies: false,
+            dependencies: {
+                "can-diff": "^1.0.1",
+                "can-dom-data-state": "^1.0.1",
+                "can-dom-events": "^1.1.2",
+                "can-dom-mutate": "^1.0.3",
+                "can-event-dom-radiochange": "^2.1.0",
+                "can-globals": "^1.0.1",
+                "can-observation": "^4.0.1",
+                "can-observation-recorder": "^1.0.2",
+                "can-queues": "^1.0.1",
+                "can-reflect": "^1.13.3",
+                "can-reflect-dependencies": "^1.0.1",
+                "can-simple-observable": "^2.0.2"
+            },
+            deprecated: false,
+            description: "Create observables from HTML attributes.",
+            devDependencies: {
+                "can-vdom": "^4.0.1",
+                "detect-cyclic-packages": "^1.1.1",
+                jshint: "^2.9.5",
+                steal: "^1.6.5",
+                "steal-qunit": "^1.0.1",
+                testee: "^0.7.0"
+            },
+            keywords: [],
+            main: "can-attribute-observable",
+            scripts: {
+                "detect-cycle": "detect-cyclic-packages",
+                jshint: "jshint ./*.js test/*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            }
+        },
+        {
+            name: "can-reflect-promise",
+            version: "2.0.1",
+            nestedFileUrl:
+                "./node_modules/can-stache-key/node_modules/can-reflect-promise/package.json",
+            origFileUrl: "./node_modules/can-reflect-promise/package.json",
+            fileUrl: "./node_modules/can-reflect-promise/package.json",
+            _from: "can-reflect-promise@^2.0.0",
+            _id: "can-reflect-promise@2.0.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-slTyeUlFwzxuc+m07gCKSY9Y+fcZaSWUlJjMGMx34LTsycxGVsfRlTSCw/sL2Hu1uGQ7+LMkrtQUbMYnBzpJOw==",
+            _location: "/can-reflect-promise",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-reflect-promise@^2.0.0",
+                name: "can-reflect-promise",
+                escapedName: "can-reflect-promise",
+                rawSpec: "^2.0.0",
+                saveSpec: null,
+                fetchSpec: "^2.0.0"
+            },
+            _requiredBy: ["/can-stache-key"],
+            _resolved:
+                "https://registry.npmjs.org/can-reflect-promise/-/can-reflect-promise-2.0.1.tgz",
+            _shasum: "608623807e9441fea9a311eecd13c450eadd93c9",
+            _spec: "can-reflect-promise@^2.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache-key",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "https://www.bitovi.com"
+            },
+            bugs: {
+                url: "https://github.com/canjs/can-reflect-promise/issues"
+            },
+            bundleDependencies: false,
+            dependencies: {
+                "can-key-tree": "^1.0.0",
+                "can-log": "^1.0.0",
+                "can-observation": "^4.0.0",
+                "can-observation-recorder": "^1.0.0",
+                "can-queues": "^1.0.0",
+                "can-reflect": "^1.1.0",
+                "can-symbol": "^1.0.0",
+                "can-util": "^3.9.0"
+            },
+            deprecated: false,
+            description: "Reflection support for Promise types",
+            devDependencies: {
+                "can-jquery": "^3.2.0",
+                "can-test-helpers": "^1.1.0",
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                steal: "^1.5.4",
+                "steal-benchmark": "0.0.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.1.2",
+                testee: "^0.5.0"
+            },
+            directories: { test: "test" },
+            homepage: "https://canjs.com/doc/can-reflect-promise.html",
+            keywords: ["canjs", "canjs-plugin", "donejs"],
+            license: "MIT",
+            main: "can-reflect-promise",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-reflect-promise.git"
+            },
+            scripts: {
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint *.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            },
+            system: { npmAlgorithm: "flat" },
+            steal: { npmAlgorithm: "flat" }
+        },
+        {
+            name: "can-key",
+            version: "0.5.0",
+            nestedFileUrl:
+                "./node_modules/can-control/node_modules/can-key/package.json",
+            origFileUrl: "./node_modules/can-key/package.json",
+            fileUrl: "./node_modules/can-key/package.json",
+            _from: "can-key@<2.0.0",
+            _id: "can-key@0.5.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-CPUrwSNvtQSjLZ/Idkm+FJL63rLhvvRWN5no4kl6CIsa9dl7MGOkqYz6GoI4kV4YYeZBKYcqfSphrFh3ixXAfA==",
+            _location: "/can-key",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-key@<2.0.0",
+                name: "can-key",
+                escapedName: "can-key",
+                rawSpec: "<2.0.0",
+                saveSpec: null,
+                fetchSpec: "<2.0.0"
+            },
+            _requiredBy: ["/can-control"],
+            _resolved: "https://registry.npmjs.org/can-key/-/can-key-0.5.0.tgz",
+            _shasum: "2a75f20c644dbf2e40f1631d34223af4be3a9672",
+            _spec: "can-key@<2.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-control",
+            author: {
+                name: "DoneJS",
+                email: "core@donejs.com",
+                url: "donejs.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-key/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-namespace": "^1.0.0",
+                "can-reflect": "^1.13.3",
+                "can-symbol": "^1.0.0"
+            },
+            deprecated: false,
+            description: "Read nested key values",
+            devDependencies: {
+                jshint: "^2.9.1",
+                steal: "^1.6.5",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.11.3",
+                testee: "^0.7.0"
+            },
+            homepage: "http://canjs.com",
+            keywords: ["canjs", "donejs-plugin"],
+            license: "MIT",
+            main: "can-key",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-key.git"
+            },
+            scripts: {
+                build: "node build.js",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test: "npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update version number" && git checkout -b release && git add -f dist/'
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                },
+                plugins: ["steal-less", "steal-stache"],
+                main: "can-key"
+            }
+        },
+        {
+            name: "can-event-dom-radiochange",
+            version: "1.0.5",
+            nestedFileUrl:
+                "./node_modules/can-attribute-observable/node_modules/can-event-dom-radiochange/package.json",
+            origFileUrl:
+                "./node_modules/can-event-dom-radiochange/package.json",
+            fileUrl: "./node_modules/can-event-dom-radiochange/package.json",
+            _from: "can-event-dom-radiochange@^1.0.4",
+            _id: "can-event-dom-radiochange@1.0.5",
+            _inBundle: false,
+            _integrity:
+                "sha512-1/Hscy2KN/eWkhsx0d2ngUwByusCPzVRnfvOC7F5kNg0ivjd7sto5e4JeflRulZv+vdruEB6yx1tzzUWERu3tQ==",
+            _location: "/can-event-dom-radiochange",
+            _phantomChildren: { "can-cid": "1.1.2", "can-namespace": "1.0.0" },
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-event-dom-radiochange@^1.0.4",
+                name: "can-event-dom-radiochange",
+                escapedName: "can-event-dom-radiochange",
+                rawSpec: "^1.0.4",
+                saveSpec: null,
+                fetchSpec: "^1.0.4"
+            },
+            _requiredBy: ["/can-util"],
+            _resolved:
+                "https://registry.npmjs.org/can-event-dom-radiochange/-/can-event-dom-radiochange-1.0.5.tgz",
+            _shasum: "7bbacdce612ec89c51e57268b0ff3993fc356a22",
+            _spec: "can-event-dom-radiochange@^1.0.4",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-util",
+            author: {
+                name: "Chris Andrejewski",
+                email: "core@donejs.com",
+                url: "https://bitovi.com"
+            },
+            bugs: {
+                url: "https://github.com/canjs/can-event-dom-radiochange/issues"
+            },
+            bundleDependencies: false,
+            dependencies: {
+                "can-cid": "^1.1.0",
+                "can-dom-data-state": "^0.2.0",
+                "can-dom-events": "^1.0.2",
+                "can-globals": "<2.0.0"
+            },
+            deprecated: false,
+            description: "Custom radiochange event",
+            devDependencies: {
+                "detect-cyclic-packages": "^1.1.0",
+                fixpack: "^2.3.1",
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.2.0",
+                testee: "^0.6.0"
+            },
+            homepage: "https://canjs.com/doc/can-event-dom-radiochange.html",
+            keywords: ["canjs", "change", "event", "radio"],
+            license: "MIT",
+            main: "can-event-dom-radiochange",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-event-dom-radiochange.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                "install-canary": "npm install --no-shrinkwrap",
+                "install-locked": "npm install",
+                jshint: "jshint ./*.js --config",
+                lint: "fixpack && npm run jshint",
+                postversion: "git push --follow-tags",
+                preversion: "npm test && npm run build",
+                test: "npm run detect-cycle && npm run lint && npm run testee",
+                testee: "testee test.html --browsers firefox"
+            },
+            steal: {
+                main: "can-event-dom-radiochange",
+                npmIgnore: ["testee", "steal-tools"]
+            }
+        },
+        {
+            name: "can-event-dom-radiochange",
+            version: "2.1.0",
+            nestedFileUrl:
+                "./node_modules/can-attribute-observable/node_modules/can-event-dom-radiochange/package.json",
+            origFileUrl:
+                "./node_modules/can-event-dom-radiochange/package.json",
+            __crawledNestedPosition: true,
+            nextFileUrl:
+                "./node_modules/can-attribute-observable/node_modules/can-event-dom-radiochange/package.json",
+            fileUrl:
+                "./node_modules/can-attribute-observable/node_modules/can-event-dom-radiochange/package.json",
+            _from: "can-event-dom-radiochange@^2.1.0",
+            _id: "can-event-dom-radiochange@2.1.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-qQhuMyak80+T8QSoOyC2q4sm7y4R86j1axwKx5puSBPBv1EB/HtP5veHnmPBckZgkEu6Y0qC3UgCl5AKy/BHtQ==",
+            _location: "/can-attribute-observable/can-event-dom-radiochange",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-event-dom-radiochange@^2.1.0",
+                name: "can-event-dom-radiochange",
+                escapedName: "can-event-dom-radiochange",
+                rawSpec: "^2.1.0",
+                saveSpec: null,
+                fetchSpec: "^2.1.0"
+            },
+            _requiredBy: ["/can-attribute-observable"],
+            _resolved:
+                "https://registry.npmjs.org/can-event-dom-radiochange/-/can-event-dom-radiochange-2.1.0.tgz",
+            _shasum: "7ebb0a47884d73b6cabd06fc80036e5bd50b46fc",
+            _spec: "can-event-dom-radiochange@^2.1.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-attribute-observable",
+            author: {
+                name: "Chris Andrejewski",
+                email: "core@donejs.com",
+                url: "https://bitovi.com"
+            },
+            bugs: {
+                url: "https://github.com/canjs/can-event-dom-radiochange/issues"
+            },
+            bundleDependencies: false,
+            dependencies: {
+                "can-dom-events": "<2.0.0",
+                "can-globals": "<2.0.0",
+                "can-namespace": "1.0.0"
+            },
+            deprecated: false,
+            description: "Custom radiochange event",
+            devDependencies: {
+                "detect-cyclic-packages": "^1.1.0",
+                fixpack: "^2.3.1",
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.2.0",
+                testee: "^0.6.0"
+            },
+            homepage: "https://canjs.com/doc/can-event-dom-radiochange.html",
+            keywords: ["canjs", "change", "event", "radio"],
+            license: "MIT",
+            main: "can-event-dom-radiochange",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-event-dom-radiochange.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                "install-canary": "npm install --no-shrinkwrap",
+                "install-locked": "npm install",
+                jshint: "jshint ./*.js --config",
+                lint: "fixpack && npm run jshint",
+                postversion: "git push --follow-tags",
+                preversion: "npm test && npm run build",
+                test: "npm run detect-cycle && npm run lint && npm run testee",
+                testee: "testee test.html --browsers firefox"
+            },
+            steal: {
+                npmIgnore: { testee: true, "steal-tools": true },
+                main: "can-event-dom-radiochange"
+            }
+        },
+        {
+            name: "can-view-import",
+            version: "4.0.2",
+            nestedFileUrl:
+                "./node_modules/steal-stache/node_modules/can-view-import/package.json",
+            origFileUrl: "./node_modules/can-view-import/package.json",
+            fileUrl: "./node_modules/can-view-import/package.json",
+            _from: "can-view-import@^4.0.0",
+            _id: "can-view-import@4.0.2",
+            _inBundle: false,
+            _integrity:
+                "sha512-Z3ZgwmeNKOSWu5W9b3eLyfIwBYwVpDcfMUdJvq5YBA8LqsAU2PsQA6oGq2McOIvJasXPninOKiwndzpFQ0ZukA==",
+            _location: "/can-view-import",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-view-import@^4.0.0",
+                name: "can-view-import",
+                escapedName: "can-view-import",
+                rawSpec: "^4.0.0",
+                saveSpec: null,
+                fetchSpec: "^4.0.0"
+            },
+            _requiredBy: ["/can-connect", "/steal-stache"],
+            _resolved:
+                "https://registry.npmjs.org/can-view-import/-/can-view-import-4.0.2.tgz",
+            _shasum: "73e5be197f05cf25b4fd6db0316889e7b6668208",
+            _spec: "can-view-import@^4.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-connect",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-view-import/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-assign": "^1.0.0",
+                "can-dom-data-state": "^1.0.0",
+                "can-dom-mutate": "<2.0.0",
+                "can-globals": "<2.0.0",
+                "can-log": "^1.0.0",
+                "can-symbol": "^1.5.0",
+                "can-util": "^3.9.5",
+                "can-view-callbacks": "^4.0.0",
+                "can-view-nodelist": "^4.0.0"
+            },
+            deprecated: false,
+            description: "Import dependencies in CanJS views",
+            devDependencies: {
+                "bit-docs": "0.0.7",
+                "can-component": "^4.0.0",
+                "can-observation": "4.0.0",
+                "can-queues": "<2.0.0",
+                "can-simple-map": "^4.0.0",
+                "can-simple-observable": "^2.0.0",
+                "can-stache": "^4.0.0",
+                "can-test-helpers": "^1.0.1",
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                steal: "^1.2.0",
+                "steal-qunit": "^1.0.0",
+                "steal-stache": "^4.0.0-pre.1",
+                "steal-tools": "^1.0.0",
+                testee: "^0.7.0"
+            },
+            homepage: "https://canjs.com/doc/can-view-import.html",
+            keywords: [],
+            main: "can-view-import",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-view-import.git"
+            },
+            scripts: {
+                "detect-cycle":
+                    "detect-cyclic-packages --ignore done-serve,steal-stache",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag=pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            }
+        }
+    ]);
+}

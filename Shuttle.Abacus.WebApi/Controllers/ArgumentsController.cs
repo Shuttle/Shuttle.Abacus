@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Messages.v1;
 using Shuttle.Access.Mvc;
@@ -8,6 +9,7 @@ using Shuttle.Esb;
 
 namespace Shuttle.Abacus.WebApi.Controllers
 {
+    [RequiresPermission(SystemPermissions.Manage.Arguments)]
     [Route("api/[controller]")]
     [RequiresSession]
     public class ArgumentsController : Controller
@@ -46,7 +48,6 @@ namespace Shuttle.Abacus.WebApi.Controllers
             }
         }
 
-        [RequiresPermission(SystemPermissions.Manage.Arguments)]
         [HttpPost]
         public IActionResult Post([FromBody] ArgumentModel model)
         {
@@ -61,5 +62,16 @@ namespace Shuttle.Abacus.WebApi.Controllers
             return Ok();
         }
 
+        [HttpGet("{id}")]
+        public IActionResult Get(Guid id)
+        {
+            using (_databaseContextFactory.Create())
+            {
+                return Ok(new
+                {
+                    Data = _argumentQuery.Get(id)
+                });
+            }
+        }
     }
 }

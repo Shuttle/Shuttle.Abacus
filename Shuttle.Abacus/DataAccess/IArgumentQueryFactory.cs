@@ -12,7 +12,6 @@ namespace Shuttle.Abacus.DataAccess
         IQuery GetValues(Guid id);
         IQuery Add(Argument item);
         IQuery Remove(Guid id);
-        IQuery GetDTO(Guid id);
         IQuery Save(Argument item);
         IQuery RemoveValues(Argument argument);
         IQuery SaveValue(Argument argument, string value);

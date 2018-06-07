@@ -47,7 +47,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "steal-tools bundle --deps"
+    "postinstall": "steal-tools bundle --deps --no-minify"
   },
   "author": "Eben Roux",
   "homepage": "https://github.com/Shuttle/Shuttle.Abacus",

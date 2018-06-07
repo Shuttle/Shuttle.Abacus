@@ -5,16 +5,16 @@ import each from 'can-util/js/each/';
 var Resources = DefineMap.extend({
 	_resources: { Default: DefineList },
 
-	add: function (aggregate, options) {
+	add: function (resource, options) {
 		var o = options || {};
 
-		if (this.has(aggregate, options)) {
-			throw new Error(`Resource '${aggregate}' has already been registered.`);
+		if (this.has(resource, options)) {
+			throw new Error(`Resource '${resource}' has already been registered.`);
 		}
 
 		this._resources.push({
-            aggregate: aggregate,
-			value: o.value,
+            resource: resource,
+			item: o.item,
 			action: o.action,
 			componentName: o.componentName,
 			url: o.url,
@@ -22,21 +22,21 @@ var Resources = DefineMap.extend({
 		});
 	},
 
-	has: function (aggregate, options) {
-		return this.find(aggregate, options) != undefined;
+	has: function (resource, options) {
+		return this.find(resource, options) != undefined;
 	},
 
-	find: function (aggregate, options) {
+	find: function (resource, options) {
 		var o = options || {};
 		var result = undefined;
 
-		each(this._resources, function (resource) {
+		each(this._resources, function (entry) {
 			if (result) {
 				return;
 			}
 
-			if (resource.aggregate === aggregate && resource.value === o.value && resource.action === o.action) {
-				result = resource;
+			if (entry.resource === resource && (entry.item || '') === (o.item || '') && (entry.action || '') === (o.action || '')) {
+				result = entry;
 			}
 		});
 

@@ -17,19 +17,6 @@ from
     Argument
 ";
 
-        private readonly string SelectClauseDTO = @"
-select
-    a.ArgumentId,
-    Name,
-    ValueType,
-    Value
-from
-    Argument a
-left join
-    ArgumentValue av
-        on (a.ArgumentId = ava.ArgumentId) 
-";
-
         public IQuery Search(ArgumentSearchSpecification specification)
         {
             Guard.AgainstNull(specification, nameof(specification));
@@ -79,7 +66,7 @@ values
 )")
                 .AddParameterValue(ArgumentColumns.Id, item.Id)
                 .AddParameterValue(ArgumentColumns.Name, item.Name)
-                .AddParameterValue(ArgumentColumns.AnswerType, item.ValueType);
+                .AddParameterValue(ArgumentColumns.ValueType, item.ValueType);
         }
 
         public IQuery Remove(Guid id)
@@ -87,13 +74,6 @@ values
             return
                 RawQuery.Create("delete from Argument where ArgumentId = @ArgumentId")
                     .AddParameterValue(ArgumentColumns.Id, id);
-        }
-
-
-        public IQuery GetDTO(Guid id)
-        {
-            return RawQuery.Create(string.Concat(SelectClauseDTO, "where a.ArgumentId = @ArgumentId order by Name"))
-                .AddParameterValue(ArgumentColumns.Id, id);
         }
 
         public IQuery Save(Argument item)
@@ -108,7 +88,7 @@ where
     ArgumentId = @ArgumentId
 ")
                 .AddParameterValue(ArgumentColumns.Name, item.Name)
-                .AddParameterValue(ArgumentColumns.AnswerType, item.ValueType)
+                .AddParameterValue(ArgumentColumns.ValueType, item.ValueType)
                 .AddParameterValue(ArgumentColumns.Id, item.Id);
         }
 
@@ -148,7 +128,7 @@ values
 )")
                 .AddParameterValue(ArgumentColumns.Id, primitiveEvent.Id)
                 .AddParameterValue(ArgumentColumns.Name, registered.Name)
-                .AddParameterValue(ArgumentColumns.AnswerType, registered.ValueType);
+                .AddParameterValue(ArgumentColumns.ValueType, registered.ValueType);
         }
 
         public IQuery Removed(PrimitiveEvent primitiveEvent, Removed removed)

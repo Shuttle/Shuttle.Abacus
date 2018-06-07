@@ -20,6 +20,23 @@ export const Map = DefineMap.extend({
     },
     valueType: {
         type: 'string'
+    },
+    remove() {
+        api.delete({id: this.id})
+            .then(function () {
+                state.alerts.show({
+                    message: localisation.value('itemRemovalRequested',
+                        {itemName: localisation.value('argument')})
+                });
+            });
+    },
+    argumentValues() {
+        router.goto({
+            resource: 'argument',
+            item: 'values',
+            id: this.id,
+            action: 'add'
+        });
     }
 });
 
@@ -60,6 +77,12 @@ export const ViewModel = DefineMap.extend({
 
         if (!columns.length) {
             columns.push({
+                columnTitle: '',
+                columnClass: 'col-1',
+                stache: '<cs-button text:from="\'values\'" click:from="argumentValues" elementClass:from="\'btn-sm\'"/>'
+            });
+
+            columns.push({
                 columnTitle: 'name',
                 columnClass: 'col',
                 attributeName: 'name'
@@ -69,6 +92,12 @@ export const ViewModel = DefineMap.extend({
                 columnTitle: 'value-type',
                 columnClass: 'col',
                 attributeName: 'valueType'
+            });
+
+            columns.push({
+                columnTitle: 'remove',
+                columnClass: 'col-1',
+                stache: '<cs-button-remove click:from="remove" elementClass:from="\'btn-sm\'"/>'
             });
         }
 

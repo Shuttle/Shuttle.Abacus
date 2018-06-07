@@ -9,9 +9,9 @@ namespace Shuttle.Abacus.DataAccess
     public interface IArgumentQuery
     {
         IEnumerable<DataRow> Search(ArgumentSearchSpecification specification);
-        DataRow Get(Guid id);
+        Query.Argument Get(Guid id);
         IEnumerable<DataRow> GetValues(Guid id);
-        DataRow Get(string name);
+        Query.Argument Get(string name);
         void Registered(PrimitiveEvent primitiveEvent, Registered registered);
         void Removed(PrimitiveEvent primitiveEvent, Removed removed);
         void Renamed(PrimitiveEvent primitiveEvent, Renamed renamed);
