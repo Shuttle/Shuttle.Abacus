@@ -29,6 +29,7 @@ import '~/navigation/';
 import '~/dashboard/';
 
 import '~/argument/';
+import '~/argument-value/';
 import '~/formula/';
 
 import validate from 'validate.js';

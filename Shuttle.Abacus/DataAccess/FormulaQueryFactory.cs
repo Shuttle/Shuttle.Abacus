@@ -8,7 +8,7 @@ namespace Shuttle.Abacus.DataAccess
     {
         private readonly string SelectClause = @"
 select 
-    FormulaId,
+    Id,
     Name,
     MaximumFormulaName,
     MinimumFormulaName
@@ -20,7 +20,7 @@ from
         {
             return RawQuery.Create(@"
 select
-    FormulaId,
+    Id,
     SequenceNumber,
     Operation,
     ValueSource,
@@ -28,31 +28,31 @@ select
 from
     FormulaOperation
 where
-    FormulaId = @FormulaId
+    Id = @Id
 ")
-                .AddParameterValue(FormulaColumns.FormulaId, id);
+                .AddParameterValue(Columns.Id, id);
         }
 
         public IQuery Get(Guid id)
         {
             return RawQuery.Create(string.Concat(SelectClause, @"
 where
-    FormulaId = @FormulaId"))
-                .AddParameterValue(FormulaColumns.FormulaId, id);
+    Id = @Id"))
+                .AddParameterValue(Columns.Id, id);
         }
 
         public IQuery RemoveOperations(Guid formulaId)
         {
             return
-                RawQuery.Create("delete from FormulaOperation where FormulaId = @FormulaId")
-                    .AddParameterValue(FormulaColumns.FormulaId, formulaId);
+                RawQuery.Create("delete from FormulaOperation where FormulaId = @Id")
+                    .AddParameterValue(Columns.Id, formulaId);
         }
 
         public IQuery RemoveConstraints(Guid formulaId)
         {
             return
-                RawQuery.Create("delete from FormulaConstraint where FormulaId = @FormulaId")
-                    .AddParameterValue(FormulaColumns.FormulaId, formulaId);
+                RawQuery.Create("delete from FormulaConstraint where FormulaId = @Id")
+                    .AddParameterValue(Columns.Id, formulaId);
         }
 
         public IQuery Constraints(Guid id)
@@ -67,9 +67,9 @@ select
 from
     FormulaConstraint
 where
-    FormulaId = @FormulaId
+    FormulaId = @Id
 ")
-                .AddParameterValue(FormulaColumns.FormulaId, id);
+                .AddParameterValue(Columns.Id, id);
         }
 
         public IQuery Registered(Guid formulaId, string name)
@@ -77,23 +77,23 @@ where
             return RawQuery.Create(@"
 insert into Formula
 (
-    FormulaId,
+    Id,
     Name
 )
 values
 (
-    @FormulaId,
+    @Id,
     @Name
 )")
-                .AddParameterValue(FormulaColumns.FormulaId, formulaId)
-                .AddParameterValue(FormulaColumns.Name, name);
+                .AddParameterValue(Columns.Id, formulaId)
+                .AddParameterValue(Columns.Name, name);
         }
 
         public IQuery Remove(Guid formulaId)
         {
             return
-                RawQuery.Create("delete from Formula where FormulaId = @FormulaId")
-                    .AddParameterValue(FormulaColumns.FormulaId, formulaId);
+                RawQuery.Create("delete from Formula where Id = @Id")
+                    .AddParameterValue(Columns.Id, formulaId);
         }
 
         public IQuery Renamed(Guid formulaId, string name)
@@ -104,10 +104,10 @@ update
 set
     Name = @Name
 where
-    FormulaId = @FormulaId
+    Id = @Id
 ")
-                .AddParameterValue(FormulaColumns.FormulaId, formulaId)
-                .AddParameterValue(FormulaColumns.Name, name);
+                .AddParameterValue(Columns.Id, formulaId)
+                .AddParameterValue(Columns.Name, name);
         }
 
         public IQuery AddOperation(Guid formulaId, int sequenceNumber, string operation, string valueSource,
@@ -124,18 +124,18 @@ insert into FormulaOperation
 )
 values
 (
-    @FormulaId,
+    @Id,
     @SequenceNumber,
     @Operation,
     @ValueSource,
     @ValueSelection
 )
 ")
-                .AddParameterValue(FormulaColumns.FormulaId, formulaId)
-                .AddParameterValue(FormulaColumns.OperationColumns.Operation, operation)
-                .AddParameterValue(FormulaColumns.OperationColumns.ValueSource, valueSource)
-                .AddParameterValue(FormulaColumns.OperationColumns.ValueSelection, valueSelection)
-                .AddParameterValue(FormulaColumns.OperationColumns.SequenceNumber, sequenceNumber);
+                .AddParameterValue(Columns.Id, formulaId)
+                .AddParameterValue(Columns.Operation, operation)
+                .AddParameterValue(Columns.ValueSource, valueSource)
+                .AddParameterValue(Columns.ValueSelection, valueSelection)
+                .AddParameterValue(Columns.SequenceNumber, sequenceNumber);
         }
 
         public IQuery Save(Formula item)
@@ -146,10 +146,10 @@ update
 set
     Name = @Name
 where
-    FormulaId = @FormulaId
+    Id = @Id
 ")
-                .AddParameterValue(FormulaColumns.Name, item.Name)
-                .AddParameterValue(FormulaColumns.FormulaId, item.Id);
+                .AddParameterValue(Columns.Name, item.Name)
+                .AddParameterValue(Columns.Id, item.Id);
         }
 
         public IQuery Search(FormulaSearchSpecification specification)
@@ -184,9 +184,9 @@ where
 order by 
     Name
 "))
-                .AddParameterValue(FormulaColumns.Name, specification.Name)
-                .AddParameterValue(FormulaColumns.MaximumFormulaName, specification.MaximumFormulaName)
-                .AddParameterValue(FormulaColumns.MinimumFormulaName, specification.MinimumFormulaName);
+                .AddParameterValue(Columns.Name, specification.Name)
+                .AddParameterValue(Columns.MaximumFormulaName, specification.MaximumFormulaName)
+                .AddParameterValue(Columns.MinimumFormulaName, specification.MinimumFormulaName);
         }
 
         public IQuery AddConstraint(Guid formulaId, int sequenceNumber, string argumentName, string comparison,
@@ -203,17 +203,17 @@ insert into FormulaConstraint
 )
 values
 (
-    @FormulaId,
+    @Id,
     @SequenceNumber,
     @ArgumentName,
     @Comparison,
     @Value
 )")
-                .AddParameterValue(FormulaColumns.FormulaId, formulaId)
-                .AddParameterValue(FormulaColumns.ConstraintColumns.SequenceNumber, sequenceNumber)
-                .AddParameterValue(FormulaColumns.ConstraintColumns.ArgumentName, argumentName)
-                .AddParameterValue(FormulaColumns.ConstraintColumns.Comparison, comparison)
-                .AddParameterValue(FormulaColumns.ConstraintColumns.Value, value);
+                .AddParameterValue(Columns.Id, formulaId)
+                .AddParameterValue(Columns.SequenceNumber, sequenceNumber)
+                .AddParameterValue(Columns.ArgumentName, argumentName)
+                .AddParameterValue(Columns.Comparison, comparison)
+                .AddParameterValue(Columns.Value, value);
         }
     }
 }

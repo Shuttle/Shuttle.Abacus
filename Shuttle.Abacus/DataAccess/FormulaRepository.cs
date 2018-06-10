@@ -24,7 +24,7 @@ namespace Shuttle.Abacus.DataAccess
 
             foreach (var row in _query.Search(new FormulaSearchSpecification()))
             {
-                var id = FormulaColumns.FormulaId.MapFrom(row);
+                var id = Columns.Id.MapFrom(row);
 
                 var formula = new Formula(id);
                 var stream = _eventStore.Get(id);

@@ -7,7 +7,7 @@ namespace Shuttle.Abacus.DataAccess
     {
         private const string SelectClause = @"
 select
-    TestId,
+    Id,
     Name,
     FormulaName,
     ExpectedResult,
@@ -32,27 +32,27 @@ select
 from
     TestArgument
 where
-    TestId = @TestId
+    TestId = @Id
 order by
     ArgumentName
 ")
-                .AddParameterValue(TestColumns.Id, id);
+                .AddParameterValue(Columns.Id, id);
         }
 
         public IQuery Get(Guid id)
         {
             return RawQuery.Create(string.Concat(SelectClause, @"
 where
-    TestId = @TestId
+    Id = @Id
 "))
-                .AddParameterValue(TestColumns.Id, id);
+                .AddParameterValue(Columns.Id, id);
         }
 
         public IQuery Remove(Guid id)
         {
             return
-                RawQuery.Create("delete from Test where TestId = @TestId")
-                    .AddParameterValue(TestColumns.Id, id);
+                RawQuery.Create("delete from Test where Id = @Id")
+                    .AddParameterValue(Columns.Id, id);
         }
 
         public IQuery Register(Guid id, string name, string formulaName, string expectedResult,
@@ -62,7 +62,7 @@ where
             return RawQuery.Create(@"
 insert into Test
 (
-    TestId,
+    Id,
     Name,
     FormulaName,
     ExpectedResult,
@@ -71,26 +71,26 @@ insert into Test
 )
 values
 (
-    @TestId,
+    @Id,
     @Name,
     @FormulaName,
     @ExpectedResult,
     @ExpectedResultType,
     @Comparison
 )")
-                .AddParameterValue(TestColumns.Id, id)
-                .AddParameterValue(TestColumns.Name, name)
-                .AddParameterValue(TestColumns.FormulaName, formulaName)
-                .AddParameterValue(TestColumns.ExpectedResult, expectedResult)
-                .AddParameterValue(TestColumns.ExpectedResultType, expectedResultType)
-                .AddParameterValue(TestColumns.Comparison, comparison);
+                .AddParameterValue(Columns.Id, id)
+                .AddParameterValue(Columns.Name, name)
+                .AddParameterValue(Columns.FormulaName, formulaName)
+                .AddParameterValue(Columns.ExpectedResult, expectedResult)
+                .AddParameterValue(Columns.ExpectedResultType, expectedResultType)
+                .AddParameterValue(Columns.Comparison, comparison);
         }
 
         public IQuery RemoveArgumentValues(Guid id)
         {
             return
-                RawQuery.Create("delete from TestArgument where TestId = @TestId")
-                    .AddParameterValue(TestColumns.Id, id);
+                RawQuery.Create("delete from TestArgument where TestId = @Id")
+                    .AddParameterValue(Columns.Id, id);
         }
 
         public IQuery Rename(Guid id, string name)
@@ -102,17 +102,17 @@ update
 set
     Name = @Name
 where 
-    TestId = @TestId
+    Id = @Id
 ")
-                    .AddParameterValue(TestColumns.Id, id);
+                    .AddParameterValue(Columns.Id, id);
         }
 
         public IQuery RemoveArgumentValue(Guid id, string argumentName)
         {
             return RawQuery.Create(
-                    "delete from TestArgument where TestId = @TestId and ArgumentName = @ArgumentName")
-                .AddParameterValue(TestColumns.Id, id)
-                .AddParameterValue(TestColumns.ArgumentColumns.ArgumentName, argumentName);
+                    "delete from TestArgument where TestId = @Id and ArgumentName = @ArgumentName")
+                .AddParameterValue(Columns.Id, id)
+                .AddParameterValue(Columns.ArgumentName, argumentName);
         }
 
         public IQuery AddArgumentValue(Guid id, string argumentName, string value)
@@ -126,14 +126,14 @@ insert into TestArgument
 )
 values
 (
-    @TestId,
+    @Id,
     @ArgumentName,
     @Value
 )
 ")
-                .AddParameterValue(TestColumns.Id, id)
-                .AddParameterValue(TestColumns.ArgumentColumns.ArgumentName, argumentName)
-                .AddParameterValue(TestColumns.ArgumentColumns.Value, value);
+                .AddParameterValue(Columns.Id, id)
+                .AddParameterValue(Columns.ArgumentName, argumentName)
+                .AddParameterValue(Columns.Value, value);
         }
     }
 }

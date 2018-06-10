@@ -10,7 +10,7 @@ import state from '~/state';
 import stack from '~/stack';
 import {OptionMap, OptionList} from 'shuttle-canstrap/select/';
 
-resources.add('argument', { value: 'value', action: 'add', permission: Permissions.Manage.Arguments});
+resources.add('argument', { item: 'values', action: 'add', permission: Permissions.Manage.Arguments});
 
 var api = {
     arguments: new Api({
@@ -85,7 +85,7 @@ export const ViewModel = DefineMap.extend({
 validator(ViewModel);
 
 export default Component.extend({
-    tag: 'abacus-argument-value-add',
+    tag: 'abacus-argument-values-add',
     ViewModel,
     view
 });

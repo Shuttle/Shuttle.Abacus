@@ -10,7 +10,7 @@ namespace Shuttle.Abacus.DataAccess
     {
         private readonly string SelectClause = @"
 select
-    ArgumentId,
+    Id,
     Name,
     ValueType
 from
@@ -33,20 +33,20 @@ where
 order by 
     Name
 "))
-                .AddParameterValue(FormulaColumns.Name, specification.Name);
+                .AddParameterValue(Columns.Name, specification.Name);
         }
 
         public IQuery Get(Guid id)
         {
             return
-                new RawQuery(string.Concat(SelectClause, "where ArgumentId = @ArgumentId")).AddParameterValue(
-                    ArgumentColumns.Id, id);
+                new RawQuery(string.Concat(SelectClause, "where Id = @Id")).AddParameterValue(
+                    Columns.Id, id);
         }
 
         public IQuery GetValues(Guid id)
         {
-            return RawQuery.Create("select Value from ArgumentValue where ArgumentId = @ArgumentId")
-                .AddParameterValue(ArgumentColumns.ValueColumns.ArgumentId, id);
+            return RawQuery.Create("select Value from ArgumentValue where ArgumentId = @Id")
+                .AddParameterValue(Columns.Id, id);
         }
 
         public IQuery Add(Argument item)
@@ -54,26 +54,26 @@ order by
             return RawQuery.Create(@"
 insert into Argument
 (
-    ArgumentId,
+    Id,
     Name,
     ValueType
 )
 values
 (
-    @ArgumentId,
+    @Id,
     @Name,
     @ValueType
 )")
-                .AddParameterValue(ArgumentColumns.Id, item.Id)
-                .AddParameterValue(ArgumentColumns.Name, item.Name)
-                .AddParameterValue(ArgumentColumns.ValueType, item.ValueType);
+                .AddParameterValue(Columns.Id, item.Id)
+                .AddParameterValue(Columns.Name, item.Name)
+                .AddParameterValue(Columns.ValueType, item.ValueType);
         }
 
         public IQuery Remove(Guid id)
         {
             return
-                RawQuery.Create("delete from Argument where ArgumentId = @ArgumentId")
-                    .AddParameterValue(ArgumentColumns.Id, id);
+                RawQuery.Create("delete from Argument where Id = @Id")
+                    .AddParameterValue(Columns.Id, id);
         }
 
         public IQuery Save(Argument item)
@@ -85,30 +85,25 @@ set
     Name = @Name,
     ValueType = @ValueType
 where
-    ArgumentId = @ArgumentId
+    Id = @Id
 ")
-                .AddParameterValue(ArgumentColumns.Name, item.Name)
-                .AddParameterValue(ArgumentColumns.ValueType, item.ValueType)
-                .AddParameterValue(ArgumentColumns.Id, item.Id);
+                .AddParameterValue(Columns.Name, item.Name)
+                .AddParameterValue(Columns.ValueType, item.ValueType)
+                .AddParameterValue(Columns.Id, item.Id);
         }
 
 
         public IQuery RemoveValues(Argument argument)
         {
-            return RawQuery.Create("delete from ArgumentValue where ArgumentId = @ArgumentId")
-                .AddParameterValue(ArgumentColumns.ValueColumns.ArgumentId, argument.Id);
-        }
-
-        public IQuery SaveValue(Argument argument, string value)
-        {
-            throw new NotImplementedException();
+            return RawQuery.Create("delete from ArgumentValue where ArgumentId = @Id")
+                .AddParameterValue(Columns.Id, argument.Id);
         }
 
         public IQuery Get(string name)
         {
             return
                 new RawQuery(string.Concat(SelectClause, "where ArgumentName = @ArgumentName")).AddParameterValue(
-                    ArgumentColumns.Name, name);
+                    Columns.Name, name);
         }
 
         public IQuery Registered(PrimitiveEvent primitiveEvent, Registered registered)
@@ -116,26 +111,26 @@ where
             return RawQuery.Create(@"
 insert into Argument
 (
-    ArgumentId,
+    Id,
     Name,
     ValueType
 )
 values
 (
-    @ArgumentId,
+    @Id,
     @Name,
     @ValueType
 )")
-                .AddParameterValue(ArgumentColumns.Id, primitiveEvent.Id)
-                .AddParameterValue(ArgumentColumns.Name, registered.Name)
-                .AddParameterValue(ArgumentColumns.ValueType, registered.ValueType);
+                .AddParameterValue(Columns.Id, primitiveEvent.Id)
+                .AddParameterValue(Columns.Name, registered.Name)
+                .AddParameterValue(Columns.ValueType, registered.ValueType);
         }
 
         public IQuery Removed(PrimitiveEvent primitiveEvent, Removed removed)
         {
             return
-                RawQuery.Create("delete from Argument where ArgumentId = @ArgumentId")
-                    .AddParameterValue(ArgumentColumns.Id, primitiveEvent.Id);
+                RawQuery.Create("delete from Argument where Id = @Id")
+                    .AddParameterValue(Columns.Id, primitiveEvent.Id);
         }
 
         public IQuery Renamed(PrimitiveEvent primitiveEvent, Renamed renamed)
@@ -146,10 +141,10 @@ update
 set
     Name = @Name
 where
-    ArgumentId = @ArgumentId
+    Id = @Id
 ")
-                .AddParameterValue(ArgumentColumns.Name, renamed.Name)
-                .AddParameterValue(ArgumentColumns.Id, primitiveEvent.Id);
+                .AddParameterValue(Columns.Name, renamed.Name)
+                .AddParameterValue(Columns.Id, primitiveEvent.Id);
         }
 
         public IQuery ValueAdded(PrimitiveEvent primitiveEvent, ValueAdded valueAdded)
@@ -162,12 +157,12 @@ insert into ArgumentValue
 )
 values
 (
-    @ArgumentId,
+    @Id,
     @Value
 )
 ")
-                .AddParameterValue(ArgumentColumns.ValueColumns.ArgumentId, primitiveEvent.Id)
-                .AddParameterValue(ArgumentColumns.ValueColumns.Value, valueAdded.Value);
+                .AddParameterValue(Columns.Id, primitiveEvent.Id)
+                .AddParameterValue(Columns.Value, valueAdded.Value);
         }
 
         public IQuery ValueRemoved(PrimitiveEvent primitiveEvent, ValueRemoved valueRemoved)
@@ -177,12 +172,12 @@ delete
 from 
     ArgumentValue 
 where 
-    ArgumentId = @ArgumentId
+    ArgumentId = @Id
 and
     Value = @Value
 ")
-                .AddParameterValue(ArgumentColumns.ValueColumns.ArgumentId, primitiveEvent.Id)
-                .AddParameterValue(ArgumentColumns.ValueColumns.Value, valueRemoved.Value);
+                .AddParameterValue(Columns.Id, primitiveEvent.Id)
+                .AddParameterValue(Columns.Value, valueRemoved.Value);
         }
     }
 }

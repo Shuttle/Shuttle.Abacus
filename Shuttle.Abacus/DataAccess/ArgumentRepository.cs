@@ -24,7 +24,7 @@ namespace Shuttle.Abacus.DataAccess
 
             foreach (var row in _query.Search(new ArgumentSearchSpecification()))
             {
-                var id = ArgumentColumns.Id.MapFrom(row);
+                var id = Columns.Id.MapFrom(row);
 
                 var argument = new Argument(id);
                 var stream = _store.Get(id);

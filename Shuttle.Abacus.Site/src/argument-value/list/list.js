@@ -9,23 +9,17 @@ import localisation from '~/localisation';
 import state from '~/state';
 import Api from 'shuttle-can-api';
 
-resources.add('argument', { value: 'value', action: 'list', permission: Permissions.Manage.Arguments});
+resources.add('argument', { item: 'values', action: 'list', permission: Permissions.Manage.Arguments});
 
 export const Map = DefineMap.extend({
-    id: {
-        type: 'string'
-    },
-    name: {
-        type: 'string'
-    },
-    valueType: {
+    value: {
         type: 'string'
     }
 });
 
 export const api = {
-    search: new Api({
-        endpoint: 'arguments/search',
+    values: new Api({
+        endpoint: 'arguments/{id}/values',
         Map
     })
 };
@@ -46,12 +40,8 @@ export const ViewModel = DefineMap.extend({
 
     get list () {
         const refreshTimestamp = this.refreshTimestamp;
-        return api.search.list({
-            name: this.name,
-            minimumFormulaName: this.minimumFormulaName,
-            maximumFormulaName: this.maximumFormulaName
-        }, {
-            post: true
+        return api.values.list({
+            id: this.argumentId
         });
     },
 
@@ -60,19 +50,13 @@ export const ViewModel = DefineMap.extend({
 
         if (!columns.length) {
             columns.push({
-                columnTitle: 'name',
+                columnTitle: 'value',
                 columnClass: 'col',
-                attributeName: 'name'
-            });
-
-            columns.push({
-                columnTitle: 'value-type',
-                columnClass: 'col',
-                attributeName: 'valueType'
+                attributeName: 'value'
             });
         }
 
-        state.title = 'arguments';
+        state.title = 'argument-values';
 
         state.navbar.addButton({
             type: 'add',
@@ -99,7 +83,7 @@ export const ViewModel = DefineMap.extend({
 });
 
 export default Component.extend({
-    tag: 'abacus-argument-value-list',
+    tag: 'abacus-argument-values-list',
     ViewModel,
     view
 });

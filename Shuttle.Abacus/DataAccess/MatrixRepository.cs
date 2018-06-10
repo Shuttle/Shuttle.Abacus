@@ -24,7 +24,7 @@ namespace Shuttle.Abacus.DataAccess
 
             foreach (var row in _query.All())
             {
-                var id = MatrixColumns.Id.MapFrom(row);
+                var id = Columns.Id.MapFrom(row);
 
                 var matrix = new Matrix(id);
                 var stream = _store.Get(id);

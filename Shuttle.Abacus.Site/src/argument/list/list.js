@@ -35,7 +35,7 @@ export const Map = DefineMap.extend({
             resource: 'argument',
             item: 'values',
             id: this.id,
-            action: 'add'
+            action: 'list'
         });
     }
 });

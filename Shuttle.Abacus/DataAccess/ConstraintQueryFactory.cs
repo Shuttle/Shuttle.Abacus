@@ -20,11 +20,11 @@ from
         {
             return RawQuery.Create(string.Concat(SelectClause, @"
 where
-    FormulaId = @FormulaId
+    FormulaId = @Id
 order by
     SequenceNumber
 "))
-                .AddParameterValue(FormulaColumns.FormulaId, formulaId);
+                .AddParameterValue(Columns.Id, formulaId);
         }
 
         public IQuery Remove(Guid ownerId)

@@ -1,8 +1,8 @@
 ﻿CREATE TABLE [dbo].[Argument] (
-    [ArgumentId] UNIQUEIDENTIFIER NOT NULL,
+    [Id] UNIQUEIDENTIFIER NOT NULL,
     [Name]       VARCHAR (120)    NOT NULL,
     [ValueType] VARCHAR (65)     NOT NULL,
-    CONSTRAINT [PK_Argument] PRIMARY KEY NONCLUSTERED ([ArgumentId] ASC)
+    CONSTRAINT [PK_Argument] PRIMARY KEY NONCLUSTERED ([Id] ASC)
 );
 
 

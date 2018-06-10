@@ -58,18 +58,18 @@ namespace Shuttle.Abacus.DataAccess
 
         private Query.Argument Get(DataRow row)
         {
-            var id = ArgumentColumns.Id.MapFrom(row);
+            var id = Columns.Id.MapFrom(row);
 
             var result = new Query.Argument
             {
                 Id = id,
-                Name= ArgumentColumns.Name.MapFrom(row),
-                ValueType = ArgumentColumns.ValueType.MapFrom(row),
+                Name= Columns.Name.MapFrom(row),
+                ValueType = Columns.ValueType.MapFrom(row),
             };
 
             foreach (var valueRow in _databaseGateway.GetRowsUsing(_argumentQueryFactory.GetValues(id)))
             {
-                result.Values.Add(ArgumentColumns.ValueColumns.Value.MapFrom(valueRow));
+                result.Values.Add(Columns.Value.MapFrom(valueRow));
             }
 
             return result;
