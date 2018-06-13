@@ -8,6 +8,7 @@ import router from '~/router';
 import localisation from '~/localisation';
 import state from '~/state';
 import Api from 'shuttle-can-api';
+import $ from 'jquery';
 
 resources.add('argument', {item: 'values', action: 'list', permission: Permissions.Manage.Arguments});
 
@@ -43,7 +44,9 @@ export const ViewModel = DefineMap.extend({
 
     values: {
         get() {
-            return this.argument.values;
+            return $.map($.makeArray(this.argument.values), function(value) {
+                return { value: value };
+            });
         }
     },
 

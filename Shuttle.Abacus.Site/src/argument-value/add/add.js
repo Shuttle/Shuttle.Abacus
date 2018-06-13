@@ -15,6 +15,9 @@ resources.add('argument', { item: 'values', action: 'add', permission: Permissio
 var api = {
     arguments: new Api({
         endpoint: 'arguments/{id}'
+    }),
+    argumentValues: new Api({
+        endpoint: 'arguments/{id}/values'
     })
 };
 
@@ -50,7 +53,6 @@ export const ViewModel = DefineMap.extend({
             return;
         }
 
-        this.valueType = result.valueType;
         this.value = result.value;
     },
 
@@ -62,33 +64,15 @@ export const ViewModel = DefineMap.extend({
         }
     },
 
-    valueType: {
-        type: 'string',
-        default: '',
-        validate: {
-            presence: true
-        }
-    },
-
-    valueTypes: {
-        Type: OptionList,
-        default: [
-            {value: 'Boolean', label: 'Boolean'},
-            {value: 'Date', label: 'Date'},
-            {value: 'Decimal', label: 'Decimal'},
-            {value: 'Integer', label: 'Integer'},
-            {value: 'Text', label: 'Text'}
-        ]
-    },
-
     add: function () {
         if (!!this.errors()) {
             return false;
         }
 
-        api.arguments.post({
-            value: this.value,
-            valueType: this.valueType
+        api.argumentValues.post({
+            value: this.value
+        },{
+            id: this.argumentId
         });
 
         this.close();
@@ -99,6 +83,8 @@ export const ViewModel = DefineMap.extend({
     close: function () {
         router.goto({
             resource: 'argument',
+            item: 'values',
+            id: this.argumentId,
             action: 'list'
         });
     }

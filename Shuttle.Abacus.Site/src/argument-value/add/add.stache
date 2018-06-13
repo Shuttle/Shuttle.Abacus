@@ -1,15 +1,17 @@
 {{#if map.isResolved}}
-    <h5>{{argument.name}}</h5>
+    <h5>{{argument.name}} ({{argument.valueType}})</h5>
 {{else}}
-    <cs-fetching title:from="'argument'" />
+    <cs-fetching title:from="'argument'"/>
 {{/if}}
 <cs-form>
-    <fieldset class="form-group">
-        <cs-form-select label:from="'value-type'" value:bind="valueType" options:from="valueTypes"
-                        vm:errors:from="errors()" errorAttribute:from="'valueType'" vm:required:from="'true'"/>
+<fieldset class="form-group">
+{{#switch(argument.valueType)}}
+{{#default}}
         <cs-form-input focus:from="'true'" label:from="'value'" vm:value:bind="value"
                        vm:errors:from="errors()" errorAttribute:from="'value'" vm:required:from="'true'"/>
-        <cs-button-submit vm:click:from="add" text:from="'add'"/>
-        <cs-button vm:click:from="close" text:from="'close'"/>
-    </fieldset>
+{{/default}}
+{{/switch}}
+    <cs-button-submit vm:click:from="add" text:from="'add'"/>
+    <cs-button vm:click:from="close" text:from="'close'"/>
+</fieldset>
 </cs-form>

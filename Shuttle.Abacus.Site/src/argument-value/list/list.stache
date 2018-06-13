@@ -1,5 +1,6 @@
 {{#if map.isResolved}}
+    <h5>{{argument.name}} ({{argument.valueType}})</h5>
     <cs-table vm:columns:from="columns" vm:rows:from="values" />
 {{else}}
-    <cs-fetching title:from="'argument-values'" />
+    <cs-fetching title:from="'argument'" />
 {{/if}}

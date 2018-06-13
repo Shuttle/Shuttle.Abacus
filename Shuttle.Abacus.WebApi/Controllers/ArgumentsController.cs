@@ -63,6 +63,20 @@ namespace Shuttle.Abacus.WebApi.Controllers
             return Ok();
         }
 
+        [HttpPost("{id}/values")]
+        public IActionResult Post(Guid id, [FromBody] ArgumentValueModel model)
+        {
+            Guard.AgainstNull(model, nameof(model));
+
+            _bus.Send(new RegisterArgumentValueCommand
+            { 
+                ArgumentId = id,
+                Value = model.Value
+            });
+
+            return Ok();
+        }
+
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
