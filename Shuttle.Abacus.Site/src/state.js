@@ -11,7 +11,37 @@ import access from "shuttle-access";
 import map from "./navigation/navigation-map";
 import each from 'can-util/js/each/';
 
+var RouteData = DefineMap.extend({
+    resource: {
+        type: 'string',
+        default: ''
+    },
+    item: {
+        type: 'string',
+        default: ''
+    },
+    action: {
+        type: 'string',
+        default: ''
+    },
+    id: {
+        type: 'string',
+        default: ''
+    },
+    full: {
+        get() {
+            return this.resource + (!!this.id ? `/${this.id}` : '') + (!!this.item ? `/${this.item}` : '') + (!!this.action ? `/${this.action}` : '');
+        }
+    }
+});
+
+var routeData = new RouteData();
+
 var State = DefineMap.extend({
+    routeData: {
+        Type: RouteData,
+        default: routeData
+    },
     sidebarCollapsed: {
         type: 'boolean'
     },

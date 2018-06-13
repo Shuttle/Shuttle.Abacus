@@ -9,36 +9,12 @@ import guard from 'shuttle-guard';
 import each from 'can-util/js/each/';
 import navbar from '~/navbar';
 
-var RouteData = DefineMap.extend({
-    resource: {
-        type: 'string',
-        default: ''
-    },
-    item: {
-        type: 'string',
-        default: ''
-    },
-    action: {
-        type: 'string',
-        default: ''
-    },
-    id: {
-        type: 'string',
-        default: ''
-    },
-    full: {
-        get() {
-            return this.resource + (!!this.id ? `/${this.id}` : '') + (!!this.item ? `/${this.item}` : '') + (!!this.action ? `/${this.action}` : '');
-        }
-    }
-});
-
-var routeData = new RouteData();
 
 var Router = DefineMap.extend({
     data: {
-        Type: RouteData,
-        default: routeData
+        get(){
+            return state.routeData;
+        }
     },
 
     previousHash: 'string',

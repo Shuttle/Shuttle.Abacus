@@ -19,20 +19,42 @@ var api = {
 };
 
 export const ViewModel = DefineMap.extend({
-    init: function () {
-        const result = stack.pop('formula');
+    argument: {
+        Type: DefineMap
+    },
 
-        state.title = 'arguments';
+    argumentId: {
+        get() {
+            return state.routeData.id;
+        }
+    },
+
+    get map() {
+        const self = this;
+        const refreshTimestamp = this.refreshTimestamp;
+        return api.arguments.map({
+            id: this.argumentId
+        })
+            .then(function(map){
+                self.argument = map;
+            });
+    },
+
+    init: function () {
+        const self = this;
+        const result = stack.pop('argument-value');
+
+        state.title = 'argument-values';
 
         if (!result) {
             return;
         }
 
-        this.name = result.name;
         this.valueType = result.valueType;
+        this.value = result.value;
     },
 
-    name: {
+    value: {
         type: 'string',
         default: '',
         validate: {
@@ -65,7 +87,7 @@ export const ViewModel = DefineMap.extend({
         }
 
         api.arguments.post({
-            name: this.name,
+            value: this.value,
             valueType: this.valueType
         });
 

@@ -9,18 +9,11 @@ import localisation from '~/localisation';
 import state from '~/state';
 import Api from 'shuttle-can-api';
 
-resources.add('argument', { item: 'values', action: 'list', permission: Permissions.Manage.Arguments});
-
-export const Map = DefineMap.extend({
-    value: {
-        type: 'string'
-    }
-});
+resources.add('argument', {item: 'values', action: 'list', permission: Permissions.Manage.Arguments});
 
 export const api = {
-    values: new Api({
-        endpoint: 'arguments/{id}/values',
-        Map
+    arguments: new Api({
+        endpoint: 'arguments/{id}'
     })
 };
 
@@ -28,6 +21,12 @@ export const ViewModel = DefineMap.extend({
     name: {
         type: 'string',
         default: ''
+    },
+
+    argumentId: {
+        get() {
+            return state.routeData.id;
+        }
     },
 
     columns: {
@@ -38,11 +37,25 @@ export const ViewModel = DefineMap.extend({
         type: 'string'
     },
 
-    get list () {
+    argument: {
+        Type: DefineMap
+    },
+
+    values: {
+        get() {
+            return this.argument.values;
+        }
+    },
+
+    get map() {
+        const self = this;
         const refreshTimestamp = this.refreshTimestamp;
-        return api.values.list({
+        return api.arguments.map({
             id: this.argumentId
-        });
+        })
+            .then(function(map){
+                self.argument = map;
+            });
     },
 
     init() {
@@ -70,14 +83,16 @@ export const ViewModel = DefineMap.extend({
         });
     },
 
-    add: function() {
+    add: function () {
         router.goto({
             resource: 'argument',
+            id: this.argumentId,
+            item: 'values',
             action: 'add'
         });
     },
 
-    refresh: function() {
+    refresh: function () {
         this.refreshTimestamp = Date.now();
     }
 });

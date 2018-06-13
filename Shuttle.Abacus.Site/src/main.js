@@ -47,6 +47,8 @@ validate.extend(validate.validators.datetime, {
     }
 });
 
+canstrap.table.tableClass = 'mt-2';
+
 canstrap.button.remove.confirmation = function (options) {
     state.modal.confirmation.show(options);
 }
