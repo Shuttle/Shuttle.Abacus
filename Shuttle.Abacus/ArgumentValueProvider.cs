@@ -4,13 +4,13 @@ using Shuttle.Core.Contract;
 
 namespace Shuttle.Abacus
 {
-    public class ArgumentValueSource
+    public class ArgumentValueProvider
     {
         private readonly Dictionary<string, string> _arguments = new Dictionary<string, string>();
 
-        public ArgumentValueSource Add(string name, string value)
+        public ArgumentValueProvider Add(string name, string value)
         {
-            Guard.AgainstNullOrEmptyString(name, "name");
+            Guard.AgainstNullOrEmptyString(name, nameof(name));
 
             _arguments.Add(name, value);
 

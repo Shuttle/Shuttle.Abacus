@@ -9,7 +9,7 @@ import localisation from '~/localisation';
 import state from '~/state';
 import Api from 'shuttle-can-api';
 
-resources.add('formula', { action: 'list', permission: Permissions.Manage.Formulas});
+resources.add('formula', { item: 'operation', action: 'list', permission: Permissions.Manage.Formulas});
 
 export const Map = DefineMap.extend({
     id: {
@@ -99,19 +99,19 @@ export const ViewModel = DefineMap.extend({
             });
 
             columns.push({
-                columnTitle: 'name',
+                columnTitle: 'operation',
                 columnClass: 'col',
-                attributeName: 'name'
+                attributeName: 'operation'
             });
 
             columns.push({
-                columnTitle: 'maximum-formula-name',
+                columnTitle: 'value-source',
                 columnClass: 'col',
-                attributeName: 'maximumFormulaName'
+                attributeName: 'valueSource'
             });
 
             columns.push({
-                columnTitle: 'minimum-formula-name',
+                columnTitle: 'value-selection',
                 columnClass: 'col',
                 attributeName: 'minimumFormulaName'
             });
@@ -134,6 +134,8 @@ export const ViewModel = DefineMap.extend({
     add: function() {
         router.goto({
             resource: 'formula',
+            id: this.formulaId,
+            item: 'operation',
             action: 'add'
         });
     },
@@ -144,7 +146,7 @@ export const ViewModel = DefineMap.extend({
 });
 
 export default Component.extend({
-    tag: 'abacus-formula-list',
+    tag: 'abacus-formula-operation-list',
     ViewModel,
     view
 });

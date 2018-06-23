@@ -26,11 +26,11 @@ namespace Shuttle.Abacus
         public Registered Register(string name, string formulaName, string expectedResult, string expectedResultType,
             string comparison)
         {
-            Guard.AgainstNullOrEmptyString(name, "name");
-            Guard.AgainstNullOrEmptyString(formulaName, "formulaName");
-            Guard.AgainstNullOrEmptyString(expectedResult, "expectedResult");
-            Guard.AgainstNullOrEmptyString(expectedResultType, "expectedResultType");
-            Guard.AgainstNullOrEmptyString(comparison, "compaprison");
+            Guard.AgainstNullOrEmptyString(name, nameof(name));
+            Guard.AgainstNullOrEmptyString(formulaName, nameof(formulaName));
+            Guard.AgainstNullOrEmptyString(expectedResult, nameof(expectedResult));
+            Guard.AgainstNullOrEmptyString(expectedResultType, nameof(expectedResultType));
+            Guard.AgainstNullOrEmptyString(comparison, nameof(comparison));
 
             return On(new Registered
             {
@@ -76,18 +76,18 @@ namespace Shuttle.Abacus
 
         public bool IsNamed(string name)
         {
-            Guard.AgainstNullOrEmptyString(name, "name");
+            Guard.AgainstNullOrEmptyString(name, nameof(name));
 
             return Name.Equals(name, StringComparison.InvariantCultureIgnoreCase);
         }
 
         public Renamed Rename(string name)
         {
-            Guard.AgainstNullOrEmptyString(name, "name");
+            Guard.AgainstNullOrEmptyString(name, nameof(name));
 
             if (IsNamed(name))
             {
-                throw new DomainException(string.Format("Already named '{0}'.", name));
+                throw new DomainException($"Already named '{name}'.");
             }
 
             return On(new Renamed
@@ -107,13 +107,13 @@ namespace Shuttle.Abacus
 
         public static string Key(string name)
         {
-            return string.Format("[argument]:name={0}", name);
+            return $"[argument]:name={name}";
         }
 
         public ArgumentSet SetArgument(string argumentName, string value)
         {
-            Guard.AgainstNullOrEmptyString(argumentName, "argumentName");
-            Guard.AgainstNullOrEmptyString(value, "value");
+            Guard.AgainstNullOrEmptyString(argumentName, nameof(argumentName));
+            Guard.AgainstNullOrEmptyString(value, nameof(value));
 
             return On(new ArgumentSet
             {
@@ -140,7 +140,7 @@ namespace Shuttle.Abacus
 
         public ArgumentRemoved RemoveArgument(string argumentName)
         {
-            Guard.AgainstNullOrEmptyString(argumentName, "argumentName");
+            Guard.AgainstNullOrEmptyString(argumentName, nameof(argumentName));
 
             return On(new ArgumentRemoved
             {

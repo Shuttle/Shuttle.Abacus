@@ -41,7 +41,7 @@ namespace Shuttle.Abacus.Server.EventHandlers
             var operationAdded = context.Event;
 
             _query.AddOperation(context.PrimitiveEvent.Id, operationAdded.SequenceNumber, operationAdded.Operation,
-                operationAdded.ValueSource, operationAdded.ValueSelection);
+                operationAdded.ValueProvider, operationAdded.Input);
         }
 
         public void ProcessEvent(IEventHandlerContext<OperationsRemoved> context)

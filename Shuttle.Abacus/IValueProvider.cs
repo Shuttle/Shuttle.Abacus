@@ -1,8 +1,8 @@
 ﻿namespace Shuttle.Abacus
 {
-    public interface IValueSource
+    public interface IValueProvider
     {
         string Name { get; }
-        string Value(string name);
+        string Value(string input);
     }
 }

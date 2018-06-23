@@ -10,11 +10,11 @@ namespace Shuttle.Abacus.Tests
         //{
         //    var calculation = new FormulaCalculation("calculation", true);
 
-        //    calculation.AddFormula(new Formula().AddOperation(new AdditionOperation(new ConstantValueSource(200))));
+        //    calculation.AddFormula(new Formula().AddOperation(new AdditionOperation(new ConstantValueProvider(200))));
 
         //    var limit = new MaximumLimit("max");
 
-        //    limit.AddFormula(new Formula().AddOperation(new AdditionOperation(new ConstantValueSource(100))));
+        //    limit.AddFormula(new Formula().AddOperation(new AdditionOperation(new ConstantValueProvider(100))));
 
         //    calculation.AddLimit(limit);
 
@@ -28,11 +28,11 @@ namespace Shuttle.Abacus.Tests
         //{
         //    var calculation = new FormulaCalculation("calculation", true);
 
-        //    calculation.AddFormula(new Formula().AddOperation(new AdditionOperation(new ConstantValueSource(100))));
+        //    calculation.AddFormula(new Formula().AddOperation(new AdditionOperation(new ConstantValueProvider(100))));
 
         //    var limit = new MinimumLimit("min");
 
-        //    limit.AddFormula(new Formula().AddOperation(new AdditionOperation(new ConstantValueSource(50))));
+        //    limit.AddFormula(new Formula().AddOperation(new AdditionOperation(new ConstantValueProvider(50))));
 
         //    calculation.AddLimit(limit);
 

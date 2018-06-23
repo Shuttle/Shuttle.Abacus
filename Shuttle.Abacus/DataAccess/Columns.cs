@@ -17,6 +17,7 @@ namespace Shuttle.Abacus.DataAccess
         public static readonly MappedColumn<string> ExpectedResultType = new MappedColumn<string>("ExpectedResultType", DbType.AnsiString);
         public static readonly MappedColumn<string> FormulaName = new MappedColumn<string>("FormulaName", DbType.AnsiString);
         public static readonly MappedColumn<Guid> Id = new MappedColumn<Guid>("Id", DbType.Guid);
+        public static readonly MappedColumn<string> Input = new MappedColumn<string>("Input", DbType.AnsiString);
         public static readonly MappedColumn<string> MaximumFormulaName = new MappedColumn<string>("MaximumFormulaName", DbType.AnsiString);
         public static readonly MappedColumn<string> MinimumFormulaName = new MappedColumn<string>("MinimumFormulaName", DbType.AnsiString);
         public static readonly MappedColumn<string> Name = new MappedColumn<string>("Name", DbType.AnsiString);
@@ -25,8 +26,7 @@ namespace Shuttle.Abacus.DataAccess
         public static readonly MappedColumn<string> RowArgumentName = new MappedColumn<string>("RowArgumentName", DbType.AnsiString);
         public static readonly MappedColumn<int> SequenceNumber = new MappedColumn<int>("SequenceNumber", DbType.Int32);
         public static readonly MappedColumn<string> Value = new MappedColumn<string>("Value", DbType.AnsiString);
-        public static readonly MappedColumn<string> ValueSelection = new MappedColumn<string>("ValueSelection", DbType.AnsiString);
-        public static readonly MappedColumn<string> ValueSource = new MappedColumn<string>("ValueSource", DbType.AnsiString);
+        public static readonly MappedColumn<string> ValueProvider = new MappedColumn<string>("ValueProvider", DbType.AnsiString);
         public static readonly MappedColumn<string> ValueType = new MappedColumn<string>("ValueType", DbType.AnsiString);
     }
 }

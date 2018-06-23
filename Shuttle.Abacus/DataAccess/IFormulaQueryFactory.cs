@@ -9,8 +9,8 @@ namespace Shuttle.Abacus.DataAccess
         IQuery Get(Guid id);
         IQuery RemoveOperations(Guid formulaId);
 
-        IQuery AddOperation(Guid formulaId, int sequenceNumber, string operation, string valueSource,
-            string valueSelection);
+        IQuery AddOperation(Guid formulaId, int sequenceNumber, string operation, string valueProvider,
+            string input);
 
         IQuery Save(Formula item);
         IQuery Search(FormulaSearchSpecification specification);

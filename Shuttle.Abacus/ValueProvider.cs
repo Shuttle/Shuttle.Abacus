@@ -4,25 +4,25 @@ using Shuttle.Core.Contract;
 
 namespace Shuttle.Abacus
 {
-    public class ValueSource<T> : IValueSource
+    public class ValueProvider<T> : IValueProvider
     {
         private readonly Dictionary<string, T> _values = new Dictionary<string, T>();
 
-        public ValueSource(string name)
+        public ValueProvider(string name)
         {
-            Guard.AgainstNullOrEmptyString(name, "name");
+            Guard.AgainstNullOrEmptyString(name, nameof(name));
 
             Name = name;
         }
 
         public string Name { get; }
 
-        public string Value(string name)
+        public string Value(string input)
         {
             throw new NotImplementedException();
         }
 
-        public IValueSource Add(string name, T value)
+        public IValueProvider Add(string name, T value)
         {
             throw new NotImplementedException();
         }

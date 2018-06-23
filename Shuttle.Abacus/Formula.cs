@@ -28,15 +28,19 @@ namespace Shuttle.Abacus
         public bool HasOperations => _operations.Count > 0;
         public bool Removed { get; private set; }
 
-        public OperationAdded AddOperation(int sequenceNumber, string operation, string valueSource,
-            string valueSelection)
+        public OperationAdded AddOperation(Guid id, string operation, string valueProvider, string input)
         {
+            Guard.AgainstNullOrEmptyString(operation, nameof(operation));
+            Guard.AgainstNullOrEmptyString(valueProvider, nameof(valueProvider));
+            Guard.AgainstNullOrEmptyString(input, nameof(input));
+
             return On(new OperationAdded
             {
-                SequenceNumber = sequenceNumber,
+                Id = id,
+                SequenceNumber = _operations.Count + 1,
                 Operation = operation,
-                ValueSource = valueSource,
-                ValueSelection = valueSelection
+                ValueProvider = valueProvider,
+                Input = input
             });
         }
 
@@ -46,19 +50,24 @@ namespace Shuttle.Abacus
 
             _operations.Add(
                 new FormulaOperation(
+                    operationAdded.Id, 
                     operationAdded.SequenceNumber,
                     operationAdded.Operation,
-                    operationAdded.ValueSource,
-                    operationAdded.ValueSelection));
+                    operationAdded.ValueProvider,
+                    operationAdded.Input));
 
             return operationAdded;
         }
 
-        public ConstraintAdded AddConstraint(int sequenceNumber, string argumentName, string comparison, string value)
+        public ConstraintAdded AddConstraint(Guid id, string argumentName, string comparison, string value)
         {
+            Guard.AgainstNullOrEmptyString(argumentName, nameof(argumentName));
+            Guard.AgainstNullOrEmptyString(comparison, nameof(comparison));
+            Guard.AgainstNullOrEmptyString(value, nameof(value));
+
             return On(new ConstraintAdded
             {
-                SequenceNumber = sequenceNumber,
+                Id = id,
                 ArgumentName = argumentName,
                 Comparison = comparison,
                 Value = value
@@ -71,7 +80,7 @@ namespace Shuttle.Abacus
 
             _constraints.Add(
                 new FormulaConstraint(
-                    constraintAdded.SequenceNumber,
+                    constraintAdded.Id,
                     constraintAdded.ArgumentName,
                     constraintAdded.Comparison,
                     constraintAdded.Value));
@@ -82,7 +91,7 @@ namespace Shuttle.Abacus
 
         public Registered Register(string name)
         {
-            Guard.AgainstNullOrEmptyString(name, "name");
+            Guard.AgainstNullOrEmptyString(name, nameof(name));
 
             return On(new Registered
             {
@@ -120,18 +129,18 @@ namespace Shuttle.Abacus
 
         public bool IsNamed(string name)
         {
-            Guard.AgainstNullOrEmptyString(name, "name");
+            Guard.AgainstNullOrEmptyString(name, nameof(name));
 
             return Name.Equals(name, StringComparison.InvariantCultureIgnoreCase);
         }
 
         public Renamed Rename(string name)
         {
-            Guard.AgainstNullOrEmptyString(name, "name");
+            Guard.AgainstNullOrEmptyString(name, nameof(name));
 
             if (IsNamed(name))
             {
-                throw new DomainException(string.Format("Already named '{0}'.", name));
+                throw new DomainException($"Already named '{name}'.");
             }
 
             return On(new Renamed
@@ -151,35 +160,41 @@ namespace Shuttle.Abacus
 
         public static string Key(string name)
         {
-            return string.Format("[formula]:name={0}", name);
+            return $"[formula]:name={name}";
         }
 
-        public OperationsRemoved RemoveOperations()
+        public OperationRemoved RemoveOperation(Guid id)
         {
-            return On(new OperationsRemoved());
+            return On(new OperationRemoved
+            {
+                Id = id
+            });
         }
 
-        private OperationsRemoved On(OperationsRemoved operationsRemoved)
+        private OperationRemoved On(OperationRemoved operationRemoved)
         {
-            Guard.AgainstNull(operationsRemoved, nameof(operationsRemoved));
+            Guard.AgainstNull(operationRemoved, nameof(operationRemoved));
 
-            _operations.Clear();
+            _operations.RemoveAll(item => item.Id.Equals(operationRemoved.Id));
 
-            return operationsRemoved;
+            return operationRemoved;
         }
 
-        public ConstraintsRemoved RemoveConstraints()
+        public ConstraintRemoved RemoveConstraint(Guid id)
         {
-            return On(new ConstraintsRemoved());
+            return On(new ConstraintRemoved
+            {
+                Id = id
+            });
         }
 
-        private ConstraintsRemoved On(ConstraintsRemoved constraintsRemoved)
+        private ConstraintRemoved On(ConstraintRemoved constraintRemoved)
         {
-            Guard.AgainstNull(constraintsRemoved, nameof(constraintsRemoved));
+            Guard.AgainstNull(constraintRemoved, nameof(constraintRemoved));
 
-            _constraints.Clear();
+            _constraints.RemoveAll(item => item.Id.Equals(constraintRemoved.Id));
 
-            return constraintsRemoved;
+            return constraintRemoved;
         }
     }
 }

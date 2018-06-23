@@ -1,9 +1,10 @@
 ﻿using System;
 
-namespace Shuttle.Abacus.Events.Formula.v1
+namespace Shuttle.Abacus.Messages.v1
 {
-    public class ConstraintAdded
+    public class RegisterFormulaConstraintCommand
     {
+        public Guid FormulaId { get; set; }
         public Guid Id { get; set; }
         public string ArgumentName { get; set; }
         public string Comparison { get; set; }

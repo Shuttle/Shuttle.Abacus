@@ -21,7 +21,7 @@ namespace Shuttle.Abacus
         {
             return ValueString == Convert.ToString(Value)
                 ? ValueString
-                : string.Format("{0} ({1})", ValueString, Convert.ToString(Value));
+                : $"{ValueString} ({Convert.ToString(Value)})";
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Shuttle.Abacus
         {
             if (!_values.ContainsKey(name))
             {
-                throw new InvalidOperationException(string.Format("There is no argument value with name '{0}'.", name));
+                throw new InvalidOperationException($"There is no argument value with name '{name}'.");
             }
 
             var result = _values[name];

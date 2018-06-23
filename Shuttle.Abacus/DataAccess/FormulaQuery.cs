@@ -60,11 +60,10 @@ namespace Shuttle.Abacus.DataAccess
             _databaseGateway.ExecuteUsing(_queryFactory.RemoveOperations(formulaId));
         }
 
-        public void AddOperation(Guid formulaId, int sequenceNumber, string operation, string valueSource,
-            string valueSelection)
+        public void AddOperation(Guid formulaId, int sequenceNumber, string operation, string valueProvider,
+            string input)
         {
-            _databaseGateway.ExecuteUsing(_queryFactory.AddOperation(formulaId, sequenceNumber, operation, valueSource,
-                valueSelection));
+            _databaseGateway.ExecuteUsing(_queryFactory.AddOperation(formulaId, sequenceNumber, operation, valueProvider, input));
         }
 
         public void RemoveConstraints(Guid formulaId)

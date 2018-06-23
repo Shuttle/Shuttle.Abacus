@@ -28,4 +28,39 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Id" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="d68f52ee-aafa-4404-91e9-4d4c2e95f384" ChangeDateTime="06/23/2018 10:19:32">
+    <Property Name="ElementName" Value="[dbo].[FormulaOperation].[ValueSource]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[FormulaOperation]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Provider" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="cbe485bf-0d43-4dfd-9568-1f1f9f878158" ChangeDateTime="06/23/2018 10:20:10">
+    <Property Name="ElementName" Value="[dbo].[FormulaOperation].[ValueSelection]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[FormulaOperation]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Value" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="28fbca2c-0454-4560-a9b9-fb931b47ee73" ChangeDateTime="06/23/2018 10:21:00">
+    <Property Name="ElementName" Value="[dbo].[FormulaOperation].[Provider]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[FormulaOperation]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ValueProvider" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ee38e881-5642-40c7-a2d4-798aa790819d" ChangeDateTime="06/23/2018 10:21:59">
+    <Property Name="ElementName" Value="[dbo].[FormulaOperation].[Value]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[FormulaOperation]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Item" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a0653b39-445d-43f6-86f3-25e8eeed5829" ChangeDateTime="06/23/2018 10:22:14">
+    <Property Name="ElementName" Value="[dbo].[FormulaOperation].[Item]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[FormulaOperation]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Input" />
+  </Operation>
 </Operations>

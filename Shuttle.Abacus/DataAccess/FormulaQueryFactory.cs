@@ -23,8 +23,8 @@ select
     Id,
     SequenceNumber,
     Operation,
-    ValueSource,
-    ValueSelection
+    ValueProvider,
+    Input
 from
     FormulaOperation
 where
@@ -110,8 +110,7 @@ where
                 .AddParameterValue(Columns.Name, name);
         }
 
-        public IQuery AddOperation(Guid formulaId, int sequenceNumber, string operation, string valueSource,
-            string valueSelection)
+        public IQuery AddOperation(Guid formulaId, int sequenceNumber, string operation, string valueProvider, string input)
         {
             return RawQuery.Create(@"
 insert into FormulaOperation
@@ -119,22 +118,22 @@ insert into FormulaOperation
     FormulaId,
     SequenceNumber,
     Operation,
-    ValueSource,
-    ValueSelection
+    ValueProvider,
+    Input
 )
 values
 (
     @Id,
     @SequenceNumber,
     @Operation,
-    @ValueSource,
-    @ValueSelection
+    @ValueProvider,
+    @Input
 )
 ")
                 .AddParameterValue(Columns.Id, formulaId)
                 .AddParameterValue(Columns.Operation, operation)
-                .AddParameterValue(Columns.ValueSource, valueSource)
-                .AddParameterValue(Columns.ValueSelection, valueSelection)
+                .AddParameterValue(Columns.ValueProvider, valueProvider)
+                .AddParameterValue(Columns.Input, input)
                 .AddParameterValue(Columns.SequenceNumber, sequenceNumber);
         }
 

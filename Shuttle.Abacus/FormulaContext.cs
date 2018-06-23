@@ -16,7 +16,7 @@ namespace Shuttle.Abacus
         {
             FormulaName = formulaName;
             Guard.AgainstNull(executionContext, nameof(executionContext));
-            Guard.AgainstNullOrEmptyString(formulaName, "formulaName");
+            Guard.AgainstNullOrEmptyString(formulaName, nameof(formulaName));
 
             _executionContext = executionContext;
 

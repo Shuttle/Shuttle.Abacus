@@ -62,7 +62,7 @@ namespace Shuttle.Abacus
 
         public ExecutionContext Execute(string formulaName, IEnumerable<ArgumentValue> values, IContextLogger logger)
         {
-            Guard.AgainstNullOrEmptyString(formulaName, "formulaName");
+            Guard.AgainstNullOrEmptyString(formulaName, nameof(formulaName));
             Guard.AgainstNull(values, nameof(values));
             Guard.AgainstNull(logger, nameof(logger));
 
@@ -106,23 +106,23 @@ namespace Shuttle.Abacus
                 {
                     decimal value = 0;
 
-                    switch (operation.ValueSource.ToLower())
+                    switch (operation.ValueProvider.ToLower())
                     {
                         case "constant":
                         {
-                            value = Convert.ToDecimal(operation.ValueSelection);
+                            value = Convert.ToDecimal(operation.Input);
 
                             break;
                         }
                         case "argument":
                         {
-                            value = Convert.ToDecimal(executionContext.GetArgumentValue(operation.ValueSelection));
+                            value = Convert.ToDecimal(executionContext.GetArgumentValue(operation.Input));
 
                             break;
                         }
                         case "matrix":
                         {
-                            var matrix = GetMatrix(operation.ValueSelection);
+                            var matrix = GetMatrix(operation.Input);
 
                             value =
                                 Convert.ToDecimal(matrix.GetValue(_constraintComparison, executionContext,
@@ -133,7 +133,7 @@ namespace Shuttle.Abacus
                         }
                         case "formula":
                         {
-                            value = Execute(executionContext, operation.ValueSelection).Result;
+                            value = Execute(executionContext, operation.Input).Result;
 
                             break;
                         }

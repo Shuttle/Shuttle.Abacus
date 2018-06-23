@@ -8,7 +8,7 @@ namespace Shuttle.Abacus.Tests
         //[Test]
         //public void Should_be_able_to_create_a_formula_with_an_initial_value()
         //{
-        //    var formula = new Formula(new ConstantValueSource(250));
+        //    var formula = new Formula(new ConstantValueProvider(250));
 
         //    var methodContext = new FormulaContextOLD();
 
@@ -20,10 +20,10 @@ namespace Shuttle.Abacus.Tests
         //{
         //    var formula = new Formula();
 
-        //    formula.AddOperation(new AdditionOperation(new ConstantValueSource(10)));
-        //    formula.AddOperation(new SubtractionOperation(new ConstantValueSource(2)));
-        //    formula.AddOperation(new MultiplicationOperation(new ConstantValueSource(5)));
-        //    formula.AddOperation(new DivisionOperation(new ConstantValueSource(2)));
+        //    formula.AddOperation(new AdditionOperation(new ConstantValueProvider(10)));
+        //    formula.AddOperation(new SubtractionOperation(new ConstantValueProvider(2)));
+        //    formula.AddOperation(new MultiplicationOperation(new ConstantValueProvider(5)));
+        //    formula.AddOperation(new DivisionOperation(new ConstantValueProvider(2)));
 
         //    var methodContext = new FormulaContextOLD();
 
@@ -35,20 +35,20 @@ namespace Shuttle.Abacus.Tests
         //{
         //    var formula = new Formula();
 
-        //    formula.AddOperation(new AdditionOperation(new ArgumentAnswerValueSource(new Argument
+        //    formula.AddOperation(new AdditionOperation(new ArgumentAnswerValueProvider(new Argument
         //                                                                           {
         //                                                                               Name = "VoluntaryExcess"
         //                                                                           })));
-        //    formula.AddOperation(new DivisionOperation(new ArgumentAnswerValueSource(new Argument
+        //    formula.AddOperation(new DivisionOperation(new ArgumentAnswerValueProvider(new Argument
         //                                                                           {
         //                                                                               Name = "SumInsured"
         //                                                                           })));
-        //    formula.AddOperation(new SquareRootOperation(new RunningTotalValueSource()));
-        //    formula.AddOperation(new MultiplicationOperation(new ConstantValueSource(-150)));
-        //    formula.AddOperation(new RoundingOperation(new ConstantValueSource(2)));
+        //    formula.AddOperation(new SquareRootOperation(new RunningTotalValueProvider()));
+        //    formula.AddOperation(new MultiplicationOperation(new ConstantValueProvider(-150)));
+        //    formula.AddOperation(new RoundingOperation(new ConstantValueProvider(2)));
         //    formula.AddOperation(
-        //        new MultiplicationOperation(new FormulaSubTotalValueSource(new FormulaCalculation("TOTAL", true))));
-        //    formula.AddOperation(new DivisionOperation(new ConstantValueSource(100)));
+        //        new MultiplicationOperation(new FormulaSubTotalValueProvider(new FormulaCalculation("TOTAL", true))));
+        //    formula.AddOperation(new DivisionOperation(new ConstantValueProvider(100)));
 
         //    var context =
         //        new FormulaContextOLD("test")

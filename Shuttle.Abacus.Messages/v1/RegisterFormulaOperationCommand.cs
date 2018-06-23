@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace Shuttle.Abacus.Events.Formula.v1
+namespace Shuttle.Abacus.Messages.v1
 {
-    public class OperationAdded
+    public class RegisterFormulaOperationCommand
     {
+        public Guid FormulaId { get; set; }
         public Guid Id { get; set; }
-        public int SequenceNumber { get; set; }
         public string Operation { get; set; }
         public string ValueProvider { get; set; }
         public string Input { get; set; }

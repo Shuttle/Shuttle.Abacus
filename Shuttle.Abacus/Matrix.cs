@@ -33,8 +33,8 @@ namespace Shuttle.Abacus
 
         public Registered Register(string name, string rowArgumentName, string columnArgumentName, string valueType)
         {
-            Guard.AgainstNullOrEmptyString(name, "name");
-            Guard.AgainstNullOrEmptyString(rowArgumentName, "rowArgumentName");
+            Guard.AgainstNullOrEmptyString(name, nameof(name));
+            Guard.AgainstNullOrEmptyString(rowArgumentName, nameof(rowArgumentName));
 
             return On(new Registered
             {
@@ -62,15 +62,14 @@ namespace Shuttle.Abacus
 
         public static string Key(string name)
         {
-            return string.Format("[matrix]:name={0}", name);
+            return $"[matrix]:name={name}";
         }
 
         public ElementAdded AddElement(int row, int column, string value)
         {
             if (HasElement(row, column))
             {
-                throw new DomainException(string.Format("There is already a value for row '{0}' and column '{1}'.", row,
-                    column));
+                throw new DomainException($"There is already a value for row '{row}' and column '{column}'.");
             }
 
             return On(new ElementAdded
@@ -102,14 +101,13 @@ namespace Shuttle.Abacus
 
         public ConstraintAdded AddConstraint(string axis, int sequenceNumber, string comparison, string value)
         {
-            Guard.AgainstNullOrEmptyString(axis, "axis");
-            Guard.AgainstNullOrEmptyString(comparison, "comparison");
+            Guard.AgainstNullOrEmptyString(axis, nameof(axis));
+            Guard.AgainstNullOrEmptyString(comparison, nameof(comparison));
 
             if (HasConstraint(axis, sequenceNumber))
             {
                 throw new DomainException(
-                    string.Format("There is already a constraint for axis '{0}' and sequence number '{1}'.", axis,
-                        sequenceNumber));
+                    $"There is already a constraint for axis '{axis}' and sequence number '{sequenceNumber}'.");
             }
 
             return On(new ConstraintAdded
@@ -163,9 +161,8 @@ namespace Shuttle.Abacus
 
             if (element == null)
             {
-                throw new InvalidOperationException(string.Format(
-                    "Could not an element for matrix '{0}' at intersection of row '{1}' and column '{2}'.", Name, row,
-                    column));
+                throw new InvalidOperationException(
+                    $"Could not an element for matrix '{Name}' at intersection of row '{row}' and column '{column}'.");
             }
 
             return element.Value;
@@ -182,9 +179,8 @@ namespace Shuttle.Abacus
 
             if (constraint == null)
             {
-                throw new InvalidOperationException(string.Format(
-                    "There is no {0} constraint in matrix '{1}' where argument '{2}' is satisfied by '{3}'.",
-                    axis.ToLower(), Name, RowArgumentName, value));
+                throw new InvalidOperationException(
+                    $"There is no {axis.ToLower()} constraint in matrix '{Name}' where argument '{RowArgumentName}' is satisfied by '{value}'.");
             }
 
             return constraint.SequenceNumber;

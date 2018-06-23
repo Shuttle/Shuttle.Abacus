@@ -37,8 +37,8 @@ namespace Shuttle.Abacus
 
         public Registered Register(string name, string valueType)
         {
-            Guard.AgainstNullOrEmptyString(name, "name");
-            Guard.AgainstNullOrEmptyString(valueType, "answerType");
+            Guard.AgainstNullOrEmptyString(name, nameof(name));
+            Guard.AgainstNullOrEmptyString(valueType, nameof(valueType));
 
             return On(new Registered
             {
@@ -78,18 +78,18 @@ namespace Shuttle.Abacus
 
         public bool IsNamed(string name)
         {
-            Guard.AgainstNullOrEmptyString(name, "name");
+            Guard.AgainstNullOrEmptyString(name, nameof(name));
 
             return Name.Equals(name, StringComparison.InvariantCultureIgnoreCase);
         }
 
         public Renamed Rename(string name)
         {
-            Guard.AgainstNullOrEmptyString(name, "name");
+            Guard.AgainstNullOrEmptyString(name, nameof(name));
 
             if (IsNamed(name))
             {
-                throw new DomainException(string.Format("Already named '{0}'.", name));
+                throw new DomainException($"Already named '{name}'.");
             }
 
             return On(new Renamed
@@ -109,7 +109,7 @@ namespace Shuttle.Abacus
 
         public ValueTypeChanged ChangeAnswerType(string answerType)
         {
-            Guard.AgainstNullOrEmptyString(answerType, "answerType");
+            Guard.AgainstNullOrEmptyString(answerType, nameof(answerType));
 
             return On(new ValueTypeChanged
             {
@@ -130,7 +130,7 @@ namespace Shuttle.Abacus
         {
             if (ContainsValue(value))
             {
-                throw new DomainException(string.Format("Value '{0}' has already been added.", value));
+                throw new DomainException($"Value '{value}' has already been added.");
             }
 
             return On(new ValueAdded
@@ -155,14 +155,14 @@ namespace Shuttle.Abacus
 
         public static string Key(string name)
         {
-            return string.Format("[argument]:name={0}", name);
+            return $"[argument]:name={name}";
         }
 
         public ValueRemoved RemoveValue(string value)
         {
             if (!ContainsValue(value))
             {
-                throw new DomainException(string.Format("Cannot remove value '{0}' since it does not exist.", value));
+                throw new DomainException($"Cannot remove value '{value}' since it does not exist.");
             }
 
             return On(new ValueRemoved

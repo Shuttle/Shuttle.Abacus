@@ -1,6 +1,9 @@
-﻿namespace Shuttle.Abacus.Events.Formula.v1
+﻿using System;
+
+namespace Shuttle.Abacus.Events.Formula.v1
 {
-    public class ConstraintsRemoved
+    public class ConstraintRemoved
     {
+        public Guid Id { get; set; }
     }
 }

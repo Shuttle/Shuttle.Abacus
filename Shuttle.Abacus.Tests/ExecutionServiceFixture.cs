@@ -16,8 +16,8 @@ namespace Shuttle.Abacus.Tests
 
             formula.Register("Test");
 
-            formula.AddOperation(1, "Addition", "Argument", "Operand1");
-            formula.AddOperation(1, "Addition", "Argument", "Operand2");
+            formula.AddOperation(TODO, "Addition", "Argument", "Operand1");
+            formula.AddOperation(TODO, "Addition", "Argument", "Operand2");
 
             formulas.Add(formula);
 
@@ -51,8 +51,8 @@ namespace Shuttle.Abacus.Tests
 
             formula.Register("Test");
 
-            formula.AddOperation(1, "Addition", "Argument", "Operand1");
-            formula.AddConstraint(1, "Operand2", "==", "10");
+            formula.AddOperation(TODO, "Addition", "Argument", "Operand1");
+            formula.AddConstraint(TODO, "Operand2", "==", "10");
 
             formulas.Add(formula);
 
@@ -85,12 +85,12 @@ namespace Shuttle.Abacus.Tests
             var formula1 = new Formula(Guid.NewGuid());
 
             formula1.Register("Formula1");
-            formula1.AddOperation(1, "Addition", "Formula", "Formula2");
+            formula1.AddOperation(TODO, "Addition", "Formula", "Formula2");
 
             var formula2 = new Formula(Guid.NewGuid());
 
             formula2.Register("Formula2");
-            formula2.AddOperation(1, "Addition", "Constant", "100");
+            formula2.AddOperation(TODO, "Addition", "Constant", "100");
 
             var formulas = new List<Formula> { formula1, formula2 };
 
@@ -107,7 +107,7 @@ namespace Shuttle.Abacus.Tests
             var formula = new Formula(Guid.NewGuid());
 
             formula.Register("Formula");
-            formula.AddOperation(1, "Addition", "Matrix", "simple-matrix");
+            formula.AddOperation(TODO, "Addition", "Matrix", "simple-matrix");
 
             var matrix = new Matrix(Guid.NewGuid());
 
@@ -139,25 +139,25 @@ namespace Shuttle.Abacus.Tests
             var formula1 = new Formula(Guid.NewGuid());
 
             formula1.Register("Formula1");
-            formula1.AddOperation(1, "Addition", "Formula", "Formula2");
+            formula1.AddOperation(TODO, "Addition", "Formula", "Formula2");
 
             var formula2 = new Formula(Guid.NewGuid());
-            formula2.AddOperation(1, "Addition", "Formula", "Formula3");
+            formula2.AddOperation(TODO, "Addition", "Formula", "Formula3");
 
             formula2.Register("Formula2");
 
             var formula3 = new Formula(Guid.NewGuid());
 
             formula3.Register("Formula3");
-            formula3.AddOperation(1, "Addition", "Formula", "Formula4");
+            formula3.AddOperation(TODO, "Addition", "Formula", "Formula4");
 
             var formula4 = new Formula(Guid.NewGuid());
 
             formula4.Register("Formula4");
-            formula4.AddOperation(1, "Addition", "Formula", "Formula5");
+            formula4.AddOperation(TODO, "Addition", "Formula", "Formula5");
 
             var formula5 = new Formula(Guid.NewGuid());
-            formula5.AddOperation(1, "Addition", "Formula", "Formula1");
+            formula5.AddOperation(TODO, "Addition", "Formula", "Formula1");
 
             formula5.Register("Formula5");
 

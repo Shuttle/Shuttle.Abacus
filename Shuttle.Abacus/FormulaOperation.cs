@@ -1,28 +1,37 @@
+using System;
+using Shuttle.Core.Contract;
+
 namespace Shuttle.Abacus
 {
-    public enum ValueSourceType
+    public enum ValueProviderType
     {
         Argument = 1,
         Constant = 2,
         Matrix = 3,
         Formula = 4,
-        RunningTotal = 5
+        Result = 5
     }
 
     public class FormulaOperation
     {
-        public FormulaOperation(int sequenceNumber, string operation, string valueSource, string valueSelection)
+        public FormulaOperation(Guid id, int sequenceNumber, string operation, string valueProvider, string input)
         {
+            Guard.AgainstNullOrEmptyString(operation, nameof(operation));
+            Guard.AgainstNullOrEmptyString(valueProvider, nameof(valueProvider));
+            Guard.AgainstNullOrEmptyString(input, nameof(input));
+
+            Id = id;
             SequenceNumber = sequenceNumber;
             Operation = operation;
-            ValueSource = valueSource;
-            ValueSelection = valueSelection;
+            ValueProvider = valueProvider;
+            Input = input;
         }
 
+        public Guid Id { get; }
         public int SequenceNumber { get; }
         public string Operation { get; }
-        public string ValueSource { get; }
-        public string ValueSelection { get; }
+        public string ValueProvider { get; }
+        public string Input { get; }
 
         public void Perform(FormulaContext context, decimal value)
         {

@@ -1,9 +1,10 @@
 ﻿using System;
 
-namespace Shuttle.Abacus.Events.Matrix.v1
+namespace Shuttle.Abacus.Messages.v1
 {
-    public class ElementAdded
+    public class RegisterMatrixElementCommand
     {
+        public Guid MatrixId { get; set; }
         public Guid Id { get; set; }
         public int Row { get; set; }
         public int Column { get; set; }

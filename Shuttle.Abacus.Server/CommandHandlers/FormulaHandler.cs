@@ -13,8 +13,8 @@ namespace Shuttle.Abacus.Server.CommandHandlers
         IMessageHandler<SetFormulaMaxmimumCommand>,
         IMessageHandler<SetFormulaMinimumCommand>,
         IMessageHandler<RemoveFormulaCommand>,
-        IMessageHandler<SetFormulaOperationsCommand>,
-        IMessageHandler<SetFormulaConstraintsCommand>
+        IMessageHandler<RegisterFormulaOperationCommand>,
+        IMessageHandler<RegisterFormulaConstraintCommand>
     {
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IEventStore _eventStore;
@@ -122,7 +122,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
             }
         }
 
-        public void ProcessMessage(IHandlerContext<SetFormulaConstraintsCommand> context)
+        public void ProcessMessage(IHandlerContext<RegisterFormulaConstraintCommand> context)
         {
             var message = context.Message;
 
@@ -148,8 +148,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 
                 foreach (var operation in message.Constraints)
                 {
-                    stream.AddEvent(formula.AddConstraint(
-                        operation.SequenceNumber,
+                    stream.AddEvent(formula.AddConstraint(TODO,
                         operation.ArgumentName,
                         operation.Comparison,
                         operation.Value));
@@ -169,7 +168,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
             throw new NotImplementedException();
         }
 
-        public void ProcessMessage(IHandlerContext<SetFormulaOperationsCommand> context)
+        public void ProcessMessage(IHandlerContext<RegisterFormulaOperationCommand> context)
         {
             var message = context.Message;
 
@@ -195,11 +194,10 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 
                 foreach (var operation in message.Operations)
                 {
-                    stream.AddEvent(formula.AddOperation(
-                        operation.SequenceNumber,
+                    stream.AddEvent(formula.AddOperation(TODO,
                         operation.Operation,
-                        operation.ValueSource,
-                        operation.ValueSelection));
+                        operation.ValueProvider,
+                        operation.Input));
                 }
 
                 _eventStore.Save(stream);
