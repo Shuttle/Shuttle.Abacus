@@ -36,7 +36,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                 var key = Matrix.Key(message.Name);
                 EventStream stream;
 
-                if (message.MatrixId.Equals(Guid.Empty))
+                if (message.Id.Equals(Guid.Empty))
                 {
                     stream = _eventStore.CreateEventStream();
                     matrix = new Matrix(stream.Id);
@@ -45,7 +45,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                 }
                 else
                 {
-                    stream = _eventStore.Get(message.MatrixId);
+                    stream = _eventStore.Get(message.Id);
                     matrix = new Matrix(stream.Id);
 
                     stream.Apply(matrix);
@@ -61,18 +61,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                     message.Name,
                     message.RowArgumentName,
                     message.ColumnArgumentName,
-                    message.ValueType));
-
-                foreach (var constraint in message.Constraints)
-                {
-                    stream.AddEvent(matrix.AddConstraint(constraint.Axis, constraint.SequenceNumber,
-                        constraint.Comparison, constraint.Value));
-                }
-
-                foreach (var element in message.Elements)
-                {
-                    stream.AddEvent(matrix.AddElement(element.Row, element.Column, element.Value));
-                }
+                    message.DataTypeName));
 
                 _eventStore.Save(stream);
             }

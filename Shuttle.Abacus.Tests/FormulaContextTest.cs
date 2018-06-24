@@ -24,7 +24,7 @@ namespace Shuttle.Abacus.Tests
 
         //    var context = new FormulaContextOLD((string) "context");
 
-        //    context.AddValue(new IntegerValueType("SomeInput", 10));
+        //    context.AddValue(new IntegerDataType("SomeInput", 10));
 
         //    var log = new StringBuilder();
 

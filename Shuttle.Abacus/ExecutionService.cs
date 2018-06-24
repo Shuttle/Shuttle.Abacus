@@ -93,7 +93,7 @@ namespace Shuttle.Abacus
                     var argument = GetArgument(constraint.ArgumentName);
                     var argumentValue = executionContext.GetArgumentValue(constraint.ArgumentName);
 
-                    if (!_constraintComparison.IsSatisfiedBy(argument.ValueType, argumentValue, constraint.Comparison,
+                    if (!_constraintComparison.IsSatisfiedBy(argument.DataType, argumentValue, constraint.Comparison,
                         constraint.Value))
                     {
                         return formulaContext.Disqualified(constraint.ArgumentName, argumentValue,
@@ -106,23 +106,23 @@ namespace Shuttle.Abacus
                 {
                     decimal value = 0;
 
-                    switch (operation.ValueProvider.ToLower())
+                    switch (operation.ValueProviderName.ToLower())
                     {
                         case "constant":
                         {
-                            value = Convert.ToDecimal(operation.Input);
+                            value = Convert.ToDecimal(operation.InputParameter);
 
                             break;
                         }
                         case "argument":
                         {
-                            value = Convert.ToDecimal(executionContext.GetArgumentValue(operation.Input));
+                            value = Convert.ToDecimal(executionContext.GetArgumentValue(operation.InputParameter));
 
                             break;
                         }
                         case "matrix":
                         {
-                            var matrix = GetMatrix(operation.Input);
+                            var matrix = GetMatrix(operation.InputParameter);
 
                             value =
                                 Convert.ToDecimal(matrix.GetValue(_constraintComparison, executionContext,
@@ -133,7 +133,7 @@ namespace Shuttle.Abacus
                         }
                         case "formula":
                         {
-                            value = Execute(executionContext, operation.Input).Result;
+                            value = Execute(executionContext, operation.InputParameter).Result;
 
                             break;
                         }

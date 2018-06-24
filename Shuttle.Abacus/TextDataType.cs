@@ -2,24 +2,24 @@ using Shuttle.Core.Contract;
 
 namespace Shuttle.Abacus
 {
-    public class TextValueType : ValueType
+    public class TextDataType : DataType
     {
-        public TextValueType(string text)
+        public TextDataType(string text)
         {
             ValueString = text;
             Value = text;
         }
 
-        public override string AnswerType => "Text";
+        public override string Name => "Text";
 
-        public override int CompareTo(ValueType other)
+        public override int CompareTo(DataType other)
         {
             Guard.AgainstNull(other, nameof(other));
 
             return ValueString.CompareTo(other.ValueString);
         }
 
-        public override string DisplayString()
+        public override string Text()
         {
             return ValueString;
         }

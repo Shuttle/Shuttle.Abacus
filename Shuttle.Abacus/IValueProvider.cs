@@ -3,6 +3,6 @@
     public interface IValueProvider
     {
         string Name { get; }
-        string Value(string input);
+        string Value(string inputParameter);
     }
 }

@@ -12,7 +12,7 @@ namespace Shuttle.Abacus.DataAccess.Query
 
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public string ValueType { get; set; }
+        public string DataTypeName { get; set; }
 
         public List<string> Values { get; set; }
     }

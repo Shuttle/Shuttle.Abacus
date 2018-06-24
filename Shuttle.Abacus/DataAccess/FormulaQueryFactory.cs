@@ -23,8 +23,8 @@ select
     Id,
     SequenceNumber,
     Operation,
-    ValueProvider,
-    Input
+    ValueProviderName,
+    InputParameter
 from
     FormulaOperation
 where
@@ -41,18 +41,18 @@ where
                 .AddParameterValue(Columns.Id, id);
         }
 
-        public IQuery RemoveOperations(Guid formulaId)
+        public IQuery RemoveOperation(Guid operationId)
         {
             return
-                RawQuery.Create("delete from FormulaOperation where FormulaId = @Id")
-                    .AddParameterValue(Columns.Id, formulaId);
+                RawQuery.Create("delete from FormulaOperation where OperationId = @Id")
+                    .AddParameterValue(Columns.Id, operationId);
         }
 
-        public IQuery RemoveConstraints(Guid formulaId)
+        public IQuery RemoveConstraint(Guid constraintId)
         {
             return
-                RawQuery.Create("delete from FormulaConstraint where FormulaId = @Id")
-                    .AddParameterValue(Columns.Id, formulaId);
+                RawQuery.Create("delete from FormulaConstraint where ConstraintId = @Id")
+                    .AddParameterValue(Columns.Id, constraintId);
         }
 
         public IQuery Constraints(Guid id)
@@ -96,7 +96,7 @@ values
                     .AddParameterValue(Columns.Id, formulaId);
         }
 
-        public IQuery Renamed(Guid formulaId, string name)
+        public IQuery Rename(Guid formulaId, string name)
         {
             return RawQuery.Create(@"
 update 
@@ -110,7 +110,7 @@ where
                 .AddParameterValue(Columns.Name, name);
         }
 
-        public IQuery AddOperation(Guid formulaId, int sequenceNumber, string operation, string valueProvider, string input)
+        public IQuery AddOperation(Guid operationId, Guid formulaId, int sequenceNumber, string operation, string valueProviderName, string inputParameter)
         {
             return RawQuery.Create(@"
 insert into FormulaOperation
@@ -118,22 +118,22 @@ insert into FormulaOperation
     FormulaId,
     SequenceNumber,
     Operation,
-    ValueProvider,
-    Input
+    ValueProviderName,
+    InputParameter
 )
 values
 (
     @Id,
     @SequenceNumber,
     @Operation,
-    @ValueProvider,
-    @Input
+    @ValueProviderName,
+    @InputParameter
 )
 ")
                 .AddParameterValue(Columns.Id, formulaId)
                 .AddParameterValue(Columns.Operation, operation)
-                .AddParameterValue(Columns.ValueProvider, valueProvider)
-                .AddParameterValue(Columns.Input, input)
+                .AddParameterValue(Columns.ValueProviderName, valueProviderName)
+                .AddParameterValue(Columns.InputParameter, inputParameter)
                 .AddParameterValue(Columns.SequenceNumber, sequenceNumber);
         }
 
@@ -188,14 +188,15 @@ order by
                 .AddParameterValue(Columns.MinimumFormulaName, specification.MinimumFormulaName);
         }
 
-        public IQuery AddConstraint(Guid formulaId, int sequenceNumber, string argumentName, string comparison,
+        public IQuery AddConstraint(Guid constraintId, Guid formulaId, string argumentName,
+            string comparison,
             string value)
         {
             return RawQuery.Create(@"
 insert into FormulaConstraint
 (
+    Id,
     FormulaId,
-    SequenceNumber,
     ArgumentName,
     Comparison,
     Value
@@ -203,13 +204,14 @@ insert into FormulaConstraint
 values
 (
     @Id,
+    @FormulaId,
     @SequenceNumber,
     @ArgumentName,
     @Comparison,
     @Value
 )")
-                .AddParameterValue(Columns.Id, formulaId)
-                .AddParameterValue(Columns.SequenceNumber, sequenceNumber)
+                .AddParameterValue(Columns.Id, constraintId)
+                .AddParameterValue(Columns.FormulaId, formulaId)
                 .AddParameterValue(Columns.ArgumentName, argumentName)
                 .AddParameterValue(Columns.Comparison, comparison)
                 .AddParameterValue(Columns.Value, value);

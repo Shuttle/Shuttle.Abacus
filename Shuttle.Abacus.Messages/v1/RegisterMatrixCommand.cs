@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using Shuttle.Abacus.Messages.v1.TransferObjects;
 
 namespace Shuttle.Abacus.Messages.v1
 {
@@ -10,6 +8,6 @@ namespace Shuttle.Abacus.Messages.v1
         public string Name { get; set; }
         public string RowArgumentName { get; set; }
         public string ColumnArgumentName { get; set; }
-        public string ValueType { get; set; }
+        public string DataTypeName { get; set; }
     }
 }

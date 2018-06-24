@@ -39,7 +39,7 @@ namespace Shuttle.Abacus.Server.EventHandlers
             var registered = context.Event;
 
             _query.Registered(context.PrimitiveEvent.Id, registered.Name, registered.ColumnArgumentName,
-                registered.RowArgumentName, registered.ValueType);
+                registered.RowArgumentName, registered.DataTypeName);
         }
     }
 }

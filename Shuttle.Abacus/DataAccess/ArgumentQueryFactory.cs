@@ -12,7 +12,7 @@ namespace Shuttle.Abacus.DataAccess
 select
     Id,
     Name,
-    ValueType
+    DataTypeName
 from
     Argument
 ";
@@ -56,17 +56,17 @@ insert into Argument
 (
     Id,
     Name,
-    ValueType
+    DataTypeName
 )
 values
 (
     @Id,
     @Name,
-    @ValueType
+    @DataTypeName
 )")
                 .AddParameterValue(Columns.Id, item.Id)
                 .AddParameterValue(Columns.Name, item.Name)
-                .AddParameterValue(Columns.ValueType, item.ValueType);
+                .AddParameterValue(Columns.DataTypeName, item.DataType);
         }
 
         public IQuery Remove(Guid id)
@@ -83,12 +83,12 @@ update
     Argument
 set
     Name = @Name,
-    ValueType = @ValueType
+    DataTypeName = @DataTypeName
 where
     Id = @Id
 ")
                 .AddParameterValue(Columns.Name, item.Name)
-                .AddParameterValue(Columns.ValueType, item.ValueType)
+                .AddParameterValue(Columns.DataTypeName, item.DataType)
                 .AddParameterValue(Columns.Id, item.Id);
         }
 
@@ -113,17 +113,17 @@ insert into Argument
 (
     Id,
     Name,
-    ValueType
+    DataTypeName
 )
 values
 (
     @Id,
     @Name,
-    @ValueType
+    @DataTypeName
 )")
                 .AddParameterValue(Columns.Id, primitiveEvent.Id)
                 .AddParameterValue(Columns.Name, registered.Name)
-                .AddParameterValue(Columns.ValueType, registered.ValueType);
+                .AddParameterValue(Columns.DataTypeName, registered.DataTypeName);
         }
 
         public IQuery Removed(PrimitiveEvent primitiveEvent, Removed removed)

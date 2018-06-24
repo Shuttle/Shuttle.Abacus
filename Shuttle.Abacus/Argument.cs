@@ -6,16 +6,16 @@ using Shuttle.Core.Contract;
 
 namespace Shuttle.Abacus
 {
-    public enum InputType
-    {
-        Boolean = 0,
-        Date = 1,
-        Decimal = 2,
-        Integer = 3,
-        List = 4,
-        Money = 5,
-        Text = 6
-    }
+    //public enum DataTypeName
+    //{
+    //    Boolean = 0,
+    //    Date = 1,
+    //    Decimal = 2,
+    //    Integer = 3,
+    //    List = 4,
+    //    Money = 5,
+    //    Text = 6
+    //}
 
     public class Argument
     {
@@ -29,21 +29,21 @@ namespace Shuttle.Abacus
         public Guid Id { get; }
 
         public string Name { get; private set; }
-        public string ValueType { get; private set; }
+        public string DataType { get; private set; }
         public bool Removed { get; private set; }
 
         public IEnumerable<string> Values => new ReadOnlyCollection<string>(_values);
         public bool HasValues => _values.Count > 0;
 
-        public Registered Register(string name, string valueType)
+        public Registered Register(string name, string dataType)
         {
             Guard.AgainstNullOrEmptyString(name, nameof(name));
-            Guard.AgainstNullOrEmptyString(valueType, nameof(valueType));
+            Guard.AgainstNullOrEmptyString(dataType, nameof(dataType));
 
             return On(new Registered
             {
                 Name = name,
-                ValueType = valueType
+                DataTypeName = dataType
             });
         }
 
@@ -52,7 +52,7 @@ namespace Shuttle.Abacus
             Guard.AgainstNull(registered, nameof(registered));
 
             Name = registered.Name;
-            ValueType = registered.ValueType;
+            DataType = registered.DataTypeName;
 
             return registered;
         }
@@ -107,23 +107,23 @@ namespace Shuttle.Abacus
             return renamed;
         }
 
-        public ValueTypeChanged ChangeAnswerType(string answerType)
+        public DataTypeNameSet SetDataTypeName(string dataType)
         {
-            Guard.AgainstNullOrEmptyString(answerType, nameof(answerType));
+            Guard.AgainstNullOrEmptyString(dataType, nameof(dataType));
 
-            return On(new ValueTypeChanged
+            return On(new DataTypeNameSet
             {
-                ValueType = answerType
+                DataTypeName = dataType
             });
         }
 
-        private ValueTypeChanged On(ValueTypeChanged valueTypeChanged)
+        private DataTypeNameSet On(DataTypeNameSet dataTypeNameSet)
         {
-            Guard.AgainstNull(valueTypeChanged, nameof(valueTypeChanged));
+            Guard.AgainstNull(dataTypeNameSet, nameof(dataTypeNameSet));
 
-            ValueType = valueTypeChanged.ValueType;
+            DataType = dataTypeNameSet.DataTypeName;
 
-            return valueTypeChanged;
+            return dataTypeNameSet;
         }
 
         public ValueAdded AddValue(string value)

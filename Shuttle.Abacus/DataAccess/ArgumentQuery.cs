@@ -64,7 +64,7 @@ namespace Shuttle.Abacus.DataAccess
             {
                 Id = id,
                 Name= Columns.Name.MapFrom(row),
-                ValueType = Columns.ValueType.MapFrom(row),
+                DataTypeName = Columns.DataTypeName.MapFrom(row),
             };
 
             foreach (var valueRow in _databaseGateway.GetRowsUsing(_argumentQueryFactory.GetValues(id)))

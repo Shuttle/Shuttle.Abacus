@@ -12,17 +12,17 @@ namespace Shuttle.Abacus.Tests
         //{
         //    var formula = new Formula();
 
-        //    formula.AddConstraint(new FromConstraint(Guid.NewGuid(), new IntegerValueType("Version", 6)));
+        //    formula.AddConstraint(new FromConstraint(Guid.NewGuid(), new IntegerDataType("Version", 6)));
 
         //    var context1 = new FormulaContextOLD(string.Empty);
 
-        //    context1.AddValue(new IntegerValueType("Version", 1));
+        //    context1.AddValue(new IntegerDataType("Version", 1));
 
         //    Assert.IsFalse(formula.IsSatisfiedBy(context1));
 
         //    var context2 = new FormulaContextOLD(string.Empty);
 
-        //    context2.AddValue(new IntegerValueType("Version", 6));
+        //    context2.AddValue(new IntegerDataType("Version", 6));
 
         //    Assert.IsTrue(formula.IsSatisfiedBy(context2));
         //}
@@ -32,17 +32,17 @@ namespace Shuttle.Abacus.Tests
         //{
         //    var formula = new Formula();
 
-        //    formula.AddConstraint(new FromConstraint(Guid.NewGuid(), new IntegerValueType("Version", 5)));
+        //    formula.AddConstraint(new FromConstraint(Guid.NewGuid(), new IntegerDataType("Version", 5)));
 
         //    var context1 = new FormulaContextOLD(string.Empty);
 
-        //    context1.AddValue(new IntegerValueType("Version", 1));
+        //    context1.AddValue(new IntegerDataType("Version", 1));
 
         //    Assert.IsFalse(formula.IsSatisfiedBy(context1));
 
         //    var context2 = new FormulaContextOLD(string.Empty);
 
-        //    context2.AddValue(new IntegerValueType("Version", 6));
+        //    context2.AddValue(new IntegerDataType("Version", 6));
 
         //    Assert.IsTrue(formula.IsSatisfiedBy(context2));
         //}
@@ -52,17 +52,17 @@ namespace Shuttle.Abacus.Tests
         //{
         //    var formula = new Formula();
 
-        //    formula.AddConstraint(new ToConstraint(Guid.NewGuid(), new IntegerValueType("Version", 5)));
+        //    formula.AddConstraint(new ToConstraint(Guid.NewGuid(), new IntegerDataType("Version", 5)));
 
         //    var context1 = new FormulaContextOLD(string.Empty);
 
-        //    context1.AddValue(new IntegerValueType("Version", 1));
+        //    context1.AddValue(new IntegerDataType("Version", 1));
 
         //    Assert.IsTrue(formula.IsSatisfiedBy(context1));
 
         //    var context2 = new FormulaContextOLD(string.Empty);
 
-        //    context2.AddValue(new IntegerValueType("Version", 6));
+        //    context2.AddValue(new IntegerDataType("Version", 6));
 
         //    Assert.IsFalse(formula.IsSatisfiedBy(context2));
         //}

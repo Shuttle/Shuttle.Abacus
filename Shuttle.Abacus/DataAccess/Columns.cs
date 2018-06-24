@@ -12,12 +12,14 @@ namespace Shuttle.Abacus.DataAccess
         public static readonly MappedColumn<int> Column = new MappedColumn<int>("Column", DbType.Int32);
         public static readonly MappedColumn<string> ColumnArgumentName = new MappedColumn<string>("ColumnArgumentName", DbType.AnsiString);
         public static readonly MappedColumn<string> Comparison = new MappedColumn<string>("Comparison", DbType.AnsiString);
+        public static readonly MappedColumn<string> DataTypeName = new MappedColumn<string>("DataTypeName", DbType.AnsiString);
         public static readonly MappedColumn<string> ExecutionType = new MappedColumn<string>("ExecutionType", DbType.AnsiString);
         public static readonly MappedColumn<string> ExpectedResult = new MappedColumn<string>("ExpectedResult", DbType.AnsiString);
         public static readonly MappedColumn<string> ExpectedResultType = new MappedColumn<string>("ExpectedResultType", DbType.AnsiString);
+        public static readonly MappedColumn<Guid> FormulaId = new MappedColumn<Guid>("FormulaId", DbType.Guid);
         public static readonly MappedColumn<string> FormulaName = new MappedColumn<string>("FormulaName", DbType.AnsiString);
         public static readonly MappedColumn<Guid> Id = new MappedColumn<Guid>("Id", DbType.Guid);
-        public static readonly MappedColumn<string> Input = new MappedColumn<string>("Input", DbType.AnsiString);
+        public static readonly MappedColumn<string> InputParameter = new MappedColumn<string>("InputParameter", DbType.AnsiString);
         public static readonly MappedColumn<string> MaximumFormulaName = new MappedColumn<string>("MaximumFormulaName", DbType.AnsiString);
         public static readonly MappedColumn<string> MinimumFormulaName = new MappedColumn<string>("MinimumFormulaName", DbType.AnsiString);
         public static readonly MappedColumn<string> Name = new MappedColumn<string>("Name", DbType.AnsiString);
@@ -26,7 +28,6 @@ namespace Shuttle.Abacus.DataAccess
         public static readonly MappedColumn<string> RowArgumentName = new MappedColumn<string>("RowArgumentName", DbType.AnsiString);
         public static readonly MappedColumn<int> SequenceNumber = new MappedColumn<int>("SequenceNumber", DbType.Int32);
         public static readonly MappedColumn<string> Value = new MappedColumn<string>("Value", DbType.AnsiString);
-        public static readonly MappedColumn<string> ValueProvider = new MappedColumn<string>("ValueProvider", DbType.AnsiString);
-        public static readonly MappedColumn<string> ValueType = new MappedColumn<string>("ValueType", DbType.AnsiString);
+        public static readonly MappedColumn<string> ValueProviderName = new MappedColumn<string>("ValueProviderName", DbType.AnsiString);
     }
 }

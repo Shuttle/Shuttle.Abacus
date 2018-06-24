@@ -7,29 +7,28 @@ namespace Shuttle.Abacus
     {
         private static readonly char[] Separator = {','};
 
-        private readonly IValueTypeFactory _valueTypeFactory;
+        private readonly IDataTypeFactory _dataTypeFactory;
 
-        public ConstraintComparison(IValueTypeFactory valueTypeFactory)
+        public ConstraintComparison(IDataTypeFactory dataTypeFactory)
         {
-            Guard.AgainstNull(valueTypeFactory, nameof(valueTypeFactory));
+            Guard.AgainstNull(dataTypeFactory, nameof(dataTypeFactory));
 
-            _valueTypeFactory = valueTypeFactory;
+            _dataTypeFactory = dataTypeFactory;
         }
 
-        public bool IsSatisfiedBy(string type, string argumentValue, string comparison, string constraintValue)
+        public bool IsSatisfiedBy(string dataTypeName, string argumentValue, string comparison, string constraintValue)
         {
             var result = true;
 
             foreach (var argumentValueItem in argumentValue.Split(Separator, StringSplitOptions.RemoveEmptyEntries))
             {
-                var argumentValueType = _valueTypeFactory.Create(type, argumentValueItem);
+                var argumentDataType = _dataTypeFactory.Create(dataTypeName, argumentValueItem);
 
-                foreach (var constraintValueItem in constraintValue.Split(Separator,
-                    StringSplitOptions.RemoveEmptyEntries))
+                foreach (var constraintValueItem in constraintValue.Split(Separator, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    var comparisonValueType = _valueTypeFactory.Create(type, constraintValueItem);
+                    var comparisonDataType = _dataTypeFactory.Create(dataTypeName, constraintValueItem);
 
-                    var comparisionResult = argumentValueType.CompareTo(comparisonValueType);
+                    var comparisionResult = argumentDataType.CompareTo(comparisonDataType);
 
                     switch (comparison.ToLowerInvariant())
                     {

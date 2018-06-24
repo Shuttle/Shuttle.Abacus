@@ -46,36 +46,31 @@ namespace Shuttle.Abacus.DataAccess
         public void Remove(Guid formulaId)
         {
             _databaseGateway.ExecuteUsing(_queryFactory.Remove(formulaId));
-            _databaseGateway.ExecuteUsing(_queryFactory.RemoveOperations(formulaId));
-            _databaseGateway.ExecuteUsing(_queryFactory.RemoveConstraints(formulaId));
         }
 
         public void Rename(Guid formulaId, string name)
         {
-            _databaseGateway.ExecuteUsing(_queryFactory.Renamed(formulaId, name));
+            _databaseGateway.ExecuteUsing(_queryFactory.Rename(formulaId, name));
         }
 
-        public void RemoveOperations(Guid formulaId)
+        public void RemoveOperation(Guid operationId)
         {
-            _databaseGateway.ExecuteUsing(_queryFactory.RemoveOperations(formulaId));
+            _databaseGateway.ExecuteUsing(_queryFactory.RemoveOperation(operationId));
         }
 
-        public void AddOperation(Guid formulaId, int sequenceNumber, string operation, string valueProvider,
-            string input)
+        public void AddOperation(Guid operationId, Guid formulaId, int sequenceNumber, string operation, string valueProviderName, string inputParameter)
         {
-            _databaseGateway.ExecuteUsing(_queryFactory.AddOperation(formulaId, sequenceNumber, operation, valueProvider, input));
+            _databaseGateway.ExecuteUsing(_queryFactory.AddOperation(operationId, formulaId, sequenceNumber, operation, valueProviderName, inputParameter));
         }
 
-        public void RemoveConstraints(Guid formulaId)
+        public void RemoveConstraint(Guid constraintId)
         {
-            _databaseGateway.ExecuteUsing(_queryFactory.RemoveConstraints(formulaId));
+            _databaseGateway.ExecuteUsing(_queryFactory.RemoveConstraint(constraintId));
         }
 
-        public void AddConstraint(Guid formulaId, int sequenceNumber, string argumentName, string comparison,
-            string value)
+        public void AddConstraint(Guid constraintId, Guid formulaId, string argumentName, string comparison, string value)
         {
-            _databaseGateway.ExecuteUsing(_queryFactory.AddConstraint(formulaId, sequenceNumber, argumentName,
-                comparison, value));
+            _databaseGateway.ExecuteUsing(_queryFactory.AddConstraint(constraintId, formulaId, argumentName, comparison, value));
         }
 
         public IEnumerable<DataRow> Constraints(Guid formulaId)

@@ -14,24 +14,24 @@ namespace Shuttle.Abacus
 
     public class FormulaOperation
     {
-        public FormulaOperation(Guid id, int sequenceNumber, string operation, string valueProvider, string input)
+        public FormulaOperation(Guid id, int sequenceNumber, string operation, string valueProviderName, string inputParameter)
         {
             Guard.AgainstNullOrEmptyString(operation, nameof(operation));
-            Guard.AgainstNullOrEmptyString(valueProvider, nameof(valueProvider));
-            Guard.AgainstNullOrEmptyString(input, nameof(input));
+            Guard.AgainstNullOrEmptyString(valueProviderName, nameof(valueProviderName));
+            Guard.AgainstNullOrEmptyString(inputParameter, nameof(inputParameter));
 
             Id = id;
             SequenceNumber = sequenceNumber;
             Operation = operation;
-            ValueProvider = valueProvider;
-            Input = input;
+            ValueProviderName = valueProviderName;
+            InputParameter = inputParameter;
         }
 
         public Guid Id { get; }
         public int SequenceNumber { get; }
         public string Operation { get; }
-        public string ValueProvider { get; }
-        public string Input { get; }
+        public string ValueProviderName { get; }
+        public string InputParameter { get; }
 
         public void Perform(FormulaContext context, decimal value)
         {

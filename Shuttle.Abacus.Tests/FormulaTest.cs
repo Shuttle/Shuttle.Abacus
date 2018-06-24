@@ -52,8 +52,8 @@ namespace Shuttle.Abacus.Tests
 
         //    var context =
         //        new FormulaContextOLD("test")
-        //            .AddValue(new ConstantValueType("VoluntaryExcess", 1000))
-        //            .AddValue(new ConstantValueType("SumInsured", 980000));
+        //            .AddValue(new ConstantDataType("VoluntaryExcess", 1000))
+        //            .AddValue(new ConstantDataType("SumInsured", 980000));
 
         //    var result = new CalculationCollectionResult(new CalculationCollection("TOTAL"), 636.99m);
 

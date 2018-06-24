@@ -25,14 +25,14 @@ select
     Name,
     ColumnArgumentName,
     RowArgumentName,
-    ValueType
+    DataTypeName
 from
     Matrix
 ")
                 .AddParameterValue(Columns.Id, id);
         }
 
-        public IQuery Add(Guid id, string name, string columnArgumentName, string rowArgumentName, string valueType)
+        public IQuery Add(Guid id, string name, string columnArgumentName, string rowArgumentName, string dataTypeName)
         {
             return RawQuery.Create(@"
 insert into Matrix
@@ -41,7 +41,7 @@ insert into Matrix
     Name,
     ColumnArgumentName,
     RowArgumentName,
-    ValueType
+    DataTypeName
 )
 values
 (
@@ -49,13 +49,13 @@ values
     @Name,
     @ColumnArgumentName,
     @RowArgumentName,
-    @ValueType
+    @DataTypeName
 )")
                 .AddParameterValue(Columns.Id, id)
                 .AddParameterValue(Columns.Name, name)
                 .AddParameterValue(Columns.ColumnArgumentName, columnArgumentName)
                 .AddParameterValue(Columns.RowArgumentName, rowArgumentName)
-                .AddParameterValue(Columns.ValueType, valueType);
+                .AddParameterValue(Columns.DataTypeName, dataTypeName);
         }
 
         public IQuery Remove(Guid id)

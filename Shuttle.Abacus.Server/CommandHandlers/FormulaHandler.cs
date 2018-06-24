@@ -144,15 +144,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                     return;
                 }
 
-                stream.AddEvent(formula.RemoveConstraints());
-
-                foreach (var operation in message.Constraints)
-                {
-                    stream.AddEvent(formula.AddConstraint(TODO,
-                        operation.ArgumentName,
-                        operation.Comparison,
-                        operation.Value));
-                }
+                stream.AddEvent(formula.RemoveConstraint(message.Id));
 
                 _eventStore.Save(stream);
             }
@@ -190,15 +182,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                     return;
                 }
 
-                stream.AddEvent(formula.RemoveOperations());
-
-                foreach (var operation in message.Operations)
-                {
-                    stream.AddEvent(formula.AddOperation(TODO,
-                        operation.Operation,
-                        operation.ValueProvider,
-                        operation.Input));
-                }
+                stream.AddEvent(formula.RemoveOperation(message.Id));
 
                 _eventStore.Save(stream);
             }

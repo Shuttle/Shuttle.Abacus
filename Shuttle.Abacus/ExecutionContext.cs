@@ -26,7 +26,7 @@ namespace Shuttle.Abacus
 
                 if (logger.LogLevel == ContextLogLevel.Verbose)
                 {
-                    logger.LogVerbose($"[input argument] {argumentValue.Name} = '{argumentValue.Value}'");
+                    logger.LogVerbose($"[inputParameter argument name] {argumentValue.Name} = '{argumentValue.Value}'");
                 }
             }
         }

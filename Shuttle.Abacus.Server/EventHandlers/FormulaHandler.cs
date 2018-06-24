@@ -9,9 +9,9 @@ namespace Shuttle.Abacus.Server.EventHandlers
         IEventHandler<Registered>,
         IEventHandler<Renamed>,
         IEventHandler<Removed>,
-        IEventHandler<OperationsRemoved>,
+        IEventHandler<OperationRemoved>,
         IEventHandler<OperationAdded>,
-        IEventHandler<ConstraintsRemoved>,
+        IEventHandler<ConstraintRemoved>,
         IEventHandler<ConstraintAdded>
     {
         private readonly IFormulaQuery _query;
@@ -27,26 +27,25 @@ namespace Shuttle.Abacus.Server.EventHandlers
         {
             var constraintAdded = context.Event;
 
-            _query.AddConstraint(context.PrimitiveEvent.Id, constraintAdded.SequenceNumber,
-                constraintAdded.ArgumentName, constraintAdded.Comparison, constraintAdded.Value);
+            _query.AddConstraint(constraintAdded.Id, context.PrimitiveEvent.Id, constraintAdded.ArgumentName, constraintAdded.Comparison, constraintAdded.Value);
         }
 
-        public void ProcessEvent(IEventHandlerContext<ConstraintsRemoved> context)
+        public void ProcessEvent(IEventHandlerContext<ConstraintRemoved> context)
         {
-            _query.RemoveConstraints(context.PrimitiveEvent.Id);
+            _query.RemoveConstraint(context.Event.Id);
         }
 
         public void ProcessEvent(IEventHandlerContext<OperationAdded> context)
         {
             var operationAdded = context.Event;
 
-            _query.AddOperation(context.PrimitiveEvent.Id, operationAdded.SequenceNumber, operationAdded.Operation,
-                operationAdded.ValueProvider, operationAdded.Input);
+            _query.AddOperation(operationAdded.Id, context.PrimitiveEvent.Id, operationAdded.SequenceNumber, operationAdded.Operation,
+                operationAdded.ValueProviderName, operationAdded.InputParameter);
         }
 
-        public void ProcessEvent(IEventHandlerContext<OperationsRemoved> context)
+        public void ProcessEvent(IEventHandlerContext<OperationRemoved> context)
         {
-            _query.RemoveOperations(context.PrimitiveEvent.Id);
+            _query.RemoveOperation(context.Event.Id);
         }
 
         public void ProcessEvent(IEventHandlerContext<Registered> context)

@@ -11,9 +11,9 @@ namespace Shuttle.Abacus.Tests
         //{
         //    var context = new FormulaContextOLD(string.Empty);
 
-        //    context.AddValue(new ConstantValueType("SumInsured", 300000));
+        //    context.AddValue(new ConstantDataType("SumInsured", 300000));
 
-        //    Assert.AreSame(ValueType.Null, context.GetArgumentAnswer("blah"));
+        //    Assert.AreSame(DataTypeName.Null, context.GetArgumentAnswer("blah"));
         //    Assert.AreEqual(300000, context.GetArgumentAnswer("SumInsured").Answer);
         //}
 
@@ -43,15 +43,15 @@ namespace Shuttle.Abacus.Tests
         //{
         //    var methodContext = new FormulaContextOLD(string.Empty);
 
-        //    methodContext.AddValue(new IntegerValueType("input", 10));
+        //    methodContext.AddValue(new IntegerDataType("inputParameter", 10));
 
         //    methodContext.IncrementSubTotal(new CalculationCollectionResult(new CalculationCollection("result"), 25));
         //    methodContext.AddResult(new FormulaCalculationResult(new FormulaCalculation("result"), 25));
 
         //    var copy = methodContext.Copy().AsReadOnly();
 
-        //    Assert.IsTrue(copy.HasArgumentAnswer("input"));
-        //    Assert.AreEqual(10, (int)copy.GetArgumentAnswer("input").Answer);
+        //    Assert.IsTrue(copy.HasArgumentAnswer("inputParameter"));
+        //    Assert.AreEqual(10, (int)copy.GetArgumentAnswer("inputParameter").Answer);
 
         //    Assert.IsTrue(copy.HasResult("result"));
         //    Assert.AreEqual(25, copy.GetResult("result").Value);

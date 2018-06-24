@@ -2,31 +2,31 @@ using System;
 
 namespace Shuttle.Abacus
 {
-    public class ValueTypeFactory : IValueTypeFactory
+    public class DataTypeFactory : IDataTypeFactory
     {
-        public ValueType Create(string type, string value)
+        public DataType Create(string name, string value)
         {
-            switch (type.ToLowerInvariant())
+            switch (name.ToLowerInvariant())
             {
                 case "boolean":
                 {
-                    return new BooleanValueType(value);
+                    return new BooleanDataType(value);
                 }
                 case "datetime":
                 {
-                    return new DateTimeValueType(value);
+                    return new DateTimeDataType(value);
                 }
                 case "decimal":
                 {
-                    return new ConstantValueType(value);
+                    return new ConstantDataType(value);
                 }
                 case "integer":
                 {
-                    return new IntegerValueType(value);
+                    return new IntegerDataType(value);
                 }
                 case "text":
                 {
-                    return new TextValueType(value);
+                    return new TextDataType(value);
                 }
                 default:
                 {

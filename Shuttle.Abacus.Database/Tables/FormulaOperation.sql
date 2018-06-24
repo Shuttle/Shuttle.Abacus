@@ -3,8 +3,8 @@
     [SequenceNumber] INT              NOT NULL,
     [Id] UNIQUEIDENTIFIER NOT NULL, 
     [Operation]      VARCHAR (120)    NOT NULL,
-    [ValueProvider]    VARCHAR (120)    NOT NULL,
-    [Input] VARCHAR (120)    NOT NULL,
+    [ValueProviderName]    VARCHAR (120)    NOT NULL,
+    [InputParameter] VARCHAR (120)    NOT NULL,
     CONSTRAINT [PK_FormulaOperation] PRIMARY KEY CLUSTERED ([FormulaId] ASC, [SequenceNumber] ASC),
     CONSTRAINT [FK_FormulaOperation_Formula] FOREIGN KEY ([FormulaId]) REFERENCES [dbo].[Formula] ([Id])
 );

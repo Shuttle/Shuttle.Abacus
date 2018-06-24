@@ -2,6 +2,6 @@
 {
     public interface IConstraintComparison
     {
-        bool IsSatisfiedBy(string type, string argumentValue, string comparison, string constraintValue);
+        bool IsSatisfiedBy(string dataTypeName, string argumentValue, string comparison, string constraintValue);
     }
 }

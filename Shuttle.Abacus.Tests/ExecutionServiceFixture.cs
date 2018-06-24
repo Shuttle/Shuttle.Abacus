@@ -16,8 +16,8 @@ namespace Shuttle.Abacus.Tests
 
             formula.Register("Test");
 
-            formula.AddOperation(TODO, "Addition", "Argument", "Operand1");
-            formula.AddOperation(TODO, "Addition", "Argument", "Operand2");
+            formula.AddOperation(Guid.NewGuid(), "Addition", "Argument", "Operand1");
+            formula.AddOperation(Guid.NewGuid(), "Addition", "Argument", "Operand2");
 
             formulas.Add(formula);
 
@@ -31,7 +31,7 @@ namespace Shuttle.Abacus.Tests
 
             var arguments = new List<Argument> { operand1, operand2 };
 
-            var service = new ExecutionService(new ConstraintComparison(new ValueTypeFactory()), formulas, arguments, new List<Matrix>());
+            var service = new ExecutionService(new ConstraintComparison(new DataTypeFactory()), formulas, arguments, new List<Matrix>());
 
             var context = service.Execute("Test", new List<ArgumentValue>
             {
@@ -51,8 +51,8 @@ namespace Shuttle.Abacus.Tests
 
             formula.Register("Test");
 
-            formula.AddOperation(TODO, "Addition", "Argument", "Operand1");
-            formula.AddConstraint(TODO, "Operand2", "==", "10");
+            formula.AddOperation(Guid.NewGuid(), "Addition", "Argument", "Operand1");
+            formula.AddConstraint(Guid.NewGuid(), "Operand2", "==", "10");
 
             formulas.Add(formula);
 
@@ -66,7 +66,7 @@ namespace Shuttle.Abacus.Tests
 
             var arguments = new List<Argument> { operand1, operand2 };
 
-            var service = new ExecutionService(new ConstraintComparison(new ValueTypeFactory()), formulas, arguments, new List<Matrix>());
+            var service = new ExecutionService(new ConstraintComparison(new DataTypeFactory()), formulas, arguments, new List<Matrix>());
 
             var context = service.Execute("Test", new List<ArgumentValue>
             {
@@ -85,16 +85,16 @@ namespace Shuttle.Abacus.Tests
             var formula1 = new Formula(Guid.NewGuid());
 
             formula1.Register("Formula1");
-            formula1.AddOperation(TODO, "Addition", "Formula", "Formula2");
+            formula1.AddOperation(Guid.NewGuid(), "Addition", "Formula", "Formula2");
 
             var formula2 = new Formula(Guid.NewGuid());
 
             formula2.Register("Formula2");
-            formula2.AddOperation(TODO, "Addition", "Constant", "100");
+            formula2.AddOperation(Guid.NewGuid(), "Addition", "Constant", "100");
 
             var formulas = new List<Formula> { formula1, formula2 };
 
-            var service = new ExecutionService(new ConstraintComparison(new ValueTypeFactory()), formulas, new List<Argument>(), new List<Matrix>());
+            var service = new ExecutionService(new ConstraintComparison(new DataTypeFactory()), formulas, new List<Argument>(), new List<Matrix>());
 
             var context = service.Execute("Formula1", new List<ArgumentValue>(), new ContextLogger(ContextLogLevel.Verbose));
 
@@ -107,7 +107,7 @@ namespace Shuttle.Abacus.Tests
             var formula = new Formula(Guid.NewGuid());
 
             formula.Register("Formula");
-            formula.AddOperation(TODO, "Addition", "Matrix", "simple-matrix");
+            formula.AddOperation(Guid.NewGuid(), "Addition", "Matrix", "simple-matrix");
 
             var matrix = new Matrix(Guid.NewGuid());
 
@@ -120,7 +120,7 @@ namespace Shuttle.Abacus.Tests
             argument.Register("argument-one", "Text");
 
             var service = new ExecutionService(
-                new ConstraintComparison(new ValueTypeFactory()),
+                new ConstraintComparison(new DataTypeFactory()),
                 new List<Formula> { formula },
                 new List<Argument> { argument },
                 new List<Matrix> { matrix });
@@ -139,31 +139,31 @@ namespace Shuttle.Abacus.Tests
             var formula1 = new Formula(Guid.NewGuid());
 
             formula1.Register("Formula1");
-            formula1.AddOperation(TODO, "Addition", "Formula", "Formula2");
+            formula1.AddOperation(Guid.NewGuid(), "Addition", "Formula", "Formula2");
 
             var formula2 = new Formula(Guid.NewGuid());
-            formula2.AddOperation(TODO, "Addition", "Formula", "Formula3");
+            formula2.AddOperation(Guid.NewGuid(), "Addition", "Formula", "Formula3");
 
             formula2.Register("Formula2");
 
             var formula3 = new Formula(Guid.NewGuid());
 
             formula3.Register("Formula3");
-            formula3.AddOperation(TODO, "Addition", "Formula", "Formula4");
+            formula3.AddOperation(Guid.NewGuid(), "Addition", "Formula", "Formula4");
 
             var formula4 = new Formula(Guid.NewGuid());
 
             formula4.Register("Formula4");
-            formula4.AddOperation(TODO, "Addition", "Formula", "Formula5");
+            formula4.AddOperation(Guid.NewGuid(), "Addition", "Formula", "Formula5");
 
             var formula5 = new Formula(Guid.NewGuid());
-            formula5.AddOperation(TODO, "Addition", "Formula", "Formula1");
+            formula5.AddOperation(Guid.NewGuid(), "Addition", "Formula", "Formula1");
 
             formula5.Register("Formula5");
 
             var formulas = new List<Formula> { formula1, formula2, formula3, formula4, formula5 };
 
-            var service = new ExecutionService(new ConstraintComparison(new ValueTypeFactory()), formulas, new List<Argument>(), new List<Matrix>());
+            var service = new ExecutionService(new ConstraintComparison(new DataTypeFactory()), formulas, new List<Argument>(), new List<Matrix>());
 
             var context = service.Execute("Formula1", new List<ArgumentValue>(), new ContextLogger(ContextLogLevel.Verbose));
 

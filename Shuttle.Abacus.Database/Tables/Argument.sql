@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Argument] (
     [Id] UNIQUEIDENTIFIER NOT NULL,
     [Name]       VARCHAR (120)    NOT NULL,
-    [ValueType] VARCHAR (65)     NOT NULL,
+    [DataTypeName] VARCHAR (65)     NOT NULL,
     CONSTRAINT [PK_Argument] PRIMARY KEY NONCLUSTERED ([Id] ASC)
 );
 

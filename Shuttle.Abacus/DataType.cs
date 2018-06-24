@@ -2,20 +2,20 @@ using System;
 
 namespace Shuttle.Abacus
 {
-    public abstract class ValueType : IComparable<ValueType>
+    public abstract class DataType : IComparable<DataType>
     {
-        public static ValueType Null = new NullValueType();
+        public static DataType Null = new NullDataType();
 
         public string ValueString { get; protected set; }
         public object Value { get; protected set; }
 
-        public abstract string AnswerType { get; }
+        public abstract string Name { get; }
 
         public virtual bool IsNull => false;
 
-        public abstract int CompareTo(ValueType other);
+        public abstract int CompareTo(DataType other);
 
-        public abstract string DisplayString();
+        public abstract string Text();
 
         public virtual string Description()
         {

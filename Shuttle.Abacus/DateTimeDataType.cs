@@ -3,11 +3,11 @@ using Shuttle.Core.Contract;
 
 namespace Shuttle.Abacus
 {
-    public class DateTimeValueType : ValueType
+    public class DateTimeDataType : DataType
     {
         private readonly DateTime _value;
 
-        public DateTimeValueType(string text)
+        public DateTimeDataType(string text)
         {
             ValueString = text;
 
@@ -16,9 +16,9 @@ namespace Shuttle.Abacus
             Value = _value;
         }
 
-        public override string AnswerType => "DateTime";
+        public override string Name => "DateTime";
 
-        public override int CompareTo(ValueType other)
+        public override int CompareTo(DataType other)
         {
             Guard.AgainstNull(other, nameof(other));
 
@@ -26,14 +26,14 @@ namespace Shuttle.Abacus
 
             if (!DateTime.TryParse(other.ValueString, out otherValue))
             {
-                throw new InvalidCastException(string.Format(Resources.IncompatibleCalculationValues, GetType().Name,
+                throw new InvalidCastException(string.Format(Resources.IncompatibleDataTypes, GetType().Name,
                     other.GetType().Name));
             }
 
             return _value.CompareTo(otherValue);
         }
 
-        public override string DisplayString()
+        public override string Text()
         {
             return _value.ToString("dd MMM yyyy HH:mm:ss");
         }

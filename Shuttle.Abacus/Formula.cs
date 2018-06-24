@@ -28,19 +28,19 @@ namespace Shuttle.Abacus
         public bool HasOperations => _operations.Count > 0;
         public bool Removed { get; private set; }
 
-        public OperationAdded AddOperation(Guid id, string operation, string valueProvider, string input)
+        public OperationAdded AddOperation(Guid id, string operation, string valueProviderName, string inputParameter)
         {
             Guard.AgainstNullOrEmptyString(operation, nameof(operation));
-            Guard.AgainstNullOrEmptyString(valueProvider, nameof(valueProvider));
-            Guard.AgainstNullOrEmptyString(input, nameof(input));
+            Guard.AgainstNullOrEmptyString(valueProviderName, nameof(valueProviderName));
+            Guard.AgainstNullOrEmptyString(inputParameter, nameof(inputParameter));
 
             return On(new OperationAdded
             {
                 Id = id,
                 SequenceNumber = _operations.Count + 1,
                 Operation = operation,
-                ValueProvider = valueProvider,
-                Input = input
+                ValueProviderName = valueProviderName,
+                InputParameter = inputParameter
             });
         }
 
@@ -53,8 +53,8 @@ namespace Shuttle.Abacus
                     operationAdded.Id, 
                     operationAdded.SequenceNumber,
                     operationAdded.Operation,
-                    operationAdded.ValueProvider,
-                    operationAdded.Input));
+                    operationAdded.ValueProviderName,
+                    operationAdded.InputParameter));
 
             return operationAdded;
         }

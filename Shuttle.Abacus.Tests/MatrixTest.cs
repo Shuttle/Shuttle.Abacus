@@ -14,7 +14,7 @@ namespace Shuttle.Abacus.Tests
 
         //    var value = new MatrixElement(10);
 
-        //    var answer = new TextValueType("argument", "one");
+        //    var answer = new TextDataType("argument", "one");
 
         //    value.AddConstraint(new EqualsConstraint(Guid.NewGuid(), answer));
 
@@ -28,7 +28,7 @@ namespace Shuttle.Abacus.Tests
 
         //    var contextFalse = new FormulaContextOLD();
 
-        //    contextFalse.AddValue(new TextValueType("argument", "two"));
+        //    contextFalse.AddValue(new TextDataType("argument", "two"));
 
         //    Assert.IsFalse(table.IsSatisfiedBy(contextFalse));
         //}

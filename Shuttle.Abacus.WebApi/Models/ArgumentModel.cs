@@ -3,6 +3,6 @@
     public class ArgumentModel
     {
         public string Name { get; set; }
-        public string ValueType { get; set; }
+        public string DataTypeName { get; set; }
     }
 }

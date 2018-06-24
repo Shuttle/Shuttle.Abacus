@@ -17,7 +17,7 @@ namespace Shuttle.Abacus
 
         public string Name { get; }
 
-        public string Value(string input)
+        public string Value(string inputParameter)
         {
             throw new NotImplementedException();
         }

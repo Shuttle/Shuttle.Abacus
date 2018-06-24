@@ -17,7 +17,7 @@ namespace Shuttle.Abacus
             Id = id;
         }
 
-        public string ValueType { get; private set; }
+        public string DataTypeName { get; private set; }
 
         public Guid Id { get; }
 
@@ -31,17 +31,18 @@ namespace Shuttle.Abacus
 
         public bool HasColumnArgument => !string.IsNullOrEmpty(ColumnArgumentName);
 
-        public Registered Register(string name, string rowArgumentName, string columnArgumentName, string valueType)
+        public Registered Register(string name, string rowArgumentName, string columnArgumentName, string dataTypeName)
         {
             Guard.AgainstNullOrEmptyString(name, nameof(name));
             Guard.AgainstNullOrEmptyString(rowArgumentName, nameof(rowArgumentName));
+            Guard.AgainstNullOrEmptyString(dataTypeName, nameof(dataTypeName));
 
             return On(new Registered
             {
                 Name = name,
                 RowArgumentName = rowArgumentName,
                 ColumnArgumentName = columnArgumentName ?? string.Empty,
-                ValueType = valueType
+                DataTypeName = dataTypeName
             });
         }
 
@@ -52,7 +53,7 @@ namespace Shuttle.Abacus
             Name = registered.Name;
             RowArgumentName = registered.RowArgumentName;
             ColumnArgumentName = registered.ColumnArgumentName;
-            ValueType = registered.ValueType;
+            DataTypeName = registered.DataTypeName;
 
             _constraints.Clear();
             _elements.Clear();
@@ -150,10 +151,10 @@ namespace Shuttle.Abacus
                 Guard.AgainstNull(columnArgument, nameof(columnArgument));
             }
 
-            var row = FindConstraint("Row", constraintComparison, rowArgument.ValueType,
+            var row = FindConstraint("Row", constraintComparison, rowArgument.DataType,
                 executionContext.GetArgumentValue(RowArgumentName));
             var column = HasColumnArgument
-                ? FindConstraint("Column", constraintComparison, columnArgument.ValueType,
+                ? FindConstraint("Column", constraintComparison, columnArgument.DataType,
                     executionContext.GetArgumentValue(ColumnArgumentName))
                 : 1;
 
@@ -168,13 +169,12 @@ namespace Shuttle.Abacus
             return element.Value;
         }
 
-        private int FindConstraint(string axis, IConstraintComparison constraintComparison, string valueType,
-            string value)
+        private int FindConstraint(string axis, IConstraintComparison constraintComparison, string dataTypeName, string value)
         {
             var constraint = _constraints.FirstOrDefault(item =>
                 item.Axis.Equals(axis, StringComparison.InvariantCultureIgnoreCase)
                 &&
-                constraintComparison.IsSatisfiedBy(valueType, item.Value, item.Comparison, value)
+                constraintComparison.IsSatisfiedBy(dataTypeName, item.Value, item.Comparison, value)
             );
 
             if (constraint == null)

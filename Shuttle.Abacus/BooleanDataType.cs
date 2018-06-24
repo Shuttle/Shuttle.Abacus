@@ -3,17 +3,17 @@ using Shuttle.Core.Contract;
 
 namespace Shuttle.Abacus
 {
-    public class BooleanValueType : ValueType
+    public class BooleanDataType : DataType
     {
         private readonly bool value;
 
-        public BooleanValueType(bool value)
+        public BooleanDataType(bool value)
         {
             Value = value;
             ValueString = Convert.ToString(value);
         }
 
-        public BooleanValueType(string text)
+        public BooleanDataType(string text)
         {
             ValueString = text;
 
@@ -38,9 +38,9 @@ namespace Shuttle.Abacus
             Value = value;
         }
 
-        public override string AnswerType => "Boolean";
+        public override string Name => "Boolean";
 
-        public override int CompareTo(ValueType other)
+        public override int CompareTo(DataType other)
         {
             Guard.AgainstNull(other, nameof(other));
 
@@ -48,14 +48,14 @@ namespace Shuttle.Abacus
 
             if (!bool.TryParse(other.ValueString, out otherValue))
             {
-                throw new InvalidCastException(string.Format(Resources.IncompatibleCalculationValues, GetType().Name,
+                throw new InvalidCastException(string.Format(Resources.IncompatibleDataTypes, GetType().Name,
                     other.GetType().Name));
             }
 
             return value.CompareTo(otherValue);
         }
 
-        public override string DisplayString()
+        public override string Text()
         {
             return value ? "Yes" : "No";
         }

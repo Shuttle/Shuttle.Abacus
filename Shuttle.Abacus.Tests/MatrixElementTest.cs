@@ -13,7 +13,7 @@ namespace Shuttle.Abacus.Tests
 
         //    Assert.IsTrue(rate.IsSatisfiedBy(new FormulaContextOLD()));
 
-        //    var answer = new TextValueType("argument", "one");
+        //    var answer = new TextDataType("argument", "one");
 
         //    rate.AddConstraint(new EqualsConstraint(Guid.NewGuid(), answer));
 
@@ -25,7 +25,7 @@ namespace Shuttle.Abacus.Tests
 
         //    var contextFalse = new FormulaContextOLD();
 
-        //    contextFalse.AddArgumentAnswer(new TextValueType("argument", "two"));
+        //    contextFalse.AddArgumentAnswer(new TextDataType("argument", "two"));
 
         //    Assert.IsFalse(rate.IsSatisfiedBy(contextFalse));
         //}
