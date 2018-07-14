@@ -2,21 +2,21 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Shuttle.Abacus" Version="1.0.0" />
     <PackageReference Include="Shuttle.Abacus.Messages" Version="1.0.0" />
-    <PackageReference Include="Shuttle.Core.Castle" Version="10.0.4" />
-    <PackageReference Include="Shuttle.Core.Data" Version="10.0.5" />
-    <PackageReference Include="Shuttle.Core.Data.SqlClient" Version="10.0.4" />
-    <PackageReference Include="Shuttle.Core.Log4Net" Version="10.0.0" />
-    <PackageReference Include="Shuttle.Core.ServiceHost" Version="10.0.0" />
-    <PackageReference Include="Shuttle.Esb.RabbitMQ" Version="10.0.5" />
-    <PackageReference Include="Shuttle.Recall.Sql.EventProcessing" Version="10.0.0" />
-    <PackageReference Include="Shuttle.Recall.Sql.Storage" Version="10.0.0" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.5.0" />
+    <PackageReference Include="Shuttle.Core.Castle" Version="10.0.5" />
+    <PackageReference Include="Shuttle.Core.Data" Version="10.0.8" />
+    <PackageReference Include="Shuttle.Core.Data.SqlClient" Version="10.0.7" />
+    <PackageReference Include="Shuttle.Core.Log4Net" Version="10.0.1" />
+    <PackageReference Include="Shuttle.Core.ServiceHost" Version="10.0.2" />
+    <PackageReference Include="Shuttle.Esb.RabbitMQ" Version="10.0.6" />
+    <PackageReference Include="Shuttle.Recall.Sql.EventProcessing" Version="10.0.2" />
+    <PackageReference Include="Shuttle.Recall.Sql.Storage" Version="10.0.2" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.5.1" />
   </ItemGroup>
 
 </Project>

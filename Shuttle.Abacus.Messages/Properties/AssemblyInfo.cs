@@ -1,10 +1,6 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-#if NET46
-[assembly: AssemblyTitle(".NET Framework 4.6")]
-#endif
-
 #if NET461
 [assembly: AssemblyTitle(".NET Framework 4.6.1")]
 #endif
@@ -23,6 +19,10 @@ using System.Runtime.InteropServices;
 
 #if NETCOREAPP2_0
 [assembly: AssemblyTitle(".NET Core 2.0")]
+#endif
+
+#if NETCOREAPP2_1
+[assembly: AssemblyTitle(".NET Core 2.1")]
 #endif
 
 #if NETSTANDARD2_0
