@@ -48,6 +48,11 @@ validate.extend(validate.validators.datetime, {
 });
 
 canstrap.table.tableClass = 'mt-2';
+canstrap.form.elementClass = 'mb-2';
+canstrap.formGroup.elementClass = 'mb-2';
+canstrap.button.remove.confirmation = function (options) {
+    state.modal.confirmation.show(options);
+}
 
 canstrap.button.remove.confirmation = function (options) {
     state.modal.confirmation.show(options);

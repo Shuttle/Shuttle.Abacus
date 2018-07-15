@@ -57,7 +57,7 @@
   "username": "Username",
   "value": "Value",
   "values": "Values",
-  "value-type": "Value type",
+  "data-type-name": "Data type name",
   "view": "View",
   "yes": "Yes",
   "workingMessage": "Please wait until the current operation completes and then try again.",

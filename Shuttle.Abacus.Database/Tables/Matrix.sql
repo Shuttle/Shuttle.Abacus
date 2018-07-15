@@ -1,8 +1,8 @@
 ﻿CREATE TABLE [dbo].[Matrix] (
     [Id]           UNIQUEIDENTIFIER NOT NULL,
     [Name]               VARCHAR (160)    NOT NULL,
-    [RowArgumentName]    VARCHAR (120)    NOT NULL,
-    [ColumnArgumentName] VARCHAR (120)    NULL,
+    [RowArgumentId]    UNIQUEIDENTIFIER    NOT NULL,
+    [ColumnArgumentId] UNIQUEIDENTIFIER    NULL,
     [DataTypeName]         VARCHAR (65)     CONSTRAINT [DF_Matrix_ResultType] DEFAULT ('Text') NOT NULL,
     CONSTRAINT [PK_Matrix] PRIMARY KEY NONCLUSTERED ([Id] ASC)
 );

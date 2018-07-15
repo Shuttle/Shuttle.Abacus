@@ -29,7 +29,7 @@ export const ViewModel = DefineMap.extend({
         }
 
         this.name = result.name;
-        this.valueType = result.valueType;
+        this.dataTypeName = result.dataTypeName;
     },
 
     name: {
@@ -40,7 +40,7 @@ export const ViewModel = DefineMap.extend({
         }
     },
 
-    valueType: {
+    dataTypeName: {
         type: 'string',
         default: '',
         validate: {
@@ -48,7 +48,7 @@ export const ViewModel = DefineMap.extend({
         }
     },
 
-    valueTypes: {
+    dataTypeNames: {
         Type: OptionList,
         default: [
             {value: 'Boolean', label: 'Boolean'},
@@ -66,7 +66,7 @@ export const ViewModel = DefineMap.extend({
 
         api.arguments.post({
             name: this.name,
-            valueType: this.valueType
+            dataTypeName: this.dataTypeName
         });
 
         this.close();

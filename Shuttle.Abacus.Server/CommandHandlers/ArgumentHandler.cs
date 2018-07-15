@@ -33,6 +33,12 @@ namespace Shuttle.Abacus.Server.CommandHandlers
         {
             var message = context.Message;
 
+            if (string.IsNullOrEmpty(message.Name) ||
+                string.IsNullOrEmpty(message.DataTypeName))
+            {
+                return;
+            }
+
             using (_databaseContextFactory.Create())
             {
                 var key = Argument.Key(message.Name);

@@ -1,4 +1,6 @@
-﻿using Castle.Windsor;
+﻿using System.Data.Common;
+using System.Data.SqlClient;
+using Castle.Windsor;
 using log4net;
 using Shuttle.Abacus.Server.EventHandlers;
 using Shuttle.Core.Castle;
@@ -28,6 +30,8 @@ namespace Shuttle.Abacus.Server
 
         public void Start()
         {
+            DbProviderFactories.RegisterFactory("System.Data.SqlClient", SqlClientFactory.Instance);
+
             Log.Assign(new Log4NetLog(LogManager.GetLogger(typeof(Host))));
 
             _container = new WindsorContainer();
