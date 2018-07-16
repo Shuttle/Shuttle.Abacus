@@ -27,7 +27,7 @@ export const Map = DefineMap.extend({
     operations() {
         router.goto({
             resource: 'formula',
-            item: 'operations',
+            item: 'operation',
             action: 'list',
             id: this.id
         });
@@ -35,7 +35,7 @@ export const Map = DefineMap.extend({
     constraints() {
         router.goto({
             resource: 'formula',
-            item: 'constraints',
+            item: 'constraint',
             action: 'list',
             id: this.id
         });

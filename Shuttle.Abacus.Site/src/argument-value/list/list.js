@@ -10,7 +10,7 @@ import state from '~/state';
 import Api from 'shuttle-can-api';
 import $ from 'jquery';
 
-resources.add('argument', {item: 'values', action: 'list', permission: Permissions.Manage.Arguments});
+resources.add('argument', {item: 'value', action: 'list', permission: Permissions.Manage.Arguments});
 
 export const api = {
     arguments: new Api({
@@ -53,6 +53,12 @@ export const ViewModel = DefineMap.extend({
     get map() {
         const self = this;
         const refreshTimestamp = this.refreshTimestamp;
+
+        if (!this.argumentId){
+            this.map = undefined;
+            return;
+        }
+
         return api.arguments.map({
             id: this.argumentId
         })
@@ -101,7 +107,7 @@ export const ViewModel = DefineMap.extend({
 });
 
 export default Component.extend({
-    tag: 'abacus-argument-values-list',
+    tag: 'abacus-argument-value-list',
     ViewModel,
     view
 });

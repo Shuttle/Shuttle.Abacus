@@ -8,44 +8,13 @@ import router from '~/router';
 import localisation from '~/localisation';
 import state from '~/state';
 import Api from 'shuttle-can-api';
+import $ from "jquery";
 
 resources.add('formula', { item: 'operation', action: 'list', permission: Permissions.Manage.Formulas});
 
-export const Map = DefineMap.extend({
-    id: {
-        type: 'string'
-    },
-    name: {
-        type: 'string'
-    },
-    maximumFormulaName: {
-        type: 'string'
-    },
-    minimumFormulaName: {
-        type: 'string'
-    },
-    operations() {
-        router.goto({
-            resource: 'formula',
-            item: 'operations',
-            action: 'list',
-            id: this.id
-        });
-    },
-    constraints() {
-        router.goto({
-            resource: 'formula',
-            item: 'constraints',
-            action: 'list',
-            id: this.id
-        });
-    }
-});
-
 export const api = {
-    search: new Api({
-        endpoint: 'formulas/search',
-        Map
+    formulas: new Api({
+        endpoint: 'formulas/{id}'
     })
 };
 
@@ -55,14 +24,10 @@ export const ViewModel = DefineMap.extend({
         default: ''
     },
 
-    minimumFormulaName: {
-        type: 'string',
-        default: ''
-    },
-
-    maximumFormulaName: {
-        type: 'string',
-        default: ''
+    formulaId: {
+        get() {
+            return state.routeData.id;
+        }
     },
 
     columns: {
@@ -73,13 +38,25 @@ export const ViewModel = DefineMap.extend({
         type: 'string'
     },
 
-    get list () {
+    formula: {
+        Type: DefineMap
+    },
+
+    get map() {
+        const self = this;
         const refreshTimestamp = this.refreshTimestamp;
-        return api.search.list({
-            name: this.name
-        }, {
-            post: true
-        });
+
+        if (!this.formulaId){
+            this.map = undefined;
+            return;
+        }
+
+        return api.formulas.map({
+            id: this.formulaId
+        })
+            .then(function(map){
+                self.formula = map;
+            });
     },
 
     init() {
@@ -87,56 +64,29 @@ export const ViewModel = DefineMap.extend({
 
         if (!columns.length) {
             columns.push({
-                columnTitle: 'operations',
-                columnClass: 'col-1',
-                stache: '<cs-button text:from="\'operations\'" click:from="operations" elementClass:from="\'btn-sm\'"/>'
-            });
-
-            columns.push({
-                columnTitle: 'constraints',
-                columnClass: 'col-1',
-                stache: '<cs-button text:from="\'constraints\'" click:from="constraints" elementClass:from="\'btn-sm\'"/>'
-            });
-
-            columns.push({
                 columnTitle: 'operation',
                 columnClass: 'col',
                 attributeName: 'operation'
             });
 
             columns.push({
-                columnTitle: 'value-source',
-                columnClass: 'col',
-                attributeName: 'valueSource'
+                columnTitle: 'value-provider-name',
+                columnClass: 'col-2',
+                attributeName: 'valueProviderName'
             });
 
             columns.push({
-                columnTitle: 'value-selection',
+                columnTitle: 'input-parameter',
                 columnClass: 'col',
-                attributeName: 'minimumFormulaName'
+                attributeName: 'inputParameterDescription'
             });
         }
 
-        state.title = 'formulas';
-
-        state.navbar.addButton({
-            type: 'add',
-            viewModel: this,
-            permission: Permissions.Manage.Formulas
-        });
+        state.title = 'operations';
 
         state.navbar.addButton({
             type: 'refresh',
             viewModel: this
-        });
-    },
-
-    add: function() {
-        router.goto({
-            resource: 'formula',
-            id: this.formulaId,
-            item: 'operation',
-            action: 'add'
         });
     },
 

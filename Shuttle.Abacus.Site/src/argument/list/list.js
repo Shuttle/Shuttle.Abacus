@@ -33,7 +33,7 @@ export const Map = DefineMap.extend({
     argumentValues() {
         router.goto({
             resource: 'argument',
-            item: 'values',
+            item: 'value',
             id: this.id,
             action: 'list'
         });
