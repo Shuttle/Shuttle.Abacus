@@ -15,6 +15,9 @@ resources.add('argument', {item: 'value', action: 'list', permission: Permission
 export const api = {
     arguments: new Api({
         endpoint: 'arguments/{id}'
+    }),
+    values: new Api({
+        endpoint: 'arguments/{id}/values'
     })
 };
 
@@ -42,12 +45,14 @@ export const ViewModel = DefineMap.extend({
         Type: DefineMap
     },
 
-    values: {
-        get() {
-            return $.map($.makeArray(this.argument.values), function(value) {
-                return { value: value };
-            });
+    get values() {
+        if (!this.argument){
+            return;
         }
+
+        return api.values.list({
+            id: this.argument.id
+        });
     },
 
     get map() {

@@ -15,6 +15,9 @@ resources.add('formula', { item: 'operation', action: 'list', permission: Permis
 export const api = {
     formulas: new Api({
         endpoint: 'formulas/{id}'
+    }),
+    operations: new Api({
+        endpoint: 'formulas/{id}/operations'
     })
 };
 
@@ -40,6 +43,16 @@ export const ViewModel = DefineMap.extend({
 
     formula: {
         Type: DefineMap
+    },
+
+    get operations(){
+        if (!this.formula){
+            return;
+        }
+
+        return api.operations.list({
+            id: this.formula.id
+        });
     },
 
     get map() {

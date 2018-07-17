@@ -22,25 +22,10 @@ var api = {
 };
 
 export const ViewModel = DefineMap.extend({
-    argument: {
-        Type: DefineMap
-    },
-
     argumentId: {
         get() {
             return state.routeData.id;
         }
-    },
-
-    get map() {
-        const self = this;
-        const refreshTimestamp = this.refreshTimestamp;
-        return api.arguments.map({
-            id: this.argumentId
-        })
-            .then(function(map){
-                self.argument = map;
-            });
     },
 
     init: function () {
@@ -83,7 +68,7 @@ export const ViewModel = DefineMap.extend({
     close: function () {
         router.goto({
             resource: 'argument',
-            item: 'values',
+            item: 'value',
             id: this.argumentId,
             action: 'list'
         });

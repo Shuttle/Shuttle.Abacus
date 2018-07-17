@@ -43,7 +43,7 @@ order by
                     Columns.Id, id);
         }
 
-        public IQuery GetValues(Guid id)
+        public IQuery Values(Guid id)
         {
             return RawQuery.Create("select Value from ArgumentValue where ArgumentId = @Id")
                 .AddParameterValue(Columns.Id, id);

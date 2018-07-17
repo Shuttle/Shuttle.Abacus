@@ -28,7 +28,14 @@ namespace Shuttle.Abacus.DataAccess
 
         public DataRow Get(Guid id)
         {
-            return _databaseGateway.GetSingleRowUsing(_queryFactory.Get(id));
+            var row = _databaseGateway.GetSingleRowUsing(_queryFactory.Get(id));
+
+            if (row == null)
+            {
+                throw EntityNotFoundException.For("Formula", id);
+            }
+
+            return row;
         }
 
         public IEnumerable<DataRow> Search(FormulaSearchSpecification specification)
@@ -58,9 +65,11 @@ namespace Shuttle.Abacus.DataAccess
             _databaseGateway.ExecuteUsing(_queryFactory.RemoveOperation(operationId));
         }
 
-        public void AddOperation(Guid operationId, Guid formulaId, int sequenceNumber, string operation, string valueProviderName, string inputParameter)
+        public void AddOperation(Guid operationId, Guid formulaId, int sequenceNumber, string operation,
+            string valueProviderName, string inputParameter)
         {
-            _databaseGateway.ExecuteUsing(_queryFactory.AddOperation(operationId, formulaId, sequenceNumber, operation, valueProviderName, inputParameter));
+            _databaseGateway.ExecuteUsing(_queryFactory.AddOperation(operationId, formulaId, sequenceNumber, operation,
+                valueProviderName, inputParameter));
         }
 
         public void RemoveConstraint(Guid constraintId)
@@ -68,9 +77,11 @@ namespace Shuttle.Abacus.DataAccess
             _databaseGateway.ExecuteUsing(_queryFactory.RemoveConstraint(constraintId));
         }
 
-        public void AddConstraint(Guid constraintId, Guid formulaId, string argumentName, string comparison, string value)
+        public void AddConstraint(Guid constraintId, Guid formulaId, string argumentName, string comparison,
+            string value)
         {
-            _databaseGateway.ExecuteUsing(_queryFactory.AddConstraint(constraintId, formulaId, argumentName, comparison, value));
+            _databaseGateway.ExecuteUsing(_queryFactory.AddConstraint(constraintId, formulaId, argumentName, comparison,
+                value));
         }
 
         public IEnumerable<DataRow> Constraints(Guid formulaId)

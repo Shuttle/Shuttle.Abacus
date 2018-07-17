@@ -27,7 +27,7 @@ namespace Shuttle.Abacus.DataAccess
             return _databaseGateway.GetRowsUsing(_argumentQueryFactory.Search(specification));
         }
 
-        public Query.Argument Get(Guid id)
+        public DataRow Get(Guid id)
         {
             var row = _databaseGateway.GetSingleRowUsing(_argumentQueryFactory.Get(id));
 
@@ -36,43 +36,12 @@ namespace Shuttle.Abacus.DataAccess
                 throw EntityNotFoundException.For("Argument", id);
             }
 
-            return Get(row);
+            return row;
         }
 
-        public IEnumerable<DataRow> GetValues(Guid id)
+        public IEnumerable<DataRow> Values(Guid id)
         {
-            return _databaseGateway.GetRowsUsing(_argumentQueryFactory.GetValues(id));
-        }
-
-        public Query.Argument Get(string name)
-        {
-            var row = _databaseGateway.GetSingleRowUsing(_argumentQueryFactory.Get(name));
-
-            if (row == null)
-            {
-                throw new EntityNotFoundException($"Could not find an 'Argument' with a name of '{name}'.");
-            }
-
-            return Get(row);
-        }
-
-        private Query.Argument Get(DataRow row)
-        {
-            var id = Columns.Id.MapFrom(row);
-
-            var result = new Query.Argument
-            {
-                Id = id,
-                Name= Columns.Name.MapFrom(row),
-                DataTypeName = Columns.DataTypeName.MapFrom(row),
-            };
-
-            foreach (var valueRow in _databaseGateway.GetRowsUsing(_argumentQueryFactory.GetValues(id)))
-            {
-                result.Values.Add(Columns.Value.MapFrom(valueRow));
-            }
-
-            return result;
+            return _databaseGateway.GetRowsUsing(_argumentQueryFactory.Values(id));
         }
 
         public void Registered(PrimitiveEvent primitiveEvent, Registered registered)

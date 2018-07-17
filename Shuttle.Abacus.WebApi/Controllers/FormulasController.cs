@@ -41,7 +41,7 @@ namespace Shuttle.Abacus.WebApi.Controllers
             {
                 return Ok(new
                 {
-                    Data = _dataRowMapper.MapObjects<DataAccess.Query.Formula>(
+                    Data = _dataRowMapper.MapObjects<FormulaModel>(
                         _formulaQuery.Search(model.Specification()))
                 });
             }
@@ -61,7 +61,6 @@ namespace Shuttle.Abacus.WebApi.Controllers
             return Ok();
         }
 
-
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
@@ -69,7 +68,19 @@ namespace Shuttle.Abacus.WebApi.Controllers
             {
                 return Ok(new
                 {
-                    Data = _formulaQuery.Get(id)
+                    Data = _dataRowMapper.MapObject<FormulaModel>(_formulaQuery.Get(id))
+                });
+            }
+        }
+
+        [HttpGet("{id}/operations")]
+        public IActionResult Operations(Guid id)
+        {
+            using (_databaseContextFactory.Create())
+            {
+                return Ok(new
+                {
+                    Data = _dataRowMapper.MapObjects<FormulaOperationModel>(_formulaQuery.Operations(id))
                 });
             }
         }

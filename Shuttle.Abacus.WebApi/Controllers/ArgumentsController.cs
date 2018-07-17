@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Messages.v1;
@@ -43,7 +42,7 @@ namespace Shuttle.Abacus.WebApi.Controllers
             {
                 return Ok(new
                 {
-                    Data = _dataRowMapper.MapObjects<DataAccess.Query.Argument>(
+                    Data = _dataRowMapper.MapObjects<ArgumentModel>(
                         _argumentQuery.Search(model.Specification()))
                 });
             }
@@ -84,7 +83,19 @@ namespace Shuttle.Abacus.WebApi.Controllers
             {
                 return Ok(new
                 {
-                    Data = _argumentQuery.Get(id)
+                    Data = _dataRowMapper.MapObject<ArgumentModel>(_argumentQuery.Get(id))
+                });
+            }
+        }
+
+        [HttpGet("{id}/values")]
+        public IActionResult Values(Guid id)
+        {
+            using (_databaseContextFactory.Create())
+            {
+                return Ok(new
+                {
+                    Data = _dataRowMapper.MapObjects<ArgumentValueModel>(_argumentQuery.Values(id))
                 });
             }
         }
