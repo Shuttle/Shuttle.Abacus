@@ -1,12 +1,6 @@
 {{#if map.isResolved}}
     <h5>{{argument.name}} ({{argument.dataTypeName}})</h5>
-    <abacus-argument-values-add />
-{{else}}
-    <cs-fetching title:from="'argument'" />
+    <abacus-argument-values-add vm:argument:from="argument" />
 {{/if}}
 
-{{#if values.isResolved}}
-    <cs-table vm:columns:from="columns" vm:rows:from="values" />
-{{else}}
-    <cs-fetching title:from="'values'" />
-{{/if}}
+<cs-table vm:columns:from="columns" vm:rows:from="values" />

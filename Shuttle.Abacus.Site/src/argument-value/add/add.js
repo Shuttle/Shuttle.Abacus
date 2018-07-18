@@ -3,12 +3,11 @@ import DefineMap from 'can-define/map/';
 import view from './add.stache!';
 import resources from '~/resources';
 import Permissions from '~/permissions';
-import router from '~/router';
 import Api from 'shuttle-can-api';
 import validator from 'can-define-validate-validatejs';
 import state from '~/state';
-import stack from '~/stack';
 import {OptionMap, OptionList} from 'shuttle-canstrap/select/';
+import localisation from '~/localisation';
 
 resources.add('argument', { item: 'values', action: 'add', permission: Permissions.Manage.Arguments});
 
@@ -22,23 +21,8 @@ var api = {
 };
 
 export const ViewModel = DefineMap.extend({
-    argumentId: {
-        get() {
-            return state.routeData.id;
-        }
-    },
-
-    init: function () {
-        const self = this;
-        const result = stack.pop('argument-value');
-
-        state.title = 'argument-values';
-
-        if (!result) {
-            return;
-        }
-
-        this.value = result.value;
+    argument: {
+        Type: DefineMap
     },
 
     value: {
@@ -57,21 +41,16 @@ export const ViewModel = DefineMap.extend({
         api.argumentValues.post({
             value: this.value
         },{
-            id: this.argumentId
-        });
-
-        this.close();
+            id: this.argument.id
+        })
+            .then(function(){
+                state.alerts.show({
+                    message: localisation.value('itemRegistrationRequested',
+                        {itemName: localisation.value('argument')})
+                });
+            });
 
         return false;
-    },
-
-    close: function () {
-        router.goto({
-            resource: 'argument',
-            item: 'value',
-            id: this.argumentId,
-            action: 'list'
-        });
     }
 });
 

@@ -4,8 +4,4 @@
     </div>
     <cs-button-submit vm:click:from="refresh" text:from="'search'"/>
 </cs-form>
-{{#if list.isResolved}}
-    <cs-table vm:columns:from="columns" vm:rows:from="list.value" />
-{{else}}
-    <cs-fetching title:from="'arguments'" />
-{{/if}}
+<cs-table vm:columns:from="columns" vm:rows:from="list.value" />

@@ -40893,6 +40893,267 @@ define('shuttle-access@1.0.1#shuttle-access', [
     });
     exports.default = access;
 });
+/*i18next-xhr-backend@1.5.1#dist/commonjs/utils*/
+define('i18next-xhr-backend@1.5.1#dist/commonjs/utils', function (require, exports, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    exports.defaults = defaults;
+    exports.extend = extend;
+    var arr = [];
+    var each = arr.forEach;
+    var slice = arr.slice;
+    function defaults(obj) {
+        each.call(slice.call(arguments, 1), function (source) {
+            if (source) {
+                for (var prop in source) {
+                    if (obj[prop] === undefined)
+                        obj[prop] = source[prop];
+                }
+            }
+        });
+        return obj;
+    }
+    function extend(obj) {
+        each.call(slice.call(arguments, 1), function (source) {
+            if (source) {
+                for (var prop in source) {
+                    obj[prop] = source[prop];
+                }
+            }
+        });
+        return obj;
+    }
+});
+/*i18next-xhr-backend@1.5.1#dist/commonjs/ajax*/
+define('i18next-xhr-backend@1.5.1#dist/commonjs/ajax', function (require, exports, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    var _typeof = typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol' ? function (obj) {
+        return typeof obj;
+    } : function (obj) {
+        return obj && typeof Symbol === 'function' && obj.constructor === Symbol && obj !== Symbol.prototype ? 'symbol' : typeof obj;
+    };
+    function addQueryString(url, params) {
+        if (params && (typeof params === 'undefined' ? 'undefined' : _typeof(params)) === 'object') {
+            var queryString = '', e = encodeURIComponent;
+            for (var paramName in params) {
+                queryString += '&' + e(paramName) + '=' + e(params[paramName]);
+            }
+            if (!queryString) {
+                return url;
+            }
+            url = url + (url.indexOf('?') !== -1 ? '&' : '?') + queryString.slice(1);
+        }
+        return url;
+    }
+    function ajax(url, options, callback, data, cache) {
+        if (data && (typeof data === 'undefined' ? 'undefined' : _typeof(data)) === 'object') {
+            if (!cache) {
+                data['_t'] = new Date();
+            }
+            data = addQueryString('', data).slice(1);
+        }
+        if (options.queryStringParams) {
+            url = addQueryString(url, options.queryStringParams);
+        }
+        try {
+            var x;
+            if (XMLHttpRequest) {
+                x = new XMLHttpRequest();
+            } else {
+                x = new ActiveXObject('MSXML2.XMLHTTP.3.0');
+            }
+            x.open(data ? 'POST' : 'GET', url, 1);
+            if (!options.crossDomain) {
+                x.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            }
+            x.withCredentials = !!options.withCredentials;
+            if (data) {
+                x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            }
+            if (x.overrideMimeType) {
+                x.overrideMimeType('application/json');
+            }
+            var h = options.customHeaders;
+            if (h) {
+                for (var i in h) {
+                    x.setRequestHeader(i, h[i]);
+                }
+            }
+            x.onreadystatechange = function () {
+                x.readyState > 3 && callback && callback(x.responseText, x);
+            };
+            x.send(data);
+        } catch (e) {
+            console && console.log(e);
+        }
+    }
+    exports.default = ajax;
+});
+/*i18next-xhr-backend@1.5.1#dist/commonjs/index*/
+define('i18next-xhr-backend@1.5.1#dist/commonjs/index', [
+    'require',
+    'exports',
+    'module',
+    './utils.js',
+    './ajax.js'
+], function (require, exports, module) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: true });
+    var _createClass = function () {
+        function defineProperties(target, props) {
+            for (var i = 0; i < props.length; i++) {
+                var descriptor = props[i];
+                descriptor.enumerable = descriptor.enumerable || false;
+                descriptor.configurable = true;
+                if ('value' in descriptor)
+                    descriptor.writable = true;
+                Object.defineProperty(target, descriptor.key, descriptor);
+            }
+        }
+        return function (Constructor, protoProps, staticProps) {
+            if (protoProps)
+                defineProperties(Constructor.prototype, protoProps);
+            if (staticProps)
+                defineProperties(Constructor, staticProps);
+            return Constructor;
+        };
+    }();
+    var _utils = require('./utils.js');
+    var utils = _interopRequireWildcard(_utils);
+    var _ajax = require('./ajax.js');
+    var _ajax2 = _interopRequireDefault(_ajax);
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { default: obj };
+    }
+    function _interopRequireWildcard(obj) {
+        if (obj && obj.__esModule) {
+            return obj;
+        } else {
+            var newObj = {};
+            if (obj != null) {
+                for (var key in obj) {
+                    if (Object.prototype.hasOwnProperty.call(obj, key))
+                        newObj[key] = obj[key];
+                }
+            }
+            newObj.default = obj;
+            return newObj;
+        }
+    }
+    function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+            throw new TypeError('Cannot call a class as a function');
+        }
+    }
+    function getDefaults() {
+        return {
+            loadPath: '/locales/{{lng}}/{{ns}}.json',
+            addPath: '/locales/add/{{lng}}/{{ns}}',
+            allowMultiLoading: false,
+            parse: JSON.parse,
+            crossDomain: false,
+            ajax: _ajax2.default
+        };
+    }
+    var Backend = function () {
+        function Backend(services) {
+            var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+            _classCallCheck(this, Backend);
+            this.init(services, options);
+            this.type = 'backend';
+        }
+        _createClass(Backend, [
+            {
+                key: 'init',
+                value: function init(services) {
+                    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+                    this.services = services;
+                    this.options = utils.defaults(options, this.options || {}, getDefaults());
+                }
+            },
+            {
+                key: 'readMulti',
+                value: function readMulti(languages, namespaces, callback) {
+                    var loadPath = this.options.loadPath;
+                    if (typeof this.options.loadPath === 'function') {
+                        loadPath = this.options.loadPath(languages, namespaces);
+                    }
+                    var url = this.services.interpolator.interpolate(loadPath, {
+                        lng: languages.join('+'),
+                        ns: namespaces.join('+')
+                    });
+                    this.loadUrl(url, callback);
+                }
+            },
+            {
+                key: 'read',
+                value: function read(language, namespace, callback) {
+                    var loadPath = this.options.loadPath;
+                    if (typeof this.options.loadPath === 'function') {
+                        loadPath = this.options.loadPath([language], [namespace]);
+                    }
+                    var url = this.services.interpolator.interpolate(loadPath, {
+                        lng: language,
+                        ns: namespace
+                    });
+                    this.loadUrl(url, callback);
+                }
+            },
+            {
+                key: 'loadUrl',
+                value: function loadUrl(url, callback) {
+                    var _this = this;
+                    this.options.ajax(url, this.options, function (data, xhr) {
+                        if (xhr.status >= 500 && xhr.status < 600)
+                            return callback('failed loading ' + url, true);
+                        if (xhr.status >= 400 && xhr.status < 500)
+                            return callback('failed loading ' + url, false);
+                        var ret = void 0, err = void 0;
+                        try {
+                            ret = _this.options.parse(data, url);
+                        } catch (e) {
+                            err = 'failed parsing ' + url + ' to json';
+                        }
+                        if (err)
+                            return callback(err, false);
+                        callback(null, ret);
+                    });
+                }
+            },
+            {
+                key: 'create',
+                value: function create(languages, namespace, key, fallbackValue) {
+                    var _this2 = this;
+                    if (typeof languages === 'string')
+                        languages = [languages];
+                    var payload = {};
+                    payload[key] = fallbackValue || '';
+                    languages.forEach(function (lng) {
+                        var url = _this2.services.interpolator.interpolate(_this2.options.addPath, {
+                            lng: lng,
+                            ns: namespace
+                        });
+                        _this2.options.ajax(url, _this2.options, function (data, xhr) {
+                        }, payload);
+                    });
+                }
+            }
+        ]);
+        return Backend;
+    }();
+    Backend.type = 'backend';
+    exports.default = Backend;
+});
+/*i18next-xhr-backend@1.5.1#index*/
+define('i18next-xhr-backend@1.5.1#index', [
+    'require',
+    'exports',
+    'module',
+    './dist/commonjs/index.js'
+], function (require, exports, module) {
+    module.exports = require('./dist/commonjs/index.js').default;
+});
 /*i18next@11.3.6#dist/commonjs/logger*/
 define('i18next@11.3.6#dist/commonjs/logger', function (require, exports, module) {
     'use strict';
@@ -43416,267 +43677,6 @@ define('i18next@11.3.6#index', [
 ], function (require, exports, module) {
     module.exports = require('./dist/commonjs/index.js').default;
 });
-/*i18next-xhr-backend@1.5.1#dist/commonjs/utils*/
-define('i18next-xhr-backend@1.5.1#dist/commonjs/utils', function (require, exports, module) {
-    'use strict';
-    Object.defineProperty(exports, '__esModule', { value: true });
-    exports.defaults = defaults;
-    exports.extend = extend;
-    var arr = [];
-    var each = arr.forEach;
-    var slice = arr.slice;
-    function defaults(obj) {
-        each.call(slice.call(arguments, 1), function (source) {
-            if (source) {
-                for (var prop in source) {
-                    if (obj[prop] === undefined)
-                        obj[prop] = source[prop];
-                }
-            }
-        });
-        return obj;
-    }
-    function extend(obj) {
-        each.call(slice.call(arguments, 1), function (source) {
-            if (source) {
-                for (var prop in source) {
-                    obj[prop] = source[prop];
-                }
-            }
-        });
-        return obj;
-    }
-});
-/*i18next-xhr-backend@1.5.1#dist/commonjs/ajax*/
-define('i18next-xhr-backend@1.5.1#dist/commonjs/ajax', function (require, exports, module) {
-    'use strict';
-    Object.defineProperty(exports, '__esModule', { value: true });
-    var _typeof = typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol' ? function (obj) {
-        return typeof obj;
-    } : function (obj) {
-        return obj && typeof Symbol === 'function' && obj.constructor === Symbol && obj !== Symbol.prototype ? 'symbol' : typeof obj;
-    };
-    function addQueryString(url, params) {
-        if (params && (typeof params === 'undefined' ? 'undefined' : _typeof(params)) === 'object') {
-            var queryString = '', e = encodeURIComponent;
-            for (var paramName in params) {
-                queryString += '&' + e(paramName) + '=' + e(params[paramName]);
-            }
-            if (!queryString) {
-                return url;
-            }
-            url = url + (url.indexOf('?') !== -1 ? '&' : '?') + queryString.slice(1);
-        }
-        return url;
-    }
-    function ajax(url, options, callback, data, cache) {
-        if (data && (typeof data === 'undefined' ? 'undefined' : _typeof(data)) === 'object') {
-            if (!cache) {
-                data['_t'] = new Date();
-            }
-            data = addQueryString('', data).slice(1);
-        }
-        if (options.queryStringParams) {
-            url = addQueryString(url, options.queryStringParams);
-        }
-        try {
-            var x;
-            if (XMLHttpRequest) {
-                x = new XMLHttpRequest();
-            } else {
-                x = new ActiveXObject('MSXML2.XMLHTTP.3.0');
-            }
-            x.open(data ? 'POST' : 'GET', url, 1);
-            if (!options.crossDomain) {
-                x.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-            }
-            x.withCredentials = !!options.withCredentials;
-            if (data) {
-                x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            }
-            if (x.overrideMimeType) {
-                x.overrideMimeType('application/json');
-            }
-            var h = options.customHeaders;
-            if (h) {
-                for (var i in h) {
-                    x.setRequestHeader(i, h[i]);
-                }
-            }
-            x.onreadystatechange = function () {
-                x.readyState > 3 && callback && callback(x.responseText, x);
-            };
-            x.send(data);
-        } catch (e) {
-            console && console.log(e);
-        }
-    }
-    exports.default = ajax;
-});
-/*i18next-xhr-backend@1.5.1#dist/commonjs/index*/
-define('i18next-xhr-backend@1.5.1#dist/commonjs/index', [
-    'require',
-    'exports',
-    'module',
-    './utils.js',
-    './ajax.js'
-], function (require, exports, module) {
-    'use strict';
-    Object.defineProperty(exports, '__esModule', { value: true });
-    var _createClass = function () {
-        function defineProperties(target, props) {
-            for (var i = 0; i < props.length; i++) {
-                var descriptor = props[i];
-                descriptor.enumerable = descriptor.enumerable || false;
-                descriptor.configurable = true;
-                if ('value' in descriptor)
-                    descriptor.writable = true;
-                Object.defineProperty(target, descriptor.key, descriptor);
-            }
-        }
-        return function (Constructor, protoProps, staticProps) {
-            if (protoProps)
-                defineProperties(Constructor.prototype, protoProps);
-            if (staticProps)
-                defineProperties(Constructor, staticProps);
-            return Constructor;
-        };
-    }();
-    var _utils = require('./utils.js');
-    var utils = _interopRequireWildcard(_utils);
-    var _ajax = require('./ajax.js');
-    var _ajax2 = _interopRequireDefault(_ajax);
-    function _interopRequireDefault(obj) {
-        return obj && obj.__esModule ? obj : { default: obj };
-    }
-    function _interopRequireWildcard(obj) {
-        if (obj && obj.__esModule) {
-            return obj;
-        } else {
-            var newObj = {};
-            if (obj != null) {
-                for (var key in obj) {
-                    if (Object.prototype.hasOwnProperty.call(obj, key))
-                        newObj[key] = obj[key];
-                }
-            }
-            newObj.default = obj;
-            return newObj;
-        }
-    }
-    function _classCallCheck(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-            throw new TypeError('Cannot call a class as a function');
-        }
-    }
-    function getDefaults() {
-        return {
-            loadPath: '/locales/{{lng}}/{{ns}}.json',
-            addPath: '/locales/add/{{lng}}/{{ns}}',
-            allowMultiLoading: false,
-            parse: JSON.parse,
-            crossDomain: false,
-            ajax: _ajax2.default
-        };
-    }
-    var Backend = function () {
-        function Backend(services) {
-            var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-            _classCallCheck(this, Backend);
-            this.init(services, options);
-            this.type = 'backend';
-        }
-        _createClass(Backend, [
-            {
-                key: 'init',
-                value: function init(services) {
-                    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-                    this.services = services;
-                    this.options = utils.defaults(options, this.options || {}, getDefaults());
-                }
-            },
-            {
-                key: 'readMulti',
-                value: function readMulti(languages, namespaces, callback) {
-                    var loadPath = this.options.loadPath;
-                    if (typeof this.options.loadPath === 'function') {
-                        loadPath = this.options.loadPath(languages, namespaces);
-                    }
-                    var url = this.services.interpolator.interpolate(loadPath, {
-                        lng: languages.join('+'),
-                        ns: namespaces.join('+')
-                    });
-                    this.loadUrl(url, callback);
-                }
-            },
-            {
-                key: 'read',
-                value: function read(language, namespace, callback) {
-                    var loadPath = this.options.loadPath;
-                    if (typeof this.options.loadPath === 'function') {
-                        loadPath = this.options.loadPath([language], [namespace]);
-                    }
-                    var url = this.services.interpolator.interpolate(loadPath, {
-                        lng: language,
-                        ns: namespace
-                    });
-                    this.loadUrl(url, callback);
-                }
-            },
-            {
-                key: 'loadUrl',
-                value: function loadUrl(url, callback) {
-                    var _this = this;
-                    this.options.ajax(url, this.options, function (data, xhr) {
-                        if (xhr.status >= 500 && xhr.status < 600)
-                            return callback('failed loading ' + url, true);
-                        if (xhr.status >= 400 && xhr.status < 500)
-                            return callback('failed loading ' + url, false);
-                        var ret = void 0, err = void 0;
-                        try {
-                            ret = _this.options.parse(data, url);
-                        } catch (e) {
-                            err = 'failed parsing ' + url + ' to json';
-                        }
-                        if (err)
-                            return callback(err, false);
-                        callback(null, ret);
-                    });
-                }
-            },
-            {
-                key: 'create',
-                value: function create(languages, namespace, key, fallbackValue) {
-                    var _this2 = this;
-                    if (typeof languages === 'string')
-                        languages = [languages];
-                    var payload = {};
-                    payload[key] = fallbackValue || '';
-                    languages.forEach(function (lng) {
-                        var url = _this2.services.interpolator.interpolate(_this2.options.addPath, {
-                            lng: lng,
-                            ns: namespace
-                        });
-                        _this2.options.ajax(url, _this2.options, function (data, xhr) {
-                        }, payload);
-                    });
-                }
-            }
-        ]);
-        return Backend;
-    }();
-    Backend.type = 'backend';
-    exports.default = Backend;
-});
-/*i18next-xhr-backend@1.5.1#index*/
-define('i18next-xhr-backend@1.5.1#index', [
-    'require',
-    'exports',
-    'module',
-    './dist/commonjs/index.js'
-], function (require, exports, module) {
-    module.exports = require('./dist/commonjs/index.js').default;
-});
 /*can-validate-validatejs@0.1.3#can-validate-validatejs*/
 define('can-validate-validatejs@0.1.3#can-validate-validatejs', [
     'require',
@@ -45406,104 +45406,6 @@ if (steal && typeof steal.addNpmPackages === "function") {
             scripts: { test: 'echo "Error: no test specified" && exit 1' }
         },
         {
-            name: "shuttle-canstrap",
-            version: "1.0.59",
-            origFileUrl: "./node_modules/shuttle-canstrap/package.json",
-            fileUrl: "./node_modules/shuttle-canstrap/package.json",
-            _from: "shuttle-canstrap@^1.0.59",
-            _id: "shuttle-canstrap@1.0.59",
-            _inBundle: false,
-            _integrity:
-                "sha512-TVlm+pomGBcudumJKpm4maIAxy5GvvB85i3ByO6EImdssObP5zuwWvxyeNCqLRryImYHDbH4LGfX6+eif1l1nw==",
-            _location: "/shuttle-canstrap",
-            _phantomChildren: {
-                "can-construct": "3.5.0",
-                "can-define": "2.5.2",
-                "can-dom-events": "1.3.0",
-                "can-dom-mutate": "1.1.0",
-                "can-event-queue": "1.1.0",
-                "can-globals": "1.2.0",
-                "can-key-tree": "1.2.0",
-                "can-list": "4.1.0",
-                "can-make-rest": "0.1.3",
-                "can-map": "4.1.1",
-                "can-namespace": "1.0.0",
-                "can-observation": "4.1.0",
-                "can-observation-recorder": "1.2.0",
-                "can-param": "1.1.0",
-                "can-parse-uri": "1.2.0",
-                "can-queues": "1.1.2",
-                "can-reflect": "1.17.0",
-                "can-route": "4.3.0",
-                "can-set": "1.6.0",
-                "can-simple-observable": "2.2.0",
-                "can-stache": "4.10.0",
-                "can-stache-bindings": "4.3.0",
-                "can-types": "1.4.0",
-                "can-util": "3.12.0",
-                "can-validate-interface": "1.0.2",
-                "can-view-callbacks": "4.3.0",
-                "can-view-import": "4.2.0",
-                "can-view-nodelist": "4.3.2",
-                "steal-stache": "4.1.2"
-            },
-            _requested: {
-                type: "range",
-                registry: true,
-                raw: "shuttle-canstrap@^1.0.59",
-                name: "shuttle-canstrap",
-                escapedName: "shuttle-canstrap",
-                rawSpec: "^1.0.59",
-                saveSpec: null,
-                fetchSpec: "^1.0.59"
-            },
-            _requiredBy: ["/", "/shuttle-access"],
-            _resolved:
-                "https://registry.npmjs.org/shuttle-canstrap/-/shuttle-canstrap-1.0.59.tgz",
-            _shasum: "86ba6adea248db7d4a0217448703221312945058",
-            _spec: "shuttle-canstrap@^1.0.59",
-            _where:
-                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
-            author: { name: "Eben Roux" },
-            bugs: {
-                url: "https://github.com/shuttle-npm/shuttle-canstrap/issues"
-            },
-            bundleDependencies: false,
-            dependencies: {
-                bootstrap: "^4.1.1",
-                "can-component": "^4.2.0",
-                "can-compute": "^4.0.3",
-                "can-connect": "^2.0.6",
-                "can-define": "^2.3.5",
-                "can-route": "^4.1.2",
-                "can-route-pushstate": "^4.0.5",
-                "can-set": "^1.5.2",
-                "can-stache": "^4.9.0",
-                "can-stache-bindings": "^4.3.0",
-                "font-awesome": "^4.7.0",
-                "popper.js": "^1.14.3",
-                "shuttle-guard": "^1.0.0",
-                steal: "^1.12.4",
-                "steal-css": "^1.3.2",
-                tether: "^1.4.4"
-            },
-            deprecated: false,
-            description: "CanJS components using Bootstrap v4",
-            devDependencies: { "sync-glob": "^1.3.8" },
-            homepage: "https://github.com/shuttle-npm/shuttle-canstrap#readme",
-            keywords: ["shuttle", "canjs", "bootstrap"],
-            license: "ISC",
-            main: "shuttle-canstrap.js",
-            repository: {
-                type: "git",
-                url: "git+https://github.com/shuttle-npm/shuttle-canstrap.git"
-            },
-            scripts: {
-                "sync-samples":
-                    'node .\\node_modules\\sync-glob\\bin\\sync-glob.js --watch "**/*" "!node_modules/**/*" ..\\shuttle-canstrap-samples\\node_modules\\shuttle-canstrap\\'
-            }
-        },
-        {
             name: "shuttle-access",
             version: "1.0.1",
             origFileUrl: "./node_modules/shuttle-access/package.json",
@@ -45570,6 +45472,107 @@ if (steal && typeof steal.addNpmPackages === "function") {
                 url: "git+https://github.com/shuttle-npm/shuttle-access.git"
             },
             scripts: { test: "mocha" }
+        },
+        {
+            name: "shuttle-canstrap",
+            version: "1.0.59",
+            origFileUrl: "./node_modules/shuttle-canstrap/package.json",
+            fileUrl: "./node_modules/shuttle-canstrap/package.json",
+            _args: [
+                [
+                    "shuttle-canstrap@1.0.59",
+                    "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site"
+                ]
+            ],
+            _from: "shuttle-canstrap@1.0.59",
+            _id: "shuttle-canstrap@1.0.59",
+            _inBundle: false,
+            _integrity:
+                "sha512-TVlm+pomGBcudumJKpm4maIAxy5GvvB85i3ByO6EImdssObP5zuwWvxyeNCqLRryImYHDbH4LGfX6+eif1l1nw==",
+            _location: "/shuttle-canstrap",
+            _phantomChildren: {
+                "can-construct": "3.5.0",
+                "can-define": "2.5.2",
+                "can-dom-events": "1.3.0",
+                "can-dom-mutate": "1.1.0",
+                "can-event-queue": "1.1.0",
+                "can-globals": "1.2.0",
+                "can-key-tree": "1.2.0",
+                "can-list": "4.1.0",
+                "can-make-rest": "0.1.3",
+                "can-map": "4.1.1",
+                "can-namespace": "1.0.0",
+                "can-observation": "4.1.0",
+                "can-observation-recorder": "1.2.0",
+                "can-param": "1.1.0",
+                "can-parse-uri": "1.2.0",
+                "can-queues": "1.1.2",
+                "can-reflect": "1.17.0",
+                "can-route": "4.3.0",
+                "can-set": "1.6.0",
+                "can-simple-observable": "2.2.0",
+                "can-stache": "4.10.0",
+                "can-stache-bindings": "4.3.0",
+                "can-types": "1.4.0",
+                "can-util": "3.12.0",
+                "can-validate-interface": "1.0.2",
+                "can-view-callbacks": "4.3.0",
+                "can-view-import": "4.2.0",
+                "can-view-nodelist": "4.3.2",
+                "steal-stache": "4.1.2"
+            },
+            _requested: {
+                type: "version",
+                registry: true,
+                raw: "shuttle-canstrap@1.0.59",
+                name: "shuttle-canstrap",
+                escapedName: "shuttle-canstrap",
+                rawSpec: "1.0.59",
+                saveSpec: null,
+                fetchSpec: "1.0.59"
+            },
+            _requiredBy: ["/", "/shuttle-access"],
+            _resolved:
+                "https://registry.npmjs.org/shuttle-canstrap/-/shuttle-canstrap-1.0.59.tgz",
+            _spec: "1.0.59",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: { name: "Eben Roux" },
+            bugs: {
+                url: "https://github.com/shuttle-npm/shuttle-canstrap/issues"
+            },
+            dependencies: {
+                bootstrap: "^4.1.1",
+                "can-component": "^4.2.0",
+                "can-compute": "^4.0.3",
+                "can-connect": "^2.0.6",
+                "can-define": "^2.3.5",
+                "can-route": "^4.1.2",
+                "can-route-pushstate": "^4.0.5",
+                "can-set": "^1.5.2",
+                "can-stache": "^4.9.0",
+                "can-stache-bindings": "^4.3.0",
+                "font-awesome": "^4.7.0",
+                "popper.js": "^1.14.3",
+                "shuttle-guard": "^1.0.0",
+                steal: "^1.12.4",
+                "steal-css": "^1.3.2",
+                tether: "^1.4.4"
+            },
+            description: "CanJS components using Bootstrap v4",
+            devDependencies: { "sync-glob": "^1.3.8" },
+            homepage: "https://github.com/shuttle-npm/shuttle-canstrap#readme",
+            keywords: ["shuttle", "canjs", "bootstrap"],
+            license: "ISC",
+            main: "shuttle-canstrap.js",
+            repository: {
+                type: "git",
+                url: "git+https://github.com/shuttle-npm/shuttle-canstrap.git"
+            },
+            scripts: {
+                "sync-samples":
+                    'node .\\node_modules\\sync-glob\\bin\\sync-glob.js --watch "**/*" "!node_modules/**/*" ..\\shuttle-canstrap-samples\\node_modules\\shuttle-canstrap\\'
+            }
         },
         {
             name: "validate.js",
@@ -45701,6 +45704,59 @@ if (steal && typeof steal.addNpmPackages === "function") {
                 url: "git+https://github.com/FortAwesome/Font-Awesome.git"
             },
             style: "css/font-awesome.css"
+        },
+        {
+            name: "shuttle-guard",
+            version: "1.0.0",
+            nestedFileUrl:
+                "./node_modules/shuttle-can-api/node_modules/shuttle-guard/package.json",
+            origFileUrl: "./node_modules/shuttle-guard/package.json",
+            fileUrl: "./node_modules/shuttle-guard/package.json",
+            _from: "shuttle-guard@^1.0.0",
+            _id: "shuttle-guard@1.0.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-8ghDgPpykaH8qDfb7zn8ii7R2jlkZEkLDgxlEH8MlG9jEArM6f+2sJirynjp2EMxPHpK5Sp7aybT0fMGh3HWkw==",
+            _location: "/shuttle-guard",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "shuttle-guard@^1.0.0",
+                name: "shuttle-guard",
+                escapedName: "shuttle-guard",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: [
+                "/",
+                "/shuttle-access",
+                "/shuttle-can-api",
+                "/shuttle-canstrap"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/shuttle-guard/-/shuttle-guard-1.0.0.tgz",
+            _shasum: "2603352e1ad4962fba75b69a76d0a3b7ed42201b",
+            _spec: "shuttle-guard@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: { name: "Eben Roux" },
+            bugs: {
+                url: "https://github.com/shuttle-npm/shuttle-guard/issues"
+            },
+            bundleDependencies: false,
+            deprecated: false,
+            description: "Guard methods.",
+            homepage: "https://github.com/shuttle-npm/shuttle-guard#readme",
+            keywords: ["guard"],
+            license: "BSD-3-Clause",
+            main: "shuttle-guard.js",
+            repository: {
+                type: "git",
+                url: "git+https://github.com/shuttle-npm/shuttle-guard.git"
+            },
+            scripts: { test: 'echo "Error: no test specified" && exit 1' }
         },
         {
             name: "can-route",
@@ -45924,6 +45980,105 @@ if (steal && typeof steal.addNpmPackages === "function") {
             }
         },
         {
+            name: "can-define",
+            version: "2.5.2",
+            nestedFileUrl:
+                "./node_modules/shuttle-can-api/node_modules/can-define/package.json",
+            origFileUrl: "./node_modules/can-define/package.json",
+            fileUrl: "./node_modules/can-define/package.json",
+            _from: "can-define@^2.5.2",
+            _id: "can-define@2.5.2",
+            _inBundle: false,
+            _integrity:
+                "sha512-/8/gA3CYpBHkC5mFU7Rlm/vIiUALqNroz/SJMu3jCbJNKFbwCSwCtRTPl/XPEmLKlbCBxoH+Gosb0/UWe7724g==",
+            _location: "/can-define",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-define@^2.5.2",
+                name: "can-define",
+                escapedName: "can-define",
+                rawSpec: "^2.5.2",
+                saveSpec: null,
+                fetchSpec: "^2.5.2"
+            },
+            _requiredBy: [
+                "/",
+                "/can-component",
+                "/can-connect",
+                "/can-define-validate-validatejs",
+                "/shuttle-access",
+                "/shuttle-can-api",
+                "/shuttle-canstrap",
+                "/shuttle-canstrap/can-connect"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-define/-/can-define-2.5.2.tgz",
+            _shasum: "da25cd21dffb525d79b80b0586751d2da1e6f829",
+            _spec: "can-define@^2.5.2",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: { name: "Bitovi" },
+            bugs: { url: "https://github.com/canjs/can-define/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-assign": "^1.1.1",
+                "can-construct": "^3.2.0",
+                "can-data-types": "<2.0.0",
+                "can-define-lazy-value": "^1.0.0",
+                "can-diff": "^1.0.0",
+                "can-event-queue": "^1.0.0",
+                "can-log": "^1.0.0",
+                "can-namespace": "^1.0.0",
+                "can-observation": "^4.0.0",
+                "can-observation-recorder": "^1.0.0",
+                "can-queues": "^1.0.0",
+                "can-reflect": "^1.15.0",
+                "can-simple-observable": "^2.0.5",
+                "can-single-reference": "^1.0.0",
+                "can-string-to-any": "^1.0.1",
+                "can-symbol": "^1.0.0"
+            },
+            deprecated: false,
+            description:
+                "Create observable objects with JS dot operator compatibility",
+            devDependencies: {
+                "can-reflect-tests": "<2.0.0",
+                "can-test-helpers": "^1.1.0",
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                serve: "^9.0.0",
+                steal: "^1.0.7",
+                "steal-qunit": "^1.0.0",
+                testee: "^0.8.0"
+            },
+            homepage: "https://github.com/canjs/can-define",
+            keywords: ["CanJS"],
+            license: "MIT",
+            main: "can-define.js",
+            repository: {
+                type: "git",
+                url: "git+https://github.com/canjs/can-define.git"
+            },
+            scripts: {
+                "detect-cycle": "detect-cyclic-packages",
+                jshint:
+                    "jshint --config .jshintrc --exclude ./node_modules,./dist .",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                start: "serve -p 8080",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            }
+        },
+        {
             name: "can-reflect",
             version: "1.17.0",
             nestedFileUrl:
@@ -46048,280 +46203,6 @@ if (steal && typeof steal.addNpmPackages === "function") {
                 test:
                     "npm run detect-cycle && npm run jshint && npm run testee",
                 testee: "testee test.html --browsers firefox",
-                version:
-                    'git commit -am "Update dist for release" && git checkout -b release && git add -f dist/'
-            }
-        },
-        {
-            name: "can-define",
-            version: "2.5.2",
-            nestedFileUrl:
-                "./node_modules/shuttle-can-api/node_modules/can-define/package.json",
-            origFileUrl: "./node_modules/can-define/package.json",
-            fileUrl: "./node_modules/can-define/package.json",
-            _from: "can-define@^2.5.2",
-            _id: "can-define@2.5.2",
-            _inBundle: false,
-            _integrity:
-                "sha512-/8/gA3CYpBHkC5mFU7Rlm/vIiUALqNroz/SJMu3jCbJNKFbwCSwCtRTPl/XPEmLKlbCBxoH+Gosb0/UWe7724g==",
-            _location: "/can-define",
-            _phantomChildren: {},
-            _requested: {
-                type: "range",
-                registry: true,
-                raw: "can-define@^2.5.2",
-                name: "can-define",
-                escapedName: "can-define",
-                rawSpec: "^2.5.2",
-                saveSpec: null,
-                fetchSpec: "^2.5.2"
-            },
-            _requiredBy: [
-                "/",
-                "/can-component",
-                "/can-connect",
-                "/can-define-validate-validatejs",
-                "/shuttle-access",
-                "/shuttle-can-api",
-                "/shuttle-canstrap",
-                "/shuttle-canstrap/can-connect"
-            ],
-            _resolved:
-                "https://registry.npmjs.org/can-define/-/can-define-2.5.2.tgz",
-            _shasum: "da25cd21dffb525d79b80b0586751d2da1e6f829",
-            _spec: "can-define@^2.5.2",
-            _where:
-                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
-            author: { name: "Bitovi" },
-            bugs: { url: "https://github.com/canjs/can-define/issues" },
-            bundleDependencies: false,
-            dependencies: {
-                "can-assign": "^1.1.1",
-                "can-construct": "^3.2.0",
-                "can-data-types": "<2.0.0",
-                "can-define-lazy-value": "^1.0.0",
-                "can-diff": "^1.0.0",
-                "can-event-queue": "^1.0.0",
-                "can-log": "^1.0.0",
-                "can-namespace": "^1.0.0",
-                "can-observation": "^4.0.0",
-                "can-observation-recorder": "^1.0.0",
-                "can-queues": "^1.0.0",
-                "can-reflect": "^1.15.0",
-                "can-simple-observable": "^2.0.5",
-                "can-single-reference": "^1.0.0",
-                "can-string-to-any": "^1.0.1",
-                "can-symbol": "^1.0.0"
-            },
-            deprecated: false,
-            description:
-                "Create observable objects with JS dot operator compatibility",
-            devDependencies: {
-                "can-reflect-tests": "<2.0.0",
-                "can-test-helpers": "^1.1.0",
-                "detect-cyclic-packages": "^1.1.0",
-                jshint: "^2.9.1",
-                serve: "^9.0.0",
-                steal: "^1.0.7",
-                "steal-qunit": "^1.0.0",
-                testee: "^0.8.0"
-            },
-            homepage: "https://github.com/canjs/can-define",
-            keywords: ["CanJS"],
-            license: "MIT",
-            main: "can-define.js",
-            repository: {
-                type: "git",
-                url: "git+https://github.com/canjs/can-define.git"
-            },
-            scripts: {
-                "detect-cycle": "detect-cyclic-packages",
-                jshint:
-                    "jshint --config .jshintrc --exclude ./node_modules,./dist .",
-                postpublish: "git push --tags && git push",
-                preversion: "npm test",
-                "release:major": "npm version major && npm publish",
-                "release:minor": "npm version minor && npm publish",
-                "release:patch": "npm version patch && npm publish",
-                "release:pre":
-                    "npm version prerelease && npm publish --tag pre",
-                start: "serve -p 8080",
-                test:
-                    "npm run detect-cycle && npm run jshint && npm run testee",
-                testee: "testee test/test.html --browsers firefox"
-            }
-        },
-        {
-            name: "shuttle-guard",
-            version: "1.0.0",
-            nestedFileUrl:
-                "./node_modules/shuttle-can-api/node_modules/shuttle-guard/package.json",
-            origFileUrl: "./node_modules/shuttle-guard/package.json",
-            fileUrl: "./node_modules/shuttle-guard/package.json",
-            _from: "shuttle-guard@^1.0.0",
-            _id: "shuttle-guard@1.0.0",
-            _inBundle: false,
-            _integrity:
-                "sha512-8ghDgPpykaH8qDfb7zn8ii7R2jlkZEkLDgxlEH8MlG9jEArM6f+2sJirynjp2EMxPHpK5Sp7aybT0fMGh3HWkw==",
-            _location: "/shuttle-guard",
-            _phantomChildren: {},
-            _requested: {
-                type: "range",
-                registry: true,
-                raw: "shuttle-guard@^1.0.0",
-                name: "shuttle-guard",
-                escapedName: "shuttle-guard",
-                rawSpec: "^1.0.0",
-                saveSpec: null,
-                fetchSpec: "^1.0.0"
-            },
-            _requiredBy: [
-                "/",
-                "/shuttle-access",
-                "/shuttle-can-api",
-                "/shuttle-canstrap"
-            ],
-            _resolved:
-                "https://registry.npmjs.org/shuttle-guard/-/shuttle-guard-1.0.0.tgz",
-            _shasum: "2603352e1ad4962fba75b69a76d0a3b7ed42201b",
-            _spec: "shuttle-guard@^1.0.0",
-            _where:
-                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
-            author: { name: "Eben Roux" },
-            bugs: {
-                url: "https://github.com/shuttle-npm/shuttle-guard/issues"
-            },
-            bundleDependencies: false,
-            deprecated: false,
-            description: "Guard methods.",
-            homepage: "https://github.com/shuttle-npm/shuttle-guard#readme",
-            keywords: ["guard"],
-            license: "BSD-3-Clause",
-            main: "shuttle-guard.js",
-            repository: {
-                type: "git",
-                url: "git+https://github.com/shuttle-npm/shuttle-guard.git"
-            },
-            scripts: { test: 'echo "Error: no test specified" && exit 1' }
-        },
-        {
-            name: "can-util",
-            version: "3.12.0",
-            nestedFileUrl:
-                "./node_modules/shuttle-can-api/node_modules/can-util/package.json",
-            origFileUrl: "./node_modules/can-util/package.json",
-            fileUrl: "./node_modules/can-util/package.json",
-            _from: "can-util@^3.11.5",
-            _id: "can-util@3.12.0",
-            _inBundle: false,
-            _integrity:
-                "sha512-xpviYXwKQrLIC1vMrxqvrs1nnhGxgH9pJniJKNziPCRBWrmzpSF0fMxazZ8VOZHHHuxmVLW/PBTBxXsUN9Jlzw==",
-            _location: "/can-util",
-            _phantomChildren: {
-                "can-cid": "1.3.0",
-                "can-dom-events": "1.3.0",
-                "can-globals": "1.2.0",
-                "can-namespace": "1.0.0",
-                "can-param": "1.1.0",
-                "can-parse-uri": "1.2.0",
-                "can-reflect": "1.17.0"
-            },
-            _requested: {
-                type: "range",
-                registry: true,
-                raw: "can-util@^3.11.5",
-                name: "can-util",
-                escapedName: "can-util",
-                rawSpec: "^3.11.5",
-                saveSpec: null,
-                fetchSpec: "^3.11.5"
-            },
-            _requiredBy: [
-                "/",
-                "/can-make-rest",
-                "/can-route-pushstate",
-                "/can-set",
-                "/shuttle-access",
-                "/shuttle-can-api",
-                "/shuttle-canstrap/can-connect",
-                "/shuttle-canstrap/can-route-pushstate"
-            ],
-            _resolved:
-                "https://registry.npmjs.org/can-util/-/can-util-3.12.0.tgz",
-            _shasum: "8dd093239aa6e368138d972ff76522e774534607",
-            _spec: "can-util@^3.11.5",
-            _where:
-                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
-            author: {
-                name: "Bitovi",
-                email: "contact@bitovi.com",
-                url: "http://bitovi.com"
-            },
-            bugs: { url: "https://github.com/canjs/can-util/issues" },
-            bundleDependencies: false,
-            dependencies: {
-                "can-ajax": "^1.0.0",
-                "can-assign": "^1.0.0",
-                "can-cid": "^1.1.0",
-                "can-deparam": "^1.0.0",
-                "can-dom-data-state": "^0.2.0",
-                "can-event-dom-enter": "^1.0.4",
-                "can-event-dom-radiochange": "^1.0.4",
-                "can-globals": "^1.1.1",
-                "can-log": "^1.0.0",
-                "can-namespace": "1.0.0",
-                "can-param": "^1.0.0",
-                "can-parse-uri": "^1.0.0",
-                "can-reflect": "^1.2.0",
-                "can-symbol": "^1.0.0",
-                "can-types": "^1.1.0"
-            },
-            deprecated: false,
-            description: "Common utilities for CanJS projects",
-            devDependencies: {
-                async: "^2.2.0",
-                "can-vdom": "^3.2.3",
-                "detect-cyclic-packages": "^1.1.0",
-                "http-server": "^0.10.0",
-                jshint: "^2.9.1",
-                qunitjs: "^2.4.0",
-                saucelabs: "^1.4.0",
-                steal: "^1.11.4",
-                "steal-css": "^1.2.5",
-                "steal-qunit": "^1.0.0",
-                "steal-tools": "^1.4.1",
-                "test-saucelabs": "0.0.3",
-                testee: "^0.8.0",
-                wd: "^1.1.3",
-                xmlhttprequest2: "^1.0.0"
-            },
-            homepage: "http://canjs.com",
-            keywords: ["canjs", "canjs-plugin", "donejs"],
-            license: "MIT",
-            main: "can-util",
-            repository: {
-                type: "git",
-                url: "git://github.com/canjs/can-util.git"
-            },
-            scripts: {
-                build: "node build.js",
-                ci:
-                    "npm run build && npm run test && node test/test-sauce-labs.js",
-                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
-                "http-server": "http-server -p 3000 --silent",
-                jshint: "jshint dom/. js/. *.js --config",
-                postversion:
-                    "git push --tags && git checkout master && git branch -D release && git push",
-                preversion: "npm test && npm run build",
-                "release:major": "npm version major && npm publish",
-                "release:minor": "npm version minor && npm publish",
-                "release:patch": "npm version patch && npm publish",
-                "release:pre":
-                    "npm version prerelease && npm publish --tag=pre",
-                test:
-                    "npm run detect-cycle && npm run jshint && npm run test:server && npm run testee",
-                "test:server": "TEST=qunit qunit test/node.js",
-                testee: "testee test/test.html --browsers firefox",
                 version:
                     'git commit -am "Update dist for release" && git checkout -b release && git add -f dist/'
             }
@@ -46457,6 +46338,128 @@ if (steal && typeof steal.addNpmPackages === "function") {
             }
         },
         {
+            name: "can-util",
+            version: "3.12.0",
+            nestedFileUrl:
+                "./node_modules/shuttle-can-api/node_modules/can-util/package.json",
+            origFileUrl: "./node_modules/can-util/package.json",
+            fileUrl: "./node_modules/can-util/package.json",
+            _from: "can-util@^3.11.5",
+            _id: "can-util@3.12.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-xpviYXwKQrLIC1vMrxqvrs1nnhGxgH9pJniJKNziPCRBWrmzpSF0fMxazZ8VOZHHHuxmVLW/PBTBxXsUN9Jlzw==",
+            _location: "/can-util",
+            _phantomChildren: {
+                "can-cid": "1.3.0",
+                "can-dom-events": "1.3.0",
+                "can-globals": "1.2.0",
+                "can-namespace": "1.0.0",
+                "can-param": "1.1.0",
+                "can-parse-uri": "1.2.0",
+                "can-reflect": "1.17.0"
+            },
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-util@^3.11.5",
+                name: "can-util",
+                escapedName: "can-util",
+                rawSpec: "^3.11.5",
+                saveSpec: null,
+                fetchSpec: "^3.11.5"
+            },
+            _requiredBy: [
+                "/",
+                "/can-make-rest",
+                "/can-route-pushstate",
+                "/can-set",
+                "/shuttle-access",
+                "/shuttle-can-api",
+                "/shuttle-canstrap/can-connect",
+                "/shuttle-canstrap/can-route-pushstate"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-util/-/can-util-3.12.0.tgz",
+            _shasum: "8dd093239aa6e368138d972ff76522e774534607",
+            _spec: "can-util@^3.11.5",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-util/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-ajax": "^1.0.0",
+                "can-assign": "^1.0.0",
+                "can-cid": "^1.1.0",
+                "can-deparam": "^1.0.0",
+                "can-dom-data-state": "^0.2.0",
+                "can-event-dom-enter": "^1.0.4",
+                "can-event-dom-radiochange": "^1.0.4",
+                "can-globals": "^1.1.1",
+                "can-log": "^1.0.0",
+                "can-namespace": "1.0.0",
+                "can-param": "^1.0.0",
+                "can-parse-uri": "^1.0.0",
+                "can-reflect": "^1.2.0",
+                "can-symbol": "^1.0.0",
+                "can-types": "^1.1.0"
+            },
+            deprecated: false,
+            description: "Common utilities for CanJS projects",
+            devDependencies: {
+                async: "^2.2.0",
+                "can-vdom": "^3.2.3",
+                "detect-cyclic-packages": "^1.1.0",
+                "http-server": "^0.10.0",
+                jshint: "^2.9.1",
+                qunitjs: "^2.4.0",
+                saucelabs: "^1.4.0",
+                steal: "^1.11.4",
+                "steal-css": "^1.2.5",
+                "steal-qunit": "^1.0.0",
+                "steal-tools": "^1.4.1",
+                "test-saucelabs": "0.0.3",
+                testee: "^0.8.0",
+                wd: "^1.1.3",
+                xmlhttprequest2: "^1.0.0"
+            },
+            homepage: "http://canjs.com",
+            keywords: ["canjs", "canjs-plugin", "donejs"],
+            license: "MIT",
+            main: "can-util",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-util.git"
+            },
+            scripts: {
+                build: "node build.js",
+                ci:
+                    "npm run build && npm run test && node test/test-sauce-labs.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                "http-server": "http-server -p 3000 --silent",
+                jshint: "jshint dom/. js/. *.js --config",
+                postversion:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag=pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run test:server && npm run testee",
+                "test:server": "TEST=qunit qunit test/node.js",
+                testee: "testee test/test.html --browsers firefox",
+                version:
+                    'git commit -am "Update dist for release" && git checkout -b release && git add -f dist/'
+            }
+        },
+        {
             name: "i18next-xhr-backend",
             version: "1.5.1",
             origFileUrl: "./node_modules/i18next-xhr-backend/package.json",
@@ -46574,6 +46577,108 @@ if (steal && typeof steal.addNpmPackages === "function") {
             }
         },
         {
+            name: "can-define-validate-validatejs",
+            version: "1.1.0",
+            origFileUrl:
+                "./node_modules/can-define-validate-validatejs/package.json",
+            fileUrl:
+                "./node_modules/can-define-validate-validatejs/package.json",
+            _from: "can-define-validate-validatejs@^1.1.0",
+            _id: "can-define-validate-validatejs@1.1.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-LGMFP14SqCDVCO/+Whpm9oc48lSCLWdMENZ1gl5Bh6Z18xGigfaEmETSz8psiS7bXXrZ4jiteauq3303EWFXHw==",
+            _location: "/can-define-validate-validatejs",
+            _phantomChildren: {
+                "can-reflect": "1.17.0",
+                "validate.js": "0.11.1"
+            },
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-define-validate-validatejs@^1.1.0",
+                name: "can-define-validate-validatejs",
+                escapedName: "can-define-validate-validatejs",
+                rawSpec: "^1.1.0",
+                saveSpec: null,
+                fetchSpec: "^1.1.0"
+            },
+            _requiredBy: ["/"],
+            _resolved:
+                "https://registry.npmjs.org/can-define-validate-validatejs/-/can-define-validate-validatejs-1.1.0.tgz",
+            _shasum: "4f1743bff9be0664526ab82c7bc8d59a4317acb3",
+            _spec: "can-define-validate-validatejs@^1.1.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
+            author: { name: "Bitovi" },
+            browser: {},
+            bugs: {
+                url:
+                    "https://github.com/canjs/can-define-validate-validatejs/issues"
+            },
+            bundleDependencies: false,
+            dependencies: {
+                "can-assign": "^1.1.1",
+                "can-define": "^2.0.0",
+                "can-reflect": "^1.11.1",
+                "can-validate": "^1.1.0",
+                "can-validate-validatejs": "^0.1.0"
+            },
+            deprecated: false,
+            description: "Validation helpers for can-define maps and lists.",
+            devDependencies: {
+                "bit-docs": "^0.0.8",
+                "can-compute": "^4.0.0",
+                "detect-cyclic-packages": "^1.1.0",
+                "http-server": "^0.11.0",
+                jshint: "^2.9.5",
+                steal: "^1.5.14",
+                "steal-qunit": "^1.0.0",
+                "steal-tools": "^1.9.0",
+                testee: "^0.8.0"
+            },
+            homepage: "https://github.com/canjs/can-define-validate-validatejs",
+            keywords: ["Validate", "plugin", "canjs"],
+            license: "MIT",
+            main: "can-define-validate-validatejs.js",
+            repository: {
+                type: "git",
+                url:
+                    "git+https://github.com/canjs/can-define-validate-validatejs.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "http-server -c-1",
+                jshint: "jshint *.js --config",
+                postversion:
+                    "git push --tags && git checkout - && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major":
+                    "npm version major && npm run build && npm publish",
+                "release:minor":
+                    "npm version minor && npm run build && npm publish",
+                "release:patch":
+                    "npm version patch && npm run build && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm run build && npm publish --tag=pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update dist for release" && git checkout -b release && git add -f dist/'
+            },
+            steal: {
+                ignoreBrowser: true,
+                npmIgnore: {
+                    documentjs: true,
+                    testee: true,
+                    "steal-tools": true
+                },
+                npmDependencies: { "steal-qunit": true }
+            }
+        },
+        {
             name: "can-component",
             version: "4.2.4",
             origFileUrl: "./node_modules/can-component/package.json",
@@ -46679,152 +46784,58 @@ if (steal && typeof steal.addNpmPackages === "function") {
             steal: {}
         },
         {
-            name: "can-define-validate-validatejs",
-            version: "1.1.0",
-            origFileUrl:
-                "./node_modules/can-define-validate-validatejs/package.json",
-            fileUrl:
-                "./node_modules/can-define-validate-validatejs/package.json",
-            _from: "can-define-validate-validatejs@^1.1.0",
-            _id: "can-define-validate-validatejs@1.1.0",
-            _inBundle: false,
-            _integrity:
-                "sha512-LGMFP14SqCDVCO/+Whpm9oc48lSCLWdMENZ1gl5Bh6Z18xGigfaEmETSz8psiS7bXXrZ4jiteauq3303EWFXHw==",
-            _location: "/can-define-validate-validatejs",
-            _phantomChildren: {
-                "can-reflect": "1.17.0",
-                "validate.js": "0.11.1"
-            },
-            _requested: {
-                type: "range",
-                registry: true,
-                raw: "can-define-validate-validatejs@^1.1.0",
-                name: "can-define-validate-validatejs",
-                escapedName: "can-define-validate-validatejs",
-                rawSpec: "^1.1.0",
-                saveSpec: null,
-                fetchSpec: "^1.1.0"
-            },
-            _requiredBy: ["/"],
-            _resolved:
-                "https://registry.npmjs.org/can-define-validate-validatejs/-/can-define-validate-validatejs-1.1.0.tgz",
-            _shasum: "4f1743bff9be0664526ab82c7bc8d59a4317acb3",
-            _spec: "can-define-validate-validatejs@^1.1.0",
-            _where:
-                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site",
-            author: { name: "Bitovi" },
-            browser: {},
-            bugs: {
-                url:
-                    "https://github.com/canjs/can-define-validate-validatejs/issues"
-            },
-            bundleDependencies: false,
-            dependencies: {
-                "can-assign": "^1.1.1",
-                "can-define": "^2.0.0",
-                "can-reflect": "^1.11.1",
-                "can-validate": "^1.1.0",
-                "can-validate-validatejs": "^0.1.0"
-            },
-            deprecated: false,
-            description: "Validation helpers for can-define maps and lists.",
-            devDependencies: {
-                "bit-docs": "^0.0.8",
-                "can-compute": "^4.0.0",
-                "detect-cyclic-packages": "^1.1.0",
-                "http-server": "^0.11.0",
-                jshint: "^2.9.5",
-                steal: "^1.5.14",
-                "steal-qunit": "^1.0.0",
-                "steal-tools": "^1.9.0",
-                testee: "^0.8.0"
-            },
-            homepage: "https://github.com/canjs/can-define-validate-validatejs",
-            keywords: ["Validate", "plugin", "canjs"],
-            license: "MIT",
-            main: "can-define-validate-validatejs.js",
-            repository: {
-                type: "git",
-                url:
-                    "git+https://github.com/canjs/can-define-validate-validatejs.git"
-            },
-            scripts: {
-                build: "node build.js",
-                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
-                develop: "http-server -c-1",
-                jshint: "jshint *.js --config",
-                postversion:
-                    "git push --tags && git checkout - && git branch -D release && git push",
-                preversion: "npm test && npm run build",
-                "release:major":
-                    "npm version major && npm run build && npm publish",
-                "release:minor":
-                    "npm version minor && npm run build && npm publish",
-                "release:patch":
-                    "npm version patch && npm run build && npm publish",
-                "release:pre":
-                    "npm version prerelease && npm run build && npm publish --tag=pre",
-                test:
-                    "npm run detect-cycle && npm run jshint && npm run testee",
-                testee: "testee test.html --browsers firefox",
-                version:
-                    'git commit -am "Update dist for release" && git checkout -b release && git add -f dist/'
-            },
-            steal: {
-                ignoreBrowser: true,
-                npmIgnore: {
-                    documentjs: true,
-                    testee: true,
-                    "steal-tools": true
-                },
-                npmDependencies: { "steal-qunit": true }
-            }
-        },
-        {
-            name: "can-assign",
-            version: "1.3.0",
+            name: "can-globals",
+            version: "1.2.0",
             nestedFileUrl:
-                "./node_modules/can-stache/node_modules/can-assign/package.json",
-            origFileUrl: "./node_modules/can-assign/package.json",
-            fileUrl: "./node_modules/can-assign/package.json",
-            _from: "can-assign@^1.1.1",
-            _id: "can-assign@1.3.0",
+                "./node_modules/can-stache/node_modules/can-globals/package.json",
+            origFileUrl: "./node_modules/can-globals/package.json",
+            fileUrl: "./node_modules/can-globals/package.json",
+            _from: "can-globals@^1.0.0",
+            _id: "can-globals@1.2.0",
             _inBundle: false,
             _integrity:
-                "sha512-lqT4aPSS51VVqQbZLSDPWttJ3bb6vsIqSmI23n9/KdkocMFMyDCZg5hQFfrrR8slzfNS6h6Q5udfCMEcVziaTg==",
-            _location: "/can-assign",
+                "sha512-FTzANPGBE6k3sJrxzx8NQP28LaFto0AEp/aMVwDGKwOs6lHN+RvRH4sBijAxVMK+4WzALlSVNPSqUyp0xyEk0Q==",
+            _location: "/can-globals",
             _phantomChildren: {},
             _requested: {
                 type: "range",
                 registry: true,
-                raw: "can-assign@^1.1.1",
-                name: "can-assign",
-                escapedName: "can-assign",
-                rawSpec: "^1.1.1",
+                raw: "can-globals@^1.0.0",
+                name: "can-globals",
+                escapedName: "can-globals",
+                rawSpec: "^1.0.0",
                 saveSpec: null,
-                fetchSpec: "^1.1.1"
+                fetchSpec: "^1.0.0"
             },
             _requiredBy: [
+                "/can-ajax",
+                "/can-attribute-observable",
                 "/can-component",
-                "/can-compute",
-                "/can-control",
-                "/can-define",
-                "/can-define-validate-validatejs",
-                "/can-list",
-                "/can-map",
-                "/can-query-logic",
-                "/can-queues",
-                "/can-set",
+                "/can-connect",
+                "/can-dom-events",
+                "/can-dom-mutate",
+                "/can-event-dom-radiochange",
+                "/can-fragment",
+                "/can-import-module",
+                "/can-route",
+                "/can-route-hash",
+                "/can-route-pushstate",
                 "/can-stache",
-                "/can-stache-bindings",
+                "/can-types",
                 "/can-util",
+                "/can-util/can-ajax",
+                "/can-util/can-event-dom-radiochange",
+                "/can-view-callbacks",
                 "/can-view-import",
-                "/can-view-scope"
+                "/can-view-model",
+                "/can-view-target",
+                "/shuttle-canstrap/can-ajax",
+                "/shuttle-canstrap/can-route-pushstate"
             ],
             _resolved:
-                "https://registry.npmjs.org/can-assign/-/can-assign-1.3.0.tgz",
-            _shasum: "5a3877ff8f9f0e7fedd537441183da381c39bc12",
-            _spec: "can-assign@^1.1.1",
+                "https://registry.npmjs.org/can-globals/-/can-globals-1.2.0.tgz",
+            _shasum: "cc526602807df386485b59d3ffb3cfcfc9b1eea2",
+            _spec: "can-globals@^1.0.0",
             _where:
                 "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
             author: {
@@ -46832,152 +46843,42 @@ if (steal && typeof steal.addNpmPackages === "function") {
                 email: "contact@bitovi.com",
                 url: "https://www.bitovi.com/"
             },
-            bugs: { url: "https://github.com/canjs/can-assign/issues" },
+            bugs: { url: "https://github.com/canjs/can-globals/issues" },
             bundleDependencies: false,
-            dependencies: { "can-namespace": "1.0.0" },
+            dependencies: {
+                "can-namespace": "^1.0.0",
+                "can-reflect": "^1.2.6",
+                "can-symbol": "^1.0.0"
+            },
             deprecated: false,
             description:
-                "A simplified version of Object.assign, which only accepts a single source argument.",
+                "This module provides a dependency injection container. Modules may define a key and specify a default value (which can be static, cached lazy, or dynamic lazy), but other code can set and reset the value as needed. There is also an event system, for alerting on value changes, both specific to a key and for any key.",
             devDependencies: {
                 "detect-cyclic-packages": "^1.1.0",
-                "done-serve": "^1.0.0",
-                "donejs-cli": "^1.0.0",
-                "generator-donejs": "^1.0.0",
-                jshint: "^2.9.1",
-                steal: "^1.3.1",
+                jshint: "^2.9.5",
+                qunitjs: "^2.4.0",
+                steal: "^1.5.6",
                 "steal-qunit": "^1.0.1",
-                "steal-tools": "^1.2.0",
-                testee: "^0.3.0"
+                "steal-tools": "^1.7.0",
+                testee: "^0.7.0"
             },
-            homepage: "https://canjs.com/",
-            keywords: ["canjs", "object", "assign"],
-            main: "dist/cjs/can-assign",
-            repository: {
-                type: "git",
-                url: "git://github.com/canjs/can-assign.git"
-            },
-            scripts: {
-                build: "node build.js",
-                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
-                develop: "done-serve --static --develop --port 8080",
-                jshint: "jshint ./*.js --config",
-                postpublish:
-                    "git push --tags && git checkout master && git branch -D release && git push",
-                preversion: "npm test && npm run build",
-                "release:major": "npm version major && npm publish",
-                "release:minor": "npm version minor && npm publish",
-                "release:patch": "npm version patch && npm publish",
-                test:
-                    "npm run detect-cycle && npm run jshint && npm run testee",
-                testee: "testee test.html --browsers firefox",
-                version:
-                    'git commit -am "Update version number" && git checkout -b release && git add -f dist/'
-            },
-            steal: {
-                npmIgnore: {
-                    testee: true,
-                    "generator-donejs": true,
-                    "donejs-cli": true,
-                    "steal-tools": true
-                },
-                main: "can-assign"
-            }
-        },
-        {
-            name: "can-symbol",
-            version: "1.6.1",
-            nestedFileUrl:
-                "./node_modules/can-stache/node_modules/can-symbol/package.json",
-            origFileUrl: "./node_modules/can-symbol/package.json",
-            fileUrl: "./node_modules/can-symbol/package.json",
-            _from: "can-symbol@^1.4.1",
-            _id: "can-symbol@1.6.1",
-            _inBundle: false,
-            _integrity:
-                "sha512-C2xIYJcVQ+FW/RrXXKQOoZXnEFqKM28qsPPrmDiV5Bx+kSqms8cnRMqt4SoZ7+89OMv5PSReRJ7fKDE06MdSCg==",
-            _location: "/can-symbol",
-            _phantomChildren: {},
-            _requested: {
-                type: "range",
-                registry: true,
-                raw: "can-symbol@^1.4.1",
-                name: "can-symbol",
-                escapedName: "can-symbol",
-                rawSpec: "^1.4.1",
-                saveSpec: null,
-                fetchSpec: "^1.4.1"
-            },
-            _requiredBy: [
-                "/can-bind",
-                "/can-component",
-                "/can-compute",
-                "/can-connect",
-                "/can-control",
-                "/can-define",
-                "/can-event-queue",
-                "/can-globals",
-                "/can-key",
-                "/can-list",
-                "/can-map",
-                "/can-observation",
-                "/can-observation-recorder",
-                "/can-query-logic",
-                "/can-reflect",
-                "/can-reflect-dependencies",
-                "/can-reflect-promise",
-                "/can-route",
-                "/can-simple-map",
-                "/can-simple-observable",
-                "/can-stache",
-                "/can-stache-bindings",
-                "/can-stache-key",
-                "/can-types",
-                "/can-util",
-                "/can-view-callbacks",
-                "/can-view-import",
-                "/can-view-live",
-                "/can-view-model",
-                "/can-view-scope"
+            homepage: "https://github.com/canjs/can-globals#readme",
+            keywords: [
+                "canjs",
+                "can-globals",
+                "globals",
+                "dependancy",
+                "injection"
             ],
-            _resolved:
-                "https://registry.npmjs.org/can-symbol/-/can-symbol-1.6.1.tgz",
-            _shasum: "06d50399f980e31736a25f2f6417d0adcd5685c3",
-            _spec: "can-symbol@^1.4.1",
-            _where:
-                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
-            author: {
-                name: "Bitovi",
-                email: "core@donejs.com",
-                url: "http://donejs.com"
-            },
-            bugs: { url: "https://github.com/canjs/can-symbol/issues" },
-            bundleDependencies: false,
-            dependencies: { "can-namespace": "^1.0.0" },
-            deprecated: false,
-            description:
-                "Well known symbols used to detail how to operate on different objects",
-            devDependencies: {
-                "bit-docs": "0.0.7",
-                "detect-cyclic-packages": "^1.1.0",
-                "done-serve": "^1.0.0-alpha.0",
-                "donejs-cli": "^1.0.0-alpha.2",
-                "generator-donejs": "^1.0.0-alpha.0",
-                jshint: "^2.9.1",
-                steal: "^1.0.5",
-                "steal-qunit": "^1.0.0",
-                "steal-tools": "^1.0.1",
-                testee: "^0.3.0"
-            },
-            homepage: "http://canjs.com",
-            keywords: ["Done", "JS"],
-            main: "can-symbol",
+            license: "MIT",
+            main: "can-globals.js",
             repository: {
                 type: "git",
-                url: "git://github.com/canjs/can-symbol.git"
+                url: "git+https://github.com/canjs/can-globals.git"
             },
             scripts: {
                 "detect-cycle": "detect-cyclic-packages --ignore done-serve",
-                develop: "done-serve --static --develop --port 8080",
+                document: "bit-docs",
                 jshint: "jshint ./*.js --config",
                 postpublish: "git push --tags && git push",
                 preversion: "npm test",
@@ -46985,28 +46886,10 @@ if (steal && typeof steal.addNpmPackages === "function") {
                 "release:minor": "npm version minor && npm publish",
                 "release:patch": "npm version patch && npm publish",
                 "release:pre":
-                    "npm version prerelease && npm publish --tag=pre",
+                    "npm version prerelease && npm run build && npm publish --tag=pre",
                 test:
                     "npm run detect-cycle && npm run jshint && npm run testee",
                 testee: "testee test.html --browsers firefox"
-            },
-            system: {
-                npmIgnore: {
-                    testee: true,
-                    "generator-donejs": true,
-                    "donejs-cli": true,
-                    "steal-tools": true
-                },
-                main: "can-symbol"
-            },
-            steal: {
-                npmIgnore: {
-                    testee: true,
-                    "generator-donejs": true,
-                    "donejs-cli": true,
-                    "steal-tools": true
-                },
-                main: "can-symbol"
             }
         },
         {
@@ -47275,58 +47158,50 @@ if (steal && typeof steal.addNpmPackages === "function") {
             steal: {}
         },
         {
-            name: "can-globals",
-            version: "1.2.0",
+            name: "can-assign",
+            version: "1.3.0",
             nestedFileUrl:
-                "./node_modules/can-stache/node_modules/can-globals/package.json",
-            origFileUrl: "./node_modules/can-globals/package.json",
-            fileUrl: "./node_modules/can-globals/package.json",
-            _from: "can-globals@^1.0.0",
-            _id: "can-globals@1.2.0",
+                "./node_modules/can-stache/node_modules/can-assign/package.json",
+            origFileUrl: "./node_modules/can-assign/package.json",
+            fileUrl: "./node_modules/can-assign/package.json",
+            _from: "can-assign@^1.1.1",
+            _id: "can-assign@1.3.0",
             _inBundle: false,
             _integrity:
-                "sha512-FTzANPGBE6k3sJrxzx8NQP28LaFto0AEp/aMVwDGKwOs6lHN+RvRH4sBijAxVMK+4WzALlSVNPSqUyp0xyEk0Q==",
-            _location: "/can-globals",
+                "sha512-lqT4aPSS51VVqQbZLSDPWttJ3bb6vsIqSmI23n9/KdkocMFMyDCZg5hQFfrrR8slzfNS6h6Q5udfCMEcVziaTg==",
+            _location: "/can-assign",
             _phantomChildren: {},
             _requested: {
                 type: "range",
                 registry: true,
-                raw: "can-globals@^1.0.0",
-                name: "can-globals",
-                escapedName: "can-globals",
-                rawSpec: "^1.0.0",
+                raw: "can-assign@^1.1.1",
+                name: "can-assign",
+                escapedName: "can-assign",
+                rawSpec: "^1.1.1",
                 saveSpec: null,
-                fetchSpec: "^1.0.0"
+                fetchSpec: "^1.1.1"
             },
             _requiredBy: [
-                "/can-ajax",
-                "/can-attribute-observable",
                 "/can-component",
-                "/can-connect",
-                "/can-dom-events",
-                "/can-dom-mutate",
-                "/can-event-dom-radiochange",
-                "/can-fragment",
-                "/can-import-module",
-                "/can-route",
-                "/can-route-hash",
-                "/can-route-pushstate",
+                "/can-compute",
+                "/can-control",
+                "/can-define",
+                "/can-define-validate-validatejs",
+                "/can-list",
+                "/can-map",
+                "/can-query-logic",
+                "/can-queues",
+                "/can-set",
                 "/can-stache",
-                "/can-types",
+                "/can-stache-bindings",
                 "/can-util",
-                "/can-util/can-ajax",
-                "/can-util/can-event-dom-radiochange",
-                "/can-view-callbacks",
                 "/can-view-import",
-                "/can-view-model",
-                "/can-view-target",
-                "/shuttle-canstrap/can-ajax",
-                "/shuttle-canstrap/can-route-pushstate"
+                "/can-view-scope"
             ],
             _resolved:
-                "https://registry.npmjs.org/can-globals/-/can-globals-1.2.0.tgz",
-            _shasum: "cc526602807df386485b59d3ffb3cfcfc9b1eea2",
-            _spec: "can-globals@^1.0.0",
+                "https://registry.npmjs.org/can-assign/-/can-assign-1.3.0.tgz",
+            _shasum: "5a3877ff8f9f0e7fedd537441183da381c39bc12",
+            _spec: "can-assign@^1.1.1",
             _where:
                 "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
             author: {
@@ -47334,53 +47209,55 @@ if (steal && typeof steal.addNpmPackages === "function") {
                 email: "contact@bitovi.com",
                 url: "https://www.bitovi.com/"
             },
-            bugs: { url: "https://github.com/canjs/can-globals/issues" },
+            bugs: { url: "https://github.com/canjs/can-assign/issues" },
             bundleDependencies: false,
-            dependencies: {
-                "can-namespace": "^1.0.0",
-                "can-reflect": "^1.2.6",
-                "can-symbol": "^1.0.0"
-            },
+            dependencies: { "can-namespace": "1.0.0" },
             deprecated: false,
             description:
-                "This module provides a dependency injection container. Modules may define a key and specify a default value (which can be static, cached lazy, or dynamic lazy), but other code can set and reset the value as needed. There is also an event system, for alerting on value changes, both specific to a key and for any key.",
+                "A simplified version of Object.assign, which only accepts a single source argument.",
             devDependencies: {
                 "detect-cyclic-packages": "^1.1.0",
-                jshint: "^2.9.5",
-                qunitjs: "^2.4.0",
-                steal: "^1.5.6",
+                "done-serve": "^1.0.0",
+                "donejs-cli": "^1.0.0",
+                "generator-donejs": "^1.0.0",
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
                 "steal-qunit": "^1.0.1",
-                "steal-tools": "^1.7.0",
-                testee: "^0.7.0"
+                "steal-tools": "^1.2.0",
+                testee: "^0.3.0"
             },
-            homepage: "https://github.com/canjs/can-globals#readme",
-            keywords: [
-                "canjs",
-                "can-globals",
-                "globals",
-                "dependancy",
-                "injection"
-            ],
-            license: "MIT",
-            main: "can-globals.js",
+            homepage: "https://canjs.com/",
+            keywords: ["canjs", "object", "assign"],
+            main: "dist/cjs/can-assign",
             repository: {
                 type: "git",
-                url: "git+https://github.com/canjs/can-globals.git"
+                url: "git://github.com/canjs/can-assign.git"
             },
             scripts: {
+                build: "node build.js",
                 "detect-cycle": "detect-cyclic-packages --ignore done-serve",
-                document: "bit-docs",
+                develop: "done-serve --static --develop --port 8080",
                 jshint: "jshint ./*.js --config",
-                postpublish: "git push --tags && git push",
-                preversion: "npm test",
+                postpublish:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
                 "release:major": "npm version major && npm publish",
                 "release:minor": "npm version minor && npm publish",
                 "release:patch": "npm version patch && npm publish",
-                "release:pre":
-                    "npm version prerelease && npm run build && npm publish --tag=pre",
                 test:
                     "npm run detect-cycle && npm run jshint && npm run testee",
-                testee: "testee test.html --browsers firefox"
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update version number" && git checkout -b release && git add -f dist/'
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                },
+                main: "can-assign"
             }
         },
         {
@@ -47494,6 +47371,86 @@ if (steal && typeof steal.addNpmPackages === "function") {
             }
         },
         {
+            name: "can-stache-helpers",
+            version: "1.2.0",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-stache-helpers/package.json",
+            origFileUrl: "./node_modules/can-stache-helpers/package.json",
+            fileUrl: "./node_modules/can-stache-helpers/package.json",
+            _from: "can-stache-helpers@^1.0.0",
+            _id: "can-stache-helpers@1.2.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-pQwmrei25IXih92JOVGXH0uMsP75/77I0+Mnc44n0lOQSow2GW8ySUH2ov27YovWemEww2hPf/LRQHmchchk5w==",
+            _location: "/can-stache-helpers",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-stache-helpers@^1.0.0",
+                name: "can-stache-helpers",
+                escapedName: "can-stache-helpers",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: ["/can-stache", "/can-view-scope"],
+            _resolved:
+                "https://registry.npmjs.org/can-stache-helpers/-/can-stache-helpers-1.2.0.tgz",
+            _shasum: "936e293fbac17f87b8b4e98d9aa2feca0b47c553",
+            _spec: "can-stache-helpers@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-stache-helpers/issues" },
+            bundleDependencies: false,
+            dependencies: { "can-namespace": "1.0.0" },
+            deprecated: false,
+            description: "Helper functions for can-stache",
+            devDependencies: {
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                testee: "^0.3.0"
+            },
+            homepage: "https://canjs.com/doc/can-stache-helpers.html",
+            keywords: ["canjs", "canjs-plugin", "donejs", "donejs-plugin"],
+            license: "MIT",
+            main: "can-stache-helpers",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-stache-helpers.git"
+            },
+            scripts: {
+                "detect-cycle": "detect-cyclic-packages",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js ./src/ --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                }
+            }
+        },
+        {
             name: "can-observation",
             version: "4.1.0",
             nestedFileUrl:
@@ -47598,86 +47555,6 @@ if (steal && typeof steal.addNpmPackages === "function") {
             },
             system: { npmAlgorithm: "flat" },
             steal: { npmAlgorithm: "flat" }
-        },
-        {
-            name: "can-stache-helpers",
-            version: "1.2.0",
-            nestedFileUrl:
-                "./node_modules/can-stache/node_modules/can-stache-helpers/package.json",
-            origFileUrl: "./node_modules/can-stache-helpers/package.json",
-            fileUrl: "./node_modules/can-stache-helpers/package.json",
-            _from: "can-stache-helpers@^1.0.0",
-            _id: "can-stache-helpers@1.2.0",
-            _inBundle: false,
-            _integrity:
-                "sha512-pQwmrei25IXih92JOVGXH0uMsP75/77I0+Mnc44n0lOQSow2GW8ySUH2ov27YovWemEww2hPf/LRQHmchchk5w==",
-            _location: "/can-stache-helpers",
-            _phantomChildren: {},
-            _requested: {
-                type: "range",
-                registry: true,
-                raw: "can-stache-helpers@^1.0.0",
-                name: "can-stache-helpers",
-                escapedName: "can-stache-helpers",
-                rawSpec: "^1.0.0",
-                saveSpec: null,
-                fetchSpec: "^1.0.0"
-            },
-            _requiredBy: ["/can-stache", "/can-view-scope"],
-            _resolved:
-                "https://registry.npmjs.org/can-stache-helpers/-/can-stache-helpers-1.2.0.tgz",
-            _shasum: "936e293fbac17f87b8b4e98d9aa2feca0b47c553",
-            _spec: "can-stache-helpers@^1.0.0",
-            _where:
-                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-stache",
-            author: {
-                name: "Bitovi",
-                email: "contact@bitovi.com",
-                url: "http://bitovi.com"
-            },
-            bugs: { url: "https://github.com/canjs/can-stache-helpers/issues" },
-            bundleDependencies: false,
-            dependencies: { "can-namespace": "1.0.0" },
-            deprecated: false,
-            description: "Helper functions for can-stache",
-            devDependencies: {
-                "detect-cyclic-packages": "^1.1.0",
-                jshint: "^2.9.1",
-                steal: "^1.3.1",
-                "steal-qunit": "^1.0.1",
-                testee: "^0.3.0"
-            },
-            homepage: "https://canjs.com/doc/can-stache-helpers.html",
-            keywords: ["canjs", "canjs-plugin", "donejs", "donejs-plugin"],
-            license: "MIT",
-            main: "can-stache-helpers",
-            repository: {
-                type: "git",
-                url: "git://github.com/canjs/can-stache-helpers.git"
-            },
-            scripts: {
-                "detect-cycle": "detect-cyclic-packages",
-                develop: "done-serve --static --develop --port 8080",
-                jshint: "jshint ./*.js ./src/ --config",
-                postpublish: "git push --tags && git push",
-                preversion: "npm test",
-                "release:major": "npm version major && npm publish",
-                "release:minor": "npm version minor && npm publish",
-                "release:patch": "npm version patch && npm publish",
-                "release:pre":
-                    "npm version prerelease && npm publish --tag pre",
-                test:
-                    "npm run detect-cycle && npm run jshint && npm run testee",
-                testee: "testee test/test.html --browsers firefox"
-            },
-            steal: {
-                npmIgnore: {
-                    testee: true,
-                    "generator-donejs": true,
-                    "donejs-cli": true,
-                    "steal-tools": true
-                }
-            }
         },
         {
             name: "can-dom-data",
@@ -47942,6 +47819,132 @@ if (steal && typeof steal.addNpmPackages === "function") {
             }
         },
         {
+            name: "can-symbol",
+            version: "1.6.1",
+            nestedFileUrl:
+                "./node_modules/can-stache/node_modules/can-symbol/package.json",
+            origFileUrl: "./node_modules/can-symbol/package.json",
+            fileUrl: "./node_modules/can-symbol/package.json",
+            _from: "can-symbol@^1.4.1",
+            _id: "can-symbol@1.6.1",
+            _inBundle: false,
+            _integrity:
+                "sha512-C2xIYJcVQ+FW/RrXXKQOoZXnEFqKM28qsPPrmDiV5Bx+kSqms8cnRMqt4SoZ7+89OMv5PSReRJ7fKDE06MdSCg==",
+            _location: "/can-symbol",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-symbol@^1.4.1",
+                name: "can-symbol",
+                escapedName: "can-symbol",
+                rawSpec: "^1.4.1",
+                saveSpec: null,
+                fetchSpec: "^1.4.1"
+            },
+            _requiredBy: [
+                "/can-bind",
+                "/can-component",
+                "/can-compute",
+                "/can-connect",
+                "/can-control",
+                "/can-define",
+                "/can-event-queue",
+                "/can-globals",
+                "/can-key",
+                "/can-list",
+                "/can-map",
+                "/can-observation",
+                "/can-observation-recorder",
+                "/can-query-logic",
+                "/can-reflect",
+                "/can-reflect-dependencies",
+                "/can-reflect-promise",
+                "/can-route",
+                "/can-simple-map",
+                "/can-simple-observable",
+                "/can-stache",
+                "/can-stache-bindings",
+                "/can-stache-key",
+                "/can-types",
+                "/can-util",
+                "/can-view-callbacks",
+                "/can-view-import",
+                "/can-view-live",
+                "/can-view-model",
+                "/can-view-scope"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-symbol/-/can-symbol-1.6.1.tgz",
+            _shasum: "06d50399f980e31736a25f2f6417d0adcd5685c3",
+            _spec: "can-symbol@^1.4.1",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "Bitovi",
+                email: "core@donejs.com",
+                url: "http://donejs.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-symbol/issues" },
+            bundleDependencies: false,
+            dependencies: { "can-namespace": "^1.0.0" },
+            deprecated: false,
+            description:
+                "Well known symbols used to detail how to operate on different objects",
+            devDependencies: {
+                "bit-docs": "0.0.7",
+                "detect-cyclic-packages": "^1.1.0",
+                "done-serve": "^1.0.0-alpha.0",
+                "donejs-cli": "^1.0.0-alpha.2",
+                "generator-donejs": "^1.0.0-alpha.0",
+                jshint: "^2.9.1",
+                steal: "^1.0.5",
+                "steal-qunit": "^1.0.0",
+                "steal-tools": "^1.0.1",
+                testee: "^0.3.0"
+            },
+            homepage: "http://canjs.com",
+            keywords: ["Done", "JS"],
+            main: "can-symbol",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-symbol.git"
+            },
+            scripts: {
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag=pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox"
+            },
+            system: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                },
+                main: "can-symbol"
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                },
+                main: "can-symbol"
+            }
+        },
+        {
             name: "can-queues",
             version: "1.1.2",
             nestedFileUrl:
@@ -48157,6 +48160,105 @@ if (steal && typeof steal.addNpmPackages === "function") {
             steal: { npmAlgorithm: "flat" }
         },
         {
+            name: "can-simple-map",
+            version: "4.2.0",
+            nestedFileUrl:
+                "./node_modules/can-route/node_modules/can-simple-map/package.json",
+            origFileUrl: "./node_modules/can-simple-map/package.json",
+            fileUrl: "./node_modules/can-simple-map/package.json",
+            _from: "can-simple-map@^4.1.0",
+            _id: "can-simple-map@4.2.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-CKJ0RR1PCpq5kACloUwjpHDmLKZRlqM0i4KRF0zZWlJk0aISvylUAKiZExV9vfxYTK/XTxfycp7NW030N6KjWg==",
+            _location: "/can-simple-map",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-simple-map@^4.1.0",
+                name: "can-simple-map",
+                escapedName: "can-simple-map",
+                rawSpec: "^4.1.0",
+                saveSpec: null,
+                fetchSpec: "^4.1.0"
+            },
+            _requiredBy: [
+                "/can-component",
+                "/can-route",
+                "/can-stache-bindings",
+                "/can-view-model",
+                "/can-view-scope"
+            ],
+            _resolved:
+                "https://registry.npmjs.org/can-simple-map/-/can-simple-map-4.2.0.tgz",
+            _shasum: "0994ba8ef6ae25e76386c7d1b6f1aa88e344085e",
+            _spec: "can-simple-map@^4.1.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bugs: { url: "https://github.com/canjs/can-simple-map/issues" },
+            bundleDependencies: false,
+            dependencies: {
+                "can-construct": "^3.2.0",
+                "can-event-queue": "^1.0.0",
+                "can-key-tree": "^1.0.0",
+                "can-log": "^1.0.0",
+                "can-observation": "^4.0.0",
+                "can-observation-recorder": "^1.0.0",
+                "can-queues": "^1.0.0",
+                "can-reflect": "^1.2.1",
+                "can-symbol": "^1.0.0"
+            },
+            deprecated: false,
+            description: "A performant live-bound map",
+            devDependencies: {
+                "can-reflect-tests": "<2.0.0",
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                steal: "^1.2.9",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.1.2",
+                testee: "^0.8.0"
+            },
+            homepage: "https://canjs.com/doc/can-simple-map.html",
+            keywords: [],
+            main: "can-simple-map",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-simple-map.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                jshint: "jshint ./*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
+            },
+            steal: {
+                npmIgnore: {
+                    documentjs: true,
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                },
+                main: "can-simple-map"
+            }
+        },
+        {
             name: "can-simple-observable",
             version: "2.2.0",
             nestedFileUrl:
@@ -48258,105 +48360,6 @@ if (steal && typeof steal.addNpmPackages === "function") {
                 testee: "testee test.html --browsers firefox"
             },
             steal: { npmIgnore: { testee: true, "steal-tools": true } }
-        },
-        {
-            name: "can-simple-map",
-            version: "4.2.0",
-            nestedFileUrl:
-                "./node_modules/can-route/node_modules/can-simple-map/package.json",
-            origFileUrl: "./node_modules/can-simple-map/package.json",
-            fileUrl: "./node_modules/can-simple-map/package.json",
-            _from: "can-simple-map@^4.1.0",
-            _id: "can-simple-map@4.2.0",
-            _inBundle: false,
-            _integrity:
-                "sha512-CKJ0RR1PCpq5kACloUwjpHDmLKZRlqM0i4KRF0zZWlJk0aISvylUAKiZExV9vfxYTK/XTxfycp7NW030N6KjWg==",
-            _location: "/can-simple-map",
-            _phantomChildren: {},
-            _requested: {
-                type: "range",
-                registry: true,
-                raw: "can-simple-map@^4.1.0",
-                name: "can-simple-map",
-                escapedName: "can-simple-map",
-                rawSpec: "^4.1.0",
-                saveSpec: null,
-                fetchSpec: "^4.1.0"
-            },
-            _requiredBy: [
-                "/can-component",
-                "/can-route",
-                "/can-stache-bindings",
-                "/can-view-model",
-                "/can-view-scope"
-            ],
-            _resolved:
-                "https://registry.npmjs.org/can-simple-map/-/can-simple-map-4.2.0.tgz",
-            _shasum: "0994ba8ef6ae25e76386c7d1b6f1aa88e344085e",
-            _spec: "can-simple-map@^4.1.0",
-            _where:
-                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-component",
-            author: {
-                name: "Bitovi",
-                email: "contact@bitovi.com",
-                url: "http://bitovi.com"
-            },
-            bugs: { url: "https://github.com/canjs/can-simple-map/issues" },
-            bundleDependencies: false,
-            dependencies: {
-                "can-construct": "^3.2.0",
-                "can-event-queue": "^1.0.0",
-                "can-key-tree": "^1.0.0",
-                "can-log": "^1.0.0",
-                "can-observation": "^4.0.0",
-                "can-observation-recorder": "^1.0.0",
-                "can-queues": "^1.0.0",
-                "can-reflect": "^1.2.1",
-                "can-symbol": "^1.0.0"
-            },
-            deprecated: false,
-            description: "A performant live-bound map",
-            devDependencies: {
-                "can-reflect-tests": "<2.0.0",
-                "detect-cyclic-packages": "^1.1.0",
-                jshint: "^2.9.1",
-                steal: "^1.2.9",
-                "steal-qunit": "^1.0.1",
-                "steal-tools": "^1.1.2",
-                testee: "^0.8.0"
-            },
-            homepage: "https://canjs.com/doc/can-simple-map.html",
-            keywords: [],
-            main: "can-simple-map",
-            repository: {
-                type: "git",
-                url: "git://github.com/canjs/can-simple-map.git"
-            },
-            scripts: {
-                build: "node build.js",
-                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
-                jshint: "jshint ./*.js --config",
-                postpublish: "git push --tags && git push",
-                preversion: "npm test",
-                "release:major": "npm version major && npm publish",
-                "release:minor": "npm version minor && npm publish",
-                "release:patch": "npm version patch && npm publish",
-                "release:pre":
-                    "npm version prerelease && npm publish --tag pre",
-                test:
-                    "npm run detect-cycle && npm run jshint && npm run testee",
-                testee: "testee test/test.html --browsers firefox"
-            },
-            steal: {
-                npmIgnore: {
-                    documentjs: true,
-                    testee: true,
-                    "generator-donejs": true,
-                    "donejs-cli": true,
-                    "steal-tools": true
-                },
-                main: "can-simple-map"
-            }
         },
         {
             name: "can-route-hash",
@@ -50725,6 +50728,89 @@ if (steal && typeof steal.addNpmPackages === "function") {
             }
         },
         {
+            name: "can-deparam",
+            version: "1.2.0",
+            nestedFileUrl:
+                "./node_modules/can-route/node_modules/can-deparam/package.json",
+            origFileUrl: "./node_modules/can-deparam/package.json",
+            fileUrl: "./node_modules/can-deparam/package.json",
+            _from: "can-deparam@^1.0.0",
+            _id: "can-deparam@1.2.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-Qq1wkHTv7rUFrJ6YEC9LU5O1sahwoGUt7EStUTh19cKyISFI33dae4aEGcy4+ztPkCLGLS6EpAeTyau7TWdbig==",
+            _location: "/can-deparam",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-deparam@^1.0.0",
+                name: "can-deparam",
+                escapedName: "can-deparam",
+                rawSpec: "^1.0.0",
+                saveSpec: null,
+                fetchSpec: "^1.0.0"
+            },
+            _requiredBy: ["/can-route", "/can-util"],
+            _resolved:
+                "https://registry.npmjs.org/can-deparam/-/can-deparam-1.2.0.tgz",
+            _shasum: "57bb7d7b35cdc2bc626f7d2042ca72f08471004f",
+            _spec: "can-deparam@^1.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-util",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "https://www.bitovi.com/"
+            },
+            bugs: { url: "https://github.com/canjs/can-deparam/issues" },
+            bundleDependencies: false,
+            dependencies: { "can-namespace": "1.0.0" },
+            deprecated: false,
+            description: "Deserialize a query string into an array or object.",
+            devDependencies: {
+                "can-string-to-any": "^1.0.1",
+                "detect-cyclic-packages": "^1.1.0",
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.2.0",
+                testee: "^0.3.0"
+            },
+            homepage: "https://canjs.com/doc/can-deparam.html",
+            keywords: ["canjs", "query string"],
+            main: "can-deparam",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-deparam.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                develop: "done-serve --static --develop --port 8080",
+                jshint: "jshint ./*.js --config",
+                postpublish:
+                    "git push --tags && git checkout master && git branch -D release && git push",
+                preversion: "npm test && npm run build",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test.html --browsers firefox",
+                version:
+                    'git commit -am "Update version number" && git checkout -b release && git add -f dist/'
+            },
+            steal: {
+                npmIgnore: {
+                    testee: true,
+                    "generator-donejs": true,
+                    "donejs-cli": true,
+                    "steal-tools": true
+                }
+            }
+        },
+        {
             name: "can-key-tree",
             version: "1.2.0",
             nestedFileUrl:
@@ -50821,89 +50907,6 @@ if (steal && typeof steal.addNpmPackages === "function") {
                 },
                 plugins: ["steal-less", "steal-stache"],
                 main: "can-key-tree"
-            }
-        },
-        {
-            name: "can-deparam",
-            version: "1.2.0",
-            nestedFileUrl:
-                "./node_modules/can-route/node_modules/can-deparam/package.json",
-            origFileUrl: "./node_modules/can-deparam/package.json",
-            fileUrl: "./node_modules/can-deparam/package.json",
-            _from: "can-deparam@^1.0.0",
-            _id: "can-deparam@1.2.0",
-            _inBundle: false,
-            _integrity:
-                "sha512-Qq1wkHTv7rUFrJ6YEC9LU5O1sahwoGUt7EStUTh19cKyISFI33dae4aEGcy4+ztPkCLGLS6EpAeTyau7TWdbig==",
-            _location: "/can-deparam",
-            _phantomChildren: {},
-            _requested: {
-                type: "range",
-                registry: true,
-                raw: "can-deparam@^1.0.0",
-                name: "can-deparam",
-                escapedName: "can-deparam",
-                rawSpec: "^1.0.0",
-                saveSpec: null,
-                fetchSpec: "^1.0.0"
-            },
-            _requiredBy: ["/can-route", "/can-util"],
-            _resolved:
-                "https://registry.npmjs.org/can-deparam/-/can-deparam-1.2.0.tgz",
-            _shasum: "57bb7d7b35cdc2bc626f7d2042ca72f08471004f",
-            _spec: "can-deparam@^1.0.0",
-            _where:
-                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-util",
-            author: {
-                name: "Bitovi",
-                email: "contact@bitovi.com",
-                url: "https://www.bitovi.com/"
-            },
-            bugs: { url: "https://github.com/canjs/can-deparam/issues" },
-            bundleDependencies: false,
-            dependencies: { "can-namespace": "1.0.0" },
-            deprecated: false,
-            description: "Deserialize a query string into an array or object.",
-            devDependencies: {
-                "can-string-to-any": "^1.0.1",
-                "detect-cyclic-packages": "^1.1.0",
-                jshint: "^2.9.1",
-                steal: "^1.3.1",
-                "steal-qunit": "^1.0.1",
-                "steal-tools": "^1.2.0",
-                testee: "^0.3.0"
-            },
-            homepage: "https://canjs.com/doc/can-deparam.html",
-            keywords: ["canjs", "query string"],
-            main: "can-deparam",
-            repository: {
-                type: "git",
-                url: "git://github.com/canjs/can-deparam.git"
-            },
-            scripts: {
-                build: "node build.js",
-                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
-                develop: "done-serve --static --develop --port 8080",
-                jshint: "jshint ./*.js --config",
-                postpublish:
-                    "git push --tags && git checkout master && git branch -D release && git push",
-                preversion: "npm test && npm run build",
-                "release:major": "npm version major && npm publish",
-                "release:minor": "npm version minor && npm publish",
-                "release:patch": "npm version patch && npm publish",
-                test:
-                    "npm run detect-cycle && npm run jshint && npm run testee",
-                testee: "testee test.html --browsers firefox",
-                version:
-                    'git commit -am "Update version number" && git checkout -b release && git add -f dist/'
-            },
-            steal: {
-                npmIgnore: {
-                    testee: true,
-                    "generator-donejs": true,
-                    "donejs-cli": true,
-                    "steal-tools": true
-                }
             }
         },
         {
@@ -51156,7 +51159,7 @@ if (steal && typeof steal.addNpmPackages === "function") {
             name: "can-fragment",
             version: "1.2.0",
             nestedFileUrl:
-                "./node_modules/can-stache/node_modules/can-fragment/package.json",
+                "./node_modules/can-view-callbacks/node_modules/can-fragment/package.json",
             origFileUrl: "./node_modules/can-fragment/package.json",
             fileUrl: "./node_modules/can-fragment/package.json",
             _from: "can-fragment@^1.0.0",
@@ -51241,6 +51244,84 @@ if (steal && typeof steal.addNpmPackages === "function") {
                     "donejs-cli": true,
                     "steal-tools": true
                 }
+            }
+        },
+        {
+            name: "can-attribute-observable",
+            version: "1.0.0",
+            nestedFileUrl:
+                "./node_modules/can-stache-bindings/node_modules/can-attribute-observable/package.json",
+            origFileUrl: "./node_modules/can-attribute-observable/package.json",
+            fileUrl: "./node_modules/can-attribute-observable/package.json",
+            _from: "can-attribute-observable@<2.0.0",
+            _id: "can-attribute-observable@1.0.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-k51OxrHQiyEOTUfeRA4O9gCehe3+WCT+zOWlXptWF6TnwcEQwgX1AldFkOJJxDHBEnV/aUChElv5Hza5+vB7Jg==",
+            _location: "/can-attribute-observable",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-attribute-observable@<2.0.0",
+                name: "can-attribute-observable",
+                escapedName: "can-attribute-observable",
+                rawSpec: "<2.0.0",
+                saveSpec: null,
+                fetchSpec: "<2.0.0"
+            },
+            _requiredBy: ["/can-stache-bindings", "/can-view-live"],
+            _resolved:
+                "https://registry.npmjs.org/can-attribute-observable/-/can-attribute-observable-1.0.0.tgz",
+            _shasum: "587893daeb29743e3ccd3e1b0b9fa1bb77253d98",
+            _spec: "can-attribute-observable@<2.0.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-view-live",
+            author: {
+                name: "Bitovi",
+                email: "contact@bitovi.com",
+                url: "http://bitovi.com"
+            },
+            bundleDependencies: false,
+            dependencies: {
+                "can-diff": "^1.0.1",
+                "can-dom-data-state": "^1.0.1",
+                "can-dom-events": "^1.1.2",
+                "can-dom-mutate": "^1.0.3",
+                "can-event-dom-radiochange": "^2.1.0",
+                "can-globals": "^1.0.1",
+                "can-observation": "^4.0.1",
+                "can-observation-recorder": "^1.0.2",
+                "can-queues": "^1.0.1",
+                "can-reflect": "^1.13.3",
+                "can-reflect-dependencies": "^1.0.1",
+                "can-simple-observable": "^2.0.2"
+            },
+            deprecated: false,
+            description: "Create observables from HTML attributes.",
+            devDependencies: {
+                "can-vdom": "^4.0.1",
+                "detect-cyclic-packages": "^1.1.1",
+                jshint: "^2.9.5",
+                steal: "^1.6.5",
+                "steal-qunit": "^1.0.1",
+                testee: "^0.8.0"
+            },
+            keywords: [],
+            main: "can-attribute-observable",
+            scripts: {
+                "detect-cycle": "detect-cyclic-packages",
+                jshint: "jshint ./*.js test/*.js --config",
+                postpublish: "git push --tags && git push",
+                preversion: "npm test",
+                "release:major": "npm version major && npm publish",
+                "release:minor": "npm version minor && npm publish",
+                "release:patch": "npm version patch && npm publish",
+                "release:pre":
+                    "npm version prerelease && npm publish --tag pre",
+                test:
+                    "npm run detect-cycle && npm run jshint && npm run testee",
+                testee: "testee test/test.html --browsers firefox"
             }
         },
         {
@@ -51329,84 +51410,6 @@ if (steal && typeof steal.addNpmPackages === "function") {
                 "release:patch": "npm version patch && npm publish",
                 "release:pre":
                     "npm version prerelease && npm publish --tag=pre",
-                test:
-                    "npm run detect-cycle && npm run jshint && npm run testee",
-                testee: "testee test/test.html --browsers firefox"
-            }
-        },
-        {
-            name: "can-attribute-observable",
-            version: "1.0.0",
-            nestedFileUrl:
-                "./node_modules/can-stache-bindings/node_modules/can-attribute-observable/package.json",
-            origFileUrl: "./node_modules/can-attribute-observable/package.json",
-            fileUrl: "./node_modules/can-attribute-observable/package.json",
-            _from: "can-attribute-observable@<2.0.0",
-            _id: "can-attribute-observable@1.0.0",
-            _inBundle: false,
-            _integrity:
-                "sha512-k51OxrHQiyEOTUfeRA4O9gCehe3+WCT+zOWlXptWF6TnwcEQwgX1AldFkOJJxDHBEnV/aUChElv5Hza5+vB7Jg==",
-            _location: "/can-attribute-observable",
-            _phantomChildren: {},
-            _requested: {
-                type: "range",
-                registry: true,
-                raw: "can-attribute-observable@<2.0.0",
-                name: "can-attribute-observable",
-                escapedName: "can-attribute-observable",
-                rawSpec: "<2.0.0",
-                saveSpec: null,
-                fetchSpec: "<2.0.0"
-            },
-            _requiredBy: ["/can-stache-bindings", "/can-view-live"],
-            _resolved:
-                "https://registry.npmjs.org/can-attribute-observable/-/can-attribute-observable-1.0.0.tgz",
-            _shasum: "587893daeb29743e3ccd3e1b0b9fa1bb77253d98",
-            _spec: "can-attribute-observable@<2.0.0",
-            _where:
-                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-view-live",
-            author: {
-                name: "Bitovi",
-                email: "contact@bitovi.com",
-                url: "http://bitovi.com"
-            },
-            bundleDependencies: false,
-            dependencies: {
-                "can-diff": "^1.0.1",
-                "can-dom-data-state": "^1.0.1",
-                "can-dom-events": "^1.1.2",
-                "can-dom-mutate": "^1.0.3",
-                "can-event-dom-radiochange": "^2.1.0",
-                "can-globals": "^1.0.1",
-                "can-observation": "^4.0.1",
-                "can-observation-recorder": "^1.0.2",
-                "can-queues": "^1.0.1",
-                "can-reflect": "^1.13.3",
-                "can-reflect-dependencies": "^1.0.1",
-                "can-simple-observable": "^2.0.2"
-            },
-            deprecated: false,
-            description: "Create observables from HTML attributes.",
-            devDependencies: {
-                "can-vdom": "^4.0.1",
-                "detect-cyclic-packages": "^1.1.1",
-                jshint: "^2.9.5",
-                steal: "^1.6.5",
-                "steal-qunit": "^1.0.1",
-                testee: "^0.8.0"
-            },
-            keywords: [],
-            main: "can-attribute-observable",
-            scripts: {
-                "detect-cycle": "detect-cyclic-packages",
-                jshint: "jshint ./*.js test/*.js --config",
-                postpublish: "git push --tags && git push",
-                preversion: "npm test",
-                "release:major": "npm version major && npm publish",
-                "release:minor": "npm version minor && npm publish",
-                "release:patch": "npm version patch && npm publish",
-                "release:pre":
-                    "npm version prerelease && npm publish --tag pre",
                 test:
                     "npm run detect-cycle && npm run jshint && npm run testee",
                 testee: "testee test/test.html --browsers firefox"
@@ -51503,6 +51506,88 @@ if (steal && typeof steal.addNpmPackages === "function") {
             steal: { npmAlgorithm: "flat" }
         },
         {
+            name: "can-event-dom-radiochange",
+            version: "2.2.0",
+            nestedFileUrl:
+                "./node_modules/can-attribute-observable/node_modules/can-event-dom-radiochange/package.json",
+            origFileUrl:
+                "./node_modules/can-event-dom-radiochange/package.json",
+            fileUrl: "./node_modules/can-event-dom-radiochange/package.json",
+            _from: "can-event-dom-radiochange@^2.1.0",
+            _id: "can-event-dom-radiochange@2.2.0",
+            _inBundle: false,
+            _integrity:
+                "sha512-Vpt0l3iwlK5wmXcZEb80pJF+diBJreY35WSLNvg2A+PkB+gqu1n8xIhMndkCB2nwi4tyunfKggA+ynDpWDKfBA==",
+            _location: "/can-event-dom-radiochange",
+            _phantomChildren: {},
+            _requested: {
+                type: "range",
+                registry: true,
+                raw: "can-event-dom-radiochange@^2.1.0",
+                name: "can-event-dom-radiochange",
+                escapedName: "can-event-dom-radiochange",
+                rawSpec: "^2.1.0",
+                saveSpec: null,
+                fetchSpec: "^2.1.0"
+            },
+            _requiredBy: ["/can-attribute-observable"],
+            _resolved:
+                "https://registry.npmjs.org/can-event-dom-radiochange/-/can-event-dom-radiochange-2.2.0.tgz",
+            _shasum: "6d23a7869442a8da990f88ad7fde458652113327",
+            _spec: "can-event-dom-radiochange@^2.1.0",
+            _where:
+                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-attribute-observable",
+            author: {
+                name: "Chris Andrejewski",
+                email: "core@donejs.com",
+                url: "https://bitovi.com"
+            },
+            bugs: {
+                url: "https://github.com/canjs/can-event-dom-radiochange/issues"
+            },
+            bundleDependencies: false,
+            dependencies: {
+                "can-dom-events": "<2.0.0",
+                "can-globals": "<2.0.0",
+                "can-namespace": "1.0.0"
+            },
+            deprecated: false,
+            description: "Custom radiochange event",
+            devDependencies: {
+                "detect-cyclic-packages": "^1.1.0",
+                fixpack: "^2.3.1",
+                jshint: "^2.9.1",
+                steal: "^1.3.1",
+                "steal-qunit": "^1.0.1",
+                "steal-tools": "^1.2.0",
+                testee: "^0.6.0"
+            },
+            homepage: "https://canjs.com/doc/can-event-dom-radiochange.html",
+            keywords: ["canjs", "change", "event", "radio"],
+            license: "MIT",
+            main: "can-event-dom-radiochange",
+            repository: {
+                type: "git",
+                url: "git://github.com/canjs/can-event-dom-radiochange.git"
+            },
+            scripts: {
+                build: "node build.js",
+                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
+                "install-canary": "npm install --no-shrinkwrap",
+                "install-locked": "npm install",
+                jshint: "jshint ./*.js --config",
+                lint: "fixpack && npm run jshint",
+                postversion: "git push --follow-tags",
+                preversion: "npm test && npm run build",
+                test: "npm run detect-cycle && npm run lint && npm run testee",
+                testee: "testee test.html --browsers firefox"
+            },
+            steal: {
+                npmIgnore: { testee: true, "steal-tools": true },
+                main: "can-event-dom-radiochange"
+            }
+        },
+        {
             name: "can-key",
             version: "1.2.0",
             nestedFileUrl:
@@ -51591,88 +51676,6 @@ if (steal && typeof steal.addNpmPackages === "function") {
                 },
                 plugins: ["steal-less", "steal-stache"],
                 main: "can-key"
-            }
-        },
-        {
-            name: "can-event-dom-radiochange",
-            version: "2.2.0",
-            nestedFileUrl:
-                "./node_modules/can-attribute-observable/node_modules/can-event-dom-radiochange/package.json",
-            origFileUrl:
-                "./node_modules/can-event-dom-radiochange/package.json",
-            fileUrl: "./node_modules/can-event-dom-radiochange/package.json",
-            _from: "can-event-dom-radiochange@^2.1.0",
-            _id: "can-event-dom-radiochange@2.2.0",
-            _inBundle: false,
-            _integrity:
-                "sha512-Vpt0l3iwlK5wmXcZEb80pJF+diBJreY35WSLNvg2A+PkB+gqu1n8xIhMndkCB2nwi4tyunfKggA+ynDpWDKfBA==",
-            _location: "/can-event-dom-radiochange",
-            _phantomChildren: {},
-            _requested: {
-                type: "range",
-                registry: true,
-                raw: "can-event-dom-radiochange@^2.1.0",
-                name: "can-event-dom-radiochange",
-                escapedName: "can-event-dom-radiochange",
-                rawSpec: "^2.1.0",
-                saveSpec: null,
-                fetchSpec: "^2.1.0"
-            },
-            _requiredBy: ["/can-attribute-observable"],
-            _resolved:
-                "https://registry.npmjs.org/can-event-dom-radiochange/-/can-event-dom-radiochange-2.2.0.tgz",
-            _shasum: "6d23a7869442a8da990f88ad7fde458652113327",
-            _spec: "can-event-dom-radiochange@^2.1.0",
-            _where:
-                "C:\\development.github\\shuttle\\Shuttle.Abacus\\Shuttle.Abacus.Site\\node_modules\\can-attribute-observable",
-            author: {
-                name: "Chris Andrejewski",
-                email: "core@donejs.com",
-                url: "https://bitovi.com"
-            },
-            bugs: {
-                url: "https://github.com/canjs/can-event-dom-radiochange/issues"
-            },
-            bundleDependencies: false,
-            dependencies: {
-                "can-dom-events": "<2.0.0",
-                "can-globals": "<2.0.0",
-                "can-namespace": "1.0.0"
-            },
-            deprecated: false,
-            description: "Custom radiochange event",
-            devDependencies: {
-                "detect-cyclic-packages": "^1.1.0",
-                fixpack: "^2.3.1",
-                jshint: "^2.9.1",
-                steal: "^1.3.1",
-                "steal-qunit": "^1.0.1",
-                "steal-tools": "^1.2.0",
-                testee: "^0.6.0"
-            },
-            homepage: "https://canjs.com/doc/can-event-dom-radiochange.html",
-            keywords: ["canjs", "change", "event", "radio"],
-            license: "MIT",
-            main: "can-event-dom-radiochange",
-            repository: {
-                type: "git",
-                url: "git://github.com/canjs/can-event-dom-radiochange.git"
-            },
-            scripts: {
-                build: "node build.js",
-                "detect-cycle": "detect-cyclic-packages --ignore done-serve",
-                "install-canary": "npm install --no-shrinkwrap",
-                "install-locked": "npm install",
-                jshint: "jshint ./*.js --config",
-                lint: "fixpack && npm run jshint",
-                postversion: "git push --follow-tags",
-                preversion: "npm test && npm run build",
-                test: "npm run detect-cycle && npm run lint && npm run testee",
-                testee: "testee test.html --browsers firefox"
-            },
-            steal: {
-                npmIgnore: { testee: true, "steal-tools": true },
-                main: "can-event-dom-radiochange"
             }
         },
         {

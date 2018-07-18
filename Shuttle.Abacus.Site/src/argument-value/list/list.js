@@ -5,19 +5,33 @@ import view from './list.stache!';
 import resources from '~/resources';
 import Permissions from '~/permissions';
 import router from '~/router';
-import localisation from '~/localisation';
 import state from '~/state';
 import Api from 'shuttle-can-api';
-import $ from 'jquery';
 
 resources.add('argument', {item: 'value', action: 'list', permission: Permissions.Manage.Arguments});
+
+export const Map = DefineMap.extend({
+    argumentId: {
+        type: 'string'
+    },
+    remove() {
+        api.values.delete({id: this.argumentId})
+            .then(function () {
+                state.alerts.show({
+                    message: localisation.value('itemRemovalRequested',
+                        {itemName: localisation.value('argument')})
+                });
+            });
+    }
+});
 
 export const api = {
     arguments: new Api({
         endpoint: 'arguments/{id}'
     }),
     values: new Api({
-        endpoint: 'arguments/{id}/values'
+        endpoint: 'arguments/{id}/values',
+        Map
     })
 };
 
@@ -45,21 +59,26 @@ export const ViewModel = DefineMap.extend({
         Type: DefineMap
     },
 
-    get values() {
-        if (!this.argument){
+    values: {
+        Type: DefineList
+    },
+
+    get _values() {
+        const self = this;
+        const refreshTimestamp = this.refreshTimestamp;
+
+        if (!this.argument) {
             return;
         }
 
-        return api.values.list({
-            id: this.argument.id
-        });
+        return;
     },
 
     get map() {
         const self = this;
         const refreshTimestamp = this.refreshTimestamp;
 
-        if (!this.argumentId){
+        if (!this.argumentId) {
             this.map = undefined;
             return;
         }
@@ -67,8 +86,19 @@ export const ViewModel = DefineMap.extend({
         return api.arguments.map({
             id: this.argumentId
         })
-            .then(function(map){
+            .then(function (map) {
                 self.argument = map;
+            })
+            .then(function () {
+                return api.values.list({
+                    id: self.argument.id
+                }).then(function (response) {
+                    self.values = response.map(function (item) {
+                        item.argumentId = self.argumentId;
+
+                        return item;
+                    });
+                })
             });
     },
 
@@ -81,15 +111,15 @@ export const ViewModel = DefineMap.extend({
                 columnClass: 'col',
                 attributeName: 'value'
             });
+
+            columns.push({
+                columnTitle: 'remove',
+                columnClass: 'col-1',
+                stache: '<cs-button-remove click:from="remove" elementClass:from="\'btn-sm\'"/>'
+            });
         }
 
         state.title = 'argument-values';
-
-        state.navbar.addButton({
-            type: 'add',
-            viewModel: this,
-            permission: Permissions.Manage.Arguments
-        });
 
         state.navbar.addButton({
             type: 'refresh',

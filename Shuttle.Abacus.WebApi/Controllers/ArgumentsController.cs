@@ -99,5 +99,19 @@ namespace Shuttle.Abacus.WebApi.Controllers
                 });
             }
         }
+
+        [HttpDelete("{id}/values")]
+        public IActionResult DeleteValue(Guid id, [FromBody] ArgumentValueModel model)
+        {
+            Guard.AgainstNull(model, nameof(model));
+
+            _bus.Send(new RemoveArgumentValueCommand
+            { 
+                ArgumentId = id,
+                Value = model.Value
+            });
+
+            return Ok();
+        }
     }
 }

@@ -12,15 +12,6 @@ import Api from 'shuttle-can-api';
 resources.add('argument', { action: 'list', permission: Permissions.Manage.Arguments});
 
 export const Map = DefineMap.extend({
-    id: {
-        type: 'string'
-    },
-    name: {
-        type: 'string'
-    },
-    valueType: {
-        type: 'string'
-    },
     remove() {
         api.delete({id: this.id})
             .then(function () {
@@ -89,9 +80,9 @@ export const ViewModel = DefineMap.extend({
             });
 
             columns.push({
-                columnTitle: 'value-type',
+                columnTitle: 'data-type-name',
                 columnClass: 'col',
-                attributeName: 'valueType'
+                attributeName: 'dataTypeName'
             });
 
             columns.push({
