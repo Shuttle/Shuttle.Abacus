@@ -15,10 +15,7 @@ export const Map = DefineMap.extend({
     remove() {
         api.delete({id: this.id})
             .then(function () {
-                state.alerts.show({
-                    message: localisation.value('itemRemovalRequested',
-                        {itemName: localisation.value('argument')})
-                });
+                state.removalRequested('argument');
             });
     },
     argumentValues() {

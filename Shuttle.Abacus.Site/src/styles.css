@@ -12,6 +12,21 @@ body {
 	min-height: 100vh;
 }
 
+.fi-2 {
+	flex: 1 0 45%;
+	margin: 5px;
+}
+
+.fi-3 {
+	flex: 1 0 30%;
+	margin: 5px;
+}
+
+.fi-4 {
+	flex: 1 0 20%;
+	margin: 5px;
+}
+
 #sidebar-collapse {
 	min-width:200px;
 	max-width:200px;

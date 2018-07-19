@@ -1,11 +1,7 @@
 {{#if map.isResolved}}
     <h3>{{formula.name}}</h3>
-{{else}}
-    <cs-fetching title:from="'formula'" />
 {{/if}}
 
-{{#if map.isResolved}}
-    <cs-table vm:columns:from="columns" vm:rows:from="operations" />
-{{else}}
-    <cs-fetching title:from="'operations'" />
-{{/if}}
+<abacus-formula-operation-add vm:formula:from="formula" />
+
+<cs-table vm:columns:from="columns" vm:rows:from="operations" />

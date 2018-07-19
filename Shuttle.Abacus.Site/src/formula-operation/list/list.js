@@ -45,14 +45,8 @@ export const ViewModel = DefineMap.extend({
         Type: DefineMap
     },
 
-    get operations(){
-        if (!this.formula){
-            return;
-        }
-
-        return api.operations.list({
-            id: this.formula.id
-        });
+    operations:{
+        Type: DefineList
     },
 
     get map() {
@@ -69,6 +63,16 @@ export const ViewModel = DefineMap.extend({
         })
             .then(function(map){
                 self.formula = map;
+
+                return api.operations.list({
+                    id: self.formulaId
+                }).then(function(response){
+                    self.operations = response.map(function (item) {
+                        item.formulaId = self.formulaId;
+
+                        return item;
+                    });
+                });
             });
     },
 

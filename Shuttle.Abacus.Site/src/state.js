@@ -139,6 +139,20 @@ var State = DefineMap.extend({
 
             return result;
         }
+    },
+    removalRequested(name){
+        this.alerts.show({
+            message: localisation.value('removalRequested',
+                {itemName: localisation.value(name)}),
+            name: 'removalRequested'
+        });
+    },
+    registrationRequested(name){
+        this.alerts.show({
+            message: localisation.value('registrationRequested',
+                {itemName: localisation.value(name)}),
+            name: 'registrationRequested'
+        });
     }
 });
 

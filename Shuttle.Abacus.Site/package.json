@@ -53,7 +53,7 @@
   "homepage": "https://github.com/Shuttle/Shuttle.Abacus",
   "dependencies": {
     "bootstrap": "^4.1.2",
-    "can-component": "^4.1.2",
+    "can-component": "^4.3.0",
     "can-compute": "^4.1.0",
     "can-connect": "^3.0.1",
     "can-define": "^2.5.2",
@@ -72,7 +72,7 @@
     "moment": "^2.22.1",
     "popper.js": "^1.14.3",
     "shuttle-access": "^1.0.1",
-    "shuttle-can-api": "^1.0.17",
+    "shuttle-can-api": "^1.0.18",
     "shuttle-canstrap": "^1.0.59",
     "shuttle-guard": "^1.0.0",
     "steal": "^1.12.3",

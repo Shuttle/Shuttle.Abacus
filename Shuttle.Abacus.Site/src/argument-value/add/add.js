@@ -9,8 +9,6 @@ import state from '~/state';
 import {OptionMap, OptionList} from 'shuttle-canstrap/select/';
 import localisation from '~/localisation';
 
-resources.add('argument', { item: 'values', action: 'add', permission: Permissions.Manage.Arguments});
-
 var api = {
     arguments: new Api({
         endpoint: 'arguments/{id}'
@@ -44,10 +42,7 @@ export const ViewModel = DefineMap.extend({
             id: this.argument.id
         })
             .then(function(){
-                state.alerts.show({
-                    message: localisation.value('itemRegistrationRequested',
-                        {itemName: localisation.value('argument')})
-                });
+                state.registrationRequested('argument');
             });
 
         return false;
@@ -57,7 +52,7 @@ export const ViewModel = DefineMap.extend({
 validator(ViewModel);
 
 export default Component.extend({
-    tag: 'abacus-argument-values-add',
+    tag: 'abacus-argument-value-add',
     ViewModel,
     view
 });
