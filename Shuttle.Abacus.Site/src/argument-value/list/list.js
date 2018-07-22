@@ -56,23 +56,10 @@ export const ViewModel = DefineMap.extend({
 		Type: DefineMap
 	},
 
-	values: {
-		Type: DefineList
-	},
-
-	get _values() {
+	get values() {
 		return !!this.argument ? api.values.list({
 			id: this.argument.id
 		}) : Promise.resolve();
-
-		// const self = this;
-		// const refreshTimestamp = this.refreshTimestamp;
-		//
-		// if (!this.argument) {
-		//     return;
-		// }
-		//
-		// return;
 	},
 
 	get map() {
@@ -90,17 +77,6 @@ export const ViewModel = DefineMap.extend({
 			.then(function (map) {
 				self.argument = map;
 			});
-			// .then(function () {
-			// 	return api.values.list({
-			// 		id: self.argument.id
-			// 	}).then(function (response) {
-			// 		self.values = response.map(function (item) {
-			// 			item.argumentId = self.argumentId;
-			//
-			// 			return item;
-			// 		});
-			// 	})
-			// });
 	},
 
 	init() {

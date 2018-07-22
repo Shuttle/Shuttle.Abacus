@@ -67,6 +67,9 @@ export const ViewModel = DefineMap.extend({
         default: ''
     },
 
+	argument: {
+	},
+
     inputParameter: {
         type: 'string',
         validate: {
@@ -94,6 +97,12 @@ export const ViewModel = DefineMap.extend({
             });
 
         return false;
+    },
+
+	argumentSearchMapper (argument){
+    	argument.text = argument.name;
+
+        return argument;
     }
 });
 

@@ -6,6 +6,8 @@
   "arguments": "Arguments",
   "argument-values": "Argument values",
   "average": "Average",
+  "autocomplete-empty": "(empty)",
+  "autocomplete-loading": "(fetching)",
   "back": "Back",
   "check": "Check",
   "clone": "Clone",

@@ -4,4 +4,4 @@
 
 <abacus-argument-value-add vm:argument:from="argument" />
 
-<cs-table vm:columns:from="columns" vm:rows:from="_values.value" />
+<cs-table vm:columns:from="columns" vm:rows:from="values.value" />
