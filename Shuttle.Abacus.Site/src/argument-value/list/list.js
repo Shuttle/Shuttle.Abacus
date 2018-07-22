@@ -11,135 +11,139 @@ import Api from 'shuttle-can-api';
 resources.add('argument', {item: 'value', action: 'list', permission: Permissions.Manage.Arguments});
 
 export const Map = DefineMap.extend({
-    argumentId: {
-        type: 'string'
-    },
-    remove() {
-        api.values.delete({id: this.argumentId}, { value: this.value })
-            .then(function () {
-                state.removalRequested("argument-value")
-            });
-    }
+	argumentId: {
+		type: 'string'
+	},
+	remove() {
+		api.values.delete({id: this.argumentId}, {value: this.value})
+			.then(function () {
+				state.removalRequested("argument-value")
+			});
+	}
 });
 
 export const api = {
-    arguments: new Api({
-        endpoint: 'arguments/{id}'
-    }),
-    values: new Api({
-        endpoint: 'arguments/{id}/values',
-        Map
-    })
+	arguments: new Api({
+		endpoint: 'arguments/{id}'
+	}),
+	values: new Api({
+		endpoint: 'arguments/{id}/values',
+		Map
+	})
 };
 
 export const ViewModel = DefineMap.extend({
-    name: {
-        type: 'string',
-        default: ''
-    },
+	name: {
+		type: 'string',
+		default: ''
+	},
 
-    argumentId: {
-        get() {
-            return state.routeData.id;
-        }
-    },
+	argumentId: {
+		get() {
+			return state.routeData.id;
+		}
+	},
 
-    columns: {
-        Default: DefineList
-    },
+	columns: {
+		Default: DefineList
+	},
 
-    refreshTimestamp: {
-        type: 'string'
-    },
+	refreshTimestamp: {
+		type: 'string'
+	},
 
-    argument: {
-        Type: DefineMap
-    },
+	argument: {
+		Type: DefineMap
+	},
 
-    values: {
-        Type: DefineList
-    },
+	values: {
+		Type: DefineList
+	},
 
-    get _values() {
-        const self = this;
-        const refreshTimestamp = this.refreshTimestamp;
+	get _values() {
+		return !!this.argument ? api.values.list({
+			id: this.argument.id
+		}) : Promise.resolve();
 
-        if (!this.argument) {
-            return;
-        }
+		// const self = this;
+		// const refreshTimestamp = this.refreshTimestamp;
+		//
+		// if (!this.argument) {
+		//     return;
+		// }
+		//
+		// return;
+	},
 
-        return;
-    },
+	get map() {
+		const self = this;
+		const refreshTimestamp = this.refreshTimestamp;
 
-    get map() {
-        const self = this;
-        const refreshTimestamp = this.refreshTimestamp;
+		if (!this.argumentId) {
+			this.map = undefined;
+			return;
+		}
 
-        if (!this.argumentId) {
-            this.map = undefined;
-            return;
-        }
+		return api.arguments.map({
+			id: this.argumentId
+		})
+			.then(function (map) {
+				self.argument = map;
+			});
+			// .then(function () {
+			// 	return api.values.list({
+			// 		id: self.argument.id
+			// 	}).then(function (response) {
+			// 		self.values = response.map(function (item) {
+			// 			item.argumentId = self.argumentId;
+			//
+			// 			return item;
+			// 		});
+			// 	})
+			// });
+	},
 
-        return api.arguments.map({
-            id: this.argumentId
-        })
-            .then(function (map) {
-                self.argument = map;
-            })
-            .then(function () {
-                return api.values.list({
-                    id: self.argument.id
-                }).then(function (response) {
-                    self.values = response.map(function (item) {
-                        item.argumentId = self.argumentId;
+	init() {
+		const columns = this.columns;
 
-                        return item;
-                    });
-                })
-            });
-    },
+		if (!columns.length) {
+			columns.push({
+				columnTitle: 'value',
+				columnClass: 'col',
+				attributeName: 'value'
+			});
 
-    init() {
-        const columns = this.columns;
+			columns.push({
+				columnTitle: 'remove',
+				columnClass: 'col-1',
+				stache: '<cs-button-remove click:from="remove" elementClass:from="\'btn-sm\'"/>'
+			});
+		}
 
-        if (!columns.length) {
-            columns.push({
-                columnTitle: 'value',
-                columnClass: 'col',
-                attributeName: 'value'
-            });
+		state.title = 'argument-values';
 
-            columns.push({
-                columnTitle: 'remove',
-                columnClass: 'col-1',
-                stache: '<cs-button-remove click:from="remove" elementClass:from="\'btn-sm\'"/>'
-            });
-        }
+		state.navbar.addButton({
+			type: 'refresh',
+			viewModel: this
+		});
+	},
 
-        state.title = 'argument-values';
+	add: function () {
+		router.goto({
+			resource: 'argument',
+			id: this.argumentId,
+			item: 'values',
+			action: 'add'
+		});
+	},
 
-        state.navbar.addButton({
-            type: 'refresh',
-            viewModel: this
-        });
-    },
-
-    add: function () {
-        router.goto({
-            resource: 'argument',
-            id: this.argumentId,
-            item: 'values',
-            action: 'add'
-        });
-    },
-
-    refresh: function () {
-        this.refreshTimestamp = Date.now();
-    }
+	refresh: function () {
+		this.refreshTimestamp = Date.now();
+	}
 });
 
 export default Component.extend({
-    tag: 'abacus-argument-value-list',
-    ViewModel,
-    view
+	tag: 'abacus-argument-value-list',
+	ViewModel,
+	view
 });

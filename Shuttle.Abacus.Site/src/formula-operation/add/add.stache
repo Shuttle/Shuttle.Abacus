@@ -1,23 +1,24 @@
 <cs-form>
-    <fieldset class="form-group">
-        <div class="d-flex flex-wrap justify-content-start">
-            <cs-form-select focus:from="'true'" label:from="'operation'" value:bind="operation"
-                            options:from="operations" vm:errors:from="errors()" errorAttribute:from="'operation'"
-                            vm:required:from="'true'" formGroupClass:from="'fi-3'"/>
-            <cs-form-select label:from="'value-provider-name'" value:bind="valueProviderName"
-                            options:from="valueProviderNames" vm:errors:from="errors()" errorAttribute:from="'valueProviderName'"
-                            vm:required:from="'true'" formGroupClass:from="'fi-3'"/>
+<fieldset class="form-group">
+<div class="d-flex flex-wrap justify-content-start">
+    <cs-form-select focus:from="'true'" label:from="'operation'" value:bind="operation"
+                    options:from="operations" vm:errors:from="errors()" errorAttribute:from="'operation'"
+                    vm:required:from="'true'" formGroupClass:from="'fi-3'"/>
+    <cs-form-select label:from="'value-provider-name'" value:bind="valueProviderName"
+                    options:from="valueProviderNames" vm:errors:from="errors()"
+                    errorAttribute:from="'valueProviderName'"
+                    vm:required:from="'true'" formGroupClass:from="'fi-3'"/>
 {{#switch(valueProviderName)}}
 {{#case('Argument')}}
-        <abacus-argument label:from="'constant'" vm:value:bind="constant"
-                       vm:errors:from="errors()" errorAttribute:from="'constant'" vm:required:from="'true'"/>
+    <cs-form-autocomplete label:raw="argument" vm:map:bind="argument" endpoint:raw="arguments/search/{search}"
+                          method:raw="post"/>
 {{/case}}
 {{#case('Constant')}}
-        <cs-form-input label:from="'constant'" vm:value:bind="constant" vm:required:from="'true'"/>
+    <cs-form-input label:from="'constant'" vm:value:bind="constant" vm:required:from="'true'"/>
 {{/case}}
 {{/switch}}
-        <cs-validation message="inputParameterMessage" />
-        </div>
-        <cs-button-submit vm:click:from="add" text:from="'add'"/>
-    </fieldset>
+    <cs-validation message="inputParameterMessage"/>
+</div>
+    <cs-button-submit vm:click:from="add" text:from="'add'"/>
+</fieldset>
 </cs-form>

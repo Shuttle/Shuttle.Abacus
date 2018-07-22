@@ -55,10 +55,6 @@ canstrap.button.remove.confirmation = function (options) {
     state.modal.confirmation.show(options);
 }
 
-canstrap.button.remove.confirmation = function (options) {
-    state.modal.confirmation.show(options);
-}
-
 $.ajaxPrefilter(function (options, originalOptions) {
     options.error = function (xhr) {
         if (xhr.status != 200) {
