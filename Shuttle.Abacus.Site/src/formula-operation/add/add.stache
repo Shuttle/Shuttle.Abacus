@@ -11,7 +11,7 @@
 {{#switch(valueProviderName)}}
 {{#case('Argument')}}
     <cs-form-autocomplete label:raw="argument" vm:map:bind="argument" endpoint:raw="arguments/search" method:raw="post"
-                          mapper:from="argumentSearchMapper" searchAttribute:raw="name" formGroupClass:from="'fi-3'"/>
+                          textAttribute:raw="name" searchAttribute:raw="name" formGroupClass:from="'fi-3'"/>
 {{/case}}
 {{#case('Constant')}}
     <cs-form-input label:from="'constant'" vm:value:bind="constant" vm:required:from="'true'"
