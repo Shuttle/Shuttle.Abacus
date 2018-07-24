@@ -1,6 +1,6 @@
 <cs-form>
 <fieldset class="form-group">
-<div class="d-flex flex-wrap justify-content-start">
+<div class="d-flex flex-wrap justify-content-start mb-2">
     <cs-form-select focus:from="'true'" label:from="'operation'" value:bind="operation"
                     options:from="operations" vm:errors:from="errors()" errorAttribute:from="'operation'"
                     vm:required:from="'true'" formGroupClass:from="'fi-3'"/>
@@ -10,7 +10,7 @@
                     vm:required:from="'true'" formGroupClass:from="'fi-3'"/>
 {{#switch(valueProviderName)}}
 {{#case('Argument')}}
-    <cs-form-autocomplete label:raw="argument" vm:map:bind="argument" endpoint:raw="arguments/search" method:raw="post"
+    <cs-form-autocomplete label:raw="argument" vm:map:bind="selectedArgument" endpoint:raw="arguments/search" method:raw="post"
                           textAttribute:raw="name" searchAttribute:raw="name" formGroupClass:from="'fi-2'"/>
 {{/case}}
 {{#case('Constant')}}
@@ -18,7 +18,11 @@
                    formGroupClass:from="'fi-2'"/>
 {{/case}}
 {{#case('Matrix')}}
-    <cs-form-autocomplete label:raw="matrix" vm:map:bind="matrix" endpoint:raw="matrices/search" method:raw="post"
+    <cs-form-autocomplete label:raw="matrix" vm:map:bind="selectedMatrix" endpoint:raw="matrices/search" method:raw="post"
+                          textAttribute:raw="name" searchAttribute:raw="name" formGroupClass:from="'fi-2'"/>
+{{/case}}
+{{#case('Formula')}}
+    <cs-form-autocomplete label:raw="formula" vm:map:bind="selectedFormula" endpoint:raw="formulas/search" method:raw="post"
                           textAttribute:raw="name" searchAttribute:raw="name" formGroupClass:from="'fi-2'"/>
 {{/case}}
 {{/switch}}

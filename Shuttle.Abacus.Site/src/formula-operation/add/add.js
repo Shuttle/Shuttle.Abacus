@@ -67,7 +67,16 @@ export const ViewModel = DefineMap.extend({
         default: ''
     },
 
-	argument: {
+	selectedArgument: {
+        Type: DefineMap
+	},
+
+	selectedMatrix: {
+        Type: DefineMap
+	},
+
+	selectedFormula: {
+        Type: DefineMap
 	},
 
     inputParameter: {
