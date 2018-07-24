@@ -24,6 +24,11 @@ namespace Shuttle.Abacus.DataAccess
             _keyStore = keyStore;
         }
 
+        public IEnumerable<DataRow> Search(MatrixSearchSpecification specification)
+        {
+            return _databaseGateway.GetRowsUsing(_matrixQueryFactory.Search(specification));
+        }
+
         public IEnumerable<DataRow> All()
         {
             return _databaseGateway.GetRowsUsing(_matrixQueryFactory.All());

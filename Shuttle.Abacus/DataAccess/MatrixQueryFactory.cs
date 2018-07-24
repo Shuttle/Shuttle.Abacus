@@ -1,20 +1,25 @@
 using System;
+using Shuttle.Core.Contract;
 using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public class MatrixQueryFactory : IMatrixQueryFactory
     {
-        public IQuery All()
-        {
-            return RawQuery.Create(@"
+        private const string Query = @"
 select
     Id,
-    Name
+    Name,
+    DataTypeName
 from
     Matrix
+";
+
+        public IQuery All()
+        {
+            return RawQuery.Create(string.Concat(Query, @"
 order by
-    Name");
+    Name"));
         }
 
         public IQuery Get(Guid id)
@@ -128,6 +133,25 @@ values
                 .AddParameterValue(Columns.Column, column)
                 .AddParameterValue(Columns.Row, row)
                 .AddParameterValue(Columns.Value, value);
+        }
+
+        public IQuery Search(MatrixSearchSpecification specification)
+        {
+            Guard.AgainstNull(specification, nameof(specification));
+
+            return new RawQuery(string.Concat(Query, @"
+where
+(
+    @Name is null
+    or
+    @Name = ''
+    or
+    Name like '%' + @Name + '%'
+)
+order by 
+    Name
+"))
+                .AddParameterValue(Columns.Name, specification.Name);
         }
     }
 }

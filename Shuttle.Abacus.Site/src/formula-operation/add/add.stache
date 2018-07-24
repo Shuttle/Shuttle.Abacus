@@ -11,11 +11,15 @@
 {{#switch(valueProviderName)}}
 {{#case('Argument')}}
     <cs-form-autocomplete label:raw="argument" vm:map:bind="argument" endpoint:raw="arguments/search" method:raw="post"
-                          textAttribute:raw="name" searchAttribute:raw="name" formGroupClass:from="'fi-3'"/>
+                          textAttribute:raw="name" searchAttribute:raw="name" formGroupClass:from="'fi-2'"/>
 {{/case}}
 {{#case('Constant')}}
     <cs-form-input label:from="'constant'" vm:value:bind="constant" vm:required:from="'true'"
-                   formGroupClass:from="'fi-3'"/>
+                   formGroupClass:from="'fi-2'"/>
+{{/case}}
+{{#case('Matrix')}}
+    <cs-form-autocomplete label:raw="matrix" vm:map:bind="matrix" endpoint:raw="matrices/search" method:raw="post"
+                          textAttribute:raw="name" searchAttribute:raw="name" formGroupClass:from="'fi-2'"/>
 {{/case}}
 {{/switch}}
     <cs-validation message="inputParameterMessage"/>

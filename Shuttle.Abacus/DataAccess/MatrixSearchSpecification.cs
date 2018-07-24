@@ -1,10 +1,10 @@
 ﻿namespace Shuttle.Abacus.DataAccess
 {
-    public class ArgumentSearchSpecification
+    public class MatrixSearchSpecification
     {
         public string Name { get; private set; }
 
-        public ArgumentSearchSpecification MatchingName(string name)
+        public MatrixSearchSpecification MatchingName(string name)
         {
             Name = name;
 

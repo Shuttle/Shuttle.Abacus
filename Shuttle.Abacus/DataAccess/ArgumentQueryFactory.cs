@@ -8,7 +8,7 @@ namespace Shuttle.Abacus.DataAccess
 {
     public class ArgumentQueryFactory : IArgumentQueryFactory
     {
-        private readonly string SelectClause = @"
+        private const string Query = @"
 select
     Id,
     Name,
@@ -21,7 +21,7 @@ from
         {
             Guard.AgainstNull(specification, nameof(specification));
 
-            return new RawQuery(string.Concat(SelectClause, @"
+            return new RawQuery(string.Concat(Query, @"
 where
 (
     @Name is null
@@ -39,7 +39,7 @@ order by
         public IQuery Get(Guid id)
         {
             return
-                new RawQuery(string.Concat(SelectClause, "where Id = @Id")).AddParameterValue(
+                new RawQuery(string.Concat(Query, "where Id = @Id")).AddParameterValue(
                     Columns.Id, id);
         }
 
@@ -102,7 +102,7 @@ where
         public IQuery Get(string name)
         {
             return
-                new RawQuery(string.Concat(SelectClause, "where ArgumentName = @ArgumentName")).AddParameterValue(
+                new RawQuery(string.Concat(Query, "where ArgumentName = @ArgumentName")).AddParameterValue(
                     Columns.Name, name);
         }
 

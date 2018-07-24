@@ -2,13 +2,13 @@
 
 namespace Shuttle.Abacus.WebApi
 {
-    public class ArgumentSearchModel
+    public class MatrixSearchModel
     {
         public string Name { get; set; }
 
-        public ArgumentSearchSpecification Specification()
+        public MatrixSearchSpecification Specification()
         {
-            return new ArgumentSearchSpecification()
+            return new MatrixSearchSpecification()
                 .MatchingName(Name);
         }
     }

@@ -14,17 +14,17 @@ body {
 
 .fi-2 {
 	flex: 1 0 45%;
-	margin: 5px;
+	margin-right: 5px;
 }
 
 .fi-3 {
 	flex: 1 0 30%;
-	margin: 5px;
+	margin-right: 5px;
 }
 
 .fi-4 {
 	flex: 1 0 20%;
-	margin: 5px;
+	margin-right: 5px;
 }
 
 #sidebar-collapse {
