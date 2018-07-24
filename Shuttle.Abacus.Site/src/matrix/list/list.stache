@@ -1,8 +1,6 @@
 <cs-form>
     <div class="row">
         <div class="col"><cs-form-input focus:from="'true'" label:from="'name'" vm:value:bind="name"/></div>
-        <div class="col"><cs-form-input label:from="'maximum-formula-name'" vm:value:bind="maximumFormulaName"/></div>
-        <div class="col"><cs-form-input label:from="'minimum-formula-name'" vm:value:bind="minimumFormulaName"/></div>
     </div>
     <cs-button-submit vm:click:from="refresh" text:from="'search'"/>
 </cs-form>

@@ -9,56 +9,29 @@ import localisation from '~/localisation';
 import state from '~/state';
 import Api from 'shuttle-can-api';
 
-resources.add('formula', { action: 'list', permission: Permissions.Manage.Formulas});
+resources.add('matrix', { action: 'list', permission: Permissions.Manage.Matrices});
 
 export const Map = DefineMap.extend({
 	remove() {
-		api.formulas.delete({id: this.id})
+		api.matrices.delete({id: this.id})
 			.then(function () {
-				state.removalRequested('formula');
+				state.removalRequested('matrix');
 			});
-	},
-    operations() {
-        router.goto({
-            resource: 'formula',
-            item: 'operation',
-            action: 'list',
-            id: this.id
-        });
-    },
-    constraints() {
-        router.goto({
-            resource: 'formula',
-            item: 'constraint',
-            action: 'list',
-            id: this.id
-        });
-    }
+	}
 });
 
 export const api = {
-	formulas: new Api({
-		endpoint: 'formulas/{id}',
-		Map
-	}),
+    matrices: new Api({
+        endpoint: 'matrices/{id}'
+    }),
     search: new Api({
-        endpoint: 'formulas/search',
+        endpoint: 'matrices/search',
         Map
     })
 };
 
 export const ViewModel = DefineMap.extend({
     name: {
-        type: 'string',
-        default: ''
-    },
-
-    minimumFormulaName: {
-        type: 'string',
-        default: ''
-    },
-
-    maximumFormulaName: {
         type: 'string',
         default: ''
     },
@@ -85,33 +58,15 @@ export const ViewModel = DefineMap.extend({
 
         if (!columns.length) {
             columns.push({
-                columnTitle: 'operations',
+                columnTitle: 'edit',
                 columnClass: 'col-1',
-                stache: '<cs-button text:from="\'operations\'" click:from="operations" elementClass:from="\'btn-sm\'"/>'
-            });
-
-            columns.push({
-                columnTitle: 'constraints',
-                columnClass: 'col-1',
-                stache: '<cs-button text:from="\'constraints\'" click:from="constraints" elementClass:from="\'btn-sm\'"/>'
+                stache: '<cs-button text:from="\'edit\'" click:from="edit" elementClass:from="\'btn-sm\'"/>'
             });
 
             columns.push({
                 columnTitle: 'name',
                 columnClass: 'col',
                 attributeName: 'name'
-            });
-
-            columns.push({
-                columnTitle: 'maximum-formula-name',
-                columnClass: 'col',
-                attributeName: 'maximumFormulaName'
-            });
-
-            columns.push({
-                columnTitle: 'minimum-formula-name',
-                columnClass: 'col',
-                attributeName: 'minimumFormulaName'
             });
 
 	        columns.push({
@@ -121,12 +76,12 @@ export const ViewModel = DefineMap.extend({
 	        });
         }
 
-        state.title = 'formulas';
+        state.title = 'matrices';
 
         state.navbar.addButton({
             type: 'add',
             viewModel: this,
-            permission: Permissions.Manage.Formulas
+            permission: Permissions.Manage.Matrices
         });
 
         state.navbar.addButton({
@@ -137,7 +92,7 @@ export const ViewModel = DefineMap.extend({
 
     add: function() {
         router.goto({
-            resource: 'formula',
+            resource: 'matrix',
             action: 'add'
         });
     },
@@ -148,7 +103,7 @@ export const ViewModel = DefineMap.extend({
 });
 
 export default Component.extend({
-    tag: 'abacus-formula-list',
+    tag: 'abacus-matrix-list',
     ViewModel,
     view
 });

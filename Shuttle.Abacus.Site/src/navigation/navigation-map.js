@@ -11,6 +11,11 @@ var map = [
         permission: Permissions.Manage.Formulas
     },
     {
+        href: '#!matrix/list',
+        text: 'matrices',
+        permission: Permissions.Manage.Matrices
+    },
+    {
         href: '#!argument/list',
         text: 'arguments',
         permission: Permissions.Manage.Arguments
