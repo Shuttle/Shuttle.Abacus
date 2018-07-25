@@ -3,11 +3,11 @@ using Shuttle.Core.Contract;
 
 namespace Shuttle.Abacus
 {
-    public class ConstantDataType : DataType
+    public class DecimalDataType : DataType
     {
         private readonly decimal _value;
 
-        public ConstantDataType(decimal value)
+        public DecimalDataType(decimal value)
         {
             _value = value;
 
@@ -15,7 +15,7 @@ namespace Shuttle.Abacus
             Value = value;
         }
 
-        public ConstantDataType(string text)
+        public DecimalDataType(string text)
         {
             ValueString = text;
 
@@ -24,15 +24,13 @@ namespace Shuttle.Abacus
             Value = _value;
         }
 
-        public override string Name => "Constant";
+        public override string Name => "Decimal";
 
         public override int CompareTo(DataType other)
         {
             Guard.AgainstNull(other, nameof(other));
 
-            decimal otherValue;
-
-            if (!decimal.TryParse(other.ValueString, out otherValue))
+            if (!decimal.TryParse(other.ValueString, out var otherValue))
             {
                 throw new InvalidCastException(string.Format(Resources.IncompatibleDataTypes, GetType().Name,
                     other.GetType().Name));

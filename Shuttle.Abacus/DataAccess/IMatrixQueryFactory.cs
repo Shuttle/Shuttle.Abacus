@@ -7,7 +7,7 @@ namespace Shuttle.Abacus.DataAccess
     {
         IQuery All();
         IQuery Get(Guid id);
-        IQuery Add(Guid id, string name, string columnArgumentName, string rowArgumentName, string dataTypeName);
+        IQuery Add(Guid id, string name, Guid? columnArgumentId, Guid rowArgumentId, string dataTypeName);
         IQuery Remove(Guid id);
         IQuery RemoveElements(Guid id);
         IQuery RemoveConstraints(Guid id);

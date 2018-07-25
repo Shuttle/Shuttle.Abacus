@@ -59,8 +59,8 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 
                 stream.AddEvent(matrix.Register(
                     message.Name,
-                    message.RowArgumentName,
-                    message.ColumnArgumentName,
+                    message.RowArgumentId,
+                    message.ColumnArgumentId,
                     message.DataTypeName));
 
                 _eventStore.Save(stream);

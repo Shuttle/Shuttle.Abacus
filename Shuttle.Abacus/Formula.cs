@@ -59,16 +59,15 @@ namespace Shuttle.Abacus
             return operationAdded;
         }
 
-        public ConstraintAdded AddConstraint(Guid id, string argumentName, string comparison, string value)
+        public ConstraintAdded AddConstraint(Guid id, Guid argumentId, string comparison, string value)
         {
-            Guard.AgainstNullOrEmptyString(argumentName, nameof(argumentName));
             Guard.AgainstNullOrEmptyString(comparison, nameof(comparison));
             Guard.AgainstNullOrEmptyString(value, nameof(value));
 
             return On(new ConstraintAdded
             {
                 Id = id,
-                ArgumentName = argumentName,
+                ArgumentId = argumentId,
                 Comparison = comparison,
                 Value = value
             });
@@ -81,7 +80,7 @@ namespace Shuttle.Abacus
             _constraints.Add(
                 new FormulaConstraint(
                     constraintAdded.Id,
-                    constraintAdded.ArgumentName,
+                    constraintAdded.ArgumentId,
                     constraintAdded.Comparison,
                     constraintAdded.Value));
 

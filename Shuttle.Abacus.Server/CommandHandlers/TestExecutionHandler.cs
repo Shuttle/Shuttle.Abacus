@@ -84,7 +84,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
             {
                 responseFormulaContext.ArgumentAnswers.Add(new Messages.v1.TransferObjects.ArgumentValue
                 {
-                    Name = usedArgumentValue.Name,
+                    Id = usedArgumentValue.Id,
                     Value = usedArgumentValue.Value
                 });
             }

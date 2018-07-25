@@ -6,7 +6,7 @@ namespace Shuttle.Abacus
     public enum ValueProviderType
     {
         Argument = 1,
-        Constant = 2,
+        Decimal = 2,
         Matrix = 3,
         Formula = 4,
         Result = 5

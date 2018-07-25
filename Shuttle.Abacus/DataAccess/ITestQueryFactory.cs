@@ -15,7 +15,7 @@ namespace Shuttle.Abacus.DataAccess
 
         IQuery RemoveArgumentValues(Guid id);
         IQuery Rename(Guid id, string name);
-        IQuery RemoveArgumentValue(Guid id, string argumentName);
-        IQuery AddArgumentValue(Guid id, string argumentName, string value);
+        IQuery RemoveArgumentValue(Guid id, Guid argumentId);
+        IQuery AddArgumentValue(Guid id, Guid argumentId, string value);
     }
 }

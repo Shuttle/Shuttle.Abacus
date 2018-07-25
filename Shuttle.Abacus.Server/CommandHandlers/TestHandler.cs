@@ -69,7 +69,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 
                 stream.Apply(test);
 
-                stream.AddEvent(test.RemoveArgument(message.ArgumentName));
+                stream.AddEvent(test.RemoveArgument(message.ArgumentId));
 
                 _eventStore.Save(stream);
             }
@@ -121,7 +121,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 
                 stream.Apply(test);
 
-                stream.AddEvent(test.SetArgument(message.ArgumentName, message.Value));
+                stream.AddEvent(test.SetArgument(message.ArgumentId, message.Value));
 
                 _eventStore.Save(stream);
             }

@@ -15,7 +15,7 @@ namespace Shuttle.Abacus.DataAccess
         void RemoveOperation(Guid operationId);
         void AddOperation(Guid operationId, Guid formulaId, int sequenceNumber, string operation, string valueProviderName, string inputParameter);
         void RemoveConstraint(Guid constraintId);
-        void AddConstraint(Guid constraintId, Guid formulaId, string argumentName, string comparison, string value);
+        void AddConstraint(Guid constraintId, Guid formulaId, Guid argumentId, string comparison, string value);
         IEnumerable<DataRow> Constraints(Guid formulaId);
         
     }

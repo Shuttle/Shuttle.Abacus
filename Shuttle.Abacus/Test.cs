@@ -110,14 +110,13 @@ namespace Shuttle.Abacus
             return $"[argument]:name={name}";
         }
 
-        public ArgumentSet SetArgument(string argumentName, string value)
+        public ArgumentSet SetArgument(Guid argumentId, string value)
         {
-            Guard.AgainstNullOrEmptyString(argumentName, nameof(argumentName));
             Guard.AgainstNullOrEmptyString(value, nameof(value));
 
             return On(new ArgumentSet
             {
-                ArgumentName = argumentName,
+                ArgumentId = argumentId,
                 Value = value
             });
         }
@@ -126,25 +125,22 @@ namespace Shuttle.Abacus
         {
             Guard.AgainstNull(argumentSet, nameof(argumentSet));
 
-            _values.Remove(FindValue(argumentSet.ArgumentName));
-            _values.Add(new ArgumentValue(argumentSet.ArgumentName, argumentSet.Value));
+            _values.Remove(FindValue(argumentSet.ArgumentId));
+            _values.Add(new ArgumentValue(argumentSet.ArgumentId, argumentSet.Value));
 
             return argumentSet;
         }
 
-        private ArgumentValue FindValue(string argumentName)
+        private ArgumentValue FindValue(Guid argumentId)
         {
-            return _values.Find(argumentValue =>
-                argumentValue.Name.Equals(argumentName, StringComparison.InvariantCultureIgnoreCase));
+            return _values.Find(argumentValue => argumentValue.Id.Equals(argumentId));
         }
 
-        public ArgumentRemoved RemoveArgument(string argumentName)
+        public ArgumentRemoved RemoveArgument(Guid argumentId)
         {
-            Guard.AgainstNullOrEmptyString(argumentName, nameof(argumentName));
-
             return On(new ArgumentRemoved
             {
-                ArgumentName = argumentName
+                ArgumentId = argumentId
             });
         }
 
@@ -152,7 +148,7 @@ namespace Shuttle.Abacus
         {
             Guard.AgainstNull(argumentRemoved, nameof(argumentRemoved));
 
-            _values.Remove(FindValue(argumentRemoved.ArgumentName));
+            _values.Remove(FindValue(argumentRemoved.ArgumentId));
 
             return argumentRemoved;
         }

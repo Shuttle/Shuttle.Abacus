@@ -1,14 +1,16 @@
-﻿namespace Shuttle.Abacus
+﻿using System;
+
+namespace Shuttle.Abacus
 {
     public class ArgumentValue
     {
-        public ArgumentValue(string name, string value)
+        public ArgumentValue(Guid id, string value)
         {
-            Name = name;
+            Id = id;
             Value = value;
         }
 
-        public string Name { get; }
+        public Guid Id { get; }
         public string Value { get; }
     }
 }

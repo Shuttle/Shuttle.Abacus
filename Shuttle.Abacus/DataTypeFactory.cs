@@ -18,7 +18,7 @@ namespace Shuttle.Abacus
                 }
                 case "decimal":
                 {
-                    return new ConstantDataType(value);
+                    return new DecimalDataType(value);
                 }
                 case "integer":
                 {

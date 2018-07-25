@@ -188,7 +188,7 @@ order by
                 .AddParameterValue(Columns.MinimumFormulaName, specification.MinimumFormulaName);
         }
 
-        public IQuery AddConstraint(Guid constraintId, Guid formulaId, string argumentName,
+        public IQuery AddConstraint(Guid constraintId, Guid formulaId, Guid argumentId,
             string comparison,
             string value)
         {
@@ -212,7 +212,7 @@ values
 )")
                 .AddParameterValue(Columns.Id, constraintId)
                 .AddParameterValue(Columns.FormulaId, formulaId)
-                .AddParameterValue(Columns.ArgumentName, argumentName)
+                .AddParameterValue(Columns.ArgumentName, argumentId)
                 .AddParameterValue(Columns.Comparison, comparison)
                 .AddParameterValue(Columns.Value, value);
         }

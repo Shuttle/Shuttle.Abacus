@@ -5,20 +5,19 @@ namespace Shuttle.Abacus
 {
     public class FormulaConstraint
     {
-        public FormulaConstraint(Guid id, string argumentName, string comparison, string value)
+        public FormulaConstraint(Guid id, Guid argumentId, string comparison, string value)
         {
-            Guard.AgainstNullOrEmptyString(argumentName, nameof(argumentName));
             Guard.AgainstNullOrEmptyString(comparison, nameof(comparison));
             Guard.AgainstNullOrEmptyString(value, nameof(value));
 
             Id = id;
-            ArgumentName = argumentName;
+            ArgumentId = argumentId;
             Comparison = comparison;
             Value = value;
         }
 
         public Guid Id { get; }
-        public string ArgumentName { get; }
+        public Guid ArgumentId { get; }
         public string Comparison { get; }
         public string Value { get; }
     }

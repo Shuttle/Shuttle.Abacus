@@ -8,6 +8,7 @@ import Api from 'shuttle-can-api';
 import validator from 'can-define-validate-validatejs';
 import state from '~/state';
 import stack from '~/stack';
+import {OptionMap, OptionList} from 'shuttle-canstrap/select/';
 import localisation from '~/localisation';
 
 resources.add('matrix', {action: 'add', permission: Permissions.Manage.Matrices});
@@ -35,6 +36,39 @@ export const ViewModel = DefineMap.extend({
         validate: {
             presence: true
         }
+    },
+
+	dataTypeName: {
+		type: 'string',
+		default: '',
+		validate: {
+			presence: true
+		}
+	},
+
+	dataTypeNames: {
+		Type: OptionList,
+		default: [
+			{value: 'Boolean', label: 'Boolean'},
+			{value: 'Date', label: 'Date'},
+			{value: 'Decimal', label: 'Decimal'},
+			{value: 'Integer', label: 'Integer'},
+			{value: 'Text', label: 'Text'}
+		]
+	},
+
+    rowArgument: {
+        Type: DefineMap,
+		validate: {
+			presence: true
+		}
+    },
+
+    columnArgument: {
+        Type: DefineMap,
+		validate: {
+			presence: true
+		}
     },
 
     add: function () {

@@ -53,10 +53,10 @@ namespace Shuttle.Abacus.DataAccess
             _databaseGateway.ExecuteUsing(_queryFactory.Rename(id, name));
         }
 
-        public void SetArgumentValue(Guid id, string argumentName, string value)
+        public void SetArgumentValue(Guid id, Guid argumentId, string value)
         {
-            _databaseGateway.ExecuteUsing(_queryFactory.RemoveArgumentValue(id, argumentName));
-            _databaseGateway.ExecuteUsing(_queryFactory.AddArgumentValue(id, argumentName, value));
+            _databaseGateway.ExecuteUsing(_queryFactory.RemoveArgumentValue(id, argumentId));
+            _databaseGateway.ExecuteUsing(_queryFactory.AddArgumentValue(id, argumentId, value));
         }
     }
 }

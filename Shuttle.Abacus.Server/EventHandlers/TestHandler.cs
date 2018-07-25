@@ -22,7 +22,7 @@ namespace Shuttle.Abacus.Server.EventHandlers
 
         public void ProcessEvent(IEventHandlerContext<ArgumentSet> context)
         {
-            _query.SetArgumentValue(context.PrimitiveEvent.Id, context.Event.ArgumentName, context.Event.Value);
+            _query.SetArgumentValue(context.PrimitiveEvent.Id, context.Event.ArgumentId, context.Event.Value);
         }
 
         public void ProcessEvent(IEventHandlerContext<Registered> context)

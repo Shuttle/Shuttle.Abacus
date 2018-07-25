@@ -77,10 +77,10 @@ namespace Shuttle.Abacus.DataAccess
             _databaseGateway.ExecuteUsing(_queryFactory.RemoveConstraint(constraintId));
         }
 
-        public void AddConstraint(Guid constraintId, Guid formulaId, string argumentName, string comparison,
+        public void AddConstraint(Guid constraintId, Guid formulaId, Guid argumentId, string comparison,
             string value)
         {
-            _databaseGateway.ExecuteUsing(_queryFactory.AddConstraint(constraintId, formulaId, argumentName, comparison,
+            _databaseGateway.ExecuteUsing(_queryFactory.AddConstraint(constraintId, formulaId, argumentId, comparison,
                 value));
         }
 

@@ -26,22 +26,18 @@ namespace Shuttle.Abacus
         public IEnumerable<Element> Elements => new ReadOnlyCollection<Element>(_elements);
         public IEnumerable<Constraint> Constraints => new ReadOnlyCollection<Constraint>(_constraints);
 
-        public string RowArgumentName { get; private set; }
-        public string ColumnArgumentName { get; private set; }
+        public Guid RowArgumentId { get; private set; }
+        public Guid? ColumnArgumentId { get; private set; }
 
-        public bool HasColumnArgument => !string.IsNullOrEmpty(ColumnArgumentName);
-
-        public Registered Register(string name, string rowArgumentName, string columnArgumentName, string dataTypeName)
+        public Registered Register(string name, Guid rowArgumentId, Guid? columnArgumentId, string dataTypeName)
         {
             Guard.AgainstNullOrEmptyString(name, nameof(name));
-            Guard.AgainstNullOrEmptyString(rowArgumentName, nameof(rowArgumentName));
-            Guard.AgainstNullOrEmptyString(dataTypeName, nameof(dataTypeName));
 
             return On(new Registered
             {
                 Name = name,
-                RowArgumentName = rowArgumentName,
-                ColumnArgumentName = columnArgumentName ?? string.Empty,
+                RowArgumentId = rowArgumentId,
+                ColumnArgumentId = columnArgumentId,
                 DataTypeName = dataTypeName
             });
         }
@@ -51,8 +47,8 @@ namespace Shuttle.Abacus
             Guard.AgainstNull(registered, nameof(registered));
 
             Name = registered.Name;
-            RowArgumentName = registered.RowArgumentName;
-            ColumnArgumentName = registered.ColumnArgumentName;
+            RowArgumentId = registered.RowArgumentId;
+            ColumnArgumentId = registered.ColumnArgumentId;
             DataTypeName = registered.DataTypeName;
 
             _constraints.Clear();
@@ -146,16 +142,16 @@ namespace Shuttle.Abacus
             Guard.AgainstNull(executionContext, nameof(executionContext));
             Guard.AgainstNull(rowArgument, nameof(rowArgument));
 
-            if (HasColumnArgument)
+            if (ColumnArgumentId.HasValue)
             {
                 Guard.AgainstNull(columnArgument, nameof(columnArgument));
             }
 
             var row = FindConstraint("Row", constraintComparison, rowArgument.DataType,
-                executionContext.GetArgumentValue(RowArgumentName));
-            var column = HasColumnArgument
+                executionContext.GetArgumentValue(RowArgumentId));
+            var column = ColumnArgumentId.HasValue
                 ? FindConstraint("Column", constraintComparison, columnArgument.DataType,
-                    executionContext.GetArgumentValue(ColumnArgumentName))
+                    executionContext.GetArgumentValue(ColumnArgumentId.Value))
                 : 1;
 
             var element = _elements.FirstOrDefault(item => item.Row == row && item.Column == column);
@@ -180,7 +176,7 @@ namespace Shuttle.Abacus
             if (constraint == null)
             {
                 throw new InvalidOperationException(
-                    $"There is no {axis.ToLower()} constraint in matrix '{Name}' where argument '{RowArgumentName}' is satisfied by '{value}'.");
+                    $"There is no {axis.ToLower()} constraint in matrix '{Name}' where argument '{RowArgumentId}' is satisfied by '{value}'.");
             }
 
             return constraint.SequenceNumber;

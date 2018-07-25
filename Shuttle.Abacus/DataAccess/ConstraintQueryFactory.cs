@@ -27,7 +27,7 @@ order by
                 .AddParameterValue(Columns.Id, formulaId);
         }
 
-        public IQuery Remove(Guid ownerId)
+        public IQuery Remove(Guid formulaId)
         {
             throw new NotImplementedException();
             //return RawQuery.Create("delete from [Constraint] where OwnerId = @OwnerId")

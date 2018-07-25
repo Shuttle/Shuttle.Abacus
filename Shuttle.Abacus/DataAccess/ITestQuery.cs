@@ -15,6 +15,6 @@ namespace Shuttle.Abacus.DataAccess
 
         void Remove(Guid id);
         void Rename(Guid id, string name);
-        void SetArgumentValue(Guid id, string argumentName, string value);
+        void SetArgumentValue(Guid id, Guid argumentId, string value);
     }
 }

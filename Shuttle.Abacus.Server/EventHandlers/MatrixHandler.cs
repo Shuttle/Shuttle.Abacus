@@ -38,8 +38,8 @@ namespace Shuttle.Abacus.Server.EventHandlers
         {
             var registered = context.Event;
 
-            _query.Registered(context.PrimitiveEvent.Id, registered.Name, registered.ColumnArgumentName,
-                registered.RowArgumentName, registered.DataTypeName);
+            _query.Registered(context.PrimitiveEvent.Id, registered.Name, registered.ColumnArgumentId,
+                registered.RowArgumentId, registered.DataTypeName);
         }
     }
 }

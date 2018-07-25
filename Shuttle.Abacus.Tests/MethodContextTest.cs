@@ -11,7 +11,7 @@ namespace Shuttle.Abacus.Tests
         //{
         //    var context = new FormulaContextOLD(string.Empty);
 
-        //    context.AddValue(new ConstantDataType("SumInsured", 300000));
+        //    context.AddValue(new DecimalDataType("SumInsured", 300000));
 
         //    Assert.AreSame(DataTypeName.Null, context.GetArgumentAnswer("blah"));
         //    Assert.AreEqual(300000, context.GetArgumentAnswer("SumInsured").Answer);

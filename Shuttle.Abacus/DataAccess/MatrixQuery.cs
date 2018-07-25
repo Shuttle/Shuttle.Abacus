@@ -3,25 +3,21 @@ using System.Collections.Generic;
 using System.Data;
 using Shuttle.Core.Contract;
 using Shuttle.Core.Data;
-using Shuttle.Recall;
 
 namespace Shuttle.Abacus.DataAccess
 {
     public class MatrixQuery : IMatrixQuery
     {
         private readonly IDatabaseGateway _databaseGateway;
-        private readonly IKeyStore _keyStore;
         private readonly IMatrixQueryFactory _matrixQueryFactory;
 
-        public MatrixQuery(IDatabaseGateway databaseGateway, IMatrixQueryFactory matrixQueryFactory, IKeyStore keyStore)
+        public MatrixQuery(IDatabaseGateway databaseGateway, IMatrixQueryFactory matrixQueryFactory)
         {
             Guard.AgainstNull(databaseGateway, nameof(databaseGateway));
             Guard.AgainstNull(matrixQueryFactory, nameof(matrixQueryFactory));
-            Guard.AgainstNull(keyStore, nameof(keyStore));
-
+            
             _databaseGateway = databaseGateway;
             _matrixQueryFactory = matrixQueryFactory;
-            _keyStore = keyStore;
         }
 
         public IEnumerable<DataRow> Search(MatrixSearchSpecification specification)
@@ -39,14 +35,14 @@ namespace Shuttle.Abacus.DataAccess
             return _databaseGateway.GetSingleRowUsing(_matrixQueryFactory.Get(id));
         }
 
-        public void Registered(Guid id, string name, string columnArgumentName, string rowArgumentName,
+        public void Registered(Guid id, string name, Guid? columnArgumentId, Guid rowArgumentId,
             string dataTypeName)
         {
             _databaseGateway.ExecuteUsing(_matrixQueryFactory.RemoveElements(id));
             _databaseGateway.ExecuteUsing(_matrixQueryFactory.RemoveConstraints(id));
             _databaseGateway.ExecuteUsing(_matrixQueryFactory.Remove(id));
 
-            _databaseGateway.ExecuteUsing(_matrixQueryFactory.Add(id, name, columnArgumentName, rowArgumentName,
+            _databaseGateway.ExecuteUsing(_matrixQueryFactory.Add(id, name, columnArgumentId, rowArgumentId,
                 dataTypeName));
         }
 

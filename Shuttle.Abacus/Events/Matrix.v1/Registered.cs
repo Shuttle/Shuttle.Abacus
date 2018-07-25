@@ -1,10 +1,12 @@
-﻿namespace Shuttle.Abacus.Events.Matrix.v1
+﻿using System;
+
+namespace Shuttle.Abacus.Events.Matrix.v1
 {
     public class Registered
     {
         public string Name { get; set; }
-        public string RowArgumentName { get; set; }
-        public string ColumnArgumentName { get; set; }
+        public Guid RowArgumentId { get; set; }
+        public Guid? ColumnArgumentId { get; set; }
         public string DataTypeName { get; set; }
     }
 }

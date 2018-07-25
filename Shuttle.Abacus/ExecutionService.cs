@@ -6,7 +6,7 @@ namespace Shuttle.Abacus
 {
     public class ExecutionService
     {
-        private readonly Dictionary<string, Argument> _arguments = new Dictionary<string, Argument>();
+        private readonly Dictionary<Guid, Argument> _arguments = new Dictionary<Guid, Argument>();
         private readonly IConstraintComparison _constraintComparison;
         private readonly Dictionary<string, Formula> _formulas = new Dictionary<string, Formula>();
         private readonly Dictionary<string, Matrix> _matrixes = new Dictionary<string, Matrix>();
@@ -33,13 +33,13 @@ namespace Shuttle.Abacus
 
             foreach (var argument in arguments)
             {
-                if (_arguments.ContainsKey(argument.Name))
+                if (_arguments.ContainsKey(argument.Id))
                 {
                     throw new ArgumentException(
                         $"There is already an argument with name '{argument.Name}' registered.");
                 }
 
-                _arguments.Add(argument.Name, argument);
+                _arguments.Add(argument.Id, argument);
             }
 
             foreach (var matrix in matrixes)
@@ -90,13 +90,13 @@ namespace Shuttle.Abacus
 
                 foreach (var constraint in formula.Constraints)
                 {
-                    var argument = GetArgument(constraint.ArgumentName);
-                    var argumentValue = executionContext.GetArgumentValue(constraint.ArgumentName);
+                    var argument = GetArgument(constraint.ArgumentId);
+                    var argumentValue = executionContext.GetArgumentValue(constraint.ArgumentId);
 
                     if (!_constraintComparison.IsSatisfiedBy(argument.DataType, argumentValue, constraint.Comparison,
                         constraint.Value))
                     {
-                        return formulaContext.Disqualified(constraint.ArgumentName, argumentValue,
+                        return formulaContext.Disqualified(constraint.ArgumentId, argumentValue,
                             constraint.Comparison,
                             constraint.Value);
                     }
@@ -108,7 +108,7 @@ namespace Shuttle.Abacus
 
                     switch (operation.ValueProviderName.ToLower())
                     {
-                        case "constant":
+                        case "decimal":
                         {
                             value = Convert.ToDecimal(operation.InputParameter);
 
@@ -116,7 +116,7 @@ namespace Shuttle.Abacus
                         }
                         case "argument":
                         {
-                            value = Convert.ToDecimal(executionContext.GetArgumentValue(operation.InputParameter));
+                            value = Convert.ToDecimal(executionContext.GetArgumentValue(new Guid(operation.InputParameter)));
 
                             break;
                         }
@@ -126,8 +126,8 @@ namespace Shuttle.Abacus
 
                             value =
                                 Convert.ToDecimal(matrix.GetValue(_constraintComparison, executionContext,
-                                    GetArgument(matrix.RowArgumentName),
-                                    matrix.HasColumnArgument ? GetArgument(matrix.ColumnArgumentName) : null));
+                                    GetArgument(matrix.RowArgumentId),
+                                    matrix.ColumnArgumentId.HasValue ? GetArgument(matrix.ColumnArgumentId.Value) : null));
 
                             break;
                         }
@@ -166,14 +166,14 @@ namespace Shuttle.Abacus
             return _formulas[formulaName];
         }
 
-        private Argument GetArgument(string name)
+        private Argument GetArgument(Guid id)
         {
-            if (!_arguments.ContainsKey(name))
+            if (!_arguments.ContainsKey(id))
             {
-                throw new InvalidOperationException($"There is no argument with name '{name}'.");
+                throw new InvalidOperationException($"There is no argument with name '{id}'.");
             }
 
-            return _arguments[name];
+            return _arguments[id];
         }
     }
 }

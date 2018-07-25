@@ -8,7 +8,7 @@ namespace Shuttle.Abacus.Tests
         //[Test]
         //public void Should_be_able_to_create_a_formula_with_an_initial_value()
         //{
-        //    var formula = new Formula(new ConstantValueProvider(250));
+        //    var formula = new Formula(new DecimalValueProvider(250));
 
         //    var methodContext = new FormulaContextOLD();
 
@@ -20,10 +20,10 @@ namespace Shuttle.Abacus.Tests
         //{
         //    var formula = new Formula();
 
-        //    formula.AddOperation(new AdditionOperation(new ConstantValueProvider(10)));
-        //    formula.AddOperation(new SubtractionOperation(new ConstantValueProvider(2)));
-        //    formula.AddOperation(new MultiplicationOperation(new ConstantValueProvider(5)));
-        //    formula.AddOperation(new DivisionOperation(new ConstantValueProvider(2)));
+        //    formula.AddOperation(new AdditionOperation(new DecimalValueProvider(10)));
+        //    formula.AddOperation(new SubtractionOperation(new DecimalValueProvider(2)));
+        //    formula.AddOperation(new MultiplicationOperation(new DecimalValueProvider(5)));
+        //    formula.AddOperation(new DivisionOperation(new DecimalValueProvider(2)));
 
         //    var methodContext = new FormulaContextOLD();
 
@@ -44,16 +44,16 @@ namespace Shuttle.Abacus.Tests
         //                                                                               Name = "SumInsured"
         //                                                                           })));
         //    formula.AddOperation(new SquareRootOperation(new RunningTotalValueProvider()));
-        //    formula.AddOperation(new MultiplicationOperation(new ConstantValueProvider(-150)));
-        //    formula.AddOperation(new RoundingOperation(new ConstantValueProvider(2)));
+        //    formula.AddOperation(new MultiplicationOperation(new DecimalValueProvider(-150)));
+        //    formula.AddOperation(new RoundingOperation(new DecimalValueProvider(2)));
         //    formula.AddOperation(
         //        new MultiplicationOperation(new FormulaSubTotalValueProvider(new FormulaCalculation("TOTAL", true))));
-        //    formula.AddOperation(new DivisionOperation(new ConstantValueProvider(100)));
+        //    formula.AddOperation(new DivisionOperation(new DecimalValueProvider(100)));
 
         //    var context =
         //        new FormulaContextOLD("test")
-        //            .AddValue(new ConstantDataType("VoluntaryExcess", 1000))
-        //            .AddValue(new ConstantDataType("SumInsured", 980000));
+        //            .AddValue(new DecimalDataType("VoluntaryExcess", 1000))
+        //            .AddValue(new DecimalDataType("SumInsured", 980000));
 
         //    var result = new CalculationCollectionResult(new CalculationCollection("TOTAL"), 636.99m);
 

@@ -11,7 +11,7 @@ namespace Shuttle.Abacus
         private readonly List<ExecutionResult> _results = new List<ExecutionResult>();
         private readonly Stack<FormulaContext> _stack = new Stack<FormulaContext>();
 
-        private readonly Dictionary<string, string> _values = new Dictionary<string, string>();
+        private readonly Dictionary<Guid, string> _values = new Dictionary<Guid, string>();
 
         public ExecutionContext(IEnumerable<ArgumentValue> values, IContextLogger logger)
         {
@@ -22,11 +22,11 @@ namespace Shuttle.Abacus
 
             foreach (var argumentValue in values)
             {
-                _values.Add(argumentValue.Name, argumentValue.Value);
+                _values.Add(argumentValue.Id, argumentValue.Value);
 
                 if (logger.LogLevel == ContextLogLevel.Verbose)
                 {
-                    logger.LogVerbose($"[inputParameter argument name] {argumentValue.Name} = '{argumentValue.Value}'");
+                    logger.LogVerbose($"[inputParameter argument name] {argumentValue.Id} = '{argumentValue.Value}'");
                 }
             }
         }
@@ -40,18 +40,18 @@ namespace Shuttle.Abacus
         public bool HasException => Exception != null;
         public IContextLogger Logger { get; }
 
-        public string GetArgumentValue(string name)
+        public string GetArgumentValue(Guid id)
         {
-            if (!_values.ContainsKey(name))
+            if (!_values.ContainsKey(id))
             {
-                throw new InvalidOperationException($"There is no argument value with name '{name}'.");
+                throw new InvalidOperationException($"There is no argument value with name '{id}'.");
             }
 
-            var result = _values[name];
+            var result = _values[id];
 
             if (HasActiveFormulaContext)
             {
-                ActiveFormulaContext().UsedArgumentValue(name, result);
+                ActiveFormulaContext().UsedArgumentValue(id, result);
             }
 
             return result;

@@ -6,6 +6,6 @@ namespace Shuttle.Abacus.DataAccess
     public interface IConstraintQueryFactory
     {
         IQuery All(Guid formulaId);
-        IQuery Remove(Guid ownerId);
+        IQuery Remove(Guid formulaId);
     }
 }

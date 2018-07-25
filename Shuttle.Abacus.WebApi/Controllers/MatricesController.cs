@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Messages.v1;
 using Shuttle.Access.Mvc;
@@ -48,19 +47,21 @@ namespace Shuttle.Abacus.WebApi.Controllers
             }
         }
 
-        //[HttpPost]
-        //public IActionResult Post([FromBody] MatrixModel model)
-        //{
-        //    Guard.AgainstNull(model, nameof(model));
+        [HttpPost]
+        public IActionResult Post([FromBody] MatrixModel model)
+        {
+            Guard.AgainstNull(model, nameof(model));
 
-        //    _bus.Send(new RegisterMatrixCommand
-        //    {
-        //        Name = model.Name,
-        //        DataTypeName = model.DataTypeName
-        //    });
+            _bus.Send(new RegisterMatrixCommand
+            {
+                Name = model.Name,
+                RowArgumentId = model.RowArgumentId,
+                ColumnArgumentId = model.ColumnArgumentId,
+                DataTypeName = model.DataTypeName
+            });
 
-        //    return Ok();
-        //}
+            return Ok();
+        }
 
         //[HttpPost("{id}/values")]
         //public IActionResult Post(Guid id, [FromBody] MatrixValueModel model)

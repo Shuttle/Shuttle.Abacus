@@ -1,7 +1,31 @@
 <cs-form>
     <fieldset class="form-group">
-        <cs-form-input focus:from="'true'" label:from="'name'" vm:value:bind="name"
-                       vm:errors:from="errors()" errorAttribute:from="'name'" vm:required:from="'true'"/>
+        <div class="d-flex flex-wrap justify-content-start mb-2">
+            <div class="fi-2">
+                <cs-form-input focus:from="'true'" label:from="'name'" vm:value:bind="name"
+                               vm:errors:from="errors()" errorAttribute:from="'name'" vm:required:from="'true'"/>
+            </div>
+            <div class="fi-2">
+                <cs-form-select label:from="'data-type-name'" value:bind="dataTypeName" options:from="dataTypeNames"
+                                vm:errors:from="errors()" errorAttribute:from="'dataTypeName'"
+                                vm:required:from="'true'"/>
+            </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-start mb-2">
+            <div class="fi-2">
+                <cs-form-autocomplete label:raw="row-argument" vm:map:bind="rowArgument" endpoint:raw="arguments/search"
+                                      method:raw="post" textAttribute:raw="name" searchAttribute:raw="name"
+                                      vm:errors:from="errors()" errorAttribute:from="'rowArgument'"
+                                      vm:required:from="'true'"/>
+            </div>
+            <div class="fi-2">
+                <cs-form-autocomplete label:raw="column-argument" vm:map:bind="columnArgument"
+                                      endpoint:raw="arguments/search"
+                                      method:raw="post" textAttribute:raw="name" searchAttribute:raw="name"
+                                      vm:errors:from="errors()" errorAttribute:from="'columnArgument'"
+                                      vm:required:from="'true'"/>
+            </div>
+        </div>
         <cs-button-submit vm:click:from="add" text:from="'add'"/>
         <cs-button vm:click:from="close" text:from="'close'"/>
     </fieldset>

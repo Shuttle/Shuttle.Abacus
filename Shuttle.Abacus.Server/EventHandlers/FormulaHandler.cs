@@ -27,7 +27,7 @@ namespace Shuttle.Abacus.Server.EventHandlers
         {
             var constraintAdded = context.Event;
 
-            _query.AddConstraint(constraintAdded.Id, context.PrimitiveEvent.Id, constraintAdded.ArgumentName, constraintAdded.Comparison, constraintAdded.Value);
+            _query.AddConstraint(constraintAdded.Id, context.PrimitiveEvent.Id, constraintAdded.ArgumentId, constraintAdded.Comparison, constraintAdded.Value);
         }
 
         public void ProcessEvent(IEventHandlerContext<ConstraintRemoved> context)

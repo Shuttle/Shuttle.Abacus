@@ -37,7 +37,7 @@ from
                 .AddParameterValue(Columns.Id, id);
         }
 
-        public IQuery Add(Guid id, string name, string columnArgumentName, string rowArgumentName, string dataTypeName)
+        public IQuery Add(Guid id, string name, Guid? columnArgumentId, Guid rowArgumentId, string dataTypeName)
         {
             return RawQuery.Create(@"
 insert into Matrix
@@ -58,8 +58,8 @@ values
 )")
                 .AddParameterValue(Columns.Id, id)
                 .AddParameterValue(Columns.Name, name)
-                .AddParameterValue(Columns.ColumnArgumentName, columnArgumentName)
-                .AddParameterValue(Columns.RowArgumentName, rowArgumentName)
+                .AddParameterValue(Columns.ColumnArgumentName, columnArgumentId)
+                .AddParameterValue(Columns.RowArgumentName, rowArgumentId)
                 .AddParameterValue(Columns.DataTypeName, dataTypeName);
         }
 
