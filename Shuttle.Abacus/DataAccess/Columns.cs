@@ -10,7 +10,7 @@ namespace Shuttle.Abacus.DataAccess
         public static readonly MappedColumn<string> ArgumentName = new MappedColumn<string>("ArgumentName", DbType.AnsiString);
         public static readonly MappedColumn<string> Axis = new MappedColumn<string>("Axis", DbType.AnsiString);
         public static readonly MappedColumn<int> Column = new MappedColumn<int>("Column", DbType.Int32);
-        public static readonly MappedColumn<string> ColumnArgumentName = new MappedColumn<string>("ColumnArgumentName", DbType.AnsiString);
+        public static readonly MappedColumn<Guid> ColumnArgumentId = new MappedColumn<Guid>("ColumnArgumentId", DbType.Guid);
         public static readonly MappedColumn<string> Comparison = new MappedColumn<string>("Comparison", DbType.AnsiString);
         public static readonly MappedColumn<string> DataTypeName = new MappedColumn<string>("DataTypeName", DbType.AnsiString);
         public static readonly MappedColumn<string> ExecutionType = new MappedColumn<string>("ExecutionType", DbType.AnsiString);
@@ -25,7 +25,7 @@ namespace Shuttle.Abacus.DataAccess
         public static readonly MappedColumn<string> Name = new MappedColumn<string>("Name", DbType.AnsiString);
         public static readonly MappedColumn<string> Operation = new MappedColumn<string>("Operation", DbType.AnsiString);
         public static readonly MappedColumn<int> Row = new MappedColumn<int>("Row", DbType.Int32);
-        public static readonly MappedColumn<string> RowArgumentName = new MappedColumn<string>("RowArgumentName", DbType.AnsiString);
+        public static readonly MappedColumn<Guid> RowArgumentId = new MappedColumn<Guid>("RowArgumentId", DbType.Guid);
         public static readonly MappedColumn<int> SequenceNumber = new MappedColumn<int>("SequenceNumber", DbType.Int32);
         public static readonly MappedColumn<string> Value = new MappedColumn<string>("Value", DbType.AnsiString);
         public static readonly MappedColumn<string> ValueProviderName = new MappedColumn<string>("ValueProviderName", DbType.AnsiString);

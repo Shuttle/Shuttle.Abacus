@@ -28,8 +28,8 @@ order by
 select
     Id,
     Name,
-    ColumnArgumentName,
-    RowArgumentName,
+    ColumnArgumentId,
+    RowArgumentId,
     DataTypeName
 from
     Matrix
@@ -44,22 +44,22 @@ insert into Matrix
 (
     Id,
     Name,
-    ColumnArgumentName,
-    RowArgumentName,
+    ColumnArgumentId,
+    RowArgumentId,
     DataTypeName
 )
 values
 (
     @Id,
     @Name,
-    @ColumnArgumentName,
-    @RowArgumentName,
+    @ColumnArgumentId,
+    @RowArgumentId,
     @DataTypeName
 )")
                 .AddParameterValue(Columns.Id, id)
                 .AddParameterValue(Columns.Name, name)
-                .AddParameterValue(Columns.ColumnArgumentName, columnArgumentId)
-                .AddParameterValue(Columns.RowArgumentName, rowArgumentId)
+                .AddParameterValue(Columns.ColumnArgumentId, columnArgumentId)
+                .AddParameterValue(Columns.RowArgumentId, rowArgumentId)
                 .AddParameterValue(Columns.DataTypeName, dataTypeName);
         }
 

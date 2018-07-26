@@ -38,10 +38,6 @@ namespace Shuttle.Abacus.DataAccess
         public void Registered(Guid id, string name, Guid? columnArgumentId, Guid rowArgumentId,
             string dataTypeName)
         {
-            _databaseGateway.ExecuteUsing(_matrixQueryFactory.RemoveElements(id));
-            _databaseGateway.ExecuteUsing(_matrixQueryFactory.RemoveConstraints(id));
-            _databaseGateway.ExecuteUsing(_matrixQueryFactory.Remove(id));
-
             _databaseGateway.ExecuteUsing(_matrixQueryFactory.Add(id, name, columnArgumentId, rowArgumentId,
                 dataTypeName));
         }

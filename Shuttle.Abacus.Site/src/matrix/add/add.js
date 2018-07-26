@@ -65,10 +65,7 @@ export const ViewModel = DefineMap.extend({
     },
 
     columnArgument: {
-        Type: DefineMap,
-		validate: {
-			presence: true
-		}
+        Type: DefineMap
     },
 
     add: function () {
@@ -77,7 +74,10 @@ export const ViewModel = DefineMap.extend({
         }
 
         matrices.post({
-            name: this.name
+            name: this.name,
+	        rowArgumentId: this.rowArgument.id,
+	        columnArgumentId: !!this.columnArgument ? this.columnArgument.id : undefined,
+	        dataTypeName: this.dataTypeName
         });
 
         this.close();

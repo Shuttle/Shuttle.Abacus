@@ -17,6 +17,14 @@ export const Map = DefineMap.extend({
 			.then(function () {
 				state.removalRequested('matrix');
 			});
+	},
+	elements() {
+		router.goto({
+			resource: 'matrix',
+			item: 'element',
+			action: 'list',
+			id: this.id
+		});
 	}
 });
 
@@ -58,9 +66,9 @@ export const ViewModel = DefineMap.extend({
 
         if (!columns.length) {
             columns.push({
-                columnTitle: 'edit',
+                columnTitle: 'elements',
                 columnClass: 'col-1',
-                stache: '<cs-button text:from="\'edit\'" click:from="edit" elementClass:from="\'btn-sm\'"/>'
+                stache: '<cs-button text:from="\'elements\'" click:from="elements" elementClass:from="\'btn-sm\'"/>'
             });
 
             columns.push({

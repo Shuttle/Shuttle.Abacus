@@ -10,16 +10,16 @@ import {OptionMap, OptionList} from 'shuttle-canstrap/select/';
 import localisation from '~/localisation';
 
 var api = {
-    formulas: new Api({
-        endpoint: 'formulas/{id}'
+    matrices: new Api({
+        endpoint: 'matrices/{id}'
     }),
-    operations: new Api({
-        endpoint: 'formula/{id}/operations'
+    elements: new Api({
+        endpoint: 'matrix/{id}/operations'
     })
 };
 
 export const ViewModel = DefineMap.extend({
-    formula: {
+    matrix: {
         Type: DefineMap
     },
 
@@ -96,13 +96,13 @@ export const ViewModel = DefineMap.extend({
             return false;
         }
 
-        api.operations.post({
+        api.elements.post({
             operation: this.operation
         },{
-            id: this.formula.id
+            id: this.matrix.id
         })
             .then(function(){
-                state.registrationRequested('formula-operation');
+                state.registrationRequested('matrix-operation');
             });
 
         return false;
@@ -118,7 +118,7 @@ export const ViewModel = DefineMap.extend({
 validator(ViewModel);
 
 export default Component.extend({
-    tag: 'abacus-formula-operation-add',
+    tag: 'abacus-matrix-element-add',
     ViewModel,
     view
 });

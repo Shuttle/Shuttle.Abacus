@@ -33,6 +33,7 @@ import '~/argument-value/';
 import '~/formula/';
 import '~/formula-operation/';
 import '~/matrix/';
+import '~/matrix-element/';
 
 import validate from 'validate.js';
 
