@@ -18,6 +18,14 @@ export const Map = DefineMap.extend({
 				state.removalRequested('matrix');
 			});
 	},
+	constraints() {
+		router.goto({
+			resource: 'matrix',
+			item: 'constraint',
+			action: 'list',
+			id: this.id
+		});
+	},
 	elements() {
 		router.goto({
 			resource: 'matrix',
@@ -65,7 +73,13 @@ export const ViewModel = DefineMap.extend({
         const columns = this.columns;
 
         if (!columns.length) {
-            columns.push({
+	        columns.push({
+		        columnTitle: 'constraints',
+		        columnClass: 'col-1',
+		        stache: '<cs-button text:from="\'constraints\'" click:from="constraints" elementClass:from="\'btn-sm\'"/>'
+	        });
+
+	        columns.push({
                 columnTitle: 'elements',
                 columnClass: 'col-1',
                 stache: '<cs-button text:from="\'elements\'" click:from="elements" elementClass:from="\'btn-sm\'"/>'

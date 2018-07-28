@@ -35,6 +35,11 @@ namespace Shuttle.Abacus.DataAccess
             return _databaseGateway.GetSingleRowUsing(_matrixQueryFactory.Get(id));
         }
 
+        public IEnumerable<DataRow> Constraints(Guid id)
+        {
+            return _databaseGateway.GetRowsUsing(_matrixQueryFactory.Constaints(id));
+        }
+
         public void Registered(Guid id, string name, Guid? columnArgumentId, Guid rowArgumentId,
             string dataTypeName)
         {
@@ -42,10 +47,10 @@ namespace Shuttle.Abacus.DataAccess
                 dataTypeName));
         }
 
-        public void ConstraintAdded(Guid id, int sequenceNumber, string axis, string comparison, string value)
+        public void ConstraintAdded(Guid id, string axis, int index, string comparison, string value)
         {
-            _databaseGateway.ExecuteUsing(_matrixQueryFactory.ConstraintAdded(id, sequenceNumber, axis, comparison,
-                value));
+            _databaseGateway.ExecuteUsing(_matrixQueryFactory.ConstraintAdded(id, axis, index,
+                comparison, value));
         }
 
         public void ElementAdded(Guid id, int column, int row, string value)

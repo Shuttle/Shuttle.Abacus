@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[FormulaOperation] (
-    [Id] UNIQUEIDENTIFIER NOT NULL, 
     [FormulaId]      UNIQUEIDENTIFIER NOT NULL,
     [SequenceNumber] INT              NOT NULL,
+    [Id] UNIQUEIDENTIFIER NOT NULL, 
     [Operation]      VARCHAR (120)    NOT NULL,
     [ValueProviderName]    VARCHAR (120)    NOT NULL,
     [InputParameter] VARCHAR (120)    NOT NULL,

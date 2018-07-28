@@ -23,7 +23,7 @@ namespace Shuttle.Abacus.Server.EventHandlers
         {
             var constraintAdded = context.Event;
 
-            _query.ConstraintAdded(context.PrimitiveEvent.Id, constraintAdded.SequenceNumber, constraintAdded.Axis,
+            _query.ConstraintAdded(context.PrimitiveEvent.Id, constraintAdded.Axis, constraintAdded.Index,
                 constraintAdded.Comparison, constraintAdded.Value);
         }
 

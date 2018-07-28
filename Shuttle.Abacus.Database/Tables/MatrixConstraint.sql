@@ -1,8 +1,8 @@
 ﻿CREATE TABLE [dbo].[MatrixConstraint] (
-    [Id] UNIQUEIDENTIFIER NOT NULL, 
     [MatrixId]      UNIQUEIDENTIFIER NOT NULL,
-    [Axis] INT NOT NULL,
+    [Axis] VARCHAR(10) NOT NULL,
     [Index] INT              NOT NULL,
+    [Id] UNIQUEIDENTIFIER NOT NULL, 
     [Comparison] VARCHAR (65)     NOT NULL,
     [Value]          VARCHAR (120)    NOT NULL,
     CONSTRAINT [PK_MatrixConstraint] PRIMARY KEY CLUSTERED ([MatrixId] ASC, [Axis] ASC, [Index] ASC),

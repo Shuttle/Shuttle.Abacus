@@ -1,10 +1,11 @@
 ﻿using System;
 
-namespace Shuttle.Abacus.Events.Matrix.v1
+namespace Shuttle.Abacus.WebApi
 {
-    public class ConstraintAdded
+    public class MatrixConstraintModel
     {
         public Guid Id { get; set; }
+        public Guid MatrixId { get; set; }
         public string Axis { get; set; }
         public int Index { get; set; }
         public string Comparison { get; set; }

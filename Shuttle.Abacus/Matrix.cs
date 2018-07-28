@@ -62,7 +62,7 @@ namespace Shuttle.Abacus
             return $"[matrix]:name={name}";
         }
 
-        public ElementAdded AddElement(int row, int column, string value)
+        public ElementAdded AddElement(Guid id, int row, int column, string value)
         {
             if (HasElement(row, column))
             {
@@ -71,6 +71,7 @@ namespace Shuttle.Abacus
 
             return On(new ElementAdded
             {
+                Id = id,
                 Row = row,
                 Column = column,
                 Value = value
@@ -81,7 +82,7 @@ namespace Shuttle.Abacus
         {
             Guard.AgainstNull(elementAdded, nameof(elementAdded));
 
-            _elements.Add(new Element(elementAdded.Row, elementAdded.Column, elementAdded.Value));
+            _elements.Add(new Element(elementAdded.Id, elementAdded.Row, elementAdded.Column, elementAdded.Value));
 
             return elementAdded;
         }
@@ -96,21 +97,22 @@ namespace Shuttle.Abacus
             return Name.Equals(name, StringComparison.InvariantCultureIgnoreCase);
         }
 
-        public ConstraintAdded AddConstraint(string axis, int sequenceNumber, string comparison, string value)
+        public ConstraintAdded AddConstraint(Guid id, string axis, int index, string comparison, string value)
         {
             Guard.AgainstNullOrEmptyString(axis, nameof(axis));
             Guard.AgainstNullOrEmptyString(comparison, nameof(comparison));
 
-            if (HasConstraint(axis, sequenceNumber))
+            if (HasConstraint(axis, index))
             {
                 throw new DomainException(
-                    $"There is already a constraint for axis '{axis}' and sequence number '{sequenceNumber}'.");
+                    $"There is already a constraint for axis '{axis}' and index '{index}'.");
             }
 
             return On(new ConstraintAdded
             {
+                Id = id,
                 Axis = axis,
-                SequenceNumber = sequenceNumber,
+                Index = index,
                 Comparison = comparison,
                 Value = value
             });
@@ -120,7 +122,7 @@ namespace Shuttle.Abacus
         {
             Guard.AgainstNull(constraintAdded, nameof(constraintAdded));
 
-            _constraints.Add(new Constraint(constraintAdded.Axis, constraintAdded.SequenceNumber,
+            _constraints.Add(new Constraint(constraintAdded.Id, constraintAdded.Axis, constraintAdded.Index,
                 constraintAdded.Comparison, constraintAdded.Value));
 
             return constraintAdded;
@@ -184,7 +186,7 @@ namespace Shuttle.Abacus
 
         public class Constraint
         {
-            public Constraint(string axis, int sequenceNumber, string comparison, string value)
+            public Constraint(Guid id, string axis, int sequenceNumber, string comparison, string value)
             {
                 if (!axis.Equals("Row", StringComparison.InvariantCultureIgnoreCase)
                     &&
@@ -193,12 +195,14 @@ namespace Shuttle.Abacus
                     throw new DomainException("Axis may only be 'Row' or 'Column'.");
                 }
 
+                Id = id;
                 Axis = axis;
                 SequenceNumber = sequenceNumber;
                 Comparison = comparison;
                 Value = value;
             }
 
+            public Guid Id { get; }
             public string Axis { get; }
             public int SequenceNumber { get; }
             public string Comparison { get; }
@@ -207,13 +211,15 @@ namespace Shuttle.Abacus
 
         public class Element
         {
-            public Element(int row, int column, string value)
+            public Element(Guid id, int row, int column, string value)
             {
+                Id = id;
                 Row = row;
                 Column = column;
                 Value = value;
             }
 
+            public Guid Id { get; }
             public int Row { get; }
             public int Column { get; }
             public string Value { get; }

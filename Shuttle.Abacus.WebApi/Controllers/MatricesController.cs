@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Messages.v1;
+using Shuttle.Access;
 using Shuttle.Access.Mvc;
 using Shuttle.Core.Contract;
 using Shuttle.Core.Data;
@@ -63,30 +65,42 @@ namespace Shuttle.Abacus.WebApi.Controllers
             return Ok();
         }
 
-        //[HttpPost("{id}/values")]
-        //public IActionResult Post(Guid id, [FromBody] MatrixValueModel model)
-        //{
-        //    Guard.AgainstNull(model, nameof(model));
+        [HttpPost("{id}/values")]
+        public IActionResult Post(Guid id, [FromBody] MatrixConstraintModel model)
+        {
+            Guard.AgainstNull(model, nameof(model));
 
-        //    _bus.Send(new RegisterMatrixValueCommand
-        //    { 
-        //        MatrixId = id,
-        //        Value = model.Value
-        //    });
+            _bus.Send(new RegisterMatrixConstraintCommand
+            {
+                MatrixId = id,
+                Value = model.Value
+            });
 
-        //    return Ok();
-        //}
+            return Ok();
+        }
 
-        //[HttpGet("{id}")]
-        //public IActionResult Get(Guid id)
-        //{
-        //    using (_databaseContextFactory.Create())
-        //    {
-        //        return Ok(new
-        //        {
-        //            Data = _dataRowMapper.MapObject<MatrixModel>(_matrixQuery.Get(id))
-        //        });
-        //    }
-        //}
+        [HttpGet("{id}")]
+        public IActionResult Get(Guid id)
+        {
+            using (_databaseContextFactory.Create())
+            {
+                return Ok(new
+                {
+                    Data = _dataRowMapper.MapObject<MatrixModel>(_matrixQuery.Get(id))
+                });
+            }
+        }
+
+        [HttpGet("{id}/values")]
+        public IActionResult Values(Guid id)
+        {
+            using (_databaseContextFactory.Create())
+            {
+                return Ok(new
+                {
+                    Data = _dataRowMapper.MapObjects<MatrixConstraintModel>(_matrixQuery.Constraints(id))
+                });
+            }
+        }
     }
 }

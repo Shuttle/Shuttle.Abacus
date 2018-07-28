@@ -84,16 +84,16 @@ export const ViewModel = DefineMap.extend({
         const columns = this.columns;
 
         if (!columns.length) {
-            columns.push({
+	        columns.push({
+		        columnTitle: 'constraints',
+		        columnClass: 'col-1',
+		        stache: '<cs-button text:from="\'constraints\'" click:from="constraints" elementClass:from="\'btn-sm\'"/>'
+	        });
+
+	        columns.push({
                 columnTitle: 'operations',
                 columnClass: 'col-1',
                 stache: '<cs-button text:from="\'operations\'" click:from="operations" elementClass:from="\'btn-sm\'"/>'
-            });
-
-            columns.push({
-                columnTitle: 'constraints',
-                columnClass: 'col-1',
-                stache: '<cs-button text:from="\'constraints\'" click:from="constraints" elementClass:from="\'btn-sm\'"/>'
             });
 
             columns.push({

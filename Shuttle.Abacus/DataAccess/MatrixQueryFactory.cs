@@ -6,7 +6,7 @@ namespace Shuttle.Abacus.DataAccess
 {
     public class MatrixQueryFactory : IMatrixQueryFactory
     {
-        private const string Query = @"
+        private const string MatrixQuery = @"
 select
     Id,
     Name,
@@ -17,7 +17,7 @@ from
 
         public IQuery All()
         {
-            return RawQuery.Create(string.Concat(Query, @"
+            return RawQuery.Create(string.Concat(MatrixQuery, @"
 order by
     Name"));
         }
@@ -84,14 +84,14 @@ values
                     .AddParameterValue(Columns.Id, id);
         }
 
-        public IQuery ConstraintAdded(Guid id, int sequenceNumber, string axis, string comparison, string value)
+        public IQuery ConstraintAdded(Guid id, string axis, int index, string comparison, string value)
         {
             return RawQuery.Create(@"
 insert into MatrixConstraint
 (
     MatrixId,
     Axis,
-    SequenceNumber,
+    Index,
     Comparison,
     Value
 )
@@ -99,14 +99,14 @@ values
 (
     @Id,
     @Axis,
-    @SequenceNumber,
+    @Index,
     @Comparison,
     @Value
 )
 ")
                 .AddParameterValue(Columns.Id, id)
-                .AddParameterValue(Columns.SequenceNumber, sequenceNumber)
                 .AddParameterValue(Columns.Axis, axis)
+                .AddParameterValue(Columns.Index, index)
                 .AddParameterValue(Columns.Comparison, comparison)
                 .AddParameterValue(Columns.Value, value);
         }
@@ -139,7 +139,7 @@ values
         {
             Guard.AgainstNull(specification, nameof(specification));
 
-            return new RawQuery(string.Concat(Query, @"
+            return new RawQuery(string.Concat(MatrixQuery, @"
 where
 (
     @Name is null
@@ -152,6 +152,23 @@ order by
     Name
 "))
                 .AddParameterValue(Columns.Name, specification.Name);
+        }
+
+        public IQuery Constaints(Guid id)
+        {
+            return RawQuery.Create(@"
+select
+    Id,
+    MatrixId,
+    Axis,
+    Index,
+    Comparison,
+    Value
+from
+    MatrixConstraint
+where
+    MatrixId = @Id
+").AddParameterValue(Columns.Id, id);
         }
     }
 }
