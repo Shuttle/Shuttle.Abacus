@@ -8,7 +8,8 @@ using Shuttle.Recall;
 namespace Shuttle.Abacus.Server.CommandHandlers
 {
     public class MatrixHandler :
-        IMessageHandler<RegisterMatrixCommand>
+        IMessageHandler<RegisterMatrixCommand>,
+        IMessageHandler<RegisterMatrixConstraintCommand>
     {
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IEventStore _eventStore;
@@ -62,6 +63,34 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                     message.RowArgumentId,
                     message.ColumnArgumentId,
                     message.DataTypeName));
+
+                _eventStore.Save(stream);
+            }
+        }
+
+        public void ProcessMessage(IHandlerContext<RegisterMatrixConstraintCommand> context)
+        {
+            var message = context.Message;
+
+            using (_databaseContextFactory.Create())
+            {
+                var stream = _eventStore.Get(message.MatrixId);
+
+                if (stream.IsEmpty)
+                {
+                    return;
+                }
+
+                var matrix = new Matrix(message.MatrixId);
+
+                stream.Apply(matrix);
+
+                if (matrix.Removed)
+                {
+                    return;
+                }
+
+                stream.AddEvent(matrix.AddConstraint(message.Id, message.Axis, message.Index, message.Comparison, message.Value));
 
                 _eventStore.Save(stream);
             }

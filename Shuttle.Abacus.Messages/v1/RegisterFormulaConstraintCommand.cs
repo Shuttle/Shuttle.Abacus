@@ -6,7 +6,7 @@ namespace Shuttle.Abacus.Messages.v1
     {
         public Guid FormulaId { get; set; }
         public Guid Id { get; set; }
-        public string ArgumentName { get; set; }
+        public Guid ArgumentId { get; set; }
         public string Comparison { get; set; }
         public string Value { get; set; }
     }

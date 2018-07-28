@@ -58,7 +58,7 @@ var Router = DefineMap.extend({
                     item: this.data.item|| '(-value)',
                     action: this.data.action || '(-action)',
                     id: this.data.id || '(-id)',
-                    interpolation: {escape: false}
+                    interpolation: {escapeValue: false}
                 }), type: 'warning', name: 'route-error'
             });
 
@@ -73,7 +73,7 @@ var Router = DefineMap.extend({
                     action: this.data.action || '(-action)',
                     id: this.data.id || '(-id)',
                     permission: resource.permission,
-                    interpolation: {escape: false}
+                    interpolation: {escapeValue: false}
                 }), type: 'danger', name: 'route-error'
             });
 

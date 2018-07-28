@@ -28,6 +28,7 @@ namespace Shuttle.Abacus
 
         public Guid RowArgumentId { get; private set; }
         public Guid? ColumnArgumentId { get; private set; }
+        public bool Removed { get; private set; }
 
         public Registered Register(string name, Guid rowArgumentId, Guid? columnArgumentId, string dataTypeName)
         {

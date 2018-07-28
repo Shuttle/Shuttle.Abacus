@@ -144,7 +144,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                     return;
                 }
 
-                stream.AddEvent(formula.RemoveConstraint(message.Id));
+                stream.AddEvent(formula.AddConstraint(message.Id, message.ArgumentId, message.Comparison, message.Value));
 
                 _eventStore.Save(stream);
             }

@@ -1,6 +1,6 @@
 import Component from 'can-component/';
 import DefineMap from 'can-define/map/';
-import view from './add.stache!';
+import view from './item.stache!';
 import resources from '~/resources';
 import Permissions from '~/permissions';
 import Api from 'shuttle-can-api';
