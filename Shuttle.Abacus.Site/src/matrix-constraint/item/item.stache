@@ -1,26 +1,29 @@
 <cs-form>
-    <fieldset class="form-group">
-        <div class="d-flex flex-wrap justify-content-start mb-2">
-            <div class="fi-4">
-                <cs-form-select focus:from="'true'" label:from="'axis'" value:bind="axis"
-                                options:from="axes" vm:errors:from="errors()" errorAttribute:from="'axis'"
-                                vm:required:from="'true'"/>
-            </div>
-            <div class="fi-4">
-                <cs-form-input label:from="'index'" vm:value:bind="index" vm:errors:from="errors()"
-                               errorAttribute:from="'index'" vm:required:from="'true'"/>
-            </div>
-            <div class="fi-4">
-                <cs-form-select label:from="'comparison'" value:bind="comparison"
-                                options:from="comparisons" vm:errors:from="errors()"
-                                errorAttribute:from="'comparison'"
-                                vm:required:from="'true'"/>
-            </div>
-            <div class="fi-4">
-                <cs-form-input label:from="'value'" vm:value:bind="value" vm:errors:from="errors()"
-                               errorAttribute:from="'value'" vm:required:from="'true'"/>
-            </div>
+<fieldset class="form-group">
+    <div class="d-flex flex-wrap justify-content-start mb-2">
+        <div class="fi-4">
+            <cs-form-select focus:from="'true'" label:from="'axis'" value:bind="axis"
+                            options:from="axes" vm:errors:from="errors()" errorAttribute:from="'axis'"
+                            vm:required:from="'true'"/>
         </div>
-        <cs-button-submit vm:click:from="add" text:from="'add'"/>
-    </fieldset>
+        <div class="fi-4">
+            <cs-form-input label:from="'index'" vm:value:bind="index" vm:errors:from="errors()"
+                           errorAttribute:from="'index'" vm:required:from="'true'"/>
+        </div>
+        <div class="fi-4">
+            <cs-form-select label:from="'comparison'" value:bind="comparison"
+                            options:from="comparisons" vm:errors:from="errors()"
+                            errorAttribute:from="'comparison'"
+                            vm:required:from="'true'"/>
+        </div>
+        <div class="fi-4">
+            <cs-form-input label:from="'value'" vm:value:bind="value" vm:errors:from="errors()"
+                           errorAttribute:from="'value'" vm:required:from="'true'"/>
+        </div>
+    </div>
+    <cs-button-submit vm:click:from="submit" text:from="submitText()"/>
+{{#unless(adding)}}
+    <cs-button vm:click:from="cancel" text:from="'cancel'"/>
+{{/if}}
+</fieldset>
 </cs-form>

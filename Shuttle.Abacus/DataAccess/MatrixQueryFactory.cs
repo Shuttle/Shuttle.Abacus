@@ -84,34 +84,37 @@ values
                     .AddParameterValue(Columns.Id, id);
         }
 
-        public IQuery ConstraintAdded(Guid id, string axis, int index, string comparison, string value)
+        public IQuery ConstraintAdded(Guid matrixId, string axis, int index, Guid id, string comparison, string value)
         {
             return RawQuery.Create(@"
 insert into MatrixConstraint
 (
     MatrixId,
     Axis,
-    Index,
+    [Index],
+    Id,
     Comparison,
     Value
 )
 values
 (
-    @Id,
+    @MatrixId,
     @Axis,
     @Index,
+    @Id,
     @Comparison,
     @Value
 )
 ")
-                .AddParameterValue(Columns.Id, id)
+                .AddParameterValue(Columns.MatrixId, matrixId)
                 .AddParameterValue(Columns.Axis, axis)
                 .AddParameterValue(Columns.Index, index)
+                .AddParameterValue(Columns.Id, id)
                 .AddParameterValue(Columns.Comparison, comparison)
                 .AddParameterValue(Columns.Value, value);
         }
 
-        public IQuery ElementAdded(Guid id, int column, int row, string value)
+        public IQuery ElementAdded(Guid matrixId, int column, int row, Guid id, string value)
         {
             return RawQuery.Create(@"
 insert into MatrixElement
@@ -119,19 +122,22 @@ insert into MatrixElement
     MatrixId,
     [Column],
     [Row],
+    Id,
     Value
 )
 values
 (
-    @Id,
+    @MatrixId,
     @Column,
     @Row,
+    @Id,
     @Value
 )
 ")
-                .AddParameterValue(Columns.Id, id)
+                .AddParameterValue(Columns.MatrixId, matrixId)
                 .AddParameterValue(Columns.Column, column)
                 .AddParameterValue(Columns.Row, row)
+                .AddParameterValue(Columns.Id, id)
                 .AddParameterValue(Columns.Value, value);
         }
 
@@ -154,14 +160,14 @@ order by
                 .AddParameterValue(Columns.Name, specification.Name);
         }
 
-        public IQuery Constaints(Guid id)
+        public IQuery Constraints(Guid id)
         {
             return RawQuery.Create(@"
 select
     Id,
     MatrixId,
     Axis,
-    Index,
+    [Index],
     Comparison,
     Value
 from

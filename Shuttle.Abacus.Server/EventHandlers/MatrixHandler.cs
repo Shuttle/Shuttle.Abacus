@@ -23,7 +23,7 @@ namespace Shuttle.Abacus.Server.EventHandlers
         {
             var constraintAdded = context.Event;
 
-            _query.ConstraintAdded(context.PrimitiveEvent.Id, constraintAdded.Axis, constraintAdded.Index,
+            _query.ConstraintAdded(context.PrimitiveEvent.Id, constraintAdded.Axis, constraintAdded.Index, constraintAdded.Id,
                 constraintAdded.Comparison, constraintAdded.Value);
         }
 
@@ -31,7 +31,7 @@ namespace Shuttle.Abacus.Server.EventHandlers
         {
             var elementAdded = context.Event;
 
-            _query.ElementAdded(context.PrimitiveEvent.Id, elementAdded.Column, elementAdded.Row, elementAdded.Value);
+            _query.ElementAdded(context.PrimitiveEvent.Id, elementAdded.Column, elementAdded.Row, elementAdded.Id, elementAdded.Value);
         }
 
         public void ProcessEvent(IEventHandlerContext<Registered> context)

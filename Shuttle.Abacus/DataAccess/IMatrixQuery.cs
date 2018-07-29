@@ -11,7 +11,7 @@ namespace Shuttle.Abacus.DataAccess
         DataRow Get(Guid id);
         IEnumerable<DataRow> Constraints(Guid id);
         void Registered(Guid id, string name, Guid? columnArgumentId, Guid rowArgumentId, string dataTypeName);
-        void ConstraintAdded(Guid id, string axis, int index, string comparison, string value);
-        void ElementAdded(Guid id, int column, int row, string value);
+        void ConstraintAdded(Guid matrixId, string axis, int index, Guid id, string comparison, string value);
+        void ElementAdded(Guid matrixId, int column, int row, Guid id, string value);
     }
 }

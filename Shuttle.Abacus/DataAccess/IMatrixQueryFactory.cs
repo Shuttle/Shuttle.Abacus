@@ -11,9 +11,9 @@ namespace Shuttle.Abacus.DataAccess
         IQuery Remove(Guid id);
         IQuery RemoveElements(Guid id);
         IQuery RemoveConstraints(Guid id);
-        IQuery ConstraintAdded(Guid id, string axis, int index, string comparison, string value);
-        IQuery ElementAdded(Guid id, int column, int row, string value);
+        IQuery ConstraintAdded(Guid matrixId, string axis, int index, Guid id, string comparison, string value);
+        IQuery ElementAdded(Guid matrixId, int column, int row, Guid id, string value);
         IQuery Search(MatrixSearchSpecification specification);
-        IQuery Constaints(Guid id);
+        IQuery Constraints(Guid id);
     }
 }

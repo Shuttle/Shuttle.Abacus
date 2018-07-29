@@ -1,13 +1,10 @@
-import Component from 'can-component/';
-import DefineMap from 'can-define/map/';
-import view from './item.stache!';
-import resources from '~/resources';
-import Permissions from '~/permissions';
-import Api from 'shuttle-can-api';
-import validator from 'can-define-validate-validatejs';
-import state from '~/state';
-import {OptionMap, OptionList} from 'shuttle-canstrap/select/';
-import localisation from '~/localisation';
+import Component from 'can-component/'
+import DefineMap from 'can-define/map/'
+import view from './item.stache!'
+import Api from 'shuttle-can-api'
+import validator from 'can-define-validate-validatejs'
+import state from '~/state'
+import { OptionMap, OptionList } from 'shuttle-canstrap/select/'
 
 var api = {
     matrices: new Api({
@@ -16,11 +13,39 @@ var api = {
     constraints: new Api({
         endpoint: 'matrices/{id}/constraints'
     })
-};
+}
 
 export const ViewModel = DefineMap.extend({
+    adding: {
+        type: 'boolean',
+        get () {
+            return !this.constraint ||
+                !this.constraint.id ||
+                this.constraint.id === '00000000-0000-0000-0000-000000000000';
+        }
+    },
+
     matrix: {
         Type: DefineMap
+    },
+
+    constraintId() {
+        return !!this.constraint ? this.constraint : undefined;
+    },
+
+    constraint: {
+        Type: DefineMap,
+        default: {},
+        set (value) {
+            if (!!value) {
+                this.axis = value.axis
+                this.index = value.index
+                this.comparison = value.comparison
+                this.value = value.value
+            }
+
+            return value
+        }
     },
 
     axes: {
@@ -31,22 +56,26 @@ export const ViewModel = DefineMap.extend({
         ]
     },
 
-	axis: {
-		type: 'string',
-		default: 'Column',
-		validate: {
-			presence: true
-		}
-	},
+    axis: {
+        type: 'string',
+        default: 'Column',
+        validate: {
+            presence: true
+        }
+    },
 
-	index: {
-		type: 'number',
-		validate: {
-			presence: true
-		}
-	},
+    index: {
+        type: 'number',
+        validate: {
+            presence: true,
+            numericality: {
+                onlyInteger: true,
+                greaterThan: 0,
+            }
+        }
+    },
 
-	comparisons: {
+    comparisons: {
         Type: OptionList,
         default: [
             {value: '==', label: '=='},
@@ -74,31 +103,40 @@ export const ViewModel = DefineMap.extend({
         }
     },
 
-    add: function () {
+    submitText() {
+        return this.adding ? 'add' : 'save';
+    },
+
+    submit: function () {
         if (!!this.errors()) {
-            return false;
+            return false
         }
 
         api.constraints.post({
+            id: this.constraintId,
             axis: this.axis,
-	        index: this.index,
-	        comparison: this.comparison,
-	        value: this.value
-        },{
+            index: this.index,
+            comparison: this.comparison,
+            value: this.value
+        }, {
             id: this.matrix.id
         })
-            .then(function(){
-                state.registrationRequested('matrix-operation');
-            });
+            .then(function () {
+                state.registrationRequested('matrix-operation')
+            })
 
-        return false;
+        return false
+    },
+
+    cancel(){
+        this.constraint = undefined;
     }
-});
+})
 
-validator(ViewModel);
+validator(ViewModel)
 
 export default Component.extend({
     tag: 'abacus-matrix-constraint',
     ViewModel,
     view
-});
+})

@@ -72,8 +72,10 @@ namespace Shuttle.Abacus.WebApi.Controllers
 
             _bus.Send(new RegisterMatrixConstraintCommand
             {
+                Id = Guid.NewGuid(),
                 MatrixId = id,
                 Axis = model.Axis,
+                Index = model.Index,
                 Comparison = model.Comparison,
                 Value = model.Value
             });
@@ -94,7 +96,7 @@ namespace Shuttle.Abacus.WebApi.Controllers
         }
 
         [HttpGet("{id}/constraints")]
-        public IActionResult Values(Guid id)
+        public IActionResult Constraint(Guid id)
         {
             using (_databaseContextFactory.Create())
             {
