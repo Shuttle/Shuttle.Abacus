@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Messages.v1;
-using Shuttle.Access;
 using Shuttle.Access.Mvc;
 using Shuttle.Core.Contract;
 using Shuttle.Core.Data;
@@ -70,7 +69,12 @@ namespace Shuttle.Abacus.WebApi.Controllers
         {
             Guard.AgainstNull(model, nameof(model));
 
-            if (!model.Ok())
+            if (string.IsNullOrEmpty(model.Axis) ||
+                !(model.Axis.Equals("Row", StringComparison.InvariantCultureIgnoreCase) ||
+                  model.Axis.Equals("Column", StringComparison.InvariantCultureIgnoreCase)) ||
+                model.Index < 1 ||
+                string.IsNullOrEmpty(model.Comparison) ||
+                string.IsNullOrEmpty(model.Value))
             {
                 return BadRequest();
             }

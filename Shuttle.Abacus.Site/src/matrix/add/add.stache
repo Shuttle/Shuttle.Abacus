@@ -22,8 +22,7 @@
                 <cs-form-autocomplete label:raw="column-argument" vm:map:bind="columnArgument"
                                       endpoint:raw="arguments/search"
                                       method:raw="post" textAttribute:raw="name" searchAttribute:raw="name"
-                                      vm:errors:from="errors()" errorAttribute:from="'columnArgument'"
-                                      vm:required:from="'true'"/>
+                />
             </div>
         </div>
         <cs-button-submit vm:click:from="add" text:from="'add'"/>

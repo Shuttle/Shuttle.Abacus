@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net461;netcoreapp2.0</TargetFrameworks>
+        <TargetFrameworks>net461;netcoreapp2.1</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
@@ -10,10 +10,17 @@
         <PackageReference Include="NUnit" Version="3.10.1" />
         <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
         <PackageReference Include="Shuttle.Core.Configuration" Version="10.0.2" />
+        <PackageReference Include="Shuttle.Core.Transactions" Version="10.0.1" />
+        <PackageReference Include="System.Data.SqlClient" Version="4.5.1" />
+        <PackageReference Include="Shuttle.Core.Data.SqlClient" Version="10.0.7" Condition="'$(TargetFramework)' == 'netcoreapp2.1'" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Shuttle.Abacus\Shuttle.Abacus.csproj" />
     </ItemGroup>
     
+    <ItemGroup>
+        <Reference Include="System.Transactions" Condition="'$(TargetFramework)' != 'netstandard2.0'" />
+    </ItemGroup>
+
 </Project>

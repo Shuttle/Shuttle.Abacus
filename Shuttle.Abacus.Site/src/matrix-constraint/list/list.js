@@ -1,15 +1,16 @@
-import Component from 'can-component/'
-import DefineMap from 'can-define/map/'
-import DefineList from 'can-define/list/'
-import view from './list.stache!'
-import resources from '~/resources'
-import Permissions from '~/permissions'
-import router from '~/router'
-import state from '~/state'
-import Api from 'shuttle-can-api'
+import Component from 'can-component/';
+import DefineMap from 'can-define/map/';
+import DefineList from 'can-define/list/';
+import view from './list.stache!';
+import resources from '~/resources';
+import Permissions from '~/permissions';
+import router from '~/router';
+import state from '~/state';
+import Api from 'shuttle-can-api';
 import each from 'can-util/js/each/';
+import { MatrixMap } from '~/matrix/';
 
-resources.add('matrix', {item: 'constraint', action: 'list', permission: Permissions.Manage.Matrices})
+resources.add('matrix', {item: 'constraint', action: 'list', permission: Permissions.Manage.Matrices});
 
 const ConstraintMap = DefineMap.extend({
     id: {
@@ -30,23 +31,24 @@ const ConstraintMap = DefineMap.extend({
     remove () {
         api.constraints.delete({id: this.id})
             .then(function () {
-                state.removalRequested('formula')
-            })
+                state.removalRequested('formula');
+            });
     },
     edit () {
         this.viewModel.constraint = this;
     }
-})
+});
 
 const api = {
     matrices: new Api({
-        endpoint: 'matrices/{id}'
+        endpoint: 'matrices/{id}',
+        Map: MatrixMap
     }),
     constraints: new Api({
         endpoint: 'matrices/{id}/constraints',
         Map: ConstraintMap
     })
-}
+};
 
 export const ViewModel = DefineMap.extend({
     name: {
@@ -56,7 +58,7 @@ export const ViewModel = DefineMap.extend({
 
     matrixId: {
         get () {
-            return state.routeData.id
+            return state.routeData.id;
         }
     },
 
@@ -69,7 +71,7 @@ export const ViewModel = DefineMap.extend({
     },
 
     matrix: {
-        Type: DefineMap
+        Type: MatrixMap
     },
 
     constraint: {
@@ -81,82 +83,82 @@ export const ViewModel = DefineMap.extend({
 
         return !!this.matrix ? api.constraints.list({
             id: this.matrix.id
-        }).then(function(result){
-                each(result, function(item){
-                    item.viewModel = self;
-                });
+        }).then(function (result) {
+            each(result, function (item) {
+                item.viewModel = self;
+            });
 
-                return result;
-            }) : Promise.resolve()
+            return result;
+        }) : Promise.resolve();
     },
 
     get map () {
-        const self = this
-        const refreshTimestamp = this.refreshTimestamp
+        const self = this;
+        const refreshTimestamp = this.refreshTimestamp;
 
         if (!this.matrixId) {
-            this.map = undefined
-            return
+            this.map = undefined;
+            return;
         }
 
         return api.matrices.map({
             id: this.matrixId
         })
             .then(function (map) {
-                self.matrix = map
-            })
+                self.matrix = map;
+            });
     },
 
     init () {
-        const columns = this.columns
+        const columns = this.columns;
 
         if (!columns.length) {
             columns.push({
                 columnTitle: 'edit',
                 columnClass: 'col-1',
                 stache: '<cs-button text:from="\'edit\'" click:from="edit" elementClass:from="\'btn-sm\'"/>'
-            })
+            });
 
             columns.push({
                 columnTitle: 'axis',
                 columnClass: 'col-1',
                 attributeName: 'axis'
-            })
+            });
 
             columns.push({
                 columnTitle: 'index',
                 columnClass: 'col-1',
                 attributeName: 'index'
-            })
+            });
 
             columns.push({
                 columnTitle: 'comparison',
                 columnClass: 'col-1',
                 attributeName: 'comparison'
-            })
+            });
 
             columns.push({
                 columnTitle: 'value',
                 columnClass: 'col',
                 attributeName: 'value'
-            })
+            });
         }
 
-        state.title = 'operations'
+        state.title = 'operations';
 
         state.navbar.addButton({
             type: 'refresh',
             viewModel: this
-        })
+        });
     },
 
     refresh: function () {
-        this.refreshTimestamp = Date.now()
+        this.refreshTimestamp = Date.now();
     }
-})
+});
 
 export default Component.extend({
     tag: 'abacus-matrix-constraint-list',
     ViewModel,
     view
-})
+});

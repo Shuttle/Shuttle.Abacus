@@ -1,10 +1,11 @@
-import Component from 'can-component/'
-import DefineMap from 'can-define/map/'
-import view from './item.stache!'
-import Api from 'shuttle-can-api'
-import validator from 'can-define-validate-validatejs'
-import state from '~/state'
-import { OptionMap, OptionList } from 'shuttle-canstrap/select/'
+import Component from 'can-component/';
+import DefineMap from 'can-define/map/';
+import view from './item.stache!';
+import Api from 'shuttle-can-api';
+import validator from 'can-define-validate-validatejs';
+import state from '~/state';
+import { OptionMap, OptionList } from 'shuttle-canstrap/select/';
+import { MatrixMap } from '~/matrix/';
 
 var api = {
     matrices: new Api({
@@ -13,7 +14,7 @@ var api = {
     constraints: new Api({
         endpoint: 'matrices/{id}/constraints'
     })
-}
+};
 
 export const ViewModel = DefineMap.extend({
     adding: {
@@ -26,10 +27,10 @@ export const ViewModel = DefineMap.extend({
     },
 
     matrix: {
-        Type: DefineMap
+        Type: MatrixMap
     },
 
-    constraintId() {
+    constraintId () {
         return !!this.constraint ? this.constraint : undefined;
     },
 
@@ -38,22 +39,35 @@ export const ViewModel = DefineMap.extend({
         default: {},
         set (value) {
             if (!!value) {
-                this.axis = value.axis
-                this.index = value.index
-                this.comparison = value.comparison
-                this.value = value.value
+                this.axis = value.axis;
+                this.index = value.index;
+                this.comparison = value.comparison;
+                this.value = value.value;
             }
 
-            return value
+            return value;
         }
     },
 
     axes: {
         Type: OptionList,
-        default: [
-            {value: 'Column', label: 'Column'},
-            {value: 'Row', label: 'Row'}
-        ]
+        get () {
+            if (!this.matrix){
+                return [];
+            }
+
+            var result =
+                [
+                    {value: 'Row', label: 'Row'}
+                ];
+
+            if (this.matrix.hasColumnArgument) {
+                result.push({value: 'Column', label: 'Column'});
+            }
+
+            return result;
+        }
+
     },
 
     axis: {
@@ -103,13 +117,13 @@ export const ViewModel = DefineMap.extend({
         }
     },
 
-    submitText() {
+    submitText () {
         return this.adding ? 'add' : 'save';
     },
 
     submit: function () {
         if (!!this.errors()) {
-            return false
+            return false;
         }
 
         api.constraints.post({
@@ -122,21 +136,21 @@ export const ViewModel = DefineMap.extend({
             id: this.matrix.id
         })
             .then(function () {
-                state.registrationRequested('matrix-operation')
-            })
+                state.registrationRequested('matrix-operation');
+            });
 
-        return false
+        return false;
     },
 
-    cancel(){
+    cancel () {
         this.constraint = undefined;
     }
-})
+});
 
-validator(ViewModel)
+validator(ViewModel);
 
 export default Component.extend({
     tag: 'abacus-matrix-constraint',
     ViewModel,
     view
-})
+});

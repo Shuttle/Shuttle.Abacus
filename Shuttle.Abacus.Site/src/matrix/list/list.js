@@ -91,6 +91,24 @@ export const ViewModel = DefineMap.extend({
                 attributeName: 'name'
             });
 
+            columns.push({
+                columnTitle: 'data-type-name',
+                columnClass: 'col',
+                attributeName: 'dataTypeName'
+            });
+
+            columns.push({
+                columnTitle: 'row-argument',
+                columnClass: 'col',
+                attributeName: 'rowArgumentName'
+            });
+
+            columns.push({
+                columnTitle: 'column-argument',
+                columnClass: 'col',
+                attributeName: 'columnArgumentName'
+            });
+
 	        columns.push({
 		        columnTitle: 'remove',
 		        columnClass: 'col-1',

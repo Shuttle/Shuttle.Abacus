@@ -10,16 +10,5 @@ namespace Shuttle.Abacus.WebApi
         public int Index { get; set; }
         public string Comparison { get; set; }
         public string Value { get; set; }
-
-        public bool Ok()
-        {
-            return !MatrixId.Equals(Guid.Empty) &&
-                   !string.IsNullOrEmpty(Axis) &&
-                   !(Axis.Equals("Row", StringComparison.InvariantCultureIgnoreCase) ||
-                     Axis.Equals("Column", StringComparison.InvariantCultureIgnoreCase)) &&
-                   Index > 0 &&
-                   !string.IsNullOrEmpty(Comparison) &&
-                   !string.IsNullOrEmpty(Value);
-        }
     }
 }

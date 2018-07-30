@@ -8,11 +8,19 @@ namespace Shuttle.Abacus.DataAccess
     {
         private const string MatrixQuery = @"
 select
-    Id,
-    Name,
-    DataTypeName
+    m.Id,
+    m.Name,
+    m.RowArgumentId,
+    ra.Name RowArgumentName,
+    m.ColumnArgumentId,
+    ca.Name ColumnArgumentName,
+    m.DataTypeName
 from
-    Matrix
+    Matrix m
+inner join
+    Argument ra on ra.Id = m.RowArgumentId
+left join
+    Argument ca on ca.Id = m.ColumnArgumentId
 ";
 
         public IQuery All()
@@ -101,7 +109,7 @@ if exists
     update
         MatrixConstraint
     set
-        Index = @Index,
+        [Index] = @Index,
         Comparison = @Comparison,
         Value = @Value
     where
@@ -196,10 +204,10 @@ where
     or
     @Name = ''
     or
-    Name like '%' + @Name + '%'
+    m.Name like '%' + @Name + '%'
 )
 order by 
-    Name
+    m.Name
 "))
                 .AddParameterValue(Columns.Name, specification.Name);
         }
