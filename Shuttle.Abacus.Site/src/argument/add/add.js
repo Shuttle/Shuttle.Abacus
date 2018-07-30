@@ -67,7 +67,10 @@ export const ViewModel = DefineMap.extend({
         api.arguments.post({
             name: this.name,
             dataTypeName: this.dataTypeName
-        });
+        })
+            .then(function(){
+                state.registrationRequested('argument');
+            });
 
         this.close();
 

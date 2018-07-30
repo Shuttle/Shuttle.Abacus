@@ -49,13 +49,13 @@ namespace Shuttle.Abacus.DataAccess
 
         public void ConstraintAdded(Guid matrixId, string axis, int index, Guid id, string comparison, string value)
         {
-            _databaseGateway.ExecuteUsing(_matrixQueryFactory.ConstraintAdded(matrixId, axis, index,
+            _databaseGateway.ExecuteUsing(_matrixQueryFactory.ConstraintRegistered(matrixId, axis, index,
                 id, comparison, value));
         }
 
         public void ElementAdded(Guid matrixId, int column, int row, Guid id, string value)
         {
-            _databaseGateway.ExecuteUsing(_matrixQueryFactory.ElementAdded(matrixId, column, row, id, value));
+            _databaseGateway.ExecuteUsing(_matrixQueryFactory.ElementRegistered(matrixId, column, row, id, value));
         }
     }
 }

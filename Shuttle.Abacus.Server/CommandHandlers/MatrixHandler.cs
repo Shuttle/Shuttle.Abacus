@@ -90,7 +90,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                     return;
                 }
 
-                stream.AddEvent(matrix.AddConstraint(message.Id, message.Axis, message.Index, message.Comparison, message.Value));
+                stream.AddEvent(matrix.RegisterConstraint(message.Id, message.Axis, message.Index, message.Comparison, message.Value));
 
                 _eventStore.Save(stream);
             }

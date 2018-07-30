@@ -2,7 +2,7 @@
 
 namespace Shuttle.Abacus.Events.Matrix.v1
 {
-    public class ConstraintAdded
+    public class ConstraintRegistered
     {
         public Guid Id { get; set; }
         public string Axis { get; set; }

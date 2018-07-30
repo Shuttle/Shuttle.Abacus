@@ -2,7 +2,7 @@
 
 namespace Shuttle.Abacus.Events.Matrix.v1
 {
-    public class ElementAdded
+    public class ElementRegistered
     {
         public Guid Id { get; set; }
         public int Row { get; set; }

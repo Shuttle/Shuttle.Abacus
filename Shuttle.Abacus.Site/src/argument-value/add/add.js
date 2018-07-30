@@ -42,7 +42,7 @@ export const ViewModel = DefineMap.extend({
             id: this.argument.id
         })
             .then(function(){
-                state.registrationRequested('argument');
+                state.registrationRequested('argument-value');
             });
 
         return false;

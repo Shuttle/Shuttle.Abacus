@@ -113,8 +113,8 @@ namespace Shuttle.Abacus.Tests
             var matrix = new Matrix(Guid.NewGuid());
 
             matrix.Register("simple-matrix", arguemtId, null, "Decimal");
-            matrix.AddConstraint(Guid.NewGuid(), "Row", 1, "==", "the-value");
-            matrix.AddElement(Guid.NewGuid(), 1, 1, "1.25");
+            matrix.RegisterConstraint(Guid.NewGuid(), "Row", 1, "==", "the-value");
+            matrix.RegisterElement(Guid.NewGuid(), 1, 1, "1.25");
 
             var argument = new Argument(arguemtId);
 

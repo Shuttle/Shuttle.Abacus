@@ -94,7 +94,6 @@ localisation.start(function(error) {
             router.process();
 
             state.started = true;
-            state.started = false;
         })
         .catch(function(){
             state.alerts.show({message: `Could not connect to access endpoint: ${access.url}`, type: 'danger', name: 'access-error'});

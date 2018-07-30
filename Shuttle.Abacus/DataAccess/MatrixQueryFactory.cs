@@ -84,27 +84,49 @@ values
                     .AddParameterValue(Columns.Id, id);
         }
 
-        public IQuery ConstraintAdded(Guid matrixId, string axis, int index, Guid id, string comparison, string value)
+        public IQuery ConstraintRegistered(Guid matrixId, string axis, int index, Guid id, string comparison, string value)
         {
             return RawQuery.Create(@"
-insert into MatrixConstraint
+if exists
 (
-    MatrixId,
-    Axis,
-    [Index],
-    Id,
-    Comparison,
-    Value
+    select 
+        null
+    from
+        MatrixConstraint
+    where
+        MatrixId = @MatrixId
+    and
+        Id = @Id
 )
-values
-(
-    @MatrixId,
-    @Axis,
-    @Index,
-    @Id,
-    @Comparison,
-    @Value
-)
+    update
+        MatrixConstraint
+    set
+        Index = @Index,
+        Comparison = @Comparison,
+        Value = @Value
+    where
+        MatrixId = @MatrixId
+    and
+        Id = @Id
+else
+    insert into MatrixConstraint
+    (
+        MatrixId,
+        Axis,
+        [Index],
+        Id,
+        Comparison,
+        Value
+    )
+    values
+    (
+        @MatrixId,
+        @Axis,
+        @Index,
+        @Id,
+        @Comparison,
+        @Value
+    )
 ")
                 .AddParameterValue(Columns.MatrixId, matrixId)
                 .AddParameterValue(Columns.Axis, axis)
@@ -114,25 +136,47 @@ values
                 .AddParameterValue(Columns.Value, value);
         }
 
-        public IQuery ElementAdded(Guid matrixId, int column, int row, Guid id, string value)
+        public IQuery ElementRegistered(Guid matrixId, int column, int row, Guid id, string value)
         {
             return RawQuery.Create(@"
-insert into MatrixElement
+if exists
 (
-    MatrixId,
-    [Column],
-    [Row],
-    Id,
-    Value
+    select 
+        null
+    from
+        MatrixElement
+    where
+        MatrixId = @MatrixId
+    and
+        Id = @Id
 )
-values
-(
-    @MatrixId,
-    @Column,
-    @Row,
-    @Id,
-    @Value
-)
+    update
+        MatrixElement
+    set
+        Column = @Column,
+        Row = @Row,
+        Value = @Value
+    where
+        MatrixId = @MatrixId
+    and
+        Id = @Id
+else
+    insert into MatrixElement
+    (
+        MatrixId,
+        [Column],
+        [Row],
+        Id,
+        Value
+    )
+    values
+    (
+        @MatrixId,
+        @Column,
+        @Row,
+        @Id,
+        @Value
+    )
 ")
                 .AddParameterValue(Columns.MatrixId, matrixId)
                 .AddParameterValue(Columns.Column, column)

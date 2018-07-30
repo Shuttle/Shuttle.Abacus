@@ -63,14 +63,9 @@ namespace Shuttle.Abacus
             return $"[matrix]:name={name}";
         }
 
-        public ElementAdded AddElement(Guid id, int row, int column, string value)
+        public ElementRegistered RegisterElement(Guid id, int row, int column, string value)
         {
-            if (HasElement(row, column))
-            {
-                throw new DomainException($"There is already a value for row '{row}' and column '{column}'.");
-            }
-
-            return On(new ElementAdded
+            return On(new ElementRegistered
             {
                 Id = id,
                 Row = row,
@@ -79,18 +74,15 @@ namespace Shuttle.Abacus
             });
         }
 
-        private ElementAdded On(ElementAdded elementAdded)
+        private ElementRegistered On(ElementRegistered elementRegistered)
         {
-            Guard.AgainstNull(elementAdded, nameof(elementAdded));
+            Guard.AgainstNull(elementRegistered, nameof(elementRegistered));
 
-            _elements.Add(new Element(elementAdded.Id, elementAdded.Row, elementAdded.Column, elementAdded.Value));
+            _elements.RemoveAll(item => item.Row == elementRegistered.Row && item.Column == elementRegistered.Column);
 
-            return elementAdded;
-        }
+            _elements.Add(new Element(elementRegistered.Id, elementRegistered.Row, elementRegistered.Column, elementRegistered.Value));
 
-        public bool HasElement(int row, int column)
-        {
-            return _elements.Find(item => item.Row == row && item.Column == column) != null;
+            return elementRegistered;
         }
 
         public bool IsNamed(string name)
@@ -98,18 +90,12 @@ namespace Shuttle.Abacus
             return Name.Equals(name, StringComparison.InvariantCultureIgnoreCase);
         }
 
-        public ConstraintAdded AddConstraint(Guid id, string axis, int index, string comparison, string value)
+        public ConstraintRegistered RegisterConstraint(Guid id, string axis, int index, string comparison, string value)
         {
             Guard.AgainstNullOrEmptyString(axis, nameof(axis));
             Guard.AgainstNullOrEmptyString(comparison, nameof(comparison));
 
-            if (HasConstraint(axis, index))
-            {
-                throw new DomainException(
-                    $"There is already a constraint for axis '{axis}' and index '{index}'.");
-            }
-
-            return On(new ConstraintAdded
+            return On(new ConstraintRegistered
             {
                 Id = id,
                 Axis = axis,
@@ -119,23 +105,19 @@ namespace Shuttle.Abacus
             });
         }
 
-        private ConstraintAdded On(ConstraintAdded constraintAdded)
+        private ConstraintRegistered On(ConstraintRegistered constraintRegistered)
         {
-            Guard.AgainstNull(constraintAdded, nameof(constraintAdded));
+            Guard.AgainstNull(constraintRegistered, nameof(constraintRegistered));
 
-            _constraints.Add(new Constraint(constraintAdded.Id, constraintAdded.Axis, constraintAdded.Index,
-                constraintAdded.Comparison, constraintAdded.Value));
+            _constraints.RemoveAll(
+                item =>
+                    item.Axis.Equals(constraintRegistered.Axis, StringComparison.InvariantCultureIgnoreCase) &&
+                    item.Index == constraintRegistered.Index);
 
-            return constraintAdded;
-        }
+            _constraints.Add(new Constraint(constraintRegistered.Id, constraintRegistered.Axis, constraintRegistered.Index,
+                constraintRegistered.Comparison, constraintRegistered.Value));
 
-        public bool HasConstraint(string axis, int sequenceNumber)
-        {
-            return
-                _constraints.Exists(
-                    item =>
-                        item.Axis.Equals(axis, StringComparison.InvariantCultureIgnoreCase) &&
-                        item.SequenceNumber == sequenceNumber);
+            return constraintRegistered;
         }
 
         public string GetValue(IConstraintComparison constraintComparison, ExecutionContext executionContext,
@@ -182,12 +164,12 @@ namespace Shuttle.Abacus
                     $"There is no {axis.ToLower()} constraint in matrix '{Name}' where argument '{RowArgumentId}' is satisfied by '{value}'.");
             }
 
-            return constraint.SequenceNumber;
+            return constraint.Index;
         }
 
         public class Constraint
         {
-            public Constraint(Guid id, string axis, int sequenceNumber, string comparison, string value)
+            public Constraint(Guid id, string axis, int index, string comparison, string value)
             {
                 if (!axis.Equals("Row", StringComparison.InvariantCultureIgnoreCase)
                     &&
@@ -198,14 +180,14 @@ namespace Shuttle.Abacus
 
                 Id = id;
                 Axis = axis;
-                SequenceNumber = sequenceNumber;
+                Index = index;
                 Comparison = comparison;
                 Value = value;
             }
 
             public Guid Id { get; }
             public string Axis { get; }
-            public int SequenceNumber { get; }
+            public int Index { get; }
             public string Comparison { get; }
             public string Value { get; }
         }

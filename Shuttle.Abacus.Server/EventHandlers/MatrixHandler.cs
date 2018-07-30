@@ -7,8 +7,8 @@ namespace Shuttle.Abacus.Server.EventHandlers
 {
     public class MatrixHandler :
         IEventHandler<Registered>,
-        IEventHandler<ConstraintAdded>,
-        IEventHandler<ElementAdded>
+        IEventHandler<ConstraintRegistered>,
+        IEventHandler<ElementRegistered>
     {
         private readonly IMatrixQuery _query;
 
@@ -19,7 +19,7 @@ namespace Shuttle.Abacus.Server.EventHandlers
             _query = query;
         }
 
-        public void ProcessEvent(IEventHandlerContext<ConstraintAdded> context)
+        public void ProcessEvent(IEventHandlerContext<ConstraintRegistered> context)
         {
             var constraintAdded = context.Event;
 
@@ -27,7 +27,7 @@ namespace Shuttle.Abacus.Server.EventHandlers
                 constraintAdded.Comparison, constraintAdded.Value);
         }
 
-        public void ProcessEvent(IEventHandlerContext<ElementAdded> context)
+        public void ProcessEvent(IEventHandlerContext<ElementRegistered> context)
         {
             var elementAdded = context.Event;
 

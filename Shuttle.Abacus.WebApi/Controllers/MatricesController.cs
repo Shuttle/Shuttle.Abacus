@@ -70,6 +70,11 @@ namespace Shuttle.Abacus.WebApi.Controllers
         {
             Guard.AgainstNull(model, nameof(model));
 
+            if (!model.Ok())
+            {
+                return BadRequest();
+            }
+
             _bus.Send(new RegisterMatrixConstraintCommand
             {
                 Id = Guid.NewGuid(),
