@@ -18,9 +18,11 @@
                     </li>
                 {{/case}}
                 {{#case "not-logged-in"}}
+                    {{#if(started)}}
                     <li class="nav-item">
                         <a class="nav-link p-2" href='#!login'>{{i18n "sign-in"}}</a>
                     </li>
+                    {{/if}}
                 {{/case}}
                 {{#case "logged-in"}}
                     <li class="nav-item dropdown">

@@ -80,20 +80,26 @@ $.ajaxPrefilter(function (options, originalOptions) {
 
 localisation.start(function(error) {
     if (error) {
-        throw new Error(error);
+        state.alerts.show({message: `Could not start localisation: ${error}`, type: 'danger', name: 'localisation-error'});
     }
 
     access.start()
         .then(function () {
             router.start();
 
-            $('#application-container').html(stache(state));
-
             if (window.location.hash === '#!' || !window.location.hash) {
                 router.goto({resource: 'dashboard'});
             }
 
             router.process();
+
+            state.started = true;
+            state.started = false;
+        })
+        .catch(function(){
+            state.alerts.show({message: `Could not connect to access endpoint: ${access.url}`, type: 'danger', name: 'access-error'});
+        })
+        .finally(function(){
+            $('#application-container').html(stache(state));
         });
 });
-

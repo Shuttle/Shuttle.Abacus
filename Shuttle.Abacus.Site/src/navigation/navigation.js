@@ -9,6 +9,11 @@ var ViewModel = DefineMap.extend({
     hasSecondary() {
         return !!this.title || this.navbar.controls.length > 0;
     },
+    started: {
+        get() {
+            return state.started;
+        }
+    },
     access: {
         get() {
             return access;

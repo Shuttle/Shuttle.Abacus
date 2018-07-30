@@ -38,6 +38,17 @@ var RouteData = DefineMap.extend({
 var routeData = new RouteData();
 
 var State = DefineMap.extend({
+    started: {
+        type: 'boolean',
+        set(value){
+            if (this.started){
+                return true;
+            }
+
+            return value;
+        }
+    },
+
     routeData: {
         Type: RouteData,
         default: routeData
