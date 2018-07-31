@@ -6,31 +6,85 @@
 <abacus-matrix-element matrix:from="matrix" element:from="element"/>
 {{/if}}
 
-<div class="{{containerClass}}">
+<table class="table">
+<thead>
+<tr class="row">
+    <th class="col-2">
+    </th>
+    <th class="col" colspan="3">
+        column-argument
+    </th>
+</tr>
+<tr class="row">
+    <th class="col-2">
+        row-argument
+    </th>
+    <th class="col">
+        <= 50
+    </th>
+    <th class="col">
+        <= 150
+    </th>
+    <th class="col">
+        > 150
+    </th>
+</tr>
+</thead>
+<tbody>
+<tr class="row">
+    <td data-title="column-n" class="col-2">
+        == Male
+    </td>
+    <td data-title="column-n" class="col">
+        1.5
+    </td>
+    <td data-title="column-n" class="col">
+        1.75
+    </td>
+    <td data-title="column-n" class="col">
+        2.0
+    </td>
+</tr>
+<tr class="row">
+    <td data-title="column-n" class="col-2">
+        == Female
+    </td>
+    <td data-title="column-n" class="col">
+        1.55
+    </td>
+    <td data-title="column-n" class="col">
+        1.80
+    </td>
+    <td data-title="column-n" class="col">
+        2.05
+    </td>
+</tr>
+</tbody>
+</table>
+
 {{#if(rows)}}
-    <table class="table">
-    <thead>
-        <tr class="row">
-            {{#each(columns)}}
-                <th class="col">
-                    {{column.index}}
-                </th>
-            {{/each}}
-        </tr>
-    </thead>
-    <tbody>
-        {{#each(rows)}}
-            <tr class="row">
-                {{#each(../columns)}}
-                    <td data-title="column-{{column.index}}" class="col">
-                        {{scope.vm.getValue(../., .)}}
-                    </td>
-                {{/each}}
-            </tr>
-        {{/each}}
-    </tbody>
+<table class="table">
+<thead>
+<tr class="row">
+{{#each(columns)}}
+    <th class="col">
+        {{column.index}}
+    </th>
+{{/each}}
+</tr>
+</thead>
+<tbody>
+{{#each(rows)}}
+<tr class="row">
+{{#each(../columns)}}
+    <td data-title="column-{{column.index}}" class="col">
+        {{scope.vm.getValue(../., .)}}
+    </td>
+{{/each}}
+</tr>
+{{/each}}
+</tbody>
 </table>
 {{else}}
-    <div class="alert alert-info" role="alert">{{i18n('table-empty-message')}}</div>
+<div class="alert alert-info" role="alert">{{i18n('table-empty-message')}}</div>
 {{/if}}
-</div>
