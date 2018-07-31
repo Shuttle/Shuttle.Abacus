@@ -10,6 +10,7 @@
 <thead>
 <tr class="row">
     <th class="col-2">
+        row-argument
     </th>
     <th class="col" colspan="3">
         column-argument
@@ -17,7 +18,6 @@
 </tr>
 <tr class="row">
     <th class="col-2">
-        row-argument
     </th>
     <th class="col">
         <= 50
