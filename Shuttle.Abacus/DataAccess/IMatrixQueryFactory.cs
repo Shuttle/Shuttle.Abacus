@@ -15,5 +15,6 @@ namespace Shuttle.Abacus.DataAccess
         IQuery ElementRegistered(Guid matrixId, int column, int row, Guid id, string value);
         IQuery Search(MatrixSearchSpecification specification);
         IQuery Constraints(Guid id);
+        IQuery Elements(Guid id);
     }
 }

@@ -105,13 +105,25 @@ namespace Shuttle.Abacus.WebApi.Controllers
         }
 
         [HttpGet("{id}/constraints")]
-        public IActionResult Constraint(Guid id)
+        public IActionResult Constraints(Guid id)
         {
             using (_databaseContextFactory.Create())
             {
                 return Ok(new
                 {
                     Data = _dataRowMapper.MapObjects<MatrixConstraintModel>(_matrixQuery.Constraints(id))
+                });
+            }
+        }
+
+        [HttpGet("{id}/elements")]
+        public IActionResult elements(Guid id)
+        {
+            using (_databaseContextFactory.Create())
+            {
+                return Ok(new
+                {
+                    Data = _dataRowMapper.MapObjects<MatrixElementModel>(_matrixQuery.Elements(id))
                 });
             }
         }

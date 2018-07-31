@@ -16,8 +16,9 @@ namespace Shuttle.Abacus.Tests.DataAccess
             {
                 Assert.That(() => query.Get(Guid.NewGuid()), Throws.Nothing);
                 Assert.That(() => query.All(), Throws.Nothing);
-                Assert.That(() => query.Constraints(Guid.NewGuid()), Throws.Nothing);
                 Assert.That(() => query.Search(new MatrixSearchSpecification()), Throws.Nothing);
+                Assert.That(() => query.Constraints(Guid.NewGuid()), Throws.Nothing);
+                Assert.That(() => query.Elements(Guid.NewGuid()), Throws.Nothing);
             }
         }
     }

@@ -104,18 +104,21 @@ if exists
     where
         MatrixId = @MatrixId
     and
-        Id = @Id
+        Axis = @Axis
+    and
+        [Index] = @Index
 )
     update
         MatrixConstraint
     set
-        [Index] = @Index,
         Comparison = @Comparison,
         Value = @Value
     where
         MatrixId = @MatrixId
     and
-        Id = @Id
+        Axis = @Axis
+    and
+        [Index] = @Index
 else
     insert into MatrixConstraint
     (
@@ -156,18 +159,20 @@ if exists
     where
         MatrixId = @MatrixId
     and
-        Id = @Id
+        [Column] = @Column
+    and
+        [Row] = @Row
 )
     update
         MatrixElement
     set
-        Column = @Column,
-        Row = @Row,
         Value = @Value
     where
         MatrixId = @MatrixId
     and
-        Id = @Id
+        [Column] = @Column
+    and
+        [Row] = @Row
 else
     insert into MatrixElement
     (
@@ -224,6 +229,22 @@ select
     Value
 from
     MatrixConstraint
+where
+    MatrixId = @Id
+").AddParameterValue(Columns.Id, id);
+        }
+
+        public IQuery Elements(Guid id)
+        {
+            return RawQuery.Create(@"
+select
+    Id,
+    MatrixId,
+    [Column],
+    [Row],
+    Value
+from
+    MatrixElement
 where
     MatrixId = @Id
 ").AddParameterValue(Columns.Id, id);

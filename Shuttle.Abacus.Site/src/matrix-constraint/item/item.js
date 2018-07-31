@@ -136,8 +136,10 @@ export const ViewModel = DefineMap.extend({
             id: this.matrix.id
         })
             .then(function () {
-                state.registrationRequested('matrix-operation');
+                state.registrationRequested('matrix-constraint');
             });
+
+        this.cancel();
 
         return false;
     },

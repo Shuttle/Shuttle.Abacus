@@ -39,6 +39,10 @@
   "manage": "Manage",
   "matrices": "Matrices",
   "matrix": "Matrix",
+  "matrix-constraint": "Matric constraint",
+  "matrix-constraints": "Matric constraints",
+  "matrix-element": "Matric element",
+  "matrix-elements": "Matric elements",
   "maximum-formula-name": "Maximum formula name",
   "minimum-formula-name": "Minimum formula name",
   "modals": {

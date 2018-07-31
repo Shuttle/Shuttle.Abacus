@@ -31,7 +31,7 @@ const ConstraintMap = DefineMap.extend({
     remove () {
         api.constraints.delete({id: this.id})
             .then(function () {
-                state.removalRequested('formula');
+                state.removalRequested('matrix-constraint');
             });
     },
     edit () {
@@ -144,7 +144,7 @@ export const ViewModel = DefineMap.extend({
             });
         }
 
-        state.title = 'operations';
+        state.title = 'matrix-constraints';
 
         state.navbar.addButton({
             type: 'refresh',

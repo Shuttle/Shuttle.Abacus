@@ -40,6 +40,11 @@ namespace Shuttle.Abacus.DataAccess
             return _databaseGateway.GetRowsUsing(_matrixQueryFactory.Constraints(id));
         }
 
+        public IEnumerable<DataRow> Elements(Guid id)
+        {
+            return _databaseGateway.GetRowsUsing(_matrixQueryFactory.Elements(id));
+        }
+
         public void Registered(Guid id, string name, Guid? columnArgumentId, Guid rowArgumentId,
             string dataTypeName)
         {

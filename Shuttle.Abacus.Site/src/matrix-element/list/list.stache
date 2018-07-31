@@ -1,7 +1,36 @@
 {{#if map.isResolved}}
-    <h3>{{formula.name}}</h3>
+    <h3>{{matrix.name}}</h3>
 {{/if}}
 
-<abacus-formula-operation-add vm:formula:from="formula" />
+{{#if(element)}}
+<abacus-matrix-element matrix:from="matrix" element:from="element"/>
+{{/if}}
 
-<cs-table vm:columns:from="columns" vm:rows:from="operations" />
+<div class="{{containerClass}}">
+{{#if(rows)}}
+    <table class="table">
+    <thead>
+        <tr class="row">
+            {{#each(columns)}}
+                <th class="col">
+                    {{column.index}}
+                </th>
+            {{/each}}
+        </tr>
+    </thead>
+    <tbody>
+        {{#each(rows)}}
+            <tr class="row">
+                {{#each(../columns)}}
+                    <td data-title="column-{{column.index}}" class="col">
+                        {{scope.vm.getValue(../., .)}}
+                    </td>
+                {{/each}}
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+    <div class="alert alert-info" role="alert">{{i18n('table-empty-message')}}</div>
+{{/if}}
+</div>
