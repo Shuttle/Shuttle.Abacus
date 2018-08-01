@@ -9,6 +9,7 @@ import Api from 'shuttle-can-api';
 import localisation from '~/localisation';
 import { MatrixMap } from '~/matrix/';
 import { MatrixConstraintList } from '~/matrix-constraint/';
+import { MatrixElementMap, MatrixElementList } from '~/matrix-element/';
 
 resources.add('matrix', {item: 'element', action: 'list', permission: Permissions.Manage.Matrices});
 
@@ -142,10 +143,27 @@ export const ViewModel = DefineMap.extend({
         return !!result.length ? result[0] : undefined;
     },
 
-    getComparison(axis, item) {
+    getComparisonDisplay(axis, item) {
         const constraint = this.findConstraint(axis, item.index);
 
         return !!constraint ? constraint.getComparisonDisplay() : localisation.value('constraint-not-found');
+    },
+
+    editing(row, column) {
+        return !!this.element ? this.element.is(row.index, column.index) : false;
+    },
+
+    edit(row, column) {
+        this.element = this.findElement(row.index, column.index);
+
+        if (!this.element){
+            this.element = new MatrixElementMap({
+                row: row.index,
+                column: column.index
+            });
+
+            this.elements.push(this.element);
+        }
     },
 
     refreshTimestamp: {
@@ -157,7 +175,7 @@ export const ViewModel = DefineMap.extend({
     },
 
     element: {
-        Type: DefineMap
+        Type: MatrixElementMap
     },
 
     constraints: {
@@ -165,7 +183,7 @@ export const ViewModel = DefineMap.extend({
     },
 
     elements: {
-        Type: DefineList
+        Type: MatrixElementList
     },
 
     get map () {

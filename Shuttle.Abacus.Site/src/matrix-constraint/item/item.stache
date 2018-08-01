@@ -24,6 +24,6 @@
     <cs-button-submit vm:click:from="submit" text:from="submitText()"/>
 {{#unless(adding)}}
     <cs-button vm:click:from="cancel" text:from="'cancel'"/>
-{{/if}}
+{{/unless}}
 </fieldset>
 </cs-form>
