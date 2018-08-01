@@ -43,6 +43,7 @@
   "matrix-constraint": "Matric constraint",
   "matrix-constraints": "Matric constraints",
   "matrix-element": "Matric element",
+  "matrix-element-empty": "(empty)",
   "matrix-elements": "Matric elements",
   "maximum-formula-name": "Maximum formula name",
   "minimum-formula-name": "Minimum formula name",

@@ -75,11 +75,10 @@
     </tr>
     <tr class="row">
         <td data-title="row-comparison" class="col-2">
-            {{scope.vm.getRowComparison(.)}}
         </td>
     {{#each(columns)}}
         <th class="col">
-            {{column.index}}
+            {{scope.vm.getComparison('Column', .)}}
         </th>
     {{/each}}
     </tr>
@@ -87,9 +86,12 @@
 <tbody>
 {{#each(rows)}}
 <tr class="row">
+    <td data-title="row-comparison" class="col-2">
+        {{scope.vm.getComparison('Row', .)}}
+    </td>
 {{#each(../columns)}}
-    <td data-title="column-{{column.index}}" class="col">
-        {{scope.vm.getValue(../., .)}}
+    <td data-title="column-{{index}}" class="col">
+        <button type="button" class="btn btn-outline-info">{{scope.vm.getValue(../., .)}}</button>
     </td>
 {{/each}}
 </tr>

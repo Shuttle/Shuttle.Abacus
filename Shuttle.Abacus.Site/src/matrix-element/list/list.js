@@ -8,7 +8,7 @@ import state from '~/state';
 import Api from 'shuttle-can-api';
 import localisation from '~/localisation';
 import { MatrixMap } from '~/matrix/';
-
+import { MatrixConstraintList } from '~/matrix-constraint/';
 
 resources.add('matrix', {item: 'element', action: 'list', permission: Permissions.Manage.Matrices});
 
@@ -113,10 +113,16 @@ export const ViewModel = DefineMap.extend({
     },
 
     getValue(row, column) {
-        return `${column.index} / ${row.index}`;
+        var element = this.findElement(row.index, column.index);
+
+        return !!element ? element.value : localisation.value('matrix-element-empty');
     },
 
     findConstraint (axis, index) {
+        if (!this.constraints){
+            return undefined;
+        }
+
         const result = this.constraints.filter((item) =>{
            return item.axis.toLowerCase() === axis.toLowerCase() && item.index === index;
         });
@@ -124,10 +130,22 @@ export const ViewModel = DefineMap.extend({
         return !!result.length ? result[0] : undefined;
     },
 
-    getComparison(axis, item) {
-        const constraint = this.findConstraint(axis, row.index);
+    findElement (row, column) {
+        if (!this.elements){
+            return undefined;
+        }
 
-        return !!constraint ? constraint.getComparison() : localisation.value('constraint-not-found');
+        const result = this.elements.filter((item) =>{
+           return item.row === row && item.column === column;
+        });
+
+        return !!result.length ? result[0] : undefined;
+    },
+
+    getComparison(axis, item) {
+        const constraint = this.findConstraint(axis, item.index);
+
+        return !!constraint ? constraint.getComparisonDisplay() : localisation.value('constraint-not-found');
     },
 
     refreshTimestamp: {
@@ -143,11 +161,11 @@ export const ViewModel = DefineMap.extend({
     },
 
     constraints: {
-        Type: DefineList
+        Type: MatrixConstraintList
     },
 
     elements: {
-        Type: MatrixConstraintList
+        Type: DefineList
     },
 
     get map () {
