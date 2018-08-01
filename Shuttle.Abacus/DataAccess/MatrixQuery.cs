@@ -20,6 +20,11 @@ namespace Shuttle.Abacus.DataAccess
             _matrixQueryFactory = matrixQueryFactory;
         }
 
+        public DataRow Find(MatrixSearchSpecification specification)
+        {
+            return _databaseGateway.GetSingleRowUsing(_matrixQueryFactory.Find(specification));
+        }
+
         public IEnumerable<DataRow> Search(MatrixSearchSpecification specification)
         {
             return _databaseGateway.GetRowsUsing(_matrixQueryFactory.Search(specification));

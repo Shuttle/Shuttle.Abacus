@@ -20,6 +20,7 @@
   "confirmation": "Confirmation",
   "constant": "Constant",
   "constraints": "Constraints",
+  "constraint-not-found": "(no constraint)",
   "copy": "Copy",
   "count": "Count",
   "dashboard": "Dashboard",

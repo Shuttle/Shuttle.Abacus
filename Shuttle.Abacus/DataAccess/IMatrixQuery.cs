@@ -6,6 +6,7 @@ namespace Shuttle.Abacus.DataAccess
 {
     public interface IMatrixQuery
     {
+        DataRow Find(MatrixSearchSpecification specification);
         IEnumerable<DataRow> Search(MatrixSearchSpecification specification);
         IEnumerable<DataRow> All();
         DataRow Get(Guid id);

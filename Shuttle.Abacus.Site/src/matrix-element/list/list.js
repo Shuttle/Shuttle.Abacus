@@ -6,8 +6,9 @@ import resources from '~/resources';
 import Permissions from '~/permissions';
 import state from '~/state';
 import Api from 'shuttle-can-api';
-import each from 'can-util/js/each/';
+import localisation from '~/localisation';
 import { MatrixMap } from '~/matrix/';
+
 
 resources.add('matrix', {item: 'element', action: 'list', permission: Permissions.Manage.Matrices});
 
@@ -115,6 +116,20 @@ export const ViewModel = DefineMap.extend({
         return `${column.index} / ${row.index}`;
     },
 
+    findConstraint (axis, index) {
+        const result = this.constraints.filter((item) =>{
+           return item.axis.toLowerCase() === axis.toLowerCase() && item.index === index;
+        });
+
+        return !!result.length ? result[0] : undefined;
+    },
+
+    getComparison(axis, item) {
+        const constraint = this.findConstraint(axis, row.index);
+
+        return !!constraint ? constraint.getComparison() : localisation.value('constraint-not-found');
+    },
+
     refreshTimestamp: {
         type: 'string'
     },
@@ -132,7 +147,7 @@ export const ViewModel = DefineMap.extend({
     },
 
     elements: {
-        Type: DefineList
+        Type: MatrixConstraintList
     },
 
     get map () {

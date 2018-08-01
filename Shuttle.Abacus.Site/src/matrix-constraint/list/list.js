@@ -9,6 +9,7 @@ import state from '~/state';
 import Api from 'shuttle-can-api';
 import each from 'can-util/js/each/';
 import { MatrixMap } from '~/matrix/';
+import { MatrixConstraintList } from '~/matrix-constraint/';
 
 resources.add('matrix', {item: 'constraint', action: 'list', permission: Permissions.Manage.Matrices});
 
@@ -75,7 +76,7 @@ export const ViewModel = DefineMap.extend({
     },
 
     constraint: {
-        Type: DefineMap
+        Type: MatrixConstraintList
     },
 
     get constraints () {

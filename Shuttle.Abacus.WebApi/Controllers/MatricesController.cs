@@ -99,7 +99,7 @@ namespace Shuttle.Abacus.WebApi.Controllers
             {
                 return Ok(new
                 {
-                    Data = _dataRowMapper.MapObject<MatrixModel>(_matrixQuery.Get(id))
+                    Data = _dataRowMapper.MapObject<MatrixModel>(_matrixQuery.Find(new MatrixSearchSpecification().WithId(id)))
                 });
             }
         }

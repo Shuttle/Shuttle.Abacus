@@ -65,13 +65,24 @@
 {{#if(rows)}}
 <table class="table">
 <thead>
-<tr class="row">
-{{#each(columns)}}
-    <th class="col">
-        {{column.index}}
-    </th>
-{{/each}}
-</tr>
+    <tr class="row">
+        <th class="col-2">
+            {{matrix.rowArgumentName}}
+        </th>
+        <th class="col" colspan="{{requiredColumnCount()}}">
+            {{matrix.columnArgumentName}}
+        </th>
+    </tr>
+    <tr class="row">
+        <td data-title="row-comparison" class="col-2">
+            {{scope.vm.getRowComparison(.)}}
+        </td>
+    {{#each(columns)}}
+        <th class="col">
+            {{column.index}}
+        </th>
+    {{/each}}
+    </tr>
 </thead>
 <tbody>
 {{#each(rows)}}

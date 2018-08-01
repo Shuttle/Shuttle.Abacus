@@ -7,7 +7,7 @@ namespace Shuttle.Abacus.DataAccess
     public class MatrixQueryFactory : IMatrixQueryFactory
     {
         private const string MatrixQuery = @"
-select
+select {0}
     m.Id,
     m.Name,
     m.RowArgumentId,
@@ -21,6 +21,22 @@ inner join
     Argument ra on ra.Id = m.RowArgumentId
 left join
     Argument ca on ca.Id = m.ColumnArgumentId
+where
+(
+    @Id is null
+    or
+    m.Id = @Id
+)
+and
+(
+    @Name is null
+    or
+    @Name = ''
+    or
+    m.Name like '%' + @Name + '%'
+)
+order by 
+    m.Name
 ";
 
         public IQuery All()
@@ -202,18 +218,8 @@ else
         {
             Guard.AgainstNull(specification, nameof(specification));
 
-            return new RawQuery(string.Concat(MatrixQuery, @"
-where
-(
-    @Name is null
-    or
-    @Name = ''
-    or
-    m.Name like '%' + @Name + '%'
-)
-order by 
-    m.Name
-"))
+            return new RawQuery(string.Format(MatrixQuery, string.Empty))
+                .AddParameterValue(Columns.Id, specification.Id)
                 .AddParameterValue(Columns.Name, specification.Name);
         }
 
@@ -248,6 +254,15 @@ from
 where
     MatrixId = @Id
 ").AddParameterValue(Columns.Id, id);
+        }
+
+        public IQuery Find(MatrixSearchSpecification specification)
+        {
+            Guard.AgainstNull(specification, nameof(specification));
+
+            return new RawQuery(string.Format(MatrixQuery, "top 1"))
+                .AddParameterValue(Columns.Id, specification.Id)
+                .AddParameterValue(Columns.Name, specification.Name);
         }
     }
 }
