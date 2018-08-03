@@ -92,6 +92,30 @@ namespace Shuttle.Abacus.WebApi.Controllers
             return Ok();
         }
 
+        [HttpPost("{id}/elements")]
+        public IActionResult Post(Guid id, [FromBody] MatrixElementModel model)
+        {
+            Guard.AgainstNull(model, nameof(model));
+
+            if (model.Row < 1 ||
+                model.Column< 1 ||
+                string.IsNullOrEmpty(model.Value))
+            {
+                return BadRequest();
+            }
+
+            _bus.Send(new RegisterMatrixElementCommand
+            {
+                Id = Guid.NewGuid(),
+                MatrixId = id,
+                Row = model.Row,
+                Column = model.Column,
+                Value = model.Value
+            });
+
+            return Ok();
+        }
+
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {

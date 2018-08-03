@@ -58,6 +58,7 @@
     "can-connect": "^3.0.1",
     "can-define": "^2.5.3",
     "can-define-validate-validatejs": "^1.1.0",
+    "can-event-dom-enter": "^2.2.0",
     "can-route": "^4.3.1",
     "can-route-pushstate": "^5.0.2",
     "can-set": "^1.6.0",

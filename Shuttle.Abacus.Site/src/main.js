@@ -4,6 +4,7 @@ import 'bootstrap';
 import 'moment';
 import 'tempusdominus';
 import 'can-stache-route-helpers';
+import 'can-event-dom-enter/add-global/';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';

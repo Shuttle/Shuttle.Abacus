@@ -2,7 +2,6 @@
     <h3>{{matrix.name}}</h3>
 {{/if}}
 
-::{{scope.vm.element.value}}
 {{#if(rows)}}
 <table class="table">
 <thead>
@@ -34,11 +33,13 @@
 <td data-title="column-{{index}}" class="col">
 {{#if(scope.vm.editing(../., .))}}
     <div class="input-group">
-        <input type="text" value:bind="scope.vm.element.value" class="form-control" placeholder="{{i18n('value')}}" aria-label="Value">
+        <input type="text" value:bind="scope.vm.element.value" class="form-control" placeholder="{{i18n('value')}}"
+               aria-label="Value" on:enter="scope.vm.save()">
         <div class="input-group-append">
-            <button class="btn btn-outline-primary" type="button" on:click="scope.vm.save()" >
+            <button class="btn btn-outline-primary" type="button" on:click="scope.vm.save()">
                 <i class:raw="fa fa-play-circle-o" aria-hidden="true"></i></button>
-            <button class="btn btn-outline-secondary" type="button" on:click="scope.vm.cancelEdit()" on:escape="scope.vm.cancelEdit()">
+            <button class="btn btn-outline-secondary" type="button" on:click="scope.vm.cancelEdit()"
+                    on:escape="scope.vm.cancelEdit()">
                 <i class:raw="fa fa-times-circle-o" aria-hidden="true"></i></button>
         </div>
     </div>

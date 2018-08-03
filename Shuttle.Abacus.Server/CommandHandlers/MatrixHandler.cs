@@ -9,7 +9,8 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 {
     public class MatrixHandler :
         IMessageHandler<RegisterMatrixCommand>,
-        IMessageHandler<RegisterMatrixConstraintCommand>
+        IMessageHandler<RegisterMatrixConstraintCommand>,
+        IMessageHandler<RegisterMatrixElementCommand>
     {
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IEventStore _eventStore;
@@ -91,6 +92,34 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                 }
 
                 stream.AddEvent(matrix.RegisterConstraint(message.Id, message.Axis, message.Index, message.Comparison, message.Value));
+
+                _eventStore.Save(stream);
+            }
+        }
+
+        public void ProcessMessage(IHandlerContext<RegisterMatrixElementCommand> context)
+        {
+            var message = context.Message;
+
+            using (_databaseContextFactory.Create())
+            {
+                var stream = _eventStore.Get(message.MatrixId);
+
+                if (stream.IsEmpty)
+                {
+                    return;
+                }
+
+                var matrix = new Matrix(message.MatrixId);
+
+                stream.Apply(matrix);
+
+                if (matrix.Removed)
+                {
+                    return;
+                }
+
+                stream.AddEvent(matrix.RegisterElement(message.Id, message.Row, message.Column, message.Value));
 
                 _eventStore.Save(stream);
             }

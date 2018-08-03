@@ -78,6 +78,8 @@ export const ViewModel = DefineMap.extend({
 	        rowArgumentId: this.rowArgument.id,
 	        columnArgumentId: !!this.columnArgument ? this.columnArgument.id : undefined,
 	        dataTypeName: this.dataTypeName
+        }).then(function(){
+            state.registrationRequested('matrix');
         });
 
         this.close();

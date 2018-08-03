@@ -191,7 +191,22 @@ export const ViewModel = DefineMap.extend({
     },
 
     save(){
-        this.element = undefined;
+        if (!this.element || !this.element.value){
+            this.element = undefined;
+            return;
+        }
+
+        api.elements.post({
+            row: this.element.row,
+            column: this.element.column,
+            value: this.element.value
+        }, {
+            id: this.matrix.id
+        })
+            .then(function () {
+                state.registrationRequested('matrix-element');
+                this.element = undefined;
+            });
     },
 
     refreshTimestamp: {
