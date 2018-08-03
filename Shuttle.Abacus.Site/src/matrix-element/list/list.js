@@ -10,6 +10,7 @@ import localisation from '~/localisation';
 import { MatrixMap } from '~/matrix/';
 import { MatrixConstraintList } from '~/matrix-constraint/';
 import { MatrixElementMap, MatrixElementList } from '~/matrix-element/';
+import $ from 'jquery';
 
 resources.add('matrix', {item: 'element', action: 'list', permission: Permissions.Manage.Matrices});
 
@@ -183,6 +184,8 @@ export const ViewModel = DefineMap.extend({
         }
 
         this.elementValue = this.element.value;
+
+        $('#' + this.element.elementId).focus();
     },
 
     cancelEdit(){
@@ -191,6 +194,8 @@ export const ViewModel = DefineMap.extend({
     },
 
     save(){
+        const self = this;
+
         if (!this.element || !this.element.value){
             this.element = undefined;
             return;
@@ -205,7 +210,7 @@ export const ViewModel = DefineMap.extend({
         })
             .then(function () {
                 state.registrationRequested('matrix-element');
-                this.element = undefined;
+                self.element = undefined;
             });
     },
 
@@ -248,13 +253,13 @@ export const ViewModel = DefineMap.extend({
                 api.elements.list({
                     id: self.matrix.id
                 }).then(function (result) {
-                    self.elements = result;
+                    self.elements = new MatrixElementList(result);
                 });
 
                 api.constraints.list({
                     id: self.matrix.id
                 }).then(function (result) {
-                    self.constraints = result;
+                    self.constraints = new MatrixConstraintList(result);
                 });
             });
     },

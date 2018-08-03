@@ -2,8 +2,16 @@
 import './list/';
 import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
+import nextId from 'shuttle-canstrap/infrastructure/id-generator';
 
 export const MatrixElementMap = DefineMap.extend({
+    init() {
+        this.elementId = 'matrix-element-' + nextId().toString();
+    },
+    elementId: {
+        type: 'string',
+        default: ''
+    },
     row:{
         type: 'number'
     },

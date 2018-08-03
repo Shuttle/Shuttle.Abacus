@@ -33,7 +33,7 @@
 <td data-title="column-{{index}}" class="col">
 {{#if(scope.vm.editing(../., .))}}
     <div class="input-group">
-        <input type="text" value:bind="scope.vm.element.value" class="form-control" placeholder="{{i18n('value')}}"
+        <input id:from="scope.vm.element.elementId" type="text" value:bind="scope.vm.element.value" class="form-control" placeholder="{{i18n('value')}}"
                aria-label="Value" on:enter="scope.vm.save()">
         <div class="input-group-append">
             <button class="btn btn-outline-primary" type="button" on:click="scope.vm.save()">
