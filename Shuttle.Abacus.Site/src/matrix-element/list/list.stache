@@ -34,7 +34,7 @@
 {{#if(scope.vm.editing(../., .))}}
     <div class="input-group">
         <input id:from="scope.vm.element.elementId" type="text" value:bind="scope.vm.element.value" class="form-control" placeholder="{{i18n('value')}}"
-               aria-label="Value" on:enter="scope.vm.save()">
+               aria-label="Value" on:keyup="scope.vm.keyup(scope.event)">
         <div class="input-group-append">
             <button class="btn btn-outline-primary" type="button" on:click="scope.vm.save()">
                 <i class:raw="fa fa-play-circle-o" aria-hidden="true"></i></button>

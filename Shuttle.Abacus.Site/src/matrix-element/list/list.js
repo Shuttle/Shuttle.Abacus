@@ -188,6 +188,16 @@ export const ViewModel = DefineMap.extend({
         $('#' + this.element.elementId).focus();
     },
 
+    keyup(ev){
+        if (ev.keyCode == 13) {
+            this.save();
+        }
+
+        if (ev.keyCode == 27) {
+            this.cancelEdit();
+        }
+    },
+
     cancelEdit(){
         this.element.value = this.elementValue;
         this.element = undefined;
