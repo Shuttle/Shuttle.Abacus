@@ -113,6 +113,12 @@ export const ViewModel = DefineMap.extend({
             }, 1);
     },
 
+    hasValue(row, column) {
+        var element = this.findElement(row.index, column.index);
+
+        return !!element && !!element.value;
+    },
+
     getValue(row, column) {
         var element = this.findElement(row.index, column.index);
 
@@ -149,6 +155,10 @@ export const ViewModel = DefineMap.extend({
         return !!constraint ? constraint.getComparisonDisplay() : localisation.value('constraint-not-found');
     },
 
+    elementValue: {
+        type: 'string'
+    },
+
     elementSelected: {
         type: 'boolean',
         get(){
@@ -171,9 +181,16 @@ export const ViewModel = DefineMap.extend({
 
             this.elements.push(this.element);
         }
+
+        this.elementValue = this.element.value;
     },
 
     cancelEdit(){
+        this.element.value = this.elementValue;
+        this.element = undefined;
+    },
+
+    save(){
         this.element = undefined;
     },
 
