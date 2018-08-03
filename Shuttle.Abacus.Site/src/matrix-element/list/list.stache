@@ -5,23 +5,23 @@
 {{#if(rows)}}
 <table class="table">
 <thead>
-    <tr class="row">
-        <th class="col-2">
-            {{matrix.rowArgumentName}}
-        </th>
-        <th class="col" colspan="{{requiredColumnCount()}}">
-            {{matrix.columnArgumentName}}
-        </th>
-    </tr>
-    <tr class="row">
-        <td data-title="row-comparison" class="col-2">
-        </td>
-    {{#each(columns)}}
-        <th class="col">
-            {{scope.vm.getComparisonDisplay('Column', .)}}
-        </th>
-    {{/each}}
-    </tr>
+<tr class="row">
+    <th class="col-2">
+        {{matrix.rowArgumentName}}
+    </th>
+    <th class="col" colspan="{{requiredColumnCount()}}">
+        {{matrix.columnArgumentName}}
+    </th>
+</tr>
+<tr class="row">
+    <td data-title="row-comparison" class="col-2">
+    </td>
+{{#each(columns)}}
+    <th class="col">
+        {{scope.vm.getComparisonDisplay('Column', .)}}
+    </th>
+{{/each}}
+</tr>
 </thead>
 <tbody>
 {{#each(rows)}}
@@ -30,13 +30,22 @@
         {{scope.vm.getComparisonDisplay('Row', .)}}
     </td>
 {{#each(../columns)}}
-    <td data-title="column-{{index}}" class="col">
-    {{#if(scope.vm.editing(../., .))}}
-        <cs-input vm:value:bind="element.value" />
-    {{else}}
-        <button type="button" class="btn btn-outline-info" on:click="scope.vm.edit(../., .)">{{scope.vm.getValue(../., .)}}</button>
-    {{/if}}
-    </td>
+<td data-title="column-{{index}}" class="col">
+{{#if(scope.vm.editing(../., .))}}
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="{{i18n('value')}}" aria-label="Value">
+        <div class="input-group-append">
+            <button class="btn btn-outline-primary" type="button">
+                <i class:raw="fa fa-play-circle-o" aria-hidden="true"></i></button>
+            <button class="btn btn-outline-secondary" type="button" on:click="scope.vm.cancelEdit()" on:escape="scope.vm.cancelEdit()">
+                <i class:raw="fa fa-times-circle-o" aria-hidden="true"></i></button>
+        </div>
+    </div>
+{{else}}
+<button type="button" class="btn btn-outline-info {{#if(scope.vm.elementSelected)}}d-none{{/if}}"
+        on:click="scope.vm.edit(../., .)">{{scope.vm.getValue(../., .)}}</button>
+{{/if}}
+</td>
 {{/each}}
 </tr>
 {{/each}}

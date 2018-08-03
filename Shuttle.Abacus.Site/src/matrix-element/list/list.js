@@ -116,7 +116,7 @@ export const ViewModel = DefineMap.extend({
     getValue(row, column) {
         var element = this.findElement(row.index, column.index);
 
-        return !!element ? element.value : localisation.value('matrix-element-empty');
+        return !!element && !!element.value ? element.value : localisation.value('matrix-element-empty');
     },
 
     findConstraint (axis, index) {
@@ -149,6 +149,13 @@ export const ViewModel = DefineMap.extend({
         return !!constraint ? constraint.getComparisonDisplay() : localisation.value('constraint-not-found');
     },
 
+    elementSelected: {
+        type: 'boolean',
+        get(){
+            return !!this.element;
+        }
+    },
+
     editing(row, column) {
         return !!this.element ? this.element.is(row.index, column.index) : false;
     },
@@ -164,6 +171,10 @@ export const ViewModel = DefineMap.extend({
 
             this.elements.push(this.element);
         }
+    },
+
+    cancelEdit(){
+        this.element = undefined;
     },
 
     refreshTimestamp: {
