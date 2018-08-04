@@ -72,7 +72,12 @@ export const ViewModel = DefineMap.extend({
 	},
 
 	selectedMatrix: {
-        Type: DefineMap
+        Type: DefineMap,
+        set(value){
+            this.inputParameter = value.id;
+
+            return value;
+        }
 	},
 
 	selectedFormula: {
@@ -88,7 +93,10 @@ export const ViewModel = DefineMap.extend({
 
 	inputParameterMessage: {
         type: 'string',
-        default: ''
+        default: '',
+        get(){
+            const e = this.errors();
+        }
     },
 
     add: function () {
