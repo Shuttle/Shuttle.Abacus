@@ -30,8 +30,7 @@ export const ViewModel = DefineMap.extend({
             {value: 'Division', label: 'Division'},
             {value: 'Multiplication', label: 'Multiplication'},
             {value: 'Rounding', label: 'Rounding'},
-            {value: 'Subtraction', label: 'Subtraction'},
-            {value: 'Set', label: 'Set'}
+            {value: 'Subtraction', label: 'Subtraction'}
         ]
     },
 
