@@ -45,13 +45,8 @@
         </div>
     </div>
 {{else}}
-{{#if(scope.vm.elementSelected)}}
-<span class="p-2 border border-{{#if(scope.vm.hasValue(../., .))}}info{{else}}warning{{/if}}">{{scope.vm.getValue
-        (../., .)}}</span>
-{{else}}
-<button type="button" class="btn btn-outline-{{#if(scope.vm.hasValue(../., .))}}info{{else}}warning{{/if}}"
-        on:click="scope.vm.edit(../., .)">{{scope.vm.getValue(../., .)}}</button>
-{{/if}}
+    <button type="button" class="btn btn-outline-{{#if(scope.vm.hasValue(../., .))}}info{{else}}warning{{/if}}"
+            on:click="scope.vm.edit(../., .)">{{scope.vm.getValue(../., .)}}</button>
 {{/if}}
 </td>
 {{/each}}
