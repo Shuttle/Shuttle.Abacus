@@ -33,7 +33,8 @@
 <td data-title="column-{{index}}" class="col">
 {{#if(scope.vm.editing(../., .))}}
     <div class="input-group">
-        <input id:from="scope.vm.element.elementId" type="text" value:bind="scope.vm.element.value" class="form-control" placeholder="{{i18n('value')}}"
+        <input id:from="scope.vm.element.elementId" type="text" value:bind="scope.vm.element.value" class="form-control"
+               placeholder="{{i18n('value')}}"
                aria-label="Value" on:keyup="scope.vm.keyup(scope.event)">
         <div class="input-group-append">
             <button class="btn btn-outline-primary" type="button" on:click="scope.vm.save()">
@@ -44,8 +45,13 @@
         </div>
     </div>
 {{else}}
-<button type="button" class="btn btn-outline-{{#if(scope.vm.hasValue(../., .))}}info{{else}}warning{{/if}} {{#if(scope.vm.elementSelected)}}d-none{{/if}}"
+{{#if(scope.vm.elementSelected)}}
+<span class="p-2 border border-{{#if(scope.vm.hasValue(../., .))}}info{{else}}warning{{/if}}">{{scope.vm.getValue
+        (../., .)}}</span>
+{{else}}
+<button type="button" class="btn btn-outline-{{#if(scope.vm.hasValue(../., .))}}info{{else}}warning{{/if}}"
         on:click="scope.vm.edit(../., .)">{{scope.vm.getValue(../., .)}}</button>
+{{/if}}
 {{/if}}
 </td>
 {{/each}}
