@@ -14,7 +14,7 @@ var api = {
         endpoint: 'formulas/{id}'
     }),
     operations: new Api({
-        endpoint: 'formula/{id}/operations'
+        endpoint: 'formulas/{id}/operations'
     })
 };
 

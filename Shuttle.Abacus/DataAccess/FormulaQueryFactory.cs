@@ -51,7 +51,7 @@ where
         public IQuery RemoveConstraint(Guid constraintId)
         {
             return
-                RawQuery.Create("delete from FormulaConstraint where ConstraintId = @Id")
+                RawQuery.Create("delete from FormulaConstraint where Id = @Id")
                     .AddParameterValue(Columns.Id, constraintId);
         }
 
@@ -59,13 +59,16 @@ where
         {
             return RawQuery.Create(@"
 select
-    FormulaId,
-    SequenceNumber,
-    ArgumentName,
-    Comparison,
-    Value
+    c.Id,
+    c.FormulaId,
+    c.ArgumentId,
+    a.Name ArgumentName,
+    c.Comparison,
+    c.Value
 from
-    FormulaConstraint
+    FormulaConstraint c
+inner join
+    Argument a on a.Id = c.ArgumentId
 where
     FormulaId = @Id
 ")
@@ -197,7 +200,7 @@ insert into FormulaConstraint
 (
     Id,
     FormulaId,
-    ArgumentName,
+    ArgumentId,
     Comparison,
     Value
 )
@@ -205,14 +208,13 @@ values
 (
     @Id,
     @FormulaId,
-    @SequenceNumber,
-    @ArgumentName,
+    @ArgumentId,
     @Comparison,
     @Value
 )")
                 .AddParameterValue(Columns.Id, constraintId)
                 .AddParameterValue(Columns.FormulaId, formulaId)
-                .AddParameterValue(Columns.ArgumentName, argumentId)
+                .AddParameterValue(Columns.ArgumentId, argumentId)
                 .AddParameterValue(Columns.Comparison, comparison)
                 .AddParameterValue(Columns.Value, value);
         }

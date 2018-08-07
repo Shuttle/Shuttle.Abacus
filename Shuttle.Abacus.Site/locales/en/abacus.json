@@ -29,6 +29,7 @@
   "elements": "Elements",
   "formula": "Formula",
   "formulas": "Formulas",
+  "formula-constraint": "Formula constraint",
   "formula-operation": "Formula operation",
   "invert": "Invert",
   "fetch": "Fetch",

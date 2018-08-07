@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DuplicateItem" xml:space="preserve">
+    <value>A duplicate item is not permitted.</value>
+  </data>
   <data name="IncompatibleDataTypes" xml:space="preserve">
     <value>Data type '{0}' cannot be compared to type '{1}'.</value>
     <comment>{0} = data type name of arguement, {1} = data type name of other argument</comment>

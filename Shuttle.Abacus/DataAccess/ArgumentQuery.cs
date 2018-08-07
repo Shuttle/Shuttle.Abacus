@@ -33,7 +33,7 @@ namespace Shuttle.Abacus.DataAccess
 
             if (row == null)
             {
-                throw EntityNotFoundException.For("Argument", id);
+                throw RecordNotFoundException.For("Argument", id);
             }
 
             return row;

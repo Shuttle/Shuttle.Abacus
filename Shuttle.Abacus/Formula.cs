@@ -34,6 +34,11 @@ namespace Shuttle.Abacus
             Guard.AgainstNullOrEmptyString(valueProviderName, nameof(valueProviderName));
             Guard.AgainstNullOrEmptyString(inputParameter, nameof(inputParameter));
 
+            if (ContainsOperation(id))
+            {
+                throw new DomainException(Resources.DuplicateItem);
+            }
+
             return On(new OperationAdded
             {
                 Id = id,
@@ -42,6 +47,11 @@ namespace Shuttle.Abacus
                 ValueProviderName = valueProviderName,
                 InputParameter = inputParameter
             });
+        }
+
+        public bool ContainsOperation(Guid id)
+        {
+            return _operations.Find(item => item.Id.Equals(id)) != null;
         }
 
         private OperationAdded On(OperationAdded operationAdded)
@@ -64,6 +74,11 @@ namespace Shuttle.Abacus
             Guard.AgainstNullOrEmptyString(comparison, nameof(comparison));
             Guard.AgainstNullOrEmptyString(value, nameof(value));
 
+            if (ContainsConstraint(id))
+            {
+                throw new DomainException(Resources.DuplicateItem);
+            }
+
             return On(new ConstraintAdded
             {
                 Id = id,
@@ -71,6 +86,11 @@ namespace Shuttle.Abacus
                 Comparison = comparison,
                 Value = value
             });
+        }
+
+        public bool ContainsConstraint(Guid id)
+        {
+            return _constraints.Find(item => item.Id.Equals(id)) != null;
         }
 
         private ConstraintAdded On(ConstraintAdded constraintAdded)

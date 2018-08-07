@@ -4,4 +4,4 @@
 
 <abacus-formula-operation-add vm:formula:from="formula" />
 
-<cs-table vm:columns:from="columns" vm:rows:from="operations" />
+<cs-table vm:columns:from="columns" vm:rows:from="operations.value" />

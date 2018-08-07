@@ -11,7 +11,6 @@ namespace Shuttle.Abacus.WebApi.Controllers
 {
     [RequiresPermission(SystemPermissions.Manage.Matrices)]
     [Route("api/[controller]")]
-    [RequiresSession]
     public class MatricesController : Controller
     {
         private readonly IServiceBus _bus;

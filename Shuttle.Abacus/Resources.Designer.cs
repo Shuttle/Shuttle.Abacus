@@ -61,6 +61,15 @@ namespace Shuttle.Abacus {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A duplicate item is not permitted..
+        /// </summary>
+        public static string DuplicateItem {
+            get {
+                return ResourceManager.GetString("DuplicateItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data type &apos;{0}&apos; cannot be compared to type &apos;{1}&apos;..
         /// </summary>
         public static string IncompatibleDataTypes {

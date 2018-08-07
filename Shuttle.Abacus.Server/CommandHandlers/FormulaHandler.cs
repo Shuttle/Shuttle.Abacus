@@ -13,6 +13,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
         IMessageHandler<SetFormulaMaxmimumCommand>,
         IMessageHandler<SetFormulaMinimumCommand>,
         IMessageHandler<RemoveFormulaCommand>,
+        IMessageHandler<RemoveFormulaConstraintCommand>,
         IMessageHandler<RegisterFormulaOperationCommand>,
         IMessageHandler<RegisterFormulaConstraintCommand>
     {
@@ -166,16 +167,14 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 
             using (_databaseContextFactory.Create())
             {
-                var stream = _eventStore.Get(message.FormulaId);
+                var stream = _eventStore.Get(message.Id);
 
                 if (stream.IsEmpty)
                 {
                     return;
                 }
 
-                var formula = new Formula(message.FormulaId);
-
-                stream.Apply(formula);
+                var formula = stream.Get<Formula>();
 
                 if (formula.Removed)
                 {
@@ -183,6 +182,37 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                 }
 
                 stream.AddEvent(formula.RemoveOperation(message.Id));
+
+                _eventStore.Save(stream);
+            }
+        }
+
+        public void ProcessMessage(IHandlerContext<RemoveFormulaConstraintCommand> context)
+        {
+            var message = context.Message;
+
+            using (_databaseContextFactory.Create())
+            {
+                var stream = _eventStore.Get(message.FormulaId);
+
+                if (stream.IsEmpty)
+                {
+                    return;
+                }
+
+                var formula = stream.Get<Formula>();
+
+                if (formula.Removed)
+                {
+                    return;
+                }
+
+                if (!formula.ContainsConstraint(message.ConstraintId))
+                {
+                    return;
+                }
+
+                stream.AddEvent(formula.RemoveConstraint(message.ConstraintId));
 
                 _eventStore.Save(stream);
             }

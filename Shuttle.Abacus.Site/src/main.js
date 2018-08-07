@@ -32,6 +32,7 @@ import '~/dashboard/';
 import '~/argument/';
 import '~/argument-value/';
 import '~/formula/';
+import '~/formula-constraint/';
 import '~/formula-operation/';
 import '~/matrix/';
 import '~/matrix-constraint/';

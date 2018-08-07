@@ -9,8 +9,8 @@ using Shuttle.Esb;
 
 namespace Shuttle.Abacus.WebApi.Controllers
 {
+    [RequiresPermission(SystemPermissions.Manage.Formulas)]
     [Route("api/[controller]")]
-    [RequiresSession]
     public class FormulasController : Controller
     {
         private readonly IServiceBus _bus;
@@ -47,7 +47,6 @@ namespace Shuttle.Abacus.WebApi.Controllers
             }
         }
 
-        [RequiresPermission(SystemPermissions.Manage.Formulas)]
         [HttpPost]
         public IActionResult Post([FromBody] FormulaModel model)
         {
@@ -83,6 +82,47 @@ namespace Shuttle.Abacus.WebApi.Controllers
                     Data = _dataRowMapper.MapObjects<FormulaOperationModel>(_formulaQuery.Operations(id))
                 });
             }
+        }
+
+        [HttpGet("{id}/constraints")]
+        public IActionResult Constraints(Guid id)
+        {
+            using (_databaseContextFactory.Create())
+            {
+                return Ok(new
+                {
+                    Data = _dataRowMapper.MapObjects<FormulaConstraintModel>(_formulaQuery.Constraints(id))
+                });
+            }
+        }
+
+        [HttpPost("{id}/constraints")]
+        public IActionResult Post(Guid id, [FromBody] FormulaConstraintModel model)
+        {
+            Guard.AgainstNull(model, nameof(model));
+
+            _bus.Send(new RegisterFormulaConstraintCommand
+            {
+                Id = Guid.NewGuid(),
+                FormulaId = id,
+                ArgumentId = model.ArgumentId,
+                Comparison = model.Comparison,
+                Value = model.Value
+            });
+
+            return Ok();
+        }
+
+        [HttpDelete("{formulaId}/constraints/{constraintId}")]
+        public IActionResult DeleteValue(Guid formulaId, Guid constraintId)
+        {
+            _bus.Send(new RemoveFormulaConstraintCommand
+            {
+                FormulaId = formulaId,
+                ConstraintId = constraintId
+            });
+
+            return Ok();
         }
     }
 }

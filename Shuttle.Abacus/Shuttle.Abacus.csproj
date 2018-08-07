@@ -15,7 +15,13 @@
   <ItemGroup>
     <PackageReference Include="Shuttle.Core.Contract" Version="10.0.1" />
     <PackageReference Include="Shuttle.Core.Data" Version="10.0.8" />
-    <PackageReference Include="Shuttle.Recall" Version="10.0.2" />
+    <PackageReference Include="Shuttle.Recall" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\..\..\Users\Eben.Roux\.nuget\packages\nunit\3.10.1\lib\netstandard2.0\nunit.framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
