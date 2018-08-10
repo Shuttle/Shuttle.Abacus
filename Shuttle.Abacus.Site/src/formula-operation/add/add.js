@@ -63,11 +63,21 @@ export const ViewModel = DefineMap.extend({
 
     constant: {
         type: 'string',
-        default: ''
+        default: '',
+        set(value){
+            this.inputParameter = value;
+
+            return value;
+        }
     },
 
 	selectedArgument: {
-        Type: DefineMap
+        Type: DefineMap,
+        set(value){
+            this.inputParameter = value.id;
+
+            return value;
+        }
 	},
 
 	selectedMatrix: {
@@ -80,7 +90,12 @@ export const ViewModel = DefineMap.extend({
 	},
 
 	selectedFormula: {
-        Type: DefineMap
+        Type: DefineMap,
+        set(value){
+            this.inputParameter = value.id;
+
+            return value;
+        }
 	},
 
     inputParameter: {
@@ -104,7 +119,9 @@ export const ViewModel = DefineMap.extend({
         }
 
         api.operations.post({
-            operation: this.operation
+            operation: this.operation,
+            valueProviderName: this.valueProviderName,
+            inputParameter: this.inputParameter
         },{
             id: this.formula.id
         })

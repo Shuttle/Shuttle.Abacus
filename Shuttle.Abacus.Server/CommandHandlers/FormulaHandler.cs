@@ -14,6 +14,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
         IMessageHandler<SetFormulaMinimumCommand>,
         IMessageHandler<RemoveFormulaCommand>,
         IMessageHandler<RemoveFormulaConstraintCommand>,
+        IMessageHandler<RemoveFormulaOperationCommand>,
         IMessageHandler<RegisterFormulaOperationCommand>,
         IMessageHandler<RegisterFormulaConstraintCommand>
     {
@@ -167,7 +168,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 
             using (_databaseContextFactory.Create())
             {
-                var stream = _eventStore.Get(message.Id);
+                var stream = _eventStore.Get(message.FormulaId);
 
                 if (stream.IsEmpty)
                 {
@@ -181,7 +182,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                     return;
                 }
 
-                stream.AddEvent(formula.RemoveOperation(message.Id));
+                stream.AddEvent(formula.AddOperation(message.Id, message.Operation, message.ValueProviderName, message.InputParameter));
 
                 _eventStore.Save(stream);
             }
@@ -213,6 +214,37 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                 }
 
                 stream.AddEvent(formula.RemoveConstraint(message.ConstraintId));
+
+                _eventStore.Save(stream);
+            }
+        }
+
+        public void ProcessMessage(IHandlerContext<RemoveFormulaOperationCommand> context)
+        {
+            var message = context.Message;
+
+            using (_databaseContextFactory.Create())
+            {
+                var stream = _eventStore.Get(message.FormulaId);
+
+                if (stream.IsEmpty)
+                {
+                    return;
+                }
+
+                var formula = stream.Get<Formula>();
+
+                if (formula.Removed)
+                {
+                    return;
+                }
+
+                if (!formula.ContainsOperation(message.OperationId))
+                {
+                    return;
+                }
+
+                stream.AddEvent(formula.RemoveOperation(message.OperationId));
 
                 _eventStore.Save(stream);
             }

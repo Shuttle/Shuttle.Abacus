@@ -95,6 +95,12 @@ export const ViewModel = DefineMap.extend({
             columns.push({
                 columnTitle: 'input-parameter',
                 columnClass: 'col',
+                attributeName: 'inputParameter'
+            });
+
+            columns.push({
+                columnTitle: 'input-parameter',
+                columnClass: 'col',
                 attributeName: 'inputParameterDescription'
             });
         }

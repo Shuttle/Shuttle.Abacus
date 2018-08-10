@@ -21,6 +21,7 @@ from
             return RawQuery.Create(@"
 select
     Id,
+    FormulaId,
     SequenceNumber,
     Operation,
     ValueProviderName,
@@ -28,7 +29,7 @@ select
 from
     FormulaOperation
 where
-    Id = @Id
+    FormulaId = @Id
 ")
                 .AddParameterValue(Columns.Id, id);
         }
@@ -44,7 +45,7 @@ where
         public IQuery RemoveOperation(Guid operationId)
         {
             return
-                RawQuery.Create("delete from FormulaOperation where OperationId = @Id")
+                RawQuery.Create("delete from FormulaOperation where Id = @Id")
                     .AddParameterValue(Columns.Id, operationId);
         }
 
@@ -118,6 +119,7 @@ where
             return RawQuery.Create(@"
 insert into FormulaOperation
 (
+    Id,
     FormulaId,
     SequenceNumber,
     Operation,
@@ -127,13 +129,15 @@ insert into FormulaOperation
 values
 (
     @Id,
+    @FormulaId,
     @SequenceNumber,
     @Operation,
     @ValueProviderName,
     @InputParameter
 )
 ")
-                .AddParameterValue(Columns.Id, formulaId)
+                .AddParameterValue(Columns.Id, operationId)
+                .AddParameterValue(Columns.FormulaId, formulaId)
                 .AddParameterValue(Columns.Operation, operation)
                 .AddParameterValue(Columns.ValueProviderName, valueProviderName)
                 .AddParameterValue(Columns.InputParameter, inputParameter)

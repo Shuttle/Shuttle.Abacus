@@ -84,6 +84,36 @@ namespace Shuttle.Abacus.WebApi.Controllers
             }
         }
 
+
+        [HttpPost("{id}/operations")]
+        public IActionResult Post(Guid id, [FromBody] FormulaOperationModel model)
+        {
+            Guard.AgainstNull(model, nameof(model));
+
+            _bus.Send(new RegisterFormulaOperationCommand
+            {
+                Id = Guid.NewGuid(),
+                FormulaId = id,
+                Operation = model.Operation,
+                ValueProviderName = model.ValueProviderName,
+                InputParameter = model.InputParameter
+            });
+
+            return Ok();
+        }
+
+        [HttpDelete("{formulaId}/operations/{operationId}")]
+        public IActionResult DeleteOperation(Guid formulaId, Guid operationId)
+        {
+            _bus.Send(new RemoveFormulaOperationCommand
+            {
+                FormulaId = formulaId,
+                OperationId = operationId
+            });
+
+            return Ok();
+        }
+
         [HttpGet("{id}/constraints")]
         public IActionResult Constraints(Guid id)
         {
@@ -114,7 +144,7 @@ namespace Shuttle.Abacus.WebApi.Controllers
         }
 
         [HttpDelete("{formulaId}/constraints/{constraintId}")]
-        public IActionResult DeleteValue(Guid formulaId, Guid constraintId)
+        public IActionResult DeleteConstraint(Guid formulaId, Guid constraintId)
         {
             _bus.Send(new RemoveFormulaConstraintCommand
             {
