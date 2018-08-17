@@ -12,12 +12,25 @@ import $ from "jquery";
 
 resources.add('formula', { item: 'operation', action: 'list', permission: Permissions.Manage.Formulas});
 
+export const OperationMap = DefineMap.extend({
+    remove() {
+        api.operations.delete({
+            formulaId: state.routeData.id,
+            operationId: this.id
+        })
+            .then(function () {
+                state.removalRequested("formula-operation")
+            });
+    }
+});
+
 export const api = {
     formulas: new Api({
         endpoint: 'formulas/{id}'
     }),
     operations: new Api({
-        endpoint: 'formulas/{id}/operations'
+        endpoint: 'formulas/{formulaId}/operations/{operationId}',
+        Map: OperationMap
     })
 };
 
@@ -65,7 +78,7 @@ export const ViewModel = DefineMap.extend({
                 self.formula = map;
 
                 return api.operations.list({
-                    id: self.formulaId
+                    formulaId: self.formulaId
                 }).then(function(response){
                     self.operations = response.map(function (item) {
                         item.formulaId = self.formulaId;
@@ -102,6 +115,12 @@ export const ViewModel = DefineMap.extend({
                 columnTitle: 'input-parameter',
                 columnClass: 'col',
                 attributeName: 'inputParameterDescription'
+            });
+
+            columns.push({
+                columnTitle: 'remove',
+                columnClass: 'col-1',
+                stache: '<cs-button-remove click:from="remove" elementClass:from="\'btn-sm\'"/>'
             });
         }
 
