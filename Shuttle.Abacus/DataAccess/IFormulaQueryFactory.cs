@@ -17,5 +17,6 @@ namespace Shuttle.Abacus.DataAccess
         IQuery Registered(Guid formulaId, string name);
         IQuery Remove(Guid formulaId);
         IQuery Rename(Guid formulaId, string name);
+        IQuery RenumberOperations(Guid formulaId, int fromSequenceNumber);
     }
 }

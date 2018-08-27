@@ -10,5 +10,6 @@ namespace Shuttle.Abacus.WebApi
         public string Operation { get; set; }
         public string ValueProviderName { get; set; }
         public string InputParameter { get; set; }
+        public string InputParameterDescription { get; set; }
     }
 }

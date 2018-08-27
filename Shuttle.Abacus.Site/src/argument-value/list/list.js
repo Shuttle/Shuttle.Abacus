@@ -67,8 +67,7 @@ export const ViewModel = DefineMap.extend({
 		const refreshTimestamp = this.refreshTimestamp;
 
 		if (!this.argumentId) {
-			this.map = undefined;
-			return;
+			return undefined;
 		}
 
 		return api.arguments.map({

@@ -88,5 +88,10 @@ namespace Shuttle.Abacus.DataAccess
         {
             return _databaseGateway.GetRowsUsing(_queryFactory.Constraints(formulaId));
         }
+
+        public void RenumberOperations(Guid formulaId, int fromSequenceNumber)
+        {
+            _databaseGateway.ExecuteUsing(_queryFactory.RenumberOperations(formulaId, fromSequenceNumber));
+        }
     }
 }

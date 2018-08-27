@@ -20,14 +20,27 @@ from
         {
             return RawQuery.Create(@"
 select
-    Id,
-    FormulaId,
-    SequenceNumber,
-    Operation,
-    ValueProviderName,
-    InputParameter
+    o.Id,
+    o.FormulaId,
+    o.SequenceNumber,
+    o.Operation,
+    o.ValueProviderName,
+    o.InputParameter,
+    case ValueProviderName
+        when 'Constant' then o.InputParameter
+        when 'Argument' then a.Name
+        when 'Matrix' then m.Name
+        when 'Formula' then f.Name
+        else 'RunningTotal'
+    end InputParameterDescription
 from
-    FormulaOperation
+    FormulaOperation o
+left join
+    Argument a on a.Id = o.InputParameter
+left join
+    Matrix m on m.Id = o.InputParameter
+left join
+    Formula f on f.Id = o.InputParameter
 where
     FormulaId = @Id
 ")
@@ -112,6 +125,22 @@ where
 ")
                 .AddParameterValue(Columns.Id, formulaId)
                 .AddParameterValue(Columns.Name, name);
+        }
+
+        public IQuery RenumberOperations(Guid formulaId, int fromSequenceNumber)
+        {
+            return RawQuery.Create(@"
+update 
+    FormulaOperation
+set
+    SequenceNumber = SequenceNumber - 1
+where
+    FormulaId = @FormulaId
+and
+    SequenceNumber > @SequenceNumber
+")
+                .AddParameterValue(Columns.FormulaId, formulaId)
+                .AddParameterValue(Columns.SequenceNumber, fromSequenceNumber);
         }
 
         public IQuery AddOperation(Guid operationId, Guid formulaId, int sequenceNumber, string operation, string valueProviderName, string inputParameter)

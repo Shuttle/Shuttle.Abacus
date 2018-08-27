@@ -64,8 +64,7 @@ export const ViewModel = DefineMap.extend({
         const refreshTimestamp = this.refreshTimestamp;
 
         if (!this.formulaId){
-            this.map = undefined;
-            return;
+            return undefined;
         }
 
         return api.formulas.map({

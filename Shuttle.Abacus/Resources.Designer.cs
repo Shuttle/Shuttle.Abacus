@@ -77,5 +77,14 @@ namespace Shuttle.Abacus {
                 return ResourceManager.GetString("IncompatibleDataTypes", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The item could not be found..
+        /// </summary>
+        public static string MissingItem {
+            get {
+                return ResourceManager.GetString("MissingItem", resourceCulture);
+            }
+        }
     }
 }

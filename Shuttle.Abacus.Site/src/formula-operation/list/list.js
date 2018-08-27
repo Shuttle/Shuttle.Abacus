@@ -67,8 +67,7 @@ export const ViewModel = DefineMap.extend({
         const refreshTimestamp = this.refreshTimestamp;
 
         if (!this.formulaId){
-            this.map = undefined;
-            return;
+            return undefined;
         }
 
         return api.formulas.map({
@@ -103,12 +102,6 @@ export const ViewModel = DefineMap.extend({
                 columnTitle: 'value-provider-name',
                 columnClass: 'col-2',
                 attributeName: 'valueProviderName'
-            });
-
-            columns.push({
-                columnTitle: 'input-parameter',
-                columnClass: 'col',
-                attributeName: 'inputParameter'
             });
 
             columns.push({

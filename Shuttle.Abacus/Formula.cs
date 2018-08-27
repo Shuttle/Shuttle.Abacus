@@ -51,7 +51,12 @@ namespace Shuttle.Abacus
 
         public bool ContainsOperation(Guid id)
         {
-            return _operations.Find(item => item.Id.Equals(id)) != null;
+            return FindOperation(id) != null;
+        }
+
+        public FormulaOperation FindOperation(Guid id)
+        {
+            return _operations.Find(item => item.Id.Equals(id));
         }
 
         private OperationAdded On(OperationAdded operationAdded)
@@ -90,7 +95,12 @@ namespace Shuttle.Abacus
 
         public bool ContainsConstraint(Guid id)
         {
-            return _constraints.Find(item => item.Id.Equals(id)) != null;
+            return FindConstraint(id) != null;
+        }
+
+        private FormulaConstraint FindConstraint(Guid id)
+        {
+            return _constraints.Find(item => item.Id.Equals(id));
         }
 
         private ConstraintAdded On(ConstraintAdded constraintAdded)
@@ -184,9 +194,17 @@ namespace Shuttle.Abacus
 
         public OperationRemoved RemoveOperation(Guid id)
         {
+            var operation = FindOperation(id);
+
+            if (operation == null)
+            {
+                throw new DomainException(Resources.MissingItem);
+            }
+
             return On(new OperationRemoved
             {
-                Id = id
+                Id = id,
+                SequenceNumber = operation.SequenceNumber
             });
         }
 

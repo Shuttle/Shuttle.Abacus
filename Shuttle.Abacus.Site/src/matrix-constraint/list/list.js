@@ -98,8 +98,7 @@ export const ViewModel = DefineMap.extend({
         const refreshTimestamp = this.refreshTimestamp;
 
         if (!this.matrixId) {
-            this.map = undefined;
-            return;
+            return undefined;
         }
 
         return api.matrices.map({

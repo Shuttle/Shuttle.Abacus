@@ -124,4 +124,7 @@
     <value>Data type '{0}' cannot be compared to type '{1}'.</value>
     <comment>{0} = data type name of arguement, {1} = data type name of other argument</comment>
   </data>
+  <data name="MissingItem" xml:space="preserve">
+    <value>The item could not be found.</value>
+  </data>
 </root>
