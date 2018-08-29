@@ -2,9 +2,9 @@
 
 namespace Shuttle.Abacus.Messages.v1
 {
-    public class SetFormulaMinimumCommand
+    public class RegisterFormulaMaxmimumCommand
     {
         public Guid FormulaId { get; set; }
-        public string MinimumFormulaName { get; set; }
+        public string MaximumFormulaName { get; set; }
     }
 }

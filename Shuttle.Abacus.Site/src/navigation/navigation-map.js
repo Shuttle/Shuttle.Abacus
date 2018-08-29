@@ -19,6 +19,11 @@ var map = [
         href: '#!argument/list',
         text: 'arguments',
         permission: Permissions.Manage.Arguments
+    },
+    {
+        href: '#!test/list',
+        text: 'tests',
+        permission: Permissions.Manage.Tests
     }
 ];
 

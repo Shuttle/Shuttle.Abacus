@@ -10,7 +10,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
     public class TestHandler :
         IMessageHandler<RegisterTestCommand>,
         IMessageHandler<RemoveTestCommand>,
-        IMessageHandler<SetTestArgumentCommand>,
+        IMessageHandler<RegisterTestArgumentCommand>,
         IMessageHandler<RemoveTestArgumentCommand>
     {
         private readonly IDatabaseContextFactory _databaseContextFactory;
@@ -45,7 +45,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                 var stream = _eventStore.CreateEventStream(test.Id);
 
                 stream.AddEvent(test.Register(message.Name, message.FormulaName, message.ExpectedResult,
-                    message.ExpectedResultType, message.Comparison));
+                    message.ExpectedResultDataTypeName, message.Comparison));
 
                 _eventStore.Save(stream);
                 _keyStore.Add(test.Id, key);
@@ -104,7 +104,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
             }
         }
 
-        public void ProcessMessage(IHandlerContext<SetTestArgumentCommand> context)
+        public void ProcessMessage(IHandlerContext<RegisterTestArgumentCommand> context)
         {
             var message = context.Message;
 
@@ -121,7 +121,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 
                 stream.Apply(test);
 
-                stream.AddEvent(test.SetArgument(message.ArgumentId, message.Value));
+                stream.AddEvent(test.RegisterArgument(message.ArgumentId, message.Value));
 
                 _eventStore.Save(stream);
             }

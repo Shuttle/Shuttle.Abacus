@@ -110,7 +110,7 @@ namespace Shuttle.Abacus
             return $"[argument]:name={name}";
         }
 
-        public ArgumentSet SetArgument(Guid argumentId, string value)
+        public ArgumentSet RegisterArgument(Guid argumentId, string value)
         {
             Guard.AgainstNullOrEmptyString(value, nameof(value));
 

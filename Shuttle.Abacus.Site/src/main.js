@@ -37,6 +37,7 @@ import '~/formula-operation/';
 import '~/matrix/';
 import '~/matrix-constraint/';
 import '~/matrix-element/';
+import '~/test/';
 
 import validate from 'validate.js';
 

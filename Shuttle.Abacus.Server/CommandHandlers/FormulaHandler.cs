@@ -10,8 +10,8 @@ namespace Shuttle.Abacus.Server.CommandHandlers
     public class FormulaHandler :
         IMessageHandler<RegisterFormulaCommand>,
         IMessageHandler<RenameFormulaCommand>,
-        IMessageHandler<SetFormulaMaxmimumCommand>,
-        IMessageHandler<SetFormulaMinimumCommand>,
+        IMessageHandler<RegisterFormulaMaxmimumCommand>,
+        IMessageHandler<RegisterFormulaMinimumCommand>,
         IMessageHandler<RemoveFormulaCommand>,
         IMessageHandler<RemoveFormulaConstraintCommand>,
         IMessageHandler<RemoveFormulaOperationCommand>,
@@ -152,12 +152,12 @@ namespace Shuttle.Abacus.Server.CommandHandlers
             }
         }
 
-        public void ProcessMessage(IHandlerContext<SetFormulaMaxmimumCommand> context)
+        public void ProcessMessage(IHandlerContext<RegisterFormulaMaxmimumCommand> context)
         {
             throw new NotImplementedException();
         }
 
-        public void ProcessMessage(IHandlerContext<SetFormulaMinimumCommand> context)
+        public void ProcessMessage(IHandlerContext<RegisterFormulaMinimumCommand> context)
         {
             throw new NotImplementedException();
         }

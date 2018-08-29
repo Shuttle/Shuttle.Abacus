@@ -1,4 +1,5 @@
 ﻿using System;
+using Shuttle.Core.Contract;
 using Shuttle.Core.Data;
 
 namespace Shuttle.Abacus.DataAccess
@@ -11,7 +12,7 @@ select
     Name,
     FormulaName,
     ExpectedResult,
-    ExpectedResultType,
+    ExpectedResultDataTypeName,
     Comparison
 from
     Test
@@ -22,19 +23,22 @@ from
             return RawQuery.Create(string.Concat(SelectClause, "order by Name"));
         }
 
-        public IQuery ArgumentValues(Guid id)
+        public IQuery Arguments(Guid id)
         {
             return RawQuery.Create(@"
 select
-    TestId,
-    ArgumentName,
-    Value
+    ta.TestId,
+    ta.ArgumentId,
+    a.Name ArgumentName,
+    ta.Value
 from
-    TestArgument
+    TestArgument ta
+inner join
+    Argument a on a.Id = ta.ArgumentId
 where
     TestId = @Id
 order by
-    ArgumentName
+    a.Name
 ")
                 .AddParameterValue(Columns.Id, id);
         }
@@ -56,8 +60,7 @@ where
         }
 
         public IQuery Register(Guid id, string name, string formulaName, string expectedResult,
-            string expectedResultType,
-            string comparison)
+            string expectedResultDataTypeName, string comparison)
         {
             return RawQuery.Create(@"
 insert into Test
@@ -66,7 +69,7 @@ insert into Test
     Name,
     FormulaName,
     ExpectedResult,
-    ExpectedResultType,
+    ExpectedResultDataTypeName,
     Comparison
 )
 values
@@ -75,14 +78,14 @@ values
     @Name,
     @FormulaName,
     @ExpectedResult,
-    @ExpectedResultType,
+    @ExpectedResultDataTypeName,
     @Comparison
 )")
                 .AddParameterValue(Columns.Id, id)
                 .AddParameterValue(Columns.Name, name)
                 .AddParameterValue(Columns.FormulaName, formulaName)
                 .AddParameterValue(Columns.ExpectedResult, expectedResult)
-                .AddParameterValue(Columns.ExpectedResultType, expectedResultType)
+                .AddParameterValue(Columns.ExpectedResultDataTypeName, expectedResultDataTypeName)
                 .AddParameterValue(Columns.Comparison, comparison);
         }
 
@@ -134,6 +137,25 @@ values
                 .AddParameterValue(Columns.Id, id)
                 .AddParameterValue(Columns.ArgumentName, argumentId)
                 .AddParameterValue(Columns.Value, value);
+        }
+
+        public IQuery Search(TestSearchSpecification specification)
+        {
+            Guard.AgainstNull(specification, nameof(specification));
+
+            return RawQuery.Create(string.Concat(SelectClause, @"
+where
+(
+    @Name is null
+    or
+    @Name = ''
+    or
+    Name like '%' + @Name + '%'
+)
+order by 
+    Name
+"))
+                .AddParameterValue(Columns.Name, specification.Name);
         }
     }
 }

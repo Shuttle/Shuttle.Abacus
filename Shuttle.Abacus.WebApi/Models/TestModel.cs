@@ -1,7 +1,10 @@
-namespace Shuttle.Abacus.Messages.v1
+﻿using System;
+
+namespace Shuttle.Abacus.WebApi
 {
-    public class RegisterTestCommand
+    public class TestModel
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string FormulaName { get; set; }
         public string ExpectedResult { get; set; }

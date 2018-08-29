@@ -27,12 +27,19 @@ namespace Shuttle.Abacus.DataAccess
 
         public DataRow Get(Guid id)
         {
-            return _databaseGateway.GetSingleRowUsing(_queryFactory.Get(id));
+            var row = _databaseGateway.GetSingleRowUsing(_queryFactory.Get(id));
+
+            if (row == null)
+            {
+                throw RecordNotFoundException.For("Test", id);
+            }
+
+            return row;
         }
 
-        public IEnumerable<DataRow> ArgumentValues(Guid id)
+        public IEnumerable<DataRow> Arguments(Guid id)
         {
-            return _databaseGateway.GetRowsUsing(_queryFactory.ArgumentValues(id));
+            return _databaseGateway.GetRowsUsing(_queryFactory.Arguments(id));
         }
 
         public void Register(Guid id, string name, string formulaName, string expectedResult, string expectedResultType,
@@ -57,6 +64,13 @@ namespace Shuttle.Abacus.DataAccess
         {
             _databaseGateway.ExecuteUsing(_queryFactory.RemoveArgumentValue(id, argumentId));
             _databaseGateway.ExecuteUsing(_queryFactory.AddArgumentValue(id, argumentId, value));
+        }
+
+        public IEnumerable<DataRow> Search(TestSearchSpecification specification)
+        {
+            Guard.AgainstNull(specification, nameof(specification));
+
+            return _databaseGateway.GetRowsUsing(_queryFactory.Search(specification));
         }
     }
 }
