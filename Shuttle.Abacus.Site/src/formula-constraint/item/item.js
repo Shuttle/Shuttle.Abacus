@@ -29,6 +29,7 @@ export const ViewModel = DefineMap.extend({
             presence: true
         }
     },
+
     comparisons: {
         Type: OptionList,
         default: [

@@ -9,6 +9,7 @@ import validator from 'can-define-validate-validatejs';
 import state from '~/state';
 import stack from '~/stack';
 import localisation from '~/localisation';
+import {OptionMap, OptionList} from 'shuttle-canstrap/select/';
 
 resources.add('test', {action: 'add', permission: Permissions.Manage.Tests});
 
@@ -29,7 +30,61 @@ export const ViewModel = DefineMap.extend({
         this.name = result.name;
     },
 
+    comparisons: {
+        Type: OptionList,
+        default: [
+            {value: '==', label: '=='},
+            {value: '!=', label: '!='},
+            {value: '>=', label: '>='},
+            {value: '>', label: '>'},
+            {value: '<=', label: '<='},
+            {value: '<', label: '<'},
+            {value: 'in', label: 'in'}
+        ]
+    },
+
+    dataTypeNames: {
+        Type: OptionList,
+        default: [
+            {value: 'Boolean', label: 'Boolean'},
+            {value: 'Date', label: 'Date'},
+            {value: 'Decimal', label: 'Decimal'},
+            {value: 'Integer', label: 'Integer'},
+            {value: 'Text', label: 'Text'}
+        ]
+    },
+
     name: {
+        type: 'string',
+        default: '',
+        validate: {
+            presence: true
+        }
+    },
+
+    selectedFormula: {
+        Type: DefineMap,
+        validate: {
+            presence: true
+        }
+    },
+
+    comparison: {
+        type: 'string',
+        default: '',
+        validate: {
+            presence: true
+        }
+    },
+
+    expectedResult: {
+        type: 'string',
+        validate: {
+            presence: true
+        }
+    },
+
+    expectedResultDataTypeName: {
         type: 'string',
         default: '',
         validate: {

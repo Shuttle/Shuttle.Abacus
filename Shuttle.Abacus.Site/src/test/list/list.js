@@ -79,7 +79,7 @@ export const ViewModel = DefineMap.extend({
             });
 
             columns.push({
-                columnTitle: 'formula-name',
+                columnTitle: 'formula',
                 columnClass: 'col',
                 attributeName: 'formulaName'
             });
@@ -91,7 +91,7 @@ export const ViewModel = DefineMap.extend({
             });
 
             columns.push({
-                columnTitle: 'expected-result-data-type-name',
+                columnTitle: 'data-type-name',
                 columnClass: 'col',
                 attributeName: 'expectedResultDataTypeName'
             });
