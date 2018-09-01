@@ -10,7 +10,7 @@ namespace Shuttle.Abacus.DataAccess
         IQuery Get(Guid id);
         IQuery Remove(Guid id);
 
-        IQuery Register(Guid id, string name, string formulaName, string expectedResult,
+        IQuery Register(Guid id, string name, Guid formulaId, string expectedResult,
             string expectedResultDataTypeName,
             string comparison);
 

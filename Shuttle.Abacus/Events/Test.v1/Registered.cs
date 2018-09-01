@@ -1,4 +1,6 @@
-﻿namespace Shuttle.Abacus.Events.Test.v1
+﻿using System;
+
+namespace Shuttle.Abacus.Events.Test.v1
 {
     public class Registered
     {
@@ -6,6 +8,6 @@
         public string ExpectedResult { get; set; }
         public string ExpectedResultType { get; set; }
         public string Comparison { get; set; }
-        public string FormulaName { get; set; }
+        public Guid FormulaId { get; set; }
     }
 }

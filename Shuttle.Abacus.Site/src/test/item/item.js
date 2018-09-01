@@ -1,6 +1,6 @@
 import Component from 'can-component/';
 import DefineMap from 'can-define/map/';
-import view from './add.stache!';
+import view from './item.stache!';
 import resources from '~/resources';
 import Permissions from '~/permissions';
 import router from '~/router';
@@ -11,7 +11,7 @@ import stack from '~/stack';
 import localisation from '~/localisation';
 import {OptionMap, OptionList} from 'shuttle-canstrap/select/';
 
-resources.add('test', {action: 'add', permission: Permissions.Manage.Tests});
+resources.add('test', {action: 'item', permission: Permissions.Manage.Tests});
 
 var tests = new Api({
     endpoint: 'tests/{id}'
@@ -92,13 +92,18 @@ export const ViewModel = DefineMap.extend({
         }
     },
 
-    add: function () {
+    save: function () {
         if (!!this.errors()) {
             return false;
         }
 
         tests.post({
-            name: this.name
+            id: state.routeData.id,
+            name: this.name,
+            formulaId: this.selectedFormula.Id,
+            comparison: this.comparison,
+            expectedResult: this.expectedResult,
+            expectedResultDataTypeName: this.expectedResultDataTypeName
         });
 
         this.close();
@@ -117,7 +122,7 @@ export const ViewModel = DefineMap.extend({
 validator(ViewModel);
 
 export default Component.extend({
-    tag: 'abacus-test-add',
+    tag: 'abacus-test-item',
     ViewModel,
     view
 });

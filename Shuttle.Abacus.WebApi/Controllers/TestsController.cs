@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Messages.v1;
-using Shuttle.Access;
 using Shuttle.Access.Mvc;
 using Shuttle.Core.Contract;
 using Shuttle.Core.Data;
@@ -55,7 +54,12 @@ namespace Shuttle.Abacus.WebApi.Controllers
 
             _bus.Send(new RegisterTestCommand
             {
-                Name = model.Name
+                Id = model.Id,
+                Name = model.Name,
+                FormulaId = model.FormulaId,
+                Comparison = model.Comparison,
+                ExpectedResult = model.ExpectedResult,
+                ExpectedResultDataTypeName = model.ExpectedResultDataTypeName
             });
 
             return Ok();
@@ -101,12 +105,12 @@ namespace Shuttle.Abacus.WebApi.Controllers
             return Ok();
         }
 
-        [HttpDelete("{formulaId}/arguments/{argumentId}")]
-        public IActionResult DeleteArgument(Guid formulaId, Guid argumentId)
+        [HttpDelete("{testId}/arguments/{argumentId}")]
+        public IActionResult DeleteArgument(Guid testId, Guid argumentId)
         {
             _bus.Send(new RemoveTestArgumentCommand
             {
-                TestId = formulaId,
+                TestId = testId,
                 ArgumentId = argumentId
             });
 

@@ -42,10 +42,10 @@ namespace Shuttle.Abacus.DataAccess
             return _databaseGateway.GetRowsUsing(_queryFactory.Arguments(id));
         }
 
-        public void Register(Guid id, string name, string formulaName, string expectedResult, string expectedResultType,
+        public void Register(Guid id, string name, Guid formulaId, string expectedResult, string expectedResultType,
             string comparison)
         {
-            _databaseGateway.ExecuteUsing(_queryFactory.Register(id, name, formulaName, expectedResult,
+            _databaseGateway.ExecuteUsing(_queryFactory.Register(id, name, formulaId, expectedResult,
                 expectedResultType, comparison));
         }
 

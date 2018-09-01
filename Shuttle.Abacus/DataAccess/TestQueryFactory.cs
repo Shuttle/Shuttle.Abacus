@@ -8,19 +8,22 @@ namespace Shuttle.Abacus.DataAccess
     {
         private const string SelectClause = @"
 select
-    Id,
-    Name,
-    FormulaName,
-    ExpectedResult,
-    ExpectedResultDataTypeName,
-    Comparison
+    t.Id,
+    t.Name,
+    t.FormulaId,
+    f.Name,
+    t.ExpectedResult,
+    t.ExpectedResultDataTypeName,
+    t.Comparison
 from
-    Test
+    Test t
+inner join
+    Formula f on f.Id = t.FormulaId
 ";
 
         public IQuery All()
         {
-            return RawQuery.Create(string.Concat(SelectClause, "order by Name"));
+            return RawQuery.Create(string.Concat(SelectClause, "order by t.Name"));
         }
 
         public IQuery Arguments(Guid id)
@@ -47,7 +50,7 @@ order by
         {
             return RawQuery.Create(string.Concat(SelectClause, @"
 where
-    Id = @Id
+    t.Id = @Id
 "))
                 .AddParameterValue(Columns.Id, id);
         }
@@ -59,7 +62,7 @@ where
                     .AddParameterValue(Columns.Id, id);
         }
 
-        public IQuery Register(Guid id, string name, string formulaName, string expectedResult,
+        public IQuery Register(Guid id, string name, Guid formulaId, string expectedResult,
             string expectedResultDataTypeName, string comparison)
         {
             return RawQuery.Create(@"
@@ -67,7 +70,7 @@ insert into Test
 (
     Id,
     Name,
-    FormulaName,
+    FormulaId,
     ExpectedResult,
     ExpectedResultDataTypeName,
     Comparison
@@ -76,14 +79,14 @@ values
 (
     @Id,
     @Name,
-    @FormulaName,
+    @FormulaId,
     @ExpectedResult,
     @ExpectedResultDataTypeName,
     @Comparison
 )")
                 .AddParameterValue(Columns.Id, id)
                 .AddParameterValue(Columns.Name, name)
-                .AddParameterValue(Columns.FormulaName, formulaName)
+                .AddParameterValue(Columns.FormulaId, formulaId)
                 .AddParameterValue(Columns.ExpectedResult, expectedResult)
                 .AddParameterValue(Columns.ExpectedResultDataTypeName, expectedResultDataTypeName)
                 .AddParameterValue(Columns.Comparison, comparison);
@@ -150,10 +153,10 @@ where
     or
     @Name = ''
     or
-    Name like '%' + @Name + '%'
+    t.Name like '%' + @Name + '%'
 )
 order by 
-    Name
+    t.Name
 "))
                 .AddParameterValue(Columns.Name, specification.Name);
         }

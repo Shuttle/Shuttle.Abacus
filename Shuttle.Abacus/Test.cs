@@ -23,11 +23,10 @@ namespace Shuttle.Abacus
         public string Comparison { get; private set; }
         public bool Removed { get; private set; }
 
-        public Registered Register(string name, string formulaName, string expectedResult, string expectedResultType,
+        public Registered Register(string name, Guid formulaId, string expectedResult, string expectedResultType,
             string comparison)
         {
             Guard.AgainstNullOrEmptyString(name, nameof(name));
-            Guard.AgainstNullOrEmptyString(formulaName, nameof(formulaName));
             Guard.AgainstNullOrEmptyString(expectedResult, nameof(expectedResult));
             Guard.AgainstNullOrEmptyString(expectedResultType, nameof(expectedResultType));
             Guard.AgainstNullOrEmptyString(comparison, nameof(comparison));
@@ -35,7 +34,7 @@ namespace Shuttle.Abacus
             return On(new Registered
             {
                 Name = name,
-                FormulaName = formulaName,
+                FormulaId = formulaId,
                 ExpectedResult = expectedResult,
                 ExpectedResultType = expectedResultType,
                 Comparison = comparison

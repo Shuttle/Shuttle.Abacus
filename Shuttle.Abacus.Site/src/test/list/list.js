@@ -126,7 +126,7 @@ export const ViewModel = DefineMap.extend({
     add: function() {
         router.goto({
             resource: 'test',
-            action: 'add'
+            action: 'item'
         });
     },
 

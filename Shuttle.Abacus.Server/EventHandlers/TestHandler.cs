@@ -29,7 +29,7 @@ namespace Shuttle.Abacus.Server.EventHandlers
         {
             var data = context.Event;
 
-            _query.Register(context.PrimitiveEvent.Id, data.Name, data.FormulaName, data.ExpectedResult,
+            _query.Register(context.PrimitiveEvent.Id, data.Name, data.FormulaId, data.ExpectedResult,
                 data.ExpectedResultType, data.Comparison);
         }
 
