@@ -52,6 +52,15 @@ namespace Shuttle.Abacus.WebApi.Controllers
         {
             Guard.AgainstNull(model, nameof(model));
 
+            if (model.FormulaId.Equals(Guid.Empty) ||
+                string.IsNullOrWhiteSpace(model.Name) ||
+                string.IsNullOrWhiteSpace(model.Comparison) ||
+                string.IsNullOrWhiteSpace(model.ExpectedResult) ||
+                string.IsNullOrWhiteSpace(model.ExpectedResultDataTypeName))
+            {
+                return BadRequest();
+            }
+
             _bus.Send(new RegisterTestCommand
             {
                 Id = model.Id,
@@ -77,7 +86,7 @@ namespace Shuttle.Abacus.WebApi.Controllers
             }
         }
 
-        [HttpGet("{id}/argument")]
+        [HttpGet("{id}/arguments")]
         public IActionResult Arguments(Guid id)
         {
             using (_databaseContextFactory.Create())

@@ -100,7 +100,7 @@ export const ViewModel = DefineMap.extend({
         tests.post({
             id: state.routeData.id,
             name: this.name,
-            formulaId: this.selectedFormula.Id,
+            formulaId: this.selectedFormula.id,
             comparison: this.comparison,
             expectedResult: this.expectedResult,
             expectedResultDataTypeName: this.expectedResultDataTypeName

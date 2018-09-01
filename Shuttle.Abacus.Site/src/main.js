@@ -38,6 +38,7 @@ import '~/matrix/';
 import '~/matrix-constraint/';
 import '~/matrix-element/';
 import '~/test/';
+import '~/test-argument/';
 
 import validate from 'validate.js';
 

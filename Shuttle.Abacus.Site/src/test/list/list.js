@@ -69,7 +69,7 @@ export const ViewModel = DefineMap.extend({
 	        columns.push({
                 columnTitle: 'arguments',
                 columnClass: 'col-1',
-                stache: '<cs-button text:raw="argumenets" click:from="arguments" elementClass:raw="btn-sm"/>'
+                stache: '<cs-button text:raw="arguments" click:from="arguments" elementClass:raw="btn-sm"/>'
             });
 
             columns.push({

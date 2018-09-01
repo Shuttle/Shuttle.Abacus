@@ -81,6 +81,8 @@
   "table-empty-message": "There are no items to display.",
   "test": "Test",
   "tests": "Tests",
+  "test-argument": "Test argument",
+  "test-arguments": "Test arguments",
   "username": "Username",
   "value": "Value",
   "values": "Values",
