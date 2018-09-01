@@ -116,9 +116,9 @@ where
         public IQuery RemoveArgumentValue(Guid id, Guid argumentId)
         {
             return RawQuery.Create(
-                    "delete from TestArgument where TestId = @Id and ArgumentName = @ArgumentName")
+                    "delete from TestArgument where TestId = @Id and ArgumentId = @ArgumentId")
                 .AddParameterValue(Columns.Id, id)
-                .AddParameterValue(Columns.ArgumentName, argumentId);
+                .AddParameterValue(Columns.ArgumentId, argumentId);
         }
 
         public IQuery AddArgumentValue(Guid id, Guid argumentId, string value)
@@ -127,18 +127,18 @@ where
 insert into TestArgument 
 (
     TestId,
-    ArgumentName,
+    ArgumentId,
     Value
 )
 values
 (
     @Id,
-    @ArgumentName,
+    @ArgumentId,
     @Value
 )
 ")
                 .AddParameterValue(Columns.Id, id)
-                .AddParameterValue(Columns.ArgumentName, argumentId)
+                .AddParameterValue(Columns.ArgumentId, argumentId)
                 .AddParameterValue(Columns.Value, value);
         }
 

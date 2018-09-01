@@ -14,7 +14,6 @@ namespace Shuttle.Abacus.DataAccess
         IQuery Remove(Guid id);
         IQuery Save(Argument item);
         IQuery RemoveValues(Argument argument);
-        IQuery Get(string name);
         IQuery Registered(PrimitiveEvent primitiveEvent, Registered registered);
         IQuery Removed(PrimitiveEvent primitiveEvent, Removed removed);
         IQuery Renamed(PrimitiveEvent primitiveEvent, Renamed renamed);

@@ -99,13 +99,6 @@ where
                 .AddParameterValue(Columns.Id, argument.Id);
         }
 
-        public IQuery Get(string name)
-        {
-            return
-                new RawQuery(string.Concat(Query, "where ArgumentName = @ArgumentName")).AddParameterValue(
-                    Columns.Name, name);
-        }
-
         public IQuery Registered(PrimitiveEvent primitiveEvent, Registered registered)
         {
             return RawQuery.Create(@"

@@ -10,6 +10,9 @@ import Api from 'shuttle-can-api';
 resources.add('test', { item: 'argument', action: 'list', permission: Permissions.Manage.Tests});
 
 export const ArgumentMap = DefineMap.extend({
+    testId: {
+        type: 'string'
+    },
     remove() {
         api.arguments.delete({
             testId: state.routeData.id,
