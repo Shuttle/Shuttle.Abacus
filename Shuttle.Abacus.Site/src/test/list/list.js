@@ -12,6 +12,10 @@ import Api from 'shuttle-can-api';
 resources.add('test', { action: 'list', permission: Permissions.Manage.Tests});
 
 export const Map = DefineMap.extend({
+    selected: {
+        type: 'boolean',
+        default: false
+    },
 	remove() {
 		api.tests.delete({id: this.id})
 			.then(function () {
@@ -40,6 +44,22 @@ export const api = {
 };
 
 export const ViewModel = DefineMap.extend({
+    selected: {
+        type: 'boolean',
+        set(value){
+            this.tests.forEach(function(item){
+                item.selected = value;
+            });
+
+            return value;
+        }
+    },
+
+    tests: {
+        Type: DefineList,
+        default: []
+    },
+
     name: {
         type: 'string',
         default: ''
@@ -53,19 +73,31 @@ export const ViewModel = DefineMap.extend({
         type: 'string'
     },
 
-    get list () {
+    list () {
+        const self = this;
         const refreshTimestamp = this.refreshTimestamp;
-        return api.search.list({
+
+        api.search.list({
             name: this.name
         }, {
             post: true
-        });
+        })
+            .then(function(response){
+                self.tests = response;
+            });
     },
 
     init() {
         const columns = this.columns;
 
         if (!columns.length) {
+            columns.push({
+                data: this,
+                    columnStache: '<cs-checkbox checked:bind="selected" checkedClass:from="\'fa-toggle-on\'" uncheckedClass:from="\'fa-toggle-off\'"/>',
+                columnClass: 'col-1',
+                stache: '<cs-checkbox checked:bind="selected" checkedClass:from="\'fa-toggle-on\'" uncheckedClass:from="\'fa-toggle-off\'"/>'
+            });
+
 	        columns.push({
                 columnTitle: 'arguments',
                 columnClass: 'col-1',
@@ -121,6 +153,8 @@ export const ViewModel = DefineMap.extend({
             type: 'refresh',
             viewModel: this
         });
+
+        this.list();
     },
 
     add: function() {
