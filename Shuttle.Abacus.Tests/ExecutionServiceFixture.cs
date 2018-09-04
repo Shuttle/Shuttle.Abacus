@@ -31,7 +31,9 @@ namespace Shuttle.Abacus.Tests
 
             var arguments = new List<Argument> { operand1, operand2 };
 
-            var service = new ExecutionService(new ConstraintComparison(new DataTypeFactory()), formulas, arguments, new List<Matrix>());
+            var service = new ExecutionService(new ConstraintComparison(new DataTypeFactory()))
+                .AddFormulaRange(formulas)
+                .AddArgumentRange(arguments);
 
             var context = service.Execute("Test", new List<ArgumentValue>
             {
@@ -65,7 +67,9 @@ namespace Shuttle.Abacus.Tests
 
             var arguments = new List<Argument> { operand1, operand2 };
 
-            var service = new ExecutionService(new ConstraintComparison(new DataTypeFactory()), formulas, arguments, new List<Matrix>());
+            var service = new ExecutionService(new ConstraintComparison(new DataTypeFactory()))
+                .AddFormulaRange(formulas)
+                .AddArgumentRange(arguments);
 
             var context = service.Execute("Test", new List<ArgumentValue>
             {
@@ -93,7 +97,8 @@ namespace Shuttle.Abacus.Tests
 
             var formulas = new List<Formula> { formula1, formula2 };
 
-            var service = new ExecutionService(new ConstraintComparison(new DataTypeFactory()), formulas, new List<Argument>(), new List<Matrix>());
+            var service = new ExecutionService(new ConstraintComparison(new DataTypeFactory()))
+                .AddFormulaRange(formulas);
 
             var context = service.Execute("Formula1", new List<ArgumentValue>(), new ContextLogger(ContextLogLevel.Verbose));
 
@@ -120,11 +125,11 @@ namespace Shuttle.Abacus.Tests
 
             argument.Register("argument-one", "Text");
 
-            var service = new ExecutionService(
-                new ConstraintComparison(new DataTypeFactory()),
-                new List<Formula> { formula },
-                new List<Argument> { argument },
-                new List<Matrix> { matrix });
+            var service = 
+                new ExecutionService(new ConstraintComparison(new DataTypeFactory()))
+                    .AddFormula(formula)
+                    .AddArgument(argument)
+                    .AddMatrix(matrix);
 
             var context = service.Execute("Formula", new List<ArgumentValue>
             {
@@ -164,7 +169,8 @@ namespace Shuttle.Abacus.Tests
 
             var formulas = new List<Formula> { formula1, formula2, formula3, formula4, formula5 };
 
-            var service = new ExecutionService(new ConstraintComparison(new DataTypeFactory()), formulas, new List<Argument>(), new List<Matrix>());
+            var service = new ExecutionService(new ConstraintComparison(new DataTypeFactory()))
+                .AddFormulaRange(formulas);
 
             var context = service.Execute("Formula1", new List<ArgumentValue>(), new ContextLogger(ContextLogLevel.Verbose));
 

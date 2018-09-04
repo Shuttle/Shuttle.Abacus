@@ -9,20 +9,25 @@ import localisation from '~/localisation';
 import state from '~/state';
 import Api from 'shuttle-can-api';
 
-resources.add('test', { action: 'list', permission: Permissions.Manage.Tests});
+resources.add('test', {action: 'list', permission: Permissions.Manage.Tests});
+
+export const ResultMap = DefineMap.extend({});
 
 export const Map = DefineMap.extend({
+    run(){
+        api.run
+    },
     selected: {
         type: 'boolean',
         default: false
     },
-	remove() {
-		api.tests.delete({id: this.id})
-			.then(function () {
-				state.removalRequested('test');
-			});
-	},
-    arguments() {
+    remove () {
+        api.tests.delete({id: this.id})
+            .then(function () {
+                state.removalRequested('test');
+            });
+    },
+    arguments () {
         router.goto({
             resource: 'test',
             item: 'argument',
@@ -33,21 +38,45 @@ export const Map = DefineMap.extend({
 });
 
 export const api = {
-	tests: new Api({
-		endpoint: 'tests/{id}',
-		Map
-	}),
+    tests: new Api({
+        endpoint: 'tests/{id}',
+        Map
+    }),
     search: new Api({
         endpoint: 'tests/search',
         Map
+    }),
+    run: new Api({
+        endpoint: 'tests/{id}/run',
+        ResultMap
     })
 };
 
 export const ViewModel = DefineMap.extend({
+    run() {
+        const self = this;
+
+        this.tests.forEach(function(item){
+            if (!item.selected){
+                return;
+            }
+
+            item.run();
+        });
+    },
+
+    selectedCount: {
+        get () {
+            return this.tests.filter(function (item) {
+                return item.selected;
+            }).length;
+        }
+    },
+
     selected: {
         type: 'boolean',
-        set(value){
-            this.tests.forEach(function(item){
+        set (value) {
+            this.tests.forEach(function (item) {
                 item.selected = value;
             });
 
@@ -82,23 +111,23 @@ export const ViewModel = DefineMap.extend({
         }, {
             post: true
         })
-            .then(function(response){
+            .then(function (response) {
                 self.tests = response;
             });
     },
 
-    init() {
+    init () {
         const columns = this.columns;
 
         if (!columns.length) {
             columns.push({
                 data: this,
-                    columnStache: '<cs-checkbox checked:bind="selected" checkedClass:from="\'fa-toggle-on\'" uncheckedClass:from="\'fa-toggle-off\'"/>',
+                columnStache: '<cs-checkbox checked:bind="selected" checkedClass:from="\'fa-toggle-on\'" uncheckedClass:from="\'fa-toggle-off\'"/>',
                 columnClass: 'col-1',
                 stache: '<cs-checkbox checked:bind="selected" checkedClass:from="\'fa-toggle-on\'" uncheckedClass:from="\'fa-toggle-off\'"/>'
             });
 
-	        columns.push({
+            columns.push({
                 columnTitle: 'arguments',
                 columnClass: 'col-1',
                 stache: '<cs-button text:raw="arguments" click:from="arguments" elementClass:raw="btn-sm"/>'
@@ -134,11 +163,11 @@ export const ViewModel = DefineMap.extend({
                 attributeName: 'comparison'
             });
 
-	        columns.push({
-		        columnTitle: 'remove',
-		        columnClass: 'col-1',
-		        stache: '<cs-button-remove click:from="remove" elementClass:raw="btn-sm"/>'
-	        });
+            columns.push({
+                columnTitle: 'remove',
+                columnClass: 'col-1',
+                stache: '<cs-button-remove click:from="remove" elementClass:raw="btn-sm"/>'
+            });
         }
 
         state.title = 'tests';
@@ -157,14 +186,14 @@ export const ViewModel = DefineMap.extend({
         this.list();
     },
 
-    add: function() {
+    add: function () {
         router.goto({
             resource: 'test',
             action: 'item'
         });
     },
 
-    refresh: function() {
+    refresh: function () {
         this.refreshTimestamp = Date.now();
     }
 });

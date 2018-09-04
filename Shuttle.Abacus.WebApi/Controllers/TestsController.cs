@@ -16,20 +16,27 @@ namespace Shuttle.Abacus.WebApi.Controllers
         private readonly IServiceBus _bus;
         private readonly IDatabaseContextFactory _databaseContextFactory;
         private readonly IDataRowMapper _dataRowMapper;
+        private readonly ITestRepository _testRepository;
         private readonly ITestQuery _testQuery;
+        private readonly IExecutionService _executionService;
 
         public TestsController(IServiceBus bus, IDatabaseContextFactory databaseContextFactory,
-            IDataRowMapper dataRowMapper, ITestQuery testQuery)
+            IDataRowMapper dataRowMapper, ITestRepository testRepository, ITestQuery testQuery,
+            IExecutionService executionService)
         {
             Guard.AgainstNull(bus, nameof(bus));
             Guard.AgainstNull(databaseContextFactory, nameof(databaseContextFactory));
             Guard.AgainstNull(dataRowMapper, nameof(dataRowMapper));
+            Guard.AgainstNull(testRepository, nameof(testRepository));
             Guard.AgainstNull(testQuery, nameof(testQuery));
+            Guard.AgainstNull(executionService, nameof(executionService));
 
             _bus = bus;
             _databaseContextFactory = databaseContextFactory;
             _dataRowMapper = dataRowMapper;
+            _testRepository = testRepository;
             _testQuery = testQuery;
+            _executionService = executionService;
         }
 
         [HttpPost("search")]
@@ -98,7 +105,6 @@ namespace Shuttle.Abacus.WebApi.Controllers
             }
         }
 
-
         [HttpPost("{id}/arguments")]
         public IActionResult Post(Guid id, [FromBody] TestArgumentModel model)
         {
@@ -124,6 +130,17 @@ namespace Shuttle.Abacus.WebApi.Controllers
             });
 
             return Ok();
+        }
+
+        [HttpGet("{id}/run")]
+        public IActionResult Run(Guid id)
+        {
+            using (_databaseContextFactory.Create())
+            {
+                var test = _testRepository.Get(id);
+
+                return Ok(_executionService.Execute(test.FormulaName,test.ArgumentValues(), new ContextLogger(ContextLogLevel.Verbose)));
+            }
         }
     }
 }

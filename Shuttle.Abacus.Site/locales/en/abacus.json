@@ -66,6 +66,7 @@
   "removeItemConfirmation": "Are you sure that you want to remove the selected item?",
   "removeItemNameConfirmation": "Are you sure that you want to remove the selected {{itemName}}?",
   "row-argument": "Row argument",
+  "run": "Run",
   "save": "Save",
   "saved": "Saved",
   "search": "Search",

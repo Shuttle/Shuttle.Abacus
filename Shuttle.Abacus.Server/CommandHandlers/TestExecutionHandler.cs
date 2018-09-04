@@ -9,18 +9,18 @@ namespace Shuttle.Abacus.Server.CommandHandlers
     public class TestExecutionHandler : IMessageHandler<ExecuteTestCommand>
     {
         private readonly IDatabaseContextFactory _databaseContextFactory;
-        private readonly IExecutionServiceFactory _executionServiceFactory;
+        private readonly IExecutionService _executionService;
         private readonly ITestRepository _testRepository;
 
         public TestExecutionHandler(IDatabaseContextFactory databaseContextFactory,
-            IExecutionServiceFactory executionServiceFactory, ITestRepository testRepository)
+            IExecutionService executionService, ITestRepository testRepository)
         {
             Guard.AgainstNull(databaseContextFactory, nameof(databaseContextFactory));
-            Guard.AgainstNull(executionServiceFactory, nameof(executionServiceFactory));
+            Guard.AgainstNull(executionService, nameof(executionService));
             Guard.AgainstNull(testRepository, nameof(testRepository));
 
             _databaseContextFactory = databaseContextFactory;
-            _executionServiceFactory = executionServiceFactory;
+            _executionService = executionService;
             _testRepository = testRepository;
         }
 
@@ -33,9 +33,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
 
             var message = context.Message;
 
-            ContextLogLevel logLevel;
-
-            if (!Enum.TryParse(message.LogLevel, true, out logLevel))
+            if (!Enum.TryParse(message.LogLevel, true, out ContextLogLevel logLevel))
             {
                 logLevel = ContextLogLevel.None;
             }
@@ -44,7 +42,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
             {
                 var test = _testRepository.Get(message.Id);
 
-                var executionContext = _executionServiceFactory.Create()
+                var executionContext = _executionService
                     .Execute(test.FormulaName, test.ArgumentValues(), new ContextLogger(logLevel));
 
                 var response = new TestExecutedEvent

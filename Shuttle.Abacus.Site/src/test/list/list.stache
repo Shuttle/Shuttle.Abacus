@@ -2,6 +2,9 @@
     <div class="row">
         <div class="col"><cs-form-input focus:raw="true" label:raw="name" vm:value:bind="name"/></div>
     </div>
-    <cs-button-submit vm:click:from="refresh" text:from="'search'"/>
+    <cs-button-submit vm:click:from="refresh" text:raw="search"/>
+    {{#if(selectedCount)}}
+        <cs-button vm:click:from="run" text:raw="run"/>
+    {{/if}}
 </cs-form>
 <cs-table vm:columns:from="columns" vm:rows:from="tests" />

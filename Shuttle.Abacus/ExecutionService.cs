@@ -4,34 +4,87 @@ using Shuttle.Core.Contract;
 
 namespace Shuttle.Abacus
 {
-    public class ExecutionService
+    public class ExecutionService : IExecutionService
     {
+        private readonly object _lock = new object();
+        private readonly IFormulaRepository _formulaRepository;
+        private readonly IArgumentRepository _argumentRepository;
+        private readonly IMatrixRepository _matrixRepository;
         private readonly Dictionary<Guid, Argument> _arguments = new Dictionary<Guid, Argument>();
         private readonly IConstraintComparison _constraintComparison;
         private readonly Dictionary<string, Formula> _formulas = new Dictionary<string, Formula>();
-        private readonly Dictionary<string, Matrix> _matrixes = new Dictionary<string, Matrix>();
+        private readonly Dictionary<string, Matrix> _matrices = new Dictionary<string, Matrix>();
 
-        public ExecutionService(IConstraintComparison constraintComparison, IEnumerable<Formula> formulas,
-            IEnumerable<Argument> arguments, IEnumerable<Matrix> matrixes)
+        public ExecutionService(IConstraintComparison constraintComparison)
         {
             Guard.AgainstNull(constraintComparison, nameof(constraintComparison));
-            Guard.AgainstNull(formulas, nameof(formulas));
-            Guard.AgainstNull(arguments, nameof(arguments));
 
             _constraintComparison = constraintComparison;
+        }
 
-            foreach (var formula in formulas)
+        public ExecutionService(IConstraintComparison constraintComparison, IFormulaRepository formulaRepository,
+            IArgumentRepository argumentRepository, IMatrixRepository matrixRepository)
+            :this(constraintComparison)
+        {
+            Guard.AgainstNull(formulaRepository, nameof(formulaRepository));
+            Guard.AgainstNull(argumentRepository, nameof(argumentRepository));
+            Guard.AgainstNull(matrixRepository, nameof(matrixRepository));
+
+            _formulaRepository = formulaRepository;
+            _argumentRepository = argumentRepository;
+            _matrixRepository = matrixRepository;
+
+            Flush();
+        }
+
+        public IExecutionService Flush()
+        {
+            lock (_lock)
             {
-                if (_formulas.ContainsKey(formula.Name))
+                _formulas.Clear();
+
+                foreach (var formula in _formulaRepository.All())
                 {
-                    throw new ArgumentException(
-                        $"There is already a formula with name '{formula.Name}' registered.");
+                    AddFormula(formula);
                 }
 
-                _formulas.Add(formula.Name, formula);
+                _arguments.Clear();
+
+                foreach (var argument in _argumentRepository.All())
+                {
+                    AddArgument(argument);
+                }
+
+                _matrices.Clear();
+
+                foreach (var matrix in _matrixRepository.All())
+                {
+                    AddMatrix(matrix);
+                }
             }
 
-            foreach (var argument in arguments)
+            return this;
+        }
+
+        public IExecutionService AddMatrix(Matrix matrix)
+        {
+            lock (_lock)
+            {
+                if (_matrices.ContainsKey(matrix.Name))
+                {
+                    throw new ArgumentException(
+                        $"There is already an matrix with name '{matrix.Name}' registered.");
+                }
+
+                _matrices.Add(matrix.Name, matrix);
+            }
+
+            return this;
+        }
+
+        public IExecutionService AddArgument(Argument argument)
+        {
+            lock (_lock)
             {
                 if (_arguments.ContainsKey(argument.Id))
                 {
@@ -42,16 +95,23 @@ namespace Shuttle.Abacus
                 _arguments.Add(argument.Id, argument);
             }
 
-            foreach (var matrix in matrixes)
+            return this;
+        }
+
+        public IExecutionService AddFormula(Formula formula)
+        {
+            lock (_lock)
             {
-                if (_matrixes.ContainsKey(matrix.Name))
+                if (_formulas.ContainsKey(formula.Name))
                 {
                     throw new ArgumentException(
-                        $"There is already an matrix with name '{matrix.Name}' registered.");
+                        $"There is already a formula with name '{formula.Name}' registered.");
                 }
 
-                _matrixes.Add(matrix.Name, matrix);
+                _formulas.Add(formula.Name, formula);
             }
+
+            return this;
         }
 
         // perhaps something like this
@@ -148,32 +208,41 @@ namespace Shuttle.Abacus
 
         private Matrix GetMatrix(string matrixName)
         {
-            if (!_matrixes.ContainsKey(matrixName))
+            lock (_lock)
             {
-                throw new InvalidOperationException($"There is no matrix with name '{matrixName}'.");
-            }
+                if (!_matrices.ContainsKey(matrixName))
+                {
+                    throw new InvalidOperationException($"There is no matrix with name '{matrixName}'.");
+                }
 
-            return _matrixes[matrixName];
+                return _matrices[matrixName];
+            }
         }
 
         private Formula GetFormula(string formulaName)
         {
-            if (!_formulas.ContainsKey(formulaName))
+            lock (_lock)
             {
-                throw new InvalidOperationException($"There is no formula with name '{formulaName}'.");
-            }
+                if (!_formulas.ContainsKey(formulaName))
+                {
+                    throw new InvalidOperationException($"There is no formula with name '{formulaName}'.");
+                }
 
-            return _formulas[formulaName];
+                return _formulas[formulaName];
+            }
         }
 
         private Argument GetArgument(Guid id)
         {
-            if (!_arguments.ContainsKey(id))
+            lock (_lock)
             {
-                throw new InvalidOperationException($"There is no argument with name '{id}'.");
-            }
+                if (!_arguments.ContainsKey(id))
+                {
+                    throw new InvalidOperationException($"There is no argument with name '{id}'.");
+                }
 
-            return _arguments[id];
+                return _arguments[id];
+            }
         }
     }
 }
