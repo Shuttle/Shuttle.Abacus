@@ -35,7 +35,7 @@ namespace Shuttle.Abacus.Tests
                 .AddFormulaRange(formulas)
                 .AddArgumentRange(arguments);
 
-            var context = service.Execute("Test", new List<ArgumentValue>
+            var context = service.Execute(formula.Id, new List<ArgumentValue>
             {
                 new ArgumentValue (operand1.Id, "2"),
                 new ArgumentValue (operand2.Id, "3")
@@ -71,7 +71,7 @@ namespace Shuttle.Abacus.Tests
                 .AddFormulaRange(formulas)
                 .AddArgumentRange(arguments);
 
-            var context = service.Execute("Test", new List<ArgumentValue>
+            var context = service.Execute(formula.Id, new List<ArgumentValue>
             {
                 new ArgumentValue (Guid.NewGuid(), "2"),
                 new ArgumentValue (Guid.NewGuid(), "3")
@@ -85,22 +85,22 @@ namespace Shuttle.Abacus.Tests
         [Test]
         public void Should_be_able_to_use_formula_from_operation()
         {
-            var formula1 = new Formula(Guid.NewGuid());
-
-            formula1.Register("Formula1");
-            formula1.AddOperation(Guid.NewGuid(), "Addition", "Formula", "Formula2");
-
             var formula2 = new Formula(Guid.NewGuid());
 
             formula2.Register("Formula2");
             formula2.AddOperation(Guid.NewGuid(), "Addition", "Decimal", "100");
+
+            var formula1 = new Formula(Guid.NewGuid());
+
+            formula1.Register("Formula1");
+            formula1.AddOperation(Guid.NewGuid(), "Addition", "Formula", formula2.Id.ToString());
 
             var formulas = new List<Formula> { formula1, formula2 };
 
             var service = new ExecutionService(new ConstraintComparison(new DataTypeFactory()))
                 .AddFormulaRange(formulas);
 
-            var context = service.Execute("Formula1", new List<ArgumentValue>(), new ContextLogger(ContextLogLevel.Verbose));
+            var context = service.Execute(formula1.Id, new List<ArgumentValue>(), new ContextLogger(ContextLogLevel.Verbose));
 
             Assert.AreEqual(100, context.Result());
         }
@@ -131,7 +131,7 @@ namespace Shuttle.Abacus.Tests
                     .AddArgument(argument)
                     .AddMatrix(matrix);
 
-            var context = service.Execute("Formula", new List<ArgumentValue>
+            var context = service.Execute(formula.Id, new List<ArgumentValue>
             {
                 new ArgumentValue(argumentId, "the-value")
             }, new ContextLogger(ContextLogLevel.Verbose));
@@ -144,35 +144,35 @@ namespace Shuttle.Abacus.Tests
         {
             var formula1 = new Formula(Guid.NewGuid());
 
-            formula1.Register("Formula1");
-            formula1.AddOperation(Guid.NewGuid(), "Addition", "Formula", "Formula2");
+            var formula5 = new Formula(Guid.NewGuid());
 
-            var formula2 = new Formula(Guid.NewGuid());
-            formula2.AddOperation(Guid.NewGuid(), "Addition", "Formula", "Formula3");
-
-            formula2.Register("Formula2");
-
-            var formula3 = new Formula(Guid.NewGuid());
-
-            formula3.Register("Formula3");
-            formula3.AddOperation(Guid.NewGuid(), "Addition", "Formula", "Formula4");
+            formula5.AddOperation(Guid.NewGuid(), "Addition", "Formula", formula1.Id.ToString());
+            formula5.Register("Formula5");
 
             var formula4 = new Formula(Guid.NewGuid());
 
             formula4.Register("Formula4");
-            formula4.AddOperation(Guid.NewGuid(), "Addition", "Formula", "Formula5");
+            formula4.AddOperation(Guid.NewGuid(), "Addition", "Formula", formula5.Id.ToString());
 
-            var formula5 = new Formula(Guid.NewGuid());
-            formula5.AddOperation(Guid.NewGuid(), "Addition", "Formula", "Formula1");
+            var formula3 = new Formula(Guid.NewGuid());
 
-            formula5.Register("Formula5");
+            formula3.Register("Formula3");
+            formula3.AddOperation(Guid.NewGuid(), "Addition", "Formula", formula4.Id.ToString());
+
+            var formula2 = new Formula(Guid.NewGuid());
+
+            formula2.AddOperation(Guid.NewGuid(), "Addition", "Formula", formula3.Id.ToString());
+            formula2.Register("Formula2");
+
+            formula1.Register("Formula1");
+            formula1.AddOperation(Guid.NewGuid(), "Addition", "Formula", formula2.Id.ToString());
 
             var formulas = new List<Formula> { formula1, formula2, formula3, formula4, formula5 };
 
             var service = new ExecutionService(new ConstraintComparison(new DataTypeFactory()))
                 .AddFormulaRange(formulas);
 
-            var context = service.Execute("Formula1", new List<ArgumentValue>(), new ContextLogger(ContextLogLevel.Verbose));
+            var context = service.Execute(formula1.Id, new List<ArgumentValue>(), new ContextLogger(ContextLogLevel.Verbose));
 
             Assert.IsTrue(context.HasException);
             Assert.IsTrue(context.Exception.Message.Contains("Cyclic"));

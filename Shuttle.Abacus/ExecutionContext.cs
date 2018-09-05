@@ -64,6 +64,8 @@ namespace Shuttle.Abacus
 
         public FormulaContext FormulaContext(string formulaName)
         {
+            Guard.AgainstNullOrEmptyString(formulaName, nameof(formulaName));
+
             var result = new FormulaContext(this, formulaName);
 
             if (_stack.Count > 0)
@@ -107,6 +109,8 @@ namespace Shuttle.Abacus
 
         public void AddResult(string formulaName, decimal result)
         {
+            Guard.AgainstNullOrEmptyString(formulaName, nameof(formulaName));
+
             _results.Add(new ExecutionResult(formulaName, result, Depth()));
         }
 
@@ -122,6 +126,8 @@ namespace Shuttle.Abacus
 
         public void CyclicInvariant(string formulaName)
         {
+            Guard.AgainstNullOrEmptyString(formulaName, nameof(formulaName));
+
             var cyclic = false;
 
             foreach (var context in _stack)

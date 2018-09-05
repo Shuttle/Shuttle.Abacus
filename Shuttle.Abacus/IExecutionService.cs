@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Shuttle.Abacus
 {
@@ -8,6 +9,6 @@ namespace Shuttle.Abacus
         IExecutionService AddMatrix(Matrix matrix);
         IExecutionService AddArgument(Argument argument);
         IExecutionService AddFormula(Formula formula);
-        ExecutionContext Execute(string formulaName, IEnumerable<ArgumentValue> values, IContextLogger logger);
+        ExecutionContext Execute(Guid formulaId, IEnumerable<ArgumentValue> values, IContextLogger logger);
     }
 }

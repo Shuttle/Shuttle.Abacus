@@ -12,8 +12,8 @@ namespace Shuttle.Abacus
         private readonly IMatrixRepository _matrixRepository;
         private readonly Dictionary<Guid, Argument> _arguments = new Dictionary<Guid, Argument>();
         private readonly IConstraintComparison _constraintComparison;
-        private readonly Dictionary<string, Formula> _formulas = new Dictionary<string, Formula>();
-        private readonly Dictionary<string, Matrix> _matrices = new Dictionary<string, Matrix>();
+        private readonly Dictionary<Guid, Formula> _formulas = new Dictionary<Guid, Formula>();
+        private readonly Dictionary<Guid, Matrix> _matrices = new Dictionary<Guid, Matrix>();
 
         public ExecutionService(IConstraintComparison constraintComparison)
         {
@@ -68,15 +68,17 @@ namespace Shuttle.Abacus
 
         public IExecutionService AddMatrix(Matrix matrix)
         {
+            Guard.AgainstNull(matrix, nameof(matrix));
+
             lock (_lock)
             {
-                if (_matrices.ContainsKey(matrix.Name))
+                if (_matrices.ContainsKey(matrix.Id))
                 {
                     throw new ArgumentException(
-                        $"There is already an matrix with name '{matrix.Name}' registered.");
+                        $"There is already an matrix with id '{matrix.Id}' registered.");
                 }
 
-                _matrices.Add(matrix.Name, matrix);
+                _matrices.Add(matrix.Id, matrix);
             }
 
             return this;
@@ -84,6 +86,8 @@ namespace Shuttle.Abacus
 
         public IExecutionService AddArgument(Argument argument)
         {
+            Guard.AgainstNull(argument, nameof(argument));
+
             lock (_lock)
             {
                 if (_arguments.ContainsKey(argument.Id))
@@ -100,15 +104,17 @@ namespace Shuttle.Abacus
 
         public IExecutionService AddFormula(Formula formula)
         {
+            Guard.AgainstNull(formula, nameof(formula));
+
             lock (_lock)
             {
-                if (_formulas.ContainsKey(formula.Name))
+                if (_formulas.ContainsKey(formula.Id))
                 {
                     throw new ArgumentException(
-                        $"There is already a formula with name '{formula.Name}' registered.");
+                        $"There is already a formula with id '{formula.Id}' registered.");
                 }
 
-                _formulas.Add(formula.Name, formula);
+                _formulas.Add(formula.Id, formula);
             }
 
             return this;
@@ -120,9 +126,8 @@ namespace Shuttle.Abacus
         //{
         //}
 
-        public ExecutionContext Execute(string formulaName, IEnumerable<ArgumentValue> values, IContextLogger logger)
+        public ExecutionContext Execute(Guid formulaId, IEnumerable<ArgumentValue> values, IContextLogger logger)
         {
-            Guard.AgainstNullOrEmptyString(formulaName, nameof(formulaName));
             Guard.AgainstNull(values, nameof(values));
             Guard.AgainstNull(logger, nameof(logger));
 
@@ -130,7 +135,7 @@ namespace Shuttle.Abacus
 
             try
             {
-                Execute(context, formulaName);
+                Execute(context, formulaId);
             }
             catch (Exception ex)
             {
@@ -140,14 +145,14 @@ namespace Shuttle.Abacus
             return context;
         }
 
-        private FormulaContext Execute(ExecutionContext executionContext, string formulaName)
+        private FormulaContext Execute(ExecutionContext executionContext, Guid formulaId)
         {
-            executionContext.CyclicInvariant(formulaName);
+            var formula = GetFormula(formulaId);
 
-            using (var formulaContext = executionContext.FormulaContext(formulaName))
+            executionContext.CyclicInvariant(formula.Name);
+
+            using (var formulaContext = executionContext.FormulaContext(formula.Name))
             {
-                var formula = GetFormula(formulaName);
-
                 foreach (var constraint in formula.Constraints)
                 {
                     var argument = GetArgument(constraint.ArgumentId);
@@ -182,7 +187,7 @@ namespace Shuttle.Abacus
                         }
                         case "matrix":
                         {
-                            var matrix = GetMatrix(operation.InputParameter);
+                            var matrix = GetMatrix(new Guid(operation.InputParameter));
 
                             value =
                                 Convert.ToDecimal(matrix.GetValue(_constraintComparison, executionContext,
@@ -193,7 +198,7 @@ namespace Shuttle.Abacus
                         }
                         case "formula":
                         {
-                            value = Execute(executionContext, operation.InputParameter).Result;
+                            value = Execute(executionContext, new Guid(operation.InputParameter)).Result;
 
                             break;
                         }
@@ -206,29 +211,29 @@ namespace Shuttle.Abacus
             }
         }
 
-        private Matrix GetMatrix(string matrixName)
+        private Matrix GetMatrix(Guid id)
         {
             lock (_lock)
             {
-                if (!_matrices.ContainsKey(matrixName))
+                if (!_matrices.ContainsKey(id))
                 {
-                    throw new InvalidOperationException($"There is no matrix with name '{matrixName}'.");
+                    throw new InvalidOperationException($"There is no matrix with id '{id}'.");
                 }
 
-                return _matrices[matrixName];
+                return _matrices[id];
             }
         }
 
-        private Formula GetFormula(string formulaName)
+        private Formula GetFormula(Guid id)
         {
             lock (_lock)
             {
-                if (!_formulas.ContainsKey(formulaName))
+                if (!_formulas.ContainsKey(id))
                 {
-                    throw new InvalidOperationException($"There is no formula with name '{formulaName}'.");
+                    throw new InvalidOperationException($"There is no formula with id '{id}'.");
                 }
 
-                return _formulas[formulaName];
+                return _formulas[id];
             }
         }
 
