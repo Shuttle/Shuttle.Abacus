@@ -12,15 +12,6 @@ namespace Shuttle.Abacus.Tests
         {
             var formulas = new List<Formula>();
 
-            var formula = new Formula(Guid.NewGuid());
-
-            formula.Register("Test");
-
-            formula.AddOperation(Guid.NewGuid(), "Addition", "Argument", "Operand1");
-            formula.AddOperation(Guid.NewGuid(), "Addition", "Argument", "Operand2");
-
-            formulas.Add(formula);
-
             var operand1 = new Argument(Guid.NewGuid());
 
             operand1.Register("Operand1", "Integer");
@@ -31,14 +22,23 @@ namespace Shuttle.Abacus.Tests
 
             var arguments = new List<Argument> { operand1, operand2 };
 
+            var formula = new Formula(Guid.NewGuid());
+
+            formula.Register("Test");
+
+            formula.AddOperation(Guid.NewGuid(), "Addition", "Argument", operand1.Id.ToString());
+            formula.AddOperation(Guid.NewGuid(), "Addition", "Argument", operand2.Id.ToString());
+
+            formulas.Add(formula);
+
             var service = new ExecutionService(new ConstraintComparison(new DataTypeFactory()))
                 .AddFormulaRange(formulas)
                 .AddArgumentRange(arguments);
 
             var context = service.Execute("Test", new List<ArgumentValue>
             {
-                new ArgumentValue (Guid.NewGuid(), "2"),
-                new ArgumentValue (Guid.NewGuid(), "3")
+                new ArgumentValue (operand1.Id, "2"),
+                new ArgumentValue (operand2.Id, "3")
             }, new ContextLogger(ContextLogLevel.Verbose));
 
             Assert.AreEqual(5, context.RootResult().Value);
@@ -108,20 +108,20 @@ namespace Shuttle.Abacus.Tests
         [Test]
         public void Should_be_able_to_use_matrix()
         {
-            var arguemtId = Guid.NewGuid();
+            var argumentId = Guid.NewGuid();
 
             var formula = new Formula(Guid.NewGuid());
 
-            formula.Register("Formula");
-            formula.AddOperation(Guid.NewGuid(), "Addition", "Matrix", "simple-matrix");
-
             var matrix = new Matrix(Guid.NewGuid());
 
-            matrix.Register("simple-matrix", arguemtId, null, "Decimal");
+            matrix.Register("simple-matrix", argumentId, null, "Decimal");
             matrix.RegisterConstraint(Guid.NewGuid(), "Row", 1, "==", "the-value");
             matrix.RegisterElement(Guid.NewGuid(), 1, 1, "1.25");
 
-            var argument = new Argument(arguemtId);
+            formula.Register("Formula");
+            formula.AddOperation(Guid.NewGuid(), "Addition", "Matrix", matrix.Id.ToString());
+
+            var argument = new Argument(argumentId);
 
             argument.Register("argument-one", "Text");
 
@@ -133,7 +133,7 @@ namespace Shuttle.Abacus.Tests
 
             var context = service.Execute("Formula", new List<ArgumentValue>
             {
-                new ArgumentValue(Guid.NewGuid(), "the-value")
+                new ArgumentValue(argumentId, "the-value")
             }, new ContextLogger(ContextLogLevel.Verbose));
 
             Assert.AreEqual(1.25, context.Result());
