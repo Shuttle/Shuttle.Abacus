@@ -139,7 +139,7 @@ namespace Shuttle.Abacus.WebApi.Controllers
             {
                 var test = _testRepository.Get(id);
 
-                var executionContext = _executionService.Execute(id, test.ArgumentValues(), new ContextLogger(ContextLogLevel.Verbose));
+                var executionContext = _executionService.Execute(test.FormulaId, test.ArgumentValues(), new ContextLogger(ContextLogLevel.Verbose));
 
                 return Ok(new
                 {

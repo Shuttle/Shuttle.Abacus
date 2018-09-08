@@ -6,7 +6,7 @@ namespace Shuttle.Abacus.Messages.v1
     public class TestExecutedEvent
     {
         public Guid Id { get; set; }
-        public string FormulaName { get; set; }
+        public Guid FormulaId { get; set; }
         public decimal Result { get; set; }
         public string Log { get; set; }
         public FormulaContext FormulaContext { get; set; }

@@ -48,7 +48,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                 var response = new TestExecutedEvent
                 {
                     Id = test.Id,
-                    FormulaName = test.FormulaName,
+                    FormulaId= test.FormulaId,
                     Log = executionContext.Logger.ToString()
                 };
 

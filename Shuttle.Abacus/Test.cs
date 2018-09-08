@@ -17,7 +17,7 @@ namespace Shuttle.Abacus
 
         public Guid Id { get; }
         public string Name { get; private set; }
-        public string FormulaName { get; private set; }
+        public Guid FormulaId { get; private set; }
         public string ExpectedResult { get; private set; }
         public string ExpectedResultType { get; private set; }
         public string Comparison { get; private set; }
@@ -46,7 +46,7 @@ namespace Shuttle.Abacus
             Guard.AgainstNull(registered, nameof(registered));
 
             Name = registered.Name;
-            FormulaName = registered.Name;
+            FormulaId = registered.FormulaId;
             ExpectedResult = registered.ExpectedResult;
             ExpectedResultType = registered.ExpectedResultType;
             Comparison = registered.Comparison;

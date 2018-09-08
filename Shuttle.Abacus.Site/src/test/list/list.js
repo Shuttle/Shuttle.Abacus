@@ -14,12 +14,16 @@ resources.add('test', {action: 'list', permission: Permissions.Manage.Tests});
 export const ResultMap = DefineMap.extend({});
 
 export const Map = DefineMap.extend({
-    run(){
-        api.run.map({ id: this.id });
+    queue(){
+        this.status = "pending";
     },
-    selected: {
-        type: 'boolean',
-        default: false
+    result: {
+        type: 'string',
+        default: ''
+    },
+    status: {
+        type: 'string',
+        default: 'none'
     },
     remove () {
         api.tests.delete({id: this.id})
@@ -53,35 +57,50 @@ export const api = {
 };
 
 export const ViewModel = DefineMap.extend({
-    run() {
+    _active: {
+        type: 'boolean',
+        default: true
+    },
+
+    runner(){
+        const self = this;
+        let poll = true;
+
+        if (!this._active){
+            return;
+        }
+
+        if (!this.tests.filter(function (item) {
+            return item.status == 'running';
+        }).length){
+            this.tests.forEach(function (item) {
+                if (item.status == 'pending'){
+                    poll = false;
+
+                    item.status = 'running';
+
+                    api.run.get({id: item.id})
+                        .then(function(response){
+                            item.status = "done";
+                            self.runner();
+                        })
+                }
+            });
+        }
+
+        if (poll) {
+            setTimeout(function () {
+                self.runner.call(self);
+            }, 1000);
+        }
+    },
+
+    queueAll() {
         const self = this;
 
         this.tests.forEach(function(item){
-            if (!item.selected){
-                return;
-            }
-
-            item.run();
+            item.queue();
         });
-    },
-
-    selectedCount: {
-        get () {
-            return this.tests.filter(function (item) {
-                return item.selected;
-            }).length;
-        }
-    },
-
-    selected: {
-        type: 'boolean',
-        set (value) {
-            this.tests.forEach(function (item) {
-                item.selected = value;
-            });
-
-            return value;
-        }
     },
 
     tests: {
@@ -122,9 +141,18 @@ export const ViewModel = DefineMap.extend({
         if (!columns.length) {
             columns.push({
                 data: this,
-                columnStache: '<cs-checkbox checked:bind="selected" checkedClass:from="\'fa-toggle-on\'" uncheckedClass:from="\'fa-toggle-off\'"/>',
+                columnTitle: 'status',
                 columnClass: 'col-1',
-                stache: '<cs-checkbox checked:bind="selected" checkedClass:from="\'fa-toggle-on\'" uncheckedClass:from="\'fa-toggle-off\'"/>'
+                stache: `
+{{#switch(status)}}
+{{#case('none')}}
+<cs-button text:raw="queue" click:from="queue" elementClass:raw="btn-sm"/>
+{{/case}}
+{{#case('pending')}}
+{{i18n('pending')}}
+{{/case}}
+{{/switch}}
+`
             });
 
             columns.push({
@@ -184,6 +212,7 @@ export const ViewModel = DefineMap.extend({
         });
 
         this.list();
+        this.runner();
     },
 
     add: function () {
@@ -195,6 +224,10 @@ export const ViewModel = DefineMap.extend({
 
     refresh: function () {
         this.refreshTimestamp = Date.now();
+    },
+
+    disconnectedCallback(){
+        this._active = false;
     }
 });
 
