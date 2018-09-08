@@ -15,7 +15,7 @@ export const ResultMap = DefineMap.extend({});
 
 export const Map = DefineMap.extend({
     run(){
-        api.run
+        api.run.map({ id: this.id });
     },
     selected: {
         type: 'boolean',

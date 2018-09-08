@@ -41,9 +41,9 @@ order by
 
         public IQuery All()
         {
-            return RawQuery.Create(string.Concat(MatrixQuery, @"
-order by
-    Name"));
+            return RawQuery.Create(string.Format(MatrixQuery, string.Empty))
+                .AddParameterValue(Columns.Id, null)
+                .AddParameterValue(Columns.Name, null);
         }
 
         public IQuery Get(Guid id)
@@ -108,7 +108,8 @@ values
                     .AddParameterValue(Columns.Id, id);
         }
 
-        public IQuery ConstraintRegistered(Guid matrixId, string axis, int index, Guid id, string comparison, string value)
+        public IQuery ConstraintRegistered(Guid matrixId, string axis, int index, Guid id, string comparison,
+            string value)
         {
             return RawQuery.Create(@"
 if exists

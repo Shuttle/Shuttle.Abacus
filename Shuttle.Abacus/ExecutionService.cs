@@ -14,27 +14,20 @@ namespace Shuttle.Abacus
         private readonly IConstraintComparison _constraintComparison;
         private readonly Dictionary<Guid, Formula> _formulas = new Dictionary<Guid, Formula>();
         private readonly Dictionary<Guid, Matrix> _matrices = new Dictionary<Guid, Matrix>();
-
-        public ExecutionService(IConstraintComparison constraintComparison)
-        {
-            Guard.AgainstNull(constraintComparison, nameof(constraintComparison));
-
-            _constraintComparison = constraintComparison;
-        }
+        private bool _initialized;
 
         public ExecutionService(IConstraintComparison constraintComparison, IFormulaRepository formulaRepository,
             IArgumentRepository argumentRepository, IMatrixRepository matrixRepository)
-            :this(constraintComparison)
         {
+            Guard.AgainstNull(constraintComparison, nameof(constraintComparison));
             Guard.AgainstNull(formulaRepository, nameof(formulaRepository));
             Guard.AgainstNull(argumentRepository, nameof(argumentRepository));
             Guard.AgainstNull(matrixRepository, nameof(matrixRepository));
 
+            _constraintComparison = constraintComparison;
             _formulaRepository = formulaRepository;
             _argumentRepository = argumentRepository;
             _matrixRepository = matrixRepository;
-
-            Flush();
         }
 
         public IExecutionService Flush()
@@ -42,25 +35,10 @@ namespace Shuttle.Abacus
             lock (_lock)
             {
                 _formulas.Clear();
-
-                foreach (var formula in _formulaRepository.All())
-                {
-                    AddFormula(formula);
-                }
-
                 _arguments.Clear();
-
-                foreach (var argument in _argumentRepository.All())
-                {
-                    AddArgument(argument);
-                }
-
                 _matrices.Clear();
 
-                foreach (var matrix in _matrixRepository.All())
-                {
-                    AddMatrix(matrix);
-                }
+                _initialized = false;
             }
 
             return this;
@@ -72,13 +50,10 @@ namespace Shuttle.Abacus
 
             lock (_lock)
             {
-                if (_matrices.ContainsKey(matrix.Id))
+                if (!_matrices.ContainsKey(matrix.Id))
                 {
-                    throw new ArgumentException(
-                        $"There is already an matrix with id '{matrix.Id}' registered.");
+                    _matrices.Add(matrix.Id, matrix);
                 }
-
-                _matrices.Add(matrix.Id, matrix);
             }
 
             return this;
@@ -90,13 +65,10 @@ namespace Shuttle.Abacus
 
             lock (_lock)
             {
-                if (_arguments.ContainsKey(argument.Id))
+                if (!_arguments.ContainsKey(argument.Id))
                 {
-                    throw new ArgumentException(
-                        $"There is already an argument with name '{argument.Name}' registered.");
+                    _arguments.Add(argument.Id, argument);
                 }
-
-                _arguments.Add(argument.Id, argument);
             }
 
             return this;
@@ -108,13 +80,10 @@ namespace Shuttle.Abacus
 
             lock (_lock)
             {
-                if (_formulas.ContainsKey(formula.Id))
+                if (!_formulas.ContainsKey(formula.Id))
                 {
-                    throw new ArgumentException(
-                        $"There is already a formula with id '{formula.Id}' registered.");
+                    _formulas.Add(formula.Id, formula);
                 }
-
-                _formulas.Add(formula.Id, formula);
             }
 
             return this;
@@ -131,6 +100,8 @@ namespace Shuttle.Abacus
             Guard.AgainstNull(values, nameof(values));
             Guard.AgainstNull(logger, nameof(logger));
 
+            Initialize();
+
             var context = new ExecutionContext(values, logger);
 
             try
@@ -143,6 +114,34 @@ namespace Shuttle.Abacus
             }
 
             return context;
+        }
+
+        private void Initialize()
+        {
+            if (_initialized)
+            {
+                return;
+            }
+
+            lock (_lock)
+            {
+                foreach (var formula in _formulaRepository.All())
+                {
+                    AddFormula(formula);
+                }
+
+                foreach (var argument in _argumentRepository.All())
+                {
+                    AddArgument(argument);
+                }
+
+                foreach (var matrix in _matrixRepository.All())
+                {
+                    AddMatrix(matrix);
+                }
+
+                _initialized = true;
+            }
         }
 
         private FormulaContext Execute(ExecutionContext executionContext, Guid formulaId)

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Shuttle.Abacus;
 using Shuttle.Access.Sql;
 using Shuttle.Core.Castle;
 using Shuttle.Core.Container;
@@ -70,6 +71,7 @@ namespace Shuttle.Access.WebApi
             componentContainer.Register<IHttpContextAccessor, HttpContextAccessor>();
             componentContainer.Register<IDatabaseContextCache, ContextDatabaseContextCache>();
             componentContainer.Register<IHashingService, HashingService>();
+            componentContainer.Register<IConstraintComparison, ConstraintComparison>();
 
             componentContainer.RegisterInstance(app.ApplicationServices.GetService<IAccessConfiguration>());
 

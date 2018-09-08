@@ -43,7 +43,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                 var test = _testRepository.Get(message.Id);
 
                 var executionContext = _executionService
-                    .Execute(test.FormulaName, test.ArgumentValues(), new ContextLogger(logLevel));
+                    .Execute(message.Id, test.ArgumentValues(), new ContextLogger(logLevel));
 
                 var response = new TestExecutedEvent
                 {
