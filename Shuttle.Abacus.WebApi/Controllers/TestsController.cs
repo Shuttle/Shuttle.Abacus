@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Shuttle.Abacus.DataAccess;
 using Shuttle.Abacus.Messages.v1;
 using Shuttle.Access.Mvc;
 using Shuttle.Core.Contract;
 using Shuttle.Core.Data;
+using Shuttle.Core.Reflection;
 using Shuttle.Esb;
 
 namespace Shuttle.Abacus.WebApi.Controllers
@@ -19,10 +21,11 @@ namespace Shuttle.Abacus.WebApi.Controllers
         private readonly ITestRepository _testRepository;
         private readonly ITestQuery _testQuery;
         private readonly IExecutionService _executionService;
+        private readonly IValueComparer _valueComparer;
 
         public TestsController(IServiceBus bus, IDatabaseContextFactory databaseContextFactory,
             IDataRowMapper dataRowMapper, ITestRepository testRepository, ITestQuery testQuery,
-            IExecutionService executionService)
+            IExecutionService executionService, IValueComparer valueComparer)
         {
             Guard.AgainstNull(bus, nameof(bus));
             Guard.AgainstNull(databaseContextFactory, nameof(databaseContextFactory));
@@ -30,6 +33,7 @@ namespace Shuttle.Abacus.WebApi.Controllers
             Guard.AgainstNull(testRepository, nameof(testRepository));
             Guard.AgainstNull(testQuery, nameof(testQuery));
             Guard.AgainstNull(executionService, nameof(executionService));
+            Guard.AgainstNull(valueComparer, nameof(valueComparer));
 
             _bus = bus;
             _databaseContextFactory = databaseContextFactory;
@@ -37,6 +41,7 @@ namespace Shuttle.Abacus.WebApi.Controllers
             _testRepository = testRepository;
             _testQuery = testQuery;
             _executionService = executionService;
+            _valueComparer = valueComparer;
         }
 
         [HttpPost("search")]
@@ -140,10 +145,15 @@ namespace Shuttle.Abacus.WebApi.Controllers
                 var test = _testRepository.Get(id);
 
                 var executionContext = _executionService.Execute(test.FormulaId, test.ArgumentValues(), new ContextLogger(ContextLogLevel.Verbose));
+                var result = executionContext.GetResult();
 
                 return Ok(new
                 {
-                    Result = executionContext.Result()
+                    Passed = _valueComparer.IsSatisfiedBy(test.ExpectedResultDataTypeName, test.ExpectedResult, "==", result.ToString(CultureInfo.InvariantCulture)),
+                    Exception = executionContext.Exception.AllMessages(),
+                    Result = result,
+                    Log = executionContext.Logger.ToString(),
+                    Results = executionContext.GetResults()
                 });
             }
         }

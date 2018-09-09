@@ -1,5 +1,6 @@
 {{#if(selectedTest)}}
 <cs-button vm:click:from="close" text:raw="close"/>
+<abacus-test-result vm:test:from="selectedTest" />
 {{else}}
 <cs-form>
     <div class="row">

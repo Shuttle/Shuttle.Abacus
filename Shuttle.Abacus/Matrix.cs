@@ -120,10 +120,10 @@ namespace Shuttle.Abacus
             return constraintRegistered;
         }
 
-        public string GetValue(IConstraintComparison constraintComparison, ExecutionContext executionContext,
+        public string GetValue(IValueComparer valueComparer, ExecutionContext executionContext,
             Argument rowArgument, Argument columnArgument)
         {
-            Guard.AgainstNull(constraintComparison, nameof(constraintComparison));
+            Guard.AgainstNull(valueComparer, nameof(valueComparer));
             Guard.AgainstNull(executionContext, nameof(executionContext));
             Guard.AgainstNull(rowArgument, nameof(rowArgument));
 
@@ -132,10 +132,10 @@ namespace Shuttle.Abacus
                 Guard.AgainstNull(columnArgument, nameof(columnArgument));
             }
 
-            var row = FindConstraint("Row", constraintComparison, rowArgument.DataType,
+            var row = FindConstraint("Row", valueComparer, rowArgument.DataType,
                 executionContext.GetArgumentValue(RowArgumentId));
             var column = ColumnArgumentId.HasValue
-                ? FindConstraint("Column", constraintComparison, columnArgument.DataType,
+                ? FindConstraint("Column", valueComparer, columnArgument.DataType,
                     executionContext.GetArgumentValue(ColumnArgumentId.Value))
                 : 1;
 
@@ -150,12 +150,12 @@ namespace Shuttle.Abacus
             return element.Value;
         }
 
-        private int FindConstraint(string axis, IConstraintComparison constraintComparison, string dataTypeName, string value)
+        private int FindConstraint(string axis, IValueComparer valueComparer, string dataTypeName, string value)
         {
             var constraint = _constraints.FirstOrDefault(item =>
                 item.Axis.Equals(axis, StringComparison.InvariantCultureIgnoreCase)
                 &&
-                constraintComparison.IsSatisfiedBy(dataTypeName, item.Value, item.Comparison, value)
+                valueComparer.IsSatisfiedBy(dataTypeName, item.Value, item.Comparison, value)
             );
 
             if (constraint == null)

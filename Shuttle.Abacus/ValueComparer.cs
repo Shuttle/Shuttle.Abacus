@@ -3,28 +3,28 @@ using Shuttle.Core.Contract;
 
 namespace Shuttle.Abacus
 {
-    public class ConstraintComparison : IConstraintComparison
+    public class ValueComparer : IValueComparer
     {
         private static readonly char[] Separator = {','};
 
         private readonly IDataTypeFactory _dataTypeFactory;
 
-        public ConstraintComparison(IDataTypeFactory dataTypeFactory)
+        public ValueComparer(IDataTypeFactory dataTypeFactory)
         {
             Guard.AgainstNull(dataTypeFactory, nameof(dataTypeFactory));
 
             _dataTypeFactory = dataTypeFactory;
         }
 
-        public bool IsSatisfiedBy(string dataTypeName, string argumentValue, string comparison, string constraintValue)
+        public bool IsSatisfiedBy(string dataTypeName, string value, string comparison, string comparisonValue)
         {
             var result = true;
 
-            foreach (var argumentValueItem in argumentValue.Split(Separator, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var argumentValueItem in value.Split(Separator, StringSplitOptions.RemoveEmptyEntries))
             {
                 var argumentDataType = _dataTypeFactory.Create(dataTypeName, argumentValueItem);
 
-                foreach (var constraintValueItem in constraintValue.Split(Separator, StringSplitOptions.RemoveEmptyEntries))
+                foreach (var constraintValueItem in comparisonValue.Split(Separator, StringSplitOptions.RemoveEmptyEntries))
                 {
                     var comparisonDataType = _dataTypeFactory.Create(dataTypeName, constraintValueItem);
 

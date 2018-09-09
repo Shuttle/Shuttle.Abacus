@@ -61,7 +61,7 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                 }
                 else
                 {
-                    response.Result = executionContext.Result();
+                    response.Result = executionContext.GetResult();
                 }
 
                 context.Send(response, c => c.Reply());

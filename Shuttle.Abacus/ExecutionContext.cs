@@ -119,9 +119,14 @@ namespace Shuttle.Abacus
             return _results.FirstOrDefault();
         }
 
-        public decimal Result()
+        public decimal GetResult()
         {
             return RootResult()?.Value ?? 0;
+        }
+
+        public IEnumerable<ExecutionResult> GetResults()
+        {
+            return _results.AsReadOnly();
         }
 
         public void CyclicInvariant(string formulaName)

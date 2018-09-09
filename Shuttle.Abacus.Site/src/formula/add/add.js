@@ -46,7 +46,10 @@ export const ViewModel = DefineMap.extend({
 
         formulas.post({
             name: this.name
-        });
+        })
+            .then(function(){
+                state.registrationRequested('formula');
+            });
 
         this.close();
 

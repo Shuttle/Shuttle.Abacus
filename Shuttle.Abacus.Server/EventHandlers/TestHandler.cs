@@ -30,7 +30,7 @@ namespace Shuttle.Abacus.Server.EventHandlers
             var data = context.Event;
 
             _query.Register(context.PrimitiveEvent.Id, data.Name, data.FormulaId, data.ExpectedResult,
-                data.ExpectedResultType, data.Comparison);
+                data.ExpectedResultDataTypeName, data.Comparison);
         }
 
         public void ProcessEvent(IEventHandlerContext<Removed> context)

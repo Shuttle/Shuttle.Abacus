@@ -48,7 +48,7 @@ namespace Shuttle.Abacus.Tests
         private IExecutionService GetExecutionService()
         {
             return new ExecutionService(
-                new ConstraintComparison(new DataTypeFactory()),
+                new ValueComparer(new DataTypeFactory()),
                 new Mock<IFormulaRepository>().Object,
                 new Mock<IArgumentRepository>().Object,
                 new Mock<IMatrixRepository>().Object);
@@ -112,7 +112,7 @@ namespace Shuttle.Abacus.Tests
 
             var context = service.Execute(formula1.Id, new List<ArgumentValue>(), new ContextLogger(ContextLogLevel.Verbose));
 
-            Assert.AreEqual(100, context.Result());
+            Assert.AreEqual(100, context.GetResult());
         }
 
         [Test]
@@ -146,7 +146,7 @@ namespace Shuttle.Abacus.Tests
                 new ArgumentValue(argumentId, "the-value")
             }, new ContextLogger(ContextLogLevel.Verbose));
 
-            Assert.AreEqual(1.25, context.Result());
+            Assert.AreEqual(1.25, context.GetResult());
         }
 
         [Test]

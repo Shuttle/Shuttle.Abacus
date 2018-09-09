@@ -6,7 +6,7 @@ namespace Shuttle.Abacus.Events.Test.v1
     {
         public string Name { get; set; }
         public string ExpectedResult { get; set; }
-        public string ExpectedResultType { get; set; }
+        public string ExpectedResultDataTypeName { get; set; }
         public string Comparison { get; set; }
         public Guid FormulaId { get; set; }
     }

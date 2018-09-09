@@ -71,7 +71,7 @@ namespace Shuttle.Access.WebApi
             componentContainer.Register<IHttpContextAccessor, HttpContextAccessor>();
             componentContainer.Register<IDatabaseContextCache, ContextDatabaseContextCache>();
             componentContainer.Register<IHashingService, HashingService>();
-            componentContainer.Register<IConstraintComparison, ConstraintComparison>();
+            componentContainer.Register<IValueComparer, ValueComparer>();
 
             componentContainer.RegisterInstance(app.ApplicationServices.GetService<IAccessConfiguration>());
 

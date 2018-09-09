@@ -11,20 +11,20 @@ namespace Shuttle.Abacus
         private readonly IArgumentRepository _argumentRepository;
         private readonly IMatrixRepository _matrixRepository;
         private readonly Dictionary<Guid, Argument> _arguments = new Dictionary<Guid, Argument>();
-        private readonly IConstraintComparison _constraintComparison;
+        private readonly IValueComparer _valueComparer;
         private readonly Dictionary<Guid, Formula> _formulas = new Dictionary<Guid, Formula>();
         private readonly Dictionary<Guid, Matrix> _matrices = new Dictionary<Guid, Matrix>();
         private bool _initialized;
 
-        public ExecutionService(IConstraintComparison constraintComparison, IFormulaRepository formulaRepository,
+        public ExecutionService(IValueComparer valueComparer, IFormulaRepository formulaRepository,
             IArgumentRepository argumentRepository, IMatrixRepository matrixRepository)
         {
-            Guard.AgainstNull(constraintComparison, nameof(constraintComparison));
+            Guard.AgainstNull(valueComparer, nameof(valueComparer));
             Guard.AgainstNull(formulaRepository, nameof(formulaRepository));
             Guard.AgainstNull(argumentRepository, nameof(argumentRepository));
             Guard.AgainstNull(matrixRepository, nameof(matrixRepository));
 
-            _constraintComparison = constraintComparison;
+            _valueComparer = valueComparer;
             _formulaRepository = formulaRepository;
             _argumentRepository = argumentRepository;
             _matrixRepository = matrixRepository;
@@ -157,7 +157,7 @@ namespace Shuttle.Abacus
                     var argument = GetArgument(constraint.ArgumentId);
                     var argumentValue = executionContext.GetArgumentValue(constraint.ArgumentId);
 
-                    if (!_constraintComparison.IsSatisfiedBy(argument.DataType, argumentValue, constraint.Comparison,
+                    if (!_valueComparer.IsSatisfiedBy(argument.DataType, argumentValue, constraint.Comparison,
                         constraint.Value))
                     {
                         return formulaContext.Disqualified(constraint.ArgumentId, argumentValue,
@@ -189,7 +189,7 @@ namespace Shuttle.Abacus
                             var matrix = GetMatrix(new Guid(operation.InputParameter));
 
                             value =
-                                Convert.ToDecimal(matrix.GetValue(_constraintComparison, executionContext,
+                                Convert.ToDecimal(matrix.GetValue(_valueComparer, executionContext,
                                     GetArgument(matrix.RowArgumentId),
                                     matrix.ColumnArgumentId.HasValue ? GetArgument(matrix.ColumnArgumentId.Value) : null));
 

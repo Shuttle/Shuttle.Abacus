@@ -10,7 +10,7 @@ namespace Shuttle.Abacus.DataAccess
         DataRow Get(Guid id);
         IEnumerable<DataRow> Arguments(Guid id);
 
-        void Register(Guid id, string name, Guid formulaId, string expectedResult, string expectedResultType,
+        void Register(Guid id, string name, Guid formulaId, string expectedResult, string expectedResultDataTypeName,
             string comparison);
 
         void Remove(Guid id);

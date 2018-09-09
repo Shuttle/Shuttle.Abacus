@@ -104,7 +104,10 @@ export const ViewModel = DefineMap.extend({
             comparison: this.comparison,
             expectedResult: this.expectedResult,
             expectedResultDataTypeName: this.expectedResultDataTypeName
-        });
+        })
+            .then(function(){
+                state.registrationRequested('test');
+            });
 
         this.close();
 

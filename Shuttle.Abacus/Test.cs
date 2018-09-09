@@ -19,16 +19,16 @@ namespace Shuttle.Abacus
         public string Name { get; private set; }
         public Guid FormulaId { get; private set; }
         public string ExpectedResult { get; private set; }
-        public string ExpectedResultType { get; private set; }
+        public string ExpectedResultDataTypeName { get; private set; }
         public string Comparison { get; private set; }
         public bool Removed { get; private set; }
 
-        public Registered Register(string name, Guid formulaId, string expectedResult, string expectedResultType,
+        public Registered Register(string name, Guid formulaId, string expectedResult, string expectedResultDataTypeName,
             string comparison)
         {
             Guard.AgainstNullOrEmptyString(name, nameof(name));
             Guard.AgainstNullOrEmptyString(expectedResult, nameof(expectedResult));
-            Guard.AgainstNullOrEmptyString(expectedResultType, nameof(expectedResultType));
+            Guard.AgainstNullOrEmptyString(expectedResultDataTypeName, nameof(expectedResultDataTypeName));
             Guard.AgainstNullOrEmptyString(comparison, nameof(comparison));
 
             return On(new Registered
@@ -36,7 +36,7 @@ namespace Shuttle.Abacus
                 Name = name,
                 FormulaId = formulaId,
                 ExpectedResult = expectedResult,
-                ExpectedResultType = expectedResultType,
+                ExpectedResultDataTypeName = expectedResultDataTypeName,
                 Comparison = comparison
             });
         }
@@ -48,7 +48,7 @@ namespace Shuttle.Abacus
             Name = registered.Name;
             FormulaId = registered.FormulaId;
             ExpectedResult = registered.ExpectedResult;
-            ExpectedResultType = registered.ExpectedResultType;
+            ExpectedResultDataTypeName = registered.ExpectedResultDataTypeName;
             Comparison = registered.Comparison;
 
             return registered;

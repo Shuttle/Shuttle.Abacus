@@ -11,8 +11,6 @@ import Api from 'shuttle-can-api';
 
 resources.add('test', {action: 'list', permission: Permissions.Manage.Tests});
 
-export const ResultMap = DefineMap.extend({});
-
 export const Map = DefineMap.extend({
     select() {
         this.viewModel.select(this);
@@ -20,7 +18,20 @@ export const Map = DefineMap.extend({
     queue () {
         this.status = 'pending';
     },
+    passed: {
+        type: 'boolean',
+        get(value){
+            return value && !!this.exception;
+        }
+    },
     result: {
+        type: 'string',
+        default: ''
+    },
+    results: {
+        Type: DefineList
+    },
+    contextLog: {
         type: 'string',
         default: ''
     },
@@ -36,13 +47,13 @@ export const Map = DefineMap.extend({
         type: 'string',
         default: '',
         get (value) {
-            return localisation.value(this.exception ? 'failed' : 'passed');
+            return localisation.value(this.passed ? 'passed' : 'failed');
         }
     },
     resultStatusModifier: {
         type: 'string',
         get () {
-            return this.exception ? 'danger' : 'success';
+            return this.passed ? 'success' : 'danger';
         }
     },
     remove () {
@@ -74,8 +85,7 @@ export const api = {
         Map
     }),
     run: new Api({
-        endpoint: 'tests/{id}/run',
-        ResultMap
+        endpoint: 'tests/{id}/run'
     })
 };
 
@@ -118,6 +128,8 @@ export const ViewModel = DefineMap.extend({
                         .then(function (response) {
                             item.status = 'none';
                             item.result = response.result;
+                            item.results = response.results;
+                            item.contextLog = response.log;
                             self.runner();
                         });
                 }
@@ -153,13 +165,8 @@ export const ViewModel = DefineMap.extend({
         Default: DefineList
     },
 
-    refreshTimestamp: {
-        type: 'string'
-    },
-
     list () {
         const self = this;
-        const refreshTimestamp = this.refreshTimestamp;
 
         api.search.list({
             name: this.name
@@ -280,7 +287,7 @@ export const ViewModel = DefineMap.extend({
     },
 
     refresh: function () {
-        this.refreshTimestamp = Date.now();
+        this.list();
     },
 
     disconnectedCallback () {
