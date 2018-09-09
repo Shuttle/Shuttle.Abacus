@@ -14,16 +14,36 @@ resources.add('test', {action: 'list', permission: Permissions.Manage.Tests});
 export const ResultMap = DefineMap.extend({});
 
 export const Map = DefineMap.extend({
-    queue(){
-        this.status = "pending";
+    select() {
+        this.viewModel.select(this);
+    },
+    queue () {
+        this.status = 'pending';
     },
     result: {
+        type: 'string',
+        default: ''
+    },
+    exception: {
         type: 'string',
         default: ''
     },
     status: {
         type: 'string',
         default: 'none'
+    },
+    resultStatus: {
+        type: 'string',
+        default: '',
+        get (value) {
+            return localisation.value(this.exception ? 'failed' : 'passed');
+        }
+    },
+    resultStatusModifier: {
+        type: 'string',
+        get () {
+            return this.exception ? 'danger' : 'success';
+        }
     },
     remove () {
         api.tests.delete({id: this.id})
@@ -38,6 +58,9 @@ export const Map = DefineMap.extend({
             action: 'list',
             id: this.id
         });
+    },
+    viewModel: {
+        Type: DefineMap
     }
 });
 
@@ -62,28 +85,41 @@ export const ViewModel = DefineMap.extend({
         default: true
     },
 
-    runner(){
+    selectedTest: {
+        Type: DefineMap
+    },
+
+    close(){
+        this.selectedTest = undefined;
+    },
+
+    select(item){
+        this.selectedTest = item;
+    },
+
+    runner () {
         const self = this;
         let poll = true;
 
-        if (!this._active){
+        if (!this._active) {
             return;
         }
 
         if (!this.tests.filter(function (item) {
             return item.status == 'running';
-        }).length){
+        }).length) {
             this.tests.forEach(function (item) {
-                if (item.status == 'pending'){
+                if (item.status == 'pending') {
                     poll = false;
 
                     item.status = 'running';
 
-                    api.run.get({id: item.id})
-                        .then(function(response){
-                            item.status = "done";
+                    api.run.map({id: item.id})
+                        .then(function (response) {
+                            item.status = 'none';
+                            item.result = response.result;
                             self.runner();
-                        })
+                        });
                 }
             });
         }
@@ -95,10 +131,10 @@ export const ViewModel = DefineMap.extend({
         }
     },
 
-    queueAll() {
+    queueAll () {
         const self = this;
 
-        this.tests.forEach(function(item){
+        this.tests.forEach(function (item) {
             item.queue();
         });
     },
@@ -132,6 +168,10 @@ export const ViewModel = DefineMap.extend({
         })
             .then(function (response) {
                 self.tests = response;
+
+                self.tests.forEach(function(map){
+                    map.viewModel = self;
+                });
             });
     },
 
@@ -149,9 +189,26 @@ export const ViewModel = DefineMap.extend({
 <cs-button text:raw="queue" click:from="queue" elementClass:raw="btn-sm"/>
 {{/case}}
 {{#case('pending')}}
-{{i18n('pending')}}
+<span class="badge badge-info">{{i18n('pending')}}</span>
+{{/case}}
+{{#case('running')}}
+<span class="badge badge-info">{{i18n('running')}}</span>
 {{/case}}
 {{/switch}}
+`
+            });
+
+            columns.push({
+                columnTitle: 'result',
+                columnClass: 'col-1',
+                stache: `
+{{#if(result)}}
+<button type="button" class="btn btn-sm btn-{{resultStatusModifier}}" on:click="select()">
+  {{resultStatus}} <span class="badge badge-light">{{result}}</span>
+</button>
+{{else}}
+-
+{{/if}}
 `
             });
 
@@ -226,7 +283,7 @@ export const ViewModel = DefineMap.extend({
         this.refreshTimestamp = Date.now();
     },
 
-    disconnectedCallback(){
+    disconnectedCallback () {
         this._active = false;
     }
 });
