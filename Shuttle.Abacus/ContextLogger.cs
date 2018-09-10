@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text;
 
 namespace Shuttle.Abacus
@@ -13,7 +14,7 @@ namespace Shuttle.Abacus
     {
         private readonly object[] _argsEmpty = { };
 
-        private readonly StringBuilder _log = new StringBuilder();
+        private readonly List<ContextLogLine> _lines = new List<ContextLogLine>();
 
         private int _indent;
 
@@ -28,6 +29,8 @@ namespace Shuttle.Abacus
 
         public bool IsNormalEnabled => LogLevel != ContextLogLevel.None;
         public bool IsVerboseEnabled => LogLevel == ContextLogLevel.Verbose;
+
+        public IEnumerable<ContextLogLine> Lines => _lines.AsReadOnly();
 
         public void LogNormal(string message)
         {
@@ -71,18 +74,18 @@ namespace Shuttle.Abacus
 
         private void AppendLine(string text, params object[] args)
         {
-            _log.AppendFormat(new string('\t', _indent) + text, args);
-            _log.AppendLine();
+            _lines.Add(new ContextLogLine {Indent = _indent, Text = string.Format(text, args)});
         }
 
         private void Log(string message)
         {
             AppendLine($"{message}");
         }
+    }
 
-        public override string ToString()
-        {
-            return _log.ToString();
-        }
+    public class ContextLogLine
+    {
+        public int Indent { get; set; }
+        public string Text { get; set; }
     }
 }

@@ -152,7 +152,7 @@ namespace Shuttle.Abacus.WebApi.Controllers
                     Passed = _valueComparer.IsSatisfiedBy(test.ExpectedResultDataTypeName, test.ExpectedResult, "==", result.ToString(CultureInfo.InvariantCulture)),
                     Exception = executionContext.Exception.AllMessages(),
                     Result = result,
-                    Log = executionContext.Logger.ToString(),
+                    LogLines = executionContext.Logger.Lines,
                     Results = executionContext.GetResults()
                 });
             }

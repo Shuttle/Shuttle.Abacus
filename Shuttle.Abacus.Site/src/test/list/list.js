@@ -31,9 +31,9 @@ export const Map = DefineMap.extend({
     results: {
         Type: DefineList
     },
-    contextLog: {
-        type: 'string',
-        default: ''
+    logLines: {
+        type: DefineList,
+        default: []
     },
     exception: {
         type: 'string',
@@ -129,7 +129,7 @@ export const ViewModel = DefineMap.extend({
                             item.status = 'none';
                             item.result = response.result;
                             item.results = response.results;
-                            item.contextLog = response.log;
+                            item.logLines = response.logLines;
                             self.runner();
                         });
                 }

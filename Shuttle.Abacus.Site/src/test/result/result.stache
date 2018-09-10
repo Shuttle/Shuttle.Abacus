@@ -1,4 +1,6 @@
 <h1>{{test.name}}</h1>
 <pre>
-    {{test.contextLog}}
+    {{#each(test.logLines)}}
+        {{indent}} - {{text}}
+    {{/each}}
 </pre>

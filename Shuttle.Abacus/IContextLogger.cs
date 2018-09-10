@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Shuttle.Abacus
 {
     public interface IContextLogger
@@ -6,6 +8,7 @@ namespace Shuttle.Abacus
 
         bool IsNormalEnabled { get; }
         bool IsVerboseEnabled { get; }
+        IEnumerable<ContextLogLine> Lines { get; }
 
         void LogNormal(string message);
         void LogVerbose(string message);
