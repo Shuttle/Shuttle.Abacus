@@ -81,6 +81,18 @@ namespace Shuttle.Abacus
         {
             AppendLine($"{message}");
         }
+
+        public override string ToString()
+        {
+            var result = new StringBuilder();
+
+            foreach (var line in _lines)
+            {
+                result.AppendLine($"{new string('\t', line.Indent)}{line.Text}");
+            }
+
+            return result.ToString();
+        }
     }
 
     public class ContextLogLine

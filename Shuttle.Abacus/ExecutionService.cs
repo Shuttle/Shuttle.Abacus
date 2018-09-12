@@ -95,14 +95,24 @@ namespace Shuttle.Abacus
         //{
         //}
 
-        public ExecutionContext Execute(Guid formulaId, IEnumerable<ArgumentValue> values, IContextLogger logger)
+        public ExecutionContext Execute(Guid formulaId, IEnumerable<ArgumentValue> argumentValues, IContextLogger logger)
         {
-            Guard.AgainstNull(values, nameof(values));
+            Guard.AgainstNull(argumentValues, nameof(argumentValues));
             Guard.AgainstNull(logger, nameof(logger));
 
             Initialize();
 
-            var context = new ExecutionContext(values, logger);
+            var context = new ExecutionContext(argumentValues, logger);
+
+            foreach (var argumentValue in argumentValues)
+            {
+                var argument = GetArgument(argumentValue.Id);
+
+                if (logger.LogLevel == ContextLogLevel.Verbose)
+                {
+                    logger.LogVerbose($"[inputParameter] {argumentValue.Id} / {argument.Name} = '{argumentValue.Value}'");
+                }
+            }
 
             try
             {
@@ -160,7 +170,9 @@ namespace Shuttle.Abacus
                     if (!_valueComparer.IsSatisfiedBy(argument.DataType, argumentValue, constraint.Comparison,
                         constraint.Value))
                     {
-                        return formulaContext.Disqualified(constraint.ArgumentId, argumentValue,
+                        return formulaContext.Disqualified(
+                            GetArgument(constraint.ArgumentId), 
+                            argumentValue,
                             constraint.Comparison,
                             constraint.Value);
                     }

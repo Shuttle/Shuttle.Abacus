@@ -109,25 +109,25 @@ namespace Shuttle.Abacus
             return $"[argument]:name={name}";
         }
 
-        public ArgumentSet RegisterArgument(Guid argumentId, string value)
+        public ArgumentRegistered RegisterArgument(Guid argumentId, string value)
         {
             Guard.AgainstNullOrEmptyString(value, nameof(value));
 
-            return On(new ArgumentSet
+            return On(new ArgumentRegistered
             {
                 ArgumentId = argumentId,
                 Value = value
             });
         }
 
-        private ArgumentSet On(ArgumentSet argumentSet)
+        private ArgumentRegistered On(ArgumentRegistered argumentRegistered)
         {
-            Guard.AgainstNull(argumentSet, nameof(argumentSet));
+            Guard.AgainstNull(argumentRegistered, nameof(argumentRegistered));
 
-            _values.Remove(FindValue(argumentSet.ArgumentId));
-            _values.Add(new ArgumentValue(argumentSet.ArgumentId, argumentSet.Value));
+            _values.Remove(FindValue(argumentRegistered.ArgumentId));
+            _values.Add(new ArgumentValue(argumentRegistered.ArgumentId, argumentRegistered.Value));
 
-            return argumentSet;
+            return argumentRegistered;
         }
 
         private ArgumentValue FindValue(Guid argumentId)

@@ -23,11 +23,6 @@ namespace Shuttle.Abacus
             foreach (var argumentValue in values)
             {
                 _values.Add(argumentValue.Id, argumentValue.Value);
-
-                if (logger.LogLevel == ContextLogLevel.Verbose)
-                {
-                    logger.LogVerbose($"[inputParameter argument name] {argumentValue.Id} = '{argumentValue.Value}'");
-                }
             }
         }
 

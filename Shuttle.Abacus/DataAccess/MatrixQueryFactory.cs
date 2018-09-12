@@ -57,6 +57,8 @@ select
     DataTypeName
 from
     Matrix
+where
+    Id = @Id
 ")
                 .AddParameterValue(Columns.Id, id);
         }

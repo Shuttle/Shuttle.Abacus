@@ -43,6 +43,8 @@ namespace Shuttle.Abacus.Tests
             }, new ContextLogger(ContextLogLevel.Verbose));
 
             Assert.AreEqual(5, context.RootResult().Value);
+
+            Console.WriteLine(context.Logger.ToString());
         }
 
         private IExecutionService GetExecutionService()
@@ -83,13 +85,13 @@ namespace Shuttle.Abacus.Tests
 
             var context = service.Execute(formula.Id, new List<ArgumentValue>
             {
-                new ArgumentValue (Guid.NewGuid(), "2"),
-                new ArgumentValue (Guid.NewGuid(), "3")
+                new ArgumentValue (operand1.Id, "2"),
+                new ArgumentValue (operand2.Id, "3")
             }, new ContextLogger(ContextLogLevel.Verbose));
 
             Assert.AreEqual(0, context.RootResult().Value);
 
-            Console.WriteLine(context.Logger);
+            Console.WriteLine(context.Logger.ToString());
         }
 
         [Test]
@@ -110,9 +112,14 @@ namespace Shuttle.Abacus.Tests
             var service = GetExecutionService()
                 .AddFormulaRange(formulas);
 
-            var context = service.Execute(formula1.Id, new List<ArgumentValue>(), new ContextLogger(ContextLogLevel.Verbose));
+            var context = service.Execute(
+                formula1.Id, 
+                new List<ArgumentValue>(), 
+                new ContextLogger(ContextLogLevel.Verbose));
 
             Assert.AreEqual(100, context.GetResult());
+
+            Console.WriteLine(context.Logger.ToString());
         }
 
         [Test]
@@ -147,6 +154,8 @@ namespace Shuttle.Abacus.Tests
             }, new ContextLogger(ContextLogLevel.Verbose));
 
             Assert.AreEqual(1.25, context.GetResult());
+
+            Console.WriteLine(context.Logger.ToString());
         }
 
         [Test]
@@ -186,6 +195,8 @@ namespace Shuttle.Abacus.Tests
 
             Assert.IsTrue(context.HasException);
             Assert.IsTrue(context.Exception.Message.Contains("Cyclic"));
+
+            Console.WriteLine(context.Logger.ToString());
         }
     }
 }

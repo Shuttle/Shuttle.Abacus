@@ -61,16 +61,18 @@ namespace Shuttle.Abacus
             Result = result;
         }
 
-        public FormulaContext Disqualified(Guid argumentId, string argumentValue, string comparison,
+        public FormulaContext Disqualified(Argument argument, string argumentValue, string comparison,
             string constraintValue)
         {
+            Guard.AgainstNull(argument, nameof(argument));
+
             if (_executionContext.Logger.IsNormalEnabled)
             {
                 _executionContext.Logger.LogNormal(
-                    $"[disqualified] : {argumentId} {comparison} {constraintValue} but was {argumentValue}");
+                    $"[disqualified] : {argument.Name} {comparison} {constraintValue} but was {argumentValue}");
             }
 
-            ConstraintViolation = new ConstraintViolation(argumentId, argumentValue, comparison, constraintValue);
+            ConstraintViolation = new ConstraintViolation(argument.Id, argumentValue, comparison, constraintValue);
 
             return this;
         }

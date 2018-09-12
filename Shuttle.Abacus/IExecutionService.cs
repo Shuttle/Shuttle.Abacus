@@ -9,6 +9,6 @@ namespace Shuttle.Abacus
         IExecutionService AddMatrix(Matrix matrix);
         IExecutionService AddArgument(Argument argument);
         IExecutionService AddFormula(Formula formula);
-        ExecutionContext Execute(Guid formulaId, IEnumerable<ArgumentValue> values, IContextLogger logger);
+        ExecutionContext Execute(Guid formulaId, IEnumerable<ArgumentValue> argumentValues, IContextLogger logger);
     }
 }
