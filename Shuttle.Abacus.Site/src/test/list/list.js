@@ -32,7 +32,7 @@ export const Map = DefineMap.extend({
         Type: DefineList
     },
     logLines: {
-        type: DefineList,
+        Type: DefineList,
         default: []
     },
     exception: {
