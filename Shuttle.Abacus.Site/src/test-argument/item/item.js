@@ -19,6 +19,15 @@ var api = {
 };
 
 export const ViewModel = DefineMap.extend({
+    adding: {
+        type: 'boolean',
+        get () {
+            return !this.argument ||
+                !this.argument.id ||
+                this.argument.id === '00000000-0000-0000-0000-000000000000';
+        }
+    },
+
     test: {
         Type: DefineMap
     },
@@ -53,6 +62,11 @@ export const ViewModel = DefineMap.extend({
             });
 
         return false;
+    },
+
+
+    cancel () {
+        this.argument = undefined;
     },
 
 	argumentSearchMapper (argument){

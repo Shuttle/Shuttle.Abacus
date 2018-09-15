@@ -117,6 +117,11 @@ export const ViewModel = DefineMap.extend({
             type: 'refresh',
             viewModel: this
         });
+
+        state.navbar.addButton({
+            type: 'back',
+            viewModel: this
+        });
     },
 
     refresh: function() {

@@ -21,7 +21,7 @@ export const Map = DefineMap.extend({
     passed: {
         type: 'boolean',
         get(value){
-            return value && !!this.exception;
+            return value && !this.exception;
         }
     },
     result: {
@@ -127,6 +127,8 @@ export const ViewModel = DefineMap.extend({
                     api.run.map({id: item.id})
                         .then(function (response) {
                             item.status = 'none';
+                            item.passed = response.passed;
+                            item.exception = response.exception;
                             item.result = response.result;
                             item.results = response.results;
                             item.logLines = response.logLines;
