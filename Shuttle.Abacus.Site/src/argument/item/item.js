@@ -1,37 +1,17 @@
 import Component from 'can-component/';
 import DefineMap from 'can-define/map/';
-import view from './add.stache!';
+import view from './item.stache!';
 import resources from '~/resources';
 import Permissions from '~/permissions';
 import router from '~/router';
 import Api from 'shuttle-can-api';
 import validator from 'can-define-validate-validatejs';
 import state from '~/state';
-import stack from '~/stack';
-import {OptionMap, OptionList} from 'shuttle-canstrap/select/';
+import { OptionMap, OptionList } from 'shuttle-canstrap/select/';
 
-resources.add('argument', {action: 'add', permission: Permissions.Manage.Arguments});
+resources.add('argument', {action: 'item', permission: Permissions.Manage.Arguments});
 
-var api = {
-    arguments: new Api({
-        endpoint: 'arguments/{id}'
-    })
-};
-
-export const ViewModel = DefineMap.extend({
-    init: function () {
-        const result = stack.pop('formula');
-
-        state.title = 'arguments';
-
-        if (!result) {
-            return;
-        }
-
-        this.name = result.name;
-        this.dataTypeName = result.dataTypeName;
-    },
-
+export const Map = DefineMap.extend({
     name: {
         type: 'string',
         default: '',
@@ -46,6 +26,31 @@ export const ViewModel = DefineMap.extend({
         validate: {
             presence: true
         }
+    }
+});
+
+var api = {
+    arguments: new Api({
+        endpoint: 'arguments/{id}'
+    })
+};
+
+export const ViewModel = DefineMap.extend({
+    init: function () {
+        const self = this;
+
+        state.title = 'arguments';
+
+        if (state.routeData.id) {
+            api.arguments.map({id: state.routeData.id})
+                .then(function (map) {
+                    self.map = map;
+                });
+        }
+    },
+
+    map: {
+        Default: Map
     },
 
     dataTypeNames: {
@@ -68,7 +73,7 @@ export const ViewModel = DefineMap.extend({
             name: this.name,
             dataTypeName: this.dataTypeName
         })
-            .then(function(){
+            .then(function () {
                 state.registrationRequested('argument');
             });
 
@@ -85,10 +90,10 @@ export const ViewModel = DefineMap.extend({
     }
 });
 
-validator(ViewModel);
+validator(Map);
 
 export default Component.extend({
-    tag: 'abacus-argument-add',
+    tag: 'abacus-argument-item',
     ViewModel,
     view
 });

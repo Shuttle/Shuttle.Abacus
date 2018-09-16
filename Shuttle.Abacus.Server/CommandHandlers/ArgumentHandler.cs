@@ -1,4 +1,5 @@
-﻿using Shuttle.Abacus.Messages.v1;
+﻿using System;
+using Shuttle.Abacus.Messages.v1;
 using Shuttle.Core.Contract;
 using Shuttle.Core.Data;
 using Shuttle.Esb;
@@ -42,13 +43,14 @@ namespace Shuttle.Abacus.Server.CommandHandlers
             using (_databaseContextFactory.Create())
             {
                 var key = Argument.Key(message.Name);
+                var existingId = _keyStore.Get(key);
 
-                if (_keyStore.Contains(key))
+                if (!message.Id.Equals(existingId ?? Guid.Empty))
                 {
                     return;
                 }
 
-                var stream = _eventStore.CreateEventStream();
+                var stream = _eventStore.Get(message.Id);
                 var argument = new Argument(stream.Id);
 
                 stream.AddEvent(argument.Register(message.Name, message.DataTypeName));

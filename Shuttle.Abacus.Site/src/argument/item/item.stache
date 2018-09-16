@@ -2,11 +2,11 @@
     <fieldset class="form-group">
         <div class="d-flex flex-wrap justify-content-start mb-2">
             <div class="fi-2">
-                <cs-form-input focus:from="'true'" label:from="'name'" vm:value:bind="name"
+                <cs-form-input focus:from="'true'" label:from="'name'" vm:value:bind="map.name"
                                vm:errors:from="errors()" errorAttribute:from="'name'" vm:required:from="'true'"/>
             </div>
             <div class="fi-2">
-                <cs-form-select label:from="'data-type-name'" value:bind="dataTypeName" options:from="dataTypeNames"
+                <cs-form-select label:from="'data-type-name'" value:bind="map.dataTypeName" options:from="dataTypeNames"
                                 vm:errors:from="errors()" errorAttribute:from="'dataTypeName'"
                                 vm:required:from="'true'"/>
             </div>

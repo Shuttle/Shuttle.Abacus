@@ -12,11 +12,12 @@ import Api from 'shuttle-can-api';
 resources.add('argument', { action: 'list', permission: Permissions.Manage.Arguments});
 
 export const Map = DefineMap.extend({
-    remove() {
-        api.delete({id: this.id})
-            .then(function () {
-                state.removalRequested('argument');
-            });
+    edit () {
+        router.goto({
+            resource: 'argument',
+            id: this.id,
+            action: 'item'
+        });
     },
     argumentValues() {
         router.goto({
@@ -25,6 +26,12 @@ export const Map = DefineMap.extend({
             id: this.id,
             action: 'list'
         });
+    },
+    remove() {
+        api.delete({id: this.id})
+            .then(function () {
+                state.removalRequested('argument');
+            });
     }
 });
 
@@ -64,6 +71,12 @@ export const ViewModel = DefineMap.extend({
         const columns = this.columns;
 
         if (!columns.length) {
+            columns.push({
+                columnTitle: 'edit',
+                columnClass: 'col-1',
+                stache: '<cs-button text:from="\'edit\'" click:from="edit" elementClass:from="\'btn-sm\'"/>'
+            });
+
             columns.push({
                 columnTitle: '',
                 columnClass: 'col-1',
@@ -106,7 +119,7 @@ export const ViewModel = DefineMap.extend({
     add: function() {
         router.goto({
             resource: 'argument',
-            action: 'add'
+            action: 'item'
         });
     },
 

@@ -102,18 +102,31 @@ where
         public IQuery Registered(PrimitiveEvent primitiveEvent, Registered registered)
         {
             return RawQuery.Create(@"
-insert into Argument
+if exists 
 (
-    Id,
-    Name,
-    DataTypeName
+    select null from Argument where Id = @Id
 )
-values
-(
-    @Id,
-    @Name,
-    @DataTypeName
-)")
+    update
+        Argument
+    set
+        Name = @Name,
+        DataTypeName = @DataTypeName
+    where
+        Id = @Id
+else
+    insert into Argument
+    (
+        Id,
+        Name,
+        DataTypeName
+    )
+    values
+    (
+        @Id,
+        @Name,
+        @DataTypeName
+    )
+")
                 .AddParameterValue(Columns.Id, primitiveEvent.Id)
                 .AddParameterValue(Columns.Name, registered.Name)
                 .AddParameterValue(Columns.DataTypeName, registered.DataTypeName);
