@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shuttle.Abacus.Messages", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shuttle.Abacus.Server", "Shuttle.Abacus.Server\Shuttle.Abacus.Server.csproj", "{7828831E-21A2-4DA1-8675-AB1874C00FFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shuttle.Abacus.WebApi", "Shuttle.Abacus.WebApi\Shuttle.Abacus.WebApi.csproj", "{B8857B03-C6CE-491F-95E2-F8607C9E8B0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shuttle.Abacus.WebApi", "Shuttle.Abacus.WebApi\Shuttle.Abacus.WebApi.csproj", "{B8857B03-C6CE-491F-95E2-F8607C9E8B0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

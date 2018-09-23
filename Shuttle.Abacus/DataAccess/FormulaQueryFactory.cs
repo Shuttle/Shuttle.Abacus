@@ -27,22 +27,21 @@ select
     o.ValueProviderName,
     o.InputParameter,
     case ValueProviderName
-        when 'Constant' then o.InputParameter
-        when 'Argument' then a.Name
-        when 'Matrix' then m.Name
-        when 'Formula' then f.Name
-        else 'RunningTotal'
+        when 'Constant' then 
+			o.InputParameter
+        when 'Argument' then 
+			(select Name from Argument where Id = o.InputParameter)
+        when 'Matrix' then 
+			(select Name from Matrix where Id = o.InputParameter)
+        when 'Formula' then 
+			(select Name from Formula where Id = o.InputParameter)
+        else 
+			'RunningTotal'
     end InputParameterDescription
 from
     FormulaOperation o
-left join
-    Argument a on a.Id = o.InputParameter
-left join
-    Matrix m on m.Id = o.InputParameter
-left join
-    Formula f on f.Id = o.InputParameter
 where
-    FormulaId = @Id
+    o.FormulaId = @Id
 ")
                 .AddParameterValue(Columns.Id, id);
         }
