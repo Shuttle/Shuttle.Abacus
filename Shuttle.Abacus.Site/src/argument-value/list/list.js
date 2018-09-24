@@ -11,11 +11,8 @@ import Api from 'shuttle-can-api';
 resources.add('argument', {item: 'value', action: 'list', permission: Permissions.Manage.Arguments});
 
 export const Map = DefineMap.extend({
-	argumentId: {
-		type: 'string'
-	},
 	remove() {
-		api.values.delete({id: this.argumentId}, {value: this.value})
+		api.values.delete({id: state.route.data.id}, {value: this.value})
 			.then(function () {
 				state.removalRequested("argument-value")
 			});
