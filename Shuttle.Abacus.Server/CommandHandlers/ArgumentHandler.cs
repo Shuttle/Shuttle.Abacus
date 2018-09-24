@@ -46,13 +46,17 @@ namespace Shuttle.Abacus.Server.CommandHandlers
                 var key = Argument.Key(message.Name);
                 var existingId = _keyStore.Get(key);
 
-                if (!message.Id.Equals(existingId ?? Guid.Empty))
+                if (!message.Id.Equals(existingId ?? message.Id))
                 {
                     return;
                 }
 
                 var stream = _eventStore.Get(message.Id);
                 var argument = new Argument(stream.Id);
+
+                stream.Apply(argument);
+
+                _keyStore.Remove(Argument.Key(argument.Name));
 
                 stream.AddEvent(argument.Register(message.Name, message.DataTypeName));
 

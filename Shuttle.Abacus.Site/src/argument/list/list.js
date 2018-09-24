@@ -26,12 +26,6 @@ export const Map = DefineMap.extend({
             id: this.id,
             action: 'list'
         });
-    },
-    remove() {
-        api.delete({id: this.id})
-            .then(function () {
-                state.removalRequested('argument');
-            });
     }
 });
 
@@ -93,12 +87,6 @@ export const ViewModel = DefineMap.extend({
                 columnTitle: 'data-type-name',
                 columnClass: 'col',
                 attributeName: 'dataTypeName'
-            });
-
-            columns.push({
-                columnTitle: 'remove',
-                columnClass: 'col-1',
-                stache: '<cs-button-remove click:from="remove" elementClass:from="\'btn-sm\'"/>'
             });
         }
 

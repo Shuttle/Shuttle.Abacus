@@ -55,6 +55,7 @@ namespace Shuttle.Abacus.WebApi.Controllers
 
             _bus.Send(new RegisterArgumentCommand
             {
+                Id = model.Id,
                 Name = model.Name,
                 DataTypeName = model.DataTypeName
             });

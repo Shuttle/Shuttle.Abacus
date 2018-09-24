@@ -29,9 +29,12 @@ export const Map = DefineMap.extend({
     }
 });
 
+validator(Map);
+
 var api = {
     arguments: new Api({
-        endpoint: 'arguments/{id}'
+        endpoint: 'arguments/{id}',
+        Map
     })
 };
 
@@ -65,14 +68,11 @@ export const ViewModel = DefineMap.extend({
     },
 
     add: function () {
-        if (!!this.errors()) {
+        if (!!this.map.errors()) {
             return false;
         }
 
-        api.arguments.post({
-            name: this.name,
-            dataTypeName: this.dataTypeName
-        })
+        api.arguments.post(this.map.serialize())
             .then(function () {
                 state.registrationRequested('argument');
             });
@@ -89,8 +89,6 @@ export const ViewModel = DefineMap.extend({
         });
     }
 });
-
-validator(Map);
 
 export default Component.extend({
     tag: 'abacus-argument-item',
