@@ -10,9 +10,7 @@ namespace Shuttle.Abacus.DataAccess
         IQuery Search(ArgumentSearchSpecification specification);
         IQuery Get(Guid id);
         IQuery Values(Guid id);
-        IQuery Add(Argument item);
         IQuery Remove(Guid id);
-        IQuery Save(Argument item);
         IQuery RemoveValues(Argument argument);
         IQuery Registered(PrimitiveEvent primitiveEvent, Registered registered);
         IQuery Removed(PrimitiveEvent primitiveEvent, Removed removed);

@@ -54,6 +54,7 @@ namespace Shuttle.Abacus.WebApi.Controllers
 
             _bus.Send(new RegisterFormulaCommand
             {
+                Id = model.Id,
                 Name = model.Name
             });
 

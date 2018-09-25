@@ -91,16 +91,33 @@ where
         public IQuery Registered(Guid formulaId, string name)
         {
             return RawQuery.Create(@"
-insert into Formula
+if exists
 (
-    Id,
-    Name
+    select
+        null
+    from
+        Formula
+    where
+        Id = @Id
 )
-values
-(
-    @Id,
-    @Name
-)")
+    update
+        Formula
+    set
+        Name = @Name
+    where
+        Id = @Id
+else
+    insert into Formula
+    (
+        Id,
+        Name
+    )
+    values
+    (
+        @Id,
+        @Name
+    )
+")
                 .AddParameterValue(Columns.Id, formulaId)
                 .AddParameterValue(Columns.Name, name);
         }
@@ -170,20 +187,6 @@ values
                 .AddParameterValue(Columns.ValueProviderName, valueProviderName)
                 .AddParameterValue(Columns.InputParameter, inputParameter)
                 .AddParameterValue(Columns.SequenceNumber, sequenceNumber);
-        }
-
-        public IQuery Save(Formula item)
-        {
-            return RawQuery.Create(@"
-update 
-    Formula
-set
-    Name = @Name
-where
-    Id = @Id
-")
-                .AddParameterValue(Columns.Name, item.Name)
-                .AddParameterValue(Columns.Id, item.Id);
         }
 
         public IQuery Search(FormulaSearchSpecification specification)

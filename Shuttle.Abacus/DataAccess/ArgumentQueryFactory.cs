@@ -49,47 +49,11 @@ order by
                 .AddParameterValue(Columns.Id, id);
         }
 
-        public IQuery Add(Argument item)
-        {
-            return RawQuery.Create(@"
-insert into Argument
-(
-    Id,
-    Name,
-    DataTypeName
-)
-values
-(
-    @Id,
-    @Name,
-    @DataTypeName
-)")
-                .AddParameterValue(Columns.Id, item.Id)
-                .AddParameterValue(Columns.Name, item.Name)
-                .AddParameterValue(Columns.DataTypeName, item.DataType);
-        }
-
         public IQuery Remove(Guid id)
         {
             return
                 RawQuery.Create("delete from Argument where Id = @Id")
                     .AddParameterValue(Columns.Id, id);
-        }
-
-        public IQuery Save(Argument item)
-        {
-            return RawQuery.Create(@"
-update 
-    Argument
-set
-    Name = @Name,
-    DataTypeName = @DataTypeName
-where
-    Id = @Id
-")
-                .AddParameterValue(Columns.Name, item.Name)
-                .AddParameterValue(Columns.DataTypeName, item.DataType)
-                .AddParameterValue(Columns.Id, item.Id);
         }
 
 

@@ -1,8 +1,0 @@
-<cs-form>
-    <fieldset class="form-group">
-        <cs-form-input focus:from="'true'" label:from="'name'" vm:value:bind="name"
-                       vm:errors:from="errors()" errorAttribute:from="'name'" vm:required:from="'true'"/>
-        <cs-button-submit vm:click:from="add" text:from="'add'"/>
-        <cs-button vm:click:from="close" text:from="'close'"/>
-    </fieldset>
-</cs-form>

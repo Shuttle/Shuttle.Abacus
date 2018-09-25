@@ -67,7 +67,7 @@ export const ViewModel = DefineMap.extend({
         ]
     },
 
-    add: function () {
+    register: function () {
         if (!!this.map.errors()) {
             return false;
         }

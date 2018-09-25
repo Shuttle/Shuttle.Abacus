@@ -42,14 +42,19 @@ namespace Shuttle.Abacus.Server.CommandHandlers
             using (_databaseContextFactory.Create())
             {
                 var key = Formula.Key(message.Name);
+                var existingId = _keyStore.Get(key);
 
-                if (_keyStore.Contains(key))
+                if (!message.Id.Equals(existingId ?? message.Id))
                 {
                     return;
                 }
 
-                var formula = new Formula(Guid.NewGuid());
-                var stream = _eventStore.CreateEventStream(formula.Id);
+                var stream = _eventStore.Get(message.Id);
+                var formula = new Formula(stream.Id);
+
+                stream.Apply(formula);
+
+                _keyStore.Remove(Formula.Key(formula.Name));
 
                 stream.AddEvent(formula.Register(message.Name));
 

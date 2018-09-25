@@ -1,6 +1,6 @@
 import Component from 'can-component/';
 import DefineMap from 'can-define/map/';
-import view from './add.stache!';
+import view from './item.stache!';
 import resources from '~/resources';
 import Permissions from '~/permissions';
 import router from '~/router';
@@ -10,43 +10,51 @@ import state from '~/state';
 import stack from '~/stack';
 import localisation from '~/localisation';
 
-resources.add('formula', {action: 'add', permission: Permissions.Manage.Formulas});
+resources.add('formula', {action: 'item', permission: Permissions.Manage.Formulas});
 
-var formulas = new Api({
-    endpoint: 'formulas/{id}'
-});
-
-export const ViewModel = DefineMap.extend({
-    init: function () {
-        const result = stack.pop('formula');
-
-        state.title = 'formula';
-
-        if (!result) {
-            return;
-        }
-
-        this.name = result.name;
-        this.minimumFormulaName = result.minimumFormulaName;
-        this.maximumFormulaName = result.maximumFormulaName;
-    },
-
+export const Map = DefineMap.extend({
     name: {
         type: 'string',
         default: '',
         validate: {
             presence: true
         }
+    }
+});
+
+validator(Map);
+
+var api = {
+    formulas: new Api({
+        endpoint: 'formulas/{id}',
+        Map
+    })
+};
+
+export const ViewModel = DefineMap.extend({
+    init: function () {
+        const self = this;
+
+        state.title = 'formula';
+
+        if (state.routeData.id) {
+            api.formulas.map({id: state.routeData.id})
+                .then(function (map) {
+                    self.map = map;
+                });
+        }
     },
 
-    add: function () {
-        if (!!this.errors()) {
+    map: {
+        Default: Map
+    },
+
+    register: function () {
+        if (!!this.map.errors()) {
             return false;
         }
 
-        formulas.post({
-            name: this.name
-        })
+        api.formulas.post(this.map.serialize())
             .then(function(){
                 state.registrationRequested('formula');
             });
@@ -64,10 +72,8 @@ export const ViewModel = DefineMap.extend({
     }
 });
 
-validator(ViewModel);
-
 export default Component.extend({
-    tag: 'abacus-formula-add',
+    tag: 'abacus-formula-item',
     ViewModel,
     view
 });

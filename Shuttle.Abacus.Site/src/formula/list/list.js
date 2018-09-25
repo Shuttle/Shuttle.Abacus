@@ -12,12 +12,13 @@ import Api from 'shuttle-can-api';
 resources.add('formula', { action: 'list', permission: Permissions.Manage.Formulas});
 
 export const Map = DefineMap.extend({
-	remove() {
-		api.formulas.delete({id: this.id})
-			.then(function () {
-				state.removalRequested('formula');
-			});
-	},
+    edit () {
+        router.goto({
+            resource: 'formula',
+            id: this.id,
+            action: 'item'
+        });
+    },
     operations() {
         router.goto({
             resource: 'formula',
@@ -84,7 +85,13 @@ export const ViewModel = DefineMap.extend({
         const columns = this.columns;
 
         if (!columns.length) {
-	        columns.push({
+            columns.push({
+                columnTitle: 'edit',
+                columnClass: 'col-1',
+                stache: '<cs-button text:from="\'edit\'" click:from="edit" elementClass:from="\'btn-sm\'"/>'
+            });
+
+            columns.push({
 		        columnTitle: 'constraints',
 		        columnClass: 'col-1',
 		        stache: '<cs-button text:from="\'constraints\'" click:from="constraints" elementClass:from="\'btn-sm\'"/>'
@@ -113,12 +120,6 @@ export const ViewModel = DefineMap.extend({
                 columnClass: 'col',
                 attributeName: 'minimumFormulaName'
             });
-
-	        columns.push({
-		        columnTitle: 'remove',
-		        columnClass: 'col-1',
-		        stache: '<cs-button-remove click:from="remove" elementClass:from="\'btn-sm\'"/>'
-	        });
         }
 
         state.title = 'formulas';
@@ -138,7 +139,7 @@ export const ViewModel = DefineMap.extend({
     add: function() {
         router.goto({
             resource: 'formula',
-            action: 'add'
+            action: 'item'
         });
     },
 
