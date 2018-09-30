@@ -29,5 +29,8 @@
     <cs-validation message:from="map.inputParameterMessage"/>
 </div>
     <cs-button-submit vm:click:from="register" text:from="'register'"/>
+{{#unless(adding)}}
+    <cs-button vm:click:from="cancel" text:raw="cancel"/>
+{{/unless}}
 </fieldset>
 </cs-form>

@@ -10,6 +10,10 @@ import { OptionMap, OptionList } from 'shuttle-canstrap/select/';
 import localisation from '~/localisation';
 
 export const Map = DefineMap.extend({
+    id: {
+        type: 'string'
+    },
+
     operation: {
         type: 'string',
         default: '',
@@ -108,6 +112,15 @@ var api = {
 validator(Map);
 
 export const ViewModel = DefineMap.extend({
+    adding: {
+        type: 'boolean',
+        get () {
+            return !this.map ||
+                !this.map.id ||
+                this.map.id === '00000000-0000-0000-0000-000000000000';
+        }
+    },
+
     formula: {
         Type: DefineMap
     },
@@ -115,6 +128,10 @@ export const ViewModel = DefineMap.extend({
     map: {
         Default: Map,
         set (map) {
+            if (!map){
+                return;
+            }
+
             switch (map.valueProviderName) {
                 case 'Argument': {
                     api.search.list({
@@ -171,6 +188,10 @@ export const ViewModel = DefineMap.extend({
             });
 
         return false;
+    },
+
+    cancel(){
+        this.map = undefined;
     },
 
     argumentSearchMapper (argument) {
