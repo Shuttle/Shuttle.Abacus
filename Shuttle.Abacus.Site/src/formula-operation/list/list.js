@@ -2,27 +2,14 @@ import Component from 'can-component/';
 import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
 import view from './list.stache!';
+import { Map } from '../item/';
 import resources from '~/resources';
 import Permissions from '~/permissions';
-import router from '~/router';
-import localisation from '~/localisation';
 import state from '~/state';
 import Api from 'shuttle-can-api';
-import $ from "jquery";
+import stache from 'can-stache/';
 
-resources.add('formula', { item: 'operation', action: 'list', permission: Permissions.Manage.Formulas});
-
-export const OperationMap = DefineMap.extend({
-    remove() {
-        api.operations.delete({
-            formulaId: state.routeData.id,
-            operationId: this.id
-        })
-            .then(function () {
-                state.removalRequested("formula-operation")
-            });
-    }
-});
+resources.add('formula', {item: 'operation', action: 'list', permission: Permissions.Manage.Formulas});
 
 export const api = {
     formulas: new Api({
@@ -30,20 +17,34 @@ export const api = {
     }),
     operations: new Api({
         endpoint: 'formulas/{formulaId}/operations/{operationId}',
-        Map: OperationMap
+        Map
     })
 };
 
 export const ViewModel = DefineMap.extend({
+    remove (operation) {
+        api.operations.delete({
+            formulaId: state.routeData.id,
+            operationId: operation.id
+        })
+            .then(function () {
+                state.removalRequested('formula-operation');
+            });
+    },
+
     name: {
         type: 'string',
         default: ''
     },
 
     formulaId: {
-        get() {
+        get () {
             return state.routeData.id;
         }
+    },
+
+    operation: {
+        Default: Map
     },
 
     columns: {
@@ -58,27 +59,27 @@ export const ViewModel = DefineMap.extend({
         Type: DefineMap
     },
 
-    operations:{
+    operations: {
         Type: DefineList
     },
 
-    get map() {
+    get map () {
         const self = this;
         const refreshTimestamp = this.refreshTimestamp;
 
-        if (!this.formulaId){
+        if (!this.formulaId) {
             return undefined;
         }
 
         return api.formulas.map({
             id: this.formulaId
         })
-            .then(function(map){
+            .then(function (map) {
                 self.formula = map;
 
                 return api.operations.list({
                     formulaId: self.formulaId
-                }).then(function(response){
+                }).then(function (response) {
                     self.operations = response.map(function (item) {
                         item.formulaId = self.formulaId;
 
@@ -88,10 +89,25 @@ export const ViewModel = DefineMap.extend({
             });
     },
 
-    init() {
+    init () {
         const columns = this.columns;
+        const self = this;
+        const editView = stache('<cs-button text:raw="edit" click:from="edit" elementClass:from="\'btn-sm\'"/>');
+        const removeView = stache('<cs-button-remove click:from="remove" elementClass:from="\'btn-sm\'"/>');
 
         if (!columns.length) {
+            columns.push({
+                columnTitle: 'edit',
+                columnClass: 'col-1',
+                view: function (operation) {
+                    operation.edit = function() {
+                        self.operation = this;
+                    };
+
+                    return editView(operation);
+                }
+            });
+
             columns.push({
                 columnTitle: 'operation',
                 columnClass: 'col',
@@ -113,7 +129,13 @@ export const ViewModel = DefineMap.extend({
             columns.push({
                 columnTitle: 'remove',
                 columnClass: 'col-1',
-                stache: '<cs-button-remove click:from="remove" elementClass:from="\'btn-sm\'"/>'
+                view: function (operation) {
+                    operation.remove = function() {
+                        self.remove(this);
+                    };
+
+                    return removeView(operation);
+                }
             });
         }
 
@@ -125,7 +147,7 @@ export const ViewModel = DefineMap.extend({
         });
     },
 
-    refresh: function() {
+    refresh: function () {
         this.refreshTimestamp = Date.now();
     }
 });

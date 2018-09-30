@@ -48,7 +48,6 @@ var State = DefineMap.extend({
             return value;
         }
     },
-
     routeData: {
         Type: RouteData,
         default: routeData
@@ -115,7 +114,8 @@ var State = DefineMap.extend({
         }
     },
     resources: {
-        get: function (value) {
+        Type: DefineList,
+        get(value) {
             var result = new DefineList();
 
             each(map, function (item) {

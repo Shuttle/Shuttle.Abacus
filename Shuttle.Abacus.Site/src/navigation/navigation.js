@@ -6,8 +6,10 @@ import state from '~/state';
 import router from '~/router';
 
 var ViewModel = DefineMap.extend({
-    hasSecondary() {
-        return !!this.title || this.navbar.controls.length > 0;
+    hasSecondary: {
+        get() {
+            return !!this.title || this.navbar.controls.length > 0;
+        }
     },
     started: {
         get() {
@@ -30,7 +32,7 @@ var ViewModel = DefineMap.extend({
         }
     },
     resources: {
-        get(){
+        get() {
             return state.resources;
         }
     },

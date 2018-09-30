@@ -30,9 +30,16 @@ where
     or
     Name like '%' + @Name + '%'
 )
+and
+(
+    @Id is null
+    or
+    Id = @Id
+)
 order by 
     Name
 "))
+                .AddParameterValue(Columns.Id, specification.Id)
                 .AddParameterValue(Columns.Name, specification.Name);
         }
 
