@@ -202,7 +202,7 @@ export const ViewModel = DefineMap.extend({
 });
 
 export default Component.extend({
-    tag: 'abacus-formula-operation-item',
+    tag: 'abacus-formula-operation',
     ViewModel,
     view
 });

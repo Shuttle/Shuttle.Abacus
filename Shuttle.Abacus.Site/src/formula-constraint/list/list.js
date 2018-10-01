@@ -2,6 +2,7 @@ import Component from 'can-component/';
 import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
 import view from './list.stache!';
+import { Map } from '../item/';
 import resources from '~/resources';
 import Permissions from '~/permissions';
 import state from '~/state';
@@ -41,6 +42,10 @@ export const ViewModel = DefineMap.extend({
         get() {
             return state.routeData.id;
         }
+    },
+
+    constraint: {
+        Default: Map
     },
 
     columns: {

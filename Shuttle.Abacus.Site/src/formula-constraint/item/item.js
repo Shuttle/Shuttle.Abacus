@@ -6,41 +6,33 @@ import Permissions from '~/permissions';
 import Api from 'shuttle-can-api';
 import validator from 'can-define-validate-validatejs';
 import state from '~/state';
-import {OptionMap, OptionList} from 'shuttle-canstrap/select/';
+import { OptionMap, OptionList } from 'shuttle-canstrap/select/';
 import localisation from '~/localisation';
 
-var api = {
-    formulas: new Api({
-        endpoint: 'formulas/{id}'
-    }),
-    constraints: new Api({
-        endpoint: 'formulas/{id}/constraints'
-    })
-};
+export const Map = DefineMap.extend({
+    id: {
+        type: 'string'
+    },
 
-export const ViewModel = DefineMap.extend({
-    formula: {
-        Type: DefineMap
+    argumentId:{
+        type: 'string'
     },
 
     argument: {
         Type: DefineMap,
         validate: {
             presence: true
-        }
-    },
+        },
+        serialize: false,
+        set(value){
+            if (!value){
+                return;
+            }
 
-    comparisons: {
-        Type: OptionList,
-        default: [
-            {value: '==', label: '=='},
-            {value: '!=', label: '!='},
-            {value: '>=', label: '>='},
-            {value: '>', label: '>'},
-            {value: '<=', label: '<='},
-            {value: '<', label: '<'},
-            {value: 'in', label: 'in'}
-        ]
+            this.argumentId = value.id;
+
+            return value;
+        }
     },
 
     comparison: {
@@ -56,35 +48,72 @@ export const ViewModel = DefineMap.extend({
         validate: {
             presence: true
         }
+    }
+});
+
+validator(Map);
+
+var api = {
+    formulas: new Api({
+        endpoint: 'formulas/{id}'
+    }),
+    constraints: new Api({
+        endpoint: 'formulas/{id}/constraints'
+    })
+};
+
+export const ViewModel = DefineMap.extend({
+    adding: {
+        type: 'boolean',
+        get () {
+            return !this.map ||
+                !this.map.id ||
+                this.map.id === '00000000-0000-0000-0000-000000000000';
+        }
+    },
+
+    formula: {
+        Type: DefineMap
+    },
+
+    map: {
+        Default: Map
+    },
+
+    comparisons: {
+        Type: OptionList,
+        default: [
+            {value: '==', label: '=='},
+            {value: '!=', label: '!='},
+            {value: '>=', label: '>='},
+            {value: '>', label: '>'},
+            {value: '<=', label: '<='},
+            {value: '<', label: '<'},
+            {value: 'in', label: 'in'}
+        ]
     },
 
     save: function () {
-        if (!!this.errors()) {
+        if (!!this.map.errors()) {
             return false;
         }
 
-        api.constraints.post({
-            argumentId: this.argument.id,
-            comparison: this.comparison,
-            value: this.value
-        },{
+        api.constraints.post(this.map.serialize(), {
             id: this.formula.id
         })
-            .then(function(){
+            .then(function () {
                 state.registrationRequested('formula-constraint');
             });
 
         return false;
     },
 
-	argumentSearchMapper (argument){
-    	argument.text = argument.name;
+    argumentSearchMapper (argument) {
+        argument.text = argument.name;
 
         return argument;
     }
 });
-
-validator(ViewModel);
 
 export default Component.extend({
     tag: 'abacus-formula-constraint',
