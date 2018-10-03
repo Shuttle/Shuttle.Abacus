@@ -159,27 +159,45 @@ and
                 .AddParameterValue(Columns.SequenceNumber, fromSequenceNumber);
         }
 
-        public IQuery AddOperation(Guid operationId, Guid formulaId, int sequenceNumber, string operation, string valueProviderName, string inputParameter)
+        public IQuery RegisterOperation(Guid operationId, Guid formulaId, int sequenceNumber, string operation, string valueProviderName, string inputParameter)
         {
             return RawQuery.Create(@"
-insert into FormulaOperation
+if exists
 (
-    Id,
-    FormulaId,
-    SequenceNumber,
-    Operation,
-    ValueProviderName,
-    InputParameter
+    select
+        null
+    from
+        FormulaOperation
+    where
+        Id = @Id
 )
-values
-(
-    @Id,
-    @FormulaId,
-    @SequenceNumber,
-    @Operation,
-    @ValueProviderName,
-    @InputParameter
-)
+    update
+        FormulaOperation
+    set
+        Operation = @Operation,
+        ValueProviderName = @ValueProviderName,
+        InputParameter = @InputParameter
+    where
+        Id = @Id
+else
+    insert into FormulaOperation
+    (
+        Id,
+        FormulaId,
+        SequenceNumber,
+        Operation,
+        ValueProviderName,
+        InputParameter
+    )
+    values
+    (
+        @Id,
+        @FormulaId,
+        @SequenceNumber,
+        @Operation,
+        @ValueProviderName,
+        @InputParameter
+    )
 ")
                 .AddParameterValue(Columns.Id, operationId)
                 .AddParameterValue(Columns.FormulaId, formulaId)
@@ -226,27 +244,45 @@ order by
                 .AddParameterValue(Columns.MinimumFormulaName, specification.MinimumFormulaName);
         }
 
-        public IQuery AddConstraint(Guid constraintId, Guid formulaId, Guid argumentId,
-            string comparison,
-            string value)
+        public IQuery RegisterConstraint(Guid constraintId, Guid formulaId, Guid argumentId,
+            string comparison, string value)
         {
             return RawQuery.Create(@"
-insert into FormulaConstraint
+if exists
 (
-    Id,
-    FormulaId,
-    ArgumentId,
-    Comparison,
-    Value
+    select
+        null
+    from
+        FormulaConstraint
+    where
+        Id = @Id
 )
-values
-(
-    @Id,
-    @FormulaId,
-    @ArgumentId,
-    @Comparison,
-    @Value
-)")
+    update
+        FormulaConstraint
+    set
+        ArgumentId = @ArgumentId,
+        Comparison = @Comparison,
+        Value = @Value
+    where
+        Id = @Id
+else
+    insert into FormulaConstraint
+    (
+        Id,
+        FormulaId,
+        ArgumentId,
+        Comparison,
+        Value
+    )
+    values
+    (
+        @Id,
+        @FormulaId,
+        @ArgumentId,
+        @Comparison,
+        @Value
+    )
+")
                 .AddParameterValue(Columns.Id, constraintId)
                 .AddParameterValue(Columns.FormulaId, formulaId)
                 .AddParameterValue(Columns.ArgumentId, argumentId)

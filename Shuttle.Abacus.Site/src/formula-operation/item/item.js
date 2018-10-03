@@ -1,13 +1,10 @@
 import Component from 'can-component/';
 import DefineMap from 'can-define/map/';
 import view from './item.stache!';
-import resources from '~/resources';
-import Permissions from '~/permissions';
 import Api from 'shuttle-can-api';
 import validator from 'can-define-validate-validatejs';
 import state from '~/state';
 import { OptionMap, OptionList } from 'shuttle-canstrap/select/';
-import localisation from '~/localisation';
 
 export const Map = DefineMap.extend({
     id: {
@@ -176,7 +173,7 @@ export const ViewModel = DefineMap.extend({
     },
 
     register: function () {
-        if (!!this.errors()) {
+        if (!!this.map.errors()) {
             return false;
         }
 

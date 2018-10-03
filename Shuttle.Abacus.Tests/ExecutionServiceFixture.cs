@@ -27,8 +27,8 @@ namespace Shuttle.Abacus.Tests
 
             formula.Register("Test");
 
-            formula.AddOperation(Guid.NewGuid(), "Addition", "Argument", operand1.Id.ToString());
-            formula.AddOperation(Guid.NewGuid(), "Addition", "Argument", operand2.Id.ToString());
+            formula.RegisterOperation(Guid.NewGuid(), "Addition", "Argument", operand1.Id.ToString());
+            formula.RegisterOperation(Guid.NewGuid(), "Addition", "Argument", operand2.Id.ToString());
 
             formulas.Add(formula);
 
@@ -72,8 +72,8 @@ namespace Shuttle.Abacus.Tests
 
             formula.Register("Test");
 
-            formula.AddOperation(Guid.NewGuid(), "Addition", "Argument", operand1.Id.ToString());
-            formula.AddConstraint(Guid.NewGuid(), operand2.Id, "==", "10");
+            formula.RegisterOperation(Guid.NewGuid(), "Addition", "Argument", operand1.Id.ToString());
+            formula.RegisterConstraint(Guid.NewGuid(), operand2.Id, "==", "10");
 
             formulas.Add(formula);
 
@@ -100,12 +100,12 @@ namespace Shuttle.Abacus.Tests
             var formula2 = new Formula(Guid.NewGuid());
 
             formula2.Register("Formula2");
-            formula2.AddOperation(Guid.NewGuid(), "Addition", "Decimal", "100");
+            formula2.RegisterOperation(Guid.NewGuid(), "Addition", "Decimal", "100");
 
             var formula1 = new Formula(Guid.NewGuid());
 
             formula1.Register("Formula1");
-            formula1.AddOperation(Guid.NewGuid(), "Addition", "Formula", formula2.Id.ToString());
+            formula1.RegisterOperation(Guid.NewGuid(), "Addition", "Formula", formula2.Id.ToString());
 
             var formulas = new List<Formula> { formula1, formula2 };
 
@@ -136,7 +136,7 @@ namespace Shuttle.Abacus.Tests
             matrix.RegisterElement(Guid.NewGuid(), 1, 1, "1.25");
 
             formula.Register("Formula");
-            formula.AddOperation(Guid.NewGuid(), "Addition", "Matrix", matrix.Id.ToString());
+            formula.RegisterOperation(Guid.NewGuid(), "Addition", "Matrix", matrix.Id.ToString());
 
             var argument = new Argument(argumentId);
 
@@ -165,26 +165,26 @@ namespace Shuttle.Abacus.Tests
 
             var formula5 = new Formula(Guid.NewGuid());
 
-            formula5.AddOperation(Guid.NewGuid(), "Addition", "Formula", formula1.Id.ToString());
+            formula5.RegisterOperation(Guid.NewGuid(), "Addition", "Formula", formula1.Id.ToString());
             formula5.Register("Formula5");
 
             var formula4 = new Formula(Guid.NewGuid());
 
             formula4.Register("Formula4");
-            formula4.AddOperation(Guid.NewGuid(), "Addition", "Formula", formula5.Id.ToString());
+            formula4.RegisterOperation(Guid.NewGuid(), "Addition", "Formula", formula5.Id.ToString());
 
             var formula3 = new Formula(Guid.NewGuid());
 
             formula3.Register("Formula3");
-            formula3.AddOperation(Guid.NewGuid(), "Addition", "Formula", formula4.Id.ToString());
+            formula3.RegisterOperation(Guid.NewGuid(), "Addition", "Formula", formula4.Id.ToString());
 
             var formula2 = new Formula(Guid.NewGuid());
 
-            formula2.AddOperation(Guid.NewGuid(), "Addition", "Formula", formula3.Id.ToString());
+            formula2.RegisterOperation(Guid.NewGuid(), "Addition", "Formula", formula3.Id.ToString());
             formula2.Register("Formula2");
 
             formula1.Register("Formula1");
-            formula1.AddOperation(Guid.NewGuid(), "Addition", "Formula", formula2.Id.ToString());
+            formula1.RegisterOperation(Guid.NewGuid(), "Addition", "Formula", formula2.Id.ToString());
 
             var formulas = new List<Formula> { formula1, formula2, formula3, formula4, formula5 };
 

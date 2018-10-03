@@ -10,9 +10,9 @@ namespace Shuttle.Abacus.Server.EventHandlers
         IEventHandler<Renamed>,
         IEventHandler<Removed>,
         IEventHandler<OperationRemoved>,
-        IEventHandler<OperationAdded>,
+        IEventHandler<OperationRegistered>,
         IEventHandler<ConstraintRemoved>,
-        IEventHandler<ConstraintAdded>
+        IEventHandler<ConstraintRegistered>
     {
         private readonly IFormulaQuery _query;
 
@@ -23,11 +23,11 @@ namespace Shuttle.Abacus.Server.EventHandlers
             _query = query;
         }
 
-        public void ProcessEvent(IEventHandlerContext<ConstraintAdded> context)
+        public void ProcessEvent(IEventHandlerContext<ConstraintRegistered> context)
         {
-            var constraintAdded = context.Event;
+            var constraintRegistered = context.Event;
 
-            _query.AddConstraint(constraintAdded.Id, context.PrimitiveEvent.Id, constraintAdded.ArgumentId, constraintAdded.Comparison, constraintAdded.Value);
+            _query.AddConstraint(constraintRegistered.Id, context.PrimitiveEvent.Id, constraintRegistered.ArgumentId, constraintRegistered.Comparison, constraintRegistered.Value);
         }
 
         public void ProcessEvent(IEventHandlerContext<ConstraintRemoved> context)
@@ -35,12 +35,12 @@ namespace Shuttle.Abacus.Server.EventHandlers
             _query.RemoveConstraint(context.Event.Id);
         }
 
-        public void ProcessEvent(IEventHandlerContext<OperationAdded> context)
+        public void ProcessEvent(IEventHandlerContext<OperationRegistered> context)
         {
-            var operationAdded = context.Event;
+            var operationRegistered = context.Event;
 
-            _query.AddOperation(operationAdded.Id, context.PrimitiveEvent.Id, operationAdded.SequenceNumber, operationAdded.Operation,
-                operationAdded.ValueProviderName, operationAdded.InputParameter);
+            _query.AddOperation(operationRegistered.Id, context.PrimitiveEvent.Id, operationRegistered.SequenceNumber, operationRegistered.Operation,
+                operationRegistered.ValueProviderName, operationRegistered.InputParameter);
         }
 
         public void ProcessEvent(IEventHandlerContext<OperationRemoved> context)

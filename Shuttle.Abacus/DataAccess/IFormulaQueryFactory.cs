@@ -8,9 +8,9 @@ namespace Shuttle.Abacus.DataAccess
         IQuery Operations(Guid id);
         IQuery Get(Guid id);
         IQuery RemoveOperation(Guid operationId);
-        IQuery AddOperation(Guid operationId, Guid formulaId, int sequenceNumber, string operation, string valueProviderName, string inputParameter);
+        IQuery RegisterOperation(Guid operationId, Guid formulaId, int sequenceNumber, string operation, string valueProviderName, string inputParameter);
         IQuery Search(FormulaSearchSpecification specification);
-        IQuery AddConstraint(Guid constraintId, Guid formulaId, Guid argumentId, string comparison, string value);
+        IQuery RegisterConstraint(Guid constraintId, Guid formulaId, Guid argumentId, string comparison, string value);
         IQuery RemoveConstraint(Guid constraintId);
         IQuery Constraints(Guid id);
         IQuery Registered(Guid formulaId, string name);

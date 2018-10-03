@@ -93,7 +93,7 @@ namespace Shuttle.Abacus.WebApi.Controllers
 
             _bus.Send(new RegisterFormulaOperationCommand
             {
-                Id = Guid.NewGuid(),
+                Id = model.Id,
                 FormulaId = id,
                 Operation = model.Operation,
                 ValueProviderName = model.ValueProviderName,
@@ -134,7 +134,7 @@ namespace Shuttle.Abacus.WebApi.Controllers
 
             _bus.Send(new RegisterFormulaConstraintCommand
             {
-                Id = Guid.NewGuid(),
+                Id = model.Id,
                 FormulaId = id,
                 ArgumentId = model.ArgumentId,
                 Comparison = model.Comparison,

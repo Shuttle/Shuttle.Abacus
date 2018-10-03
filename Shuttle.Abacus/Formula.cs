@@ -19,7 +19,7 @@ namespace Shuttle.Abacus
         public IEnumerable<FormulaOperation> Operations => new ReadOnlyCollection<FormulaOperation>(_operations);
 
         public Guid Id { get; }
-        public string Name { get; set; }
+        public string Name { get; private set; }
         public string MaximumFormulaName { get; private set; }
         public string MinimumFormulaName { get; private set; }
 
@@ -28,21 +28,16 @@ namespace Shuttle.Abacus
         public bool HasOperations => _operations.Count > 0;
         public bool Removed { get; private set; }
 
-        public OperationAdded AddOperation(Guid id, string operation, string valueProviderName, string inputParameter)
+        public OperationRegistered RegisterOperation(Guid id, string operation, string valueProviderName, string inputParameter)
         {
             Guard.AgainstNullOrEmptyString(operation, nameof(operation));
             Guard.AgainstNullOrEmptyString(valueProviderName, nameof(valueProviderName));
             Guard.AgainstNullOrEmptyString(inputParameter, nameof(inputParameter));
 
-            if (ContainsOperation(id))
-            {
-                throw new DomainException(Resources.DuplicateItem);
-            }
-
-            return On(new OperationAdded
+            return On(new OperationRegistered
             {
                 Id = id,
-                SequenceNumber = _operations.Count + 1,
+                SequenceNumber = FindOperation(id)?.SequenceNumber ?? _operations.Count + 1,
                 Operation = operation,
                 ValueProviderName = valueProviderName,
                 InputParameter = inputParameter
@@ -59,22 +54,24 @@ namespace Shuttle.Abacus
             return _operations.Find(item => item.Id.Equals(id));
         }
 
-        private OperationAdded On(OperationAdded operationAdded)
+        private OperationRegistered On(OperationRegistered operationRegistered)
         {
-            Guard.AgainstNull(operationAdded, nameof(operationAdded));
+            Guard.AgainstNull(operationRegistered, nameof(operationRegistered));
+
+            _operations.RemoveAll(item => item.Id.Equals(operationRegistered.Id));
 
             _operations.Add(
                 new FormulaOperation(
-                    operationAdded.Id, 
-                    operationAdded.SequenceNumber,
-                    operationAdded.Operation,
-                    operationAdded.ValueProviderName,
-                    operationAdded.InputParameter));
+                    operationRegistered.Id, 
+                    operationRegistered.SequenceNumber,
+                    operationRegistered.Operation,
+                    operationRegistered.ValueProviderName,
+                    operationRegistered.InputParameter));
 
-            return operationAdded;
+            return operationRegistered;
         }
 
-        public ConstraintAdded AddConstraint(Guid id, Guid argumentId, string comparison, string value)
+        public ConstraintRegistered RegisterConstraint(Guid id, Guid argumentId, string comparison, string value)
         {
             Guard.AgainstNullOrEmptyString(comparison, nameof(comparison));
             Guard.AgainstNullOrEmptyString(value, nameof(value));
@@ -84,7 +81,7 @@ namespace Shuttle.Abacus
                 throw new DomainException(Resources.DuplicateItem);
             }
 
-            return On(new ConstraintAdded
+            return On(new ConstraintRegistered
             {
                 Id = id,
                 ArgumentId = argumentId,
@@ -103,18 +100,20 @@ namespace Shuttle.Abacus
             return _constraints.Find(item => item.Id.Equals(id));
         }
 
-        private ConstraintAdded On(ConstraintAdded constraintAdded)
+        private ConstraintRegistered On(ConstraintRegistered constraintRegistered)
         {
-            Guard.AgainstNull(constraintAdded, nameof(constraintAdded));
+            Guard.AgainstNull(constraintRegistered, nameof(constraintRegistered));
+
+            _constraints.RemoveAll(item => item.Id.Equals(constraintRegistered.Id));
 
             _constraints.Add(
                 new FormulaConstraint(
-                    constraintAdded.Id,
-                    constraintAdded.ArgumentId,
-                    constraintAdded.Comparison,
-                    constraintAdded.Value));
+                    constraintRegistered.Id,
+                    constraintRegistered.ArgumentId,
+                    constraintRegistered.Comparison,
+                    constraintRegistered.Value));
 
-            return constraintAdded;
+            return constraintRegistered;
         }
 
 

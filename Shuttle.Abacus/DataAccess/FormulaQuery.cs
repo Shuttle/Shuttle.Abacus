@@ -68,7 +68,7 @@ namespace Shuttle.Abacus.DataAccess
         public void AddOperation(Guid operationId, Guid formulaId, int sequenceNumber, string operation,
             string valueProviderName, string inputParameter)
         {
-            _databaseGateway.ExecuteUsing(_queryFactory.AddOperation(operationId, formulaId, sequenceNumber, operation,
+            _databaseGateway.ExecuteUsing(_queryFactory.RegisterOperation(operationId, formulaId, sequenceNumber, operation,
                 valueProviderName, inputParameter));
         }
 
@@ -80,7 +80,7 @@ namespace Shuttle.Abacus.DataAccess
         public void AddConstraint(Guid constraintId, Guid formulaId, Guid argumentId, string comparison,
             string value)
         {
-            _databaseGateway.ExecuteUsing(_queryFactory.AddConstraint(constraintId, formulaId, argumentId, comparison,
+            _databaseGateway.ExecuteUsing(_queryFactory.RegisterConstraint(constraintId, formulaId, argumentId, comparison,
                 value));
         }
 
