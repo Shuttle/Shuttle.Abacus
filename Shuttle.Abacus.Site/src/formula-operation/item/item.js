@@ -144,6 +144,23 @@ export const ViewModel = DefineMap.extend({
                         map.selectedArgument = list[0];
                     });
                 }
+                case 'Matrix': {
+                    api.search.list({
+                        id: map.inputParameter
+                    }, {
+                        post: true,
+                        parameters: {type: 'matrices'}
+                    }).then(function(list){
+                        if (!list.length){
+                            return;
+                        }
+
+                        map.selectedMatrix = list[0];
+                    });
+                }
+                case 'Constant': {
+                    map.constant = map.inputParameter;
+                }
             }
 
             return map;
@@ -188,7 +205,7 @@ export const ViewModel = DefineMap.extend({
     },
 
     cancel(){
-        this.map = undefined;
+        this.map = new Map();
     },
 
     argumentSearchMapper (argument) {
