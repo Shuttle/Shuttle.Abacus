@@ -24,6 +24,13 @@ export const Map = DefineMap.extend({
         default: '',
         validate: {
             presence: true
+        },
+        set (value) {
+            if (value === 'RunningTotal') {
+                this.inputParameter = 'RunningTotal';
+            }
+
+            return value;
         }
     },
 
@@ -41,7 +48,7 @@ export const Map = DefineMap.extend({
     selectedArgument: {
         Type: DefineMap,
         set (value) {
-            if (!value){
+            if (!value) {
                 return;
             }
 
@@ -125,7 +132,7 @@ export const ViewModel = DefineMap.extend({
     map: {
         Default: Map,
         set (map) {
-            if (!map){
+            if (!map) {
                 return;
             }
 
@@ -136,8 +143,8 @@ export const ViewModel = DefineMap.extend({
                     }, {
                         post: true,
                         parameters: {type: 'arguments'}
-                    }).then(function(list){
-                        if (!list.length){
+                    }).then(function (list) {
+                        if (!list.length) {
                             return;
                         }
 
@@ -150,12 +157,26 @@ export const ViewModel = DefineMap.extend({
                     }, {
                         post: true,
                         parameters: {type: 'matrices'}
-                    }).then(function(list){
-                        if (!list.length){
+                    }).then(function (list) {
+                        if (!list.length) {
                             return;
                         }
 
                         map.selectedMatrix = list[0];
+                    });
+                }
+                case 'Formula': {
+                    api.search.list({
+                        id: map.inputParameter
+                    }, {
+                        post: true,
+                        parameters: {type: 'formulas'}
+                    }).then(function (list) {
+                        if (!list.length) {
+                            return;
+                        }
+
+                        map.selectedFormula = list[0];
                     });
                 }
                 case 'Constant': {
@@ -204,7 +225,7 @@ export const ViewModel = DefineMap.extend({
         return false;
     },
 
-    cancel(){
+    cancel () {
         this.map = new Map();
     },
 

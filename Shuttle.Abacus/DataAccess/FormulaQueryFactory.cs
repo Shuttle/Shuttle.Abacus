@@ -214,13 +214,19 @@ else
             return RawQuery.Create(string.Concat(SelectClause, @"
 where
 (
+    @Id is null
+    or
+    Id = @Id
+)
+and
+(
     @Name is null
     or
     @Name = ''
     or
     Name like '%' + @Name + '%'
 )
-    and
+and
 (
     @MaximumFormulaName is null
     or
@@ -228,7 +234,7 @@ where
     or
     MaximumFormulaName like '%' + @MaximumFormulaName + '%'
 )
-    and
+and
 (
     @MinimumFormulaName is null
     or
@@ -239,6 +245,7 @@ where
 order by 
     Name
 "))
+                .AddParameterValue(Columns.Id, specification.Id)
                 .AddParameterValue(Columns.Name, specification.Name)
                 .AddParameterValue(Columns.MaximumFormulaName, specification.MaximumFormulaName)
                 .AddParameterValue(Columns.MinimumFormulaName, specification.MinimumFormulaName);

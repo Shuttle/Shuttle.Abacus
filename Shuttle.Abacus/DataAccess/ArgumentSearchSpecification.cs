@@ -7,16 +7,16 @@ namespace Shuttle.Abacus.DataAccess
         public Guid? Id { get; private set; }
         public string Name { get; private set; }
 
-        public ArgumentSearchSpecification MatchingName(string name)
+        public ArgumentSearchSpecification WithId(Guid id)
         {
-            Name = name;
+            Id = id;
 
             return this;
         }
 
-        public ArgumentSearchSpecification WithId(Guid id)
+        public ArgumentSearchSpecification MatchingName(string name)
         {
-            Id = id;
+            Name = name;
 
             return this;
         }

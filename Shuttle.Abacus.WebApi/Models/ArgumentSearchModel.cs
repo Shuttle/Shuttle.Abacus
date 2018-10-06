@@ -12,16 +12,15 @@ namespace Shuttle.Abacus.WebApi
         {
             var specification = new ArgumentSearchSpecification();
 
-            if (!string.IsNullOrWhiteSpace(Name))
-            {
-                specification.MatchingName(Name);
-            }
-
             if (!Id.Equals(Guid.Empty))
             {
                 specification.WithId(Id);
             }
 
+            if (!string.IsNullOrWhiteSpace(Name))
+            {
+                specification.MatchingName(Name);
+            }
             return specification;
         }
     }

@@ -24,17 +24,17 @@ from
             return new RawQuery(string.Concat(Query, @"
 where
 (
+    @Id is null
+    or
+    Id = @Id
+)
+and
+(
     @Name is null
     or
     @Name = ''
     or
     Name like '%' + @Name + '%'
-)
-and
-(
-    @Id is null
-    or
-    Id = @Id
 )
 order by 
     Name
