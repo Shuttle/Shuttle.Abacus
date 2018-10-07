@@ -1,17 +1,19 @@
 <cs-form>
 <fieldset class="form-group">
-    <cs-form-autocomplete label:raw="argument" vm:map:bind="map.argument" endpoint:raw="arguments/search"
-                          method:raw="post" textAttribute:raw="name" searchAttribute:raw="name"
-                          vm:errors:from="map.errors()" errorAttribute:raw="argument"
-                          vm:required:raw="true"/>
     <div class="d-flex flex-wrap justify-content-start mb-2">
-        <div class="fi-2">
+        <div class="fi-3">
+            <cs-form-autocomplete label:raw="argument" vm:map:bind="map.argument" endpoint:raw="arguments/search"
+                                  method:raw="post" textAttribute:raw="name" searchAttribute:raw="name"
+                                  vm:errors:from="map.errors()" errorAttribute:raw="argument"
+                                  vm:required:raw="true"/>
+        </div>
+        <div class="fi-3">
             <cs-form-select label:raw="comparison" value:bind="map.comparison"
                             options:from="comparisons" vm:errors:from="map.errors()"
                             errorAttribute:raw="comparison"
                             vm:required:raw="true"/>
         </div>
-        <div class="fi-2">
+        <div class="fi-3">
             <cs-form-input label:raw="value" vm:value:bind="map.value" vm:errors:from="map.errors()"
                            errorAttribute:raw="value" vm:required:raw="true"/>
         </div>
