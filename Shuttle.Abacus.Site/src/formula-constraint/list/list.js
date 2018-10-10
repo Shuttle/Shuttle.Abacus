@@ -7,20 +7,9 @@ import resources from '~/resources';
 import Permissions from '~/permissions';
 import state from '~/state';
 import Api from 'shuttle-can-api';
+import stache from 'can-stache';
 
 resources.add('formula', { item: 'constraint', action: 'list', permission: Permissions.Manage.Formulas});
-
-export const ConstraintMap = DefineMap.extend({
-    remove() {
-        api.constraints.delete({
-            formulaId: state.routeData.id,
-            constraintId: this.id
-        })
-            .then(function () {
-                state.removalRequested("formula-constraint")
-            });
-    }
-});
 
 export const api = {
     formulas: new Api({
@@ -28,7 +17,7 @@ export const api = {
     }),
     constraints: new Api({
         endpoint: 'formulas/{formulaId}/constraints/{constraintId}',
-        Map: ConstraintMap
+        Map
     })
 };
 
@@ -92,8 +81,23 @@ export const ViewModel = DefineMap.extend({
 
     init() {
         const columns = this.columns;
+        const self = this;
+        const editView = stache('<cs-button text:raw="edit" click:from="edit" elementClass:from="\'btn-sm\'"/>');
+        const removeView = stache('<cs-button-remove click:from="remove" elementClass:from="\'btn-sm\'"/>');
 
         if (!columns.length) {
+            columns.push({
+                columnTitle: 'edit',
+                columnClass: 'col-1',
+                view: function (constraint) {
+                    constraint.edit = function() {
+                        self.constraint = this;
+                    };
+
+                    return editView(constraint);
+                }
+            });
+
             columns.push({
                 columnTitle: 'argument',
                 columnClass: 'col',
@@ -115,7 +119,13 @@ export const ViewModel = DefineMap.extend({
             columns.push({
                 columnTitle: 'remove',
                 columnClass: 'col-1',
-                stache: '<cs-button-remove click:from="remove" elementClass:from="\'btn-sm\'"/>'
+                view: function (operation) {
+                    operation.remove = function() {
+                        self.remove(this);
+                    };
+
+                    return removeView(operation);
+                }
             });
         }
 
@@ -125,6 +135,16 @@ export const ViewModel = DefineMap.extend({
             type: 'refresh',
             viewModel: this
         });
+    },
+
+    remove (constraint) {
+        api.constraints.delete({
+            formulaId: state.routeData.id,
+            constraintId: constraint.id
+        })
+            .then(function () {
+                state.removalRequested('formula-constraint');
+            });
     },
 
     refresh: function() {

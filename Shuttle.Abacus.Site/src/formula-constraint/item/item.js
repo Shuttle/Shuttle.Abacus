@@ -48,12 +48,23 @@ export const Map = DefineMap.extend({
         validate: {
             presence: true
         }
+    },
+
+    remove: {
+        type: 'any'
+    },
+
+    edit: {
+        type: 'any'
     }
 });
 
 validator(Map);
 
 var api = {
+    arguments: new Api({
+        endpoint: 'arguments/search'
+    }),
     formulas: new Api({
         endpoint: 'formulas/{id}'
     }),
@@ -77,7 +88,26 @@ export const ViewModel = DefineMap.extend({
     },
 
     map: {
-        Default: Map
+        Default: Map,
+        set(map){
+            if (!map) {
+                return;
+            }
+
+            api.arguments.list({
+                id: map.argumentId
+            }, {
+                post: true
+            }).then(function (list) {
+                if (!list.length) {
+                    return;
+                }
+
+                map.argument = list[0];
+            });
+
+            return map;
+        }
     },
 
     comparisons: {
