@@ -132,8 +132,8 @@ export const ViewModel = DefineMap.extend({
     map: {
         Default: Map,
         set (map) {
-            if (!map) {
-                return;
+            if (!map || !map.inputParameter) {
+                return map;
             }
 
             switch (map.valueProviderName) {
@@ -227,12 +227,6 @@ export const ViewModel = DefineMap.extend({
 
     cancel () {
         this.map = new Map();
-    },
-
-    argumentSearchMapper (argument) {
-        argument.text = argument.name;
-
-        return argument;
     }
 });
 

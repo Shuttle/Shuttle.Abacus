@@ -1,13 +1,10 @@
 import Component from 'can-component/';
 import DefineMap from 'can-define/map/';
 import view from './item.stache!';
-import resources from '~/resources';
-import Permissions from '~/permissions';
 import Api from 'shuttle-can-api';
 import validator from 'can-define-validate-validatejs';
 import state from '~/state';
 import { OptionMap, OptionList } from 'shuttle-canstrap/select/';
-import localisation from '~/localisation';
 
 export const Map = DefineMap.extend({
     id: {
@@ -90,8 +87,8 @@ export const ViewModel = DefineMap.extend({
     map: {
         Default: Map,
         set(map){
-            if (!map) {
-                return;
+            if (!map || !map.argumentId) {
+                return map;
             }
 
             api.arguments.list({
@@ -124,6 +121,8 @@ export const ViewModel = DefineMap.extend({
     },
 
     save: function () {
+        const self = this;
+
         if (!!this.map.errors()) {
             return false;
         }
@@ -133,15 +132,15 @@ export const ViewModel = DefineMap.extend({
         })
             .then(function () {
                 state.registrationRequested('formula-constraint');
+
+                self.cancel();
             });
 
         return false;
     },
 
-    argumentSearchMapper (argument) {
-        argument.text = argument.name;
-
-        return argument;
+    cancel () {
+        this.map = new Map();
     }
 });
 

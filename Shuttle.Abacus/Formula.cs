@@ -76,11 +76,6 @@ namespace Shuttle.Abacus
             Guard.AgainstNullOrEmptyString(comparison, nameof(comparison));
             Guard.AgainstNullOrEmptyString(value, nameof(value));
 
-            if (ContainsConstraint(id))
-            {
-                throw new DomainException(Resources.DuplicateItem);
-            }
-
             return On(new ConstraintRegistered
             {
                 Id = id,
