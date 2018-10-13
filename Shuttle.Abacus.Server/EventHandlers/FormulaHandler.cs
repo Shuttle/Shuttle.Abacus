@@ -45,8 +45,8 @@ namespace Shuttle.Abacus.Server.EventHandlers
 
         public void ProcessEvent(IEventHandlerContext<OperationRemoved> context)
         {
-            _query.RemoveOperation(context.PrimitiveEvent.Id);
-            _query.RenumberOperations(context.Event.Id, context.Event.SequenceNumber);
+            _query.RemoveOperation(context.Event.Id);
+            _query.RenumberOperations(context.PrimitiveEvent.Id, context.Event.SequenceNumber);
         }
 
         public void ProcessEvent(IEventHandlerContext<Registered> context)
