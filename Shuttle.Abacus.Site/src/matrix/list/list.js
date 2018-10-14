@@ -12,12 +12,6 @@ import Api from 'shuttle-can-api';
 resources.add('matrix', { action: 'list', permission: Permissions.Manage.Matrices});
 
 export const Map = DefineMap.extend({
-	remove() {
-		api.matrices.delete({id: this.id})
-			.then(function () {
-				state.removalRequested('matrix');
-			});
-	},
 	constraints() {
 		router.goto({
 			resource: 'matrix',
@@ -108,12 +102,6 @@ export const ViewModel = DefineMap.extend({
                 columnClass: 'col',
                 attributeName: 'columnArgumentName'
             });
-
-	        columns.push({
-		        columnTitle: 'remove',
-		        columnClass: 'col-1',
-		        stache: '<cs-button-remove click:from="remove" elementClass:from="\'btn-sm\'"/>'
-	        });
         }
 
         state.title = 'matrices';
