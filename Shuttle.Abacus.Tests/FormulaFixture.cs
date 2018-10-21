@@ -3,7 +3,7 @@ using NUnit.Framework;
 namespace Shuttle.Abacus.Tests
 {
     [TestFixture]
-    public class FormulaTest
+    public class FormulaFixture
     {
         //[Test]
         //public void Should_be_able_to_create_a_formula_with_an_initial_value()

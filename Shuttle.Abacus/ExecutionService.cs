@@ -213,6 +213,12 @@ namespace Shuttle.Abacus
 
                             break;
                         }
+                        case "result":
+                        {
+                            value = formulaContext.Result;
+
+                            break;
+                        }
                     }
 
                     operation.Perform(formulaContext, value);

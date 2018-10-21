@@ -43,6 +43,30 @@ namespace Shuttle.Abacus
 
                     return;
                 }
+                case "subtraction":
+                {
+                    context.SetResult(context.Result - value);
+
+                    return;
+                }
+                case "multiplication":
+                {
+                    context.SetResult(context.Result * value);
+
+                    return;
+                }
+                case "division":
+                {
+                    context.SetResult(context.Result / value);
+
+                    return;
+                }
+                case "rounding":
+                {
+                    context.SetResult(Math.Round(context.Result, (int)value));
+
+                    return;
+                }
             }
         }
     }

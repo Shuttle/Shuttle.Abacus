@@ -36,7 +36,7 @@ select
         when 'Formula' then 
 			(select Name from Formula where Id = o.InputParameter)
         else 
-			'RunningTotal'
+			'Result'
     end InputParameterDescription
 from
     FormulaOperation o

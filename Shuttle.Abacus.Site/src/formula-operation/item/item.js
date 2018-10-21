@@ -34,7 +34,7 @@ export const Map = DefineMap.extend({
         }
     },
 
-    constant: {
+    decimal: {
         type: 'string',
         default: '',
         set (value) {
@@ -179,8 +179,8 @@ export const ViewModel = DefineMap.extend({
                         map.selectedFormula = list[0];
                     });
                 }
-                case 'Constant': {
-                    map.constant = map.inputParameter;
+                case 'Decimal': {
+                    map.decimal = map.inputParameter;
                 }
             }
 
@@ -203,14 +203,16 @@ export const ViewModel = DefineMap.extend({
         Type: OptionList,
         default: [
             {value: 'Argument', label: 'Argument'},
-            {value: 'Constant', label: 'Constant'},
+            {value: 'Decimal', label: 'Decimal'},
             {value: 'Matrix', label: 'Matrix'},
             {value: 'Formula', label: 'Formula'},
-            {value: 'RunningTotal', label: 'RunningTotal'}
+            {value: 'Result', label: 'Result'}
         ]
     },
 
     register: function () {
+        const self = this;
+
         if (!!this.map.errors()) {
             return false;
         }
@@ -220,6 +222,8 @@ export const ViewModel = DefineMap.extend({
         })
             .then(function () {
                 state.registrationRequested('formula-operation');
+
+                self.map = nothing;
             });
 
         return false;

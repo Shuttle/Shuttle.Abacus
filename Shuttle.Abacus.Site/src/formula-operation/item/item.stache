@@ -13,8 +13,8 @@
     <cs-form-autocomplete label:raw="argument" vm:map:bind="map.selectedArgument" endpoint:raw="arguments/search" method:raw="post"
                           textAttribute:raw="name" searchAttribute:raw="name" formGroupClass:from="'fi-2'"/>
 {{/case}}
-{{#case('Constant')}}
-    <cs-form-input label:from="'constant'" vm:value:bind="map.constant" vm:required:from="'true'"
+{{#case('Decimal')}}
+    <cs-form-input label:from="'decimal'" vm:value:bind="map.decimal" vm:required:from="'true'"
                    formGroupClass:from="'fi-2'"/>
 {{/case}}
 {{#case('Matrix')}}

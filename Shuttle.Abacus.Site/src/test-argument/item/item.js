@@ -47,6 +47,8 @@ export const ViewModel = DefineMap.extend({
     },
 
     save: function () {
+        const self = this;
+
         if (!!this.errors()) {
             return false;
         }
@@ -59,6 +61,8 @@ export const ViewModel = DefineMap.extend({
         })
             .then(function(){
                 state.registrationRequested('test-argument');
+
+                self.argument = undefined;
             });
 
         return false;
