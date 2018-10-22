@@ -116,7 +116,7 @@ namespace Shuttle.Abacus
 
             try
             {
-                Execute(context, formulaId);
+                Execute(context, formulaId, logger);
             }
             catch (Exception ex)
             {
@@ -154,7 +154,7 @@ namespace Shuttle.Abacus
             }
         }
 
-        private FormulaContext Execute(ExecutionContext executionContext, Guid formulaId)
+        private FormulaContext Execute(ExecutionContext executionContext, Guid formulaId, IContextLogger logger)
         {
             var formula = GetFormula(formulaId);
 
@@ -170,8 +170,13 @@ namespace Shuttle.Abacus
                     if (!_valueComparer.IsSatisfiedBy(argument.DataType, argumentValue, constraint.Comparison,
                         constraint.Value))
                     {
+                        if (logger.LogLevel == ContextLogLevel.Verbose)
+                        {
+                            logger.LogVerbose($"[disqualified] {argument.Name} is '{argumentValue}' and should {constraint.Comparison} '{constraint.Value}'");
+                        }
+
                         return formulaContext.Disqualified(
-                            GetArgument(constraint.ArgumentId), 
+                            argument, 
                             argumentValue,
                             constraint.Comparison,
                             constraint.Value);
@@ -209,7 +214,7 @@ namespace Shuttle.Abacus
                         }
                         case "formula":
                         {
-                            value = Execute(executionContext, new Guid(operation.InputParameter)).Result;
+                            value = Execute(executionContext, new Guid(operation.InputParameter), logger).Result;
 
                             break;
                         }
@@ -219,6 +224,11 @@ namespace Shuttle.Abacus
 
                             break;
                         }
+                    }
+
+                    if (logger.LogLevel == ContextLogLevel.Verbose)
+                    {
+                        logger.LogVerbose($"[operation] {formulaContext.Result} {operation.GetOperator()} {value}");
                     }
 
                     operation.Perform(formulaContext, value);

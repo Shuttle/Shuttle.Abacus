@@ -33,6 +33,35 @@ namespace Shuttle.Abacus
         public string ValueProviderName { get; }
         public string InputParameter { get; }
 
+        public string GetOperator()
+        {
+            switch (Operation.ToLower())
+            {
+                case "addition":
+                {
+                    return "+";
+                }
+                case "subtraction":
+                {
+                    return "-";
+                }
+                case "multiplication":
+                {
+                    return "*";
+                }
+                case "division":
+                {
+                    return "/";
+                    }
+                case "rounding":
+                {
+                    return "rounded to";
+                }
+            }
+
+            return $"(unknown operation {Operation})";
+        }
+
         public void Perform(FormulaContext context, decimal value)
         {
             switch (Operation.ToLower())
