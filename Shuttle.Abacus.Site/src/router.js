@@ -12,7 +12,7 @@ import navbar from '~/navbar';
 
 var Router = DefineMap.extend({
     data: {
-        get(){
+        get() {
             return state.routeData;
         }
     },
