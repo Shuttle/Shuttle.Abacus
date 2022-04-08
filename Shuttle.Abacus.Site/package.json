@@ -70,7 +70,7 @@
     "i18next": "^11.10.0",
     "i18next-xhr-backend": "^1.5.1",
     "jquery": "^3.3.1",
-    "moment": "^2.22.1",
+    "moment": "^2.29.2",
     "popper.js": "^1.14.4",
     "shuttle-access": "^1.0.1",
     "shuttle-can-api": "^1.0.23",
