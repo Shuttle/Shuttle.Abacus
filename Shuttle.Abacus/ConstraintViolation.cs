@@ -1,20 +1,9 @@
-﻿using System;
+namespace Shuttle.Abacus;
 
-namespace Shuttle.Abacus
+public class ConstraintViolation(Guid argumentId, string argumentValue, string comparison, string constraintValue)
 {
-    public class ConstraintViolation
-    {
-        public ConstraintViolation(Guid argumentId, string argumentValue, string comparison, string constraintValue)
-        {
-            ArgumentId = argumentId;
-            ArgumentValue = argumentValue;
-            Comparison = comparison;
-            ConstraintValue = constraintValue;
-        }
-
-        public Guid ArgumentId { get; }
-        public string ArgumentValue { get; }
-        public string Comparison { get; }
-        public string ConstraintValue { get; }
-    }
+    public Guid ArgumentId { get; } = argumentId;
+    public string ArgumentValue { get; } = argumentValue;
+    public string Comparison { get; } = comparison;
+    public string ConstraintValue { get; } = constraintValue;
 }

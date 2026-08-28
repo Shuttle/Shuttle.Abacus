@@ -1,7 +1,6 @@
-﻿namespace Shuttle.Abacus.Events.Argument.v1
+namespace Shuttle.Abacus.Events.Argument.v1;
+
+public class ValueAdded
 {
-    public class ValueAdded
-    {
-        public string Value { get; set; }
-    }
+    public string Value { get; set; } = string.Empty;
 }

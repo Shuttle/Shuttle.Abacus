@@ -1,38 +1,17 @@
-using System;
+namespace Shuttle.Abacus;
 
-namespace Shuttle.Abacus
+public class DataTypeFactory : IDataTypeFactory
 {
-    public class DataTypeFactory : IDataTypeFactory
+    public DataType Create(string name, string value)
     {
-        public DataType Create(string name, string value)
+        return name.ToLowerInvariant() switch
         {
-            switch (name.ToLowerInvariant())
-            {
-                case "boolean":
-                {
-                    return new BooleanDataType(value);
-                }
-                case "datetime":
-                {
-                    return new DateTimeDataType(value);
-                }
-                case "decimal":
-                {
-                    return new DecimalDataType(value);
-                }
-                case "integer":
-                {
-                    return new IntegerDataType(value);
-                }
-                case "text":
-                {
-                    return new TextDataType(value);
-                }
-                default:
-                {
-                    throw new InvalidOperationException();
-                }
-            }
-        }
+            "boolean" => new BooleanDataType(value),
+            "datetime" => new DateTimeDataType(value),
+            "decimal" => new DecimalDataType(value),
+            "integer" => new IntegerDataType(value),
+            "text" => new TextDataType(value),
+            _ => throw new InvalidOperationException($"Unknown data type '{name}'.")
+        };
     }
 }

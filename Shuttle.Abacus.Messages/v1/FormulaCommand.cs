@@ -1,17 +1,5 @@
-using System;
-using System.Collections.Generic;
+// Dead code kept for reference: an unused base/marker message from the legacy codebase with no producers or
+// consumers.
+namespace Shuttle.Abacus.Messages.v1;
 
-namespace Shuttle.Abacus.Messages.v1
-{
-    public class FormulaCommand
-    {
-        public FormulaCommand()
-        {
-            Commands = new List<object>();
-        }
-
-        public Guid FormulaId { get; set; }
-
-        public List<object> Commands { get; set; }
-    }
-}
+public class FormulaCommand;

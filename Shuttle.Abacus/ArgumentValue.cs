@@ -1,16 +1,7 @@
-﻿using System;
+namespace Shuttle.Abacus;
 
-namespace Shuttle.Abacus
+public class ArgumentValue(Guid id, string value)
 {
-    public class ArgumentValue
-    {
-        public ArgumentValue(Guid id, string value)
-        {
-            Id = id;
-            Value = value;
-        }
-
-        public Guid Id { get; }
-        public string Value { get; }
-    }
+    public Guid Id { get; } = id;
+    public string Value { get; } = value;
 }

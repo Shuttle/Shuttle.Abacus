@@ -1,49 +1,42 @@
-using System;
-using Shuttle.Core.Contract;
+using System.Globalization;
+using Shuttle.Contract;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus;
+
+public class IntegerDataType : DataType
 {
-    public class IntegerDataType : DataType
+    private readonly int _value;
+
+    public IntegerDataType(string text)
     {
-        private readonly int _value;
+        ValueString = text;
+        _value = int.Parse(text, CultureInfo.InvariantCulture);
+        Value = _value;
+    }
 
-        public IntegerDataType(string text)
+    public IntegerDataType(int value)
+    {
+        _value = value;
+        Value = value;
+        ValueString = Convert.ToString(value, CultureInfo.InvariantCulture);
+    }
+
+    public override string Name => "Integer";
+
+    public override int CompareTo(DataType? other)
+    {
+        Guard.AgainstNull(other);
+
+        if (!int.TryParse(other.ValueString, NumberStyles.Integer, CultureInfo.InvariantCulture, out var otherValue))
         {
-            ValueString = text;
-
-            _value = int.Parse(text);
-
-            Value = _value;
+            throw new InvalidCastException(string.Format(Resources.IncompatibleDataTypes, GetType().Name, other.GetType().Name));
         }
 
-        public IntegerDataType(int value)
-        {
-            _value = value;
+        return _value.CompareTo(otherValue);
+    }
 
-            Value = value;
-            ValueString = Convert.ToString(value);
-        }
-
-        public override string Name => "Integer";
-
-        public override int CompareTo(DataType other)
-        {
-            Guard.AgainstNull(other, nameof(other));
-
-            int otherValue;
-
-            if (!int.TryParse(other.ValueString, out otherValue))
-            {
-                throw new InvalidCastException(string.Format(Resources.IncompatibleDataTypes, GetType().Name,
-                    other.GetType().Name));
-            }
-
-            return _value.CompareTo(otherValue);
-        }
-
-        public override string Text()
-        {
-            return _value.ToString("#,##0");
-        }
+    public override string Text()
+    {
+        return _value.ToString("#,##0", CultureInfo.InvariantCulture);
     }
 }

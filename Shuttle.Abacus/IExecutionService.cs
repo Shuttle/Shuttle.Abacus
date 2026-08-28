@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+namespace Shuttle.Abacus;
 
-namespace Shuttle.Abacus
+public interface IExecutionService
 {
-    public interface IExecutionService
-    {
-        IExecutionService Flush();
-        IExecutionService AddMatrix(Matrix matrix);
-        IExecutionService AddArgument(Argument argument);
-        IExecutionService AddFormula(Formula formula);
-        ExecutionContext Execute(Guid formulaId, IEnumerable<ArgumentValue> argumentValues, IContextLogger logger);
-    }
+    IExecutionService Flush();
+    IExecutionService AddMatrix(Matrix matrix);
+    IExecutionService AddArgument(Argument argument);
+    IExecutionService AddFormula(Formula formula);
+    Task<ExecutionContext> ExecuteAsync(Guid formulaId, IEnumerable<ArgumentValue> argumentValues, IContextLogger logger, CancellationToken cancellationToken = default);
 }

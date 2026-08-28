@@ -1,6 +1,0 @@
-<h1>{{test.name}}</h1>
-<pre>
-    {{#each(test.logLines)}}
-        {{indent}} - {{text}}
-    {{/each}}
-</pre>

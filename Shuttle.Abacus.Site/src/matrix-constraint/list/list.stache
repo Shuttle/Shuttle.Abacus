@@ -1,7 +1,0 @@
-{{#if map.isResolved}}
-    <h3>{{matrix.name}}</h3>
-{{/if}}
-
-<abacus-matrix-constraint matrix:from="matrix" constraint:from="constraint" />
-
-<cs-table vm:columns:from="columns" vm:rows:from="constraints.value" />

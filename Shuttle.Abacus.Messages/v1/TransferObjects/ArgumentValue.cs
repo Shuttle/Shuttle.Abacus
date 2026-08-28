@@ -1,10 +1,7 @@
-﻿using System;
+namespace Shuttle.Abacus.Messages.v1.TransferObjects;
 
-namespace Shuttle.Abacus.Messages.v1.TransferObjects
+public class ArgumentValue
 {
-    public class ArgumentValue
-    {
-        public Guid Id { get; set; }
-        public string Value { get; set; }
-    }
+    public Guid Id { get; set; }
+    public string Value { get; set; } = string.Empty;
 }

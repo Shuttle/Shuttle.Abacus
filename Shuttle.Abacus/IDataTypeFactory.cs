@@ -1,7 +1,6 @@
-﻿namespace Shuttle.Abacus
+namespace Shuttle.Abacus;
+
+public interface IDataTypeFactory
 {
-    public interface IDataTypeFactory
-    {
-        DataType Create(string name, string value);
-    }
+    DataType Create(string name, string value);
 }

@@ -1,10 +1,7 @@
-﻿using System;
+namespace Shuttle.Abacus.Events.Test.v1;
 
-namespace Shuttle.Abacus.Events.Test.v1
+public class ArgumentRegistered
 {
-    public class ArgumentRegistered
-    {
-        public Guid ArgumentId { get; set; }
-        public string Value { get; set; }
-    }
+    public Guid ArgumentId { get; set; }
+    public string Value { get; set; } = string.Empty;
 }

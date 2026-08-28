@@ -1,27 +1,26 @@
-using Shuttle.Core.Contract;
+using Shuttle.Contract;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus;
+
+public class TextDataType : DataType
 {
-    public class TextDataType : DataType
+    public TextDataType(string text)
     {
-        public TextDataType(string text)
-        {
-            ValueString = text;
-            Value = text;
-        }
+        ValueString = text;
+        Value = text;
+    }
 
-        public override string Name => "Text";
+    public override string Name => "Text";
 
-        public override int CompareTo(DataType other)
-        {
-            Guard.AgainstNull(other, nameof(other));
+    public override int CompareTo(DataType? other)
+    {
+        Guard.AgainstNull(other);
 
-            return ValueString.CompareTo(other.ValueString);
-        }
+        return string.Compare(ValueString, other.ValueString, StringComparison.Ordinal);
+    }
 
-        public override string Text()
-        {
-            return ValueString;
-        }
+    public override string Text()
+    {
+        return ValueString;
     }
 }

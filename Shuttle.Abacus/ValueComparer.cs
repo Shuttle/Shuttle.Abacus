@@ -1,84 +1,38 @@
-﻿using System;
-using Shuttle.Core.Contract;
+using Shuttle.Contract;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus;
+
+public class ValueComparer(IDataTypeFactory dataTypeFactory) : IValueComparer
 {
-    public class ValueComparer : IValueComparer
+    private static readonly char[] Separator = [','];
+
+    private readonly IDataTypeFactory _dataTypeFactory = Guard.AgainstNull(dataTypeFactory);
+
+    public bool IsSatisfiedBy(string dataTypeName, string value, string comparison, string comparisonValue)
     {
-        private static readonly char[] Separator = {','};
+        var result = true;
 
-        private readonly IDataTypeFactory _dataTypeFactory;
-
-        public ValueComparer(IDataTypeFactory dataTypeFactory)
+        foreach (var argumentValueItem in value.Split(Separator, StringSplitOptions.RemoveEmptyEntries))
         {
-            Guard.AgainstNull(dataTypeFactory, nameof(dataTypeFactory));
+            var argumentDataType = _dataTypeFactory.Create(dataTypeName, argumentValueItem);
 
-            _dataTypeFactory = dataTypeFactory;
-        }
-
-        public bool IsSatisfiedBy(string dataTypeName, string value, string comparison, string comparisonValue)
-        {
-            var result = true;
-
-            foreach (var argumentValueItem in value.Split(Separator, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var constraintValueItem in comparisonValue.Split(Separator, StringSplitOptions.RemoveEmptyEntries))
             {
-                var argumentDataType = _dataTypeFactory.Create(dataTypeName, argumentValueItem);
+                var comparisonDataType = _dataTypeFactory.Create(dataTypeName, constraintValueItem);
 
-                foreach (var constraintValueItem in comparisonValue.Split(Separator, StringSplitOptions.RemoveEmptyEntries))
+                var comparisonResult = argumentDataType.CompareTo(comparisonDataType);
+
+                result = comparison.ToLowerInvariant() switch
                 {
-                    var comparisonDataType = _dataTypeFactory.Create(dataTypeName, constraintValueItem);
-
-                    var comparisionResult = argumentDataType.CompareTo(comparisonDataType);
-
-                    switch (comparison.ToLowerInvariant())
-                    {
-                        case "==":
-                        {
-                            result = comparisionResult == 0;
-
-                            break;
-                        }
-                        case "!=":
-                        {
-                            result = comparisionResult != 0;
-
-                            break;
-                        }
-                        case ">=":
-                        {
-                            result = comparisionResult == 0 || comparisionResult == 1;
-
-                            break;
-                        }
-                        case ">":
-                        {
-                            result = comparisionResult == 1;
-
-                            break;
-                        }
-                        case "<=":
-                        {
-                            result = comparisionResult == -1 || comparisionResult == 0;
-
-                            break;
-                        }
-                        case "<":
-                        {
-                            result = comparisionResult == -1;
-
-                            break;
-                        }
-                        case "in":
-                        {
-                            throw new NotImplementedException();
-                        }
-                    }
-
-                    if (!result)
-                    {
-                        break;
-                    }
-                }
+                    "==" => comparisonResult == 0,
+                    "!=" => comparisonResult != 0,
+                    ">=" => comparisonResult is 0 or 1,
+                    ">" => comparisonResult == 1,
+                    "<=" => comparisonResult is -1 or 0,
+                    "<" => comparisonResult == -1,
+                    "in" => throw new NotImplementedException(),
+                    _ => result
+                };
 
                 if (!result)
                 {
@@ -86,7 +40,12 @@ namespace Shuttle.Abacus
                 }
             }
 
-            return result;
+            if (!result)
+            {
+                break;
+            }
         }
+
+        return result;
     }
 }

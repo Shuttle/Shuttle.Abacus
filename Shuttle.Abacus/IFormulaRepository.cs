@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
+namespace Shuttle.Abacus;
 
-namespace Shuttle.Abacus
+public interface IFormulaRepository
 {
-    public interface IFormulaRepository
-    {
-        IEnumerable<Formula> All();
-    }
+    Task<IEnumerable<Formula>> AllAsync(CancellationToken cancellationToken = default);
 }

@@ -1,7 +1,0 @@
-{{#if map.isResolved}}
-    <h3>{{test.name}}</h3>
-{{/if}}
-
-<abacus-test-argument vm:test:from="test" />
-
-<cs-table vm:columns:from="columns" vm:rows:from="arguments" />

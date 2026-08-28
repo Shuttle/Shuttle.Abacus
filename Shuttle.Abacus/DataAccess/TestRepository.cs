@@ -1,28 +1,26 @@
-﻿using System;
-using Shuttle.Core.Contract;
+using Shuttle.Contract;
 using Shuttle.Recall;
 
-namespace Shuttle.Abacus.DataAccess
+namespace Shuttle.Abacus.DataAccess;
+
+public class TestRepository(IEventStore eventStore) : ITestRepository
 {
-    public class TestRepository : ITestRepository
+    private readonly IEventStore _eventStore = Guard.AgainstNull(eventStore);
+
+    public async Task<Test> GetAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        private readonly IEventStore _eventStore;
+        var test = new Test();
+        var stream = await _eventStore.GetAsync(id, cancellationToken);
 
-        public TestRepository(IEventStore eventStore)
+        if (stream.IsEmpty)
         {
-            Guard.AgainstNull(eventStore, nameof(eventStore));
-
-            _eventStore = eventStore;
+            throw RecordNotFoundException.For("Test", id);
         }
 
-        public Test Get(Guid id)
-        {
-            var result = new Test(id);
-            var stream = _eventStore.Get(id);
+        stream.Apply(test);
 
-            stream.Apply(result);
+        test.Id = id;
 
-            return result;
-        }
+        return test;
     }
 }

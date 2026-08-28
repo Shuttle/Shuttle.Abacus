@@ -1,202 +1,178 @@
-﻿using System;
-using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
 
-namespace Shuttle.Abacus.Tests
+namespace Shuttle.Abacus.Tests;
+
+[TestFixture]
+public class ExecutionServiceFixture
 {
-    [TestFixture]
-    public class ExecutionServiceFixture
+    private static IExecutionService GetExecutionService()
     {
-        [Test]
-        public void Should_be_able_to_perform_simple_addition()
-        {
-            var formulas = new List<Formula>();
+        return new ExecutionService(
+            new ValueComparer(new DataTypeFactory()),
+            new Mock<IFormulaRepository>().Object,
+            new Mock<IArgumentRepository>().Object,
+            new Mock<IMatrixRepository>().Object);
+    }
 
-            var operand1 = new Argument(Guid.NewGuid());
+    [Test]
+    public async Task Should_be_able_to_perform_simple_addition()
+    {
+        var operand1 = new Argument { Id = Guid.NewGuid() };
 
-            operand1.Register("Operand1", "Integer");
+        operand1.Register("Operand1", "Integer");
 
-            var operand2 = new Argument(Guid.NewGuid());
+        var operand2 = new Argument { Id = Guid.NewGuid() };
 
-            operand2.Register("Operand2", "Decimal");
+        operand2.Register("Operand2", "Decimal");
 
-            var arguments = new List<Argument> { operand1, operand2 };
+        var arguments = new List<Argument> { operand1, operand2 };
 
-            var formula = new Formula(Guid.NewGuid());
+        var formula = new Formula { Id = Guid.NewGuid() };
 
-            formula.Register("Test");
+        formula.Register("Test");
+        formula.RegisterOperation(Guid.NewGuid(), "Addition", "Argument", operand1.Id.ToString());
+        formula.RegisterOperation(Guid.NewGuid(), "Addition", "Argument", operand2.Id.ToString());
 
-            formula.RegisterOperation(Guid.NewGuid(), "Addition", "Argument", operand1.Id.ToString());
-            formula.RegisterOperation(Guid.NewGuid(), "Addition", "Argument", operand2.Id.ToString());
+        var service = GetExecutionService()
+            .AddFormulaRange([formula])
+            .AddArgumentRange(arguments);
 
-            formulas.Add(formula);
+        var context = await service.ExecuteAsync(formula.Id,
+        [
+            new(operand1.Id, "2"),
+            new(operand2.Id, "3")
+        ], new ContextLogger(ContextLogLevel.Verbose));
 
-            var service = GetExecutionService()
-                .AddFormulaRange(formulas)
-                .AddArgumentRange(arguments);
+        Assert.That(context.RootResult()!.Value, Is.EqualTo(5));
 
-            var context = service.Execute(formula.Id, new List<ArgumentValue>
-            {
-                new ArgumentValue (operand1.Id, "2"),
-                new ArgumentValue (operand2.Id, "3")
-            }, new ContextLogger(ContextLogLevel.Verbose));
+        Console.WriteLine(context.Logger.ToString());
+    }
 
-            Assert.AreEqual(5, context.RootResult().Value);
+    [Test]
+    public async Task Should_be_able_to_apply_simple_constraint()
+    {
+        var operand1 = new Argument { Id = Guid.NewGuid() };
 
-            Console.WriteLine(context.Logger.ToString());
-        }
+        operand1.Register("Operand1", "Integer");
 
-        private IExecutionService GetExecutionService()
-        {
-            return new ExecutionService(
-                new ValueComparer(new DataTypeFactory()),
-                new Mock<IFormulaRepository>().Object,
-                new Mock<IArgumentRepository>().Object,
-                new Mock<IMatrixRepository>().Object);
-        }
+        var operand2 = new Argument { Id = Guid.NewGuid() };
 
-        [Test]
-        public void Should_be_able_to_apply_simple_constraint()
-        {
-            var operand1 = new Argument(Guid.NewGuid());
+        operand2.Register("Operand2", "Decimal");
 
-            operand1.Register("Operand1", "Integer");
+        var formula = new Formula { Id = Guid.NewGuid() };
 
-            var operand2 = new Argument(Guid.NewGuid());
+        formula.Register("Test");
+        formula.RegisterOperation(Guid.NewGuid(), "Addition", "Argument", operand1.Id.ToString());
+        formula.RegisterConstraint(Guid.NewGuid(), operand2.Id, "==", "10");
 
-            operand2.Register("Operand2", "Decimal");
+        var arguments = new List<Argument> { operand1, operand2 };
 
-            var formulas = new List<Formula>();
-            var formula = new Formula(Guid.NewGuid());
+        var service = GetExecutionService()
+            .AddFormulaRange([formula])
+            .AddArgumentRange(arguments);
 
-            formula.Register("Test");
+        var context = await service.ExecuteAsync(formula.Id,
+        [
+            new(operand1.Id, "2"),
+            new(operand2.Id, "3")
+        ], new ContextLogger(ContextLogLevel.Verbose));
 
-            formula.RegisterOperation(Guid.NewGuid(), "Addition", "Argument", operand1.Id.ToString());
-            formula.RegisterConstraint(Guid.NewGuid(), operand2.Id, "==", "10");
+        Assert.That(context.RootResult()!.Value, Is.EqualTo(0));
 
-            formulas.Add(formula);
+        Console.WriteLine(context.Logger.ToString());
+    }
 
-            var arguments = new List<Argument> { operand1, operand2 };
+    [Test]
+    public async Task Should_be_able_to_use_formula_from_operation()
+    {
+        var formula2 = new Formula { Id = Guid.NewGuid() };
 
-            var service = GetExecutionService()
-                .AddFormulaRange(formulas)
-                .AddArgumentRange(arguments);
+        formula2.Register("Formula2");
+        formula2.RegisterOperation(Guid.NewGuid(), "Addition", "Decimal", "100");
 
-            var context = service.Execute(formula.Id, new List<ArgumentValue>
-            {
-                new ArgumentValue (operand1.Id, "2"),
-                new ArgumentValue (operand2.Id, "3")
-            }, new ContextLogger(ContextLogLevel.Verbose));
+        var formula1 = new Formula { Id = Guid.NewGuid() };
 
-            Assert.AreEqual(0, context.RootResult().Value);
+        formula1.Register("Formula1");
+        formula1.RegisterOperation(Guid.NewGuid(), "Addition", "Formula", formula2.Id.ToString());
 
-            Console.WriteLine(context.Logger.ToString());
-        }
+        var service = GetExecutionService().AddFormulaRange([formula1, formula2]);
 
-        [Test]
-        public void Should_be_able_to_use_formula_from_operation()
-        {
-            var formula2 = new Formula(Guid.NewGuid());
+        var context = await service.ExecuteAsync(formula1.Id, [], new ContextLogger(ContextLogLevel.Verbose));
 
-            formula2.Register("Formula2");
-            formula2.RegisterOperation(Guid.NewGuid(), "Addition", "Decimal", "100");
+        Assert.That(context.GetResult(), Is.EqualTo(100));
 
-            var formula1 = new Formula(Guid.NewGuid());
+        Console.WriteLine(context.Logger.ToString());
+    }
 
-            formula1.Register("Formula1");
-            formula1.RegisterOperation(Guid.NewGuid(), "Addition", "Formula", formula2.Id.ToString());
+    [Test]
+    public async Task Should_be_able_to_use_matrix()
+    {
+        var argumentId = Guid.NewGuid();
 
-            var formulas = new List<Formula> { formula1, formula2 };
+        var formula = new Formula { Id = Guid.NewGuid() };
+        var matrix = new Matrix { Id = Guid.NewGuid() };
 
-            var service = GetExecutionService()
-                .AddFormulaRange(formulas);
+        matrix.Register("simple-matrix", argumentId, null, "Decimal");
+        matrix.RegisterConstraint(Guid.NewGuid(), "Row", 1, "==", "the-value");
+        matrix.RegisterElement(Guid.NewGuid(), 1, 1, "1.25");
 
-            var context = service.Execute(
-                formula1.Id, 
-                new List<ArgumentValue>(), 
-                new ContextLogger(ContextLogLevel.Verbose));
+        formula.Register("Formula");
+        formula.RegisterOperation(Guid.NewGuid(), "Addition", "Matrix", matrix.Id.ToString());
 
-            Assert.AreEqual(100, context.GetResult());
+        var argument = new Argument { Id = argumentId };
 
-            Console.WriteLine(context.Logger.ToString());
-        }
+        argument.Register("argument-one", "Text");
 
-        [Test]
-        public void Should_be_able_to_use_matrix()
-        {
-            var argumentId = Guid.NewGuid();
+        var service = GetExecutionService()
+            .AddFormula(formula)
+            .AddArgument(argument)
+            .AddMatrix(matrix);
 
-            var formula = new Formula(Guid.NewGuid());
+        var context = await service.ExecuteAsync(formula.Id,
+        [
+            new(argumentId, "the-value")
+        ], new ContextLogger(ContextLogLevel.Verbose));
 
-            var matrix = new Matrix(Guid.NewGuid());
+        Assert.That(context.GetResult(), Is.EqualTo(1.25m));
 
-            matrix.Register("simple-matrix", argumentId, null, "Decimal");
-            matrix.RegisterConstraint(Guid.NewGuid(), "Row", 1, "==", "the-value");
-            matrix.RegisterElement(Guid.NewGuid(), 1, 1, "1.25");
+        Console.WriteLine(context.Logger.ToString());
+    }
 
-            formula.Register("Formula");
-            formula.RegisterOperation(Guid.NewGuid(), "Addition", "Matrix", matrix.Id.ToString());
+    [Test]
+    public async Task Should_fail_on_cyclic_formulas()
+    {
+        var formula1 = new Formula { Id = Guid.NewGuid() };
+        var formula5 = new Formula { Id = Guid.NewGuid() };
 
-            var argument = new Argument(argumentId);
+        formula5.RegisterOperation(Guid.NewGuid(), "Addition", "Formula", formula1.Id.ToString());
+        formula5.Register("Formula5");
 
-            argument.Register("argument-one", "Text");
+        var formula4 = new Formula { Id = Guid.NewGuid() };
 
-            var service =
-                GetExecutionService()
-                    .AddFormula(formula)
-                    .AddArgument(argument)
-                    .AddMatrix(matrix);
+        formula4.Register("Formula4");
+        formula4.RegisterOperation(Guid.NewGuid(), "Addition", "Formula", formula5.Id.ToString());
 
-            var context = service.Execute(formula.Id, new List<ArgumentValue>
-            {
-                new ArgumentValue(argumentId, "the-value")
-            }, new ContextLogger(ContextLogLevel.Verbose));
+        var formula3 = new Formula { Id = Guid.NewGuid() };
 
-            Assert.AreEqual(1.25, context.GetResult());
+        formula3.Register("Formula3");
+        formula3.RegisterOperation(Guid.NewGuid(), "Addition", "Formula", formula4.Id.ToString());
 
-            Console.WriteLine(context.Logger.ToString());
-        }
+        var formula2 = new Formula { Id = Guid.NewGuid() };
 
-        [Test]
-        public void Should_fail_on_cyclic_formulas()
-        {
-            var formula1 = new Formula(Guid.NewGuid());
+        formula2.RegisterOperation(Guid.NewGuid(), "Addition", "Formula", formula3.Id.ToString());
+        formula2.Register("Formula2");
 
-            var formula5 = new Formula(Guid.NewGuid());
+        formula1.Register("Formula1");
+        formula1.RegisterOperation(Guid.NewGuid(), "Addition", "Formula", formula2.Id.ToString());
 
-            formula5.RegisterOperation(Guid.NewGuid(), "Addition", "Formula", formula1.Id.ToString());
-            formula5.Register("Formula5");
+        var service = GetExecutionService().AddFormulaRange([formula1, formula2, formula3, formula4, formula5]);
 
-            var formula4 = new Formula(Guid.NewGuid());
+        var context = await service.ExecuteAsync(formula1.Id, [], new ContextLogger(ContextLogLevel.Verbose));
 
-            formula4.Register("Formula4");
-            formula4.RegisterOperation(Guid.NewGuid(), "Addition", "Formula", formula5.Id.ToString());
+        Assert.That(context.HasException, Is.True);
+        Assert.That(context.Exception!.Message, Does.Contain("Cyclic"));
 
-            var formula3 = new Formula(Guid.NewGuid());
-
-            formula3.Register("Formula3");
-            formula3.RegisterOperation(Guid.NewGuid(), "Addition", "Formula", formula4.Id.ToString());
-
-            var formula2 = new Formula(Guid.NewGuid());
-
-            formula2.RegisterOperation(Guid.NewGuid(), "Addition", "Formula", formula3.Id.ToString());
-            formula2.Register("Formula2");
-
-            formula1.Register("Formula1");
-            formula1.RegisterOperation(Guid.NewGuid(), "Addition", "Formula", formula2.Id.ToString());
-
-            var formulas = new List<Formula> { formula1, formula2, formula3, formula4, formula5 };
-
-            var service = GetExecutionService()
-                .AddFormulaRange(formulas);
-
-            var context = service.Execute(formula1.Id, new List<ArgumentValue>(), new ContextLogger(ContextLogLevel.Verbose));
-
-            Assert.IsTrue(context.HasException);
-            Assert.IsTrue(context.Exception.Message.Contains("Cyclic"));
-
-            Console.WriteLine(context.Logger.ToString());
-        }
+        Console.WriteLine(context.Logger.ToString());
     }
 }

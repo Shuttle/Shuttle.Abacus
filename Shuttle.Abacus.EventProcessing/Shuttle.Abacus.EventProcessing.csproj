@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Shuttle.Contract" Version="21.0.1" />
+    <PackageReference Include="Shuttle.Hopper" Version="22.0.1" />
+    <PackageReference Include="Shuttle.Recall" Version="22.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shuttle.Abacus.Messages\Shuttle.Abacus.Messages.csproj" />
+    <ProjectReference Include="..\Shuttle.Abacus.SqlServer\Shuttle.Abacus.SqlServer.csproj" />
+    <ProjectReference Include="..\Shuttle.Abacus\Shuttle.Abacus.csproj" />
+  </ItemGroup>
+
+</Project>

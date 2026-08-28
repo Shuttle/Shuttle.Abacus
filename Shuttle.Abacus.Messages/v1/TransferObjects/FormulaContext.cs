@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+namespace Shuttle.Abacus.Messages.v1.TransferObjects;
 
-namespace Shuttle.Abacus.Messages.v1.TransferObjects
+public class FormulaContext
 {
-    public class FormulaContext
-    {
-        public List<ArgumentValue> ArgumentAnswers { get; set; }
-        public List<FormulaContext> FormulaContexts { get; set; }
-
-        public string FormulaName { get; set; }
-        public decimal Result { get; set; }
-        public DateTime DateStarted { get; set; }
-        public DateTime DateCompleted { get; set; }
-
-        public FormulaContext()
-        {
-            ArgumentAnswers = new List<ArgumentValue>();
-            FormulaContexts = new List<FormulaContext>();
-        }
-    }
+    public decimal Result { get; set; }
+    public DateTime DateStarted { get; set; }
+    public DateTime DateCompleted { get; set; }
+    public List<ArgumentValue> ArgumentAnswers { get; set; } = [];
+    public List<FormulaContext> FormulaContexts { get; set; } = [];
 }

@@ -1,7 +1,6 @@
-﻿namespace Shuttle.Abacus.Events.Test.v1
+namespace Shuttle.Abacus.Events.Test.v1;
+
+public class Renamed
 {
-    public class Renamed
-    {
-        public string Name { get; set; }
-    }
+    public string Name { get; set; } = string.Empty;
 }

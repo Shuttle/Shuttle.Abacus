@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
+namespace Shuttle.Abacus;
 
-namespace Shuttle.Abacus
+public interface IArgumentRepository
 {
-    public interface IArgumentRepository
-    {
-        IEnumerable<Argument> All();
-    }
+    Task<IEnumerable<Argument>> AllAsync(CancellationToken cancellationToken = default);
 }

@@ -1,9 +1,6 @@
-using System;
+namespace Shuttle.Abacus;
 
-namespace Shuttle.Abacus
+public interface IEntity
 {
-    public interface IEntity
-    {
-        Guid Id { get; }
-    }
+    Guid Id { get; }
 }

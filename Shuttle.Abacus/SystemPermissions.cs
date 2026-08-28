@@ -1,13 +1,12 @@
-﻿namespace Shuttle.Abacus
+namespace Shuttle.Abacus;
+
+public static class SystemPermissions
 {
-    public class SystemPermissions
+    public static class Manage
     {
-        public static class Manage
-        {
-            public const string Arguments = "abacus://arguments/manage";
-            public const string Formulas = "abacus://formulas/manage";
-            public const string Matrices = "abacus://matrices/manage";
-            public const string Tests = "abacus://tests/manage";
-        }
+        public const string Arguments = "abacus://arguments/manage";
+        public const string Formulas = "abacus://formulas/manage";
+        public const string Matrices = "abacus://matrices/manage";
+        public const string Tests = "abacus://tests/manage";
     }
 }

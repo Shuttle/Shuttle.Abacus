@@ -1,9 +1,6 @@
-﻿using System;
+namespace Shuttle.Abacus;
 
-namespace Shuttle.Abacus
+public interface ITestRepository
 {
-    public interface ITestRepository
-    {
-        Test Get(Guid id);
-    }
+    Task<Test> GetAsync(Guid id, CancellationToken cancellationToken = default);
 }

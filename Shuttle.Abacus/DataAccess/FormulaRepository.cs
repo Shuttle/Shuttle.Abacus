@@ -1,40 +1,29 @@
-﻿using System.Collections.Generic;
-using Shuttle.Core.Contract;
+using Shuttle.Contract;
 using Shuttle.Recall;
 
-namespace Shuttle.Abacus.DataAccess
+namespace Shuttle.Abacus.DataAccess;
+
+public class FormulaRepository(IFormulaQuery query, IEventStore eventStore) : IFormulaRepository
 {
-    public class FormulaRepository : IFormulaRepository
+    private readonly IFormulaQuery _query = Guard.AgainstNull(query);
+    private readonly IEventStore _eventStore = Guard.AgainstNull(eventStore);
+
+    public async Task<IEnumerable<Formula>> AllAsync(CancellationToken cancellationToken = default)
     {
-        private readonly IEventStore _eventStore;
-        private readonly IFormulaQuery _query;
+        var result = new List<Formula>();
 
-        public FormulaRepository(IFormulaQuery query, IEventStore eventStore)
+        foreach (var item in await _query.SearchAsync(new(), cancellationToken))
         {
-            Guard.AgainstNull(query, nameof(query));
-            Guard.AgainstNull(eventStore, nameof(eventStore));
+            var formula = new Formula();
+            var stream = await _eventStore.GetAsync(item.Id, cancellationToken);
 
-            _query = query;
-            _eventStore = eventStore;
+            stream.Apply(formula);
+
+            formula.Id = item.Id;
+
+            result.Add(formula);
         }
 
-        public IEnumerable<Formula> All()
-        {
-            var result = new List<Formula>();
-
-            foreach (var row in _query.Search(new FormulaSearchSpecification()))
-            {
-                var id = Columns.Id.MapFrom(row);
-
-                var formula = new Formula(id);
-                var stream = _eventStore.Get(id);
-
-                stream.Apply(formula);
-
-                result.Add(formula);
-            }
-
-            return result;
-        }
+        return result;
     }
 }

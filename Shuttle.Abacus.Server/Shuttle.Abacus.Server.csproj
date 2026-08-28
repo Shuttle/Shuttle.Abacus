@@ -2,21 +2,41 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
+    <RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>a6f3a4a1-abac-4abc-9a1e-abacus00server</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Shuttle.Abacus" Version="1.0.0" />
-    <PackageReference Include="Shuttle.Abacus.Messages" Version="1.0.0" />
-    <PackageReference Include="Shuttle.Core.Castle" Version="10.0.5" />
-    <PackageReference Include="Shuttle.Core.Data" Version="10.0.8" />
-    <PackageReference Include="Shuttle.Core.Data.SqlClient" Version="10.0.7" />
-    <PackageReference Include="Shuttle.Core.Log4Net" Version="10.0.1" />
-    <PackageReference Include="Shuttle.Core.ServiceHost" Version="10.0.2" />
-    <PackageReference Include="Shuttle.Esb.RabbitMQ" Version="10.0.12" />
-    <PackageReference Include="Shuttle.Recall.Sql.EventProcessing" Version="10.1.4" />
-    <PackageReference Include="Shuttle.Recall.Sql.Storage" Version="10.1.4" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.5.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="10.0.11" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.11" />
+    <PackageReference Include="Shuttle.Mediator" Version="21.0.2" />
+    <PackageReference Include="Shuttle.Hopper" Version="22.0.1" />
+    <PackageReference Include="Shuttle.Hopper.AzureStorageQueues" Version="22.0.1" />
+    <PackageReference Include="Shuttle.Hopper.SqlServer.Subscription" Version="22.0.1" />
+    <PackageReference Include="Shuttle.Recall.SqlServer.EventProcessing" Version="22.0.1" />
+    <PackageReference Include="Shuttle.Recall.SqlServer.Storage" Version="22.0.1" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="10.0.0" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="10.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="10.0.1" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shuttle.Abacus.Application\Shuttle.Abacus.Application.csproj" />
+    <ProjectReference Include="..\Shuttle.Abacus.EventProcessing\Shuttle.Abacus.EventProcessing.csproj" />
+    <ProjectReference Include="..\Shuttle.Abacus.Messages\Shuttle.Abacus.Messages.csproj" />
+    <ProjectReference Include="..\Shuttle.Abacus.SqlServer\Shuttle.Abacus.SqlServer.csproj" />
+    <ProjectReference Include="..\Shuttle.Abacus\Shuttle.Abacus.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,0 @@
-﻿CREATE TABLE [dbo].[Tag] (
-    [Id]  UNIQUEIDENTIFIER NOT NULL,
-    [Tag] VARCHAR (65)     NOT NULL,
-    CONSTRAINT [PK_Tag] PRIMARY KEY CLUSTERED ([Id] ASC, [Tag] ASC)
-);
-

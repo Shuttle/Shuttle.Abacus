@@ -1,15 +1,38 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;net462;net47;net471;netstandard2.0;netcoreapp2.0;netcoreapp2.1</TargetFrameworks>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include=".build\package.msbuild" />
-    <None Include=".build\package.nuspec" />
-    <None Include=".build\Shuttle.MSBuild.dll" />
-    <None Include=".build\Shuttle.MSBuild.targets" />
+    <PackageReference Include="Shuttle.Contract" Version="21.0.1" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Description>Hopper message contracts for Shuttle.Abacus.</Description>
+    <Version>1.0.0</Version>
+    <Authors>Eben Roux</Authors>
+    <Company>Shuttle</Company>
+    <Copyright>Copyright (c) 2025, Eben Roux</Copyright>
+    <PackageProjectUrl>https://github.com/Shuttle/Shuttle.Abacus</PackageProjectUrl>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Shuttle/Shuttle.Abacus.git</RepositoryUrl>
+    <PackageTags>rules rating rate constraints formula messages</PackageTags>
+    <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\.media\logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

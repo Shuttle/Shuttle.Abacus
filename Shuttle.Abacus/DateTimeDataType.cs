@@ -1,41 +1,35 @@
-using System;
-using Shuttle.Core.Contract;
+using System.Globalization;
+using Shuttle.Contract;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus;
+
+public class DateTimeDataType : DataType
 {
-    public class DateTimeDataType : DataType
+    private readonly DateTime _value;
+
+    public DateTimeDataType(string text)
     {
-        private readonly DateTime _value;
+        ValueString = text;
+        _value = DateTime.Parse(text, CultureInfo.InvariantCulture);
+        Value = _value;
+    }
 
-        public DateTimeDataType(string text)
+    public override string Name => "DateTime";
+
+    public override int CompareTo(DataType? other)
+    {
+        Guard.AgainstNull(other);
+
+        if (!DateTime.TryParse(other.ValueString, CultureInfo.InvariantCulture, DateTimeStyles.None, out var otherValue))
         {
-            ValueString = text;
-
-            _value = DateTime.Parse(text);
-
-            Value = _value;
+            throw new InvalidCastException(string.Format(Resources.IncompatibleDataTypes, GetType().Name, other.GetType().Name));
         }
 
-        public override string Name => "DateTime";
+        return _value.CompareTo(otherValue);
+    }
 
-        public override int CompareTo(DataType other)
-        {
-            Guard.AgainstNull(other, nameof(other));
-
-            DateTime otherValue;
-
-            if (!DateTime.TryParse(other.ValueString, out otherValue))
-            {
-                throw new InvalidCastException(string.Format(Resources.IncompatibleDataTypes, GetType().Name,
-                    other.GetType().Name));
-            }
-
-            return _value.CompareTo(otherValue);
-        }
-
-        public override string Text()
-        {
-            return _value.ToString("dd MMM yyyy HH:mm:ss");
-        }
+    public override string Text()
+    {
+        return _value.ToString("dd MMM yyyy HH:mm:ss", CultureInfo.InvariantCulture);
     }
 }

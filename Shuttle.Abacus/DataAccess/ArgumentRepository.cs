@@ -1,40 +1,29 @@
-﻿using System.Collections.Generic;
-using Shuttle.Core.Contract;
+using Shuttle.Contract;
 using Shuttle.Recall;
 
-namespace Shuttle.Abacus.DataAccess
+namespace Shuttle.Abacus.DataAccess;
+
+public class ArgumentRepository(IArgumentQuery query, IEventStore eventStore) : IArgumentRepository
 {
-    public class ArgumentRepository : IArgumentRepository
+    private readonly IArgumentQuery _query = Guard.AgainstNull(query);
+    private readonly IEventStore _eventStore = Guard.AgainstNull(eventStore);
+
+    public async Task<IEnumerable<Argument>> AllAsync(CancellationToken cancellationToken = default)
     {
-        private readonly IArgumentQuery _query;
-        private readonly IEventStore _store;
+        var result = new List<Argument>();
 
-        public ArgumentRepository(IArgumentQuery query, IEventStore store)
+        foreach (var item in await _query.SearchAsync(new(), cancellationToken))
         {
-            Guard.AgainstNull(query, nameof(query));
-            Guard.AgainstNull(store, nameof(store));
+            var argument = new Argument();
+            var stream = await _eventStore.GetAsync(item.Id, cancellationToken);
 
-            _query = query;
-            _store = store;
+            stream.Apply(argument);
+
+            argument.Id = item.Id;
+
+            result.Add(argument);
         }
 
-        public IEnumerable<Argument> All()
-        {
-            var result = new List<Argument>();
-
-            foreach (var row in _query.Search(new ArgumentSearchSpecification()))
-            {
-                var id = Columns.Id.MapFrom(row);
-
-                var argument = new Argument(id);
-                var stream = _store.Get(id);
-
-                stream.Apply(argument);
-
-                result.Add(argument);
-            }
-
-            return result;
-        }
+        return result;
     }
 }

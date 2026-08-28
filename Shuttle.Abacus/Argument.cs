@@ -1,183 +1,168 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Shuttle.Abacus.Events.Argument.v1;
-using Shuttle.Core.Contract;
+using Shuttle.Contract;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus;
+
+public class Argument
 {
-    //public enum DataTypeName
-    //{
-    //    Boolean = 0,
-    //    Date = 1,
-    //    Decimal = 2,
-    //    Integer = 3,
-    //    List = 4,
-    //    Money = 5,
-    //    Text = 6
-    //}
+    private readonly List<string> _values = [];
 
-    public class Argument
+    // Set by the repository/participant that loads this aggregate from the event stream — Recall's
+    // `EventStream.Get<T>()` requires a parameterless constructor and knows nothing of this domain-specific id,
+    // but `ExecutionService` needs to key bulk-loaded collections of arguments/formulas/matrices by it.
+    public Guid Id { get; set; }
+
+    public string Name { get; private set; } = string.Empty;
+    public string DataType { get; private set; } = string.Empty;
+    public bool Removed { get; private set; }
+
+    public IEnumerable<string> Values => _values.AsReadOnly();
+    public bool HasValues => _values.Count > 0;
+
+    public Registered Register(string name, string dataType)
     {
-        private readonly List<string> _values = new List<string>();
+        Guard.AgainstEmpty(name);
+        Guard.AgainstEmpty(dataType);
 
-        public Argument(Guid id)
+        return On(new Registered
         {
-            Id = id;
+            Name = name,
+            DataTypeName = dataType
+        });
+    }
+
+    private Registered On(Registered registered)
+    {
+        Guard.AgainstNull(registered);
+
+        Name = registered.Name;
+        DataType = registered.DataTypeName;
+
+        return registered;
+    }
+
+    public Removed Remove()
+    {
+        if (Removed)
+        {
+            throw new DomainException("Already removed.");
         }
 
-        public Guid Id { get; }
+        return On(new Removed());
+    }
 
-        public string Name { get; private set; }
-        public string DataType { get; private set; }
-        public bool Removed { get; private set; }
+    private Removed On(Removed removed)
+    {
+        Guard.AgainstNull(removed);
 
-        public IEnumerable<string> Values => new ReadOnlyCollection<string>(_values);
-        public bool HasValues => _values.Count > 0;
+        Removed = true;
 
-        public Registered Register(string name, string dataType)
+        return removed;
+    }
+
+    public bool IsNamed(string name)
+    {
+        Guard.AgainstEmpty(name);
+
+        return Name.Equals(name, StringComparison.InvariantCultureIgnoreCase);
+    }
+
+    public Renamed Rename(string name)
+    {
+        Guard.AgainstEmpty(name);
+
+        if (IsNamed(name))
         {
-            Guard.AgainstNullOrEmptyString(name, nameof(name));
-            Guard.AgainstNullOrEmptyString(dataType, nameof(dataType));
-
-            return On(new Registered
-            {
-                Name = name,
-                DataTypeName = dataType
-            });
+            throw new DomainException($"Already named '{name}'.");
         }
 
-        private Registered On(Registered registered)
+        return On(new Renamed
         {
-            Guard.AgainstNull(registered, nameof(registered));
+            Name = name
+        });
+    }
 
-            Name = registered.Name;
-            DataType = registered.DataTypeName;
+    private Renamed On(Renamed renamed)
+    {
+        Guard.AgainstNull(renamed);
 
-            return registered;
+        Name = renamed.Name;
+
+        return renamed;
+    }
+
+    // Dead code kept for reference: no participant currently calls this — `DataType` is only ever set at
+    // registration time — but the event/handler plumbing may be wired up for it later.
+    public DataTypeNameSet SetDataTypeName(string dataType)
+    {
+        Guard.AgainstEmpty(dataType);
+
+        return On(new DataTypeNameSet
+        {
+            DataTypeName = dataType
+        });
+    }
+
+    private DataTypeNameSet On(DataTypeNameSet dataTypeNameSet)
+    {
+        Guard.AgainstNull(dataTypeNameSet);
+
+        DataType = dataTypeNameSet.DataTypeName;
+
+        return dataTypeNameSet;
+    }
+
+    public ValueAdded AddValue(string value)
+    {
+        if (ContainsValue(value))
+        {
+            throw new DomainException($"Value '{value}' has already been added.");
         }
 
-        public Removed Remove()
+        return On(new ValueAdded
         {
-            if (Removed)
-            {
-                throw new DomainException("Already removed.");
-            }
+            Value = value
+        });
+    }
 
-            return On(new Removed());
+    private ValueAdded On(ValueAdded valueAdded)
+    {
+        Guard.AgainstNull(valueAdded);
+
+        _values.Add(valueAdded.Value);
+
+        return valueAdded;
+    }
+
+    public bool ContainsValue(string value)
+    {
+        return _values.Contains(value);
+    }
+
+    public static string Key(string name)
+    {
+        return $"[argument]:name={name}";
+    }
+
+    public ValueRemoved RemoveValue(string value)
+    {
+        if (!ContainsValue(value))
+        {
+            throw new DomainException($"Cannot remove value '{value}' since it does not exist.");
         }
 
-        private Removed On(Removed removed)
+        return On(new ValueRemoved
         {
-            Guard.AgainstNull(removed, nameof(removed));
+            Value = value
+        });
+    }
 
-            Removed = true;
+    private ValueRemoved On(ValueRemoved valueRemoved)
+    {
+        Guard.AgainstNull(valueRemoved);
 
-            return removed;
-        }
+        _values.Remove(valueRemoved.Value);
 
-        public bool IsNamed(string name)
-        {
-            Guard.AgainstNullOrEmptyString(name, nameof(name));
-
-            return Name.Equals(name, StringComparison.InvariantCultureIgnoreCase);
-        }
-
-        public Renamed Rename(string name)
-        {
-            Guard.AgainstNullOrEmptyString(name, nameof(name));
-
-            if (IsNamed(name))
-            {
-                throw new DomainException($"Already named '{name}'.");
-            }
-
-            return On(new Renamed
-            {
-                Name = name
-            });
-        }
-
-        private Renamed On(Renamed renamed)
-        {
-            Guard.AgainstNull(renamed, nameof(renamed));
-
-            Name = renamed.Name;
-
-            return renamed;
-        }
-
-        public DataTypeNameSet SetDataTypeName(string dataType)
-        {
-            Guard.AgainstNullOrEmptyString(dataType, nameof(dataType));
-
-            return On(new DataTypeNameSet
-            {
-                DataTypeName = dataType
-            });
-        }
-
-        private DataTypeNameSet On(DataTypeNameSet dataTypeNameSet)
-        {
-            Guard.AgainstNull(dataTypeNameSet, nameof(dataTypeNameSet));
-
-            DataType = dataTypeNameSet.DataTypeName;
-
-            return dataTypeNameSet;
-        }
-
-        public ValueAdded AddValue(string value)
-        {
-            if (ContainsValue(value))
-            {
-                throw new DomainException($"Value '{value}' has already been added.");
-            }
-
-            return On(new ValueAdded
-            {
-                Value = value
-            });
-        }
-
-        private ValueAdded On(ValueAdded valueAdded)
-        {
-            Guard.AgainstNull(valueAdded, nameof(valueAdded));
-
-            _values.Add(valueAdded.Value);
-
-            return valueAdded;
-        }
-
-        public bool ContainsValue(string value)
-        {
-            return _values.Contains(value);
-        }
-
-        public static string Key(string name)
-        {
-            return $"[argument]:name={name}";
-        }
-
-        public ValueRemoved RemoveValue(string value)
-        {
-            if (!ContainsValue(value))
-            {
-                throw new DomainException($"Cannot remove value '{value}' since it does not exist.");
-            }
-
-            return On(new ValueRemoved
-            {
-                Value = value
-            });
-        }
-
-        private ValueRemoved On(ValueRemoved valueRemoved)
-        {
-            Guard.AgainstNull(valueRemoved, nameof(valueRemoved));
-
-            _values.Remove(valueRemoved.Value);
-
-            return valueRemoved;
-        }
+        return valueRemoved;
     }
 }

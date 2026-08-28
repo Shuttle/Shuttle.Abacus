@@ -1,19 +1,18 @@
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus;
+
+public class NullDataType : DataType
 {
-    public class NullDataType : DataType
+    public override string Name => "NULL";
+
+    public override bool IsNull => true;
+
+    public override int CompareTo(DataType? other)
     {
-        public override string Name => "NULL";
+        return 0;
+    }
 
-        public override bool IsNull => true;
-
-        public override int CompareTo(DataType other)
-        {
-            return 0;
-        }
-
-        public override string Text()
-        {
-            return "NULL";
-        }
+    public override string Text()
+    {
+        return "NULL";
     }
 }

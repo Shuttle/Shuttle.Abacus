@@ -1,30 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using Shuttle.Core.Contract;
+using Shuttle.Contract;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus;
+
+public class ArgumentValueProvider
 {
-    public class ArgumentValueProvider
+    private readonly Dictionary<string, string> _arguments = new();
+
+    public ArgumentValueProvider Add(string name, string value)
     {
-        private readonly Dictionary<string, string> _arguments = new Dictionary<string, string>();
+        Guard.AgainstEmpty(name);
 
-        public ArgumentValueProvider Add(string name, string value)
+        _arguments.Add(name, value);
+
+        return this;
+    }
+
+    public string GetValue(string name)
+    {
+        if (!_arguments.TryGetValue(name, out var value))
         {
-            Guard.AgainstNullOrEmptyString(name, nameof(name));
-
-            _arguments.Add(name, value);
-
-            return this;
+            throw new InvalidOperationException($"Could not find an argument with name '{name}'.");
         }
 
-        public string GetValue(string name)
-        {
-            if (!_arguments.ContainsKey(name))
-            {
-                throw new InvalidOperationException($"Could not find an argument with name '{name}'.");
-            }
-
-            return _arguments[name];
-        }
+        return value;
     }
 }

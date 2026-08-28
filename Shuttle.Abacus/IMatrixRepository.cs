@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
+namespace Shuttle.Abacus;
 
-namespace Shuttle.Abacus
+public interface IMatrixRepository
 {
-    public interface IMatrixRepository
-    {
-        IEnumerable<Matrix> All();
-    }
+    Task<IEnumerable<Matrix>> AllAsync(CancellationToken cancellationToken = default);
 }

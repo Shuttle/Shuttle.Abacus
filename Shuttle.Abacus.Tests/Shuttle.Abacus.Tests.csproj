@@ -1,26 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFrameworks>net461;netcoreapp2.1</TargetFrameworks>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
-        <PackageReference Include="Moq" Version="4.10.0" />
-        <PackageReference Include="NUnit" Version="3.11.0" />
-        <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
-        <PackageReference Include="Shuttle.Core.Configuration" Version="10.0.2" />
-        <PackageReference Include="Shuttle.Core.Transactions" Version="10.0.1" />
-        <PackageReference Include="System.Data.SqlClient" Version="4.5.1" />
-        <PackageReference Include="Shuttle.Core.Data.SqlClient" Version="10.0.7" Condition="'$(TargetFramework)' == 'netcoreapp2.1'" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.9.0" />
+    <PackageReference Include="Moq" Version="4.20.72" />
+    <PackageReference Include="NUnit" Version="4.6.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="6.2.0" />
+    <PackageReference Include="Shuttle.Recall.SqlServer.Storage" Version="22.0.1" />
+  </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Shuttle.Abacus\Shuttle.Abacus.csproj" />
-    </ItemGroup>
-    
-    <ItemGroup>
-        <Reference Include="System.Transactions" Condition="'$(TargetFramework)' != 'netstandard2.0'" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shuttle.Abacus.Application\Shuttle.Abacus.Application.csproj" />
+    <ProjectReference Include="..\Shuttle.Abacus.Messages\Shuttle.Abacus.Messages.csproj" />
+    <ProjectReference Include="..\Shuttle.Abacus\Shuttle.Abacus.csproj" />
+  </ItemGroup>
 
 </Project>

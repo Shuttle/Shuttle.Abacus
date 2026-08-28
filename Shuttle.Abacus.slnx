@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="Shuttle.Abacus.Application/Shuttle.Abacus.Application.csproj" />
+  <Project Path="Shuttle.Abacus.EventProcessing/Shuttle.Abacus.EventProcessing.csproj" />
+  <Project Path="Shuttle.Abacus.Messages/Shuttle.Abacus.Messages.csproj" />
+  <Project Path="Shuttle.Abacus.Server/Shuttle.Abacus.Server.csproj" />
+  <Project Path="Shuttle.Abacus.SqlServer/Shuttle.Abacus.SqlServer.csproj" />
+  <Project Path="Shuttle.Abacus.Tests/Shuttle.Abacus.Tests.csproj" />
+  <Project Path="Shuttle.Abacus.WebApi/Shuttle.Abacus.WebApi.csproj" />
+  <Project Path="Shuttle.Abacus/Shuttle.Abacus.csproj" />
+</Solution>

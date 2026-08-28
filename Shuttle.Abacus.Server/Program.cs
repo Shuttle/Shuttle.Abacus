@@ -1,69 +1,90 @@
-﻿using System.Data.Common;
-using System.Data.SqlClient;
-using Castle.Windsor;
-using log4net;
-using Shuttle.Abacus.Server.EventHandlers;
-using Shuttle.Core.Castle;
-using Shuttle.Core.Container;
-using Shuttle.Core.Data;
-using Shuttle.Core.Log4Net;
-using Shuttle.Core.Logging;
-using Shuttle.Core.ServiceHost;
-using Shuttle.Esb;
+using System.Data.Common;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Serilog;
+using Shuttle.Abacus.EventProcessing.v1.EventHandlers;
+using Shuttle.Abacus.SqlServer;
+using Shuttle.Hopper;
+using Shuttle.Hopper.AzureStorageQueues;
+using Shuttle.Mediator;
 using Shuttle.Recall;
+using Shuttle.Recall.SqlServer.EventProcessing;
+using Shuttle.Recall.SqlServer.Storage;
 
-namespace Shuttle.Abacus.Server
+namespace Shuttle.Abacus.Server;
+
+public class Program
 {
-    public class Program
+    public static async Task Main(string[] args)
     {
-        private static void Main()
-        {
-            ServiceHost.Run<Host>();
-        }
-    }
+        DbProviderFactories.RegisterFactory("Microsoft.Data.SqlClient", SqlClientFactory.Instance);
 
-    public class Host : IServiceHost
-    {
-        private IServiceBus _bus;
-        private IEventProcessor _eventProcessor;
-        private WindsorContainer _container;
+        var builder = Host.CreateApplicationBuilder(args);
 
-        public void Start()
-        {
-            DbProviderFactories.RegisterFactory("System.Data.SqlClient", SqlClientFactory.Instance);
+        builder.Configuration.AddUserSecrets<Program>().AddEnvironmentVariables();
 
-            Log.Assign(new Log4NetLog(LogManager.GetLogger(typeof(Host))));
+        var configuration = builder.Configuration;
+        var services = builder.Services;
 
-            _container = new WindsorContainer();
+        var abacusConnectionString = configuration.GetConnectionString("Abacus") ?? "Missing connection string 'Abacus'.";
 
-            var container = new WindsorComponentContainer(_container);
+        Log.Logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(configuration)
+            .CreateLogger();
 
-            container.RegisterSuffixed("Shuttle.Abacus");
+        builder.Logging.ClearProviders();
+        builder.Services.AddSerilog();
 
-            EventStore.Register(container);
-            ServiceBus.Register(container);
+        services
+            .AddAbacus()
+            .UseSqlServer(options =>
+            {
+                options.ConnectionString = abacusConnectionString;
+            });
 
-            container.Register<ArgumentHandler>();
-            container.Register<FormulaHandler>();
-            container.Register<MatrixHandler>();
-            container.Register<TestHandler>();
+        services
+            .AddHopper(options =>
+            {
+                configuration.GetSection(HopperOptions.SectionName).Bind(options);
+            })
+            .UseAzureStorageQueues(azureBuilder =>
+            {
+                azureBuilder.Configure("azure", options =>
+                {
+                    configuration.GetSection($"{AzureStorageQueueOptions.SectionName}:Abacus").Bind(options);
 
-            _eventProcessor = container.Resolve<IEventProcessor>();
+                    if (string.IsNullOrWhiteSpace(options.StorageAccount))
+                    {
+                        options.ConnectionString = configuration.GetConnectionString("azure") ?? string.Empty;
+                    }
+                });
+            })
+            .AddMessageHandlersFrom(typeof(Program).Assembly);
 
-            _eventProcessor.AddProjection(new Projection("Argument").AddEventHandler(container.Resolve<ArgumentHandler>()));
-            _eventProcessor.AddProjection(new Projection("Formula").AddEventHandler(container.Resolve<FormulaHandler>()));
-            _eventProcessor.AddProjection(new Projection("Matrix").AddEventHandler(container.Resolve<MatrixHandler>()));
-            _eventProcessor.AddProjection(new Projection("Test").AddEventHandler(container.Resolve<TestHandler>()));
+        services
+            .AddRecall(options =>
+            {
+                configuration.GetSection(RecallOptions.SectionName).Bind(options);
+            })
+            .UseSqlServerEventStorage(options =>
+            {
+                options.ConnectionString = abacusConnectionString;
+                options.Schema = "abacus";
+            })
+            .UseSqlServerEventProcessing()
+            .AddProjection<ArgumentHandler>(ProjectionNames.Argument)
+            .AddProjection<FormulaHandler>(ProjectionNames.Formula)
+            .AddProjection<MatrixHandler>(ProjectionNames.Matrix)
+            .AddProjection<TestHandler>(ProjectionNames.Test);
 
-            container.Resolve<IDatabaseContextFactory>().ConfigureWith("Abacus");
+        services
+            .AddMediator()
+            .AddParticipantsFrom(typeof(Application.RegisterArgument).Assembly);
 
-            _bus = ServiceBus.Create(container).Start();
-            _eventProcessor.Start();
-        }
+        var host = builder.Build();
 
-        public void Stop()
-        {
-            _bus?.Dispose();
-        }
+        await host.RunAsync();
     }
 }

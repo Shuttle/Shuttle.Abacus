@@ -1,160 +1,162 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Shuttle.Abacus.Events.Test.v1;
-using Shuttle.Core.Contract;
+using Shuttle.Contract;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus;
+
+public class Test
 {
-    public class Test
+    private readonly List<ArgumentValue> _values = [];
+
+    public Guid Id { get; set; }
+
+    public string Name { get; private set; } = string.Empty;
+    public Guid FormulaId { get; private set; }
+    public string ExpectedResult { get; private set; } = string.Empty;
+    public string ExpectedResultDataTypeName { get; private set; } = string.Empty;
+    public string Comparison { get; private set; } = string.Empty;
+    public bool Removed { get; private set; }
+
+    public Registered Register(string name, Guid formulaId, string expectedResult, string expectedResultDataTypeName, string comparison)
     {
-        private readonly List<ArgumentValue> _values = new List<ArgumentValue>();
+        Guard.AgainstEmpty(name);
+        Guard.AgainstEmpty(expectedResult);
+        Guard.AgainstEmpty(expectedResultDataTypeName);
+        Guard.AgainstEmpty(comparison);
 
-        public Test(Guid id)
+        return On(new Registered
         {
-            Id = id;
+            Name = name,
+            FormulaId = formulaId,
+            ExpectedResult = expectedResult,
+            ExpectedResultDataTypeName = expectedResultDataTypeName,
+            Comparison = comparison
+        });
+    }
+
+    private Registered On(Registered registered)
+    {
+        Guard.AgainstNull(registered);
+
+        Name = registered.Name;
+        FormulaId = registered.FormulaId;
+        ExpectedResult = registered.ExpectedResult;
+        ExpectedResultDataTypeName = registered.ExpectedResultDataTypeName;
+        Comparison = registered.Comparison;
+
+        return registered;
+    }
+
+    public Removed Remove()
+    {
+        if (Removed)
+        {
+            throw new DomainException("Already removed.");
         }
 
-        public Guid Id { get; }
-        public string Name { get; private set; }
-        public Guid FormulaId { get; private set; }
-        public string ExpectedResult { get; private set; }
-        public string ExpectedResultDataTypeName { get; private set; }
-        public string Comparison { get; private set; }
-        public bool Removed { get; private set; }
+        return On(new Removed());
+    }
 
-        public Registered Register(string name, Guid formulaId, string expectedResult, string expectedResultDataTypeName,
-            string comparison)
+    private Removed On(Removed removed)
+    {
+        Guard.AgainstNull(removed);
+
+        Removed = true;
+
+        return removed;
+    }
+
+    public bool IsNamed(string name)
+    {
+        Guard.AgainstEmpty(name);
+
+        return Name.Equals(name, StringComparison.InvariantCultureIgnoreCase);
+    }
+
+    public Renamed Rename(string name)
+    {
+        Guard.AgainstEmpty(name);
+
+        if (IsNamed(name))
         {
-            Guard.AgainstNullOrEmptyString(name, nameof(name));
-            Guard.AgainstNullOrEmptyString(expectedResult, nameof(expectedResult));
-            Guard.AgainstNullOrEmptyString(expectedResultDataTypeName, nameof(expectedResultDataTypeName));
-            Guard.AgainstNullOrEmptyString(comparison, nameof(comparison));
-
-            return On(new Registered
-            {
-                Name = name,
-                FormulaId = formulaId,
-                ExpectedResult = expectedResult,
-                ExpectedResultDataTypeName = expectedResultDataTypeName,
-                Comparison = comparison
-            });
+            throw new DomainException($"Already named '{name}'.");
         }
 
-        private Registered On(Registered registered)
+        return On(new Renamed
         {
-            Guard.AgainstNull(registered, nameof(registered));
+            Name = name
+        });
+    }
 
-            Name = registered.Name;
-            FormulaId = registered.FormulaId;
-            ExpectedResult = registered.ExpectedResult;
-            ExpectedResultDataTypeName = registered.ExpectedResultDataTypeName;
-            Comparison = registered.Comparison;
+    private Renamed On(Renamed renamed)
+    {
+        Guard.AgainstNull(renamed);
 
-            return registered;
+        Name = renamed.Name;
+
+        return renamed;
+    }
+
+    public static string Key(string name)
+    {
+        return $"[test]:name={name}";
+    }
+
+    public ArgumentRegistered RegisterArgument(Guid argumentId, string value)
+    {
+        Guard.AgainstEmpty(value);
+
+        return On(new ArgumentRegistered
+        {
+            ArgumentId = argumentId,
+            Value = value
+        });
+    }
+
+    private ArgumentRegistered On(ArgumentRegistered argumentRegistered)
+    {
+        Guard.AgainstNull(argumentRegistered);
+
+        var existing = FindValue(argumentRegistered.ArgumentId);
+
+        if (existing != null)
+        {
+            _values.Remove(existing);
         }
 
-        public Removed Remove()
-        {
-            if (Removed)
-            {
-                throw new DomainException("Already removed.");
-            }
+        _values.Add(new(argumentRegistered.ArgumentId, argumentRegistered.Value));
 
-            return On(new Removed());
+        return argumentRegistered;
+    }
+
+    private ArgumentValue? FindValue(Guid argumentId)
+    {
+        return _values.Find(argumentValue => argumentValue.Id.Equals(argumentId));
+    }
+
+    public ArgumentRemoved RemoveArgument(Guid argumentId)
+    {
+        return On(new ArgumentRemoved
+        {
+            ArgumentId = argumentId
+        });
+    }
+
+    private ArgumentRemoved On(ArgumentRemoved argumentRemoved)
+    {
+        Guard.AgainstNull(argumentRemoved);
+
+        var existing = FindValue(argumentRemoved.ArgumentId);
+
+        if (existing != null)
+        {
+            _values.Remove(existing);
         }
 
-        private Removed On(Removed removed)
-        {
-            Guard.AgainstNull(removed, nameof(removed));
+        return argumentRemoved;
+    }
 
-            Removed = true;
-
-            return removed;
-        }
-
-        public bool IsNamed(string name)
-        {
-            Guard.AgainstNullOrEmptyString(name, nameof(name));
-
-            return Name.Equals(name, StringComparison.InvariantCultureIgnoreCase);
-        }
-
-        public Renamed Rename(string name)
-        {
-            Guard.AgainstNullOrEmptyString(name, nameof(name));
-
-            if (IsNamed(name))
-            {
-                throw new DomainException($"Already named '{name}'.");
-            }
-
-            return On(new Renamed
-            {
-                Name = name
-            });
-        }
-
-        private Renamed On(Renamed renamed)
-        {
-            Guard.AgainstNull(renamed, nameof(renamed));
-
-            Name = renamed.Name;
-
-            return renamed;
-        }
-
-        public static string Key(string name)
-        {
-            return $"[argument]:name={name}";
-        }
-
-        public ArgumentRegistered RegisterArgument(Guid argumentId, string value)
-        {
-            Guard.AgainstNullOrEmptyString(value, nameof(value));
-
-            return On(new ArgumentRegistered
-            {
-                ArgumentId = argumentId,
-                Value = value
-            });
-        }
-
-        private ArgumentRegistered On(ArgumentRegistered argumentRegistered)
-        {
-            Guard.AgainstNull(argumentRegistered, nameof(argumentRegistered));
-
-            _values.Remove(FindValue(argumentRegistered.ArgumentId));
-            _values.Add(new ArgumentValue(argumentRegistered.ArgumentId, argumentRegistered.Value));
-
-            return argumentRegistered;
-        }
-
-        private ArgumentValue FindValue(Guid argumentId)
-        {
-            return _values.Find(argumentValue => argumentValue.Id.Equals(argumentId));
-        }
-
-        public ArgumentRemoved RemoveArgument(Guid argumentId)
-        {
-            return On(new ArgumentRemoved
-            {
-                ArgumentId = argumentId
-            });
-        }
-
-        private ArgumentRemoved On(ArgumentRemoved argumentRemoved)
-        {
-            Guard.AgainstNull(argumentRemoved, nameof(argumentRemoved));
-
-            _values.Remove(FindValue(argumentRemoved.ArgumentId));
-
-            return argumentRemoved;
-        }
-
-        public IEnumerable<ArgumentValue> ArgumentValues()
-        {
-            return new ReadOnlyCollection<ArgumentValue>(_values);
-        }
+    public IEnumerable<ArgumentValue> ArgumentValues()
+    {
+        return _values.AsReadOnly();
     }
 }

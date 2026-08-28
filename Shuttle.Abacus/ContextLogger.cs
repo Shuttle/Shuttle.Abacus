@@ -1,103 +1,82 @@
-using System.Collections.Generic;
 using System.Text;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus;
+
+public enum ContextLogLevel
 {
-    public enum ContextLogLevel
+    None = 0,
+    Normal = 1,
+    Verbose = 2
+}
+
+public class ContextLogger(ContextLogLevel logLevel) : IContextLogger
+{
+    private readonly List<ContextLogLine> _lines = [];
+
+    private int _indent;
+
+    public ContextLogLevel LogLevel { get; } = logLevel;
+
+    public bool IsNormalEnabled => LogLevel != ContextLogLevel.None;
+    public bool IsVerboseEnabled => LogLevel == ContextLogLevel.Verbose;
+
+    public IEnumerable<ContextLogLine> Lines => _lines.AsReadOnly();
+
+    public void LogNormal(string message)
     {
-        None = 0,
-        Normal = 1,
-        Verbose = 2
+        if (LogLevel == ContextLogLevel.None)
+        {
+            return;
+        }
+
+        Log(message);
     }
 
-    public class ContextLogger : IContextLogger
+    public void LogVerbose(string message)
     {
-        private readonly object[] _argsEmpty = { };
+        if (LogLevel != ContextLogLevel.Verbose)
+        {
+            return;
+        }
 
-        private readonly List<ContextLogLine> _lines = new List<ContextLogLine>();
+        Log(message);
+    }
 
-        private int _indent;
+    public void IncreaseIndent()
+    {
+        _indent++;
+    }
 
-        public ContextLogger(ContextLogLevel logLevel)
+    public void DecreaseIndent()
+    {
+        _indent--;
+
+        if (_indent < 0)
         {
             _indent = 0;
-
-            LogLevel = logLevel;
-        }
-
-        public ContextLogLevel LogLevel { get; }
-
-        public bool IsNormalEnabled => LogLevel != ContextLogLevel.None;
-        public bool IsVerboseEnabled => LogLevel == ContextLogLevel.Verbose;
-
-        public IEnumerable<ContextLogLine> Lines => _lines.AsReadOnly();
-
-        public void LogNormal(string message)
-        {
-            if (LogLevel == ContextLogLevel.None)
-            {
-                return;
-            }
-
-            Log(message);
-        }
-
-        public void LogVerbose(string message)
-        {
-            if (LogLevel != ContextLogLevel.Verbose)
-            {
-                return;
-            }
-
-            Log(message);
-        }
-
-        public void IncreaseIndent()
-        {
-            _indent++;
-        }
-
-        public void DecreaseIndent()
-        {
-            _indent--;
-
-            if (_indent < 0)
-            {
-                _indent = 0;
-            }
-        }
-
-        private void AppendLine(string text)
-        {
-            AppendLine(text, _argsEmpty);
-        }
-
-        private void AppendLine(string text, params object[] args)
-        {
-            _lines.Add(new ContextLogLine {Indent = _indent, Text = string.Format(text, args)});
-        }
-
-        private void Log(string message)
-        {
-            AppendLine($"{message}");
-        }
-
-        public override string ToString()
-        {
-            var result = new StringBuilder();
-
-            foreach (var line in _lines)
-            {
-                result.AppendLine($"{new string('\t', line.Indent)}{line.Text}");
-            }
-
-            return result.ToString();
         }
     }
 
-    public class ContextLogLine
+    private void Log(string message)
     {
-        public int Indent { get; set; }
-        public string Text { get; set; }
+        _lines.Add(new() { Indent = _indent, Text = message });
     }
+
+    public override string ToString()
+    {
+        var result = new StringBuilder();
+
+        foreach (var line in _lines)
+        {
+            result.AppendLine($"{new string('\t', line.Indent)}{line.Text}");
+        }
+
+        return result.ToString();
+    }
+}
+
+public class ContextLogLine
+{
+    public int Indent { get; set; }
+    public string Text { get; set; } = string.Empty;
 }

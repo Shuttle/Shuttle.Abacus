@@ -1,40 +1,29 @@
-﻿using System.Collections.Generic;
-using Shuttle.Core.Contract;
+using Shuttle.Contract;
 using Shuttle.Recall;
 
-namespace Shuttle.Abacus.DataAccess
+namespace Shuttle.Abacus.DataAccess;
+
+public class MatrixRepository(IMatrixQuery query, IEventStore eventStore) : IMatrixRepository
 {
-    public class MatrixRepository : IMatrixRepository
+    private readonly IMatrixQuery _query = Guard.AgainstNull(query);
+    private readonly IEventStore _eventStore = Guard.AgainstNull(eventStore);
+
+    public async Task<IEnumerable<Matrix>> AllAsync(CancellationToken cancellationToken = default)
     {
-        private readonly IMatrixQuery _query;
-        private readonly IEventStore _store;
+        var result = new List<Matrix>();
 
-        public MatrixRepository(IMatrixQuery query, IEventStore store)
+        foreach (var item in await _query.SearchAsync(new(), cancellationToken))
         {
-            Guard.AgainstNull(query, nameof(query));
-            Guard.AgainstNull(store, nameof(store));
+            var matrix = new Matrix();
+            var stream = await _eventStore.GetAsync(item.Id, cancellationToken);
 
-            _query = query;
-            _store = store;
+            stream.Apply(matrix);
+
+            matrix.Id = item.Id;
+
+            result.Add(matrix);
         }
 
-        public IEnumerable<Matrix> All()
-        {
-            var result = new List<Matrix>();
-
-            foreach (var row in _query.All())
-            {
-                var id = Columns.Id.MapFrom(row);
-
-                var matrix = new Matrix(id);
-                var stream = _store.Get(id);
-
-                stream.Apply(matrix);
-
-                result.Add(matrix);
-            }
-
-            return result;
-        }
+        return result;
     }
 }

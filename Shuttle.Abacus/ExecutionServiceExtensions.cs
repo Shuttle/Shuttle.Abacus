@@ -1,54 +1,51 @@
-﻿using System.Collections.Generic;
-using Shuttle.Core.Contract;
+using Shuttle.Contract;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus;
+
+public static class ExecutionServiceExtensions
 {
-    public static class ExecutionServiceExtensions
+    public static IExecutionService AddFormulaRange(this IExecutionService service, IEnumerable<Formula>? formulas)
     {
-        public static IExecutionService AddFormulaRange(this IExecutionService service, IEnumerable<Formula> formulas)
+        Guard.AgainstNull(service);
+
+        if (formulas != null)
         {
-            Guard.AgainstNull(service, nameof(service));
-
-            if (formulas != null)
+            foreach (var formula in formulas)
             {
-                foreach (var formula in formulas)
-                {
-                    service.AddFormula(formula);
-                }
+                service.AddFormula(formula);
             }
-
-            return service;
         }
 
-        public static IExecutionService AddArgumentRange(this IExecutionService service,
-            IEnumerable<Argument> arguments)
+        return service;
+    }
+
+    public static IExecutionService AddArgumentRange(this IExecutionService service, IEnumerable<Argument>? arguments)
+    {
+        Guard.AgainstNull(service);
+
+        if (arguments != null)
         {
-            Guard.AgainstNull(service, nameof(service));
-
-            if (arguments != null)
+            foreach (var argument in arguments)
             {
-                foreach (var argument in arguments)
-                {
-                    service.AddArgument(argument);
-                }
+                service.AddArgument(argument);
             }
-
-            return service;
         }
 
-        public static IExecutionService AddMatrixRange(this IExecutionService service, IEnumerable<Matrix> matrices)
+        return service;
+    }
+
+    public static IExecutionService AddMatrixRange(this IExecutionService service, IEnumerable<Matrix>? matrices)
+    {
+        Guard.AgainstNull(service);
+
+        if (matrices != null)
         {
-            Guard.AgainstNull(service, nameof(service));
-
-            if (matrices != null)
+            foreach (var matrix in matrices)
             {
-                foreach (var matrix in matrices)
-                {
-                    service.AddMatrix(matrix);
-                }
+                service.AddMatrix(matrix);
             }
-
-            return service;
         }
+
+        return service;
     }
 }

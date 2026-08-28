@@ -1,47 +1,42 @@
-using System;
-using Shuttle.Core.Contract;
+using System.Globalization;
+using Shuttle.Contract;
 
-namespace Shuttle.Abacus
+namespace Shuttle.Abacus;
+
+public class DecimalDataType : DataType
 {
-    public class DecimalDataType : DataType
+    private readonly decimal _value;
+
+    public DecimalDataType(decimal value)
     {
-        private readonly decimal _value;
+        _value = value;
+        ValueString = Convert.ToString(value, CultureInfo.InvariantCulture);
+        Value = value;
+    }
 
-        public DecimalDataType(decimal value)
+    public DecimalDataType(string text)
+    {
+        ValueString = text;
+        _value = decimal.Parse(text, CultureInfo.InvariantCulture);
+        Value = _value;
+    }
+
+    public override string Name => "Decimal";
+
+    public override int CompareTo(DataType? other)
+    {
+        Guard.AgainstNull(other);
+
+        if (!decimal.TryParse(other.ValueString, NumberStyles.Number, CultureInfo.InvariantCulture, out var otherValue))
         {
-            _value = value;
-
-            ValueString = Convert.ToString(value);
-            Value = value;
+            throw new InvalidCastException(string.Format(Resources.IncompatibleDataTypes, GetType().Name, other.GetType().Name));
         }
 
-        public DecimalDataType(string text)
-        {
-            ValueString = text;
+        return _value.CompareTo(otherValue);
+    }
 
-            _value = decimal.Parse(text);
-
-            Value = _value;
-        }
-
-        public override string Name => "Decimal";
-
-        public override int CompareTo(DataType other)
-        {
-            Guard.AgainstNull(other, nameof(other));
-
-            if (!decimal.TryParse(other.ValueString, out var otherValue))
-            {
-                throw new InvalidCastException(string.Format(Resources.IncompatibleDataTypes, GetType().Name,
-                    other.GetType().Name));
-            }
-
-            return _value.CompareTo(otherValue);
-        }
-
-        public override string Text()
-        {
-            return _value.ToString("N");
-        }
+    public override string Text()
+    {
+        return _value.ToString("N", CultureInfo.InvariantCulture);
     }
 }

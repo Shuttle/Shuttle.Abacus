@@ -1,7 +1,0 @@
-{{#if map.isResolved}}
-    <h5>{{argument.name}} ({{argument.dataTypeName}})</h5>
-{{/if}}
-
-<abacus-argument-value-add vm:argument:from="argument" />
-
-<cs-table vm:columns:from="columns" vm:rows:from="values.value" />
