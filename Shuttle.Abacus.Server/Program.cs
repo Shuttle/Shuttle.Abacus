@@ -75,7 +75,7 @@ public class Program
             })
             .UseSqlServerEventProcessing()
             .AddProjection<ArgumentHandler>(ProjectionNames.Argument)
-            .AddProjection<FormulaHandler>(ProjectionNames.Formula)
+            .AddProjection<AlgorithmHandler>(ProjectionNames.Algorithm)
             .AddProjection<MatrixHandler>(ProjectionNames.Matrix)
             .AddProjection<TestHandler>(ProjectionNames.Test);
 

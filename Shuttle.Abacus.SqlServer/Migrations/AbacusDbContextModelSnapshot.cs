@@ -22,6 +22,96 @@ namespace Shuttle.Abacus.SqlServer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Shuttle.Abacus.SqlServer.Models.Algorithm", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("MaximumAlgorithmName")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("MinimumAlgorithmName")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Name" }, "UX_Algorithm_Name")
+                        .IsUnique();
+
+                    b.ToTable("Algorithm", "abacus");
+                });
+
+            modelBuilder.Entity("Shuttle.Abacus.SqlServer.Models.AlgorithmConstraint", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AlgorithmId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ArgumentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Comparison")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlgorithmId");
+
+                    b.ToTable("AlgorithmConstraint", "abacus");
+                });
+
+            modelBuilder.Entity("Shuttle.Abacus.SqlServer.Models.AlgorithmOperation", b =>
+                {
+                    b.Property<Guid>("AlgorithmId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("SequenceNumber")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("InputParameter")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Operation")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("ValueProviderName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("AlgorithmId", "SequenceNumber");
+
+                    b.HasIndex(new[] { "Id" }, "UX_AlgorithmOperation_Id")
+                        .IsUnique();
+
+                    b.ToTable("AlgorithmOperation", "abacus");
+                });
+
             modelBuilder.Entity("Shuttle.Abacus.SqlServer.Models.Argument", b =>
                 {
                     b.Property<Guid>("Id")
@@ -58,96 +148,6 @@ namespace Shuttle.Abacus.SqlServer.Migrations
                     b.HasKey("ArgumentId", "Value");
 
                     b.ToTable("ArgumentValue", "abacus");
-                });
-
-            modelBuilder.Entity("Shuttle.Abacus.SqlServer.Models.Formula", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("MaximumFormulaName")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("MinimumFormulaName")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex(new[] { "Name" }, "UX_Formula_Name")
-                        .IsUnique();
-
-                    b.ToTable("Formula", "abacus");
-                });
-
-            modelBuilder.Entity("Shuttle.Abacus.SqlServer.Models.FormulaConstraint", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ArgumentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Comparison")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<Guid>("FormulaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FormulaId");
-
-                    b.ToTable("FormulaConstraint", "abacus");
-                });
-
-            modelBuilder.Entity("Shuttle.Abacus.SqlServer.Models.FormulaOperation", b =>
-                {
-                    b.Property<Guid>("FormulaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("SequenceNumber")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("InputParameter")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Operation")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("ValueProviderName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("FormulaId", "SequenceNumber");
-
-                    b.HasIndex(new[] { "Id" }, "UX_FormulaOperation_Id")
-                        .IsUnique();
-
-                    b.ToTable("FormulaOperation", "abacus");
                 });
 
             modelBuilder.Entity("Shuttle.Abacus.SqlServer.Models.Matrix", b =>
@@ -246,6 +246,9 @@ namespace Shuttle.Abacus.SqlServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("AlgorithmId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Comparison")
                         .IsRequired()
                         .HasMaxLength(10)
@@ -260,9 +263,6 @@ namespace Shuttle.Abacus.SqlServer.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid>("FormulaId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -295,6 +295,28 @@ namespace Shuttle.Abacus.SqlServer.Migrations
                     b.ToTable("TestArgument", "abacus");
                 });
 
+            modelBuilder.Entity("Shuttle.Abacus.SqlServer.Models.AlgorithmConstraint", b =>
+                {
+                    b.HasOne("Shuttle.Abacus.SqlServer.Models.Algorithm", "Algorithm")
+                        .WithMany("Constraints")
+                        .HasForeignKey("AlgorithmId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Algorithm");
+                });
+
+            modelBuilder.Entity("Shuttle.Abacus.SqlServer.Models.AlgorithmOperation", b =>
+                {
+                    b.HasOne("Shuttle.Abacus.SqlServer.Models.Algorithm", "Algorithm")
+                        .WithMany("Operations")
+                        .HasForeignKey("AlgorithmId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Algorithm");
+                });
+
             modelBuilder.Entity("Shuttle.Abacus.SqlServer.Models.ArgumentValue", b =>
                 {
                     b.HasOne("Shuttle.Abacus.SqlServer.Models.Argument", "Argument")
@@ -304,28 +326,6 @@ namespace Shuttle.Abacus.SqlServer.Migrations
                         .IsRequired();
 
                     b.Navigation("Argument");
-                });
-
-            modelBuilder.Entity("Shuttle.Abacus.SqlServer.Models.FormulaConstraint", b =>
-                {
-                    b.HasOne("Shuttle.Abacus.SqlServer.Models.Formula", "Formula")
-                        .WithMany("Constraints")
-                        .HasForeignKey("FormulaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Formula");
-                });
-
-            modelBuilder.Entity("Shuttle.Abacus.SqlServer.Models.FormulaOperation", b =>
-                {
-                    b.HasOne("Shuttle.Abacus.SqlServer.Models.Formula", "Formula")
-                        .WithMany("Operations")
-                        .HasForeignKey("FormulaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Formula");
                 });
 
             modelBuilder.Entity("Shuttle.Abacus.SqlServer.Models.MatrixConstraint", b =>
@@ -361,16 +361,16 @@ namespace Shuttle.Abacus.SqlServer.Migrations
                     b.Navigation("Test");
                 });
 
-            modelBuilder.Entity("Shuttle.Abacus.SqlServer.Models.Argument", b =>
-                {
-                    b.Navigation("Values");
-                });
-
-            modelBuilder.Entity("Shuttle.Abacus.SqlServer.Models.Formula", b =>
+            modelBuilder.Entity("Shuttle.Abacus.SqlServer.Models.Algorithm", b =>
                 {
                     b.Navigation("Constraints");
 
                     b.Navigation("Operations");
+                });
+
+            modelBuilder.Entity("Shuttle.Abacus.SqlServer.Models.Argument", b =>
+                {
+                    b.Navigation("Values");
                 });
 
             modelBuilder.Entity("Shuttle.Abacus.SqlServer.Models.Matrix", b =>

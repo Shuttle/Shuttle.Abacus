@@ -8,8 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="Shuttle.Contract" Version="21.0.1" />
-    <PackageReference Include="Shuttle.Recall" Version="22.0.1" />
-    <PackageReference Include="Shuttle.Recall.SqlServer.Storage" Version="22.0.1" />
+    <PackageReference Include="Shuttle.Recall" Version="23.0.1" />
+    <PackageReference Include="Shuttle.Recall.SqlServer.Storage" Version="23.0.1" />
   </ItemGroup>
 
   <PropertyGroup>
@@ -22,7 +22,7 @@
     <PackageIcon>logo.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/Shuttle/Shuttle.Abacus.git</RepositoryUrl>
-    <PackageTags>rules rating rate constraints formula</PackageTags>
+    <PackageTags>rules rating rate constraints algorithm</PackageTags>
     <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
   </PropertyGroup>
 

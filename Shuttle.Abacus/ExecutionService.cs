@@ -6,25 +6,25 @@ namespace Shuttle.Abacus;
 public class ExecutionService : IExecutionService
 {
     private readonly object _lock = new();
-    private readonly IFormulaRepository _formulaRepository;
+    private readonly IAlgorithmRepository _algorithmRepository;
     private readonly IArgumentRepository _argumentRepository;
     private readonly IMatrixRepository _matrixRepository;
     private readonly Dictionary<Guid, Argument> _arguments = new();
     private readonly IValueComparer _valueComparer;
-    private readonly Dictionary<Guid, Formula> _formulas = new();
+    private readonly Dictionary<Guid, Algorithm> _algorithms = new();
     private readonly Dictionary<Guid, Matrix> _matrices = new();
     private bool _initialized;
 
-    public ExecutionService(IValueComparer valueComparer, IFormulaRepository formulaRepository,
+    public ExecutionService(IValueComparer valueComparer, IAlgorithmRepository algorithmRepository,
         IArgumentRepository argumentRepository, IMatrixRepository matrixRepository)
     {
         Guard.AgainstNull(valueComparer);
-        Guard.AgainstNull(formulaRepository);
+        Guard.AgainstNull(algorithmRepository);
         Guard.AgainstNull(argumentRepository);
         Guard.AgainstNull(matrixRepository);
 
         _valueComparer = valueComparer;
-        _formulaRepository = formulaRepository;
+        _algorithmRepository = algorithmRepository;
         _argumentRepository = argumentRepository;
         _matrixRepository = matrixRepository;
     }
@@ -33,7 +33,7 @@ public class ExecutionService : IExecutionService
     {
         lock (_lock)
         {
-            _formulas.Clear();
+            _algorithms.Clear();
             _arguments.Clear();
             _matrices.Clear();
 
@@ -67,19 +67,19 @@ public class ExecutionService : IExecutionService
         return this;
     }
 
-    public IExecutionService AddFormula(Formula formula)
+    public IExecutionService AddAlgorithm(Algorithm algorithm)
     {
-        Guard.AgainstNull(formula);
+        Guard.AgainstNull(algorithm);
 
         lock (_lock)
         {
-            _formulas.TryAdd(formula.Id, formula);
+            _algorithms.TryAdd(algorithm.Id, algorithm);
         }
 
         return this;
     }
 
-    public async Task<ExecutionContext> ExecuteAsync(Guid formulaId, IEnumerable<ArgumentValue> argumentValues, IContextLogger logger, CancellationToken cancellationToken = default)
+    public async Task<ExecutionContext> ExecuteAsync(Guid algorithmId, IEnumerable<ArgumentValue> argumentValues, IContextLogger logger, CancellationToken cancellationToken = default)
     {
         Guard.AgainstNull(argumentValues);
         Guard.AgainstNull(logger);
@@ -101,7 +101,7 @@ public class ExecutionService : IExecutionService
 
         try
         {
-            Execute(context, formulaId, logger);
+            Execute(context, algorithmId, logger);
         }
         catch (Exception ex)
         {
@@ -118,9 +118,9 @@ public class ExecutionService : IExecutionService
             return;
         }
 
-        foreach (var formula in await _formulaRepository.AllAsync(cancellationToken))
+        foreach (var algorithm in await _algorithmRepository.AllAsync(cancellationToken))
         {
-            AddFormula(formula);
+            AddAlgorithm(algorithm);
         }
 
         foreach (var argument in await _argumentRepository.AllAsync(cancellationToken))
@@ -139,15 +139,15 @@ public class ExecutionService : IExecutionService
         }
     }
 
-    private FormulaContext Execute(ExecutionContext executionContext, Guid formulaId, IContextLogger logger)
+    private AlgorithmContext Execute(ExecutionContext executionContext, Guid algorithmId, IContextLogger logger)
     {
-        var formula = GetFormula(formulaId);
+        var algorithm = GetAlgorithm(algorithmId);
 
-        executionContext.CyclicInvariant(formula.Name);
+        executionContext.CyclicInvariant(algorithm.Name);
 
-        using var formulaContext = executionContext.FormulaContext(formula.Name);
+        using var algorithmContext = executionContext.AlgorithmContext(algorithm.Name);
 
-        foreach (var constraint in formula.Constraints)
+        foreach (var constraint in algorithm.Constraints)
         {
             var argument = GetArgument(constraint.ArgumentId);
             var argumentValue = executionContext.GetArgumentValue(constraint.ArgumentId);
@@ -159,11 +159,11 @@ public class ExecutionService : IExecutionService
                     logger.LogVerbose($"[disqualified] {argument.Name} is '{argumentValue}' and should {constraint.Comparison} '{constraint.Value}'");
                 }
 
-                return formulaContext.Disqualified(argument, argumentValue, constraint.Comparison, constraint.Value);
+                return algorithmContext.Disqualified(argument, argumentValue, constraint.Comparison, constraint.Value);
             }
         }
 
-        foreach (var operation in formula.Operations)
+        foreach (var operation in algorithm.Operations)
         {
             decimal value = 0;
 
@@ -183,23 +183,23 @@ public class ExecutionService : IExecutionService
                         matrix.ColumnArgumentId.HasValue ? GetArgument(matrix.ColumnArgumentId.Value) : null), CultureInfo.InvariantCulture);
 
                     break;
-                case "formula":
+                case "algorithm":
                     value = Execute(executionContext, new(operation.InputParameter), logger).Result;
                     break;
                 case "result":
-                    value = formulaContext.Result;
+                    value = algorithmContext.Result;
                     break;
             }
 
             if (logger.LogLevel == ContextLogLevel.Verbose)
             {
-                logger.LogVerbose($"[operation] {formulaContext.Result} {operation.GetOperator()} {value}");
+                logger.LogVerbose($"[operation] {algorithmContext.Result} {operation.GetOperator()} {value}");
             }
 
-            operation.Perform(formulaContext, value);
+            operation.Perform(algorithmContext, value);
         }
 
-        return formulaContext;
+        return algorithmContext;
     }
 
     private Matrix GetMatrix(Guid id)
@@ -215,16 +215,16 @@ public class ExecutionService : IExecutionService
         }
     }
 
-    private Formula GetFormula(Guid id)
+    private Algorithm GetAlgorithm(Guid id)
     {
         lock (_lock)
         {
-            if (!_formulas.TryGetValue(id, out var formula))
+            if (!_algorithms.TryGetValue(id, out var algorithm))
             {
-                throw new InvalidOperationException($"There is no formula with id '{id}'.");
+                throw new InvalidOperationException($"There is no algorithm with id '{id}'.");
             }
 
-            return formula;
+            return algorithm;
         }
     }
 

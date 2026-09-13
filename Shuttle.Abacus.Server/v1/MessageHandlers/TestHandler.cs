@@ -14,7 +14,7 @@ public class TestHandler(IMediator mediator) :
 
     public async Task HandleAsync(Messages.v1.RegisterTest message, CancellationToken cancellationToken = default)
     {
-        await _mediator.SendAsync(new Application.RegisterTest(message.Id, message.Name, message.FormulaId, message.ExpectedResult, message.ExpectedResultDataTypeName, message.Comparison), cancellationToken);
+        await _mediator.SendAsync(new Application.RegisterTest(message.Id, message.Name, message.AlgorithmId, message.ExpectedResult, message.ExpectedResultDataTypeName, message.Comparison), cancellationToken);
     }
 
     public async Task HandleAsync(Messages.v1.RemoveTest message, CancellationToken cancellationToken = default)

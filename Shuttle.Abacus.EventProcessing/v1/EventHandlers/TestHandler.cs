@@ -22,7 +22,7 @@ public class TestHandler(AbacusDbContext dbContext, IBus bus) :
         {
             Id = context.PrimitiveEvent.Id,
             Name = context.Event.Name,
-            FormulaId = context.Event.FormulaId,
+            AlgorithmId = context.Event.AlgorithmId,
             ExpectedResult = context.Event.ExpectedResult,
             ExpectedResultDataTypeName = context.Event.ExpectedResultDataTypeName,
             Comparison = context.Event.Comparison
@@ -33,7 +33,7 @@ public class TestHandler(AbacusDbContext dbContext, IBus bus) :
         {
             Id = context.PrimitiveEvent.Id,
             Name = context.Event.Name,
-            FormulaId = context.Event.FormulaId,
+            AlgorithmId = context.Event.AlgorithmId,
             ExpectedResult = context.Event.ExpectedResult,
             ExpectedResultDataTypeName = context.Event.ExpectedResultDataTypeName,
             Comparison = context.Event.Comparison

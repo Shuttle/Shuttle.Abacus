@@ -14,7 +14,7 @@ public static class TestEndpoints
         {
             Id = test.Id,
             Name = test.Name,
-            FormulaId = test.FormulaId,
+            AlgorithmId = test.AlgorithmId,
             ExpectedResult = test.ExpectedResult,
             ExpectedResultDataTypeName = test.ExpectedResultDataTypeName,
             Comparison = test.Comparison
@@ -99,7 +99,7 @@ public static class TestEndpoints
 
     private static async Task<IResult> Post([FromBody] Contracts.v1.Test message, MessageDispatcher messageDispatcher)
     {
-        if (message.FormulaId.Equals(Guid.Empty) ||
+        if (message.AlgorithmId.Equals(Guid.Empty) ||
             string.IsNullOrWhiteSpace(message.Name) ||
             string.IsNullOrWhiteSpace(message.Comparison) ||
             string.IsNullOrWhiteSpace(message.ExpectedResult) ||
@@ -111,8 +111,8 @@ public static class TestEndpoints
         var id = message.Id ?? Guid.NewGuid();
 
         await messageDispatcher.DispatchAsync(
-            () => new Messages.v1.RegisterTest { Id = id, Name = message.Name, FormulaId = message.FormulaId, ExpectedResult = message.ExpectedResult, ExpectedResultDataTypeName = message.ExpectedResultDataTypeName, Comparison = message.Comparison },
-            () => new RegisterTest(id, message.Name, message.FormulaId, message.ExpectedResult, message.ExpectedResultDataTypeName, message.Comparison));
+            () => new Messages.v1.RegisterTest { Id = id, Name = message.Name, AlgorithmId = message.AlgorithmId, ExpectedResult = message.ExpectedResult, ExpectedResultDataTypeName = message.ExpectedResultDataTypeName, Comparison = message.Comparison },
+            () => new RegisterTest(id, message.Name, message.AlgorithmId, message.ExpectedResult, message.ExpectedResultDataTypeName, message.Comparison));
 
         return Results.Accepted();
     }
@@ -159,7 +159,7 @@ public static class TestEndpoints
     private static async Task<IResult> Run(Guid id, ITestRepository testRepository, IExecutionService executionService, IValueComparer valueComparer, CancellationToken cancellationToken)
     {
         var test = await testRepository.GetAsync(id, cancellationToken);
-        var executionContext = await executionService.ExecuteAsync(test.FormulaId, test.ArgumentValues(), new ContextLogger(ContextLogLevel.Verbose), cancellationToken);
+        var executionContext = await executionService.ExecuteAsync(test.AlgorithmId, test.ArgumentValues(), new ContextLogger(ContextLogLevel.Verbose), cancellationToken);
         var result = executionContext.GetResult();
 
         return Results.Ok(new Contracts.v1.TestRunResult
@@ -169,7 +169,7 @@ public static class TestEndpoints
             Exception = executionContext.HasException ? AllMessages(executionContext.Exception!) : null,
             Result = result,
             LogLines = executionContext.Logger.Lines.Select(line => new Contracts.v1.TestRunLogLine { Indent = line.Indent, Text = line.Text }).ToList(),
-            Results = executionContext.GetResults().Select(r => new Contracts.v1.TestRunFormulaResult { FormulaName = r.FormulaName, Value = r.Value, Depth = r.Depth }).ToList()
+            Results = executionContext.GetResults().Select(r => new Contracts.v1.TestRunAlgorithmResult { AlgorithmName = r.AlgorithmName, Value = r.Value, Depth = r.Depth }).ToList()
         });
     }
 }

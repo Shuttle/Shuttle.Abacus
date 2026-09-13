@@ -20,7 +20,7 @@
     <PackageIcon>logo.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/Shuttle/Shuttle.Abacus.git</RepositoryUrl>
-    <PackageTags>rules rating rate constraints formula messages</PackageTags>
+    <PackageTags>rules rating rate constraints algorithm messages</PackageTags>
     <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
   </PropertyGroup>
 

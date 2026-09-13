@@ -13,7 +13,7 @@
     <description>Constraint-based expression evaluation.</description>
     <releaseNotes />
     <copyright>Copyright (c) {year}, Eben Roux</copyright>
-    <tags>shuttle rules expression business inference rete calculation formula equation math</tags>
+    <tags>shuttle rules expression business inference rete calculation algorithm equation math</tags>
     <dependencies>
       <dependency id="Shuttle.Core.Contract" version="{Shuttle.Core.Contract-version}" />
       <dependency id="Shuttle.Core.Data" version="{Shuttle.Core.Data-version}" />

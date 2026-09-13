@@ -6,7 +6,7 @@ namespace Shuttle.Abacus;
 public class ExecutionContext
 {
     private readonly List<ExecutionResult> _results = [];
-    private readonly Stack<FormulaContext> _stack = new();
+    private readonly Stack<AlgorithmContext> _stack = new();
 
     private readonly Dictionary<Guid, string> _values = new();
 
@@ -23,9 +23,9 @@ public class ExecutionContext
         }
     }
 
-    public bool HasActiveFormulaContext => _stack.Count > 0;
+    public bool HasActiveAlgorithmContext => _stack.Count > 0;
 
-    public FormulaContext? RootFormulaContext { get; private set; }
+    public AlgorithmContext? RootAlgorithmContext { get; private set; }
 
     public Exception? Exception { get; private set; }
 
@@ -39,9 +39,9 @@ public class ExecutionContext
             throw new InvalidOperationException($"There is no argument value with id '{id}'.");
         }
 
-        if (HasActiveFormulaContext)
+        if (HasActiveAlgorithmContext)
         {
-            ActiveFormulaContext()!.UsedArgumentValue(id, result);
+            ActiveAlgorithmContext()!.UsedArgumentValue(id, result);
         }
 
         return result;
@@ -52,11 +52,11 @@ public class ExecutionContext
         return _stack.Count;
     }
 
-    public FormulaContext FormulaContext(string formulaName)
+    public AlgorithmContext AlgorithmContext(string algorithmName)
     {
-        Guard.AgainstEmpty(formulaName);
+        Guard.AgainstEmpty(algorithmName);
 
-        var result = new FormulaContext(this, formulaName);
+        var result = new AlgorithmContext(this, algorithmName);
 
         if (_stack.Count > 0)
         {
@@ -64,23 +64,23 @@ public class ExecutionContext
         }
         else
         {
-            RootFormulaContext = result;
+            RootAlgorithmContext = result;
         }
 
         _stack.Push(result);
 
-        Logger.LogNormal($"[starting] : {formulaName}");
+        Logger.LogNormal($"[starting] : {algorithmName}");
 
         return result;
     }
 
-    public void FormulaContextCompleted(FormulaContext formulaContext)
+    public void AlgorithmContextCompleted(AlgorithmContext algorithmContext)
     {
-        Guard.AgainstNull(formulaContext);
+        Guard.AgainstNull(algorithmContext);
 
-        AddResult(formulaContext);
+        AddResult(algorithmContext);
 
-        Logger.LogNormal($"[completed] : {formulaContext.FormulaName} ({formulaContext.TotalMilliseconds} ms)");
+        Logger.LogNormal($"[completed] : {algorithmContext.AlgorithmName} ({algorithmContext.TotalMilliseconds} ms)");
 
         if (_stack.Count > 0)
         {
@@ -88,20 +88,20 @@ public class ExecutionContext
         }
     }
 
-    private void AddResult(FormulaContext formulaContext)
+    private void AddResult(AlgorithmContext algorithmContext)
     {
-        Guard.AgainstNull(formulaContext);
+        Guard.AgainstNull(algorithmContext);
 
-        Logger.LogNormal($"[result] : {formulaContext.Result} ({formulaContext.FormulaName})");
+        Logger.LogNormal($"[result] : {algorithmContext.Result} ({algorithmContext.AlgorithmName})");
 
-        AddResult(formulaContext.FormulaName, formulaContext.Result);
+        AddResult(algorithmContext.AlgorithmName, algorithmContext.Result);
     }
 
-    public void AddResult(string formulaName, decimal result)
+    public void AddResult(string algorithmName, decimal result)
     {
-        Guard.AgainstEmpty(formulaName);
+        Guard.AgainstEmpty(algorithmName);
 
-        _results.Add(new(formulaName, result, Depth()));
+        _results.Add(new(algorithmName, result, Depth()));
     }
 
     public ExecutionResult? RootResult()
@@ -119,25 +119,25 @@ public class ExecutionContext
         return _results.AsReadOnly();
     }
 
-    public void CyclicInvariant(string formulaName)
+    public void CyclicInvariant(string algorithmName)
     {
-        Guard.AgainstEmpty(formulaName);
+        Guard.AgainstEmpty(algorithmName);
 
-        var cyclic = _stack.Any(context => context.FormulaName.Equals(formulaName, StringComparison.InvariantCultureIgnoreCase));
+        var cyclic = _stack.Any(context => context.AlgorithmName.Equals(algorithmName, StringComparison.InvariantCultureIgnoreCase));
 
         if (!cyclic)
         {
             return;
         }
 
-        var stack = new StringBuilder(formulaName);
+        var stack = new StringBuilder(algorithmName);
 
         foreach (var context in _stack)
         {
-            stack.Append($" <- {context.FormulaName}");
+            stack.Append($" <- {context.AlgorithmName}");
         }
 
-        throw new InvalidOperationException($"Cyclic formula usage: {stack}");
+        throw new InvalidOperationException($"Cyclic algorithm usage: {stack}");
     }
 
     public ExecutionContext WithException(Exception exception)
@@ -147,7 +147,7 @@ public class ExecutionContext
         return this;
     }
 
-    public FormulaContext? ActiveFormulaContext()
+    public AlgorithmContext? ActiveAlgorithmContext()
     {
         return _stack.Count == 0 ? null : _stack.Peek();
     }

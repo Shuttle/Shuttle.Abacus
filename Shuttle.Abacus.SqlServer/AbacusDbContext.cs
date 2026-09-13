@@ -6,9 +6,9 @@ public class AbacusDbContext(DbContextOptions<AbacusDbContext> options) : DbCont
 {
     public DbSet<Models.Argument> Arguments { get; set; } = null!;
     public DbSet<Models.ArgumentValue> ArgumentValues { get; set; } = null!;
-    public DbSet<Models.Formula> Formulas { get; set; } = null!;
-    public DbSet<Models.FormulaOperation> FormulaOperations { get; set; } = null!;
-    public DbSet<Models.FormulaConstraint> FormulaConstraints { get; set; } = null!;
+    public DbSet<Models.Algorithm> Algorithms { get; set; } = null!;
+    public DbSet<Models.AlgorithmOperation> AlgorithmOperations { get; set; } = null!;
+    public DbSet<Models.AlgorithmConstraint> AlgorithmConstraints { get; set; } = null!;
     public DbSet<Models.Matrix> Matrices { get; set; } = null!;
     public DbSet<Models.MatrixConstraint> MatrixConstraints { get; set; } = null!;
     public DbSet<Models.MatrixElement> MatrixElements { get; set; } = null!;
@@ -23,16 +23,16 @@ public class AbacusDbContext(DbContextOptions<AbacusDbContext> options) : DbCont
             .HasForeignKey(f => f.ArgumentId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        modelBuilder.Entity<Models.Formula>()
+        modelBuilder.Entity<Models.Algorithm>()
             .HasMany(p => p.Operations)
-            .WithOne(f => f.Formula)
-            .HasForeignKey(f => f.FormulaId)
+            .WithOne(f => f.Algorithm)
+            .HasForeignKey(f => f.AlgorithmId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        modelBuilder.Entity<Models.Formula>()
+        modelBuilder.Entity<Models.Algorithm>()
             .HasMany(p => p.Constraints)
-            .WithOne(f => f.Formula)
-            .HasForeignKey(f => f.FormulaId)
+            .WithOne(f => f.Algorithm)
+            .HasForeignKey(f => f.AlgorithmId)
             .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Models.Matrix>()

@@ -123,7 +123,7 @@ var recallBuilder = services
     })
     .UseSqlServerEventProcessing()
     .AddProjection<ArgumentHandler>(Shuttle.Abacus.ProjectionNames.Argument)
-    .AddProjection<FormulaHandler>(Shuttle.Abacus.ProjectionNames.Formula)
+    .AddProjection<AlgorithmHandler>(Shuttle.Abacus.ProjectionNames.Algorithm)
     .AddProjection<MatrixHandler>(Shuttle.Abacus.ProjectionNames.Matrix)
     .AddProjection<TestHandler>(Shuttle.Abacus.ProjectionNames.Test);
 
@@ -158,7 +158,7 @@ app.UseAccessAuthorization();
 
 app
     .MapArgumentEndpoints(versionSet)
-    .MapFormulaEndpoints(versionSet)
+    .MapAlgorithmEndpoints(versionSet)
     .MapMatrixEndpoints(versionSet)
     .MapTestEndpoints(versionSet)
     .MapServerEndpoints(versionSet);

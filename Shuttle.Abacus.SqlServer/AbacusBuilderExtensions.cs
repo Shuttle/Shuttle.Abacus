@@ -19,7 +19,7 @@ public static class AbacusBuilderExtensions
 
             builder.Services
                 .AddScoped<IArgumentQuery, ArgumentQuery>()
-                .AddScoped<IFormulaQuery, FormulaQuery>()
+                .AddScoped<IAlgorithmQuery, AlgorithmQuery>()
                 .AddScoped<IMatrixQuery, MatrixQuery>()
                 .AddScoped<ITestQuery, TestQuery>()
                 .AddDbContext<AbacusDbContext>((_, dbContextOptions) =>

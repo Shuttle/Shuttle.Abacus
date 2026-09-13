@@ -17,7 +17,7 @@ public static class ServiceCollectionExtensions
                 .AddSingleton<IValueComparer, ValueComparer>()
                 .AddScoped<IExecutionService, ExecutionService>()
                 .AddScoped<IArgumentRepository, ArgumentRepository>()
-                .AddScoped<IFormulaRepository, FormulaRepository>()
+                .AddScoped<IAlgorithmRepository, AlgorithmRepository>()
                 .AddScoped<IMatrixRepository, MatrixRepository>()
                 .AddScoped<ITestRepository, TestRepository>();
 

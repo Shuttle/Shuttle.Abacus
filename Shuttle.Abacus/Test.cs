@@ -10,13 +10,13 @@ public class Test
     public Guid Id { get; set; }
 
     public string Name { get; private set; } = string.Empty;
-    public Guid FormulaId { get; private set; }
+    public Guid AlgorithmId { get; private set; }
     public string ExpectedResult { get; private set; } = string.Empty;
     public string ExpectedResultDataTypeName { get; private set; } = string.Empty;
     public string Comparison { get; private set; } = string.Empty;
     public bool Removed { get; private set; }
 
-    public Registered Register(string name, Guid formulaId, string expectedResult, string expectedResultDataTypeName, string comparison)
+    public Registered Register(string name, Guid algorithmId, string expectedResult, string expectedResultDataTypeName, string comparison)
     {
         Guard.AgainstEmpty(name);
         Guard.AgainstEmpty(expectedResult);
@@ -26,7 +26,7 @@ public class Test
         return On(new Registered
         {
             Name = name,
-            FormulaId = formulaId,
+            AlgorithmId = algorithmId,
             ExpectedResult = expectedResult,
             ExpectedResultDataTypeName = expectedResultDataTypeName,
             Comparison = comparison
@@ -38,7 +38,7 @@ public class Test
         Guard.AgainstNull(registered);
 
         Name = registered.Name;
-        FormulaId = registered.FormulaId;
+        AlgorithmId = registered.AlgorithmId;
         ExpectedResult = registered.ExpectedResult;
         ExpectedResultDataTypeName = registered.ExpectedResultDataTypeName;
         Comparison = registered.Comparison;

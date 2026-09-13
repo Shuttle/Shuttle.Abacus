@@ -4,15 +4,15 @@ namespace Shuttle.Abacus;
 
 public static class ExecutionServiceExtensions
 {
-    public static IExecutionService AddFormulaRange(this IExecutionService service, IEnumerable<Formula>? formulas)
+    public static IExecutionService AddAlgorithmRange(this IExecutionService service, IEnumerable<Algorithm>? algorithms)
     {
         Guard.AgainstNull(service);
 
-        if (formulas != null)
+        if (algorithms != null)
         {
-            foreach (var formula in formulas)
+            foreach (var algorithm in algorithms)
             {
-                service.AddFormula(formula);
+                service.AddAlgorithm(algorithm);
             }
         }
 

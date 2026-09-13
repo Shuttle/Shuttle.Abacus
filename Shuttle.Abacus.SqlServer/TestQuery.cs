@@ -25,7 +25,7 @@ public class TestQuery(AbacusDbContext dbContext) : ITestQuery
         {
             Id = e.Id,
             Name = e.Name,
-            FormulaId = e.FormulaId,
+            AlgorithmId = e.AlgorithmId,
             ExpectedResult = e.ExpectedResult,
             ExpectedResultDataTypeName = e.ExpectedResultDataTypeName,
             Comparison = e.Comparison

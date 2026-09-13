@@ -9,7 +9,7 @@ public class Argument
 
     // Set by the repository/participant that loads this aggregate from the event stream — Recall's
     // `EventStream.Get<T>()` requires a parameterless constructor and knows nothing of this domain-specific id,
-    // but `ExecutionService` needs to key bulk-loaded collections of arguments/formulas/matrices by it.
+    // but `ExecutionService` needs to key bulk-loaded collections of arguments/algorithms/matrices by it.
     public Guid Id { get; set; }
 
     public string Name { get; private set; } = string.Empty;

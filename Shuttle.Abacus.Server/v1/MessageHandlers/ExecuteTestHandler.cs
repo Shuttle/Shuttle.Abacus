@@ -21,12 +21,12 @@ public class ExecuteTestHandler(IBus bus, IExecutionService executionService, IT
         }
 
         var test = await _testRepository.GetAsync(message.Id, cancellationToken);
-        var executionContext = await _executionService.ExecuteAsync(test.FormulaId, test.ArgumentValues(), new ContextLogger(logLevel), cancellationToken);
+        var executionContext = await _executionService.ExecuteAsync(test.AlgorithmId, test.ArgumentValues(), new ContextLogger(logLevel), cancellationToken);
 
         var response = new Messages.v1.TestExecuted
         {
             Id = test.Id,
-            FormulaId = test.FormulaId,
+            AlgorithmId = test.AlgorithmId,
             Log = executionContext.Logger.ToString()
         };
 
@@ -37,22 +37,22 @@ public class ExecuteTestHandler(IBus bus, IExecutionService executionService, IT
         else
         {
             response.Result = executionContext.GetResult();
-            response.FormulaContext = executionContext.RootFormulaContext == null ? null : Map(executionContext.RootFormulaContext);
+            response.AlgorithmContext = executionContext.RootAlgorithmContext == null ? null : Map(executionContext.RootAlgorithmContext);
         }
 
         await _bus.SendAsync(response, builder => builder.AsReply(), cancellationToken);
     }
 
-    private static Messages.v1.TransferObjects.FormulaContext Map(FormulaContext formulaContext)
+    private static Messages.v1.TransferObjects.AlgorithmContext Map(AlgorithmContext algorithmContext)
     {
-        var result = new Messages.v1.TransferObjects.FormulaContext
+        var result = new Messages.v1.TransferObjects.AlgorithmContext
         {
-            Result = formulaContext.Result,
-            DateStarted = formulaContext.DateStarted,
-            DateCompleted = formulaContext.DateCompleted
+            Result = algorithmContext.Result,
+            DateStarted = algorithmContext.DateStarted,
+            DateCompleted = algorithmContext.DateCompleted
         };
 
-        foreach (var usedArgumentValue in formulaContext.UsedArgumentValues())
+        foreach (var usedArgumentValue in algorithmContext.UsedArgumentValues())
         {
             result.ArgumentAnswers.Add(new()
             {
@@ -61,9 +61,9 @@ public class ExecuteTestHandler(IBus bus, IExecutionService executionService, IT
             });
         }
 
-        foreach (var containedFormulaContext in formulaContext.ContainedFormulaContexts())
+        foreach (var containedAlgorithmContext in algorithmContext.ContainedAlgorithmContexts())
         {
-            result.FormulaContexts.Add(Map(containedFormulaContext));
+            result.AlgorithmContexts.Add(Map(containedAlgorithmContext));
         }
 
         return result;
