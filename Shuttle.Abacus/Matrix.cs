@@ -138,7 +138,7 @@ public class Matrix
 
     private int FindConstraint(string axis, IValueComparer valueComparer, string dataTypeName, string value)
     {
-        var constraint = _constraints.FirstOrDefault(item =>
+        var constraint = _constraints.OrderBy(item => item.Index).FirstOrDefault(item =>
             item.Axis.Equals(axis, StringComparison.InvariantCultureIgnoreCase)
             &&
             valueComparer.IsSatisfiedBy(dataTypeName, item.Value, item.Comparison, value)
